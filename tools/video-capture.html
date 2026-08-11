@@ -1033,8 +1033,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(source){
       var card=source.querySelector('.source-card'), width=Number(card.getAttribute('width')), height=Number(card.getAttribute('height'));
       var x=Number(source.dataset.x), y=Number(source.dataset.y), left=x+width/2<620;
-      var sx=left ? x+width : x, sy=y+height/2, c1=left ? sx+71 : sx-71, c2=left ? 520 : 720;
-      sourceActivePath.setAttribute('d','M '+sx+' '+sy+' C '+c1+' '+sy+' '+c2+' 380 620 380');
+      var sx=left ? x+width : x, sy=y+height/2, c1=left ? sx+71 : sx-71, c2=left ? 520 : 720, c2y=sy<380 ? 330 : 430;
+      sourceActivePath.setAttribute('d','M '+sx+' '+sy+' C '+c1+' '+sy+' '+c2+' '+c2y+' 620 380');
       setPathProgress(sourceActivePath,state.knowledgePathProgress);
       if(sourceParticle) sourceParticle.style.opacity='0';
       if(!state.knowledgeHolding && state.knowledgeStepProgress>=.05 && state.knowledgeStepProgress<.95) setParticleOnPath(sourceActivePath,state.knowledgePathProgress,sourceParticle);
