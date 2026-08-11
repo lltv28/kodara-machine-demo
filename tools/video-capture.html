@@ -1310,7 +1310,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var chapter=new URLSearchParams(location.search).get('player');
   var durations={learn:7000,triagers:12000,growth:11000};
   if(!durations[chapter] || !window.renderCaptureFrame) return;
-  var duration=durations[chapter],elapsed=0,startedAt=0,frame=0,playing=false,ended=false;
+  var duration=durations[chapter],elapsed=0,startedAt=0,frame=0,playing=false;
 
   function fit(){
     var scale=Math.max(innerWidth/1240,innerHeight/760);
@@ -1322,11 +1322,11 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(!playing) return;
     elapsed=Math.min(duration,now-startedAt);
     render();
-    if(elapsed>=duration){ playing=false;ended=true;frame=0;send('ended');return; }
+    if(elapsed>=duration){ elapsed=0;startedAt=now;render();send('looped'); }
     frame=requestAnimationFrame(tick);
   }
   function play(replay){
-    if(replay || ended){ elapsed=0;ended=false;render(); }
+    if(replay){ elapsed=0;render(); }
     if(playing) return;
     playing=true;startedAt=performance.now()-elapsed;send('playing');frame=requestAnimationFrame(tick);
   }
