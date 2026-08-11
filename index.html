@@ -638,9 +638,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var FLYWHEEL_ASSEMBLY_END=5.2/STORY_SCREENS;
   var FLYWHEEL_END=7/STORY_SCREENS;
   var CHART_TRANSITION_END=8.2/STORY_SCREENS;
-  var STORY_PLAYHEAD_RATE=.16;
-  var STORY_SALE_HOLD_MS=560;
-  var STORY_GRAPH_HOLD_MS=620;
   function computeTriagerDwellProgress(progressValue){
     var p=zoomClamp(progressValue,0,1);
     if(p<.2) return .5*storyEase(p/.2);
@@ -653,12 +650,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(p>=1) return 1;
     var segment=Math.min(3,Math.floor(p*4)), local=p*4-segment;
     return stops[segment]+(stops[segment+1]-stops[segment])*storyEase(zoomRange(local,0,.58));
-  }
-  function stepBufferedProgress(current,target,elapsedMs){
-    if(!Number.isFinite(current) || !Number.isFinite(target) || !Number.isFinite(elapsedMs)) return null;
-    var delta=target-current, maxStep=STORY_PLAYHEAD_RATE*zoomClamp(elapsedMs,0,50)/1000;
-    if(Math.abs(delta)<=maxStep) return target;
-    return current+(delta<0 ? -maxStep : maxStep);
   }
   function storyDefaults(){
     return {sourceOpacity:0,knowledgeProgress:1,knowledgeRingOpacity:0,knowledgeSourceIndex:3,knowledgePathProgress:1,knowledgeStepProgress:1,knowledgeHolding:true,deploymentProgress:1,teamProgress:0,triagerActivityProgress:0,budgetOpacity:0,budgetAmount:0,saleGainOpacity:0,saleGainY:6,salePulse:0,workerOpacity:0,engineOpacity:0,triagerDemoOpacity:0,phoneOpacity:0,adOpacity:0,adsOpacity:0,shellOpacity:0,shellScale:.88,sceneZoom:1.05,wheelOpacity:1,wheelOriginX:50,wheelOriginY:50,brainOpacity:0,activityOpacity:.18,labelsOpacity:0,triagerLabel:0,nodeTriagers:0,nodeTicket:0,nodeDownsell:0,flywheelOrbitOpacity:0,flywheelOrbitProgress:0,coreX:50,coreY:50,coreScale:1,coreOpacity:1,coreCopyOpacity:1,coreMarkOpacity:0,coreStatusOpacity:1,graphOpacity:0,graphScale:.985,graphProgress:0,graphFillOpacity:0,graphOriginLabelOpacity:0,relayOpacity:0,relayProgress:0,phase:'manager',beat:'manager',complete:false};
@@ -830,6 +821,16 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     for(var i=0;i<graphThresholds.length;i++) if(state.graphProgress>=graphThresholds[i]-.0001) graphCount=i+1;
     return {saleCount:saleCount,graphCount:graphCount};
   }
+  function computeSemanticFocus(state){
+    if(!state) return '';
+    if(state.phase==='triagers'){
+      var activity=computeTriagerActivity(state.triagerActivityProgress);
+      return activity && activity.managerProgress>0 && activity.managerProgress<1 ? 'sale' : '';
+    }
+    var graphThresholds=[.38,.62,.86,1];
+    for(var i=0;i<graphThresholds.length;i++) if(Math.abs(state.graphProgress-graphThresholds[i])<.0001) return 'graph';
+    return '';
+  }
   function computeScrollPosition(input){
     if(!input) return null;
     var values=[input.frameTop,input.viewportHeight,input.trackOffsetTop,input.trackHeight,input.pinHeight,input.pinTop];
@@ -893,7 +894,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var phonePath=zoomSection && zoomSection.querySelector('.phone-path');
   var triagerPath=zoomSection && zoomSection.querySelector('.triager-path');
   var activityParticle=zoomSection && zoomSection.querySelector('.activity-particle');
-  var storyViewport=null, storyLayout=null, storyFrame=0, heightTimer=0, layoutTimer=0, storyActive=false, lastTrackHeight=0, lastStoryProgress=-1, targetStoryProgress=0, renderedStoryProgress=null, lastStoryTime=0, storyDirection=0, storyHoldUntil=0, semanticHoldType='', semanticSaleCount=0, semanticGraphCount=0, semanticQueue=[], lastBeat='', storyStarted=false, storyCompleted=false;
+  var storyViewport=null, storyLayout=null, storyFrame=0, heightTimer=0, layoutTimer=0, storyActive=false, lastTrackHeight=0, lastStoryProgress=-1, lastBeat='', storyStarted=false, storyCompleted=false;
   var standaloneVisible=false, standaloneFrame=0;
   function trackDemo(name){ parent.postMessage({fdDemoEvent:name},'*'); }
   function setNarrativeState(beat){
@@ -1194,13 +1195,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     lastStoryProgress=-1;
     queueScrollStory(storyViewport);
   }
-  function startSemanticHold(now){
-    if(storyHoldUntil>now || !semanticQueue.length) return;
-    var event=semanticQueue.shift();
-    semanticHoldType=event.type;
-    storyHoldUntil=now+event.duration;
-  }
-  function renderScrollStory(frameTime){
+  function renderScrollStory(){
     storyFrame=0;
     if(REDUCE || !storyViewport || !zoomTrack || !zoomPin) return;
     activateScrollStory();
@@ -1217,51 +1212,15 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     });
     if(!position) return;
     if(window!==parent) zoomPin.style.transform='translate3d(0,'+position.offset.toFixed(2)+'px,0)';
-    var now=Number.isFinite(frameTime) ? frameTime : lastStoryTime+16.67;
-    targetStoryProgress=position.progress;
-    if(renderedStoryProgress===null){
-      renderedStoryProgress=targetStoryProgress;
-      var initialMilestones=computeSemanticMilestones(computeScrollStoryState(renderedStoryProgress));
-      semanticSaleCount=initialMilestones.saleCount;
-      semanticGraphCount=initialMilestones.graphCount;
+    var progress=position.progress, state=computeScrollStoryState(progress);
+    zoomSection.dataset.semanticHold=computeSemanticFocus(state);
+    if(Math.abs(progress-lastStoryProgress)>=.0001){
+      lastStoryProgress=progress;
+      applyStoryState(state,progress);
     }
-    var direction=Math.sign(targetStoryProgress-renderedStoryProgress);
-    if(direction && storyDirection && direction!==storyDirection){
-      storyHoldUntil=0;
-      semanticHoldType='';
-      semanticQueue.length=0;
-    }
-    if(direction) storyDirection=direction;
-    if(storyHoldUntil<=now){
-      storyHoldUntil=0;
-      semanticHoldType='';
-      startSemanticHold(now);
-    }
-    var holding=storyHoldUntil>now;
-    var elapsed=lastStoryTime ? now-lastStoryTime : 16.67;
-    lastStoryTime=now;
-    if(!holding){
-      var stepped=stepBufferedProgress(renderedStoryProgress,targetStoryProgress,elapsed);
-      if(stepped!==null) renderedStoryProgress=stepped;
-    }
-    var state=computeScrollStoryState(renderedStoryProgress), milestones=computeSemanticMilestones(state);
-    if(storyDirection>0){
-      for(var sale=semanticSaleCount;sale<milestones.saleCount;sale++) semanticQueue.push({type:'sale',duration:STORY_SALE_HOLD_MS});
-      for(var high=semanticGraphCount;high<milestones.graphCount;high++) semanticQueue.push({type:'graph',duration:STORY_GRAPH_HOLD_MS});
-    }
-    semanticSaleCount=milestones.saleCount;
-    semanticGraphCount=milestones.graphCount;
-    startSemanticHold(now);
-    holding=storyHoldUntil>now;
-    zoomSection.dataset.semanticHold=holding ? semanticHoldType : '';
-    if(Math.abs(renderedStoryProgress-lastStoryProgress)>=.0001){
-      lastStoryProgress=renderedStoryProgress;
-      applyStoryState(state,renderedStoryProgress);
-    }
-    if(!storyStarted && renderedStoryProgress>.01){ storyStarted=true; trackDemo('started'); }
-    if(!storyCompleted && renderedStoryProgress>=.999){ storyCompleted=true; trackDemo('completed'); }
-    if(storyCompleted && renderedStoryProgress<.94) storyCompleted=false;
-    if(window!==parent && (holding || semanticQueue.length || Math.abs(targetStoryProgress-renderedStoryProgress)>=.0001)) storyFrame=requestAnimationFrame(renderScrollStory);
+    if(!storyStarted && progress>.01){ storyStarted=true; trackDemo('started'); }
+    if(!storyCompleted && progress>=.999){ storyCompleted=true; trackDemo('completed'); }
+    if(storyCompleted && progress<.94) storyCompleted=false;
   }
   function queueScrollStory(viewport){
     if(viewport){
@@ -1270,11 +1229,11 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     }
     if(!storyFrame) storyFrame=requestAnimationFrame(renderScrollStory);
   }
-  function runStandaloneStory(frameTime){
+  function runStandaloneStory(){
     standaloneFrame=0;
     if(!standaloneVisible || document.hidden) return;
     storyViewport={frameTop:-window.scrollY,viewportHeight:window.innerHeight};
-    renderScrollStory(frameTime);
+    renderScrollStory();
     standaloneFrame=requestAnimationFrame(runStandaloneStory);
   }
   function setStandaloneVisible(visible){
