@@ -1308,7 +1308,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 (function(){
   'use strict';
   var chapter=new URLSearchParams(location.search).get('player');
-  var durations={learn:7000,triagers:12000,growth:11000};
+  var durations={learn:5000,triagers:8000,growth:8000};
   if(!durations[chapter] || !window.renderCaptureFrame) return;
   var duration=durations[chapter],elapsed=0,startedAt=0,frame=0,playing=false;
 
