@@ -255,12 +255,12 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .fw-label{display:none}
   .source-kicker,.source-detail,.source-rule{display:none}
   .source-title{font-size:16px}
-  .story-graph-copy{left:14%;top:9%;width:72%}
+  .story-graph-copy{left:20%;top:9%;width:60%}
   .story-graph h3{font-size:clamp(1.5rem,7vw,2rem)}
-  .story-graph-plot{left:12%;top:28%;width:76%}
-  .story-graph .axis{left:14%;top:70%;width:72%;font-size:.75rem}
+  .story-graph-plot{left:20%;top:28%;width:60%}
+  .story-graph .axis{left:20%;top:70%;width:60%;font-size:.75rem}
   .story-graph-axis-label{font-size:10px}
-  .story-graph-origin-label{left:17%;top:61%;font-size:.75rem}
+  .story-graph-origin-label{left:22.5%;top:61%;font-size:.75rem}
   .story-graph-milestone{display:none;left:50%!important;top:auto!important;bottom:17%;width:max-content;max-width:78%!important;padding:7px 10px;border:1px solid var(--accent-line);border-radius:10px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);font-size:.875rem;transform:translate(-50%,var(--milestone-y,4px));text-align:center}
   .story-graph-milestone.is-current{display:block}
   .stage-caption{position:absolute;left:50%;bottom:12px;z-index:6;display:block;max-width:calc(100% - 28px);padding:8px 12px;border:1px solid var(--accent-line);border-radius:10px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);color:var(--accent-ink);font:750 .875rem/1.25 var(--fb);text-align:center;opacity:var(--stage-caption-opacity,1);transform:translateX(-50%);pointer-events:none}
@@ -1172,7 +1172,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   window.renderCaptureFrame=function(chapter,progress){
     var triagerStart=MANAGER_END+(TRIAGER_INTRO_END-MANAGER_END)*.42;
     var growthStart=TRIAGER_END+(FLYWHEEL_ASSEMBLY_END-TRIAGER_END)*.35;
-    var ranges={learn:[0,MANAGER_END],triagers:[triagerStart,TRIAGER_END],growth:[growthStart,1]};
+    var graphStart=FLYWHEEL_END+(CHART_TRANSITION_END-FLYWHEEL_END)*.42;
+    var ranges={learn:[0,MANAGER_END],triagers:[triagerStart,TRIAGER_END],flywheel:[growthStart,FLYWHEEL_END],graph:[graphStart,1],growth:[growthStart,1]};
     var range=ranges[chapter];
     if(!CAPTURE || !range) return false;
     activateScrollStory();
@@ -1308,7 +1309,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 (function(){
   'use strict';
   var chapter=new URLSearchParams(location.search).get('player');
-  var durations={learn:5000,triagers:8000,growth:8000};
+  var durations={learn:5000,triagers:8000,flywheel:8000,graph:8000};
   if(!durations[chapter] || !window.renderCaptureFrame) return;
   var duration=durations[chapter],elapsed=0,startedAt=0,frame=0,playing=false;
 

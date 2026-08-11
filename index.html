@@ -28,18 +28,19 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 .embed-mode .head,.embed-mode .trust,.embed-mode .cta{display:none}
 .video-mode .zoom-section{display:none!important}
 
-/* ---------- three independent live chapters ---------- */
+/* ---------- four independent live chapters ---------- */
 .video-story{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
 .video-story-head{padding:clamp(22px,3.5vw,40px) clamp(22px,3.5vw,40px) 20px}
 .video-story-intro{max-width:700px;margin-top:8px;color:var(--ink-2);font-size:clamp(1rem,.95rem + .25vw,1.12rem);line-height:1.55}
-.video-chapter-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}
+.video-chapter-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px}
 .video-chapter-nav a{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid var(--line-2);border-radius:12px;color:var(--ink-2);font-size:.88rem;font-weight:700;text-decoration:none;transition:border-color .18s ease,background .18s ease,color .18s ease}
 .video-chapter-nav a:hover,.video-chapter-nav a:focus-visible{border-color:rgba(22,164,108,.48);background:rgba(22,164,108,.055);color:var(--accent-ink);outline:none}
 .video-chapter-nav span{display:grid;place-items:center;flex:0 0 24px;height:24px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 .72rem var(--mono)}
 .video-chapters{display:grid;padding:0 0 clamp(90px,18vh,180px)}
 .video-chapter{--stack-top:18px;position:sticky;top:var(--stack-top);z-index:10;display:flex;flex-direction:column;scroll-margin-top:var(--stack-top);margin-bottom:clamp(90px,18vh,180px);border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:0 22px 55px -32px rgba(46,38,28,.46);overflow:hidden;transform:translateY(var(--stack-shift,0)) scale(var(--stack-scale,1));transform-origin:center top;transition:transform .25s ease,box-shadow .25s ease}
 .video-chapter:nth-child(2){--stack-top:56px;z-index:11}
-.video-chapter:nth-child(3){--stack-top:94px;z-index:12;margin-bottom:0}
+.video-chapter:nth-child(3){--stack-top:94px;z-index:12}
+.video-chapter:nth-child(4){--stack-top:132px;z-index:13;margin-bottom:0}
 .video-chapter.is-past{box-shadow:0 14px 34px -28px rgba(46,38,28,.38)}
 .video-card-tab{order:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;min-height:58px;padding:10px 18px;border-bottom:1px solid var(--line-2);background:#fff}
 .video-card-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 .72rem var(--mono)}
@@ -69,6 +70,7 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
   .video-chapter{--stack-top:10px;margin-bottom:100px;border-radius:16px}
   .video-chapter:nth-child(2){--stack-top:42px}
   .video-chapter:nth-child(3){--stack-top:74px}
+  .video-chapter:nth-child(4){--stack-top:106px}
   .video-card-tab{grid-template-columns:auto minmax(0,1fr);min-height:52px;padding:8px 12px;gap:9px}
   .video-card-number{width:28px;height:28px}
   .video-card-tab h3{font-size:1rem}
@@ -392,7 +394,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Book a strategy call (opens in a new tab)">Book a strategy call</a>
   </header>
 
-  <!-- ============ HOW IT WORKS · three user-controlled video chapters ============ -->
+  <!-- ============ HOW IT WORKS · four user-controlled live chapters ============ -->
   <section class="card video-story" aria-labelledby="video-story-title">
     <div class="video-story-head">
       <div class="card-eyebrow">Every sale funds the next batch of leads.</div>
@@ -401,7 +403,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       <nav class="video-chapter-nav" aria-label="Demo chapters">
         <a href="#demo-learn"><span>01</span>Learn your business</a>
         <a href="#demo-triagers"><span>02</span>Deploy AI Triagers</a>
-        <a href="#demo-growth"><span>03</span>Fund the next lead</a>
+        <a href="#demo-flywheel"><span>03</span>Complete the flywheel</a>
+        <a href="#demo-graph"><span>04</span>Compound growth</a>
       </nav>
     </div>
     <div class="video-chapters">
@@ -426,19 +429,31 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Deploy AI Triagers">Play</button></div>
         </div>
         <div class="video-chapter-copy">
-          <p>Each Triager guides a buyer through the $8 assessment, identifies fit, and sends every new sale back to the Brain as usable ad budget.</p><a class="video-chapter-next" href="#demo-growth">See self-funding growth</a>
+          <p>Each Triager guides a buyer through the $8 assessment, identifies fit, and sends every new sale back to the Brain as usable ad budget.</p><a class="video-chapter-next" href="#demo-flywheel">See the flywheel</a>
         </div>
       </article>
-      <article class="video-chapter" id="demo-growth" data-chapter="growth">
+      <article class="video-chapter" id="demo-flywheel" data-chapter="flywheel">
         <header class="video-card-tab">
-          <span class="video-card-number">03</span><h3>Each sale funds the next lead.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+          <span class="video-card-number">03</span><h3>Each sale completes the flywheel.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
         </header>
         <div class="video-chapter-media">
-          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=growth" title="The flywheel reinvesting sales into a self-funding growth curve" loading="lazy"></iframe>
-          <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Fund the next lead">Play</button></div>
+          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=flywheel" title="AI Triagers assembling into the self-funding sales flywheel" loading="lazy"></iframe>
+          <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Complete the flywheel">Play</button></div>
         </div>
         <div class="video-chapter-copy">
-          <p>The Brain reinvests assessment revenue into ads. More traffic creates more qualified buyers, more sales, and a larger budget for the next cycle.</p>
+          <p>The Brain reinvests assessment revenue into ads, bringing new leads back into the same coordinated sales loop.</p><a class="video-chapter-next" href="#demo-graph">See the growth curve</a>
+        </div>
+      </article>
+      <article class="video-chapter" id="demo-graph" data-chapter="graph">
+        <header class="video-card-tab">
+          <span class="video-card-number">04</span><h3>Reinvestment compounds growth.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+        </header>
+        <div class="video-chapter-media">
+          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=graph" title="A self-funding growth curve reaching progressively higher ad-budget milestones" loading="lazy"></iframe>
+          <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Compound growth">Play</button></div>
+        </div>
+        <div class="video-chapter-copy">
+          <p>Each completed cycle raises the available ad budget, funding more traffic and creating progressively higher growth milestones.</p>
         </div>
       </article>
     </div>
@@ -1394,7 +1409,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
-  var rendererVersion=new URLSearchParams(location.search).get('v') || '20260811f';
+  var rendererVersion=new URLSearchParams(location.search).get('v') || '20260811g';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control'),state:chapter.querySelector('.video-watch-state')};
