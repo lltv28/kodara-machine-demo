@@ -661,6 +661,15 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var segment=Math.min(3,Math.floor(p*4)), local=p*4-segment;
     return stops[segment]+(stops[segment+1]-stops[segment])*storyEase(zoomRange(local,0,.58));
   }
+  function computeGraphPlayerState(progressValue){
+    var progress=zoomClamp(progressValue,0,1), state=computeScrollStoryState(CHART_TRANSITION_END);
+    state.graphProgress=computeGraphDwellProgress(progress);
+    state.graphFillOpacity=storyEase(zoomRange(state.graphProgress,.78,1));
+    state.relayProgress=state.graphProgress;
+    state.phase=progress>=1 ? 'complete' : 'chart';
+    state.complete=progress>=1;
+    return state;
+  }
   function storyDefaults(){
     return {sourceOpacity:0,knowledgeProgress:1,knowledgeRingOpacity:0,knowledgeSourceIndex:3,knowledgePathProgress:1,knowledgeStepProgress:1,knowledgeHolding:true,deploymentProgress:1,teamProgress:0,triagerActivityProgress:0,budgetOpacity:0,budgetAmount:0,saleGainOpacity:0,saleGainY:6,salePulse:0,workerOpacity:0,engineOpacity:0,triagerDemoOpacity:0,phoneOpacity:0,adOpacity:0,adsOpacity:0,shellOpacity:0,shellScale:.88,sceneZoom:1.05,wheelOpacity:1,wheelOriginX:50,wheelOriginY:50,brainOpacity:0,activityOpacity:.18,labelsOpacity:0,triagerLabel:0,nodeTriagers:0,nodeTicket:0,nodeDownsell:0,flywheelOrbitOpacity:0,flywheelOrbitProgress:0,coreX:50,coreY:50,coreScale:1,coreOpacity:1,coreCopyOpacity:1,coreMarkOpacity:0,coreStatusOpacity:1,graphOpacity:0,graphScale:.985,graphProgress:0,graphFillOpacity:0,graphOriginLabelOpacity:0,relayOpacity:0,relayProgress:0,phase:'manager',beat:'manager',complete:false};
   }
@@ -1170,16 +1179,14 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     setNarrativeState(state.beat);
   }
   window.renderCaptureFrame=function(chapter,progress){
-    var triagerStart=MANAGER_END+(TRIAGER_INTRO_END-MANAGER_END)*.42;
-    var growthStart=TRIAGER_END+(FLYWHEEL_ASSEMBLY_END-TRIAGER_END)*.35;
-    var graphStart=FLYWHEEL_END+(CHART_TRANSITION_END-FLYWHEEL_END)*.42;
-    var ranges={learn:[0,MANAGER_END],triagers:[triagerStart,TRIAGER_END],flywheel:[growthStart,FLYWHEEL_END],graph:[graphStart,1],growth:[growthStart,1]};
+    var ranges={learn:[0,MANAGER_END],triagers:[TRIAGER_INTRO_END,TRIAGER_END],flywheel:[FLYWHEEL_ASSEMBLY_END,FLYWHEEL_END]};
     var range=ranges[chapter];
-    if(!CAPTURE || !range) return false;
+    if(!CAPTURE || (!range && chapter!=='graph')) return false;
     activateScrollStory();
     var local=zoomClamp(Number(progress)||0,0,1);
-    var global=range[0]+(range[1]-range[0])*local;
-    var state=computeScrollStoryState(global);
+    var sample=Math.min(local,.999999);
+    var global=range ? range[0]+(range[1]-range[0])*sample : CHART_TRANSITION_END;
+    var state=chapter==='graph' ? computeGraphPlayerState(local) : computeScrollStoryState(global);
     applyStoryState(state,global);
     document.documentElement.dataset.captureReady='1';
     return {chapter:chapter,progress:local,phase:state.phase};
