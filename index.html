@@ -29,31 +29,35 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 .video-mode .zoom-section{display:none!important}
 
 /* ---------- three independent video chapters ---------- */
-.video-story{padding:0;overflow:hidden}
+.video-story{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
 .video-story-head{padding:clamp(22px,3.5vw,40px) clamp(22px,3.5vw,40px) 20px}
 .video-story-intro{max-width:700px;margin-top:8px;color:var(--ink-2);font-size:clamp(1rem,.95rem + .25vw,1.12rem);line-height:1.55}
 .video-chapter-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}
 .video-chapter-nav a{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid var(--line-2);border-radius:12px;color:var(--ink-2);font-size:.88rem;font-weight:700;text-decoration:none;transition:border-color .18s ease,background .18s ease,color .18s ease}
 .video-chapter-nav a:hover,.video-chapter-nav a:focus-visible{border-color:rgba(22,164,108,.48);background:rgba(22,164,108,.055);color:var(--accent-ink);outline:none}
 .video-chapter-nav span{display:grid;place-items:center;flex:0 0 24px;height:24px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 .72rem var(--mono)}
-.video-chapters{display:grid}
-.video-chapter{scroll-margin-top:18px;border-top:1px solid var(--line-2)}
-.video-chapter-media{position:relative;width:100%;aspect-ratio:1240/760;overflow:hidden;background:var(--bg)}
-.video-chapter video{display:block;width:100%;height:100%;object-fit:cover;background:var(--bg)}
+.video-chapters{display:grid;padding:0 0 clamp(90px,18vh,180px)}
+.video-chapter{--stack-top:18px;position:sticky;top:var(--stack-top);z-index:10;display:flex;flex-direction:column;scroll-margin-top:var(--stack-top);margin-bottom:clamp(90px,18vh,180px);border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:0 22px 55px -32px rgba(46,38,28,.46);overflow:hidden;transform:translateY(var(--stack-shift,0)) scale(var(--stack-scale,1));transform-origin:center top;transition:transform .25s ease,box-shadow .25s ease}
+.video-chapter:nth-child(2){--stack-top:56px;z-index:11}
+.video-chapter:nth-child(3){--stack-top:94px;z-index:12;margin-bottom:0}
+.video-chapter.is-past{box-shadow:0 14px 34px -28px rgba(46,38,28,.38)}
+.video-card-tab{order:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;min-height:58px;padding:10px 18px;border-bottom:1px solid var(--line-2);background:#fff}
+.video-card-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 .72rem var(--mono)}
+.video-card-tab h3{overflow:hidden;color:var(--ink);font-family:var(--fd);font-size:clamp(1.08rem,.92rem + .45vw,1.35rem);line-height:1.08;letter-spacing:-.01em;text-overflow:ellipsis;white-space:nowrap}
+.video-chapter-media{order:2;position:relative;width:100%;height:min(61.29vw,698px,calc(100dvh - 250px));overflow:hidden;background:var(--bg)}
+.video-chapter video{display:block;width:100%;height:100%;object-fit:contain;background:var(--bg)}
 .video-chapter-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;padding:14px;pointer-events:none;background:linear-gradient(180deg,transparent 70%,rgba(30,41,59,.035))}
 .video-control{display:flex;align-items:center;gap:7px;min-height:42px;padding:9px 13px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 7px 20px rgba(30,41,59,.13);color:var(--ink);font:700 .82rem var(--fb);cursor:pointer;pointer-events:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .video-control::before{content:'▶';font-size:.68rem;color:var(--accent-ink)}
 .video-chapter.is-playing .video-control::before{content:'Ⅱ';font-size:.72rem}
 .video-chapter.is-ended .video-control::before{content:'↻';font-size:1rem}
 .video-control:focus-visible{outline:3px solid rgba(22,164,108,.24);outline-offset:2px}
-.video-chapter-copy{display:grid;grid-template-columns:minmax(0,.68fr) minmax(280px,1.32fr);gap:clamp(20px,4vw,54px);align-items:start;padding:clamp(22px,3vw,34px) clamp(22px,3.5vw,40px) clamp(30px,5vw,52px)}
-.video-step{font:650 .75rem var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:9px}
-.video-chapter h3{font-family:var(--fd);font-size:clamp(1.6rem,1.25rem + 1.25vw,2.25rem);line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
-.video-chapter-copy p{color:var(--ink-2);font-size:clamp(1rem,.95rem + .24vw,1.1rem);line-height:1.6;text-wrap:pretty}
-.video-watch-state{display:inline-flex;align-items:center;gap:7px;margin-top:14px;color:var(--ink-3);font:600 .75rem var(--mono);letter-spacing:.02em}
+.video-chapter-copy{order:3;display:flex;justify-content:space-between;gap:24px;align-items:center;min-height:76px;padding:14px 18px}
+.video-chapter-copy p{max-width:760px;color:var(--ink-2);font-size:clamp(.9rem,.86rem + .16vw,1rem);line-height:1.45;text-wrap:pretty}
+.video-watch-state{display:inline-flex;align-items:center;gap:7px;color:var(--ink-3);font:600 .72rem var(--mono);letter-spacing:.02em;white-space:nowrap}
 .video-watch-state::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .18s ease,box-shadow .18s ease}
 .video-chapter.is-active .video-watch-state::before{background:var(--accent);box-shadow:0 0 0 4px rgba(22,164,108,.12)}
-.video-chapter-next{display:inline-flex;align-items:center;gap:7px;margin-top:18px;color:var(--accent-ink);font-size:.88rem;font-weight:750;text-decoration:none}
+.video-chapter-next{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;color:var(--accent-ink);font-size:.85rem;font-weight:750;text-decoration:none;white-space:nowrap}
 .video-chapter-next::after{content:'↓'}
 .video-chapter:last-child .video-chapter-next{display:none}
 @media(max-width:720px){
@@ -61,12 +65,22 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
   .video-story-head{padding:22px 18px 16px}
   .video-chapter-nav{grid-template-columns:1fr;gap:6px}
   .video-chapter-nav a{min-height:42px}
-  .video-chapter-media{aspect-ratio:840/760}
-  .video-chapter-copy{grid-template-columns:1fr;gap:12px;padding:20px 18px 34px}
-  .video-chapter-copy p{font-size:1rem}
+  .video-chapters{padding-bottom:110px}
+  .video-chapter{--stack-top:10px;margin-bottom:100px;border-radius:16px}
+  .video-chapter:nth-child(2){--stack-top:42px}
+  .video-chapter:nth-child(3){--stack-top:74px}
+  .video-card-tab{grid-template-columns:auto minmax(0,1fr);min-height:52px;padding:8px 12px;gap:9px}
+  .video-card-number{width:28px;height:28px}
+  .video-card-tab h3{font-size:1rem}
+  .video-card-tab .video-watch-state{display:none}
+  .video-chapter-media{height:min(calc((100vw - 24px)*.9048),calc(100dvh - 230px))}
+  .video-chapter-copy{display:grid;gap:10px;min-height:0;padding:13px 14px 15px}
+  .video-chapter-copy p{font-size:.9rem;line-height:1.42}
   .video-control{min-height:44px;padding:10px 14px}
 }
 @media(prefers-reduced-motion:reduce){
+  .video-chapter{position:relative;top:auto!important;margin-bottom:18px;transform:none!important;transition:none}
+  .video-chapters{padding-bottom:0}
   .video-chapter-nav a,.video-watch-state::before{transition:none}
 }
 
@@ -393,6 +407,9 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     </div>
     <div class="video-chapters">
       <article class="video-chapter" id="demo-learn" data-chapter="learn">
+        <header class="video-card-tab">
+          <span class="video-card-number">01</span><h3>It learns your business first.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+        </header>
         <div class="video-chapter-media">
           <video muted playsinline preload="metadata" poster="assets/posters/learn-desktop.jpg" aria-label="Business knowledge flowing into the AI Brain Manager">
             <source media="(max-width:720px)" src="assets/video/learn-mobile.mp4" type="video/mp4">
@@ -401,11 +418,13 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Learn your business">Play</button></div>
         </div>
         <div class="video-chapter-copy">
-          <div><div class="video-step">Step 1 of 3</div><h3>It learns your business first.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div></div>
-          <div><p>Your offers, customers, messaging, and sales data train one AI Brain Manager—so every buyer conversation starts with the right context.</p><a class="video-chapter-next" href="#demo-triagers">See the AI Triagers</a></div>
+          <p>Your offers, customers, messaging, and sales data train one AI Brain Manager, so every buyer conversation starts with the right context.</p><a class="video-chapter-next" href="#demo-triagers">See the AI Triagers</a>
         </div>
       </article>
       <article class="video-chapter" id="demo-triagers" data-chapter="triagers">
+        <header class="video-card-tab">
+          <span class="video-card-number">02</span><h3>Five AI Triagers qualify buyers.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+        </header>
         <div class="video-chapter-media">
           <video muted playsinline preload="none" poster="assets/posters/triagers-desktop.jpg" aria-label="Five AI Triagers routing buyers and returning eight-dollar sales">
             <source media="(max-width:720px)" src="assets/video/triagers-mobile.mp4" type="video/mp4">
@@ -414,11 +433,13 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Deploy AI Triagers">Play</button></div>
         </div>
         <div class="video-chapter-copy">
-          <div><div class="video-step">Step 2 of 3</div><h3>Five AI Triagers qualify buyers.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div></div>
-          <div><p>Each Triager guides a buyer through the $8 assessment, identifies fit, and sends every new sale back to the Brain as usable ad budget.</p><a class="video-chapter-next" href="#demo-growth">See self-funding growth</a></div>
+          <p>Each Triager guides a buyer through the $8 assessment, identifies fit, and sends every new sale back to the Brain as usable ad budget.</p><a class="video-chapter-next" href="#demo-growth">See self-funding growth</a>
         </div>
       </article>
       <article class="video-chapter" id="demo-growth" data-chapter="growth">
+        <header class="video-card-tab">
+          <span class="video-card-number">03</span><h3>Each sale funds the next lead.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+        </header>
         <div class="video-chapter-media">
           <video muted playsinline preload="none" poster="assets/posters/growth-desktop.jpg" aria-label="The flywheel reinvesting sales into a self-funding growth curve">
             <source media="(max-width:720px)" src="assets/video/growth-mobile.mp4" type="video/mp4">
@@ -427,8 +448,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Fund the next lead">Play</button></div>
         </div>
         <div class="video-chapter-copy">
-          <div><div class="video-step">Step 3 of 3</div><h3>Each sale funds the next lead.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div></div>
-          <div><p>The Brain reinvests assessment revenue into ads. More traffic creates more qualified buyers, more sales, and a larger budget for the next cycle.</p></div>
+          <p>The Brain reinvests assessment revenue into ads. More traffic creates more qualified buyers, more sales, and a larger budget for the next cycle.</p>
         </div>
       </article>
     </div>
@@ -1384,7 +1404,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var chapters=Array.prototype.slice.call(document.querySelectorAll('.video-chapter'));
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
-  var ratios=new Map(), active=null;
+  var ratios=new Map(), active=null, viewportGeometry=null;
 
   function elements(chapter){
     return {video:chapter.querySelector('video'),button:chapter.querySelector('.video-control'),state:chapter.querySelector('.video-watch-state')};
@@ -1401,29 +1421,44 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       if(video && !video.paused) video.pause();
     });
   }
+  function markActive(chapter){
+    active=chapter;
+    var activeIndex=chapters.indexOf(chapter);
+    chapters.forEach(function(item,index){
+      var depth=Math.max(0,activeIndex-index);
+      item.classList.toggle('is-active',item===chapter);
+      item.classList.toggle('is-past',index<activeIndex);
+      item.style.setProperty('--stack-scale',String(1-depth*.012));
+      item.style.setProperty('--stack-shift',(-3*depth)+'px');
+    });
+  }
   function playChapter(chapter,forceReplay){
     if(!chapter || document.hidden) return;
     var video=elements(chapter).video;
     if(!video) return;
     pauseOthers(chapter);
-    active=chapter;
-    chapters.forEach(function(item){ item.classList.toggle('is-active',item===chapter); });
+    markActive(chapter);
     if(forceReplay || video.ended){ video.currentTime=0; chapter.classList.remove('is-ended'); }
     var promise=video.play();
     if(promise && promise.catch) promise.catch(function(){ setState(chapter,'Ready to play'); });
   }
   function evaluateVisibility(){
-    var best=null,bestRatio=0;
+    var best=null,bestRatio=0,dominant=null;
+    var viewportHeight=viewportGeometry ? viewportGeometry.viewportHeight : window.innerHeight;
+    var activationLine=Math.min(viewportHeight*.42,380);
     chapters.forEach(function(chapter){
       var ratio=ratios.get(chapter)||0;
-      if(ratio>bestRatio){ best=chapter; bestRatio=ratio; }
+      var top=chapter.getBoundingClientRect().top+(viewportGeometry ? viewportGeometry.frameTop : 0);
+      if(ratio>=.30 && top<=activationLine) dominant=chapter;
+      if(ratio>=bestRatio){ best=chapter; bestRatio=ratio; }
     });
     var activeRatio=active ? ratios.get(active)||0 : 0;
     if(active && activeRatio<.30){
       var activeVideo=elements(active).video;
       if(activeVideo && !activeVideo.paused) activeVideo.pause();
     }
-    if(!reduce && best && bestRatio>=.55 && best!==active && !elements(best).video.ended) playChapter(best,false);
+    var next=dominant || (bestRatio>=.55 ? best : null);
+    if(!reduce && next && next!==active && !elements(next).video.ended) playChapter(next,false);
   }
   function ratioInParent(chapter,frameTop,viewportHeight){
     var rect=chapter.getBoundingClientRect(), top=frameTop+rect.top, bottom=top+rect.height;
@@ -1439,9 +1474,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       else video.pause();
     });
     video.addEventListener('play',function(){
-      pauseOthers(chapter); active=chapter;
+      pauseOthers(chapter); markActive(chapter);
       chapter.classList.add('is-playing'); chapter.classList.remove('is-ended');
-      chapters.forEach(function(other){ other.classList.toggle('is-active',other===chapter); });
       setState(chapter,'Playing');
       parent.postMessage({fdDemoEvent:'video-'+chapter.dataset.chapter+'-started'},'*');
     });
@@ -1472,6 +1506,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(event.source!==parent || !event.data || !event.data.fdViewport) return;
     var viewport=event.data.fdViewport;
     if(!Number.isFinite(viewport.frameTop)||!Number.isFinite(viewport.viewportHeight)) return;
+    viewportGeometry={frameTop:viewport.frameTop,viewportHeight:viewport.viewportHeight};
     chapters.forEach(function(chapter){ ratios.set(chapter,ratioInParent(chapter,viewport.frameTop,viewport.viewportHeight)); });
     evaluateVisibility();
   });
