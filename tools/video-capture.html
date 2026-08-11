@@ -153,13 +153,14 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .source-active-path{fill:none;stroke:rgb(22,164,108);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
 .source-particle{fill:rgb(22,164,108);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .source-card{fill:rgba(255,253,251,.98);stroke:rgba(16,104,68,.28);stroke-width:2;filter:url(#phone-shadow)}
-.business-source.is-active .source-card{stroke:rgb(22,164,108);stroke-width:3}
-.source-kicker{font:700 8px Instrument Sans,sans-serif;fill:rgba(16,104,68,.72);letter-spacing:.07em;text-anchor:middle}
-.source-title{font:750 12.5px Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle}
-.source-rule{stroke:rgba(16,104,68,.18);stroke-width:1}
-.source-detail{font:550 8.5px Instrument Sans,sans-serif;fill:#5c6761;text-anchor:middle}
+.business-source.is-active .source-card{fill:rgba(234,246,240,.92);stroke:rgb(22,164,108);stroke-width:3}
+.source-kicker{font:750 8.5px Instrument Sans,sans-serif;fill:rgba(16,104,68,.78);letter-spacing:.08em;text-anchor:middle}
+.source-title{font:750 13.5px Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle}
+.source-metric{font:800 16px Instrument Sans,sans-serif;fill:rgb(16,104,68);text-anchor:middle}
+.source-detail{font:600 8.8px Instrument Sans,sans-serif;fill:#5c6761;text-anchor:middle}
 .triager-demo-scene{opacity:var(--triager-demo-opacity,0)}
 .manager-triager-link{fill:none;stroke:rgba(16,104,68,.28);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 7}
+.manager-triager-link.is-active{stroke:rgb(22,164,108)}
 .triager-ad-node{opacity:var(--ad-opacity,0)}
 .triager-ad-node .ad-node-body{fill:#fff;stroke:rgba(16,104,68,.28);stroke-width:2;filter:url(#ns)}
 .triager-ad-node text{font-family:Instrument Sans,sans-serif;font-weight:750;fill:rgba(26,26,26,.8);text-anchor:middle;dominant-baseline:central}
@@ -210,8 +211,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-core{position:absolute;left:var(--core-x,50%);top:var(--core-y,50%);z-index:4;width:clamp(124px,20cqw,168px);aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:rgba(16,104,68,.96);border:2px solid rgb(16,104,68);box-shadow:0 12px 30px rgba(30,41,59,.16);color:#fff;text-align:center;opacity:var(--core-opacity,1);transform:translate(-50%,-50%) scale(var(--core-scale,1));will-change:left,top,transform;pointer-events:none}
 .zoom-section.is-manager-pulse .story-core{transform:translate(-50%,-50%) scale(1.035)}
 .zoom-section[data-story-phase="triagers"] .story-core{transform:translate(-50%,-50%) scale(var(--sale-scale,1));box-shadow:0 12px 30px rgba(30,41,59,.16),0 0 0 8px rgba(22,164,108,var(--sale-ring-opacity,0))}
-.story-core-knowledge{position:absolute;inset:-10px;width:calc(100% + 20px);height:calc(100% + 20px);overflow:visible;opacity:var(--knowledge-ring-opacity,1);transform:rotate(-90deg)}
-.story-core-knowledge circle{fill:none;stroke:rgb(22,164,108);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--knowledge-progress,0))}
 .story-core-title{position:relative;font-family:var(--fd);font-weight:700;font-size:clamp(1.35rem,4cqw,2.55rem);line-height:.9;letter-spacing:-.025em;opacity:var(--core-copy-opacity,1);transform:translateY(var(--core-title-y,0px))}
 .story-core-mark{position:absolute;left:50%;top:50%;font:800 2.7rem var(--fb);letter-spacing:-.04em;opacity:var(--core-mark-opacity,0);transform:translate(-50%,-50%)}
 .story-core-budget{position:absolute;left:50%;top:68%;display:grid;gap:1px;opacity:var(--budget-opacity,0);transform:translateX(-50%);white-space:nowrap}
@@ -416,40 +415,40 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         </g>
         <g class="source-demo-scene" aria-hidden="true">
           <g aria-hidden="true">
-            <path class="source-guide" d="M367 225 C455 225 510 330 620 380"/>
-            <path class="source-guide" d="M367 535 C455 535 510 430 620 380"/>
-            <path class="source-guide" d="M873 225 C785 225 730 330 620 380"/>
-            <path class="source-guide" d="M873 535 C785 535 730 430 620 380"/>
+            <path class="source-guide" d="M399 225 C470 225 520 330 620 380"/>
+            <path class="source-guide" d="M399 535 C470 535 520 430 620 380"/>
+            <path class="source-guide" d="M841 225 C770 225 720 330 620 380"/>
+            <path class="source-guide" d="M841 535 C770 535 720 430 620 380"/>
             <path class="source-active-path" pathLength="1"/>
             <circle class="source-particle" r="5"/>
           </g>
-          <g class="business-source" transform="translate(275 150)" data-source-index="0" data-x="275" data-y="150" data-status="Learning offers">
-            <rect class="source-card" width="92" height="150" rx="18"/>
-            <text class="source-kicker" x="46" y="27">BUSINESS DATA</text>
-            <text class="source-title" x="46" y="57">Products &amp;</text><text class="source-title" x="46" y="73">Services</text>
-            <line class="source-rule" x1="18" y1="91" x2="74" y2="91"/>
-            <text class="source-detail" x="46" y="112">Offers and outcomes</text><text class="source-detail" x="46" y="126">Pricing and delivery</text>
+          <g class="business-source" transform="translate(275 159)" data-source-index="0" data-x="275" data-y="159" data-status="Learning offers">
+            <rect class="source-card" width="124" height="132" rx="16"/>
+            <text class="source-kicker" x="62" y="22">OFFERS</text>
+            <text class="source-title" x="62" y="48">Products &amp;</text><text class="source-title" x="62" y="64">Services</text>
+            <text class="source-metric" x="62" y="91">$8 → $2.5k</text>
+            <text class="source-detail" x="62" y="113">Assessment to core offer</text>
           </g>
-          <g class="business-source" transform="translate(275 460)" data-source-index="1" data-x="275" data-y="460" data-status="Learning customers">
-            <rect class="source-card" width="92" height="150" rx="18"/>
-            <text class="source-kicker" x="46" y="27">BUSINESS DATA</text>
-            <text class="source-title" x="46" y="57">Customers &amp;</text><text class="source-title" x="46" y="73">Pain Points</text>
-            <line class="source-rule" x1="18" y1="91" x2="74" y2="91"/>
-            <text class="source-detail" x="46" y="112">Who buys</text><text class="source-detail" x="46" y="126">Why they act</text>
+          <g class="business-source" transform="translate(275 469)" data-source-index="1" data-x="275" data-y="469" data-status="Learning customers">
+            <rect class="source-card" width="124" height="132" rx="16"/>
+            <text class="source-kicker" x="62" y="22">BUYERS</text>
+            <text class="source-title" x="62" y="48">Customer</text><text class="source-title" x="62" y="64">Profiles</text>
+            <text class="source-metric" x="62" y="91">3 segments</text>
+            <text class="source-detail" x="62" y="113">Pain points mapped</text>
           </g>
-          <g class="business-source" transform="translate(873 150)" data-source-index="2" data-x="873" data-y="150" data-status="Learning messaging">
-            <rect class="source-card" width="92" height="150" rx="18"/>
-            <text class="source-kicker" x="46" y="27">BUSINESS DATA</text>
-            <text class="source-title" x="46" y="57">Brand &amp;</text><text class="source-title" x="46" y="73">Messaging</text>
-            <line class="source-rule" x1="18" y1="91" x2="74" y2="91"/>
-            <text class="source-detail" x="46" y="112">Voice and claims</text><text class="source-detail" x="46" y="126">Proof and assets</text>
+          <g class="business-source" transform="translate(841 159)" data-source-index="2" data-x="841" data-y="159" data-status="Learning messaging">
+            <rect class="source-card" width="124" height="132" rx="16"/>
+            <text class="source-kicker" x="62" y="22">POSITIONING</text>
+            <text class="source-title" x="62" y="48">Brand &amp;</text><text class="source-title" x="62" y="64">Messaging</text>
+            <text class="source-metric" x="62" y="91">12 assets</text>
+            <text class="source-detail" x="62" y="113">Voice + claims aligned</text>
           </g>
-          <g class="business-source" transform="translate(873 460)" data-source-index="3" data-x="873" data-y="460" data-status="Learning sales data">
-            <rect class="source-card" width="92" height="150" rx="18"/>
-            <text class="source-kicker" x="46" y="27">BUSINESS DATA</text>
-            <text class="source-title" x="46" y="57">Sales Data &amp;</text><text class="source-title" x="46" y="73">Assets</text>
-            <line class="source-rule" x1="18" y1="91" x2="74" y2="91"/>
-            <text class="source-detail" x="46" y="112">What converts</text><text class="source-detail" x="46" y="126">Where leads start</text>
+          <g class="business-source" transform="translate(841 469)" data-source-index="3" data-x="841" data-y="469" data-status="Learning sales data">
+            <rect class="source-card" width="124" height="132" rx="16"/>
+            <text class="source-kicker" x="62" y="22">PERFORMANCE</text>
+            <text class="source-title" x="62" y="48">Sales</text><text class="source-title" x="62" y="64">Data</text>
+            <text class="source-metric" x="62" y="91">4.8% CVR</text>
+            <text class="source-detail" x="62" y="113">Leads + revenue tracked</text>
           </g>
         </g>
         <g class="triager-demo-scene" aria-hidden="true">
@@ -463,7 +462,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           <g class="triager-team-label" transform="translate(620 555)"><text>AI Triagers</text></g>
           <g class="triager-activity" aria-hidden="true">
             <path class="activity-path phone-path" pathLength="1"/>
-            <path class="activity-path triager-path" pathLength="1"/>
             <circle class="activity-particle" r="5"/>
           </g>
           <g class="triager-phone" transform="translate(275 150)" data-phone-index="0" data-x="275" data-y="150" style="--phone-delay:0ms">
@@ -578,7 +576,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
             </div>
           </div>
           <div class="story-core" role="img" aria-label="AI Brain Manager learning the business and coordinating the system">
-            <svg class="story-core-knowledge" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47" pathLength="1"/></svg>
             <div class="story-core-mark" aria-hidden="true">AI</div>
             <div class="story-core-title">AI Brain<br>Manager</div>
             <div class="story-core-budget" aria-hidden="true"><span class="story-core-budget-label">AD BUDGET</span><strong class="story-core-budget-value">$0</strong></div>
@@ -905,8 +902,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var triagerPhones=zoomSection ? zoomSection.querySelectorAll('.triager-phone') : [];
   var phoneScreenUses=zoomSection ? zoomSection.querySelectorAll('.phone-screen-state') : [];
   var engineLinks=zoomSection ? zoomSection.querySelectorAll('.engine-link') : [];
+  var managerTriagerLinks=zoomSection ? zoomSection.querySelectorAll('.manager-triager-link') : [];
   var phonePath=zoomSection && zoomSection.querySelector('.phone-path');
-  var triagerPath=zoomSection && zoomSection.querySelector('.triager-path');
   var activityParticle=zoomSection && zoomSection.querySelector('.activity-particle');
   var storyViewport=null, storyLayout=null, storyFrame=0, heightTimer=0, layoutTimer=0, storyActive=false, lastTrackHeight=0, lastStoryProgress=-1, lastBeat='', storyStarted=false, storyCompleted=false;
   var standaloneVisible=false, standaloneFrame=0;
@@ -1034,8 +1031,9 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     for(var i=0;i<sourceNodes.length;i++) sourceNodes[i].classList.toggle('is-active',!state.knowledgeHolding && i===state.knowledgeSourceIndex);
     var source=sourceNodes[state.knowledgeSourceIndex];
     if(source){
-      var x=Number(source.dataset.x), y=Number(source.dataset.y), left=x<620;
-      var sx=left ? x+92 : x, sy=y+75, c1=left ? sx+88 : sx-88, c2=left ? 510 : 730;
+      var card=source.querySelector('.source-card'), width=Number(card.getAttribute('width')), height=Number(card.getAttribute('height'));
+      var x=Number(source.dataset.x), y=Number(source.dataset.y), left=x+width/2<620;
+      var sx=left ? x+width : x, sy=y+height/2, c1=left ? sx+71 : sx-71, c2=left ? 520 : 720;
       sourceActivePath.setAttribute('d','M '+sx+' '+sy+' C '+c1+' '+sy+' '+c2+' 380 620 380');
       setPathProgress(sourceActivePath,state.knowledgePathProgress);
       if(sourceParticle) sourceParticle.style.opacity='0';
@@ -1047,22 +1045,20 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   function clearTriagerActivity(){
     for(var i=0;i<triagerPhones.length;i++) triagerPhones[i].classList.remove('is-connected');
     for(var j=0;j<triagerWorkers.length;j++) triagerWorkers[j].classList.remove('is-active');
-    setPathProgress(phonePath,0); setPathProgress(triagerPath,0);
+    for(var k=0;k<managerTriagerLinks.length;k++) managerTriagerLinks[k].classList.remove('is-active');
+    setPathProgress(phonePath,0);
     if(phonePath) phonePath.style.opacity='0';
-    if(triagerPath) triagerPath.style.opacity='0';
     if(activityParticle) activityParticle.style.opacity='0';
   }
-  function setTriagerConnection(phoneIndex,triagerIndex,phoneProgress,triagerProgress,opacity){
+  function setTriagerConnection(phoneIndex,triagerIndex,phoneProgress,opacity){
     var phone=triagerPhones[phoneIndex], worker=triagerWorkers[triagerIndex];
     if(!phone || !worker) return false;
     var px=Number(phone.dataset.x)+46, py=Number(phone.dataset.y)+75, tx=Number(worker.dataset.startX), ty=Number(worker.dataset.startY);
-    var phoneMid=(px+tx)/2, managerMid=(tx+620)/2;
+    var phoneMid=(px+tx)/2;
     phonePath.setAttribute('d','M '+px+' '+py+' C '+phoneMid+' '+py+' '+phoneMid+' '+ty+' '+tx+' '+ty);
-    triagerPath.setAttribute('d','M '+tx+' '+ty+' C '+managerMid+' '+ty+' '+managerMid+' 380 620 380');
     setPathProgress(phonePath,phoneProgress);
-    setPathProgress(triagerPath,triagerProgress);
     if(phonePath) phonePath.style.opacity=String(.88*opacity);
-    if(triagerPath) triagerPath.style.opacity=String(.88*opacity);
+    for(var i=0;i<managerTriagerLinks.length;i++) managerTriagerLinks[i].classList.toggle('is-active',i===triagerIndex && opacity>0);
     return true;
   }
   function renderTriagerScrollActivity(progress,active){
@@ -1074,10 +1070,10 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       triagerPhones[i].classList.toggle('is-connected',i===state.connectionPhoneIndex);
     }
     for(var j=0;j<triagerWorkers.length;j++) triagerWorkers[j].classList.toggle('is-active',j===state.connectionTriagerIndex);
-    if(setTriagerConnection(state.connectionPhoneIndex,state.connectionTriagerIndex,state.connectionTail ? 1 : state.phoneProgress,state.connectionTail ? 1 : state.triagerProgress,state.connectorOpacity)){
+    if(setTriagerConnection(state.connectionPhoneIndex,state.connectionTriagerIndex,state.connectionTail ? 1 : state.phoneProgress,state.connectorOpacity)){
       if(activityParticle) activityParticle.style.opacity='0';
       if(!state.connectionTail && state.progress>=.18 && state.progress<.50) setParticleOnPath(phonePath,state.phoneProgress);
-      else if(!state.connectionTail && state.progress>=.50 && state.progress<.92) setParticleOnPath(triagerPath,state.triagerProgress);
+      else if(!state.connectionTail && state.progress>=.50 && state.progress<.92) setParticleOnPath(managerTriagerLinks[state.connectionTriagerIndex],1-state.triagerProgress);
     }
     zoomSection.classList.toggle('is-manager-pulse',state.managerProgress>0 && state.progress<.98);
     zoomSection.style.setProperty('--sale-scale',String(1+.045*state.salePulse));
@@ -1094,7 +1090,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       triagerPhones[i].classList.toggle('is-connected',i===state.phoneIndex);
     }
     for(var j=0;j<triagerWorkers.length;j++) triagerWorkers[j].classList.toggle('is-active',j===state.triagerIndex);
-    setTriagerConnection(state.phoneIndex,state.triagerIndex,1,1,1);
+    setTriagerConnection(state.phoneIndex,state.triagerIndex,1,1);
     if(activityParticle) activityParticle.style.opacity='0';
   }
   function applyStoryState(state,storyProgress){
