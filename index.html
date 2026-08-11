@@ -1151,7 +1151,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   function setTriagerConnection(phoneIndex,triagerIndex,phoneProgress,opacity){
     var phone=triagerPhones[phoneIndex], worker=triagerWorkers[triagerIndex];
     if(!phone || !worker) return false;
-    var px=Number(phone.dataset.x)+46, py=Number(phone.dataset.y)+75, tx=Number(worker.dataset.startX), ty=Number(worker.dataset.startY);
+    var phoneX=Number(phone.dataset.x), phoneCenterX=phoneX+46, tx=Number(worker.dataset.startX), ty=Number(worker.dataset.startY);
+    var px=tx>phoneCenterX ? phoneX+92 : phoneX, py=Number(phone.dataset.y)+75;
     var phoneMid=(px+tx)/2;
     phonePath.setAttribute('d','M '+px+' '+py+' C '+phoneMid+' '+py+' '+phoneMid+' '+ty+' '+tx+' '+ty);
     setPathProgress(phonePath,phoneProgress);
@@ -1168,10 +1169,11 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       triagerPhones[i].classList.toggle('is-connected',i===state.connectionPhoneIndex);
     }
     for(var j=0;j<triagerWorkers.length;j++) triagerWorkers[j].classList.toggle('is-active',j===state.connectionTriagerIndex);
-    if(setTriagerConnection(state.connectionPhoneIndex,state.connectionTriagerIndex,state.connectionTail ? 1 : state.phoneProgress,state.connectorOpacity)){
+    var phoneMotion=zoomRange(state.rawProgress,.06,.36), triagerMotion=zoomRange(state.rawProgress,.36,.66);
+    if(setTriagerConnection(state.connectionPhoneIndex,state.connectionTriagerIndex,state.connectionTail ? 1 : phoneMotion,state.connectorOpacity)){
       if(activityParticle) activityParticle.style.opacity='0';
-      if(!state.connectionTail && state.progress>=.18 && state.progress<.50) setParticleOnPath(phonePath,state.phoneProgress);
-      else if(!state.connectionTail && state.progress>=.50 && state.progress<.92) setParticleOnPath(managerTriagerLinks[state.connectionTriagerIndex],1-state.triagerProgress);
+      if(!state.connectionTail && state.rawProgress>=.06 && state.rawProgress<.36) setParticleOnPath(phonePath,phoneMotion);
+      else if(!state.connectionTail && state.rawProgress>=.36 && state.rawProgress<.66) setParticleOnPath(managerTriagerLinks[state.connectionTriagerIndex],1-triagerMotion);
     }
     zoomSection.classList.toggle('is-manager-pulse',state.managerProgress>0 && state.progress<.98);
     zoomSection.style.setProperty('--sale-scale',String(1+.045*state.salePulse));
