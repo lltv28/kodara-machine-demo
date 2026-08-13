@@ -87,7 +87,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-graph-callout line{stroke:rgba(16,104,68,.38);stroke-width:1}
 .story-graph-callout text{display:none}
 .story-graph-milestones{position:absolute;inset:0;pointer-events:none}
-.story-graph-milestone{position:absolute;max-width:128px;padding-left:8px;border-left:2px solid rgba(16,104,68,.55);color:var(--ink-2);font:700 .8125rem/1.22 var(--fb);opacity:0;transform:translateY(var(--milestone-y,4px))}
+.story-graph-milestone{position:absolute;z-index:2;max-width:128px;padding:2px 6px 2px 8px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.92);color:var(--ink-2);font:700 .8125rem/1.22 var(--fb);opacity:0;transform:translateY(var(--milestone-y,4px))}
 .story-graph-milestone.is-confirmed{color:var(--accent-ink);border-left-color:var(--accent)}
 .zoom-section[data-semantic-hold="graph"] .story-graph-milestone.is-current{font-size:.9rem}
 .story-graph-milestone:nth-child(1){left:42.5%;top:49%}
@@ -278,9 +278,9 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .story-graph-axis-label,.story-graph-callout{display:none}
   .story-graph-origin-label{display:none}
   .story-graph-milestone{display:none;bottom:auto;width:max-content;max-width:30%!important;padding:8px 10px;border:0;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:rgba(255,253,251,.94);box-shadow:none;font-size:28px;transform:translateY(var(--milestone-y,4px));text-align:left}
-  .story-graph-milestone:nth-child(1){left:42.5%!important;top:43%!important}
-  .story-graph-milestone:nth-child(2){left:56.5%!important;top:33.5%!important}
-  .story-graph-milestone:nth-child(3){left:70.5%!important;top:24%!important;transform:translate(-100%,var(--milestone-y,4px))}
+  .story-graph-milestone:nth-child(1){left:42.5%!important;top:39.5%!important}
+  .story-graph-milestone:nth-child(2){left:56.5%!important;top:29.5%!important}
+  .story-graph-milestone:nth-child(3){left:70.5%!important;top:19.5%!important;transform:translate(-100%,var(--milestone-y,4px))}
   .story-graph-milestone.is-current{display:block}
   .stage-caption{position:absolute;left:45%;bottom:18px;z-index:6;display:block;max-width:40%;padding:13px 18px;border:1px solid var(--accent-line);border-radius:12px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);color:var(--accent-ink);font:750 28px/1.2 var(--fb);text-align:center;opacity:var(--stage-caption-opacity,1);transform:translateX(-50%);pointer-events:none}
   .zoom-section[data-story-phase="flywheel"] .stage-caption{left:45%;bottom:18px;max-width:40%;padding:13px 18px;font-size:28px;text-align:center;transform:translateX(-50%)}
@@ -572,7 +572,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                   <g aria-hidden="true">
                     <path class="story-graph-axis" d="M 12 18 V 142 H 308"/>
                     <text class="story-graph-axis-label" x="160" y="161" text-anchor="middle">Time</text>
-                    <text class="story-graph-axis-label" transform="translate(5 68) rotate(-90)" text-anchor="middle">Ad budget</text>
+                    <text class="story-graph-axis-label" x="12" y="11">Ad budget</text>
                   </g>
                   <line x1="12" y1="120" x2="308" y2="120" stroke="var(--line-2)" stroke-width="1" stroke-dasharray="3 4"/>
                   <polygon class="story-graph-fill" points="12,120 96,120 96,92 168,92 168,62 240,62 240,32 300,32 300,142 12,142" fill="rgba(22,164,108,.12)"/>
