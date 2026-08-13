@@ -138,9 +138,9 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-graph-milestone{position:absolute;max-width:128px;padding-left:8px;border-left:2px solid rgba(16,104,68,.55);color:var(--ink-2);font:700 .8125rem/1.22 var(--fb);opacity:0;transform:translateY(var(--milestone-y,4px))}
 .story-graph-milestone.is-confirmed{color:var(--accent-ink);border-left-color:var(--accent)}
 .zoom-section[data-semantic-hold="graph"] .story-graph-milestone.is-current{font-size:.9rem}
-.story-graph-milestone:nth-child(1){left:44%;top:36%}
-.story-graph-milestone:nth-child(2){left:58.5%;top:31%}
-.story-graph-milestone:nth-child(3){left:74.5%;top:20%;max-width:112px}
+.story-graph-milestone:nth-child(1){left:42.5%;top:49%}
+.story-graph-milestone:nth-child(2){left:56.5%;top:39.5%}
+.story-graph-milestone:nth-child(3){left:70.5%;top:30%;max-width:112px}
 .story-graph-relay{opacity:var(--relay-opacity,0)}
 .story-graph-relay circle{fill:#fff;stroke:var(--accent);stroke-width:2.2;filter:drop-shadow(0 4px 7px rgba(16,104,68,.2))}
 .story-graph-relay text{fill:var(--accent-ink);font:800 5.8px var(--fb);text-anchor:middle;dominant-baseline:central}
@@ -779,6 +779,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var FLYWHEEL_ASSEMBLY_END=5.2/STORY_SCREENS;
   var FLYWHEEL_END=7/STORY_SCREENS;
   var CHART_TRANSITION_END=8.2/STORY_SCREENS;
+  /* Exact cumulative lengths of the four graph plateaus on its 376-unit polyline. */
+  var GRAPH_PEAKS=[112/376,214/376,316/376,1];
   function computeTriagerDwellProgress(progressValue){
     var p=zoomClamp(progressValue,0,1);
     if(p<.2) return .5*storyEase(p/.2);
@@ -787,7 +789,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     return .98+.02*storyEase((p-.7)/.3);
   }
   function computeGraphDwellProgress(progressValue){
-    var p=zoomClamp(progressValue,0,1), stops=[0,.38,.62,.86,1];
+    var p=zoomClamp(progressValue,0,1), stops=[0,GRAPH_PEAKS[0],GRAPH_PEAKS[1],GRAPH_PEAKS[2],GRAPH_PEAKS[3]];
     if(p>=1) return 1;
     var segment=Math.min(3,Math.floor(p*4)), local=p*4-segment;
     return stops[segment]+(stops[segment+1]-stops[segment])*storyEase(zoomRange(local,0,.58));
@@ -958,7 +960,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       var activity=computeTriagerActivity(state.triagerActivityProgress);
       saleCount=activity ? activity.triagerIndex+(activity.managerProgress>=.45 ? 1 : 0) : 0;
     }else if(state.phase==='triagers-to-flywheel' || state.phase==='flywheel' || state.phase==='flywheel-to-chart' || state.phase==='chart' || state.phase==='complete') saleCount=5;
-    var graphThresholds=[.38,.62,.86,1];
+    var graphThresholds=GRAPH_PEAKS;
     for(var i=0;i<graphThresholds.length;i++) if(state.graphProgress>=graphThresholds[i]-.0001) graphCount=i+1;
     return {saleCount:saleCount,graphCount:graphCount};
   }
@@ -968,7 +970,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       var activity=computeTriagerActivity(state.triagerActivityProgress);
       return activity && activity.managerProgress>0 && activity.managerProgress<1 ? 'sale' : '';
     }
-    var graphThresholds=[.38,.62,.86,1];
+    var graphThresholds=GRAPH_PEAKS;
     for(var i=0;i<graphThresholds.length;i++) if(Math.abs(state.graphProgress-graphThresholds[i])<.0001) return 'graph';
     return '';
   }
@@ -1104,7 +1106,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   function renderGraphState(state){
     if(!graphLine) return;
-    var progress=zoomClamp(state.relayProgress,0,1), thresholds=[.28,.52,.76,.98];
+    var progress=zoomClamp(state.relayProgress,0,1), thresholds=GRAPH_PEAKS;
     if(graphRelay){
       var length=graphLine.getTotalLength();
       if(length){
@@ -1114,13 +1116,13 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       graphRelay.style.opacity=String(state.relayOpacity);
     }
     for(var i=0;i<graphDots.length;i++){
-      var reveal=storyEase(zoomRange(state.graphProgress,thresholds[i]-.04,thresholds[i]+.04));
+      var reveal=storyEase(zoomRange(state.graphProgress,thresholds[i]-.05,thresholds[i]));
       graphDots[i].style.opacity=String(reveal);
       graphDots[i].style.transform='scale('+reveal.toFixed(3)+')';
-      graphDots[i].classList.toggle('is-confirmed',state.graphProgress>=Math.min(1,thresholds[i]+.1));
+      graphDots[i].classList.toggle('is-confirmed',state.graphProgress>=Math.min(1,thresholds[i]+.04));
     }
     for(var j=0;j<graphCallouts.length;j++){
-      var calloutReveal=storyEase(zoomRange(state.graphProgress,thresholds[j]+.01,thresholds[j]+.1));
+      var calloutReveal=storyEase(zoomRange(state.graphProgress,thresholds[j]-.04,thresholds[j]));
       graphCallouts[j].style.opacity=String(calloutReveal);
       graphCallouts[j].style.transform='translateY('+(3*(1-calloutReveal)).toFixed(2)+'px)';
       if(graphMilestones[j]){
@@ -1129,12 +1131,12 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       }
     }
     var current=-1;
-    for(var k=0;k<3;k++) if(state.graphProgress>=thresholds[k]+.01) current=k;
+    for(var k=0;k<3;k++) if(state.graphProgress>=thresholds[k]-.0001) current=k;
     for(var m=0;m<graphMilestones.length;m++) graphMilestones[m].classList.toggle('is-current',m===current);
     var currentDot=-1;
-    for(var n=0;n<thresholds.length;n++) if(state.graphProgress>=Math.min(1,thresholds[n]+.1)-.0001) currentDot=n;
+    for(var n=0;n<thresholds.length;n++) if(state.graphProgress>=thresholds[n]-.0001) currentDot=n;
     for(var q=0;q<graphDots.length;q++) graphDots[q].classList.toggle('is-current',q===currentDot);
-    for(var r=0;r<graphMilestones.length;r++) graphMilestones[r].classList.toggle('is-confirmed',state.graphProgress>=thresholds[r]+.1);
+    for(var r=0;r<graphMilestones.length;r++) graphMilestones[r].classList.toggle('is-confirmed',state.graphProgress>=Math.min(1,thresholds[r]+.04));
   }
   function renderStageCaption(state){
     if(!stageCaption) return;
@@ -1427,7 +1429,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
-  var rendererVersion='20260813a';
+  var rendererVersion='20260813b';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control'),state:chapter.querySelector('.video-watch-state')};
