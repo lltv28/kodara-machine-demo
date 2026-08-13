@@ -277,7 +277,10 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .story-graph .axis{left:20%;top:70%;width:60%;font-size:26px}
   .story-graph-axis-label,.story-graph-callout{display:none}
   .story-graph-origin-label{display:none}
-  .story-graph-milestone{display:none;left:50%!important;top:auto!important;bottom:17%;width:max-content;max-width:78%!important;padding:12px 18px;border:1px solid var(--accent-line);border-radius:12px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);font-size:28px;transform:translate(-50%,var(--milestone-y,4px));text-align:center}
+  .story-graph-milestone{display:none;bottom:auto;width:max-content;max-width:30%!important;padding:8px 10px;border:0;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:rgba(255,253,251,.94);box-shadow:none;font-size:28px;transform:translateY(var(--milestone-y,4px));text-align:left}
+  .story-graph-milestone:nth-child(1){left:42.5%!important;top:43%!important}
+  .story-graph-milestone:nth-child(2){left:56.5%!important;top:33.5%!important}
+  .story-graph-milestone:nth-child(3){left:70.5%!important;top:24%!important;transform:translate(-100%,var(--milestone-y,4px))}
   .story-graph-milestone.is-current{display:block}
   .stage-caption{position:absolute;left:45%;bottom:18px;z-index:6;display:block;max-width:40%;padding:13px 18px;border:1px solid var(--accent-line);border-radius:12px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);color:var(--accent-ink);font:750 28px/1.2 var(--fb);text-align:center;opacity:var(--stage-caption-opacity,1);transform:translateX(-50%);pointer-events:none}
   .zoom-section[data-story-phase="flywheel"] .stage-caption{left:45%;bottom:18px;max-width:40%;padding:13px 18px;font-size:28px;text-align:center;transform:translateX(-50%)}
