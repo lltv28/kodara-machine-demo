@@ -1432,7 +1432,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
-  var rendererVersion='20260813f';
+  var rendererVersion='20260813g';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control'),state:chapter.querySelector('.video-watch-state')};
@@ -1536,6 +1536,10 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       var chapter=chapters.find(function(item){ return elements(item).frame && elements(item).frame.contentWindow===event.source; });
       if(!chapter || event.data.chapter!==chapter.dataset.chapter) return;
       var type=event.data.fdDemoPlayer;
+      if(type==='looped'){
+        chapter.dataset.playerState='playing';
+        return;
+      }
       chapter.dataset.playerState=type==='ended' ? 'finished' : type;
       if(type==='ready'){
         setState(chapter,'Ready to play');

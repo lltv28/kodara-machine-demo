@@ -1347,7 +1347,10 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var scale=Math.max(innerWidth/1240,innerHeight/760);
     document.querySelector('.wrap').style.transform='scale('+scale+')';
   }
-  function render(){ window.renderCaptureFrame(chapter,Math.min(1,elapsed/duration)); }
+  function render(){
+    window.renderCaptureFrame(chapter,Math.min(1,elapsed/duration));
+    if(chapter==='graph') document.querySelector('.zoom-section').style.opacity=Math.min(1,elapsed/320,(duration-elapsed)/320);
+  }
   function send(type){ parent.postMessage({fdDemoPlayer:type,chapter:chapter,progress:Math.min(1,elapsed/duration)},'*'); }
   function tick(now){
     if(!playing) return;
