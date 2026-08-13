@@ -79,6 +79,8 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
   .video-chapter-copy{display:grid;gap:10px;min-height:0;padding:13px 14px 15px}
   .video-chapter-copy p{font-size:.9rem;line-height:1.42}
   .video-control{min-height:44px;padding:10px 14px}
+  .video-chapter-media,.video-chapter-copy{transition:opacity .18s ease,visibility 0s linear 0s}
+  .video-chapter.is-past .video-chapter-media,.video-chapter.is-past .video-chapter-copy{visibility:hidden;opacity:0;transition:opacity .18s ease,visibility 0s linear .18s}
 }
 @media(prefers-reduced-motion:reduce){
   .video-chapter{position:relative;top:auto!important;margin-bottom:18px;transform:none!important;transition:none}
@@ -200,10 +202,10 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .source-particle{fill:rgb(22,164,108);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .source-card{fill:rgba(255,253,251,.98);stroke:rgba(16,104,68,.28);stroke-width:2;filter:url(#phone-shadow)}
 .business-source.is-active .source-card{fill:rgba(234,246,240,.92);stroke:rgb(22,164,108);stroke-width:3}
-.source-kicker{font:750 8.5px Instrument Sans,sans-serif;fill:rgba(16,104,68,.78);letter-spacing:.08em;text-anchor:middle}
-.source-title{font:750 13.5px Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle}
-.source-metric{font:800 16px Instrument Sans,sans-serif;fill:rgb(16,104,68);text-anchor:middle}
-.source-detail{font:600 8.8px Instrument Sans,sans-serif;fill:#5c6761;text-anchor:middle}
+.source-kicker{display:none;font:750 8.5px Instrument Sans,sans-serif;fill:rgba(16,104,68,.78);letter-spacing:.08em;text-anchor:middle}
+.source-title{font:750 17px Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle}
+.source-metric{font:800 18px Instrument Sans,sans-serif;fill:rgb(16,104,68);text-anchor:middle}
+.source-detail{display:none;font:600 8.8px Instrument Sans,sans-serif;fill:#5c6761;text-anchor:middle}
 .triager-demo-scene{opacity:var(--triager-demo-opacity,0)}
 .manager-triager-link{fill:none;stroke:rgba(16,104,68,.28);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 7}
 .manager-triager-link.is-active{stroke:rgb(22,164,108)}
@@ -300,17 +302,33 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .zoom-beat-copy{top:59px;padding:0 4px;font-size:.94rem;line-height:1.4}
   .fw-label{display:none}
   .source-kicker,.source-detail,.source-rule{display:none}
-  .source-title{font-size:16px}
+  .source-title{font-size:26px}
+  .source-metric{font-size:27px}
+  .source-card{stroke-width:3}
+  .phone-ui-kicker,.phone-ui-copy,.phone-ui-choice-label,.phone-header-rule{display:none}
+  .phone-ui-title,.phone-ui-button-label{display:none}
+  .phone-ui-price{font-size:30px}
+  .triager-team-label text{font-size:28px}
+  .triager-worker .worker-core text{display:none}
+  .triager-worker .worker-core circle{fill:rgba(234,246,240,.98)}
+  .story-core{width:210px}
+  .story-core-title{font-size:32px;line-height:.92}
+  .story-core-budget-label{font-size:22px}
+  .story-core-budget-value{font-size:30px}
+  .story-core-gain,.zoom-section[data-semantic-hold="sale"] .story-core-gain{font-size:26px}
+  .story-core-status{font-size:24px}
+  .flywheel-node-label{font-size:26px}
+  .flywheel-node-label.is-compact{font-size:24px}
   .story-graph-copy{left:14%;top:9%;width:72%}
-  .story-graph h3{font-size:clamp(1.5rem,7vw,2rem)}
+  .story-graph h3{font-size:34px}
   .story-graph-plot{left:12%;top:28%;width:76%}
-  .story-graph .axis{left:14%;top:70%;width:72%;font-size:.75rem}
-  .story-graph-axis-label{font-size:10px}
-  .story-graph-origin-label{left:17%;top:61%;font-size:.75rem}
-  .story-graph-milestone{display:none;left:50%!important;top:auto!important;bottom:17%;width:max-content;max-width:78%!important;padding:7px 10px;border:1px solid var(--accent-line);border-radius:10px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);font-size:.875rem;transform:translate(-50%,var(--milestone-y,4px));text-align:center}
+  .story-graph .axis{left:14%;top:70%;width:72%;font-size:26px}
+  .story-graph-axis-label,.story-graph-callout{display:none}
+  .story-graph-origin-label{display:none}
+  .story-graph-milestone{display:none;left:50%!important;top:auto!important;bottom:17%;width:max-content;max-width:78%!important;padding:12px 18px;border:1px solid var(--accent-line);border-radius:12px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);font-size:28px;transform:translate(-50%,var(--milestone-y,4px));text-align:center}
   .story-graph-milestone.is-current{display:block}
-  .stage-caption{position:absolute;left:50%;bottom:12px;z-index:6;display:block;max-width:calc(100% - 28px);padding:8px 12px;border:1px solid var(--accent-line);border-radius:10px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);color:var(--accent-ink);font:750 .875rem/1.25 var(--fb);text-align:center;opacity:var(--stage-caption-opacity,1);transform:translateX(-50%);pointer-events:none}
-  .zoom-section[data-story-phase="flywheel"] .stage-caption{left:12px;bottom:12px;max-width:38%;padding:7px 9px;font-size:.8rem;text-align:left;transform:none}
+  .stage-caption{position:absolute;left:45%;bottom:18px;z-index:6;display:block;max-width:40%;padding:13px 18px;border:1px solid var(--accent-line);border-radius:12px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);color:var(--accent-ink);font:750 28px/1.2 var(--fb);text-align:center;opacity:var(--stage-caption-opacity,1);transform:translateX(-50%);pointer-events:none}
+  .zoom-section[data-story-phase="flywheel"] .stage-caption{left:45%;bottom:18px;max-width:40%;padding:13px 18px;font-size:28px;text-align:center;transform:translateX(-50%)}
   .zoom-section[data-story-phase="chart"] .stage-caption,.zoom-section[data-story-phase="complete"] .stage-caption{display:none}
   .zoom-static .zoom-beats{grid-template-columns:1fr}
   .zoom-static .graph-layer{min-height:500px;aspect-ratio:auto;padding:20px 16px}
@@ -537,29 +555,29 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           <g class="business-source" transform="translate(275 159)" data-source-index="0" data-x="275" data-y="159" data-status="Learning offers">
             <rect class="source-card" width="124" height="132" rx="16"/>
             <text class="source-kicker" x="62" y="22">OFFERS</text>
-            <text class="source-title" x="62" y="48">Products &amp;</text><text class="source-title" x="62" y="64">Services</text>
-            <text class="source-metric" x="62" y="91">$8 → $2.5k</text>
+            <text class="source-title" x="62" y="54">Offers</text>
+            <text class="source-metric" x="62" y="84">$8 → $2.5k</text>
             <text class="source-detail" x="62" y="113">Assessment to core offer</text>
           </g>
           <g class="business-source" transform="translate(275 469)" data-source-index="1" data-x="275" data-y="469" data-status="Learning customers">
             <rect class="source-card" width="124" height="132" rx="16"/>
             <text class="source-kicker" x="62" y="22">BUYERS</text>
-            <text class="source-title" x="62" y="48">Customer</text><text class="source-title" x="62" y="64">Profiles</text>
-            <text class="source-metric" x="62" y="91">3 segments</text>
+            <text class="source-title" x="62" y="54">Customers</text>
+            <text class="source-metric" x="62" y="84">3 segments</text>
             <text class="source-detail" x="62" y="113">Pain points mapped</text>
           </g>
           <g class="business-source" transform="translate(841 159)" data-source-index="2" data-x="841" data-y="159" data-status="Learning messaging">
             <rect class="source-card" width="124" height="132" rx="16"/>
             <text class="source-kicker" x="62" y="22">POSITIONING</text>
-            <text class="source-title" x="62" y="48">Brand &amp;</text><text class="source-title" x="62" y="64">Messaging</text>
-            <text class="source-metric" x="62" y="91">12 assets</text>
+            <text class="source-title" x="62" y="54">Messaging</text>
+            <text class="source-metric" x="62" y="84">12 assets</text>
             <text class="source-detail" x="62" y="113">Voice + claims aligned</text>
           </g>
           <g class="business-source" transform="translate(841 469)" data-source-index="3" data-x="841" data-y="469" data-status="Learning sales data">
             <rect class="source-card" width="124" height="132" rx="16"/>
             <text class="source-kicker" x="62" y="22">PERFORMANCE</text>
-            <text class="source-title" x="62" y="48">Sales</text><text class="source-title" x="62" y="64">Data</text>
-            <text class="source-metric" x="62" y="91">4.8% CVR</text>
+            <text class="source-title" x="62" y="54">Sales data</text>
+            <text class="source-metric" x="62" y="84">4.8% CVR</text>
             <text class="source-detail" x="62" y="113">Leads + revenue tracked</text>
           </g>
         </g>
@@ -1409,7 +1427,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
-  var rendererVersion='20260811i';
+  var rendererVersion='20260813a';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control'),state:chapter.querySelector('.video-watch-state')};
