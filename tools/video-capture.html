@@ -72,7 +72,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-graph-copy{position:absolute;left:22%;top:12%;width:62%}
 .story-graph h3{font-family:var(--fd);font-size:clamp(1.55rem,1.15rem + 1.5vw,2.35rem);line-height:1.05;letter-spacing:-.015em;margin:0}
 .story-graph-plot{position:absolute;left:22%;top:29%;display:block;width:62%;height:auto}
-.story-graph .axis{position:absolute;left:22%;top:67%;display:flex;justify-content:space-between;width:62%;color:var(--ink-3);font:600 .75rem var(--mono);letter-spacing:.025em;text-transform:uppercase}
+.story-graph .axis{position:absolute;left:24.3%;top:67%;display:flex;justify-content:space-between;width:59.7%;color:var(--ink-3);font:600 .75rem var(--mono);letter-spacing:.025em;text-transform:uppercase}
 .story-graph-origin-label{position:absolute;left:24.3%;top:59%;color:var(--ink-2);font:700 .78rem var(--fb);line-height:1.2;opacity:var(--graph-origin-label-opacity,0);transform:translateX(-50%);white-space:nowrap}
 .story-graph-line{stroke-dasharray:100;stroke-dashoffset:var(--graph-dashoffset,0)}
 .story-graph-fill{opacity:var(--graph-fill-opacity,0)}
@@ -274,7 +274,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .story-graph-copy{left:20%;top:9%;width:60%}
   .story-graph h3{font-size:34px}
   .story-graph-plot{left:20%;top:28%;width:60%}
-  .story-graph .axis{left:20%;top:70%;width:60%;font-size:26px}
+  .story-graph .axis{left:22.25%;top:70%;width:57.75%;font-size:26px}
   .story-graph-axis-label,.story-graph-callout{display:none}
   .story-graph-origin-label{display:none}
   .story-graph-milestone{display:none;bottom:auto;width:max-content;max-width:30%!important;padding:8px 10px;border:0;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:rgba(255,253,251,.94);box-shadow:none;font-size:28px;transform:translateY(var(--milestone-y,4px));text-align:left}
@@ -590,7 +590,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                   <div class="story-graph-milestone">Profit funds more leads</div>
                 </div>
                 <div class="story-graph-origin-label">AI Brain Manager</div>
-                <div class="axis"><span>Starting budget</span><span>More sales</span></div>
+                <div class="axis"><span>Ad budget from revenue</span><span>More sales</span></div>
               </div>
             </div>
           </div>
@@ -684,6 +684,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   function computeGraphPlayerState(progressValue){
     var progress=zoomClamp(progressValue,0,1), state=computeScrollStoryState(CHART_TRANSITION_END);
+    state.coreOpacity=0;
+    state.graphOriginLabelOpacity=0;
     state.graphProgress=computeGraphDwellProgress(progress);
     state.graphFillOpacity=storyEase(zoomRange(state.graphProgress,.78,1));
     state.relayProgress=state.graphProgress;
@@ -799,7 +801,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       state.beat='chart';
       return state;
     }
-    state.wheelOpacity=0; state.brainOpacity=0; state.sceneZoom=.86; state.coreX=24.3; state.coreY=54.7; state.coreScale=.28; state.coreCopyOpacity=0; state.coreMarkOpacity=1; state.coreStatusOpacity=0; state.graphOpacity=1; state.graphScale=1; state.graphProgress=1; state.graphFillOpacity=1; state.graphOriginLabelOpacity=1; state.relayOpacity=1; state.relayProgress=1; state.phase=p>=1 ? 'complete' : 'chart'; state.beat='chart'; state.complete=p>=1;
+    state.wheelOpacity=0; state.brainOpacity=0; state.sceneZoom=.86; state.coreX=24.3; state.coreY=54.7; state.coreScale=.28; state.coreOpacity=0; state.coreCopyOpacity=0; state.coreMarkOpacity=1; state.coreStatusOpacity=0; state.graphOpacity=1; state.graphScale=1; state.graphProgress=1; state.graphFillOpacity=1; state.graphOriginLabelOpacity=0; state.relayOpacity=1; state.relayProgress=1; state.phase=p>=1 ? 'complete' : 'chart'; state.beat='chart'; state.complete=p>=1;
     return state;
   }
   function computeTriagerPosition(input,progress,deploymentProgress){
