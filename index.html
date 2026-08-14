@@ -117,8 +117,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
 .wheel-layer{order:2;container-type:inline-size;opacity:var(--wheel-opacity,1)}
 .graph-layer{display:block;padding:0;opacity:var(--graph-opacity,0);transform:scale(var(--graph-scale,.985));background:var(--bg);will-change:transform}
 .story-graph{position:absolute;inset:0}
-.story-graph-copy{position:absolute;left:22%;top:12%;width:62%}
-.story-graph h3{font-family:var(--fd);font-size:clamp(1.55rem,1.15rem + 1.5vw,2.35rem);line-height:1.05;letter-spacing:-.015em;margin:0}
 .story-graph-plot{position:absolute;left:22%;top:29%;display:block;width:62%;height:auto}
 .story-graph .axis{position:absolute;left:24.3%;top:69.5%;display:flex;justify-content:flex-end;width:59.7%;color:var(--ink-3);font:600 .75rem var(--mono);letter-spacing:.025em;text-transform:uppercase}
 .story-graph-origin-label{position:absolute;left:24.3%;top:59%;color:var(--ink-2);font:700 .78rem var(--fb);line-height:1.2;opacity:var(--graph-origin-label-opacity,0);transform:translateX(-50%);white-space:nowrap}
@@ -179,7 +177,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
 .zoom-static .ads-label{opacity:1}
 .zoom-static .graph-layer{display:grid;place-items:center;padding:clamp(28px,7cqw,72px)}
 .zoom-static .story-graph{position:relative;width:min(100%,560px);height:360px}
-.zoom-static .story-graph-copy{top:7%}
 .zoom-static .story-graph-plot{top:27%}
 .zoom-static .story-graph-line{stroke-dashoffset:0!important}
 .zoom-static .story-graph-fill,.zoom-static .story-graph-origin,.zoom-static .story-graph-dot,.zoom-static .story-graph-origin-label{opacity:1!important}
@@ -319,8 +316,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
   .story-core-status{font-size:24px}
   .flywheel-node-label{font-size:26px}
   .flywheel-node-label.is-compact{font-size:24px}
-  .story-graph-copy{left:14%;top:9%;width:72%}
-  .story-graph h3{font-size:34px}
   .story-graph-plot{left:12%;top:28%;width:76%}
   .story-graph .axis{left:16.7%;top:70%;width:69.3%;font-size:26px}
   .story-graph-axis-label:not(.is-y),.story-graph-callout{display:none}
@@ -336,7 +331,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
   .zoom-static .zoom-beats{grid-template-columns:1fr}
   .zoom-static .graph-layer{min-height:500px;aspect-ratio:auto;padding:20px 16px}
   .zoom-static .story-graph{height:460px}
-  .zoom-static .story-graph-copy{top:4%}
   .zoom-static .story-graph-plot{top:22%}
   .zoom-static .story-graph .axis{top:54%}
   .zoom-static .story-graph-origin-label{top:48%}
@@ -705,9 +699,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
             </div>
             <div class="zoom-layer graph-layer" aria-hidden="true">
               <div class="story-graph">
-                <div class="story-graph-copy">
-                  <h3>Sales fund the next round</h3>
-                </div>
                 <svg class="story-graph-plot" viewBox="0 0 320 170" preserveAspectRatio="none" role="img" aria-label="Illustrative ad budget increasing over time as an assessment covers lead cost, a sale adds profit, and profit funds more leads">
                   <g aria-hidden="true">
                     <path class="story-graph-axis" d="M 12 18 V 142 H 308"/>
