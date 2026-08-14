@@ -19,7 +19,7 @@
   --shadow-sm:0 1px 3px rgba(0,0,0,.10),0 1px 2px -1px rgba(0,0,0,.10);
   --shadow-md:0 18px 40px -22px rgba(46,38,28,.40);
   --fb:"Instrument Sans",system-ui,sans-serif;--fd:"Instrument Serif",Georgia,serif;--mono:"IBM Plex Mono",monospace;
-  --demo-critical:19px;--demo-meta:17px;
+  --demo-critical:22px;--demo-meta:17px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-smoothing:antialiased;
@@ -68,6 +68,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-graph{position:absolute;inset:0}
 .story-graph-copy{position:absolute;left:22%;top:12%;width:62%}
 .story-graph h3{font-family:var(--fd);font-size:clamp(1.55rem,1.15rem + 1.5vw,2.35rem);line-height:1.05;letter-spacing:-.015em;margin:0}
+.story-graph-y-title{position:absolute;left:19.2%;top:50%;z-index:1;color:var(--ink-3);font:700 var(--demo-meta)/1 var(--mono);letter-spacing:.025em;text-transform:uppercase;transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap}
 .story-graph-plot{position:absolute;left:22%;top:29%;display:block;width:62%;height:auto}
 .story-graph .axis{position:absolute;left:24.3%;top:67%;display:flex;justify-content:flex-end;width:59.7%;color:var(--ink-3);font:600 var(--demo-critical) var(--mono);letter-spacing:.025em;text-transform:uppercase}
 .story-graph-origin-label{position:absolute;left:24.3%;top:59%;color:var(--ink-2);font:700 var(--demo-critical) var(--fb);line-height:1.2;opacity:var(--graph-origin-label-opacity,0);transform:translateX(-50%);white-space:nowrap}
@@ -80,6 +81,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .zoom-section[data-semantic-hold="graph"] .story-graph-dot.is-current{stroke-width:4.6}
 .story-graph-axis{fill:none;stroke:rgba(30,41,59,.2);stroke-width:1}
 .story-graph-axis-label{fill:var(--ink-3);font:650 8px var(--mono);letter-spacing:.025em;text-transform:uppercase}
+.story-graph-axis-label.is-y{display:none}
 .story-graph-callout{opacity:0;transform:translateY(3px);transform-box:fill-box;transform-origin:center}
 .story-graph-callout line{stroke:rgba(16,104,68,.38);stroke-width:1}
 .story-graph-callout text{display:none}
@@ -237,7 +239,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .stage-caption{display:none}
 .player-mode .phone-header-letter,.player-mode .phone-ui-kicker,.player-mode .phone-ui-title,.player-mode .phone-ui-copy,.player-mode .phone-ui-button-label,.player-mode .phone-ui-choice-label{display:none}
 @media(max-width:720px){
-  :root{--demo-critical:37px;--demo-meta:33px}
+  :root{--demo-critical:42px;--demo-meta:33px}
   body{padding-inline:10px}
   .card{--card-pad:12px;padding:20px var(--card-pad)}
   .zoom-pin{gap:12px}
@@ -263,7 +265,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .triager-worker .worker-core text{display:none}
   .triager-worker .worker-core circle{fill:rgba(234,246,240,.98)}
   .story-core{width:236px}
-  .story-core-title{font-size:40px;line-height:.94}
+  .story-core-title{font-size:var(--demo-critical);line-height:.94}
   .story-core-budget{top:62%}
   .story-core-budget-label{font-size:var(--demo-meta)}
   .story-core-budget-value{font-size:var(--demo-critical)}
@@ -272,26 +274,23 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .flywheel-node-label,.flywheel-node-label.is-compact{font-size:var(--demo-critical)}
   .ads-label{font-size:var(--demo-critical)}
   .flywheel-node,.triager-ad-node .ad-node-body{r:70px}
-  .node-ticket .flywheel-node-label:nth-of-type(1){y:345px}
+  .node-ticket .flywheel-node-label:nth-of-type(1){y:338px}
   .node-ticket .flywheel-node-label:nth-of-type(2){y:380px}
-  .node-ticket .flywheel-node-label:nth-of-type(3){y:415px}
-  .node-downsell .flywheel-node-label:nth-of-type(1){y:635px}
-  .node-downsell .flywheel-node-label:nth-of-type(2){y:675px}
+  .node-ticket .flywheel-node-label:nth-of-type(3){y:422px}
+  .node-downsell .flywheel-node-label:nth-of-type(1){y:632px}
+  .node-downsell .flywheel-node-label:nth-of-type(2){y:676px}
   .story-graph-copy{left:20%;top:9%;width:60%}
   .story-graph h3{font-size:42px}
   .story-graph-plot{left:20%;top:28%;width:60%}
   .story-graph .axis{left:22.25%;top:70%;width:57.75%;font-size:var(--demo-critical)}
-  .story-graph-axis-label{font-size:16px}
   .story-graph-axis-label:not(.is-y),.story-graph-callout{display:none}
   .story-graph-origin-label{display:none}
-  .story-graph-milestone{display:none;bottom:auto;width:max-content;max-width:34%!important;padding:8px 10px;border:0;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:rgba(255,253,251,.94);box-shadow:none;font-size:var(--demo-critical);transform:translateY(var(--milestone-y,4px));text-align:left}
+  .story-graph-milestone{display:none;bottom:auto;width:max-content;max-width:40%!important;padding:8px 10px;border:0;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:rgba(255,253,251,.94);box-shadow:none;font-size:var(--demo-critical);transform:translateY(var(--milestone-y,4px));text-align:left}
   .story-graph-milestone:nth-child(1){left:42.5%!important;top:39.5%!important}
   .story-graph-milestone:nth-child(2){left:56.5%!important;top:29.5%!important}
   .story-graph-milestone:nth-child(3){left:70.5%!important;top:19.5%!important;transform:translate(-100%,var(--milestone-y,4px))}
   .story-graph-milestone.is-current{display:block}
-  .stage-caption{position:absolute;left:45%;bottom:18px;z-index:6;display:block;max-width:45%;padding:13px 18px;border:1px solid var(--accent-line);border-radius:12px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);color:var(--accent-ink);font:750 var(--demo-critical)/1.25 var(--fb);text-align:center;opacity:var(--stage-caption-opacity,1);transform:translateX(-50%);pointer-events:none}
-  .zoom-section[data-story-phase="flywheel"] .stage-caption{left:45%;bottom:18px;max-width:45%;padding:13px 18px;font-size:var(--demo-critical);text-align:center;transform:translateX(-50%)}
-  .zoom-section[data-story-phase="chart"] .stage-caption,.zoom-section[data-story-phase="complete"] .stage-caption{display:none}
+  .stage-caption{display:none}
   .zoom-static .zoom-beats{grid-template-columns:1fr}
   .zoom-static .graph-layer{min-height:500px;aspect-ratio:auto;padding:20px 16px}
   .zoom-static .story-graph{height:460px}
@@ -573,6 +572,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                 <div class="story-graph-copy">
                   <h3>Sales fund the next round</h3>
                 </div>
+                <div class="story-graph-y-title">Ad budget from revenue</div>
                 <svg class="story-graph-plot" viewBox="0 0 320 170" preserveAspectRatio="none" role="img" aria-label="Illustrative ad budget increasing over time as an assessment covers lead cost, a sale adds profit, and profit funds more leads">
                   <g aria-hidden="true">
                     <path class="story-graph-axis" d="M 12 18 V 142 H 308"/>
