@@ -120,7 +120,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
 .story-graph-copy{position:absolute;left:22%;top:12%;width:62%}
 .story-graph h3{font-family:var(--fd);font-size:clamp(1.55rem,1.15rem + 1.5vw,2.35rem);line-height:1.05;letter-spacing:-.015em;margin:0}
 .story-graph-plot{position:absolute;left:22%;top:29%;display:block;width:62%;height:auto}
-.story-graph .axis{position:absolute;left:24.3%;top:67%;display:flex;justify-content:flex-end;width:59.7%;color:var(--ink-3);font:600 .75rem var(--mono);letter-spacing:.025em;text-transform:uppercase}
+.story-graph .axis{position:absolute;left:24.3%;top:69.5%;display:flex;justify-content:flex-end;width:59.7%;color:var(--ink-3);font:600 .75rem var(--mono);letter-spacing:.025em;text-transform:uppercase}
 .story-graph-origin-label{position:absolute;left:24.3%;top:59%;color:var(--ink-2);font:700 .78rem var(--fb);line-height:1.2;opacity:var(--graph-origin-label-opacity,0);transform:translateX(-50%);white-space:nowrap}
 .story-graph-line{stroke-dasharray:100;stroke-dashoffset:var(--graph-dashoffset,0)}
 .story-graph-fill{opacity:var(--graph-fill-opacity,0)}
@@ -135,12 +135,12 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
 .story-graph-callout line{stroke:rgba(16,104,68,.38);stroke-width:1}
 .story-graph-callout text{display:none}
 .story-graph-milestones{position:absolute;inset:0;pointer-events:none}
-.story-graph-milestone{position:absolute;z-index:2;max-width:128px;padding:2px 6px 2px 8px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.92);color:var(--ink-2);font:700 .8125rem/1.22 var(--fb);opacity:0;transform:translateY(var(--milestone-y,4px))}
+.story-graph-milestone{position:absolute;z-index:2;max-width:144px;padding:2px 6px 2px 8px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.92);color:var(--ink-2);font:700 .8125rem/1.22 var(--fb);opacity:0;transform:translateY(calc(-100% - 10px + var(--milestone-y,4px)))}
 .story-graph-milestone.is-confirmed{color:var(--accent-ink);border-left-color:var(--accent)}
 .zoom-section[data-semantic-hold="graph"] .story-graph-milestone.is-current{font-size:.9rem}
-.story-graph-milestone:nth-child(1){left:42.5%;top:49%}
-.story-graph-milestone:nth-child(2){left:56.5%;top:39.5%}
-.story-graph-milestone:nth-child(3){left:70.5%;top:30%;max-width:112px}
+.story-graph-milestone:nth-child(1){left:42.5%;top:58%}
+.story-graph-milestone:nth-child(2){left:56.5%;top:48.6%}
+.story-graph-milestone:nth-child(3){left:70.5%;top:39.1%}
 .story-graph-relay{opacity:var(--relay-opacity,0)}
 .story-graph-relay circle{fill:#fff;stroke:var(--accent);stroke-width:2.2;filter:drop-shadow(0 4px 7px rgba(16,104,68,.2))}
 .story-graph-relay text{fill:var(--accent-ink);font:800 5.8px var(--fb);text-anchor:middle;dominant-baseline:central}
@@ -1573,7 +1573,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
   var chapterStack=chapters[0].parentElement, exitSentinel=chapterStack && chapterStack.querySelector('.video-stack-exit');
-  var rendererVersion='20260813j';
+  var rendererVersion='20260814a';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control')};
