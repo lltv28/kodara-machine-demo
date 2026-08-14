@@ -19,24 +19,31 @@
   --shadow-sm:0 1px 3px rgba(0,0,0,.10),0 1px 2px -1px rgba(0,0,0,.10);
   --shadow-md:0 18px 40px -22px rgba(46,38,28,.40);
   --fb:"Instrument Sans",system-ui,sans-serif;--fd:"Instrument Serif",Georgia,serif;--mono:"IBM Plex Mono",monospace;
+  --type-display:clamp(2.5rem,2.11rem + 1.6vw,3.25rem);
+  --type-section:clamp(1.875rem,1.72rem + .65vw,2.25rem);
+  --type-card:clamp(1.375rem,1.29rem + .42vw,1.625rem);
+  --type-body:1.125rem;--type-body-large:clamp(1.125rem,1.08rem + .18vw,1.25rem);
+  --type-question:clamp(1.1875rem,1.13rem + .25vw,1.375rem);
+  --type-control:1.0625rem;--type-label:1rem;--type-meta:.9375rem;--type-legal:.875rem;
+  --type-quote:clamp(1.75rem,1.55rem + 1vw,2.25rem);--type-stat:clamp(3.5rem,7vw,5.5rem);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-smoothing:antialiased;
+body{font-family:var(--fb);font-size:var(--type-body);background:transparent;color:var(--ink);-webkit-font-smoothing:antialiased;
   display:flex;flex-direction:column;align-items:center;padding:10px 20px 20px;overflow-x:hidden}
 .wrap{width:100%;max-width:1140px;display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0}
-.embed-mode .head,.embed-mode .trust,.embed-mode .cta{display:none}
+.embed-mode .head,.embed-mode .proof,.embed-mode .faq,.embed-mode .trust,.embed-mode .cta{display:none}
 .video-mode .zoom-section{display:none!important}
 
 /* ---------- four independent live chapters ---------- */
 .video-story{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
 .video-story-head{padding:clamp(22px,3.5vw,40px) clamp(22px,3.5vw,40px) 20px}
-.video-story-intro{max-width:700px;margin-top:8px;color:var(--ink-2);font-size:clamp(1rem,.95rem + .25vw,1.12rem);line-height:1.55}
+.video-story-intro{max-width:65ch;margin-top:8px;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.6}
 .video-chapter-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px}
-.video-chapter-nav a{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid var(--line-2);border-radius:12px;color:var(--ink-2);font-size:.88rem;font-weight:700;text-decoration:none;transition:border-color .18s ease,background .18s ease,color .18s ease}
+.video-chapter-nav a{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid var(--line-2);border-radius:12px;color:var(--ink-2);font-size:var(--type-label);font-weight:700;text-decoration:none;transition:border-color .18s ease,background .18s ease,color .18s ease}
 .video-chapter-nav a:hover,.video-chapter-nav a:focus-visible{border-color:rgba(22,164,108,.48);background:rgba(22,164,108,.055);color:var(--accent-ink);outline:none}
 .video-chapter-nav a.is-current{border-color:rgba(22,164,108,.34);background:rgba(22,164,108,.07);color:var(--accent-ink)}
-.video-chapter-nav span{display:grid;place-items:center;flex:0 0 24px;height:24px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 .72rem var(--mono)}
+.video-chapter-nav span{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 var(--type-meta) var(--mono)}
 .video-chapters{--stack-start:18px;--stack-step:48px;display:grid;padding:0 0 clamp(64px,10vh,110px);isolation:isolate}
 .video-chapter{--stack-index:0;--stack-top:calc(var(--stack-start) + var(--stack-index)*var(--stack-step));position:sticky;top:var(--stack-top);z-index:10;display:flex;flex-direction:column;scroll-margin-top:var(--stack-top);margin-bottom:clamp(44px,7vh,72px);border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:0 22px 55px -32px rgba(46,38,28,.46);overflow:hidden;transform:translateY(var(--stack-shift,0)) scale(var(--stack-scale,1));transform-origin:center top;transition:transform .32s cubic-bezier(.2,.75,.25,1),border-color .24s ease,box-shadow .32s ease}
 .video-chapter:nth-child(2){--stack-index:1;z-index:11}
@@ -46,41 +53,48 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 .video-chapter.is-past{box-shadow:0 10px 28px -24px rgba(46,38,28,.34)}
 .video-card-tab{order:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;min-height:58px;padding:10px 18px;border-bottom:1px solid var(--line-2);background:#fff;transition:background .24s ease}
 .video-chapter.is-past .video-card-tab{background:#fbfcfa}
-.video-card-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 .72rem var(--mono)}
-.video-card-tab h3{overflow:hidden;color:var(--ink);font-family:var(--fd);font-size:clamp(1.08rem,.92rem + .45vw,1.35rem);line-height:1.08;letter-spacing:-.01em;text-overflow:ellipsis;white-space:nowrap}
+.video-card-number{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 var(--type-meta) var(--mono)}
+.video-card-tab h3{overflow:hidden;color:var(--ink);font-family:var(--fd);font-size:var(--type-card);line-height:1.12;letter-spacing:-.01em;text-overflow:ellipsis;white-space:nowrap}
 .video-chapter-media{order:2;position:relative;width:100%;height:min(61.29vw,698px,calc(100dvh - 250px));overflow:hidden;background:var(--bg)}
 .demo-player-frame{display:block;width:100%;height:100%;border:0;background:var(--bg);pointer-events:none}
 .video-chapter-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;padding:14px;pointer-events:none;background:linear-gradient(180deg,transparent 70%,rgba(30,41,59,.035))}
-.video-control{display:flex;align-items:center;gap:7px;min-height:42px;padding:9px 13px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 7px 20px rgba(30,41,59,.13);color:var(--ink);font:700 .82rem var(--fb);cursor:pointer;pointer-events:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.video-control{display:flex;align-items:center;gap:7px;min-height:44px;padding:9px 14px;border:1px solid rgba(255,255,255,.8);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 7px 20px rgba(30,41,59,.13);color:var(--ink);font:700 var(--type-control) var(--fb);cursor:pointer;pointer-events:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .video-control::before{content:'▶';font-size:.68rem;color:var(--accent-ink)}
 .video-chapter.is-playing .video-control::before{content:'Ⅱ';font-size:.72rem}
 .video-chapter.is-ended .video-control::before{content:'↻';font-size:1rem}
 .video-control:focus-visible{outline:3px solid rgba(22,164,108,.24);outline-offset:2px}
 .video-chapter-copy{order:3;display:flex;justify-content:space-between;gap:24px;align-items:center;min-height:76px;padding:14px 18px}
-.video-chapter-copy p{max-width:760px;color:var(--ink-2);font-size:clamp(.9rem,.86rem + .16vw,1rem);line-height:1.45;text-wrap:pretty}
-.video-watch-state{display:inline-flex;align-items:center;gap:7px;color:var(--ink-3);font:600 .72rem var(--mono);letter-spacing:.02em;white-space:nowrap}
+.video-chapter-copy p{max-width:65ch;color:var(--ink-2);font-size:var(--type-body);line-height:1.6;text-wrap:pretty}
+.video-watch-state{display:inline-flex;align-items:center;gap:7px;color:var(--ink-3);font:600 var(--type-legal) var(--mono);letter-spacing:.02em;white-space:nowrap}
 .video-watch-state::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .18s ease,box-shadow .18s ease}
 .video-chapter.is-active .video-watch-state::before{background:var(--accent);box-shadow:0 0 0 4px rgba(22,164,108,.12)}
-.video-chapter-next{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;color:var(--accent-ink);font-size:.85rem;font-weight:750;text-decoration:none;white-space:nowrap}
+.video-chapter-next{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;color:var(--accent-ink);font-size:var(--type-label);font-weight:750;text-decoration:none;white-space:nowrap}
 .video-chapter-next::after{content:'↓'}
 .video-chapter:last-child .video-chapter-next{display:none}
 @media(max-width:720px){
+  :root{--type-quote:1.25rem}
   body{padding-inline:12px}
   .video-story-head{padding:22px 18px 16px}
   .video-chapter-nav{grid-template-columns:1fr;gap:6px}
-  .video-chapter-nav a{min-height:42px}
+  .video-chapter-nav a{min-height:44px}
   .video-chapters{--stack-start:8px;--stack-step:42px;padding-bottom:72px}
   .video-chapter{margin-bottom:52px;border-radius:16px}
   .video-card-tab{grid-template-columns:auto minmax(0,1fr);min-height:52px;padding:8px 12px;gap:9px}
-  .video-card-number{width:28px;height:28px}
-  .video-card-tab h3{font-size:1rem}
+  .video-card-number{width:30px;height:30px}
+  .video-card-tab h3{overflow:visible;font-family:var(--fb);font-weight:700;line-height:1.25;text-overflow:clip;white-space:normal}
   .video-card-tab .video-watch-state{display:none}
   .video-chapter-media{height:min(calc((100vw - 24px)*.9048),calc(100dvh - 230px))}
   .video-chapter-copy{display:grid;gap:10px;min-height:0;padding:13px 14px 15px}
-  .video-chapter-copy p{font-size:.9rem;line-height:1.42}
+  .video-chapter-copy p{line-height:1.6}
   .video-control{min-height:44px;padding:10px 14px}
   .video-chapter-media,.video-chapter-copy{transition:opacity .18s ease,visibility 0s linear 0s}
   .video-chapter.is-past .video-chapter-media,.video-chapter.is-past .video-chapter-copy{visibility:hidden;opacity:0;transition:opacity .18s ease,visibility 0s linear .18s}
+}
+@media(max-width:720px) and (max-height:600px){
+  .video-chapters{display:block;padding-bottom:32px}
+  .video-chapter{position:relative;top:auto!important;margin-bottom:24px;transform:none!important}
+  .video-chapter-media{height:calc((100vw - 24px)*.9048)}
+  .video-chapter.is-past .video-chapter-media,.video-chapter.is-past .video-chapter-copy{visibility:visible;opacity:1}
 }
 @media(prefers-reduced-motion:reduce){
   .video-chapter{position:relative;top:auto!important;margin-bottom:18px;transform:none!important;transition:none}
@@ -90,18 +104,14 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 
 /* ---------- header ---------- */
 .head{text-align:center;max-width:760px;margin:8px auto 26px}
-.eyebrow{font-family:var(--mono);font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--accent-ink);display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:14px}
-.eyebrow::before{content:"";width:14px;height:1.5px;background:var(--accent)}
-h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4rem);line-height:1.06;letter-spacing:-.02em;text-wrap:balance;margin-bottom:14px}
-.sub{font-size:clamp(1.05rem,.95rem+.5vw,1.3rem);color:var(--ink-2);line-height:1.55;text-wrap:balance}
+h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin-bottom:14px}
+.sub{max-width:60ch;margin-inline:auto;font-size:var(--type-body-large);color:var(--ink-2);line-height:1.6;text-wrap:balance}
 
 /* ---------- shared card ---------- */
 .card{--card-pad:clamp(22px,3.5vw,40px);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
 .card+.card{margin-top:22px}
 
-.card-eyebrow{font-family:var(--mono);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
-.card-title{font-family:var(--fd);font-size:clamp(1.6rem,1.2rem+1.4vw,2.2rem);line-height:1.1;letter-spacing:-.015em}
+.card-title{font-family:var(--fd);font-size:var(--type-section);line-height:1.1;letter-spacing:-.015em}
 
 /* ============================================================
    SECTION 1 - THE MACHINE
@@ -345,7 +355,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .graph-layer{padding:24px}
 }
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
-.cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--fb);font-weight:700;font-size:1rem;letter-spacing:-.005em;color:#fff;background:var(--accent-ink);border:1px solid var(--accent-ink);border-radius:999px;padding:13px 28px;text-decoration:none;box-shadow:var(--shadow-sm);transition:background .15s ease}
+.cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:700;font-size:var(--type-control);letter-spacing:-.005em;color:#fff;background:var(--accent-ink);border:1px solid var(--accent-ink);border-radius:999px;padding:13px 28px;text-decoration:none;box-shadow:var(--shadow-sm);transition:background .15s ease}
 .cta-btn:hover{background:#0c5537}
 .cta-btn:active{transform:translateY(1px)}
 .cta-btn:focus-visible{outline:3px solid rgba(22,164,108,.42);outline-offset:4px}
@@ -354,18 +364,54 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .beat{margin-top:30px}
 /* ---- closing CTA bookend ---- */
 .cta{text-align:center}
-.cta .cta-line{font-family:var(--fd);font-size:clamp(1.35rem,1.1rem+1.1vw,1.9rem);line-height:1.15;letter-spacing:-.01em;margin-bottom:18px}
+.cta .cta-line{font-family:var(--fd);font-size:var(--type-section);line-height:1.15;letter-spacing:-.01em;margin-bottom:18px}
 
 /* ============================================================
    SECTION 3 - TRUST STRIP
    ============================================================ */
+.proof-head{max-width:720px;margin-bottom:28px}
+.proof-intro{max-width:65ch;margin-top:9px;color:var(--ink-2);font-size:var(--type-body);line-height:1.6}
+.proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.proof-card{display:flex;min-width:0;min-height:254px;flex-direction:column;padding:clamp(20px,2vw,22px);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
+.proof-stat{display:block;color:var(--accent-ink);font-family:var(--fd);font-size:var(--type-stat);font-weight:700;line-height:.9;letter-spacing:-.035em}
+.proof-result{max-width:31ch;margin-top:14px;color:var(--ink);font-size:var(--type-body);font-weight:650;line-height:1.5;text-wrap:pretty}
+.proof-card blockquote{max-width:25ch;color:var(--ink);font-family:var(--fd);font-size:var(--type-quote);font-weight:700;line-height:1.15;letter-spacing:-.018em;text-wrap:pretty}
+.proof-person{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:center;margin-top:auto;padding-top:18px}
+.proof-person img{display:block;width:52px;height:52px;border:1px solid var(--line-2);border-radius:12px;object-fit:cover;background:var(--surface)}
+.proof-person strong,.proof-person span{display:block}
+.proof-person strong{font-size:var(--type-label);line-height:1.3}
+.proof-person span{margin-top:3px;color:var(--ink-3);font-size:var(--type-meta);line-height:1.45}
+.proof-note{max-width:65ch;margin:18px auto 0;color:var(--ink-3);font-size:var(--type-legal);line-height:1.55;text-align:center}
+@media(max-width:720px){
+  .proof-head{margin-bottom:22px}
+  .proof-grid{grid-template-columns:1fr;gap:12px}
+  .proof-card{min-height:224px;padding:20px}
+  .proof-card blockquote{font-size:var(--type-quote)}
+}
+
+.faq-head{max-width:680px;margin-bottom:24px}
+.faq-intro{margin-top:9px;color:var(--ink-2);font-size:var(--type-body);line-height:1.6}
+.faq-list{border-top:1px solid var(--line-2)}
+.faq-item{border-bottom:1px solid var(--line-2)}
+.faq-item summary{position:relative;padding:20px 46px 20px 0;color:var(--ink);font-size:var(--type-question);font-weight:700;line-height:1.45;cursor:pointer;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';position:absolute;top:50%;right:4px;color:var(--accent-ink);font-family:var(--fs);font-size:1.5rem;font-weight:400;line-height:1;transform:translateY(-50%)}
+.faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq-item summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:var(--radius)}
+.faq-answer{max-width:65ch;padding:0 46px 20px 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.65}
+@media(max-width:720px){
+  .faq-head{margin-bottom:18px}
+  .faq-item summary{padding:18px 40px 18px 0}
+  .faq-answer{padding:0 40px 18px 0}
+}
+
 .trust{text-align:center}
-.trust .k{font-family:var(--mono);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.trust .k{font-family:var(--mono);font-size:var(--type-legal);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px}
-.chip{font-size:.85rem;font-weight:600;color:var(--ink-2);border:1px solid var(--line-2);background:var(--surface-2);border-radius:999px;padding:7px 14px}
-.logos{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;align-items:center;color:var(--ink-3);font-weight:700;font-size:1rem}
+.chip{font-size:var(--type-meta);font-weight:600;color:var(--ink-2);border:1px solid var(--line-2);background:var(--surface-2);border-radius:999px;padding:8px 14px}
+.logos{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;align-items:center;color:var(--ink-3);font-weight:700;font-size:var(--type-label)}
 .logos span{opacity:.72}
-.disc{font-size:.8rem;color:var(--ink-3);margin-top:16px;line-height:1.5;max-width:680px;margin-inline:auto}
+.disc{font-size:var(--type-legal);color:var(--ink-3);margin-top:16px;line-height:1.55;max-width:65ch;margin-inline:auto}
 
 /* ============================================================
    REDUCED MOTION - settle on the end-state, no motion
@@ -402,6 +448,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 @media(max-width:720px){
   .wrap.reduce .zoom-beats{grid-template-columns:1fr}
 }
+
 </style>
 </head>
 <body>
@@ -409,7 +456,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 
   <!-- ============ HERO ============ -->
   <header class="head">
-    <div class="eyebrow">The self-funding machine</div>
     <h1>An AI sales department that pays for its own leads.</h1>
     <p class="sub">Ads bring in assessment buyers, the Brain routes each one, and every sale funds your next round of traffic.</p>
     <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Book a strategy call (opens in a new tab)">Book a strategy call</a>
@@ -418,7 +464,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   <!-- ============ HOW IT WORKS · four user-controlled live chapters ============ -->
   <section class="card video-story" aria-labelledby="video-story-title">
     <div class="video-story-head">
-      <div class="card-eyebrow">Every sale funds the next batch of leads.</div>
       <h2 class="card-title" id="video-story-title">See how the machine works</h2>
       <p class="video-story-intro">Each live chapter plays when it enters view. Watch in order, jump to any stage, or keep scrolling whenever you’re ready.</p>
       <nav class="video-chapter-nav" aria-label="Demo chapters">
@@ -483,7 +528,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   <!-- Inert compatibility copy. The active capture renderer lives in tools/video-capture.html. -->
   <template id="legacy-capture-source">
   <section class="card zoom-section zoom-static" aria-labelledby="machine-title">
-    <div class="card-eyebrow">Every sale funds the next batch of leads.</div>
     <h2 class="card-title" id="machine-title">How the machine works</h2>
     <div class="zoom-track">
       <div class="zoom-pin">
@@ -739,11 +783,130 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     </div>
 
     <!-- THE PAYOFF -->
-    <div class="card-eyebrow beat">The system in one sentence</div>
     <p class="machine-summary">Paid assessments offset acquisition costs. AI qualifies each buyer. High-ticket sales create profit.</p>
     <p class="cf-note">Illustrative demo. Results vary with offer, traffic, close rate, fulfillment, and refunds.</p>
   </section>
   </template>
+
+  <!-- ============ CLIENT PROOF ============ -->
+  <section class="card proof" aria-labelledby="proof-title">
+    <div class="proof-head">
+      <h2 class="card-title" id="proof-title">Results worth showing.</h2>
+      <p class="proof-intro">Some outcomes are strongest as numbers. Others are better told in the client’s own words.</p>
+    </div>
+    <div class="proof-grid">
+      <article class="proof-card is-stat" aria-label="Leanne Ellington client result">
+        <strong class="proof-stat">$19K</strong>
+        <p class="proof-result">in high-ticket clients enrolled from one month of ads</p>
+        <div class="proof-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/leanne.jpg" width="104" height="104" loading="lazy" alt="Leanne Ellington">
+          <div><strong>Leanne Ellington</strong><span>Body image and emotional health coach</span></div>
+        </div>
+      </article>
+
+      <article class="proof-card is-quote" aria-label="Sandra Parker testimonial">
+        <blockquote>“I’ve never had that consistency in my business before.”</blockquote>
+        <div class="proof-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/sandra.jpg" width="104" height="104" loading="lazy" alt="Sandra Parker">
+          <div><strong>Sandra Parker</strong><span>Sobriety coach - Just The Tonic</span></div>
+        </div>
+      </article>
+
+      <article class="proof-card is-quote" aria-label="Mike Buontempo testimonial">
+        <blockquote>“My copywriter team averages a 15-20% win rate, and it takes weeks to write.”</blockquote>
+        <div class="proof-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/mike.jpg" width="104" height="104" loading="lazy" alt="Mike Buontempo">
+          <div><strong>Mike Buontempo</strong><span>CEO - Client Accelerators</span></div>
+        </div>
+      </article>
+
+      <article class="proof-card is-stat" aria-label="Scotty Tregellas client result">
+        <strong class="proof-stat">17</strong>
+        <p class="proof-result">recurring spots pre-sold before the AI fully launched</p>
+        <div class="proof-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/scotty.jpg" width="104" height="104" loading="lazy" alt="Scotty Tregellas">
+          <div><strong>Scotty Tregellas</strong><span>Business funding consultant</span></div>
+        </div>
+      </article>
+
+      <article class="proof-card is-stat" aria-label="Jose Fang client result">
+        <strong class="proof-stat">5/day</strong>
+        <p class="proof-result">new-client capacity without building a bigger team</p>
+        <div class="proof-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/jose.jpg" width="104" height="104" loading="lazy" alt="Jose Fang">
+          <div><strong>Jose Fang</strong><span>Coaching agency founder</span></div>
+        </div>
+      </article>
+
+      <article class="proof-card is-quote" aria-label="Leanne Ellington testimonial">
+        <blockquote>“I can run my business more efficiently and still do the work that really matters to me.”</blockquote>
+        <div class="proof-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/leanne.jpg" width="104" height="104" loading="lazy" alt="Leanne Ellington">
+          <div><strong>Leanne Ellington</strong><span>Body image and emotional health coach</span></div>
+        </div>
+      </article>
+
+      <article class="proof-card is-quote" aria-label="Jose Fang testimonial">
+        <blockquote>“I could enroll five clients in one day and do the work without building a bigger team.”</blockquote>
+        <div class="proof-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/jose.jpg" width="104" height="104" loading="lazy" alt="Jose Fang">
+          <div><strong>Jose Fang</strong><span>Coaching agency founder</span></div>
+        </div>
+      </article>
+
+      <article class="proof-card is-stat" aria-label="Mike Buontempo client result">
+        <strong class="proof-stat">27%</strong>
+        <p class="proof-result">ad creative win rate on the AI’s first run</p>
+        <div class="proof-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/mike.jpg" width="104" height="104" loading="lazy" alt="Mike Buontempo">
+          <div><strong>Mike Buontempo</strong><span>CEO - Client Accelerators</span></div>
+        </div>
+      </article>
+    </div>
+    <p class="proof-note">Individual experiences are not typical and do not guarantee a specific result. Results vary by offer, market, traffic, execution, and sales process.</p>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="card faq" aria-labelledby="faq-title">
+    <div class="faq-head">
+      <h2 class="card-title" id="faq-title">Questions before you book.</h2>
+      <p class="faq-intro">Clear answers about fit, setup, and how the system works.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" name="kodara-faq" open>
+        <summary>What is Kodara?</summary>
+        <p class="faq-answer">Kodara is an AI-assisted sales system that learns your offer, qualifies leads, supports follow-up, and connects acquisition activity to your sales process.</p>
+      </details>
+      <details class="faq-item" name="kodara-faq">
+        <summary>Does it replace my sales team?</summary>
+        <p class="faq-answer">No. It handles repetitive qualification and follow-up so your team can focus on high-value sales conversations and client delivery.</p>
+      </details>
+      <details class="faq-item" name="kodara-faq">
+        <summary>How does self-funding growth work?</summary>
+        <p class="faq-answer">A paid front-end offer can offset acquisition costs while qualified buyers move toward higher-ticket offers. Results depend on your offer, traffic, close rate, and execution.</p>
+      </details>
+      <details class="faq-item" name="kodara-faq">
+        <summary>What does setup involve?</summary>
+        <p class="faq-answer">We map your offer, products, sales process, qualification criteria, CRM, calendar, messaging, and ad workflow. Final scope is agreed before the build begins.</p>
+      </details>
+      <details class="faq-item" name="kodara-faq">
+        <summary>Will it work with my current tools?</summary>
+        <p class="faq-answer">We review your existing stack during setup and identify what can connect directly, what needs adaptation, and what should stay unchanged.</p>
+      </details>
+      <details class="faq-item" name="kodara-faq">
+        <summary>Who is this best for?</summary>
+        <p class="faq-answer">Businesses with a proven offer, consistent lead flow or ad spend, and enough delivery capacity to handle more qualified buyers.</p>
+      </details>
+      <details class="faq-item" name="kodara-faq">
+        <summary>How long does implementation take?</summary>
+        <p class="faq-answer">Timing depends on scope, integrations, assets, and approvals. You receive a clear implementation plan before work starts.</p>
+      </details>
+      <details class="faq-item" name="kodara-faq">
+        <summary>What happens on the strategy call?</summary>
+        <p class="faq-answer">We review your numbers, funnel, offer, and sales process, then identify where this system could create the most leverage.</p>
+      </details>
+    </div>
+  </section>
 
   <!-- ============ TRUST ============ -->
   <section class="card trust" aria-label="Who the system is designed for">
@@ -1432,7 +1595,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
-  var rendererVersion='20260813g';
+  var rendererVersion='20260813h';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control'),state:chapter.querySelector('.video-watch-state')};
