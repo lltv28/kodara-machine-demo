@@ -1595,7 +1595,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
-  var rendererVersion='20260813i';
+  var rendererVersion='20260813j';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control'),state:chapter.querySelector('.video-watch-state')};

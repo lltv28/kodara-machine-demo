@@ -68,7 +68,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-graph{position:absolute;inset:0}
 .story-graph-copy{position:absolute;left:22%;top:12%;width:62%}
 .story-graph h3{font-family:var(--fd);font-size:clamp(1.55rem,1.15rem + 1.5vw,2.35rem);line-height:1.05;letter-spacing:-.015em;margin:0}
-.story-graph-y-title{position:absolute;left:19.2%;top:50%;z-index:1;color:var(--ink-3);font:700 var(--demo-meta)/1 var(--mono);letter-spacing:.025em;text-transform:uppercase;transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap}
+.story-graph-y-title{position:absolute;left:21.2%;top:50%;z-index:1;color:var(--ink-3);font:700 var(--demo-meta)/1 var(--mono);letter-spacing:.025em;text-transform:uppercase;transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap}
 .story-graph-plot{position:absolute;left:22%;top:29%;display:block;width:62%;height:auto}
 .story-graph .axis{position:absolute;left:24.3%;top:67%;display:flex;justify-content:flex-end;width:59.7%;color:var(--ink-3);font:600 var(--demo-critical) var(--mono);letter-spacing:.025em;text-transform:uppercase}
 .story-graph-origin-label{position:absolute;left:24.3%;top:59%;color:var(--ink-2);font:700 var(--demo-critical) var(--fb);line-height:1.2;opacity:var(--graph-origin-label-opacity,0);transform:translateX(-50%);white-space:nowrap}
@@ -223,6 +223,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .flywheel-node{fill:#fff;stroke:rgba(16,104,68,.18);stroke-width:2;filter:url(#ns)}
 .flywheel-node-label{font-family:Instrument Sans,sans-serif;font-weight:750;font-size:var(--demo-critical);fill:rgba(26,26,26,.82);text-anchor:middle;dominant-baseline:central}
 .flywheel-node-label.is-compact{font-size:var(--demo-critical)}
+.triager-node-title-mobile{display:none}
 .fw-ring path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--shell-opacity,1))}
 .flywheel-orbit-path{fill:none;stroke:transparent;pointer-events:none}
 .flywheel-orbit-marker{fill:rgb(22,164,108);stroke:#fff;stroke-width:3;filter:url(#phone-shadow);opacity:0;pointer-events:none}
@@ -273,12 +274,13 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .story-core-status{font-size:var(--demo-critical)}
   .flywheel-node-label,.flywheel-node-label.is-compact{font-size:var(--demo-critical)}
   .ads-label{font-size:var(--demo-critical)}
-  .flywheel-node,.triager-ad-node .ad-node-body{r:70px}
-  .node-ticket .flywheel-node-label:nth-of-type(1){y:338px}
-  .node-ticket .flywheel-node-label:nth-of-type(2){y:380px}
-  .node-ticket .flywheel-node-label:nth-of-type(3){y:422px}
-  .node-downsell .flywheel-node-label:nth-of-type(1){y:632px}
-  .node-downsell .flywheel-node-label:nth-of-type(2){y:676px}
+  .flywheel-node,.triager-ad-node .ad-node-body{r:102px}
+  .triager-node-title{display:none}
+  .triager-node-title-mobile{display:block}
+  .node-ticket .flywheel-node-label:nth-of-type(1){transform:translateY(-28px)}
+  .node-ticket .flywheel-node-label:nth-of-type(3){transform:translateY(28px)}
+  .node-downsell .flywheel-node-label:nth-of-type(1){transform:translateY(-16px)}
+  .node-downsell .flywheel-node-label:nth-of-type(2){transform:translateY(16px)}
   .story-graph-copy{left:20%;top:9%;width:60%}
   .story-graph h3{font-size:42px}
   .story-graph-plot{left:20%;top:28%;width:60%}
@@ -531,6 +533,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         <g class="node-triagers">
           <circle class="flywheel-node" cx="620" cy="105" r="58"/>
           <text class="flywheel-node-label is-compact triager-node-title" x="620" y="139">AI Triagers</text>
+          <text class="flywheel-node-label is-compact triager-node-title-mobile" x="620" y="80">AI</text>
+          <text class="flywheel-node-label is-compact triager-node-title-mobile" x="620" y="130">Triagers</text>
         </g>
         <g class="node-ticket">
           <circle class="flywheel-node" cx="895" cy="380" r="58"/>
