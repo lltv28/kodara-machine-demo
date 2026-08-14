@@ -39,11 +39,6 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .video-story{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
 .video-story-head{padding:clamp(22px,3.5vw,40px) clamp(22px,3.5vw,40px) 20px}
 .video-story-intro{max-width:65ch;margin-top:8px;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.6}
-.video-chapter-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:20px}
-.video-chapter-nav a{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid var(--line-2);border-radius:12px;color:var(--ink-2);font-size:var(--type-label);font-weight:700;text-decoration:none;transition:border-color .18s ease,background .18s ease,color .18s ease}
-.video-chapter-nav a:hover,.video-chapter-nav a:focus-visible{border-color:rgba(22,164,108,.48);background:rgba(22,164,108,.055);color:var(--accent-ink);outline:none}
-.video-chapter-nav a.is-current{border-color:rgba(22,164,108,.34);background:rgba(22,164,108,.07);color:var(--accent-ink)}
-.video-chapter-nav span{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 var(--type-meta) var(--mono)}
 .video-chapters{--stack-start:18px;--stack-step:48px;display:grid;padding:0 0 clamp(64px,10vh,110px);isolation:isolate}
 .video-chapter{--stack-index:0;--stack-top:calc(var(--stack-start) + var(--stack-index)*var(--stack-step));position:sticky;top:var(--stack-top);z-index:10;display:flex;flex-direction:column;scroll-margin-top:var(--stack-top);margin-bottom:clamp(44px,7vh,72px);border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:0 22px 55px -32px rgba(46,38,28,.46);overflow:hidden;opacity:var(--stack-opacity,1);transform:translateY(calc(var(--stack-shift,0px) + var(--stack-exit-shift,0px))) scale(var(--stack-scale,1));transform-origin:center top;transition:transform .42s cubic-bezier(.2,.75,.25,1),opacity .32s ease,border-color .24s ease,box-shadow .32s ease}
 .video-chapter:nth-child(2){--stack-index:1;z-index:11}
@@ -54,9 +49,8 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .video-stack-exit{height:clamp(220px,30vh,340px);pointer-events:none}
 .video-chapter.is-active{border-color:rgba(22,164,108,.25);box-shadow:0 28px 68px -34px rgba(46,38,28,.52)}
 .video-chapter.is-past{box-shadow:0 10px 28px -24px rgba(46,38,28,.34)}
-.video-card-tab{order:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;min-height:58px;padding:10px 18px;border-bottom:1px solid var(--line-2);background:#fff;transition:background .24s ease}
+.video-card-tab{order:1;display:grid;grid-template-columns:minmax(0,1fr);align-items:center;min-height:58px;padding:10px 18px;border-bottom:1px solid var(--line-2);background:#fff;transition:background .24s ease}
 .video-chapter.is-past .video-card-tab{background:#fbfcfa}
-.video-card-number{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--bg);color:var(--accent-ink);font:700 var(--type-meta) var(--mono)}
 .video-card-tab h3{overflow:hidden;color:var(--ink);font-family:var(--fd);font-size:var(--type-card);line-height:1.12;letter-spacing:-.01em;text-overflow:ellipsis;white-space:nowrap}
 .video-chapter-media{order:2;position:relative;width:100%;height:min(61.29vw,698px,calc(100dvh - 250px));overflow:hidden;background:var(--bg)}
 .demo-player-frame{display:block;width:100%;height:100%;border:0;background:var(--bg);pointer-events:none}
@@ -68,9 +62,6 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .video-control:focus-visible{outline:3px solid rgba(22,164,108,.24);outline-offset:2px}
 .video-chapter-copy{order:3;display:flex;justify-content:space-between;gap:24px;align-items:center;min-height:76px;padding:14px 18px}
 .video-chapter-copy p{max-width:65ch;color:var(--ink-2);font-size:var(--type-body);line-height:1.6;text-wrap:pretty}
-.video-watch-state{display:inline-flex;align-items:center;gap:7px;color:var(--ink-3);font:600 var(--type-legal) var(--mono);letter-spacing:.02em;white-space:nowrap}
-.video-watch-state::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .18s ease,box-shadow .18s ease}
-.video-chapter.is-active .video-watch-state::before{background:var(--accent);box-shadow:0 0 0 4px rgba(22,164,108,.12)}
 .video-chapter-next{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;color:var(--accent-ink);font-size:var(--type-label);font-weight:750;text-decoration:none;white-space:nowrap}
 .video-chapter-next::after{content:'↓'}
 .video-chapter:last-child .video-chapter-next{display:none}
@@ -78,14 +69,10 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   :root{--type-quote:1.25rem}
   body{padding-inline:12px}
   .video-story-head{padding:22px 18px 16px}
-  .video-chapter-nav{grid-template-columns:1fr;gap:6px}
-  .video-chapter-nav a{min-height:44px}
   .video-chapters{--stack-start:8px;--stack-step:42px;padding-bottom:72px}
   .video-chapter{margin-bottom:52px;border-radius:16px}
-  .video-card-tab{grid-template-columns:auto minmax(0,1fr);min-height:52px;padding:8px 12px;gap:9px}
-  .video-card-number{width:30px;height:30px}
+  .video-card-tab{grid-template-columns:minmax(0,1fr);min-height:52px;padding:8px 12px}
   .video-card-tab h3{overflow:visible;font-family:var(--fb);font-weight:700;line-height:1.25;text-overflow:clip;white-space:normal}
-  .video-card-tab .video-watch-state{display:none}
   .video-chapter-media{height:min(calc((100vw - 24px)*.9048),calc(100dvh - 230px))}
   .video-chapter-copy{display:grid;gap:10px;min-height:0;padding:13px 14px 15px}
   .video-chapter-copy p{line-height:1.6}
@@ -103,7 +90,6 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 @media(prefers-reduced-motion:reduce){
   .video-chapter{position:relative;top:auto!important;margin-bottom:18px;transform:none!important;transition:none}
   .video-chapters{padding-bottom:0}
-  .video-chapter-nav a,.video-watch-state::before{transition:none}
 }
 
 /* ---------- header ---------- */
@@ -466,18 +452,12 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
   <section class="card video-story" aria-labelledby="video-story-title">
     <div class="video-story-head">
       <h2 class="card-title" id="video-story-title">See how the machine works</h2>
-      <p class="video-story-intro">Each live chapter plays when it enters view. Watch in order, jump to any stage, or keep scrolling whenever you’re ready.</p>
-      <nav class="video-chapter-nav" aria-label="Demo chapters">
-        <a href="#demo-learn"><span>01</span>Learn your business</a>
-        <a href="#demo-triagers"><span>02</span>Deploy AI Triagers</a>
-        <a href="#demo-flywheel"><span>03</span>Complete the flywheel</a>
-        <a href="#demo-graph"><span>04</span>Compound growth</a>
-      </nav>
+      <p class="video-story-intro">Each live chapter plays when it enters view. Scroll at your pace, then pause or replay any demo when you want a closer look.</p>
     </div>
     <div class="video-chapters">
       <article class="video-chapter" id="demo-learn" data-chapter="learn">
         <header class="video-card-tab">
-          <span class="video-card-number">01</span><h3>It learns your business first.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+          <h3>It learns your business first.</h3>
         </header>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=learn" title="Business knowledge flowing into the AI Brain Manager" loading="eager"></iframe>
@@ -489,7 +469,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
       </article>
       <article class="video-chapter" id="demo-triagers" data-chapter="triagers">
         <header class="video-card-tab">
-          <span class="video-card-number">02</span><h3>Five AI Triagers qualify buyers.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+          <h3>Five AI Triagers qualify buyers.</h3>
         </header>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=triagers" title="Five AI Triagers routing buyers and returning eight-dollar sales" loading="lazy"></iframe>
@@ -501,7 +481,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
       </article>
       <article class="video-chapter" id="demo-flywheel" data-chapter="flywheel">
         <header class="video-card-tab">
-          <span class="video-card-number">03</span><h3>Each sale completes the flywheel.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+          <h3>Each sale completes the flywheel.</h3>
         </header>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=flywheel" title="AI Triagers assembling into the self-funding sales flywheel" loading="lazy"></iframe>
@@ -513,7 +493,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
       </article>
       <article class="video-chapter" id="demo-graph" data-chapter="graph">
         <header class="video-card-tab">
-          <span class="video-card-number">04</span><h3>Reinvestment compounds growth.</h3><div class="video-watch-state" aria-live="polite">Plays when in view</div>
+          <h3>Reinvestment compounds growth.</h3>
         </header>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=graph" title="A self-funding growth curve reaching progressively higher ad-budget milestones" loading="lazy"></iframe>
@@ -1596,11 +1576,10 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
   var rendererVersion='20260813j';
 
   function elements(chapter){
-    return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control'),state:chapter.querySelector('.video-watch-state')};
+    return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control')};
   }
   function setState(chapter,label){
     var item=elements(chapter);
-    if(item.state) item.state.textContent=label;
     if(item.button) item.button.textContent=label==='Playing' ? 'Pause' : label==='Finished' ? 'Replay' : 'Play';
   }
   function pauseOthers(exception){
@@ -1627,11 +1606,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
       item.classList.toggle('is-past',index<activeIndex);
       item.style.setProperty('--stack-scale',String(1-depth*.018));
       item.style.setProperty('--stack-shift',(-4*depth)+'px');
-    });
-    document.querySelectorAll('.video-chapter-nav a').forEach(function(link){
-      var current=link.getAttribute('href')==='#'+chapter.id;
-      link.classList.toggle('is-current',current);
-      if(current) link.setAttribute('aria-current','step'); else link.removeAttribute('aria-current');
     });
   }
   function playChapter(chapter,forceReplay){
@@ -1690,7 +1664,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
     if(reduce) setState(chapter,'Ready to play');
   });
 
-  document.querySelectorAll('.video-chapter-nav a,.video-chapter-next').forEach(function(link){
+  document.querySelectorAll('.video-chapter-next').forEach(function(link){
     link.addEventListener('click',function(){
       var target=document.querySelector(link.getAttribute('href'));
       if(target) setTimeout(function(){ if(!reduce) playChapter(target,false); },0);
