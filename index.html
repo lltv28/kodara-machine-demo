@@ -1564,7 +1564,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:var(--type-display);line-heig
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
   var chapterStack=chapters[0].parentElement, exitSentinel=chapterStack && chapterStack.querySelector('.video-stack-exit');
-  var rendererVersion='20260814a';
+  var rendererVersion='20260814b';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control')};
