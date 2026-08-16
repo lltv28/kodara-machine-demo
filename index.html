@@ -45,12 +45,6 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .video-card-tab h3{color:var(--ink);font-family:var(--fd);font-size:clamp(1.7rem,2.6vw,2.35rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
 .video-chapter-media{order:2;position:relative;width:100%;height:auto;aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
 .demo-player-frame{display:block;width:100%;height:100%;border:0;background:var(--bg);pointer-events:none}
-.video-chapter-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;padding:14px;pointer-events:none;background:linear-gradient(180deg,transparent 70%,rgba(30,41,59,.035))}
-.video-control{display:flex;align-items:center;gap:7px;min-height:44px;padding:9px 13px;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:rgba(255,255,255,.88);box-shadow:var(--shadow-sm);color:var(--ink-2);font:600 var(--type-control) var(--fb);cursor:pointer;pointer-events:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.video-control::before{content:'▶';font-size:.68rem;color:var(--accent-ink)}
-.video-chapter.is-playing .video-control::before{content:'Ⅱ';font-size:.72rem}
-.video-chapter.is-ended .video-control::before{content:'↻';font-size:1rem}
-.video-control:focus-visible{outline:3px solid rgba(22,164,108,.24);outline-offset:2px}
 .video-chapter-copy{order:3;display:flex;flex:1;align-items:flex-start;min-height:138px;padding:18px}
 .video-chapter-copy p{max-width:65ch;color:var(--ink-2);font-size:var(--type-body);line-height:1.6;text-wrap:pretty}
 @media(max-width:720px){
@@ -64,7 +58,6 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   .video-chapter-media{height:auto;aspect-ratio:5/4}
   .video-chapter-copy{min-height:0;padding:14px}
   .video-chapter-copy p{line-height:1.6}
-  .video-control{min-height:44px;padding:10px 14px}
 }
 @media(prefers-reduced-motion:reduce){
   .video-chapter{transition:none}
@@ -256,7 +249,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     <p class="proof-snapshot-note">Kodara has installed AI sales departments for more than 350 businesses across more than 30 industries. Individual results vary and are not guaranteed.</p>
   </section>
 
-  <!-- ============ HOW IT WORKS · four user-controlled live chapters ============ -->
+  <!-- ============ HOW IT WORKS · four live chapters ============ -->
   <section class="card video-story" aria-labelledby="video-story-title">
     <div class="video-story-head">
       <h2 class="card-title" id="video-story-title">See how the machine works</h2>
@@ -269,7 +262,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
         </header>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=learn&amp;compact=1" title="Business knowledge flowing into the AI brain" loading="eager"></iframe>
-          <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Learn your business">Play</button></div>
         </div>
         <div class="video-chapter-copy">
           <p>It learns your offers, knowledge, qualification logic, and communication style so every AI salesperson works from the same source.</p>
@@ -281,7 +273,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
         </header>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=triagers&amp;compact=1" title="AI Triagers routing buyers and returning assessment sales" loading="lazy"></iframe>
-          <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Deploy AI Triagers">Play</button></div>
         </div>
         <div class="video-chapter-copy">
           <p>They educate each prospect through a low-cost diagnostic assessment, reveal the problem, and identify fit. The $8 amount is illustrative.</p>
@@ -293,7 +284,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
         </header>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=flywheel&amp;compact=1" title="AI Triagers assembling into the complete sales loop" loading="lazy"></iframe>
-          <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Complete the sales loop">Play</button></div>
         </div>
         <div class="video-chapter-copy">
           <p>Qualified buyers move toward your highest-level service. Other buyers receive a smaller digital offer, while non-buyers enter automated follow-up.</p>
@@ -305,7 +295,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
         </header>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=graph&amp;compact=1" title="An ad-budget growth curve reaching progressively higher milestones" loading="lazy"></iframe>
-          <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play ad budget growth">Play</button></div>
         </div>
         <div class="video-chapter-copy">
           <p>Revenue from assessments and smaller offers can return to traffic and help fund the next round. Results depend on the offer, traffic, and execution.</p>
@@ -572,24 +561,13 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   var ratios=new Map();
   var rendererVersion='20260816d';
   var activeChapter=null;
-  var manualChapter=null;
   var desktopPlayback=window.matchMedia && matchMedia('(min-width:721px)');
 
   function desktopMulti(){ return !!(desktopPlayback && desktopPlayback.matches); }
 
-  function elements(chapter){
-    return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control')};
-  }
-  function setState(chapter,label){
-    var item=elements(chapter);
-    if(!item.button) return;
-    var action=label==='Playing' ? 'Pause' : label==='Finished' ? 'Replay' : 'Play';
-    var title=chapter.querySelector('h3');
-    item.button.textContent=action;
-    item.button.setAttribute('aria-label',action+' '+(title ? title.textContent.trim() : 'demo'));
-  }
+  function frameFor(chapter){ return chapter.querySelector('.demo-player-frame'); }
   function sendAction(chapter,action){
-    var frame=elements(chapter).frame;
+    var frame=frameFor(chapter);
     if(frame && frame.contentWindow) frame.contentWindow.postMessage({fdDemoPlayerAction:action},'*');
   }
   function pauseChapter(chapter){
@@ -599,59 +577,48 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   }
   function playChapter(chapter,forceReplay){
     if(!chapter || document.hidden) return;
-    if(!elements(chapter).frame) return;
+    if(!frameFor(chapter)) return;
     if(!forceReplay && chapter.dataset.playerState==='playing') return;
     chapter.dataset.requestedState='play';
     if(forceReplay || chapter.dataset.playerState==='finished') chapter.classList.remove('is-ended');
     sendAction(chapter,forceReplay || chapter.dataset.playerState==='finished' ? 'replay' : 'play');
   }
   function visibleChapters(){
-    return chapters.filter(function(chapter){ return (ratios.get(chapter)||0)>=.15 && chapter.dataset.userPaused!=='true'; });
+    return chapters.filter(function(chapter){ return (ratios.get(chapter)||0)>=.15; });
   }
-  function activateChapter(chapter,manual){
+  function activateChapter(chapter){
     if(!chapter || reduce) return;
     chapters.forEach(function(item){ if(item!==chapter) pauseChapter(item); });
     activeChapter=chapter;
-    if(manual) manualChapter=chapter;
     playChapter(chapter,chapter.dataset.playerState==='finished');
   }
   function evaluateVisibility(){
     if(reduce) return;
     if(desktopMulti()){
       activeChapter=null;
-      manualChapter=null;
       chapters.forEach(function(chapter){
-        if((ratios.get(chapter)||0)>=.15 && chapter.dataset.userPaused!=='true') playChapter(chapter,false);
+        if((ratios.get(chapter)||0)>=.15) playChapter(chapter,false);
         else pauseChapter(chapter);
       });
       return;
     }
-    if(manualChapter){
-      if((ratios.get(manualChapter)||0)>=.05){
-        if(manualChapter.dataset.userPaused!=='true') playChapter(manualChapter,false);
-        return;
-      }
-      pauseChapter(manualChapter);
-      manualChapter=null;
-      activeChapter=null;
-    }
-    if(activeChapter && (ratios.get(activeChapter)||0)>=.15 && activeChapter.dataset.userPaused!=='true'){
+    if(activeChapter && (ratios.get(activeChapter)||0)>=.15){
       playChapter(activeChapter,false);
       return;
     }
     var next=visibleChapters()[0];
-    if(next) activateChapter(next,false);
+    if(next) activateChapter(next);
     else {
       chapters.forEach(pauseChapter);
       activeChapter=null;
     }
   }
   function advanceSequence(chapter){
-    if(desktopMulti() || chapter!==activeChapter || chapter===manualChapter) return;
+    if(desktopMulti() || chapter!==activeChapter) return;
     var visible=visibleChapters();
     if(visible.length<2) return;
     var index=visible.indexOf(chapter);
-    activateChapter(visible[(index+1+visible.length)%visible.length],false);
+    activateChapter(visible[(index+1+visible.length)%visible.length]);
   }
   function ratioInParent(chapter,frameTop,viewportHeight){
     var rect=chapter.getBoundingClientRect(), top=frameTop+rect.top, bottom=top+rect.height;
@@ -659,29 +626,17 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   }
 
   chapters.forEach(function(chapter){
-    var item=elements(chapter),button=item.button;
+    var frame=frameFor(chapter);
     ratios.set(chapter,0);
     chapter.dataset.playerState='loading';
-    if(!item.frame || !button) return;
-    item.frame.addEventListener('load',function(){
-      if(chapter.dataset.playerState==='loading'){ chapter.dataset.playerState='ready';setState(chapter,'Ready to play'); }
+    if(!frame) return;
+    frame.addEventListener('load',function(){
+      if(chapter.dataset.playerState==='loading') chapter.dataset.playerState='ready';
       if(chapter.dataset.requestedState==='play') sendAction(chapter,'play');
     });
-    var playerUrl=new URL(item.frame.dataset.src,location.href);
+    var playerUrl=new URL(frame.dataset.src,location.href);
     playerUrl.searchParams.set('v',rendererVersion);
-    item.frame.src=playerUrl.href;
-    button.addEventListener('click',function(){
-      if(chapter.dataset.playerState==='playing'){
-        chapter.dataset.userPaused='true';
-        if(!desktopMulti()) manualChapter=chapter;
-        pauseChapter(chapter);
-      } else {
-        delete chapter.dataset.userPaused;
-        if(desktopMulti()) playChapter(chapter,false);
-        else activateChapter(chapter,true);
-      }
-    });
-    if(reduce) setState(chapter,'Ready to play');
+    frame.src=playerUrl.href;
   });
 
   document.addEventListener('visibilitychange',function(){
@@ -694,7 +649,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   window.addEventListener('message',function(event){
     if(!event.data) return;
     if(event.data.fdDemoPlayer){
-      var chapter=chapters.find(function(item){ return elements(item).frame && elements(item).frame.contentWindow===event.source; });
+      var chapter=chapters.find(function(item){ return frameFor(item) && frameFor(item).contentWindow===event.source; });
       if(!chapter || event.data.chapter!==chapter.dataset.chapter) return;
       var type=event.data.fdDemoPlayer;
       if(type==='looped'){
@@ -704,18 +659,17 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
       }
       chapter.dataset.playerState=type==='ended' ? 'finished' : type;
       if(type==='ready'){
-        setState(chapter,'Ready to play');
         if(chapter.dataset.requestedState==='play') sendAction(chapter,'play');
       }
       if(type==='playing'){
-        chapter.classList.add('is-playing','is-active');chapter.classList.remove('is-ended');setState(chapter,'Playing');
+        chapter.classList.add('is-playing','is-active');chapter.classList.remove('is-ended');
         parent.postMessage({fdDemoEvent:'video-'+chapter.dataset.chapter+'-started'},'*');
       }
       if(type==='paused'){
-        chapter.classList.remove('is-playing','is-active');setState(chapter,event.data.progress>0 ? 'Paused' : 'Ready to play');
+        chapter.classList.remove('is-playing','is-active');
       }
       if(type==='ended'){
-        chapter.classList.remove('is-playing');chapter.classList.add('is-ended');setState(chapter,'Finished');
+        chapter.classList.remove('is-playing');chapter.classList.add('is-ended');
         parent.postMessage({fdDemoEvent:'video-'+chapter.dataset.chapter+'-completed'},'*');
       }
       return;
