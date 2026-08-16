@@ -573,6 +573,9 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   var rendererVersion='20260816d';
   var activeChapter=null;
   var manualChapter=null;
+  var desktopPlayback=window.matchMedia && matchMedia('(min-width:721px)');
+
+  function desktopMulti(){ return !!(desktopPlayback && desktopPlayback.matches); }
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control')};
@@ -614,6 +617,15 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   }
   function evaluateVisibility(){
     if(reduce) return;
+    if(desktopMulti()){
+      activeChapter=null;
+      manualChapter=null;
+      chapters.forEach(function(chapter){
+        if((ratios.get(chapter)||0)>=.15 && chapter.dataset.userPaused!=='true') playChapter(chapter,false);
+        else pauseChapter(chapter);
+      });
+      return;
+    }
     if(manualChapter){
       if((ratios.get(manualChapter)||0)>=.05){
         if(manualChapter.dataset.userPaused!=='true') playChapter(manualChapter,false);
@@ -635,7 +647,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     }
   }
   function advanceSequence(chapter){
-    if(chapter!==activeChapter || chapter===manualChapter) return;
+    if(desktopMulti() || chapter!==activeChapter || chapter===manualChapter) return;
     var visible=visibleChapters();
     if(visible.length<2) return;
     var index=visible.indexOf(chapter);
@@ -661,11 +673,12 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     button.addEventListener('click',function(){
       if(chapter.dataset.playerState==='playing'){
         chapter.dataset.userPaused='true';
-        manualChapter=chapter;
+        if(!desktopMulti()) manualChapter=chapter;
         pauseChapter(chapter);
       } else {
         delete chapter.dataset.userPaused;
-        activateChapter(chapter,true);
+        if(desktopMulti()) playChapter(chapter,false);
+        else activateChapter(chapter,true);
       }
     });
     if(reduce) setState(chapter,'Ready to play');
@@ -674,6 +687,10 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   document.addEventListener('visibilitychange',function(){
     if(document.hidden) chapters.forEach(pauseChapter); else evaluateVisibility();
   });
+  if(desktopPlayback){
+    if(desktopPlayback.addEventListener) desktopPlayback.addEventListener('change',evaluateVisibility);
+    else desktopPlayback.addListener(evaluateVisibility);
+  }
   window.addEventListener('message',function(event){
     if(!event.data) return;
     if(event.data.fdDemoPlayer){
@@ -713,7 +730,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     var observer=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){ ratios.set(entry.target,entry.intersectionRatio); });
       evaluateVisibility();
-    },{threshold:[0,.3,.55,.75,1]});
+    },{threshold:[0,.05,.15,.3,.55,.75,1]});
     chapters.forEach(function(chapter){ observer.observe(chapter); });
   }
 })();
