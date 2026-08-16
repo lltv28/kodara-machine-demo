@@ -32,7 +32,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   display:flex;flex-direction:column;align-items:center;padding:10px 20px 20px;overflow-x:hidden}
 .wrap{width:100%;max-width:1080px;display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0}
-.embed-mode .head,.embed-mode .proof,.embed-mode .faq,.embed-mode .trust,.embed-mode .cta{display:none}
+.embed-mode .head,.embed-mode .process,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .trust,.embed-mode .cta{display:none}
 .video-mode .zoom-section{display:none!important}
 
 /* ---------- four independent live chapters ---------- */
@@ -40,13 +40,11 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .video-story-head{padding:clamp(22px,3.5vw,40px) clamp(22px,3.5vw,40px) 20px}
 .video-story-intro{max-width:65ch;margin-top:8px;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.6}
 .video-chapters{--stack-start:18px;--stack-step:48px;display:grid;padding:0 0 clamp(64px,10vh,110px);isolation:isolate}
-.video-chapter{--stack-index:0;--stack-top:calc(var(--stack-start) + var(--stack-index)*var(--stack-step));position:sticky;top:var(--stack-top);z-index:10;display:flex;flex-direction:column;scroll-margin-top:var(--stack-top);margin-bottom:clamp(44px,7vh,72px);border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:0 22px 55px -32px rgba(46,38,28,.46);overflow:hidden;opacity:var(--stack-opacity,1);transform:translateY(calc(var(--stack-shift,0px) + var(--stack-exit-shift,0px))) scale(var(--stack-scale,1));transform-origin:center top;transition:transform .42s cubic-bezier(.2,.75,.25,1),opacity .32s ease,border-color .24s ease,box-shadow .32s ease}
+.video-chapter{--stack-index:0;--stack-top:calc(var(--stack-start) + var(--stack-index)*var(--stack-step));position:sticky;top:var(--stack-top);z-index:10;display:flex;flex-direction:column;scroll-margin-top:var(--stack-top);margin-bottom:clamp(44px,7vh,72px);border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:0 22px 55px -32px rgba(46,38,28,.46);overflow:hidden;transform:translateY(var(--stack-shift,0px)) scale(var(--stack-scale,1));transform-origin:center top;transition:transform .42s cubic-bezier(.2,.75,.25,1),border-color .24s ease,box-shadow .32s ease}
 .video-chapter:nth-child(2){--stack-index:1;z-index:11}
 .video-chapter:nth-child(3){--stack-index:2;z-index:12}
 .video-chapter:nth-child(4){--stack-index:3;z-index:13;margin-bottom:0}
-.video-chapters.is-exiting .video-chapter{--stack-exit-shift:calc((3 - var(--stack-index))*var(--stack-step) - var(--stack-shift,0px))}
-.video-chapters.is-exiting .video-chapter:not(:nth-child(4)){--stack-opacity:0}
-.video-stack-exit{height:clamp(220px,30vh,340px);pointer-events:none}
+.video-stack-exit{height:clamp(620px,85dvh,900px);pointer-events:none}
 .video-chapter.is-active{border-color:rgba(22,164,108,.25);box-shadow:0 28px 68px -34px rgba(46,38,28,.52)}
 .video-chapter.is-past{box-shadow:0 10px 28px -24px rgba(46,38,28,.34)}
 .video-card-tab{order:1;display:grid;grid-template-columns:minmax(0,1fr);align-items:center;min-height:58px;padding:10px 18px;border-bottom:1px solid var(--line-2);background:#fff;transition:background .24s ease}
@@ -83,13 +81,14 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 @media(max-width:720px) and (max-height:600px){
   .video-chapters{display:block;padding-bottom:32px}
   .video-chapter{position:relative;top:auto!important;margin-bottom:24px;transform:none!important}
-  .video-chapters.is-exiting .video-chapter{opacity:1}
+  .video-stack-exit{display:none}
   .video-chapter-media{height:calc((100vw - 24px)*.9048)}
   .video-chapter.is-past .video-chapter-media,.video-chapter.is-past .video-chapter-copy{visibility:visible;opacity:1}
 }
 @media(prefers-reduced-motion:reduce){
   .video-chapter{position:relative;top:auto!important;margin-bottom:18px;transform:none!important;transition:none}
   .video-chapters{padding-bottom:0}
+  .video-stack-exit{display:none}
 }
 
 /* ---------- header ---------- */
@@ -101,7 +100,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 .card{--card-pad:clamp(22px,3.5vw,40px);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
 .card+.card{margin-top:clamp(72px,8vw,104px)}
 
-.video-story.card,.proof.card,.faq.card,.trust.card,.cta.card{border:0;border-radius:0;background:transparent;box-shadow:none}
+.video-story.card,.process.card,.case-studies.card,.proof.card,.faq.card,.trust.card,.cta.card{border:0;border-radius:0;background:transparent;box-shadow:none}
 .video-story.card{padding:0}
 
 .card-title{font-family:var(--fd);font-size:var(--type-section);line-height:1.1;letter-spacing:-.015em}
@@ -136,7 +135,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 .story-graph-callout line{stroke:rgba(16,104,68,.38);stroke-width:1}
 .story-graph-callout text{display:none}
 .story-graph-milestones{position:absolute;inset:0;pointer-events:none}
-.story-graph-milestone{position:absolute;z-index:2;max-width:144px;padding:2px 6px 2px 8px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.92);color:var(--ink-2);font:700 .8125rem/1.22 var(--fb);opacity:0;transform:translateY(calc(-100% - 10px + var(--milestone-y,4px)))}
+.story-graph-milestone{position:absolute;z-index:2;max-width:144px;padding:2px 6px 2px 8px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.92);color:var(--ink-2);font:700 .8125rem/1.22 var(--fb);opacity:0;transform:translateY(calc(-100% - 38px + var(--milestone-y,4px)))}
 .story-graph-milestone.is-confirmed{color:var(--accent-ink);border-left-color:var(--accent)}
 .zoom-section[data-semantic-hold="graph"] .story-graph-milestone.is-current{font-size:.9rem}
 .story-graph-milestone:nth-child(1){left:42.5%;top:58%}
@@ -324,9 +323,9 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   .story-graph-axis-label:not(.is-y),.story-graph-callout{display:none}
   .story-graph-origin-label{display:none}
   .story-graph-milestone{display:none;bottom:auto;width:max-content;max-width:30%!important;padding:8px 10px;border:0;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:rgba(255,253,251,.94);box-shadow:none;font-size:28px;transform:translateY(var(--milestone-y,4px));text-align:left}
-  .story-graph-milestone:nth-child(1){left:42.5%!important;top:39.5%!important}
-  .story-graph-milestone:nth-child(2){left:56.5%!important;top:29.5%!important}
-  .story-graph-milestone:nth-child(3){left:70.5%!important;top:19.5%!important;transform:translate(-100%,var(--milestone-y,4px))}
+  .story-graph-milestone:nth-child(1){left:42.5%!important;top:32%!important}
+  .story-graph-milestone:nth-child(2){left:56.5%!important;top:22%!important}
+  .story-graph-milestone:nth-child(3){left:70.5%!important;top:12%!important;transform:translate(-100%,var(--milestone-y,4px))}
   .story-graph-milestone.is-current{display:block}
   .stage-caption{position:absolute;left:45%;bottom:18px;z-index:6;display:block;max-width:40%;padding:13px 18px;border:1px solid var(--accent-line);border-radius:12px;background:rgba(255,253,251,.96);box-shadow:var(--shadow-sm);color:var(--accent-ink);font:750 28px/1.2 var(--fb);text-align:center;opacity:var(--stage-caption-opacity,1);transform:translateX(-50%);pointer-events:none}
   .zoom-section[data-story-phase="flywheel"] .stage-caption{left:45%;bottom:18px;max-width:40%;padding:13px 18px;font-size:28px;text-align:center;transform:translateX(-50%)}
@@ -353,13 +352,61 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 .cta{text-align:center}
 .cta .cta-line{font-family:var(--fd);font-size:var(--type-section);line-height:1.15;letter-spacing:-.01em;margin-bottom:18px}
 
+/* ---------- done-for-you process ---------- */
+.process-head,.case-studies-head{max-width:760px;margin-bottom:clamp(28px,4vw,44px)}
+.process-intro,.case-studies-intro{max-width:65ch;margin-top:10px;color:var(--ink-2);font-size:var(--type-body);line-height:1.6}
+.process-list{position:relative;display:grid;gap:18px;max-width:920px;margin-inline:auto}
+.process-list::before{content:'';position:absolute;left:18px;top:24px;bottom:24px;width:2px;background:var(--accent-line)}
+.process-step{position:relative;display:grid;grid-template-columns:38px minmax(0,1fr);gap:20px;align-items:start}
+.process-node{position:relative;z-index:1;width:14px;height:14px;margin:30px 0 0 12px;border:3px solid #fff;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--accent-line)}
+.process-panel{padding:clamp(24px,3vw,34px);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
+.process-panel h3{font-family:var(--fd);font-size:var(--type-card);font-weight:400;line-height:1.12;letter-spacing:-.012em;text-wrap:balance}
+.process-panel p{max-width:65ch;margin-top:10px;color:var(--ink-2);font-size:var(--type-body);line-height:1.65}
+.process-your-part{max-width:920px;margin:20px auto 0;padding:clamp(24px,3vw,34px);border:1px solid var(--accent-line);border-radius:var(--radius-lg);background:var(--accent-soft);color:var(--ink-2);font-size:var(--type-body);line-height:1.6}
+.process-your-part strong{display:block;margin-bottom:4px;color:var(--accent-ink);font-family:var(--fd);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:400;line-height:1.15}
+
+/* ---------- video client stories ---------- */
+.case-studies-disclaimer{max-width:65ch;margin-top:10px;color:var(--ink-3);font-size:var(--type-legal);line-height:1.55}
+.case-featured{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
+.case-featured .case-media{border-right:1px solid var(--line-2)}
+.case-featured-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,4vw,46px)}
+.case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+.case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
+.case-support-copy{display:flex;flex:1;flex-direction:column;padding:clamp(22px,3vw,30px)}
+.case-media{position:relative;aspect-ratio:16/9;background:var(--surface);overflow:hidden}
+.case-media wistia-player{display:block;width:100%;height:100%}
+.case-media wistia-player:not(:defined){background-position:center;background-size:cover;background-repeat:no-repeat}
+.case-media wistia-player[media-id='zd09c1c9jq']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/zd09c1c9jq/swatch')}
+.case-media wistia-player[media-id='fay3lgo8op']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/fay3lgo8op/swatch')}
+.case-media wistia-player[media-id='5ycx1zrlxw']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/5ycx1zrlxw/swatch')}
+.case-title{font-family:var(--fd);font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+.case-support .case-title{font-size:clamp(1.75rem,2.8vw,2.25rem)}
+.case-copy{margin-top:12px;color:var(--ink-2);font-size:var(--type-body);line-height:1.6}
+.case-person{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:center;margin-top:auto;padding-top:22px}
+.case-person img{display:block;width:52px;height:52px;border:1px solid var(--line-2);border-radius:var(--radius-lg);object-fit:cover;background:var(--surface)}
+.case-person strong,.case-person span{display:block}
+.case-person strong{font-size:var(--type-label);line-height:1.3}
+.case-person span{margin-top:3px;color:var(--ink-3);font-size:var(--type-meta);line-height:1.45}
+@media(max-width:720px){
+  .process-head,.case-studies-head{margin-bottom:24px}
+  .process-list{gap:14px}
+  .process-list::before{left:9px}
+  .process-step{grid-template-columns:20px minmax(0,1fr);gap:12px}
+  .process-node{margin:27px 0 0 3px}
+  .process-panel,.process-your-part{padding:22px}
+  .case-featured,.case-support-grid{grid-template-columns:1fr}
+  .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
+  .case-featured-copy,.case-support-copy{padding:22px}
+  .case-support-grid{gap:14px;margin-top:14px}
+}
+
 /* ============================================================
    SECTION 3 - TRUST STRIP
    ============================================================ */
 .proof-head{max-width:720px;margin-bottom:28px}
 .proof-intro{max-width:65ch;margin-top:9px;color:var(--ink-2);font-size:var(--type-body);line-height:1.6}
 .proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.proof-card{display:flex;min-width:0;min-height:254px;flex-direction:column;padding:clamp(20px,2vw,22px);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
+.proof-card{display:flex;min-width:0;min-height:230px;flex-direction:column;padding:clamp(20px,2vw,24px);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
 .proof-stat{display:block;color:var(--accent-ink);font-family:var(--fd);font-size:var(--type-stat);font-weight:700;line-height:.9;letter-spacing:-.035em}
 .proof-result{max-width:31ch;margin-top:14px;color:var(--ink);font-size:var(--type-body);font-weight:650;line-height:1.5;text-wrap:pretty}
 .proof-card blockquote{max-width:25ch;color:var(--ink);font-family:var(--fd);font-size:var(--type-quote);font-weight:700;line-height:1.15;letter-spacing:-.018em;text-wrap:pretty}
@@ -372,7 +419,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 @media(max-width:720px){
   .proof-head{margin-bottom:22px}
   .proof-grid{grid-template-columns:1fr;gap:12px}
-  .proof-card{min-height:224px;padding:20px}
+  .proof-card{min-height:210px;padding:20px}
   .proof-card blockquote{font-size:var(--type-quote)}
 }
 
@@ -493,7 +540,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
           <h3>Reinvestment compounds growth.</h3>
         </header>
         <div class="video-chapter-media">
-          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=graph" title="A self-funding growth curve reaching progressively higher ad-budget milestones" loading="lazy"></iframe>
+          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=graph" title="A self-funding growth curve reaching progressively higher ad-budget milestones" loading="eager"></iframe>
           <div class="video-chapter-overlay"><button class="video-control" type="button" aria-label="Play Compound growth">Play</button></div>
         </div>
         <div class="video-chapter-copy">
@@ -663,7 +710,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
         </g>
         <g class="node-triagers">
           <circle class="flywheel-node" cx="620" cy="105" r="58"/>
-          <text class="flywheel-node-label is-compact triager-node-title" x="620" y="139">AI Triagers</text>
+          <text class="flywheel-node-label is-compact triager-node-title" x="620" y="105">AI Triagers</text>
         </g>
         <g class="node-ticket">
           <circle class="flywheel-node" cx="895" cy="380" r="58"/>
@@ -763,6 +810,91 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     <p class="cf-note">Illustrative demo. Results vary with offer, traffic, close rate, fulfillment, and refunds.</p>
   </section>
   </template>
+
+  <!-- ============ DONE-FOR-YOU PROCESS ============ -->
+  <section class="card process" aria-labelledby="process-title">
+    <div class="process-head">
+      <h2 class="card-title" id="process-title">Three steps, fully done for you.</h2>
+      <p class="process-intro">Built for established experts whose growth still depends on their personal time, attention, or availability.</p>
+    </div>
+    <div class="process-list">
+      <article class="process-step">
+        <span class="process-node" aria-hidden="true"></span>
+        <div class="process-panel">
+          <h3>We train the Brain on your business.</h3>
+          <p>We map your offers, pricing, customers, sales process, calls, courses, and content. Then we train the AI Brain Manager and validate its knowledge before launch.</p>
+        </div>
+      </article>
+      <article class="process-step">
+        <span class="process-node" aria-hidden="true"></span>
+        <div class="process-panel">
+          <h3>We launch your AI sales team.</h3>
+          <p>We deploy the AI Triagers, connect the paid assessment and follow-up journey, and launch the system to your existing audience before scaling traffic.</p>
+        </div>
+      </article>
+      <article class="process-step">
+        <span class="process-node" aria-hidden="true"></span>
+        <div class="process-panel">
+          <h3>We optimize the self-funding loop.</h3>
+          <p>We improve qualification, follow-up, and the path into recurring or high-ticket offers so every lead can create more value and fund future acquisition.</p>
+        </div>
+      </article>
+    </div>
+    <p class="process-your-part"><strong>Your part: about an hour a week.</strong>You review and approve. We handle the build, launch, and ongoing optimization.</p>
+  </section>
+
+  <!-- ============ VIDEO CLIENT STORIES ============ -->
+  <section class="card case-studies" aria-labelledby="case-studies-title">
+    <div class="case-studies-head">
+      <h2 class="card-title" id="case-studies-title">See what it’s doing for businesses like yours.</h2>
+      <p class="case-studies-intro">Hear directly from owners using AI to sell, serve, and scale with less dependence on their personal time.</p>
+      <p class="case-studies-disclaimer">Individual experiences are not typical and do not guarantee a specific result. Results vary by offer, market, traffic, execution, and sales process.</p>
+    </div>
+
+    <article class="case-featured" aria-labelledby="sandra-case-title">
+      <div class="case-media">
+        <wistia-player media-id="zd09c1c9jq" aspect="1.7777777777777777"></wistia-player>
+      </div>
+      <div class="case-featured-copy">
+        <h3 class="case-title" id="sandra-case-title">More sales, more clients, far fewer sales calls.</h3>
+        <p class="case-copy">Sandra’s AI sells a £17 entry product, builds trust, and identifies people ready for her £6,000 coaching program before they reach her calendar.</p>
+        <div class="case-person">
+          <img src="https://lltv28.github.io/kodara-success-portal/img/sandra.jpg" width="104" height="104" loading="lazy" alt="Sandra Parker">
+          <div><strong>Sandra Parker</strong><span>Sobriety coach - Just The Tonic</span></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="case-support-grid">
+      <article class="case-support" aria-labelledby="leanne-case-title">
+        <div class="case-media">
+          <wistia-player media-id="fay3lgo8op" aspect="1.791044776119403"></wistia-player>
+        </div>
+        <div class="case-support-copy">
+          <h3 class="case-title" id="leanne-case-title">She runs two businesses on fewer hours.</h3>
+          <p class="case-copy">Leanne’s AI handles repeat questions in her voice, freeing her to serve clients and launch a second business.</p>
+          <div class="case-person">
+            <img src="https://lltv28.github.io/kodara-success-portal/img/leanne.jpg" width="104" height="104" loading="lazy" alt="Leanne Ellington">
+            <div><strong>Leanne Ellington</strong><span>Body image and emotional health coach</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="case-support" aria-labelledby="jose-case-title">
+        <div class="case-media">
+          <wistia-player media-id="5ycx1zrlxw" aspect="1.7777777777777777"></wistia-player>
+        </div>
+        <div class="case-support-copy">
+          <h3 class="case-title" id="jose-case-title">He can take on five clients a day without growing his team.</h3>
+          <p class="case-copy">Jose turned a fulfillment bottleneck into a repeatable AI-assisted process, increasing capacity without adding payroll.</p>
+          <div class="case-person">
+            <img src="https://lltv28.github.io/kodara-success-portal/img/jose.jpg" width="104" height="104" loading="lazy" alt="Jose Fang">
+            <div><strong>Jose Fang</strong><span>Coaching agency founder</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <!-- ============ CLIENT PROOF ============ -->
   <section class="card proof" aria-labelledby="proof-title">
@@ -976,7 +1108,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     if(p<FLYWHEEL_ASSEMBLY_END){
       t=storyEase(zoomRange(p,TRIAGER_END,FLYWHEEL_ASSEMBLY_END));
       state.teamProgress=t;
-      state.workerOpacity=1;
+      state.workerOpacity=1-zoomRange(t,.72,1);
       state.engineOpacity=zoomRange(t,.18,.55);
       state.triagerDemoOpacity=1-zoomRange(t,.05,.42);
       state.phoneOpacity=1-zoomRange(t,0,.45);
@@ -1001,7 +1133,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     }
     if(p<FLYWHEEL_END){
       t=zoomRange(p,FLYWHEEL_ASSEMBLY_END,FLYWHEEL_END);
-      state.teamProgress=1; state.workerOpacity=1; state.engineOpacity=1; state.adOpacity=1; state.adsOpacity=1; state.shellOpacity=1; state.shellScale=1; state.sceneZoom=1.1; state.activityOpacity=.22; state.labelsOpacity=1; state.triagerLabel=1; state.nodeTriagers=1; state.nodeTicket=1; state.nodeDownsell=1; state.phase='flywheel'; state.beat='flywheel';
+      state.teamProgress=1; state.workerOpacity=0; state.engineOpacity=1; state.adOpacity=1; state.adsOpacity=1; state.shellOpacity=1; state.shellScale=1; state.sceneZoom=1.1; state.activityOpacity=.22; state.labelsOpacity=1; state.triagerLabel=1; state.nodeTriagers=1; state.nodeTicket=1; state.nodeDownsell=1; state.phase='flywheel'; state.beat='flywheel';
       state.flywheelOrbitProgress=storyEase(t);
       state.flywheelOrbitOpacity=storyEase(zoomRange(t,.02,.08))*(1-storyEase(zoomRange(t,.94,1)));
       return state;
@@ -1010,7 +1142,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
       t=storyEase(zoomRange(p,FLYWHEEL_END,CHART_TRANSITION_END));
       var coreMorph=storyEase(zoomRange(t,.06,.72));
       state.teamProgress=1;
-      state.workerOpacity=1-t;
+      state.workerOpacity=0;
       state.engineOpacity=1-t;
       state.adOpacity=1;
       state.adsOpacity=1;
@@ -1566,8 +1698,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map(), active=null, viewportGeometry=null;
-  var chapterStack=chapters[0].parentElement, exitSentinel=chapterStack && chapterStack.querySelector('.video-stack-exit');
-  var rendererVersion='20260814b';
+  var rendererVersion='20260815a';
 
   function elements(chapter){
     return {frame:chapter.querySelector('.demo-player-frame'),button:chapter.querySelector('.video-control')};
@@ -1625,14 +1756,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     if(active && activeRatio<.30) pauseChapter(active);
     var next=dominant || (bestRatio>=.55 ? best : null);
     if(!reduce && next && next!==active && next.dataset.playerState!=='finished') playChapter(next,false);
-  }
-  function updateExitState(){
-    if(!chapterStack || !exitSentinel) return;
-    if(reduce){ chapterStack.classList.remove('is-exiting');return; }
-    var rect=exitSentinel.getBoundingClientRect();
-    var viewportHeight=viewportGeometry ? viewportGeometry.viewportHeight : window.innerHeight;
-    var top=rect.top+(viewportGeometry ? viewportGeometry.frameTop : 0);
-    chapterStack.classList.toggle('is-exiting',top<=viewportHeight*.82 && top+rect.height>0);
   }
   function ratioInParent(chapter,frameTop,viewportHeight){
     var rect=chapter.getBoundingClientRect(), top=frameTop+rect.top, bottom=top+rect.height;
@@ -1701,7 +1824,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
     if(!Number.isFinite(viewport.frameTop)||!Number.isFinite(viewport.viewportHeight)) return;
     viewportGeometry={frameTop:viewport.frameTop,viewportHeight:viewport.viewportHeight};
     chapters.forEach(function(chapter){ ratios.set(chapter,ratioInParent(chapter,viewport.frameTop,viewport.viewportHeight)); });
-    updateExitState();
     evaluateVisibility();
   });
   if(window===parent && 'IntersectionObserver' in window){
@@ -1710,11 +1832,11 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
       evaluateVisibility();
     },{threshold:[0,.3,.55,.75,1]});
     chapters.forEach(function(chapter){ observer.observe(chapter); });
-    if(exitSentinel){
-      var exitObserver=new IntersectionObserver(updateExitState,{rootMargin:'0px 0px -18% 0px',threshold:[0,.01]});
-      exitObserver.observe(exitSentinel);
-    }
   }
 })();
 </script>
+<script src="https://fast.wistia.com/player.js" async></script>
+<script src="https://fast.wistia.com/embed/zd09c1c9jq.js" type="module" async></script>
+<script src="https://fast.wistia.com/embed/fay3lgo8op.js" type="module" async></script>
+<script src="https://fast.wistia.com/embed/5ycx1zrlxw.js" type="module" async></script>
 </body></html>

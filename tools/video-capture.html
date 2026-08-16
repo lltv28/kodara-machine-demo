@@ -84,7 +84,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-graph-callout line{stroke:rgba(16,104,68,.38);stroke-width:1}
 .story-graph-callout text{display:none}
 .story-graph-milestones{position:absolute;inset:0;pointer-events:none}
-.story-graph-milestone{position:absolute;z-index:2;max-width:172px;padding:4px 8px 4px 10px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.94);color:var(--ink-2);font:700 var(--demo-critical)/1.25 var(--fb);opacity:0;transform:translateY(calc(-100% - 14px + var(--milestone-y,4px)))}
+.story-graph-milestone{position:absolute;z-index:2;max-width:172px;padding:4px 8px 4px 10px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.94);color:var(--ink-2);font:700 var(--demo-critical)/1.25 var(--fb);opacity:0;transform:translateY(calc(-100% - 42px + var(--milestone-y,4px)))}
 .story-graph-milestone.is-confirmed{color:var(--accent-ink);border-left-color:var(--accent)}
 .zoom-section[data-semantic-hold="graph"] .story-graph-milestone.is-current{font-size:var(--demo-critical)}
 .story-graph-milestone:nth-child(1){left:42.5%;top:58%}
@@ -283,9 +283,9 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .story-graph-axis-label:not(.is-y),.story-graph-callout{display:none}
   .story-graph-origin-label{display:none}
   .story-graph-milestone{display:none;bottom:auto;width:max-content;max-width:40%!important;padding:8px 10px;border:0;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:rgba(255,253,251,.94);box-shadow:none;font-size:var(--demo-critical);transform:translateY(var(--milestone-y,4px));text-align:left}
-  .story-graph-milestone:nth-child(1){left:42.5%!important;top:39.5%!important}
-  .story-graph-milestone:nth-child(2){left:56.5%!important;top:29.5%!important}
-  .story-graph-milestone:nth-child(3){left:70.5%!important;top:19.5%!important;transform:translate(-100%,var(--milestone-y,4px))}
+  .story-graph-milestone:nth-child(1){left:42.5%!important;top:32%!important}
+  .story-graph-milestone:nth-child(2){left:56.5%!important;top:22%!important}
+  .story-graph-milestone:nth-child(3){left:70.5%!important;top:12%!important;transform:translate(-100%,var(--milestone-y,4px))}
   .story-graph-milestone.is-current{display:block}
   .stage-caption{display:none}
   .zoom-static .zoom-beats{grid-template-columns:1fr}
@@ -523,7 +523,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         </g>
         <g class="node-triagers">
           <circle class="flywheel-node" cx="620" cy="105" r="58"/>
-          <text class="flywheel-node-label is-compact triager-node-title" x="620" y="139">AI Triagers</text>
+          <text class="flywheel-node-label is-compact triager-node-title" x="620" y="105">AI Triagers</text>
           <text class="flywheel-node-label is-compact triager-node-title-mobile" x="620" y="80">AI</text>
           <text class="flywheel-node-label is-compact triager-node-title-mobile" x="620" y="130">Triagers</text>
         </g>
@@ -729,7 +729,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(p<FLYWHEEL_ASSEMBLY_END){
       t=storyEase(zoomRange(p,TRIAGER_END,FLYWHEEL_ASSEMBLY_END));
       state.teamProgress=t;
-      state.workerOpacity=1;
+      state.workerOpacity=1-zoomRange(t,.72,1);
       state.engineOpacity=zoomRange(t,.18,.55);
       state.triagerDemoOpacity=1-zoomRange(t,.05,.42);
       state.phoneOpacity=1-zoomRange(t,0,.45);
@@ -754,7 +754,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     }
     if(p<FLYWHEEL_END){
       t=zoomRange(p,FLYWHEEL_ASSEMBLY_END,FLYWHEEL_END);
-      state.teamProgress=1; state.workerOpacity=1; state.engineOpacity=1; state.adOpacity=1; state.adsOpacity=1; state.shellOpacity=1; state.shellScale=1; state.sceneZoom=1.1; state.activityOpacity=.22; state.labelsOpacity=1; state.triagerLabel=1; state.nodeTriagers=1; state.nodeTicket=1; state.nodeDownsell=1; state.phase='flywheel'; state.beat='flywheel';
+      state.teamProgress=1; state.workerOpacity=0; state.engineOpacity=1; state.adOpacity=1; state.adsOpacity=1; state.shellOpacity=1; state.shellScale=1; state.sceneZoom=1.1; state.activityOpacity=.22; state.labelsOpacity=1; state.triagerLabel=1; state.nodeTriagers=1; state.nodeTicket=1; state.nodeDownsell=1; state.phase='flywheel'; state.beat='flywheel';
       state.flywheelOrbitProgress=storyEase(t);
       state.flywheelOrbitOpacity=storyEase(zoomRange(t,.02,.08))*(1-storyEase(zoomRange(t,.94,1)));
       return state;
@@ -763,7 +763,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       t=storyEase(zoomRange(p,FLYWHEEL_END,CHART_TRANSITION_END));
       var coreMorph=storyEase(zoomRange(t,.06,.72));
       state.teamProgress=1;
-      state.workerOpacity=1-t;
+      state.workerOpacity=0;
       state.engineOpacity=1-t;
       state.adOpacity=1;
       state.adsOpacity=1;
@@ -1340,7 +1340,6 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   function render(){
     window.renderCaptureFrame(chapter,Math.min(1,elapsed/duration));
-    if(chapter==='graph') document.querySelector('.zoom-section').style.opacity=Math.min(1,elapsed/320,(duration-elapsed)/320);
   }
   function send(type){ parent.postMessage({fdDemoPlayer:type,chapter:chapter,progress:Math.min(1,elapsed/duration)},'*'); }
   function tick(now){
