@@ -82,14 +82,13 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 .proof-snapshot-logos{padding:8px 0 12px}
 .proof-snapshot-logo-label{color:var(--ink-2);font-size:var(--type-label);font-weight:650;line-height:1.4;text-align:center}
 .proof-snapshot-logo-row{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));align-items:center;gap:clamp(18px,2.4vw,34px);max-width:1000px;margin:22px auto 0}
-.proof-snapshot-logo{display:flex;grid-column:span 2;align-items:center;justify-content:center;min-width:0;height:72px}
+.proof-snapshot-logo{--logo-width:156px;--logo-height:54px;display:flex;grid-column:span 2;align-items:center;justify-content:center;min-width:0;height:72px}
 .proof-snapshot-logo:nth-child(6){grid-column:2/span 2}
-.proof-snapshot-logo img{display:block;width:auto;max-width:100%;max-height:54px;object-fit:contain;filter:grayscale(1);opacity:.72}
-.proof-snapshot-wordmark{color:var(--ink-2);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:800;letter-spacing:-.025em;white-space:nowrap;opacity:.78}
-.proof-snapshot-logo--mayo{grid-column:span 1;justify-content:flex-end}
-.proof-snapshot-logo--mayo img{max-height:68px}
-.proof-snapshot-logo--clickfunnels{grid-column:span 3;justify-content:flex-start;font-size:clamp(1.2rem,2vw,1.55rem)}
-.proof-snapshot-logo--hr-block img{width:min(100%,150px);max-height:42px}
+.proof-snapshot-logo img{display:block;width:min(100%,var(--logo-width));height:auto;max-height:var(--logo-height);object-fit:contain;filter:grayscale(1);opacity:.72}
+.proof-snapshot-logo--mayo{--logo-width:68px;--logo-height:62px}
+.proof-snapshot-logo--clickfunnels{--logo-width:170px;--logo-height:30px}
+.proof-snapshot-logo--clickfunnels img{filter:grayscale(1) brightness(0)}
+.proof-snapshot-logo--hr-block{--logo-width:132px;--logo-height:36px}
 .proof-snapshot-note{margin-top:16px;color:var(--ink-3);font-size:var(--type-legal);line-height:1.45;text-align:center}
 
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
@@ -217,16 +216,13 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 
 @media(max-width:720px){
   .proof-snapshot-logos{padding:6px 0 10px}
-  .proof-snapshot-logo-row{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px 14px;margin-top:18px}
-  .proof-snapshot-logo{grid-column:span 3;height:50px}
-  .proof-snapshot-logo:nth-child(-n+3){grid-column:span 2}
-  .proof-snapshot-logo:nth-child(6){grid-column:span 3}
-  .proof-snapshot-logo img{max-height:40px}
-  .proof-snapshot-wordmark{font-size:1rem}
-  .proof-snapshot-logo--mayo{grid-column:span 2}
-  .proof-snapshot-logo--mayo img{max-height:48px}
-  .proof-snapshot-logo--clickfunnels{grid-column:span 4;font-size:1.16rem}
-  .proof-snapshot-logo--hr-block img{width:min(100%,120px);max-height:32px}
+  .proof-snapshot-logo-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px;margin-top:18px}
+  .proof-snapshot-logo{--logo-width:146px;--logo-height:40px;grid-column:auto;height:50px}
+  .proof-snapshot-logo:nth-child(6){grid-column:auto}
+  .proof-snapshot-logo:last-child{grid-column:1/-1}
+  .proof-snapshot-logo--mayo{--logo-width:52px;--logo-height:48px}
+  .proof-snapshot-logo--clickfunnels{--logo-width:150px;--logo-height:26px}
+  .proof-snapshot-logo--hr-block{--logo-width:120px;--logo-height:32px}
   .mid-cta-inner{align-items:stretch;flex-direction:column;padding:24px 20px}
   .mid-cta .cta-btn{width:100%}
   .mobile-cta{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:20;display:flex;justify-content:center;min-height:52px;transform:translateY(calc(100% + 28px));opacity:0;pointer-events:none;box-shadow:0 12px 34px rgba(16,104,68,.24);transition:transform .2s ease,opacity .2s ease}
@@ -259,7 +255,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/highlevel.svg" loading="lazy" decoding="async" alt="HighLevel"></span>
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/tony-robbins.svg" loading="lazy" decoding="async" alt="Tony Robbins"></span>
           <span class="proof-snapshot-logo proof-snapshot-logo--mayo" role="listitem"><img src="assets/logos/mayo-clinic.svg" loading="lazy" decoding="async" alt="Mayo Clinic"></span>
-          <span class="proof-snapshot-logo proof-snapshot-wordmark proof-snapshot-logo--clickfunnels" role="listitem">ClickFunnels</span>
+          <span class="proof-snapshot-logo proof-snapshot-logo--clickfunnels" role="listitem"><img src="assets/logos/clickfunnels.svg" loading="lazy" decoding="async" alt="ClickFunnels"></span>
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/johns-hopkins.png" loading="lazy" decoding="async" alt="Johns Hopkins"></span>
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/servicetitan.svg" loading="lazy" decoding="async" alt="ServiceTitan"></span>
           <span class="proof-snapshot-logo proof-snapshot-logo--hr-block" role="listitem"><img src="assets/logos/hr-block.svg" loading="lazy" decoding="async" alt="H&amp;R Block"></span>
