@@ -99,9 +99,9 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-graph-axis-label{fill:var(--ink-3);font:650 8px var(--mono);letter-spacing:.025em;text-transform:uppercase}
 .story-graph-axis-label.is-y{display:none}
 .story-graph-milestones{position:absolute;left:22%;top:16%;z-index:3;width:62%;pointer-events:none}
-.story-graph-milestone{position:absolute;left:50%;top:0;width:72%;box-sizing:border-box;z-index:2;padding:6px 10px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.96);color:var(--ink-2);font:700 var(--demo-critical)/1.2 var(--fb);opacity:0;text-align:center;transform:translateX(-50%) translateY(var(--milestone-y,4px))}
+.story-graph-milestone{position:absolute;left:50%;top:0;width:72%;box-sizing:border-box;z-index:2;padding:6px 10px;border:2px solid var(--accent);border-radius:8px;background:rgba(255,253,251,.96);color:var(--ink-2);font:700 var(--demo-critical)/1.2 var(--fb);opacity:0;text-align:center;transform:translateX(-50%) translateY(var(--milestone-y,4px))}
 .story-graph-milestone.is-current{display:block}
-.story-graph-milestone.is-confirmed{color:var(--accent-ink);border-left-color:var(--accent)}
+.story-graph-milestone.is-confirmed{color:var(--accent-ink);border-color:var(--accent)}
 .zoom-section[data-semantic-hold="graph"] .story-graph-milestone.is-current{font-size:var(--demo-critical)}
 .story-graph-milestone:not(.is-current){display:none}
 .story-graph-connector-overlay{position:absolute;inset:0;z-index:2;width:100%;height:100%;overflow:visible;pointer-events:none}
@@ -295,7 +295,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .story-graph .axis{left:22.25%;top:70%;width:57.75%;font-size:var(--demo-critical)}
   .story-graph-axis-label:not(.is-y){display:none}
   .story-graph-origin-label{display:none}
-  .story-graph-milestone{padding:8px 10px;border-left-width:3px;border-radius:0 8px 8px 0;font-size:var(--demo-critical)}
+  .story-graph-milestone{padding:8px 10px;border-width:3px;border-radius:8px;font-size:var(--demo-critical)}
   .stage-caption{display:none}
   .zoom-static .zoom-beats{grid-template-columns:1fr}
   .zoom-static .graph-layer{min-height:500px;aspect-ratio:auto;padding:20px 16px}
@@ -1040,16 +1040,16 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       if(isCurrent) currentReveal=milestoneReveal;
     }
     if(graphMilestoneConnector){
-      if(current>=0 && relayPoint){
+      var connectorActive=current>=0 && state.graphProgress<=thresholds[current]+.0001;
+      if(current>=0 && relayPoint && connectorActive){
         var plotLeft=COMPACT ? .24 : .22, plotTop=COMPACT ? .25 : .29, plotWidth=COMPACT ? .54 : .62;
         var plotScale=1240*plotWidth/320;
         var relayX=1240*plotLeft+relayPoint.x*plotScale, relayY=760*plotTop+relayPoint.y*plotScale;
-        var captionWidth=COMPACT ? .96 : .72;
-        var startX=1240*(plotLeft+plotWidth*(.5-captionWidth/2)), startY=COMPACT ? 130 : 140, bendX=startX-24;
-        var dx=relayX-bendX, dy=relayY-startY, distance=Math.max(1,Math.hypot(dx,dy)), markerRadius=18*plotScale;
+        var startX=1240*(plotLeft+plotWidth*.5), startY=COMPACT ? 160 : 165, bendY=startY+18;
+        var dx=relayX-startX, dy=relayY-bendY, distance=Math.max(1,Math.hypot(dx,dy)), markerRadius=18*plotScale;
         var endX=relayX-dx/distance*markerRadius, endY=relayY-dy/distance*markerRadius;
         var connectorReveal=storyEase(zoomRange(currentReveal,0,.45));
-        graphMilestoneConnector.setAttribute('d','M '+startX.toFixed(2)+' '+startY+' L '+bendX.toFixed(2)+' '+startY+' L '+endX.toFixed(2)+' '+endY.toFixed(2));
+        graphMilestoneConnector.setAttribute('d','M '+startX.toFixed(2)+' '+startY+' L '+startX.toFixed(2)+' '+bendY.toFixed(2)+' L '+endX.toFixed(2)+' '+endY.toFixed(2));
         graphMilestoneConnector.style.opacity=String(connectorReveal*state.relayOpacity);
         graphMilestoneConnector.style.strokeDashoffset=String(100*(1-connectorReveal));
       }else{
