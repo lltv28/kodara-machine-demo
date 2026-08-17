@@ -79,9 +79,15 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 
 /* ---------- early proof ---------- */
 .proof-snapshot{padding:0!important}
-.proof-snapshot-inner{display:grid;grid-template-columns:1.15fr repeat(3,minmax(0,1fr));align-items:stretch;border:1px solid var(--accent-line);border-radius:var(--radius-xl);background:var(--accent-soft);overflow:hidden}
-.proof-snapshot-title{display:flex;align-items:center;padding:24px;color:var(--accent-ink);font-family:var(--fd);font-size:clamp(1.65rem,2.6vw,2.25rem);font-weight:400;line-height:1.08;text-wrap:balance}
+.proof-snapshot-inner{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;border:1px solid var(--accent-line);border-radius:var(--radius-xl);background:var(--accent-soft);overflow:hidden}
+.proof-snapshot-logos{grid-column:1/-1;padding:18px 22px 20px;border-bottom:1px solid var(--accent-line);background:rgba(255,255,255,.42)}
+.proof-snapshot-logo-label{color:var(--ink-2);font-size:var(--type-label);font-weight:650;line-height:1.4;text-align:center}
+.proof-snapshot-logo-row{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));align-items:center;gap:clamp(10px,1.8vw,24px);margin-top:16px}
+.proof-snapshot-logo{display:flex;align-items:center;justify-content:center;min-width:0;height:40px}
+.proof-snapshot-logo img{display:block;width:auto;max-width:100%;max-height:32px;object-fit:contain;filter:grayscale(1);opacity:.62}
+.proof-snapshot-wordmark{color:var(--ink-2);font-size:clamp(.72rem,1.2vw,.94rem);font-weight:800;letter-spacing:-.025em;white-space:nowrap;opacity:.72}
 .proof-snapshot-item{padding:22px;border-left:1px solid var(--accent-line)}
+.proof-snapshot-logos + .proof-snapshot-item{border-left:0}
 .proof-snapshot-item strong,.proof-snapshot-item span{display:block}
 .proof-snapshot-item strong{color:var(--accent-ink);font-family:var(--fd);font-size:clamp(2.7rem,5vw,4.5rem);line-height:.9;letter-spacing:-.04em}
 .proof-snapshot-item span{margin-top:9px;color:var(--ink-2);font-size:var(--type-meta);font-weight:650;line-height:1.35}
@@ -212,8 +218,13 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 
 @media(max-width:720px){
   .proof-snapshot-inner{grid-template-columns:1fr}
-  .proof-snapshot-title{padding:20px 20px 14px}
+  .proof-snapshot-logos{padding:18px 16px 20px}
+  .proof-snapshot-logo-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 18px;margin-top:14px}
+  .proof-snapshot-logo{height:36px}
+  .proof-snapshot-logo img{max-height:28px}
+  .proof-snapshot-wordmark{font-size:.8rem}
   .proof-snapshot-item{display:grid;grid-template-columns:100px minmax(0,1fr);align-items:center;gap:16px;padding:16px 20px;border-top:1px solid var(--accent-line);border-left:0}
+  .proof-snapshot-logos + .proof-snapshot-item{border-top:0}
   .proof-snapshot-item strong{font-size:2.8rem}
   .proof-snapshot-item span{margin-top:0;font-size:var(--type-label)}
   .mid-cta-inner{align-items:stretch;flex-direction:column;padding:24px 20px}
@@ -239,9 +250,22 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   </header>
 
   <!-- ============ EARLY PROOF ============ -->
-  <section class="card proof-snapshot" aria-labelledby="proof-snapshot-title">
+  <section class="card proof-snapshot" aria-label="Credibility and client results">
     <div class="proof-snapshot-inner">
-      <h2 class="proof-snapshot-title" id="proof-snapshot-title">Results from real client builds.</h2>
+      <div class="proof-snapshot-logos">
+        <p class="proof-snapshot-logo-label">We've built AI products used by people at:</p>
+        <div class="proof-snapshot-logo-row" role="list">
+          <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/mayo-clinic.svg" loading="lazy" decoding="async" alt="Mayo Clinic"></span>
+          <span class="proof-snapshot-logo proof-snapshot-wordmark" role="listitem">ClickFunnels</span>
+          <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/johns-hopkins.png" loading="lazy" decoding="async" alt="Johns Hopkins"></span>
+          <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/highlevel.svg" loading="lazy" decoding="async" alt="HighLevel"></span>
+          <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/fidelity-investments.png" loading="lazy" decoding="async" alt="Fidelity Investments"></span>
+          <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/servicetitan.svg" loading="lazy" decoding="async" alt="ServiceTitan"></span>
+          <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/tony-robbins.svg" loading="lazy" decoding="async" alt="Tony Robbins"></span>
+          <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/hr-block.svg" loading="lazy" decoding="async" alt="H&amp;R Block"></span>
+          <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/ramsey-solutions.svg" loading="lazy" decoding="async" alt="Ramsey Solutions"></span>
+        </div>
+      </div>
       <div class="proof-snapshot-item"><strong>$19K</strong><span>in high-ticket clients from one month of ads</span></div>
       <div class="proof-snapshot-item"><strong>17</strong><span>recurring spots pre-sold before full launch</span></div>
       <div class="proof-snapshot-item"><strong>5</strong><span>clients enrolled in one day without a bigger team</span></div>
