@@ -79,19 +79,15 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 
 /* ---------- early proof ---------- */
 .proof-snapshot{padding:0!important}
-.proof-snapshot-inner{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;border:1px solid var(--accent-line);border-radius:var(--radius-xl);background:var(--accent-soft);overflow:hidden}
-.proof-snapshot-logos{grid-column:1/-1;padding:18px 22px 20px;border-bottom:1px solid var(--accent-line);background:rgba(255,255,255,.42)}
+.proof-snapshot-inner{width:100%}
+.proof-snapshot-logos{padding:8px 0 12px}
 .proof-snapshot-logo-label{color:var(--ink-2);font-size:var(--type-label);font-weight:650;line-height:1.4;text-align:center}
-.proof-snapshot-logo-row{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));align-items:center;gap:clamp(10px,1.8vw,24px);margin-top:16px}
-.proof-snapshot-logo{display:flex;align-items:center;justify-content:center;min-width:0;height:40px}
-.proof-snapshot-logo img{display:block;width:auto;max-width:100%;max-height:32px;object-fit:contain;filter:grayscale(1);opacity:.62}
-.proof-snapshot-wordmark{color:var(--ink-2);font-size:clamp(.72rem,1.2vw,.94rem);font-weight:800;letter-spacing:-.025em;white-space:nowrap;opacity:.72}
-.proof-snapshot-item{padding:22px;border-left:1px solid var(--accent-line)}
-.proof-snapshot-logos + .proof-snapshot-item{border-left:0}
-.proof-snapshot-item strong,.proof-snapshot-item span{display:block}
-.proof-snapshot-item strong{color:var(--accent-ink);font-family:var(--fd);font-size:clamp(2.7rem,5vw,4.5rem);line-height:.9;letter-spacing:-.04em}
-.proof-snapshot-item span{margin-top:9px;color:var(--ink-2);font-size:var(--type-meta);font-weight:650;line-height:1.35}
-.proof-snapshot-note{margin-top:10px;color:var(--ink-3);font-size:var(--type-legal);line-height:1.45;text-align:center}
+.proof-snapshot-logo-row{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));align-items:center;gap:clamp(18px,2.4vw,34px);max-width:1000px;margin:22px auto 0}
+.proof-snapshot-logo{display:flex;grid-column:span 2;align-items:center;justify-content:center;min-width:0;height:72px}
+.proof-snapshot-logo:nth-child(6){grid-column:2/span 2}
+.proof-snapshot-logo img{display:block;width:auto;max-width:100%;max-height:54px;object-fit:contain;filter:grayscale(1);opacity:.72}
+.proof-snapshot-wordmark{color:var(--ink-2);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:800;letter-spacing:-.025em;white-space:nowrap;opacity:.78}
+.proof-snapshot-note{margin-top:16px;color:var(--ink-3);font-size:var(--type-legal);line-height:1.45;text-align:center}
 
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:700;font-size:var(--type-control);letter-spacing:-.005em;white-space:nowrap;color:#fff;background:var(--accent-ink);border:1px solid var(--accent-ink);border-radius:999px;padding:13px 28px;text-decoration:none;box-shadow:var(--shadow-sm);transition:background .15s ease}
@@ -217,16 +213,13 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 .logos .logo-client-accelerators{width:220px;max-width:min(220px,38vw);height:auto;max-height:72px}
 
 @media(max-width:720px){
-  .proof-snapshot-inner{grid-template-columns:1fr}
-  .proof-snapshot-logos{padding:18px 16px 20px}
-  .proof-snapshot-logo-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 18px;margin-top:14px}
-  .proof-snapshot-logo{height:36px}
-  .proof-snapshot-logo img{max-height:28px}
-  .proof-snapshot-wordmark{font-size:.8rem}
-  .proof-snapshot-item{display:grid;grid-template-columns:100px minmax(0,1fr);align-items:center;gap:16px;padding:16px 20px;border-top:1px solid var(--accent-line);border-left:0}
-  .proof-snapshot-logos + .proof-snapshot-item{border-top:0}
-  .proof-snapshot-item strong{font-size:2.8rem}
-  .proof-snapshot-item span{margin-top:0;font-size:var(--type-label)}
+  .proof-snapshot-logos{padding:6px 0 10px}
+  .proof-snapshot-logo-row{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px 14px;margin-top:18px}
+  .proof-snapshot-logo{grid-column:span 3;height:50px}
+  .proof-snapshot-logo:nth-child(-n+3){grid-column:span 2}
+  .proof-snapshot-logo:nth-child(6){grid-column:span 3}
+  .proof-snapshot-logo img{max-height:40px}
+  .proof-snapshot-wordmark{font-size:1rem}
   .mid-cta-inner{align-items:stretch;flex-direction:column;padding:24px 20px}
   .mid-cta .cta-btn{width:100%}
   .mobile-cta{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:20;display:flex;justify-content:center;min-height:52px;transform:translateY(calc(100% + 28px));opacity:0;pointer-events:none;box-shadow:0 12px 34px rgba(16,104,68,.24);transition:transform .2s ease,opacity .2s ease}
@@ -250,7 +243,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   </header>
 
   <!-- ============ EARLY PROOF ============ -->
-  <section class="card proof-snapshot" aria-label="Credibility and client results">
+  <section class="card proof-snapshot" aria-label="AI product credibility">
     <div class="proof-snapshot-inner">
       <div class="proof-snapshot-logos">
         <p class="proof-snapshot-logo-label">We've built AI products used by people at:</p>
@@ -266,9 +259,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/ramsey-solutions.svg" loading="lazy" decoding="async" alt="Ramsey Solutions"></span>
         </div>
       </div>
-      <div class="proof-snapshot-item"><strong>$19K</strong><span>in high-ticket clients from one month of ads</span></div>
-      <div class="proof-snapshot-item"><strong>17</strong><span>recurring spots pre-sold before full launch</span></div>
-      <div class="proof-snapshot-item"><strong>5</strong><span>clients enrolled in one day without a bigger team</span></div>
     </div>
     <p class="proof-snapshot-note">Kodara has installed AI sales departments for more than 350 businesses across more than 30 industries. Individual results vary and are not guaranteed.</p>
   </section>
