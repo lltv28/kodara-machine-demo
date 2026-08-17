@@ -1352,6 +1352,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 
   function fit(){
     var scale=Math.max(innerWidth/1240,innerHeight/760);
+    if(chapter==='flywheel') scale*=.82;
     document.querySelector('.wrap').style.transform='scale('+scale+')';
   }
   function render(){
