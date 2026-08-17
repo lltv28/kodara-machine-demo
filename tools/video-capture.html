@@ -44,18 +44,19 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 .player-mode.compact-mode[data-player="learn"] .story-core,.player-mode.compact-mode[data-player="flywheel"] .story-core{width:190px}
 .player-mode.compact-mode[data-player="triagers"] .story-core{width:230px}
 .player-mode.compact-mode[data-player="flywheel"] .cf-note{display:none}
-.player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:38px;transform:translateY(-42px)}
-.player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:58%}
-.player-mode.compact-mode[data-player="flywheel"] .story-core-title{font-size:48px}
+.player-mode.compact-mode[data-player="learn"] .story-core-title{font-size:52px}
+.player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:46px;transform:translateY(-46px)}
+.player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:60%}
+.player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:30px;font-weight:650;letter-spacing:.045em}
+.player-mode.compact-mode[data-player="triagers"] .story-core-gain{right:-50px;top:36%}
+.player-mode.compact-mode[data-player="flywheel"] .story-core-title{font-size:54px}
 .player-mode.compact-mode[data-player="flywheel"] .node-triagers,.player-mode.compact-mode[data-player="flywheel"] .node-ticket,.player-mode.compact-mode[data-player="flywheel"] .node-downsell,.player-mode.compact-mode[data-player="flywheel"] .triager-ad-node{opacity:1!important}
 .player-mode.compact-mode[data-player="flywheel"] .flywheel-node-label,.player-mode.compact-mode[data-player="flywheel"] .ads-label{opacity:1!important}
-.player-mode.compact-mode[data-player="graph"] .story-graph-y-title{left:24%;top:12%}
+.player-mode.compact-mode[data-player="graph"] .story-graph-y-title{left:26%;top:4%}
 .player-mode.compact-mode[data-player="graph"] .story-graph-plot{left:24%;top:25%;width:54%}
 .player-mode.compact-mode[data-player="graph"] .story-graph .axis{left:24%;top:72%;width:54%}
-.player-mode.compact-mode[data-player="graph"] .story-graph-milestone{max-width:34%!important}
-.player-mode.compact-mode[data-player="graph"] .story-graph-milestone:nth-child(1){left:35%}
-.player-mode.compact-mode[data-player="graph"] .story-graph-milestone:nth-child(2){left:50%}
-.player-mode.compact-mode[data-player="graph"] .story-graph-milestone:nth-child(3){left:70%}
+.player-mode.compact-mode[data-player="graph"] .story-graph-milestones{left:24%;top:14%;width:54%}
+.player-mode.compact-mode[data-player="graph"] .story-graph-milestone{width:96%;padding:4px 10px;font-size:36px;line-height:1.1;white-space:nowrap}
 
 /* ---------- header ---------- */
 .head{text-align:center;max-width:760px;margin:8px auto 26px}
@@ -82,7 +83,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .wheel-layer{order:2;container-type:inline-size;opacity:var(--wheel-opacity,1)}
 .graph-layer{display:block;padding:0;opacity:var(--graph-opacity,0);transform:scale(var(--graph-scale,.985));background:var(--bg);will-change:transform}
 .story-graph{position:absolute;inset:0}
-.story-graph-y-title{position:absolute;left:24%;top:12%;z-index:1;max-width:52%;color:var(--ink-2);font:750 var(--demo-critical)/1.15 var(--fb);letter-spacing:0;text-transform:none;transform:none;white-space:normal}
+.story-graph-y-title{position:absolute;left:24%;top:4%;z-index:1;max-width:52%;color:var(--ink-2);font:750 var(--demo-critical)/1.15 var(--fb);letter-spacing:0;text-transform:none;transform:none;white-space:normal}
 .story-graph-plot{position:absolute;left:22%;top:29%;display:block;width:62%;height:auto}
 .story-graph .axis{position:absolute;left:24.3%;top:69.5%;display:flex;justify-content:flex-end;width:59.7%;color:var(--ink-2);font:750 var(--demo-critical) var(--fb);letter-spacing:0;text-transform:none}
 .story-graph-origin-label{position:absolute;left:24.3%;top:59%;color:var(--ink-2);font:700 var(--demo-critical) var(--fb);line-height:1.2;opacity:var(--graph-origin-label-opacity,0);transform:translateX(-50%);white-space:nowrap}
@@ -97,19 +98,17 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .story-graph-axis{fill:none;stroke:rgba(30,41,59,.2);stroke-width:1}
 .story-graph-axis-label{fill:var(--ink-3);font:650 8px var(--mono);letter-spacing:.025em;text-transform:uppercase}
 .story-graph-axis-label.is-y{display:none}
-.story-graph-callout{opacity:0;transform:translateY(3px);transform-box:fill-box;transform-origin:center}
-.story-graph-callout line{stroke:rgba(16,104,68,.38);stroke-width:1}
-.story-graph-callout text{display:none}
-.story-graph-milestones{position:absolute;inset:0;pointer-events:none}
-.story-graph-milestone{position:absolute;z-index:2;max-width:172px;padding:4px 8px 4px 10px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.94);color:var(--ink-2);font:700 var(--demo-critical)/1.25 var(--fb);opacity:0;transform:translateY(calc(-100% - 42px + var(--milestone-y,4px)))}
+.story-graph-milestones{position:absolute;left:22%;top:16%;z-index:3;width:62%;pointer-events:none}
+.story-graph-milestone{position:absolute;left:50%;top:0;width:72%;box-sizing:border-box;z-index:2;padding:6px 10px;border-left:2px solid rgba(16,104,68,.55);border-radius:0 5px 5px 0;background:rgba(255,253,251,.96);color:var(--ink-2);font:700 var(--demo-critical)/1.2 var(--fb);opacity:0;text-align:center;transform:translateX(-50%) translateY(var(--milestone-y,4px))}
+.story-graph-milestone.is-current{display:block}
 .story-graph-milestone.is-confirmed{color:var(--accent-ink);border-left-color:var(--accent)}
 .zoom-section[data-semantic-hold="graph"] .story-graph-milestone.is-current{font-size:var(--demo-critical)}
-.story-graph-milestone:nth-child(1){left:42.5%;top:58%}
-.story-graph-milestone:nth-child(2){left:56.5%;top:48.6%}
-.story-graph-milestone:nth-child(3){left:70.5%;top:39.1%}
+.story-graph-milestone:not(.is-current){display:none}
+.story-graph-connector-overlay{position:absolute;inset:0;z-index:2;width:100%;height:100%;overflow:visible;pointer-events:none}
+.story-graph-milestone-connector{fill:none;stroke:rgba(16,104,68,.74);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:100;stroke-dashoffset:100;opacity:0;vector-effect:non-scaling-stroke}
 .story-graph-relay{opacity:var(--relay-opacity,0)}
-.story-graph-relay circle{fill:#fff;stroke:var(--accent);stroke-width:2.2;filter:drop-shadow(0 4px 7px rgba(16,104,68,.2))}
-.story-graph-relay text{fill:var(--accent-ink);font:800 13.5px var(--fb);text-anchor:middle;dominant-baseline:central}
+.story-graph-relay circle{fill:#fff;stroke:var(--accent);stroke-width:2.6;filter:drop-shadow(0 4px 7px rgba(16,104,68,.2))}
+.story-graph-relay text{fill:var(--accent-ink);font:800 18px var(--fb);text-anchor:middle;dominant-baseline:central}
 .zoom-layer .fw{width:100%;height:100%;display:block;border:0}
 .zoom-beats{order:2;position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));height:126px;min-height:126px;list-style:none;margin:0;padding:22px 0 0}
 .zoom-beats::before,.zoom-beats::after{content:'';position:absolute;left:12.5%;right:12.5%;top:12px;height:2px;border-radius:2px;transform-origin:left center}
@@ -149,8 +148,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .zoom-static .story-graph-line{stroke-dashoffset:0!important}
 .zoom-static .story-graph-fill,.zoom-static .story-graph-origin,.zoom-static .story-graph-dot,.zoom-static .story-graph-origin-label{opacity:1!important}
 .zoom-static .story-graph-dot{transform:scale(1)!important}
-.zoom-static .story-graph-callout{opacity:1!important;transform:none!important}
-.zoom-static .story-graph-milestone{display:block!important;opacity:1!important;transform:none!important}
+.zoom-static .story-graph-milestones{left:8%;top:76%;width:84%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.zoom-static .story-graph-milestone{position:relative!important;inset:auto!important;display:block!important;width:auto;opacity:1!important;text-align:left;transform:none!important}
 .zoom-static .story-graph-relay{display:none}
 .zoom-static .fw-label{opacity:1!important}
 .zoom-static .stage-caption{display:none!important}
@@ -168,8 +167,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .source-card{fill:rgba(255,253,251,.98);stroke:rgba(16,104,68,.28);stroke-width:2;filter:url(#phone-shadow)}
 .business-source.is-active .source-card{fill:rgba(234,246,240,.92);stroke:rgb(22,164,108);stroke-width:3}
 .source-kicker{display:none;font:750 8.5px Instrument Sans,sans-serif;fill:rgba(16,104,68,.78);letter-spacing:.08em;text-anchor:middle}
-.source-title{font:750 var(--demo-critical) Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle}
-.source-metric{font:800 var(--demo-meta) Instrument Sans,sans-serif;fill:rgb(16,104,68);text-anchor:middle}
+.source-title{font:750 var(--demo-critical) Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle;dominant-baseline:central}
+.source-metric{font:800 var(--demo-meta) Instrument Sans,sans-serif;fill:rgb(16,104,68);text-anchor:middle;dominant-baseline:central}
 .source-detail{display:none;font:600 8.8px Instrument Sans,sans-serif;fill:#5c6761;text-anchor:middle}
 .triager-demo-scene{opacity:var(--triager-demo-opacity,0)}
 .manager-triager-link{fill:none;stroke:rgba(16,104,68,.28);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 7}
@@ -237,7 +236,11 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .flywheel-node{fill:#fff;stroke:rgba(16,104,68,.18);stroke-width:2;filter:url(#ns)}
 .flywheel-node-label{font-family:Instrument Sans,sans-serif;font-weight:750;font-size:var(--demo-critical);fill:rgba(26,26,26,.82);text-anchor:middle;dominant-baseline:central}
 .flywheel-node-label.is-compact{font-size:var(--demo-critical)}
-.triager-node-title-mobile{display:none}
+.node-label-stack--2 .flywheel-node-label:first-child{transform:translateY(-20px)}
+.node-label-stack--2 .flywheel-node-label:last-child{transform:translateY(20px)}
+.node-label-stack--3 .flywheel-node-label{font-size:calc(var(--demo-critical)*.86)}
+.node-label-stack--3 .flywheel-node-label:first-child{transform:translateY(-38px)}
+.node-label-stack--3 .flywheel-node-label:last-child{transform:translateY(38px)}
 .fw-ring path{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--shell-opacity,1))}
 .flywheel-orbit-path{fill:none;stroke:transparent;pointer-events:none}
 .flywheel-orbit-marker{fill:rgb(22,164,108);stroke:#fff;stroke-width:3;filter:url(#phone-shadow);opacity:0;pointer-events:none}
@@ -288,21 +291,11 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .flywheel-node-label,.flywheel-node-label.is-compact{font-size:var(--demo-critical)}
   .ads-label{font-size:var(--demo-critical)}
   .flywheel-node,.triager-ad-node .ad-node-body{r:102px}
-  .triager-node-title{display:none}
-  .triager-node-title-mobile{display:block}
-  .node-ticket .flywheel-node-label:nth-of-type(1){transform:translateY(-28px)}
-  .node-ticket .flywheel-node-label:nth-of-type(3){transform:translateY(28px)}
-  .node-downsell .flywheel-node-label:nth-of-type(1){transform:translateY(-16px)}
-  .node-downsell .flywheel-node-label:nth-of-type(2){transform:translateY(16px)}
   .story-graph-plot{left:20%;top:28%;width:60%}
   .story-graph .axis{left:22.25%;top:70%;width:57.75%;font-size:var(--demo-critical)}
-  .story-graph-axis-label:not(.is-y),.story-graph-callout{display:none}
+  .story-graph-axis-label:not(.is-y){display:none}
   .story-graph-origin-label{display:none}
-  .story-graph-milestone{display:none;bottom:auto;width:max-content;max-width:40%!important;padding:8px 10px;border:0;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;background:rgba(255,253,251,.94);box-shadow:none;font-size:var(--demo-critical);transform:translateY(var(--milestone-y,4px));text-align:left}
-  .story-graph-milestone:nth-child(1){left:42.5%!important;top:34%!important}
-  .story-graph-milestone:nth-child(2){left:56.5%!important;top:27%!important}
-  .story-graph-milestone:nth-child(3){left:70.5%!important;top:22%!important;transform:translate(-100%,var(--milestone-y,4px))}
-  .story-graph-milestone.is-current{display:block}
+  .story-graph-milestone{padding:8px 10px;border-left-width:3px;border-radius:0 8px 8px 0;font-size:var(--demo-critical)}
   .stage-caption{display:none}
   .zoom-static .zoom-beats{grid-template-columns:1fr}
   .zoom-static .graph-layer{min-height:500px;aspect-ratio:auto;padding:20px 16px}
@@ -310,7 +303,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .zoom-static .story-graph-plot{top:22%}
   .zoom-static .story-graph .axis{top:54%}
   .zoom-static .story-graph-origin-label{top:48%}
-  .zoom-static .story-graph-milestones{left:8%;right:8%;top:62%;bottom:auto;display:grid;gap:5px}
+  .zoom-static .story-graph-milestones{left:8%;right:8%;top:62%;bottom:auto;display:grid;grid-template-columns:1fr;gap:5px}
   .zoom-static .story-graph-milestone{position:relative!important;inset:auto!important;width:auto;max-width:none!important;padding:4px 8px;font-size:.75rem;text-align:left;transform:none!important}
   .graph-layer{padding:24px}
 }
@@ -450,49 +443,49 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         </g>
         <g class="source-demo-scene" aria-hidden="true">
           <g aria-hidden="true">
-            <path class="source-guide" d="M425 225 C485 225 530 330 620 380"/>
-            <path class="source-guide" d="M425 535 C485 535 530 430 620 380"/>
-            <path class="source-guide" d="M815 225 C755 225 710 330 620 380"/>
-            <path class="source-guide" d="M815 535 C755 535 710 430 620 380"/>
+            <path class="source-guide" d="M450 225 C500 225 535 330 620 380"/>
+            <path class="source-guide" d="M450 535 C500 535 535 430 620 380"/>
+            <path class="source-guide" d="M790 225 C740 225 705 330 620 380"/>
+            <path class="source-guide" d="M790 535 C740 535 705 430 620 380"/>
             <path class="source-active-path" pathLength="1"/>
             <circle class="source-particle" r="5"/>
           </g>
           <g class="business-source" transform="translate(275 159)" data-source-index="0" data-x="275" data-y="159" data-status="Learning offers">
-            <rect class="source-card" width="150" height="132" rx="16"/>
+            <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
             <text class="source-kicker" x="75" y="22">OFFERS</text>
-            <text class="source-title" x="75" y="54">Offers</text>
-            <text class="source-metric" x="75" y="84">Under $20</text>
+            <text class="source-title" x="75" y="45">Offers</text>
+            <text class="source-metric" x="75" y="87">Under $20</text>
             <text class="source-detail" x="75" y="113">Assessment → core offer</text>
           </g>
           <g class="business-source" transform="translate(275 469)" data-source-index="1" data-x="275" data-y="469" data-status="Learning customers">
-            <rect class="source-card" width="150" height="132" rx="16"/>
+            <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
             <text class="source-kicker" x="75" y="22">BUYERS</text>
-            <text class="source-title" x="75" y="54">Buyers</text>
-            <text class="source-metric" x="75" y="84">Best fit</text>
+            <text class="source-title" x="75" y="45">Buyers</text>
+            <text class="source-metric" x="75" y="87">Best fit</text>
             <text class="source-detail" x="75" y="113">Pain points + intent</text>
           </g>
           <g class="business-source" transform="translate(815 159)" data-source-index="2" data-x="815" data-y="159" data-status="Learning messaging">
-            <rect class="source-card" width="150" height="132" rx="16"/>
+            <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
             <text class="source-kicker" x="75" y="22">POSITIONING</text>
-            <text class="source-title" x="75" y="54">Brand</text>
-            <text class="source-metric" x="75" y="84">Your voice</text>
+            <text class="source-title" x="75" y="45">Brand</text>
+            <text class="source-metric" x="75" y="87">Your voice</text>
             <text class="source-detail" x="75" y="113">Tone + claims aligned</text>
           </g>
           <g class="business-source" transform="translate(815 469)" data-source-index="3" data-x="815" data-y="469" data-status="Learning sales data">
-            <rect class="source-card" width="150" height="132" rx="16"/>
+            <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
             <text class="source-kicker" x="75" y="22">PERFORMANCE</text>
-            <text class="source-title" x="75" y="54">Sales</text>
-            <text class="source-metric" x="75" y="84">Lead flow</text>
+            <text class="source-title" x="75" y="45">Sales</text>
+            <text class="source-metric" x="75" y="87">Lead flow</text>
             <text class="source-detail" x="75" y="113">Leads + outcomes tracked</text>
           </g>
         </g>
         <g class="triager-demo-scene" aria-hidden="true">
           <g>
-            <line class="manager-triager-link" x1="620" y1="380" x2="475" y2="260"/>
-            <line class="manager-triager-link" x1="620" y1="380" x2="475" y2="500"/>
-            <line class="manager-triager-link" x1="620" y1="380" x2="620" y2="245"/>
-            <line class="manager-triager-link" x1="620" y1="380" x2="765" y2="260"/>
-            <line class="manager-triager-link" x1="620" y1="380" x2="765" y2="500"/>
+            <line class="manager-triager-link" x1="620" y1="380" x2="473" y2="332"/>
+            <line class="manager-triager-link" x1="620" y1="380" x2="529" y2="505"/>
+            <line class="manager-triager-link" x1="620" y1="380" x2="620" y2="225"/>
+            <line class="manager-triager-link" x1="620" y1="380" x2="767" y2="332"/>
+            <line class="manager-triager-link" x1="620" y1="380" x2="711" y2="505"/>
           </g>
           <g class="triager-team-label" transform="translate(620 555)"><text>5 AI Triagers</text></g>
           <g class="triager-activity" aria-hidden="true">
@@ -542,20 +535,25 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         </g>
         <g class="node-triagers">
           <circle class="flywheel-node" cx="620" cy="105" r="58"/>
-          <text class="flywheel-node-label is-compact triager-node-title" x="620" y="105">AI Triagers</text>
-          <text class="flywheel-node-label is-compact triager-node-title-mobile" x="620" y="80">AI</text>
-          <text class="flywheel-node-label is-compact triager-node-title-mobile" x="620" y="130">Triagers</text>
+          <g class="node-label-stack node-label-stack--2" transform="translate(620 105)">
+            <text class="flywheel-node-label is-compact" x="0" y="0">AI</text>
+            <text class="flywheel-node-label is-compact" x="0" y="0">Triagers</text>
+          </g>
         </g>
         <g class="node-ticket">
           <circle class="flywheel-node" cx="895" cy="380" r="58"/>
-          <text class="flywheel-node-label is-compact" x="895" y="358">High</text>
-          <text class="flywheel-node-label is-compact" x="895" y="380">Ticket</text>
-          <text class="flywheel-node-label is-compact" x="895" y="402">Sales</text>
+          <g class="node-label-stack node-label-stack--3" transform="translate(895 380)">
+            <text class="flywheel-node-label is-compact" x="0" y="0">High</text>
+            <text class="flywheel-node-label is-compact" x="0" y="0">Ticket</text>
+            <text class="flywheel-node-label is-compact" x="0" y="0">Sales</text>
+          </g>
         </g>
         <g class="node-downsell">
           <circle class="flywheel-node" cx="620" cy="655" r="58"/>
-          <text class="flywheel-node-label" x="620" y="643">Downsell</text>
-          <text class="flywheel-node-label" x="620" y="667">Sales</text>
+          <g class="node-label-stack node-label-stack--2" transform="translate(620 655)">
+            <text class="flywheel-node-label" x="0" y="0">Downsell</text>
+            <text class="flywheel-node-label" x="0" y="0">Sales</text>
+          </g>
         </g>
         </g>
         <g class="triager-ad-node" transform="translate(345 380)" aria-hidden="true">
@@ -563,11 +561,11 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           <text class="ads-label" x="0" y="0" font-size="20">Ads</text>
         </g>
         <g class="triager-team" aria-hidden="true">
-          <g class="triager-worker" transform="translate(596 94) scale(.72)" data-start-x="475" data-start-y="260" data-end-x="596" data-end-y="94" style="--worker-delay:0s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
-          <g class="triager-worker" transform="translate(618 89) scale(.72)" data-start-x="475" data-start-y="500" data-end-x="618" data-end-y="89" style="--worker-delay:.12s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
-          <g class="triager-worker" transform="translate(640 94) scale(.72)" data-start-x="620" data-start-y="245" data-end-x="640" data-end-y="94" style="--worker-delay:.24s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
-          <g class="triager-worker" transform="translate(607 113) scale(.72)" data-start-x="765" data-start-y="260" data-end-x="607" data-end-y="113" style="--worker-delay:.36s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
-          <g class="triager-worker" transform="translate(629 113) scale(.72)" data-start-x="765" data-start-y="500" data-end-x="629" data-end-y="113" style="--worker-delay:.48s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
+          <g class="triager-worker" transform="translate(596 94) scale(.72)" data-start-x="473" data-start-y="332" data-end-x="596" data-end-y="94" style="--worker-delay:0s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
+          <g class="triager-worker" transform="translate(618 89) scale(.72)" data-start-x="529" data-start-y="505" data-end-x="618" data-end-y="89" style="--worker-delay:.12s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
+          <g class="triager-worker" transform="translate(640 94) scale(.72)" data-start-x="620" data-start-y="225" data-end-x="640" data-end-y="94" style="--worker-delay:.24s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
+          <g class="triager-worker" transform="translate(607 113) scale(.72)" data-start-x="767" data-start-y="332" data-end-x="607" data-end-y="113" style="--worker-delay:.36s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
+          <g class="triager-worker" transform="translate(629 113) scale(.72)" data-start-x="711" data-start-y="505" data-end-x="629" data-end-y="113" style="--worker-delay:.48s"><g class="worker-core"><circle r="14" fill="#fff" stroke="rgba(16,104,68,.28)" stroke-width="2"/><text text-anchor="middle" dominant-baseline="central" font-family="Instrument Sans,sans-serif" font-weight="800" font-size="12" fill="rgba(16,104,68,.92)">AI</text></g></g>
         </g>
         <g class="brain-manager" aria-hidden="true">
           <circle cx="620" cy="380" r="84" fill="rgba(16,104,68,0.92)" stroke="rgb(16,104,68)" stroke-width="2" filter="url(#ns)"/>
@@ -596,11 +594,9 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                   <circle class="story-graph-origin" cx="12" cy="120" r="5" fill="var(--accent)"/>
                   <polyline class="story-graph-line" pathLength="100" points="12,120 96,120 96,92 168,92 168,62 240,62 240,32 300,32" fill="none" stroke="var(--accent)" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
                   <g fill="#fff" stroke="var(--accent)" stroke-width="2"><circle class="story-graph-dot" cx="96" cy="92" r="4"/><circle class="story-graph-dot" cx="168" cy="62" r="4"/><circle class="story-graph-dot" cx="240" cy="32" r="4"/><circle class="story-graph-dot" cx="300" cy="32" r="4"/></g>
-                  <g class="story-graph-callout" aria-hidden="true"><line x1="96" y1="92" x2="104" y2="82"/><text x="107" y="77"><tspan x="107">Assessment helps</tspan><tspan x="107" dy="8">cover lead cost</tspan></text></g>
-                  <g class="story-graph-callout" aria-hidden="true"><line x1="168" y1="62" x2="176" y2="52"/><text x="179" y="47"><tspan x="179">Smaller sale</tspan><tspan x="179" dy="8">adds revenue</tspan></text></g>
-                  <g class="story-graph-callout" aria-hidden="true"><line x1="240" y1="32" x2="248" y2="22"/><text x="296" y="13" text-anchor="end"><tspan x="296">Revenue helps</tspan><tspan x="296" dy="8">fund more leads</tspan></text></g>
-                  <g class="story-graph-relay" aria-hidden="true" transform="translate(12 120)"><circle r="14"/><text y=".5">AI</text></g>
+                  <g class="story-graph-relay" aria-hidden="true" transform="translate(12 120)"><circle r="18"/><text y=".5">AI</text></g>
                 </svg>
+                <svg class="story-graph-connector-overlay" viewBox="0 0 1240 760" preserveAspectRatio="none" aria-hidden="true"><path class="story-graph-milestone-connector" pathLength="100"/></svg>
                 <div class="story-graph-milestones" aria-label="Growth milestones">
                   <div class="story-graph-milestone">Assessment helps cover lead cost</div>
                   <div class="story-graph-milestone">Smaller sale adds revenue</div>
@@ -906,6 +902,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   /* zoom-geometry:end */
   var CAPTURE=document.documentElement.classList.contains('capture-mode');
+  var COMPACT=document.documentElement.classList.contains('compact-mode');
   var REDUCE = !CAPTURE && (!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) || /[?&]reduce=1/.test(location.search));
   var EMBED=document.documentElement.classList.contains('embed-mode');
   if(EMBED){
@@ -925,8 +922,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var graphLayer=zoomSection && zoomSection.querySelector('.graph-layer');
   var graphLine=zoomSection && zoomSection.querySelector('.story-graph-line');
   var graphRelay=zoomSection && zoomSection.querySelector('.story-graph-relay');
+  var graphMilestoneConnector=zoomSection && zoomSection.querySelector('.story-graph-milestone-connector');
   var graphDots=zoomSection ? zoomSection.querySelectorAll('.story-graph-dot') : [];
-  var graphCallouts=zoomSection ? zoomSection.querySelectorAll('.story-graph-callout') : [];
   var graphMilestones=zoomSection ? zoomSection.querySelectorAll('.story-graph-milestone') : [];
   var flywheelOrbitPath=zoomSection && zoomSection.querySelector('.flywheel-orbit-path');
   var flywheelOrbitMarker=zoomSection && zoomSection.querySelector('.flywheel-orbit-marker');
@@ -1016,12 +1013,12 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   function renderGraphState(state){
     if(!graphLine) return;
-    var progress=zoomClamp(state.relayProgress,0,1), thresholds=GRAPH_PEAKS;
+    var progress=zoomClamp(state.relayProgress,0,1), thresholds=GRAPH_PEAKS, relayPoint=null;
     if(graphRelay){
       var length=graphLine.getTotalLength();
       if(length){
-        var point=graphLine.getPointAtLength(length*progress);
-        graphRelay.setAttribute('transform','translate('+point.x.toFixed(2)+' '+point.y.toFixed(2)+')');
+        relayPoint=graphLine.getPointAtLength(length*progress);
+        graphRelay.setAttribute('transform','translate('+relayPoint.x.toFixed(2)+' '+relayPoint.y.toFixed(2)+')');
       }
       graphRelay.style.opacity=String(state.relayOpacity);
     }
@@ -1031,18 +1028,35 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       graphDots[i].style.transform='scale('+reveal.toFixed(3)+')';
       graphDots[i].classList.toggle('is-confirmed',state.graphProgress>=Math.min(1,thresholds[i]+.04));
     }
-    for(var j=0;j<graphCallouts.length;j++){
-      var calloutReveal=storyEase(zoomRange(state.graphProgress,thresholds[j]-.04,thresholds[j]));
-      graphCallouts[j].style.opacity=String(calloutReveal);
-      graphCallouts[j].style.transform='translateY('+(3*(1-calloutReveal)).toFixed(2)+'px)';
-      if(graphMilestones[j]){
-        graphMilestones[j].style.opacity=String(calloutReveal);
-        graphMilestones[j].style.setProperty('--milestone-y',(4*(1-calloutReveal)).toFixed(2)+'px');
+    var current=-1, currentReveal=0;
+    for(var k=0;k<3;k++) if(state.graphProgress>=thresholds[k]-.04) current=k;
+    for(var m=0;m<graphMilestones.length;m++){
+      var isCurrent=m===current;
+      var milestoneReveal=isCurrent ? storyEase(zoomRange(state.graphProgress,thresholds[m]-.04,thresholds[m])) : 0;
+      graphMilestones[m].classList.toggle('is-current',isCurrent);
+      var captionReveal=storyEase(zoomRange(milestoneReveal,.68,1));
+      graphMilestones[m].style.opacity=String(captionReveal);
+      graphMilestones[m].style.setProperty('--milestone-y',(4*(1-captionReveal)).toFixed(2)+'px');
+      if(isCurrent) currentReveal=milestoneReveal;
+    }
+    if(graphMilestoneConnector){
+      if(current>=0 && relayPoint){
+        var plotLeft=COMPACT ? .24 : .22, plotTop=COMPACT ? .25 : .29, plotWidth=COMPACT ? .54 : .62;
+        var plotScale=1240*plotWidth/320;
+        var relayX=1240*plotLeft+relayPoint.x*plotScale, relayY=760*plotTop+relayPoint.y*plotScale;
+        var captionWidth=COMPACT ? .96 : .72;
+        var startX=1240*(plotLeft+plotWidth*(.5-captionWidth/2)), startY=COMPACT ? 130 : 140, bendX=startX-24;
+        var dx=relayX-bendX, dy=relayY-startY, distance=Math.max(1,Math.hypot(dx,dy)), markerRadius=18*plotScale;
+        var endX=relayX-dx/distance*markerRadius, endY=relayY-dy/distance*markerRadius;
+        var connectorReveal=storyEase(zoomRange(currentReveal,0,.45));
+        graphMilestoneConnector.setAttribute('d','M '+startX.toFixed(2)+' '+startY+' L '+bendX.toFixed(2)+' '+startY+' L '+endX.toFixed(2)+' '+endY.toFixed(2));
+        graphMilestoneConnector.style.opacity=String(connectorReveal*state.relayOpacity);
+        graphMilestoneConnector.style.strokeDashoffset=String(100*(1-connectorReveal));
+      }else{
+        graphMilestoneConnector.style.opacity='0';
+        graphMilestoneConnector.style.strokeDashoffset='100';
       }
     }
-    var current=-1;
-    for(var k=0;k<3;k++) if(state.graphProgress>=thresholds[k]-.0001) current=k;
-    for(var m=0;m<graphMilestones.length;m++) graphMilestones[m].classList.toggle('is-current',m===current);
     var currentDot=-1;
     for(var n=0;n<thresholds.length;n++) if(state.graphProgress>=thresholds[n]-.0001) currentDot=n;
     for(var q=0;q<graphDots.length;q++) graphDots[q].classList.toggle('is-current',q===currentDot);
