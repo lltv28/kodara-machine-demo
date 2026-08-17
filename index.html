@@ -32,7 +32,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   display:flex;flex-direction:column;align-items:center;padding:10px 20px 20px;overflow-x:hidden}
 .wrap{width:100%;max-width:1080px;display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0}
-.embed-mode .head,.embed-mode .proof-snapshot,.embed-mode .process,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .trust,.embed-mode .cta{display:none}
+.embed-mode .head,.embed-mode .proof-snapshot,.embed-mode .process,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
 /* ---------- four independent live chapters ---------- */
 .video-story{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
@@ -71,7 +71,7 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 .card{--card-pad:clamp(22px,3.5vw,40px);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
 .card+.card{margin-top:clamp(72px,8vw,104px)}
 
-.video-story.card,.proof-snapshot.card,.process.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.trust.card,.cta.card{border:0;border-radius:0;background:transparent;box-shadow:none}
+.video-story.card,.proof-snapshot.card,.process.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.cta.card{border:0;border-radius:0;background:transparent;box-shadow:none}
 .video-story.card{padding:0}
 
 .card-title{font-family:var(--fd);font-size:var(--type-section);line-height:1.1;letter-spacing:-.015em}
@@ -208,12 +208,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   .faq-answer{padding:0 40px 18px 0}
 }
 
-.trust{text-align:center}
-.trust-title{font-family:var(--fd);font-size:var(--type-card);font-weight:400;line-height:1.1}
-.logos{display:flex;flex-wrap:wrap;gap:22px 50px;justify-content:center;align-items:center;margin-top:26px}
-.logos img{display:block;width:auto;max-width:min(260px,42vw);height:62px;object-fit:contain}
-.logos .logo-client-accelerators{width:220px;max-width:min(220px,38vw);height:auto;max-height:72px}
-
 @media(max-width:720px){
   .proof-snapshot-logos{padding:6px 0 10px}
   .proof-snapshot-logo-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px;margin-top:18px}
@@ -228,8 +222,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   .mobile-cta{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:20;display:flex;justify-content:center;min-height:52px;transform:translateY(calc(100% + 28px));opacity:0;pointer-events:none;box-shadow:0 12px 34px rgba(16,104,68,.24);transition:transform .2s ease,opacity .2s ease}
   .mobile-cta.is-visible{transform:translateY(0);opacity:1;pointer-events:auto}
   .embed-mode .mobile-cta{display:none}
-  .logos{gap:20px 34px}
-  .logos img{max-width:42vw;height:48px}
 }
 @media(prefers-reduced-motion:reduce){.mobile-cta{transition:none}}
 
@@ -548,15 +540,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
         <summary>What happens after I apply for a free live demo?</summary>
         <p class="faq-answer">Our team shows you how the done-for-you process could fit your business, then confirms whether your business qualifies. If accepted, you enter the client-specific build and launch process.</p>
       </details>
-    </div>
-  </section>
-
-  <!-- ============ TRUST ============ -->
-  <section class="card trust" aria-labelledby="trust-title">
-    <h2 class="trust-title" id="trust-title">Kodara clients.</h2>
-    <div class="logos">
-      <img src="assets/logos/just-the-tonic.png" width="264" height="60" loading="lazy" alt="Just The Tonic Coaching">
-      <img class="logo-client-accelerators" src="assets/logos/client-accelerators.png" width="512" height="218" loading="lazy" alt="Client Accelerators">
     </div>
   </section>
 
