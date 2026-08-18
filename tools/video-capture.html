@@ -45,6 +45,7 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 .player-mode.compact-mode[data-player="triagers"] .story-core{width:230px}
 .player-mode.compact-mode[data-player="flywheel"] .cf-note{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core-title{font-size:52px}
+.player-mode.compact-mode[data-player="learn"] .source-title{font-size:34px}
 .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:46px;transform:translateY(-46px)}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:60%}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:30px;font-weight:650;letter-spacing:.045em}
@@ -166,10 +167,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .source-particle{fill:rgb(22,164,108);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .source-card{fill:rgba(255,253,251,.98);stroke:rgba(16,104,68,.28);stroke-width:2;filter:url(#phone-shadow)}
 .business-source.is-active .source-card{fill:rgba(234,246,240,.92);stroke:rgb(22,164,108);stroke-width:3}
-.source-kicker{display:none;font:750 8.5px Instrument Sans,sans-serif;fill:rgba(16,104,68,.78);letter-spacing:.08em;text-anchor:middle}
 .source-title{font:750 var(--demo-critical) Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle;dominant-baseline:central}
-.source-metric{font:800 var(--demo-meta) Instrument Sans,sans-serif;fill:rgb(16,104,68);text-anchor:middle;dominant-baseline:central}
-.source-detail{display:none;font:600 8.8px Instrument Sans,sans-serif;fill:#5c6761;text-anchor:middle}
 .triager-demo-scene{opacity:var(--triager-demo-opacity,0)}
 .manager-triager-link{fill:none;stroke:rgba(16,104,68,.28);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 7}
 .manager-triager-link.is-active{stroke:rgb(22,164,108)}
@@ -271,9 +269,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .zoom-beat-title::before{top:-21px;width:9px;height:9px}
   .zoom-beat-copy{top:59px;padding:0 4px;font-size:.94rem;line-height:1.4}
   .fw-label{display:none}
-  .source-kicker,.source-detail,.source-rule{display:none}
   .source-title{font-size:var(--demo-critical)}
-  .source-metric{font-size:var(--demo-meta)}
   .source-card{stroke-width:3}
   .phone-ui-kicker,.phone-ui-copy,.phone-ui-choice-label,.phone-header-rule{display:none}
   .phone-ui-title,.phone-ui-button-label{display:none}
@@ -372,8 +368,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 
   <!-- ============ HERO ============ -->
   <header class="head">
-    <h1>A done-for-you AI sales department designed to turn your lead flow into a self-funding loop.</h1>
-    <p class="sub">It sells a personalized assessment for under $20, sends the hottest buyers toward your highest-level service, and follows up with everyone else so smaller sales can help recover your acquisition costs.</p>
+    <h1>A done-for-you AI sales department that gives every lead a next step.</h1>
+    <p class="sub">AI Triagers sell a personalized assessment for under $20. That purchase helps identify serious buyers, route them toward your highest-level service, and recover part of what you spend to acquire leads. Everyone else gets a smaller offer or automated follow-up.</p>
     <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a free live demo</a>
   </header>
 
@@ -393,7 +389,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
             <text class="phone-ui-kicker" x="6" y="11">ASSESSMENT</text>
             <text class="phone-ui-title" x="6" y="25">Find your</text><text class="phone-ui-title" x="6" y="34">growth gap</text>
             <text class="phone-ui-price" x="39" y="62">$8</text>
-            <text class="phone-ui-copy" x="39" y="73" text-anchor="middle">2 minute growth diagnostic</text>
+            <text class="phone-ui-copy" x="39" y="73" text-anchor="middle">2-minute growth diagnostic</text>
             <rect class="phone-ui-button" x="7" y="87" width="64" height="17" rx="8.5"/><text class="phone-ui-button-label" x="39" y="95.5">Start</text>
           </symbol>
           <symbol id="phone-state-question" viewBox="0 0 78 114">
@@ -420,16 +416,16 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           </symbol>
           <symbol id="phone-state-paid" viewBox="0 0 78 114">
             <circle class="phone-ui-check" cx="39" cy="24" r="13"/><path class="phone-ui-check-mark" d="M32 24l5 5 10-12"/>
-            <text class="phone-ui-kicker" x="39" y="48" text-anchor="middle">PAYMENT</text><text class="phone-ui-price" x="39" y="72">$8</text><text class="phone-ui-title" x="39" y="88" text-anchor="middle">Serious buyer</text>
+            <text class="phone-ui-kicker" x="39" y="48" text-anchor="middle">PAYMENT</text><text class="phone-ui-price" x="39" y="72">$8</text><text class="phone-ui-title" x="39" y="88" text-anchor="middle">Paid buyer</text>
             <text class="phone-ui-copy" x="39" y="99" text-anchor="middle">Next step ready</text>
           </symbol>
           <symbol id="phone-state-funding" viewBox="0 0 78 114">
             <circle class="phone-ui-ad" cx="39" cy="27" r="16"/><text class="phone-ui-button-label" x="39" y="27">AD</text>
-            <text class="phone-ui-price" x="39" y="65">+$8</text><text class="phone-ui-title" x="39" y="82" text-anchor="middle">Available</text><text class="phone-ui-copy" x="39" y="94" text-anchor="middle">For the next ads</text>
+            <text class="phone-ui-price" x="39" y="65">+$8</text><text class="phone-ui-title" x="39" y="82" text-anchor="middle">Ready</text><text class="phone-ui-copy" x="39" y="94" text-anchor="middle">For more ads</text>
           </symbol>
           <symbol id="phone-state-ready" viewBox="0 0 78 114">
             <circle class="phone-ui-check" cx="39" cy="28" r="13"/><path class="phone-ui-check-mark" d="M32 28l5 5 10-12"/>
-            <text class="phone-ui-kicker" x="39" y="52" text-anchor="middle">READY</text><text class="phone-ui-title" x="39" y="69" text-anchor="middle">Next-lead budget</text>
+            <text class="phone-ui-kicker" x="39" y="52" text-anchor="middle">READY</text><text class="phone-ui-title" x="39" y="69" text-anchor="middle">Ad budget</text>
             <rect class="phone-ui-button" x="7" y="84" width="64" height="17" rx="8.5"/><text class="phone-ui-button-label" x="39" y="92.5">Keep growing</text>
           </symbol>
         </defs>
@@ -452,31 +448,19 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           </g>
           <g class="business-source" transform="translate(275 159)" data-source-index="0" data-x="275" data-y="159" data-status="Learning offers">
             <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
-            <text class="source-kicker" x="75" y="22">OFFERS</text>
-            <text class="source-title" x="75" y="45">Offers</text>
-            <text class="source-metric" x="75" y="87">Under $20</text>
-            <text class="source-detail" x="75" y="113">Assessment → core offer</text>
+            <text class="source-title" x="75" y="66">Your offers</text>
           </g>
           <g class="business-source" transform="translate(275 469)" data-source-index="1" data-x="275" data-y="469" data-status="Learning customers">
             <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
-            <text class="source-kicker" x="75" y="22">BUYERS</text>
-            <text class="source-title" x="75" y="45">Buyers</text>
-            <text class="source-metric" x="75" y="87">Best fit</text>
-            <text class="source-detail" x="75" y="113">Pain points + intent</text>
+            <text class="source-title" x="75" y="66">Your buyers</text>
           </g>
           <g class="business-source" transform="translate(815 159)" data-source-index="2" data-x="815" data-y="159" data-status="Learning messaging">
             <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
-            <text class="source-kicker" x="75" y="22">POSITIONING</text>
-            <text class="source-title" x="75" y="45">Brand</text>
-            <text class="source-metric" x="75" y="87">Your voice</text>
-            <text class="source-detail" x="75" y="113">Tone + claims aligned</text>
+            <text class="source-title" x="75" y="66">Your voice</text>
           </g>
           <g class="business-source" transform="translate(815 469)" data-source-index="3" data-x="815" data-y="469" data-status="Learning sales data">
             <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
-            <text class="source-kicker" x="75" y="22">PERFORMANCE</text>
-            <text class="source-title" x="75" y="45">Sales</text>
-            <text class="source-metric" x="75" y="87">Lead flow</text>
-            <text class="source-detail" x="75" y="113">Leads + outcomes tracked</text>
+            <text class="source-title" x="75" y="66">Sales results</text>
           </g>
         </g>
         <g class="triager-demo-scene" aria-hidden="true">
@@ -543,16 +527,16 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         <g class="node-ticket">
           <circle class="flywheel-node" cx="895" cy="380" r="58"/>
           <g class="node-label-stack node-label-stack--3" transform="translate(895 380)">
-            <text class="flywheel-node-label is-compact" x="0" y="0">High</text>
-            <text class="flywheel-node-label is-compact" x="0" y="0">Ticket</text>
-            <text class="flywheel-node-label is-compact" x="0" y="0">Sales</text>
+            <text class="flywheel-node-label is-compact" x="0" y="0">Highest</text>
+            <text class="flywheel-node-label is-compact" x="0" y="0">Level</text>
+            <text class="flywheel-node-label is-compact" x="0" y="0">Service</text>
           </g>
         </g>
         <g class="node-downsell">
           <circle class="flywheel-node" cx="620" cy="655" r="58"/>
           <g class="node-label-stack node-label-stack--2" transform="translate(620 655)">
-            <text class="flywheel-node-label" x="0" y="0">Downsell</text>
-            <text class="flywheel-node-label" x="0" y="0">Sales</text>
+            <text class="flywheel-node-label" x="0" y="0">Smaller</text>
+            <text class="flywheel-node-label" x="0" y="0">Offer</text>
           </g>
         </g>
         </g>
@@ -575,7 +559,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         </g>
         </svg>
         <div class="fw-label" style="left:16.7%;top:18.6%">Attracts new leads</div>
-        <div class="fw-label" style="left:83.3%;top:18.6%">Paid assessment</div>
+        <div class="fw-label" style="left:83.3%;top:18.6%">Personalized assessment</div>
         <div class="fw-label" style="left:83.3%;top:81.4%">Smaller offer</div>
         <div class="fw-label" style="left:16.7%;top:81.4%">Helps fund new leads</div>
             </div>
@@ -598,12 +582,12 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                 </svg>
                 <svg class="story-graph-connector-overlay" viewBox="0 0 1240 760" preserveAspectRatio="none" aria-hidden="true"><path class="story-graph-milestone-connector" pathLength="100"/></svg>
                 <div class="story-graph-milestones" aria-label="Growth milestones">
-                  <div class="story-graph-milestone">Assessment helps cover lead cost</div>
-                  <div class="story-graph-milestone">Smaller sale adds revenue</div>
-                  <div class="story-graph-milestone">Revenue helps fund more leads</div>
+                  <div class="story-graph-milestone">Assessment can offset lead cost</div>
+                  <div class="story-graph-milestone">Smaller sales grow ad budget</div>
+                  <div class="story-graph-milestone">Ad budget can fund more leads</div>
                 </div>
                 <div class="story-graph-origin-label">AI Brain</div>
-                <div class="axis"><span>More sales</span></div>
+                <div class="axis"><span>Time</span></div>
               </div>
             </div>
           </div>
@@ -623,7 +607,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           </li>
           <li class="zoom-beat" data-beat="triagers">
             <h3 class="zoom-beat-title"><span class="zoom-beat-full">Deploys AI Triagers</span><span class="zoom-beat-short" aria-hidden="true">Triagers</span></h3>
-            <p class="zoom-beat-copy">AI Triagers qualify and educate cold prospects through a paid assessment.</p>
+            <p class="zoom-beat-copy">AI Triagers qualify and educate cold prospects through a personalized assessment.</p>
           </li>
           <li class="zoom-beat" data-beat="flywheel">
             <h3 class="zoom-beat-title"><span class="zoom-beat-full">Complete Sales Loop</span><span class="zoom-beat-short" aria-hidden="true">Sales Loop</span></h3>
@@ -631,7 +615,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           </li>
           <li class="zoom-beat" data-beat="chart">
             <h3 class="zoom-beat-title"><span class="zoom-beat-full">Ad Budget Growth</span><span class="zoom-beat-short" aria-hidden="true">Ad Growth</span></h3>
-            <p class="zoom-beat-copy">Assessment and smaller-offer revenue can help fund more leads.</p>
+            <p class="zoom-beat-copy">Assessment and smaller-offer revenue can help pay for more leads.</p>
           </li>
         </ol>
       </div>
@@ -1072,7 +1056,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     else if(state.phase==='triagers') copy='Buyer activity routes through AI Triagers';
     else if(state.phase==='triagers-to-flywheel') copy='The same Triagers move into the flywheel';
     else if(state.phase==='flywheel'){
-      var flywheelCopy=['Attracts new leads','Sells the paid assessment','Offers a smaller next step','Helps fund the next leads'];
+      var flywheelCopy=['Attracts new leads','Sells the personalized assessment','Offers a smaller next step','Helps fund the next leads'];
       copy=flywheelCopy[Math.min(3,Math.floor(state.flywheelOrbitProgress*4))];
     }else if(state.phase==='flywheel-to-chart') copy='Smaller sales can help fund the next leads';
     stageCaption.textContent=copy;
