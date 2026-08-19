@@ -19,7 +19,6 @@
   --shadow-sm:0 1px 3px rgba(0,0,0,.10),0 1px 2px -1px rgba(0,0,0,.10);
   --shadow-md:0 18px 40px -22px rgba(46,38,28,.40);
   --fb:"Instrument Sans",system-ui,sans-serif;--fd:"Instrument Serif",Georgia,serif;--mono:"IBM Plex Mono",monospace;
-  --type-display:clamp(4rem,3.55rem + 1.82vw,5.1rem);
   --type-section:clamp(3rem,2.52rem + 1.94vw,4.25rem);
   --type-card:clamp(2rem,1.63rem + 1.52vw,3rem);
   --type-body:1.25rem;--type-body-large:clamp(1.25rem,1.18rem + .28vw,1.375rem);
@@ -32,7 +31,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   display:flex;flex-direction:column;align-items:center;padding:10px 20px 20px;overflow-x:hidden}
 .wrap{width:100%;max-width:1080px;display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0}
-.embed-mode .head,.embed-mode .proof-snapshot,.embed-mode .motivation-bridge,.embed-mode .process,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
+.embed-mode .proof-snapshot,.embed-mode .process,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
 /* ---------- four independent live chapters ---------- */
 .video-story{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
@@ -48,7 +47,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .video-chapter-copy{order:3;display:flex;flex:1;align-items:flex-start;min-height:138px;padding:18px}
 .video-chapter-copy p{max-width:65ch;color:var(--ink-2);font-size:var(--type-body);line-height:1.6;text-wrap:pretty}
 @media(max-width:720px){
-  :root{--type-display:clamp(3rem,12vw,4rem);--type-section:clamp(2.5rem,10vw,3.25rem);--type-body:1.125rem;--type-body-large:1.25rem;--type-question:1.75rem;--type-quote:1.25rem}
+  :root{--type-section:clamp(2.5rem,10vw,3.25rem);--type-body:1.125rem;--type-body-large:1.25rem;--type-question:1.75rem;--type-quote:1.25rem}
   body{padding-inline:12px}
   .video-story-head{padding:22px 18px 16px}
   .video-chapters{grid-template-columns:1fr;gap:14px}
@@ -61,11 +60,6 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 @media(prefers-reduced-motion:reduce){
   .video-chapter{transition:none}
 }
-
-/* ---------- header ---------- */
-.head{text-align:center;max-width:900px;margin:8px auto 34px}
-h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-height:1.02;letter-spacing:-.018em;text-wrap:balance;margin-bottom:18px}
-.sub{max-width:60ch;margin-inline:auto;font-size:var(--type-body-large);color:var(--ink-2);line-height:1.6;text-wrap:balance}
 
 /* ---------- shared card ---------- */
 .card{--card-pad:clamp(22px,3.5vw,40px);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
@@ -91,16 +85,11 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 .proof-snapshot-logo--hr-block{--logo-width:132px;--logo-height:36px}
 .proof-snapshot-note{margin-top:16px;color:var(--ink-3);font-size:var(--type-legal);line-height:1.45;text-align:center}
 
-/* ---------- motivation bridge ---------- */
-.motivation-bridge{width:min(100%,920px);margin:clamp(64px,7vw,92px) auto clamp(72px,8vw,104px);padding-inline:clamp(14px,4vw,44px);text-align:center}
-.motivation-bridge p{color:var(--ink);font-family:var(--fd);font-size:clamp(2.25rem,1.82rem + 1.75vw,3.15rem);line-height:1.14;letter-spacing:-.014em;text-wrap:balance}
-
-/* ---- CTA button (one intent: hero + closing bookend) ---- */
+/* ---- CTA button ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:700;font-size:var(--type-control);letter-spacing:-.005em;white-space:nowrap;color:#fff;background:var(--accent-ink);border:1px solid var(--accent-ink);border-radius:999px;padding:13px 28px;text-decoration:none;box-shadow:var(--shadow-sm);transition:background .15s ease}
 .cta-btn:hover{background:#0c5537}
 .cta-btn:active{transform:translateY(1px)}
 .cta-btn:focus-visible{outline:3px solid rgba(22,164,108,.42);outline-offset:4px}
-.head .cta-btn{margin-top:22px}
 .mobile-cta{display:none}
 /* ---- beat labels inside the fused How-it-works card ---- */
 .beat{margin-top:30px}
@@ -234,18 +223,11 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
 <body>
 <main class="wrap">
 
-  <!-- ============ HERO ============ -->
-  <header class="head">
-    <h1>A done-for-you AI sales department that gives every lead a next step.</h1>
-    <p class="sub">AI Triagers sell a personalized assessment for under $20. That purchase helps identify serious buyers, route them toward your highest-level service, and recover part of what you spend to acquire leads. Everyone else gets a smaller offer or automated follow-up.</p>
-    <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a free live demo</a>
-  </header>
-
   <!-- ============ EARLY PROOF ============ -->
   <section class="card proof-snapshot" aria-label="AI salespeople credibility">
     <div class="proof-snapshot-inner">
       <div class="proof-snapshot-logos">
-        <p class="proof-snapshot-logo-label">Our AI salespeople have sold to people at:</p>
+        <h1 class="proof-snapshot-logo-label">Our AI salespeople have sold to people at:</h1>
         <div class="proof-snapshot-logo-row" role="list">
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/fidelity-investments.png" loading="lazy" decoding="async" alt="Fidelity Investments"></span>
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/highlevel.svg" loading="lazy" decoding="async" alt="HighLevel"></span>
@@ -260,10 +242,6 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
       </div>
     </div>
     <p class="proof-snapshot-note">Kodara has installed AI sales departments for more than 350 businesses across more than 30 industries. Individual results vary and are not guaranteed.</p>
-  </section>
-
-  <section class="motivation-bridge" aria-label="Why every lead needs a next step">
-    <p>Every lead you pay for should have a useful next step, even when that person is not ready for your highest-level service today. Kodara builds the system that creates those next steps for you.</p>
   </section>
 
   <!-- ============ HOW IT WORKS · four live chapters ============ -->
@@ -737,19 +715,19 @@ h1{font-family:var(--fd);font-weight:400;font-size:var(--type-display);line-heig
   }
 
   var mobileCta=document.querySelector('.mobile-cta');
-  var hero=document.querySelector('.head');
+  var openingProof=document.querySelector('.proof-snapshot');
   var closingCta=document.querySelector('.cta');
-  if(mobileCta && hero && closingCta && 'IntersectionObserver' in window){
-    var heroVisible=true,closingVisible=false;
-    function syncMobileCta(){ mobileCta.classList.toggle('is-visible',!heroVisible && !closingVisible); }
+  if(mobileCta && openingProof && closingCta && 'IntersectionObserver' in window){
+    var openingVisible=true,closingVisible=false;
+    function syncMobileCta(){ mobileCta.classList.toggle('is-visible',!openingVisible && !closingVisible); }
     var ctaObserver=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if(entry.target===hero) heroVisible=entry.isIntersecting;
+        if(entry.target===openingProof) openingVisible=entry.isIntersecting;
         if(entry.target===closingCta) closingVisible=entry.isIntersecting;
       });
       syncMobileCta();
     });
-    ctaObserver.observe(hero);
+    ctaObserver.observe(openingProof);
     ctaObserver.observe(closingCta);
   }
 
