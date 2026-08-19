@@ -121,7 +121,10 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 
 /* ---------- video client stories ---------- */
 .case-featured{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
+.case-featured--portrait{grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr)}
 .case-featured .case-media{border-right:1px solid var(--line-2)}
+.case-featured--portrait .case-media{display:flex;align-self:center;align-items:center;aspect-ratio:3/4;background:var(--surface)}
+.case-featured--portrait .case-media wistia-player{height:auto;aspect-ratio:3/4}
 .case-featured-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,4vw,46px)}
 .case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
 .case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
@@ -129,12 +132,21 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .case-media{position:relative;aspect-ratio:16/9;background:var(--surface);overflow:hidden}
 .case-media wistia-player{display:block;width:100%;height:100%}
 .case-media wistia-player:not(:defined){background-position:center;background-size:cover;background-repeat:no-repeat}
-.case-media wistia-player[media-id='zd09c1c9jq']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/zd09c1c9jq/swatch')}
+.case-media wistia-player[media-id='6oj2gj3wqt']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/6oj2gj3wqt/swatch')}
 .case-media wistia-player[media-id='fay3lgo8op']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/fay3lgo8op/swatch')}
 .case-media wistia-player[media-id='5ycx1zrlxw']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/5ycx1zrlxw/swatch')}
 .case-title{font-family:var(--fd);font-size:clamp(2rem,3.5vw,3rem);font-weight:400;line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
 .case-support .case-title{font-size:clamp(1.75rem,2.8vw,2.25rem)}
 .case-copy{margin-top:12px;color:var(--ink-2);font-size:var(--type-body);line-height:1.6}
+.case-quote{margin-top:18px;padding-left:16px;border-left:3px solid var(--accent);color:var(--ink);font-family:var(--fd);font-size:clamp(1.4rem,2.2vw,1.75rem);font-weight:700;line-height:1.24;text-wrap:pretty}
+.case-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:22px;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.case-result{padding:16px 16px 16px 0}
+.case-result+.case-result{padding-left:16px;border-left:1px solid var(--line-2)}
+.case-result strong,.case-result span{display:block}
+.case-result strong{color:var(--accent-ink);font-family:var(--fd);font-size:clamp(1.7rem,2.8vw,2.25rem);line-height:1}
+.case-result span{margin-top:5px;color:var(--ink-3);font-size:var(--type-meta);font-weight:650;line-height:1.4}
+.case-mechanism{margin-top:18px;color:var(--ink-2);font-size:var(--type-label);line-height:1.55}
+.case-mechanism strong{color:var(--ink)}
 .case-person{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:center;margin-top:auto;padding-top:22px}
 .case-person img{display:block;width:52px;height:52px;border:1px solid var(--line-2);border-radius:var(--radius-lg);object-fit:cover;background:var(--surface)}
 .case-person strong,.case-person span{display:block}
@@ -149,6 +161,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   .process-panel,.process-your-part{padding:22px}
   .case-featured,.case-support-grid{grid-template-columns:1fr}
   .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
+  .case-featured--portrait .case-media{aspect-ratio:3/4}
   .case-featured-copy,.case-support-copy{padding:22px}
   .case-support-grid{gap:14px;margin-top:14px}
 }
@@ -345,16 +358,22 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   <section class="card case-studies" aria-labelledby="case-studies-title">
     <div class="case-studies-head">
       <h2 class="card-title" id="case-studies-title">See how business owners put AI to work.</h2>
-      <p class="case-studies-intro">Start with Sandra’s paid-offer story, then see how Leanne and Jose used AI to remove sales and delivery bottlenecks.</p>
+      <p class="case-studies-intro">Start with Sandra’s paid-ad results, then see how Leanne and Jose used AI to remove sales and delivery bottlenecks.</p>
     </div>
 
-    <article class="case-featured" aria-labelledby="sandra-case-title">
+    <article class="case-featured case-featured--portrait" aria-labelledby="sandra-case-title">
       <div class="case-media">
-        <wistia-player media-id="zd09c1c9jq" aspect="1.7777777777777777"></wistia-player>
+        <wistia-player media-id="6oj2gj3wqt" aspect="0.75"></wistia-player>
       </div>
       <div class="case-featured-copy">
-        <h3 class="case-title" id="sandra-case-title">A £17 sale helps identify buyers for a £6,000 offer.</h3>
-        <p class="case-copy">Sandra’s AI sells a £17 product first. That purchase signals serious intent and helps identify buyers ready for her £6,000 coaching program.</p>
+        <h3 class="case-title" id="sandra-case-title">Sandra says her ads now return 3-6× what she spends.</h3>
+        <p class="case-copy">After trying multiple approaches without finding a profitable return, Sandra says she now consistently sees 3-6× ROAS while attracting better-quality people to her calls.</p>
+        <blockquote class="case-quote">“This is the first time I’ve ever been able to make money on ads.”</blockquote>
+        <div class="case-results" aria-label="Sandra Parker reported results">
+          <div class="case-result"><strong>3-6× ROAS</strong><span>reported consistently</span></div>
+          <div class="case-result"><strong>2×</strong><span>on track to make twice what she made last year</span></div>
+        </div>
+        <p class="case-mechanism"><strong>How the system works:</strong> Her £17 entry offer helps identify buyers for her £6,000 coaching program.</p>
         <div class="case-person">
           <img src="https://lltv28.github.io/kodara-success-portal/img/sandra.jpg" width="104" height="104" loading="lazy" alt="Sandra Parker">
           <div><strong>Sandra Parker</strong><span>Sobriety coach - Just The Tonic</span></div>
@@ -463,8 +482,8 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
       </article>
 
       <article class="proof-card is-stat" aria-label="Sandra Parker client result">
-        <strong class="proof-stat">£17</strong>
-        <p class="proof-result">purchase helped identify buyers for a £6,000 coaching offer</p>
+        <strong class="proof-stat">3-6×</strong>
+        <p class="proof-result">ROAS consistently reported from paid ads</p>
         <div class="proof-person">
           <img src="https://lltv28.github.io/kodara-success-portal/img/sandra.jpg" width="104" height="104" loading="lazy" alt="Sandra Parker">
           <div><strong>Sandra Parker</strong><span>Sobriety coach - Just The Tonic</span></div>
@@ -662,7 +681,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   function loadWistia(){
     if(loaded) return;
     loaded=true;
-    ['https://fast.wistia.com/player.js','https://fast.wistia.com/embed/zd09c1c9jq.js','https://fast.wistia.com/embed/fay3lgo8op.js','https://fast.wistia.com/embed/5ycx1zrlxw.js'].forEach(function(src,index){
+    ['https://fast.wistia.com/player.js','https://fast.wistia.com/embed/6oj2gj3wqt.js','https://fast.wistia.com/embed/fay3lgo8op.js','https://fast.wistia.com/embed/5ycx1zrlxw.js'].forEach(function(src,index){
       var script=document.createElement('script');
       script.src=src;
       script.async=true;
