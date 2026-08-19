@@ -276,7 +276,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=learn&amp;compact=1" title="Business knowledge flowing into the AI brain" loading="eager"></iframe>
         </div>
         <div class="video-chapter-copy">
-          <p>It learns your offers, knowledge, qualification logic, and communication style so every AI salesperson works from the same source.</p>
+          <p>It learns your offers, buyers, voice, and sales data so every AI salesperson works from the same source.</p>
         </div>
       </article>
       <article class="video-chapter" id="demo-triagers" data-chapter="triagers">
@@ -544,7 +544,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map();
-  var rendererVersion='20260817e';
+  var rendererVersion='20260819a';
   var activeChapter=null;
   var desktopPlayback=window.matchMedia && matchMedia('(min-width:721px)');
 
@@ -715,18 +715,21 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 
   var mobileCta=document.querySelector('.mobile-cta');
   var openingProof=document.querySelector('.proof-snapshot');
+  var demoStory=document.querySelector('.video-story');
   var closingCta=document.querySelector('.cta');
   if(mobileCta && openingProof && closingCta && 'IntersectionObserver' in window){
-    var openingVisible=true,closingVisible=false;
-    function syncMobileCta(){ mobileCta.classList.toggle('is-visible',!openingVisible && !closingVisible); }
+    var openingVisible=true,demoVisible=false,closingVisible=false;
+    function syncMobileCta(){ mobileCta.classList.toggle('is-visible',!openingVisible && !demoVisible && !closingVisible); }
     var ctaObserver=new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.target===openingProof) openingVisible=entry.isIntersecting;
+        if(entry.target===demoStory) demoVisible=entry.isIntersecting;
         if(entry.target===closingCta) closingVisible=entry.isIntersecting;
       });
       syncMobileCta();
     });
     ctaObserver.observe(openingProof);
+    if(demoStory) ctaObserver.observe(demoStory);
     ctaObserver.observe(closingCta);
   }
 

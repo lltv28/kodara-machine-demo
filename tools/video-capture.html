@@ -50,6 +50,12 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:60%}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:30px;font-weight:650;letter-spacing:.045em}
 .player-mode.compact-mode[data-player="triagers"] .story-core-gain{right:-50px;top:36%}
+.player-mode.compact-mode[data-player="triagers"] .triager-team-label text{font-size:38px}
+.player-mode.compact-mode[data-player="triagers"] .triager-worker .worker-core circle{fill:rgb(22,164,108);stroke:#fff;stroke-width:3}
+.player-mode.compact-mode[data-player="triagers"] .triager-worker.is-active .worker-core circle{fill:rgb(16,104,68)}
+.player-mode.compact-mode[data-player="triagers"] .phone-stage-caption{display:block;font-size:28px}
+.player-mode.compact-mode[data-player="triagers"] .phone-screen-state,.player-mode.compact-mode[data-player="triagers"] .phone-header{display:none}
+.player-mode.compact-mode[data-player="triagers"] .phone-compact-state{display:block}
 .player-mode.compact-mode[data-player="flywheel"] .story-core-title{font-size:54px}
 .player-mode.compact-mode[data-player="flywheel"] .node-triagers,.player-mode.compact-mode[data-player="flywheel"] .node-ticket,.player-mode.compact-mode[data-player="flywheel"] .node-downsell,.player-mode.compact-mode[data-player="flywheel"] .triager-ad-node{opacity:1!important}
 .player-mode.compact-mode[data-player="flywheel"] .flywheel-node-label,.player-mode.compact-mode[data-player="flywheel"] .ads-label{opacity:1!important}
@@ -157,15 +163,15 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .engine-links{opacity:var(--engine-opacity,0)}
 .triager-team{opacity:var(--worker-opacity,0)}
 .source-demo-scene{opacity:var(--source-opacity,0)}
-.source-guide{fill:none;stroke:rgba(16,104,68,.18);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 7}
+.source-guide{fill:none;stroke:rgba(16,104,68,.27);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 7}
 .source-active-path{fill:none;stroke:rgb(22,164,108);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
 .source-particle{fill:rgb(22,164,108);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .source-card{fill:rgba(255,253,251,.98);stroke:rgba(16,104,68,.28);stroke-width:2;filter:url(#phone-shadow)}
 .business-source.is-active .source-card{fill:rgba(234,246,240,.92);stroke:rgb(22,164,108);stroke-width:3}
 .source-title{font:750 var(--demo-critical) Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle;dominant-baseline:central}
 .triager-demo-scene{opacity:var(--triager-demo-opacity,0)}
-.manager-triager-link{fill:none;stroke:rgba(16,104,68,.28);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 7}
-.manager-triager-link.is-active{stroke:rgb(22,164,108)}
+.manager-triager-link{fill:none;stroke:rgba(16,104,68,.34);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 7}
+.manager-triager-link.is-active{stroke:rgb(22,164,108);stroke-width:3.5}
 .triager-ad-node{opacity:var(--ad-opacity,0)}
 .triager-ad-node .ad-node-body{fill:#fff;stroke:rgba(16,104,68,.28);stroke-width:2;filter:url(#ns)}
 .triager-ad-node text{font-family:Instrument Sans,sans-serif;font-weight:750;fill:rgba(26,26,26,.8);text-anchor:middle;dominant-baseline:central}
@@ -174,9 +180,9 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .triager-team-label text{font:750 var(--demo-critical) Instrument Sans,sans-serif;fill:rgba(16,104,68,.82);text-anchor:middle;dominant-baseline:central}
 .triager-phone{opacity:var(--phone-opacity,0)}
 .phone-body{transform-box:fill-box;transform-origin:center;filter:url(#phone-shadow)}
-.phone-shell{fill:#151917;stroke:#151917;stroke-width:2}
+.phone-shell{fill:#26332d;stroke:#26332d;stroke-width:2}
 .phone-screen{fill:#fff}
-.phone-speaker{fill:#151917}
+.phone-speaker{fill:#26332d}
 .phone-home{fill:rgba(255,255,255,.72)}
 .phone-header-mark{fill:rgb(16,104,68)}
 .phone-header-letter{font:800 5px Instrument Sans,sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:central}
@@ -185,7 +191,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .phone-ui-kicker{font:700 4.2px Instrument Sans,sans-serif;fill:rgb(16,104,68);letter-spacing:.08em}
 .phone-ui-title{font:750 7px Instrument Sans,sans-serif;fill:#18201d}
 .phone-ui-copy{font:500 4.7px Instrument Sans,sans-serif;fill:#6b746f}
-.phone-ui-price{font:800 var(--demo-critical) Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle}
+.phone-ui-price{font:800 var(--demo-critical) Instrument Sans,sans-serif;fill:#18201d;text-anchor:middle;opacity:var(--phone-price-opacity,1)}
 .phone-ui-button{fill:rgb(16,104,68)}
 .phone-ui-button-label{font:750 5.2px Instrument Sans,sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:central}
 .phone-ui-choice{fill:#f5f7f6;stroke:#dce3df;stroke-width:.8}
@@ -197,6 +203,10 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .phone-ui-result{fill:#eff5f2}.phone-ui-result-bar{fill:rgb(22,164,108)}
 .phone-ui-field{fill:#fff;stroke:#dce3df;stroke-width:.8}
 .phone-ui-ad{fill:rgb(16,104,68)}
+.phone-stage-caption{display:none;font:750 26px Instrument Sans,sans-serif;fill:#27312d;text-anchor:middle;dominant-baseline:central}
+.phone-compact-state{display:none}
+.phone-compact-symbol{fill:rgb(22,164,108)}
+.phone-compact-glyph{font:800 28px Instrument Sans,sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:central}
 .triager-phone.is-connected .phone-body{transform:translateY(-2px) scale(1.025)}
 .triager-phone.is-connected .phone-shell{stroke:rgb(22,164,108);stroke-width:3}
 .activity-path{fill:none;stroke:rgb(22,164,108);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.88}
@@ -431,28 +441,28 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         </g>
         <g class="source-demo-scene" aria-hidden="true">
           <g aria-hidden="true">
-            <path class="source-guide" d="M450 225 C500 225 535 330 620 380"/>
-            <path class="source-guide" d="M450 535 C500 535 535 430 620 380"/>
-            <path class="source-guide" d="M790 225 C740 225 705 330 620 380"/>
-            <path class="source-guide" d="M790 535 C740 535 705 430 620 380"/>
+            <path class="source-guide" d="M475 225 C515 225 540 330 620 380"/>
+            <path class="source-guide" d="M475 535 C515 535 540 430 620 380"/>
+            <path class="source-guide" d="M765 225 C725 225 700 330 620 380"/>
+            <path class="source-guide" d="M765 535 C725 535 700 430 620 380"/>
             <path class="source-active-path" pathLength="1"/>
             <circle class="source-particle" r="5"/>
           </g>
-          <g class="business-source" transform="translate(275 159)" data-source-index="0" data-x="275" data-y="159" data-status="Learning offers">
+          <g class="business-source" transform="translate(300 159)" data-source-index="0" data-x="300" data-y="159" data-status="Learning offers">
             <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
             <text class="source-title" x="75" y="66">Your offers</text>
           </g>
-          <g class="business-source" transform="translate(275 469)" data-source-index="1" data-x="275" data-y="469" data-status="Learning customers">
+          <g class="business-source" transform="translate(300 469)" data-source-index="1" data-x="300" data-y="469" data-status="Learning customers">
             <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
             <text class="source-title" x="75" y="66">Your buyers</text>
           </g>
-          <g class="business-source" transform="translate(815 159)" data-source-index="2" data-x="815" data-y="159" data-status="Learning messaging">
+          <g class="business-source" transform="translate(790 159)" data-source-index="2" data-x="790" data-y="159" data-status="Learning messaging">
             <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
             <text class="source-title" x="75" y="66">Your voice</text>
           </g>
-          <g class="business-source" transform="translate(815 469)" data-source-index="3" data-x="815" data-y="469" data-status="Learning sales data">
+          <g class="business-source" transform="translate(790 469)" data-source-index="3" data-x="790" data-y="469" data-status="Learning sales data">
             <rect class="source-card" x="-25" width="200" height="132" rx="16"/>
-            <text class="source-title" x="75" y="66">Sales results</text>
+            <text class="source-title" x="75" y="66">Sales data</text>
           </g>
         </g>
         <g class="triager-demo-scene" aria-hidden="true">
@@ -463,34 +473,42 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
             <line class="manager-triager-link" x1="620" y1="380" x2="767" y2="332"/>
             <line class="manager-triager-link" x1="620" y1="380" x2="711" y2="505"/>
           </g>
-          <g class="triager-team-label" transform="translate(620 555)"><text>5 AI Triagers</text></g>
+          <g class="triager-team-label" transform="translate(620 575)"><text>5 AI Triagers</text></g>
           <g class="triager-activity" aria-hidden="true">
             <path class="activity-path phone-path" pathLength="1"/>
             <circle class="activity-particle" r="5"/>
           </g>
-          <g class="triager-phone" transform="translate(275 150)" data-phone-index="0" data-x="275" data-y="150" style="--phone-delay:0ms">
+          <g class="triager-phone" transform="translate(295 150)" data-phone-index="0" data-x="295" data-y="150" style="--phone-delay:0ms">
             <g class="phone-body"><rect class="phone-shell" width="92" height="150" rx="18"/><rect class="phone-screen" x="6" y="6" width="80" height="138" rx="13"/><rect class="phone-speaker" x="34" y="5" width="24" height="8" rx="4"/>
               <g class="phone-header"><rect class="phone-header-mark" x="9" y="16" width="8" height="8" rx="2"/><text class="phone-header-letter" x="13" y="20.5">K</text><line class="phone-header-rule" x1="9" y1="28" x2="83" y2="28"/></g>
               <use class="phone-screen-state" href="#phone-state-landing" x="7" y="30" width="78" height="108"/><rect class="phone-home" x="34" y="141" width="24" height="2" rx="1"/>
+              <g class="phone-compact-state"><circle class="phone-compact-symbol" cx="46" cy="76" r="25"/><text class="phone-compact-glyph" x="46" y="77">A</text></g>
             </g>
+            <text class="phone-stage-caption" x="46" y="176">Assessment</text>
           </g>
-          <g class="triager-phone" transform="translate(275 460)" data-phone-index="1" data-x="275" data-y="460" style="--phone-delay:35ms">
+          <g class="triager-phone" transform="translate(295 460)" data-phone-index="1" data-x="295" data-y="460" style="--phone-delay:35ms">
             <g class="phone-body"><rect class="phone-shell" width="92" height="150" rx="18"/><rect class="phone-screen" x="6" y="6" width="80" height="138" rx="13"/><rect class="phone-speaker" x="34" y="5" width="24" height="8" rx="4"/>
               <g class="phone-header"><rect class="phone-header-mark" x="9" y="16" width="8" height="8" rx="2"/><text class="phone-header-letter" x="13" y="20.5">K</text><line class="phone-header-rule" x1="9" y1="28" x2="83" y2="28"/></g>
               <use class="phone-screen-state" href="#phone-state-question" x="7" y="30" width="78" height="108"/><rect class="phone-home" x="34" y="141" width="24" height="2" rx="1"/>
+              <g class="phone-compact-state"><circle class="phone-compact-symbol" cx="46" cy="76" r="25"/><text class="phone-compact-glyph" x="46" y="77">?</text></g>
             </g>
+            <text class="phone-stage-caption" x="46" y="176">Qualify</text>
           </g>
-          <g class="triager-phone" transform="translate(873 150)" data-phone-index="2" data-x="873" data-y="150" style="--phone-delay:70ms">
+          <g class="triager-phone" transform="translate(853 150)" data-phone-index="2" data-x="853" data-y="150" style="--phone-delay:70ms">
             <g class="phone-body"><rect class="phone-shell" width="92" height="150" rx="18"/><rect class="phone-screen" x="6" y="6" width="80" height="138" rx="13"/><rect class="phone-speaker" x="34" y="5" width="24" height="8" rx="4"/>
               <g class="phone-header"><rect class="phone-header-mark" x="9" y="16" width="8" height="8" rx="2"/><text class="phone-header-letter" x="13" y="20.5">K</text><line class="phone-header-rule" x1="9" y1="28" x2="83" y2="28"/></g>
               <use class="phone-screen-state" href="#phone-state-plan" x="7" y="30" width="78" height="108"/><rect class="phone-home" x="34" y="141" width="24" height="2" rx="1"/>
+              <g class="phone-compact-state"><circle class="phone-compact-symbol" cx="46" cy="76" r="25"/><text class="phone-compact-glyph" x="46" y="77">✓</text></g>
             </g>
+            <text class="phone-stage-caption" x="46" y="176">Plan</text>
           </g>
-          <g class="triager-phone" transform="translate(873 460)" data-phone-index="3" data-x="873" data-y="460" style="--phone-delay:105ms">
+          <g class="triager-phone" transform="translate(853 460)" data-phone-index="3" data-x="853" data-y="460" style="--phone-delay:105ms">
             <g class="phone-body"><rect class="phone-shell" width="92" height="150" rx="18"/><rect class="phone-screen" x="6" y="6" width="80" height="138" rx="13"/><rect class="phone-speaker" x="34" y="5" width="24" height="8" rx="4"/>
               <g class="phone-header"><rect class="phone-header-mark" x="9" y="16" width="8" height="8" rx="2"/><text class="phone-header-letter" x="13" y="20.5">K</text><line class="phone-header-rule" x1="9" y1="28" x2="83" y2="28"/></g>
               <use class="phone-screen-state" href="#phone-state-checkout" x="7" y="30" width="78" height="108"/><rect class="phone-home" x="34" y="141" width="24" height="2" rx="1"/>
+              <g class="phone-compact-state"><circle class="phone-compact-symbol" cx="46" cy="76" r="25"/><text class="phone-compact-glyph" x="46" y="77">$</text></g>
             </g>
+            <text class="phone-stage-caption" x="46" y="176">Checkout</text>
           </g>
         </g>
         <g class="flywheel-shell" aria-hidden="true">
@@ -939,6 +957,10 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(!use || use.dataset.screen===name) return;
     use.dataset.screen=name;
     use.setAttribute('href','#phone-state-'+name);
+    var phone=triagerPhones[index], caption=phone && phone.querySelector('.phone-stage-caption');
+    if(caption) caption.textContent={landing:'Assessment',question:'Qualify',plan:'Plan',checkout:'Checkout',paid:'Paid',funding:'Funds ads',ready:'Ready'}[name] || '';
+    var glyph=phone && phone.querySelector('.phone-compact-glyph');
+    if(glyph) glyph.textContent={landing:'A',question:'?',plan:'✓',checkout:'$',paid:'✓',funding:'↻',ready:'✓'}[name] || '•';
   }
   function setPathProgress(path,progress){
     if(path) path.style.strokeDashoffset=String(1-zoomClamp(progress,0,1));
