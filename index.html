@@ -123,7 +123,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .case-featured{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
 .case-featured--portrait{grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr)}
 .case-featured .case-media{border-right:1px solid var(--line-2)}
-.case-featured--portrait .case-media{display:flex;align-self:center;align-items:center;aspect-ratio:3/4;background:var(--surface)}
+.case-featured--portrait .case-media{display:flex;align-items:center;aspect-ratio:auto;background:var(--surface)}
 .case-featured--portrait .case-media wistia-player{height:auto;aspect-ratio:3/4}
 .case-featured-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,4vw,46px)}
 .case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
@@ -170,7 +170,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
    SECTION 3 - TRUST STRIP
    ============================================================ */
 .proof-head{max-width:720px;margin-bottom:28px}
-.proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px;row-gap:40px}
+.proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .proof-card{position:relative;display:flex;min-width:0;min-height:230px;flex-direction:column;padding:clamp(20px,2vw,24px);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
 .proof-stat{display:block;color:var(--accent-ink);font-family:var(--fd);font-size:clamp(4.25rem,8vw,6.5rem);font-weight:700;line-height:.82;letter-spacing:-.05em}
 .proof-result{max-width:31ch;margin-top:14px;color:var(--ink);font-size:var(--type-body);font-weight:650;line-height:1.5;text-wrap:pretty}
@@ -184,18 +184,25 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 .proof-note{max-width:65ch;margin:18px auto 0;color:var(--ink-3);font-size:var(--type-legal);line-height:1.55;text-align:center}
 .proof-more{display:block}
 .proof-more summary{display:none}
-.proof-grid-more{margin-top:40px}
+.proof-grid-more{margin-top:24px}
 @media(max-width:720px){
   .proof-head{margin-bottom:22px}
   .proof-grid{grid-template-columns:1fr;gap:28px}
   .proof-card{min-height:210px;padding:20px}
-  .proof-card blockquote{font-size:var(--type-quote)}
+  .proof-card blockquote{max-width:none;padding-left:32px;font-size:var(--type-quote)}
+  .proof-card blockquote::before{font-size:3.75rem}
   .proof-more{display:block;margin-top:18px}
   .proof-more summary{display:flex;align-items:center;justify-content:center;min-height:48px;border:1px solid var(--line-2);border-radius:999px;background:#fff;color:var(--accent-ink);font-size:var(--type-control);font-weight:700;cursor:pointer;list-style:none}
   .proof-more summary::-webkit-details-marker{display:none}
   .proof-more summary::after{content:' +';margin-left:5px}
   .proof-more[open] summary::after{content:' −'}
+  .proof-more-close{display:none}
+  .proof-more[open]{display:flex;flex-direction:column;margin-top:0}
+  .proof-more[open] .proof-more-open{display:none}
+  .proof-more[open] .proof-more-close{display:inline}
+  .proof-more[open] summary{order:2;margin-top:18px}
   .proof-grid-more{display:grid;margin-top:28px}
+  .proof-more[open] .proof-grid-more{order:1}
 }
 
 .faq-head{max-width:680px;margin-bottom:24px}
@@ -367,11 +374,11 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
       </div>
       <div class="case-featured-copy">
         <h3 class="case-title" id="sandra-case-title">Sandra says her ads now return 3-6× what she spends.</h3>
-        <p class="case-copy">After trying multiple approaches without finding a profitable return, Sandra says she now consistently sees 3-6× ROAS while attracting better-quality people to her calls.</p>
+        <p class="case-copy">After trying multiple approaches without finding a profitable return, Sandra says she now consistently sees 3-6× ROAS while attracting better-quality people to her calls. She is also on track to make twice what she made last year.</p>
         <blockquote class="case-quote">“This is the first time I’ve ever been able to make money on ads.”</blockquote>
         <div class="case-results" aria-label="Sandra Parker reported results">
           <div class="case-result"><strong>3-6× ROAS</strong><span>reported consistently</span></div>
-          <div class="case-result"><strong>2×</strong><span>on track to make twice what she made last year</span></div>
+          <div class="case-result"><strong>2×</strong><span>on track to double</span></div>
         </div>
         <p class="case-mechanism"><strong>How the system works:</strong> Her £17 entry offer helps identify buyers for her £6,000 coaching program.</p>
         <div class="case-person">
@@ -454,7 +461,7 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
     </div>
 
     <details class="proof-more">
-      <summary>See 4 more client results</summary>
+      <summary><span class="proof-more-open">See 4 more client results</span><span class="proof-more-close">Hide additional results</span></summary>
       <div class="proof-grid proof-grid-more">
       <article class="proof-card is-stat" aria-label="Scotty Tregellas client result">
         <strong class="proof-stat">17</strong>
