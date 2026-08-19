@@ -121,11 +121,12 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
 
 /* ---------- video client stories ---------- */
 .case-featured{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
-.case-featured--portrait{grid-template-columns:minmax(300px,.72fr) minmax(0,1.28fr)}
+.case-featured--portrait{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:center;gap:clamp(32px,4vw,40px);padding:32px}
 .case-featured .case-media{border-right:1px solid var(--line-2)}
-.case-featured--portrait .case-media{display:flex;align-items:center;aspect-ratio:auto;background:var(--surface)}
+.case-featured--portrait .case-media{display:block;width:100%;aspect-ratio:3/4;background:#fff;border:1px solid var(--line-2);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
 .case-featured--portrait .case-media wistia-player{height:auto;aspect-ratio:3/4}
 .case-featured-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,4vw,46px)}
+.case-featured--portrait .case-featured-copy{padding:0}
 .case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
 .case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
 .case-support-copy{display:flex;flex:1;flex-direction:column;padding:clamp(22px,3vw,30px)}
@@ -161,8 +162,10 @@ body{font-family:var(--fb);font-size:var(--type-body);background:transparent;col
   .process-panel,.process-your-part{padding:22px}
   .case-featured,.case-support-grid{grid-template-columns:1fr}
   .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
-  .case-featured--portrait .case-media{aspect-ratio:3/4}
+  .case-featured--portrait{gap:22px;padding:20px}
+  .case-featured--portrait .case-media{aspect-ratio:3/4;border:1px solid var(--line-2)}
   .case-featured-copy,.case-support-copy{padding:22px}
+  .case-featured--portrait .case-featured-copy{padding:0}
   .case-support-grid{gap:14px;margin-top:14px}
 }
 
