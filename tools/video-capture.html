@@ -958,6 +958,8 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     use.dataset.screen=name;
     use.setAttribute('href','#phone-state-'+name);
     var phone=triagerPhones[index], caption=phone && phone.querySelector('.phone-stage-caption');
+    var compactTriager=document.documentElement.classList.contains('compact-mode') && document.documentElement.dataset.player==='triagers';
+    if(compactTriager) return;
     if(caption) caption.textContent={landing:'Assessment',question:'Qualify',plan:'Plan',checkout:'Checkout',paid:'Paid',funding:'Funds ads',ready:'Ready'}[name] || '';
     var glyph=phone && phone.querySelector('.phone-compact-glyph');
     if(glyph) glyph.textContent={landing:'A',question:'?',plan:'✓',checkout:'$',paid:'✓',funding:'↻',ready:'✓'}[name] || '•';
@@ -1358,7 +1360,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 (function(){
   'use strict';
   var chapter=new URLSearchParams(location.search).get('player');
-  var durations={learn:5000,triagers:8000,flywheel:8000,graph:8000};
+  var durations={learn:5000,triagers:12000,flywheel:8000,graph:8000};
   if(!durations[chapter] || !window.renderCaptureFrame) return;
   var duration=durations[chapter],elapsed=0,startedAt=0,frame=0,playing=false;
 
