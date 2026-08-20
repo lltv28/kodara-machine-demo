@@ -214,13 +214,14 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .activity-path{fill:none;stroke:rgb(22,164,108);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.88}
 .activity-particle{fill:rgb(22,164,108);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .triager-conversation-demo{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;color:#18201d}
-.conversation-stack{position:absolute;left:41.5%;top:8.5%;width:37.5%;display:grid;gap:14px;opacity:0}
-.conversation-summary,.conversation-active{border:2px solid rgba(16,104,68,.16);border-radius:16px;background:rgba(255,253,251,.98);box-shadow:0 10px 28px rgba(30,41,59,.09)}
-.conversation-summary{min-height:88px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;padding:14px 20px;color:#68736d;font-size:30px;line-height:1.15}
+.conversation-stack{--conversation-summary-h:112px;--conversation-active-h:390px;--conversation-gap:14px;position:absolute;left:41.5%;top:8.5%;width:37.5%;height:calc(var(--conversation-summary-h) + var(--conversation-summary-h) + var(--conversation-active-h) + var(--conversation-gap) + var(--conversation-gap));opacity:0}
+.conversation-card{position:absolute;inset:0;pointer-events:none}
+.conversation-summary,.conversation-active{position:absolute;left:0;right:0;top:0;border:2px solid rgba(16,104,68,.16);border-radius:16px;background:rgba(255,253,251,.98);box-shadow:0 10px 28px rgba(30,41,59,.09);will-change:transform,opacity}
+.conversation-summary{height:var(--conversation-summary-h);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;padding:14px 20px;color:#68736d;font-size:30px;line-height:1.15}
 .conversation-summary-copy{display:grid;gap:4px;min-width:0}
 .conversation-summary strong,.conversation-active strong{font-weight:750;color:#18201d}
 .conversation-summary-result{color:rgb(16,104,68);white-space:nowrap}
-.conversation-active{min-height:390px;padding:22px 24px;overflow:hidden}
+.conversation-active{height:var(--conversation-active-h);padding:22px 24px;overflow:hidden}
 .conversation-active-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:2px solid rgba(16,104,68,.12);font-size:32px}
 .conversation-active-status{color:rgb(16,104,68);font-weight:700;white-space:nowrap}
 .conversation-messages{display:grid;gap:14px;padding-top:18px}
@@ -603,34 +604,48 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
               </svg>
               <div class="conversation-brain-note">5 AI Triagers active</div>
               <div class="conversation-stack" aria-hidden="true">
-                <div class="conversation-summary">
-                  <div class="conversation-summary-copy">
-                    <strong data-conversation-previous-name>Sandra</strong>
-                    <span>Handled</span>
+                <article class="conversation-card" data-conversation-index="0">
+                  <div class="conversation-summary">
+                    <div class="conversation-summary-copy"><strong>Sandra</strong><span data-conversation-summary-state>Handled</span></div>
+                    <strong class="conversation-summary-result" data-conversation-summary-tail>Complete</strong>
                   </div>
-                  <strong class="conversation-summary-result">Complete</strong>
-                </div>
-                <div class="conversation-active">
-                  <div class="conversation-active-head">
-                    <strong data-conversation-active-name>Sandra</strong>
-                    <span class="conversation-active-status">AI Triager replying</span>
+                  <div class="conversation-active">
+                    <div class="conversation-active-head"><strong>Sandra</strong><span class="conversation-active-status">AI Triager replying</span></div>
+                    <div class="conversation-messages">
+                      <div class="conversation-message">“Which option fits me without another call?”</div>
+                      <div class="conversation-message is-ai">The $8 assessment is your next step.</div>
+                    </div>
+                    <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
                   </div>
-                  <div class="conversation-messages">
-                    <div class="conversation-message" data-conversation-question>“Which option fits me without another call?”</div>
-                    <div class="conversation-message is-ai" data-conversation-answer>The $8 assessment is your next step.</div>
+                </article>
+                <article class="conversation-card" data-conversation-index="1">
+                  <div class="conversation-summary">
+                    <div class="conversation-summary-copy"><strong>Michael</strong><span data-conversation-summary-state>Queued</span></div>
+                    <strong class="conversation-summary-result" data-conversation-summary-tail>Up next</strong>
                   </div>
-                  <div class="conversation-purchase">
-                    <strong>Assessment purchased</strong>
-                    <strong>$8</strong>
+                  <div class="conversation-active">
+                    <div class="conversation-active-head"><strong>Michael</strong><span class="conversation-active-status">AI Triager replying</span></div>
+                    <div class="conversation-messages">
+                      <div class="conversation-message">“I’m not ready for the full service. What’s next?”</div>
+                      <div class="conversation-message is-ai">The $8 assessment is your next step.</div>
+                    </div>
+                    <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
                   </div>
-                </div>
-                <div class="conversation-summary">
-                  <div class="conversation-summary-copy">
-                    <strong data-conversation-next-name>Michael</strong>
-                    <span>Conversation queued</span>
+                </article>
+                <article class="conversation-card" data-conversation-index="2">
+                  <div class="conversation-summary">
+                    <div class="conversation-summary-copy"><strong>David</strong><span data-conversation-summary-state>Queued</span></div>
+                    <strong class="conversation-summary-result" data-conversation-summary-tail>Up next</strong>
                   </div>
-                  <span>Up next</span>
-                </div>
+                  <div class="conversation-active">
+                    <div class="conversation-active-head"><strong>David</strong><span class="conversation-active-status">AI Triager replying</span></div>
+                    <div class="conversation-messages">
+                      <div class="conversation-message">“Can this help if I already run ads?”</div>
+                      <div class="conversation-message is-ai">Yes. Start with the $8 assessment.</div>
+                    </div>
+                    <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
+                  </div>
+                </article>
               </div>
             </div>
             <div class="zoom-layer graph-layer" aria-hidden="true">
@@ -1000,16 +1015,11 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var activityParticle=zoomSection && zoomSection.querySelector('.activity-particle');
   var conversationDemo=zoomSection && zoomSection.querySelector('.triager-conversation-demo');
   var conversationStack=zoomSection && zoomSection.querySelector('.conversation-stack');
-  var conversationActive=zoomSection && zoomSection.querySelector('.conversation-active');
-  var conversationPurchase=zoomSection && zoomSection.querySelector('.conversation-purchase');
+  var conversationCards=zoomSection ? zoomSection.querySelectorAll('.conversation-card') : [];
+  var conversationGeometry=null;
   var conversationLinkActive=zoomSection && zoomSection.querySelector('.conversation-link-active');
   var conversationLinkSuccess=zoomSection && zoomSection.querySelector('.conversation-link-success');
   var conversationTransferDot=zoomSection && zoomSection.querySelector('.conversation-transfer-dot');
-  var conversationPreviousName=zoomSection && zoomSection.querySelector('[data-conversation-previous-name]');
-  var conversationActiveName=zoomSection && zoomSection.querySelector('[data-conversation-active-name]');
-  var conversationNextName=zoomSection && zoomSection.querySelector('[data-conversation-next-name]');
-  var conversationQuestion=zoomSection && zoomSection.querySelector('[data-conversation-question]');
-  var conversationAnswer=zoomSection && zoomSection.querySelector('[data-conversation-answer]');
   var storyViewport=null, storyLayout=null, storyFrame=0, heightTimer=0, layoutTimer=0, storyActive=false, lastTrackHeight=0, lastStoryProgress=-1, lastBeat='', storyStarted=false, storyCompleted=false;
   var standaloneVisible=false, standaloneFrame=0;
   function trackDemo(name){ parent.postMessage({fdDemoEvent:name},'*'); }
@@ -1167,35 +1177,69 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     }
     zoomSection.classList.toggle('is-manager-pulse',!state.knowledgeHolding && state.knowledgeStepProgress>=.95);
   }
-  var triagerConversations=[
-    {name:'Sandra',question:'“Which option fits me without another call?”',answer:'The $8 assessment is your next step.'},
-    {name:'Michael',question:'“I’m not ready for the full service. What’s next?”',answer:'The $8 assessment is your next step.'},
-    {name:'David',question:'“Can this help if I already run ads?”',answer:'Yes. Start with the $8 assessment.'}
-  ];
   function computeConversationActivity(progressValue){
     var p=zoomClamp(progressValue,0,1), scaled=p>=1 ? 3 : p*3, slot=p>=1 ? 2 : Math.floor(scaled), raw=p>=1 ? 1 : scaled-slot;
-    var activeIndex=slot, previousIndex=slot>0 ? slot-1 : -1, nextIndex=slot<2 ? slot+1 : -1;
+    var activeIndex=slot, nextIndex=(slot+1)%3;
     var purchase=storyEase(zoomRange(raw,.48,.60));
     var solid=storyEase(zoomRange(raw,.54,.66));
-    var transfer=storyEase(zoomRange(raw,.66,.82));
-    var connectorOpacity=1-storyEase(zoomRange(raw,.88,.94));
-    var impact=storyEase(zoomRange(raw,.78,.84));
+    var transfer=storyEase(zoomRange(raw,.66,.80));
+    var connectorOpacity=1-storyEase(zoomRange(raw,.82,.87));
+    var impact=storyEase(zoomRange(raw,.76,.82));
+    var rotation=storyEase(zoomRange(raw,.88,.99));
     var pulse=transfer<=0 || transfer>=1 ? 0 : Math.sin(Math.PI*transfer);
-    return {slot:slot,raw:raw,activeIndex:activeIndex,previousIndex:previousIndex,nextIndex:nextIndex,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,pulse:pulse};
+    return {slot:slot,raw:raw,activeIndex:activeIndex,nextIndex:nextIndex,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,rotation:rotation,pulse:pulse};
+  }
+  function setConversationPanel(panel,y,opacity,scale){
+    panel.style.opacity=String(zoomClamp(opacity,0,1));
+    panel.style.transform='translate3d(0,'+y.toFixed(2)+'px,0) scale('+scale.toFixed(3)+')';
+  }
+  function setConversationSummary(card,state,tail){
+    var stateNode=card.querySelector('[data-conversation-summary-state]'), tailNode=card.querySelector('[data-conversation-summary-tail]');
+    stateNode.textContent=state;
+    tailNode.textContent=tail;
+  }
+  function getConversationGeometry(){
+    if(conversationGeometry) return conversationGeometry;
+    var styles=getComputedStyle(conversationStack);
+    var summaryHeight=parseFloat(styles.getPropertyValue('--conversation-summary-h'));
+    var activeHeight=parseFloat(styles.getPropertyValue('--conversation-active-h'));
+    var gap=parseFloat(styles.getPropertyValue('--conversation-gap'));
+    var activeY=summaryHeight+gap, nextY=activeY+activeHeight+gap;
+    conversationGeometry={summaryHeight:summaryHeight,activeHeight:activeHeight,gap:gap,activeY:activeY,nextY:nextY};
+    return conversationGeometry;
+  }
+  function renderConversationCard(card,index,state,geometry){
+    var summary=card.querySelector('.conversation-summary'), active=card.querySelector('.conversation-active'), purchase=card.querySelector('.conversation-purchase');
+    var t=state.rotation;
+    setConversationPanel(summary,geometry.nextY,0,1);
+    setConversationPanel(active,geometry.activeY,0,.98);
+    purchase.style.opacity='0';
+    if(index===state.activeIndex){
+      setConversationSummary(card,'Handled','Complete');
+      setConversationPanel(summary,geometry.activeY*(1-t),t,.98+.02*t);
+      setConversationPanel(active,geometry.activeY-geometry.gap*1.7*t,1-t,1-.02*t);
+      purchase.style.opacity=String(state.purchase*(1-storyEase(zoomRange(state.raw,.82,.87)))*(1-t));
+      purchase.style.transform='translateY('+(8*(1-state.purchase)).toFixed(2)+'px)';
+    }else if(index===state.nextIndex){
+      setConversationSummary(card,'Queued','Up next');
+      setConversationPanel(summary,geometry.nextY-(geometry.nextY-geometry.activeY)*t,1-t,1);
+      setConversationPanel(active,geometry.activeY+geometry.gap*3*(1-t),t,.98+.02*t);
+    }else{
+      var firstHalf=zoomClamp(t*2,0,1), secondHalf=zoomClamp((t-.5)*2,0,1);
+      if(t<.5){
+        setConversationSummary(card,'Handled','Complete');
+        setConversationPanel(summary,-geometry.summaryHeight*.8*firstHalf,1-firstHalf,1-.02*firstHalf);
+      }else{
+        setConversationSummary(card,'Queued','Up next');
+        setConversationPanel(summary,geometry.nextY+geometry.gap*2.5*(1-secondHalf),secondHalf,.98+.02*secondHalf);
+      }
+    }
   }
   function renderConversationActivity(progress){
     if(!conversationDemo || !conversationStack) return;
-    var state=computeConversationActivity(progress), active=triagerConversations[state.activeIndex];
-    conversationPreviousName.textContent=state.previousIndex>=0 ? triagerConversations[state.previousIndex].name : 'Earlier buyer';
-    conversationActiveName.textContent=active.name;
-    conversationNextName.textContent=state.nextIndex>=0 ? triagerConversations[state.nextIndex].name : 'New buyer';
-    conversationQuestion.textContent=active.question;
-    conversationAnswer.textContent=active.answer;
+    var state=computeConversationActivity(progress), geometry=getConversationGeometry();
+    for(var i=0;i<conversationCards.length;i++) renderConversationCard(conversationCards[i],i,state,geometry);
     conversationStack.style.opacity='1';
-    var cardShift=state.raw<.08 ? 12*(1-storyEase(state.raw/.08)) : state.raw>.96 ? -10*storyEase((state.raw-.96)/.04) : 0;
-    conversationActive.style.transform='translateY('+cardShift.toFixed(2)+'px)';
-    conversationPurchase.style.opacity=String(state.purchase*(1-storyEase(zoomRange(state.raw,.92,1))));
-    conversationPurchase.style.transform='translateY('+(8*(1-state.purchase)).toFixed(2)+'px)';
     conversationLinkActive.style.opacity=String((1-state.solid)*state.connectorOpacity);
     conversationLinkSuccess.style.opacity=String(state.solid*state.connectorOpacity);
     conversationLinkSuccess.style.strokeDashoffset=String(1-state.solid);
@@ -1208,7 +1252,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     zoomSection.style.setProperty('--sale-ring-opacity',String(.16*state.pulse));
     var budget=state.slot*8+(state.impact>=.5 ? 8 : 0);
     if(coreBudgetValue) coreBudgetValue.textContent='$'+budget;
-    var gainOpacity=state.impact*(1-storyEase(zoomRange(state.raw,.90,.98)));
+    var gainOpacity=state.impact*(1-storyEase(zoomRange(state.raw,.82,.87)));
     if(coreGain){ coreGain.style.opacity=String(gainOpacity); coreGain.style.transform='translateY('+(6-10*state.impact).toFixed(2)+'px)'; }
     if(storyCore) storyCore.setAttribute('aria-label','AI brain. Total ad budget $'+budget);
     if(coreStatus) coreStatus.textContent=state.impact>0 ? 'Makes $8 available for ads' : 'AI Triagers are handling buyer conversations';
