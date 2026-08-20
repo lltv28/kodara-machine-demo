@@ -42,14 +42,14 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 .player-mode .wrap{position:absolute;left:50%;top:50%;width:1240px!important;max-width:none;height:760px!important;margin:-380px 0 0 -620px;transform-origin:center}
 .player-mode.compact-mode[data-player="learn"] .story-core-status,.player-mode.compact-mode[data-player="triagers"] .story-core-status,.player-mode.compact-mode[data-player="flywheel"] .story-core-status{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core,.player-mode.compact-mode[data-player="flywheel"] .story-core{width:190px}
-.player-mode.compact-mode[data-player="triagers"] .story-core{left:28.6%;top:50%;width:230px}
+.player-mode.compact-mode[data-player="triagers"] .story-core{left:30.3%;top:50%;width:210px;opacity:var(--triager-loop-opacity,1)}
 .player-mode.compact-mode[data-player="flywheel"] .cf-note{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core-title{font-size:52px}
 .player-mode.compact-mode[data-player="learn"] .source-title{font-size:34px}
 .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:46px;transform:translateY(-46px)}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:60%}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:30px;font-weight:650;letter-spacing:.045em}
-.player-mode.compact-mode[data-player="triagers"] .story-core-gain{right:-50px;top:36%}
+.player-mode.compact-mode[data-player="triagers"] .story-core-gain{left:50%;right:auto;top:-36%;--gain-y:6px;transform:translate(-50%,var(--gain-y))!important}
 .player-mode.compact-mode[data-player="triagers"] .triager-team-label text{font-size:38px}
 .player-mode.compact-mode[data-player="triagers"] .triager-worker .worker-core circle{fill:rgb(22,164,108);stroke:#fff;stroke-width:3}
 .player-mode.compact-mode[data-player="triagers"] .triager-worker.is-active .worker-core circle{fill:rgb(16,104,68)}
@@ -214,21 +214,21 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .activity-path{fill:none;stroke:rgb(22,164,108);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.88}
 .activity-particle{fill:rgb(22,164,108);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .triager-conversation-demo{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;color:#18201d}
-.conversation-stack{--conversation-summary-h:112px;--conversation-active-h:390px;--conversation-gap:14px;position:absolute;left:41.5%;top:8.5%;width:37.5%;height:calc(var(--conversation-summary-h) + var(--conversation-summary-h) + var(--conversation-active-h) + var(--conversation-gap) + var(--conversation-gap));opacity:0}
+.conversation-stack{--conversation-summary-h:96px;--conversation-active-h:390px;--conversation-gap:14px;position:absolute;left:41%;top:8.5%;width:37.5%;height:calc(var(--conversation-summary-h) + var(--conversation-summary-h) + var(--conversation-active-h) + var(--conversation-gap) + var(--conversation-gap));opacity:0}
 .conversation-card{position:absolute;inset:0;pointer-events:none}
 .conversation-summary,.conversation-active{position:absolute;left:0;right:0;top:0;border:2px solid rgba(16,104,68,.16);border-radius:16px;background:rgba(255,253,251,.98);box-shadow:0 10px 28px rgba(30,41,59,.09);will-change:transform,opacity}
-.conversation-summary{height:var(--conversation-summary-h);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;padding:14px 20px;color:#68736d;font-size:30px;line-height:1.15}
-.conversation-summary-copy{display:grid;gap:4px;min-width:0}
+.conversation-summary{height:var(--conversation-summary-h);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;padding:14px 20px;color:#68736d;font-size:32px;line-height:1.15}
 .conversation-summary strong,.conversation-active strong{font-weight:750;color:#18201d}
 .conversation-summary-result{color:rgb(16,104,68);white-space:nowrap}
-.conversation-active{height:var(--conversation-active-h);padding:22px 24px;overflow:hidden;clip-path:inset(0 0 0 0 round 16px)}
-.conversation-active-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:2px solid rgba(16,104,68,.12);font-size:32px}
+.conversation-active{height:var(--conversation-active-h);overflow:hidden;clip-path:inset(0 0 0 0 round 16px)}
+.conversation-active-content{height:100%;padding:18px 24px 16px;will-change:transform,opacity}
+.conversation-active-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:2px solid rgba(16,104,68,.12);font-size:32px}
 .conversation-active-status{color:rgb(16,104,68);font-weight:700;white-space:nowrap}
-.conversation-messages{display:grid;gap:14px;padding-top:18px}
-.conversation-message{width:92%;padding:14px 17px;border-radius:14px;background:#f0f3f1;color:#27312d;font-size:32px;line-height:1.18}
-.conversation-message.is-ai{justify-self:end;background:#eaf6f0;color:#0f6843}
-.conversation-purchase{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:17px;padding-top:15px;border-top:2px solid rgba(16,104,68,.12);color:rgb(16,104,68);font-size:31px;opacity:0;transform:translateY(8px)}
-.conversation-brain-note{position:absolute;left:19.5%;top:71%;width:18%;text-align:center;color:#385146;font-size:26px;font-weight:750;line-height:1.15}
+.conversation-messages{display:grid;gap:10px;padding-top:12px}
+.conversation-message{width:92%;padding:10px 16px;border-radius:14px;background:#f0f3f1;color:#27312d;font-size:32px;line-height:1.18}
+.conversation-message.is-ai{justify-self:end;background:#eaf6f0;color:#0f6843;opacity:0;transform:translateY(8px);will-change:transform,opacity}
+.conversation-purchase{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:10px;padding-top:10px;border-top:2px solid rgba(16,104,68,.12);color:rgb(16,104,68);font-size:31px;opacity:0;transform:translateY(8px)}
+.conversation-brain-note{position:absolute;left:21.3%;top:71%;width:18%;text-align:center;color:#385146;font-size:30px;font-weight:750;line-height:1.15}
 .conversation-link-layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .conversation-link-active,.conversation-link-success{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .conversation-link-active{stroke:rgba(71,85,105,.46);stroke-width:3;stroke-dasharray:9 11}
@@ -596,54 +596,60 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         <div class="fw-label" style="left:83.3%;top:81.4%">Smaller offer</div>
         <div class="fw-label" style="left:16.7%;top:81.4%">Helps fund new leads</div>
             </div>
-            <div class="triager-conversation-demo" role="img" aria-label="Three buyer conversations handled by five AI Triagers, with assessment revenue returning to the AI brain">
+            <div class="triager-conversation-demo" role="img" aria-label="Three buyer conversations handled by AI Triagers, with assessment revenue returning to the AI brain">
               <svg class="conversation-link-layer" viewBox="0 0 1240 760" preserveAspectRatio="none" aria-hidden="true">
-                <path class="conversation-link-active" d="M 540 370 C 510 370 500 380 470 380"/>
-                <path class="conversation-link-success" pathLength="1" d="M 540 370 C 510 370 500 380 470 380"/>
+                <path class="conversation-link-active" d="M 520 370 C 506 370 500 380 481 380"/>
+                <path class="conversation-link-success" pathLength="1" d="M 520 370 C 506 370 500 380 481 380"/>
                 <circle class="conversation-transfer-dot" r="8"/>
               </svg>
-              <div class="conversation-brain-note">5 AI Triagers active</div>
+              <div class="conversation-brain-note">AI Triagers active</div>
               <div class="conversation-stack" aria-hidden="true">
                 <article class="conversation-card" data-conversation-index="0">
                   <div class="conversation-summary">
-                    <div class="conversation-summary-copy"><strong>Sandra</strong><span data-conversation-summary-state>Handled</span></div>
-                    <strong class="conversation-summary-result" data-conversation-summary-tail>Complete</strong>
+                    <strong>Sandra</strong>
+                    <span class="conversation-summary-result" data-conversation-summary-tail>Assessment sold</span>
                   </div>
                   <div class="conversation-active">
-                    <div class="conversation-active-head"><strong>Sandra</strong><span class="conversation-active-status">AI Triager replying</span></div>
-                    <div class="conversation-messages">
-                      <div class="conversation-message">“Which option fits me without another call?”</div>
-                      <div class="conversation-message is-ai">The $8 assessment is your next step.</div>
+                    <div class="conversation-active-content">
+                      <div class="conversation-active-head"><strong>Sandra</strong><span class="conversation-active-status">Reading lead</span></div>
+                      <div class="conversation-messages">
+                        <div class="conversation-message">“Which option fits me without another call?”</div>
+                        <div class="conversation-message is-ai">Start with the $8 assessment.</div>
+                      </div>
+                      <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
                     </div>
-                    <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
                   </div>
                 </article>
                 <article class="conversation-card" data-conversation-index="1">
                   <div class="conversation-summary">
-                    <div class="conversation-summary-copy"><strong>Michael</strong><span data-conversation-summary-state>Queued</span></div>
-                    <strong class="conversation-summary-result" data-conversation-summary-tail>Up next</strong>
+                    <strong>Michael</strong>
+                    <span class="conversation-summary-result" data-conversation-summary-tail>Up next</span>
                   </div>
                   <div class="conversation-active">
-                    <div class="conversation-active-head"><strong>Michael</strong><span class="conversation-active-status">AI Triager replying</span></div>
-                    <div class="conversation-messages">
-                      <div class="conversation-message">“I’m not ready for the full service. What’s next?”</div>
-                      <div class="conversation-message is-ai">The $8 assessment is your next step.</div>
+                    <div class="conversation-active-content">
+                      <div class="conversation-active-head"><strong>Michael</strong><span class="conversation-active-status">Reading lead</span></div>
+                      <div class="conversation-messages">
+                        <div class="conversation-message">“I’m not ready for full service. What’s next?”</div>
+                        <div class="conversation-message is-ai">Start with the $8 assessment.</div>
+                      </div>
+                      <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
                     </div>
-                    <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
                   </div>
                 </article>
                 <article class="conversation-card" data-conversation-index="2">
                   <div class="conversation-summary">
-                    <div class="conversation-summary-copy"><strong>David</strong><span data-conversation-summary-state>Queued</span></div>
-                    <strong class="conversation-summary-result" data-conversation-summary-tail>Up next</strong>
+                    <strong>David</strong>
+                    <span class="conversation-summary-result" data-conversation-summary-tail>Up next</span>
                   </div>
                   <div class="conversation-active">
-                    <div class="conversation-active-head"><strong>David</strong><span class="conversation-active-status">AI Triager replying</span></div>
-                    <div class="conversation-messages">
-                      <div class="conversation-message">“Can this help if I already run ads?”</div>
-                      <div class="conversation-message is-ai">Yes. Start with the $8 assessment.</div>
+                    <div class="conversation-active-content">
+                      <div class="conversation-active-head"><strong>David</strong><span class="conversation-active-status">Reading lead</span></div>
+                      <div class="conversation-messages">
+                        <div class="conversation-message">“Can this help if I already run ads?”</div>
+                        <div class="conversation-message is-ai">Yes. Start with the $8 assessment.</div>
+                      </div>
+                      <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
                     </div>
-                    <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
                   </div>
                 </article>
               </div>
@@ -1016,6 +1022,20 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var conversationDemo=zoomSection && zoomSection.querySelector('.triager-conversation-demo');
   var conversationStack=zoomSection && zoomSection.querySelector('.conversation-stack');
   var conversationCards=zoomSection ? zoomSection.querySelectorAll('.conversation-card') : [];
+  var conversationCardViews=[];
+  for(var conversationCardIndex=0;conversationCardIndex<conversationCards.length;conversationCardIndex++){
+    var conversationCard=conversationCards[conversationCardIndex];
+    conversationCardViews.push({
+      card:conversationCard,
+      summary:conversationCard.querySelector('.conversation-summary'),
+      active:conversationCard.querySelector('.conversation-active'),
+      content:conversationCard.querySelector('.conversation-active-content'),
+      aiMessage:conversationCard.querySelector('.conversation-message.is-ai'),
+      status:conversationCard.querySelector('.conversation-active-status'),
+      purchase:conversationCard.querySelector('.conversation-purchase'),
+      tail:conversationCard.querySelector('[data-conversation-summary-tail]')
+    });
+  }
   var conversationGeometry=null;
   var conversationLinkActive=zoomSection && zoomSection.querySelector('.conversation-link-active');
   var conversationLinkSuccess=zoomSection && zoomSection.querySelector('.conversation-link-success');
@@ -1178,26 +1198,28 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     zoomSection.classList.toggle('is-manager-pulse',!state.knowledgeHolding && state.knowledgeStepProgress>=.95);
   }
   function computeConversationActivity(progressValue){
-    var p=zoomClamp(progressValue,0,1), scaled=p>=1 ? 3 : p*3, slot=p>=1 ? 2 : Math.floor(scaled), raw=p>=1 ? 1 : scaled-slot;
+    var p=zoomClamp(progressValue,0,1), cycleProgress=zoomClamp(p/.96,0,1), scaled=cycleProgress>=1 ? 3 : cycleProgress*3, slot=cycleProgress>=1 ? 2 : Math.floor(scaled), raw=cycleProgress>=1 ? 1 : scaled-slot;
     var activeIndex=slot, nextIndex=(slot+1)%3;
+    var contentIn=slot===0 && p<.015 ? 1 : storyEase(zoomRange(raw,0,.025));
+    var aiReply=storyEase(zoomRange(raw,.16,.27));
     var purchase=storyEase(zoomRange(raw,.42,.54));
     var solid=storyEase(zoomRange(raw,.50,.62));
     var transfer=storyEase(zoomRange(raw,.62,.74));
     var connectorOpacity=1-storyEase(zoomRange(raw,.76,.815));
     var impact=storyEase(zoomRange(raw,.70,.76));
-    var collapse=storyEase(zoomRange(raw,.82,.895));
-    var expand=storyEase(zoomRange(raw,.92,.995));
+    var contentOut=1-storyEase(zoomRange(raw,.79,.82));
+    var collapse=storyEase(zoomRange(raw,.82,.88));
+    var expand=storyEase(zoomRange(raw,.925,.985));
+    var loopOpacity=1-storyEase(zoomRange(p,.96,.995));
     var pulse=transfer<=0 || transfer>=1 ? 0 : Math.sin(Math.PI*transfer);
-    return {slot:slot,raw:raw,activeIndex:activeIndex,nextIndex:nextIndex,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,collapse:collapse,expand:expand,pulse:pulse};
+    return {slot:slot,raw:raw,activeIndex:activeIndex,nextIndex:nextIndex,contentIn:contentIn,aiReply:aiReply,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,contentOut:contentOut,collapse:collapse,expand:expand,loopOpacity:loopOpacity,pulse:pulse};
   }
   function setConversationPanel(panel,y,opacity,scale){
     panel.style.opacity=String(zoomClamp(opacity,0,1));
     panel.style.transform='translate3d(0,'+y.toFixed(2)+'px,0) scale('+scale.toFixed(3)+')';
   }
-  function setConversationSummary(card,state,tail){
-    var stateNode=card.querySelector('[data-conversation-summary-state]'), tailNode=card.querySelector('[data-conversation-summary-tail]');
-    stateNode.textContent=state;
-    tailNode.textContent=tail;
+  function setConversationSummary(view,tail){
+    view.tail.textContent=tail;
   }
   function getConversationGeometry(){
     if(conversationGeometry) return conversationGeometry;
@@ -1218,34 +1240,41 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     }
     return {positions:positions,openAmounts:openAmounts};
   }
-  function renderConversationCard(card,index,state,geometry,layout){
-    var summary=card.querySelector('.conversation-summary'), active=card.querySelector('.conversation-active'), purchase=card.querySelector('.conversation-purchase');
+  function renderConversationCard(view,index,state,geometry,layout){
     var isCurrent=index===state.activeIndex, isNext=index===state.nextIndex;
     var openAmount=layout.openAmounts[index], y=layout.positions[index];
     var summaryOpacity=isCurrent ? state.collapse>=1 ? 1 : 0 : isNext ? state.expand>0 ? 0 : 1 : 1;
     var activeOpacity=isCurrent ? state.collapse>=1 ? 0 : 1 : isNext ? state.expand>0 ? 1 : 0 : 0;
+    var contentOpacity=isCurrent ? state.contentIn*state.contentOut : 0;
     var completed=isCurrent || (!isNext && index<state.activeIndex);
-    setConversationSummary(card,completed ? 'Handled' : 'Queued',completed ? 'Complete' : 'Up next');
-    setConversationPanel(summary,y,summaryOpacity,1);
-    setConversationPanel(active,y,activeOpacity,.985+.015*openAmount);
-    active.style.clipPath='inset(0 0 '+((1-openAmount)*(1-geometry.summaryHeight/geometry.activeHeight)*100).toFixed(2)+'% 0 round 16px)';
-    card.style.zIndex=openAmount>0 ? '2' : '1';
-    purchase.style.opacity='0';
+    setConversationSummary(view,completed ? 'Assessment sold' : 'Up next');
+    setConversationPanel(view.summary,y,summaryOpacity,1);
+    setConversationPanel(view.active,y,activeOpacity,.985+.015*openAmount);
+    view.active.style.clipPath='inset(0 0 '+((1-openAmount)*(1-geometry.summaryHeight/geometry.activeHeight)*100).toFixed(2)+'% 0 round 16px)';
+    view.content.style.opacity=String(contentOpacity);
+    view.content.style.transform='translateY('+(6*(1-contentOpacity)).toFixed(2)+'px)';
+    view.aiMessage.style.opacity=String(isCurrent ? state.aiReply : 0);
+    view.aiMessage.style.transform='translateY('+(8*(1-state.aiReply)).toFixed(2)+'px)';
+    view.status.textContent=state.purchase>=.5 ? 'Assessment sold' : state.aiReply>=.5 ? 'Reply sent' : 'Reading lead';
+    view.card.style.zIndex=openAmount>0 ? '2' : '1';
+    view.purchase.style.opacity='0';
     if(isCurrent){
-      purchase.style.opacity=String(state.purchase*(1-state.collapse));
-      purchase.style.transform='translateY('+(8*(1-state.purchase)).toFixed(2)+'px)';
+      view.purchase.style.opacity=String(state.purchase*state.contentOut);
+      view.purchase.style.transform='translateY('+(8*(1-state.purchase)).toFixed(2)+'px)';
     }
   }
   function renderConversationActivity(progress){
     if(!conversationDemo || !conversationStack) return;
     var state=computeConversationActivity(progress), geometry=getConversationGeometry();
-    var layout=getConversationAccordionLayout(state,geometry,conversationCards.length);
-    for(var i=0;i<conversationCards.length;i++) renderConversationCard(conversationCards[i],i,state,geometry,layout);
+    var layout=getConversationAccordionLayout(state,geometry,conversationCardViews.length);
+    for(var i=0;i<conversationCardViews.length;i++) renderConversationCard(conversationCardViews[i],i,state,geometry,layout);
     var linkY=65+layout.positions[state.activeIndex]+geometry.activeHeight/2;
-    var linkPath='M 540 '+linkY.toFixed(2)+' C 510 '+linkY.toFixed(2)+' 500 380 470 380';
+    var linkPath='M 520 '+linkY.toFixed(2)+' C 506 '+linkY.toFixed(2)+' 500 380 481 380';
     conversationLinkActive.setAttribute('d',linkPath);
     conversationLinkSuccess.setAttribute('d',linkPath);
+    conversationDemo.style.opacity=String(state.loopOpacity);
     conversationStack.style.opacity='1';
+    zoomSection.style.setProperty('--triager-loop-opacity',String(state.loopOpacity));
     conversationLinkActive.style.opacity=String((1-state.solid)*state.connectorOpacity);
     conversationLinkSuccess.style.opacity=String(state.solid*state.connectorOpacity);
     conversationLinkSuccess.style.strokeDashoffset=String(1-state.solid);
@@ -1259,7 +1288,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var budget=state.slot*8+(state.impact>=.5 ? 8 : 0);
     if(coreBudgetValue) coreBudgetValue.textContent='$'+budget;
     var gainOpacity=state.impact*state.connectorOpacity;
-    if(coreGain){ coreGain.style.opacity=String(gainOpacity); coreGain.style.transform='translateY('+(6-10*state.impact).toFixed(2)+'px)'; }
+    if(coreGain){ coreGain.style.opacity=String(gainOpacity); coreGain.style.setProperty('--gain-y',(6-10*state.impact).toFixed(2)+'px'); }
     if(storyCore) storyCore.setAttribute('aria-label','AI brain. Total ad budget $'+budget);
     if(coreStatus) coreStatus.textContent=state.impact>0 ? 'Makes $8 available for ads' : 'AI Triagers are handling buyer conversations';
   }
@@ -1270,6 +1299,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     setPathProgress(phonePath,0);
     if(phonePath) phonePath.style.opacity='0';
     if(activityParticle) activityParticle.style.opacity='0';
+    if(conversationDemo) conversationDemo.style.opacity='0';
     if(conversationStack) conversationStack.style.opacity='0';
     if(conversationLinkActive) conversationLinkActive.style.opacity='0';
     if(conversationLinkSuccess) conversationLinkSuccess.style.opacity='0';
