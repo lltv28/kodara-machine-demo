@@ -221,7 +221,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-summary-copy{display:grid;gap:4px;min-width:0}
 .conversation-summary strong,.conversation-active strong{font-weight:750;color:#18201d}
 .conversation-summary-result{color:rgb(16,104,68);white-space:nowrap}
-.conversation-active{height:var(--conversation-active-h);padding:22px 24px;overflow:hidden}
+.conversation-active{height:var(--conversation-active-h);padding:22px 24px;overflow:hidden;clip-path:inset(0 0 0 0 round 16px)}
 .conversation-active-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:2px solid rgba(16,104,68,.12);font-size:32px}
 .conversation-active-status{color:rgb(16,104,68);font-weight:700;white-space:nowrap}
 .conversation-messages{display:grid;gap:14px;padding-top:18px}
@@ -1180,14 +1180,15 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   function computeConversationActivity(progressValue){
     var p=zoomClamp(progressValue,0,1), scaled=p>=1 ? 3 : p*3, slot=p>=1 ? 2 : Math.floor(scaled), raw=p>=1 ? 1 : scaled-slot;
     var activeIndex=slot, nextIndex=(slot+1)%3;
-    var purchase=storyEase(zoomRange(raw,.48,.60));
-    var solid=storyEase(zoomRange(raw,.54,.66));
-    var transfer=storyEase(zoomRange(raw,.66,.80));
-    var connectorOpacity=1-storyEase(zoomRange(raw,.82,.87));
-    var impact=storyEase(zoomRange(raw,.76,.82));
-    var rotation=storyEase(zoomRange(raw,.88,.99));
+    var purchase=storyEase(zoomRange(raw,.42,.54));
+    var solid=storyEase(zoomRange(raw,.50,.62));
+    var transfer=storyEase(zoomRange(raw,.62,.74));
+    var connectorOpacity=1-storyEase(zoomRange(raw,.76,.815));
+    var impact=storyEase(zoomRange(raw,.70,.76));
+    var collapse=storyEase(zoomRange(raw,.82,.895));
+    var expand=storyEase(zoomRange(raw,.92,.995));
     var pulse=transfer<=0 || transfer>=1 ? 0 : Math.sin(Math.PI*transfer);
-    return {slot:slot,raw:raw,activeIndex:activeIndex,nextIndex:nextIndex,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,rotation:rotation,pulse:pulse};
+    return {slot:slot,raw:raw,activeIndex:activeIndex,nextIndex:nextIndex,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,collapse:collapse,expand:expand,pulse:pulse};
   }
   function setConversationPanel(panel,y,opacity,scale){
     panel.style.opacity=String(zoomClamp(opacity,0,1));
@@ -1204,41 +1205,46 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var summaryHeight=parseFloat(styles.getPropertyValue('--conversation-summary-h'));
     var activeHeight=parseFloat(styles.getPropertyValue('--conversation-active-h'));
     var gap=parseFloat(styles.getPropertyValue('--conversation-gap'));
-    var activeY=summaryHeight+gap, nextY=activeY+activeHeight+gap;
-    conversationGeometry={summaryHeight:summaryHeight,activeHeight:activeHeight,gap:gap,activeY:activeY,nextY:nextY};
+    conversationGeometry={summaryHeight:summaryHeight,activeHeight:activeHeight,gap:gap};
     return conversationGeometry;
   }
-  function renderConversationCard(card,index,state,geometry){
+  function getConversationAccordionLayout(state,geometry,count){
+    var positions=[], openAmounts=[], y=0;
+    for(var i=0;i<count;i++){
+      var openAmount=i===state.activeIndex ? 1-state.collapse : i===state.nextIndex ? state.expand : 0;
+      positions.push(y);
+      openAmounts.push(openAmount);
+      y+=geometry.summaryHeight+(geometry.activeHeight-geometry.summaryHeight)*openAmount+geometry.gap;
+    }
+    return {positions:positions,openAmounts:openAmounts};
+  }
+  function renderConversationCard(card,index,state,geometry,layout){
     var summary=card.querySelector('.conversation-summary'), active=card.querySelector('.conversation-active'), purchase=card.querySelector('.conversation-purchase');
-    var t=state.rotation;
-    setConversationPanel(summary,geometry.nextY,0,1);
-    setConversationPanel(active,geometry.activeY,0,.98);
+    var isCurrent=index===state.activeIndex, isNext=index===state.nextIndex;
+    var openAmount=layout.openAmounts[index], y=layout.positions[index];
+    var summaryOpacity=isCurrent ? state.collapse>=1 ? 1 : 0 : isNext ? state.expand>0 ? 0 : 1 : 1;
+    var activeOpacity=isCurrent ? state.collapse>=1 ? 0 : 1 : isNext ? state.expand>0 ? 1 : 0 : 0;
+    var completed=isCurrent || (!isNext && index<state.activeIndex);
+    setConversationSummary(card,completed ? 'Handled' : 'Queued',completed ? 'Complete' : 'Up next');
+    setConversationPanel(summary,y,summaryOpacity,1);
+    setConversationPanel(active,y,activeOpacity,.985+.015*openAmount);
+    active.style.clipPath='inset(0 0 '+((1-openAmount)*(1-geometry.summaryHeight/geometry.activeHeight)*100).toFixed(2)+'% 0 round 16px)';
+    card.style.zIndex=openAmount>0 ? '2' : '1';
     purchase.style.opacity='0';
-    if(index===state.activeIndex){
-      setConversationSummary(card,'Handled','Complete');
-      setConversationPanel(summary,geometry.activeY*(1-t),t,.98+.02*t);
-      setConversationPanel(active,geometry.activeY-geometry.gap*1.7*t,1-t,1-.02*t);
-      purchase.style.opacity=String(state.purchase*(1-storyEase(zoomRange(state.raw,.82,.87)))*(1-t));
+    if(isCurrent){
+      purchase.style.opacity=String(state.purchase*(1-state.collapse));
       purchase.style.transform='translateY('+(8*(1-state.purchase)).toFixed(2)+'px)';
-    }else if(index===state.nextIndex){
-      setConversationSummary(card,'Queued','Up next');
-      setConversationPanel(summary,geometry.nextY-(geometry.nextY-geometry.activeY)*t,1-t,1);
-      setConversationPanel(active,geometry.activeY+geometry.gap*3*(1-t),t,.98+.02*t);
-    }else{
-      var firstHalf=zoomClamp(t*2,0,1), secondHalf=zoomClamp((t-.5)*2,0,1);
-      if(t<.5){
-        setConversationSummary(card,'Handled','Complete');
-        setConversationPanel(summary,-geometry.summaryHeight*.8*firstHalf,1-firstHalf,1-.02*firstHalf);
-      }else{
-        setConversationSummary(card,'Queued','Up next');
-        setConversationPanel(summary,geometry.nextY+geometry.gap*2.5*(1-secondHalf),secondHalf,.98+.02*secondHalf);
-      }
     }
   }
   function renderConversationActivity(progress){
     if(!conversationDemo || !conversationStack) return;
     var state=computeConversationActivity(progress), geometry=getConversationGeometry();
-    for(var i=0;i<conversationCards.length;i++) renderConversationCard(conversationCards[i],i,state,geometry);
+    var layout=getConversationAccordionLayout(state,geometry,conversationCards.length);
+    for(var i=0;i<conversationCards.length;i++) renderConversationCard(conversationCards[i],i,state,geometry,layout);
+    var linkY=65+layout.positions[state.activeIndex]+geometry.activeHeight/2;
+    var linkPath='M 540 '+linkY.toFixed(2)+' C 510 '+linkY.toFixed(2)+' 500 380 470 380';
+    conversationLinkActive.setAttribute('d',linkPath);
+    conversationLinkSuccess.setAttribute('d',linkPath);
     conversationStack.style.opacity='1';
     conversationLinkActive.style.opacity=String((1-state.solid)*state.connectorOpacity);
     conversationLinkSuccess.style.opacity=String(state.solid*state.connectorOpacity);
@@ -1252,7 +1258,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     zoomSection.style.setProperty('--sale-ring-opacity',String(.16*state.pulse));
     var budget=state.slot*8+(state.impact>=.5 ? 8 : 0);
     if(coreBudgetValue) coreBudgetValue.textContent='$'+budget;
-    var gainOpacity=state.impact*(1-storyEase(zoomRange(state.raw,.82,.87)));
+    var gainOpacity=state.impact*state.connectorOpacity;
     if(coreGain){ coreGain.style.opacity=String(gainOpacity); coreGain.style.transform='translateY('+(6-10*state.impact).toFixed(2)+'px)'; }
     if(storyCore) storyCore.setAttribute('aria-label','AI brain. Total ad budget $'+budget);
     if(coreStatus) coreStatus.textContent=state.impact>0 ? 'Makes $8 available for ads' : 'AI Triagers are handling buyer conversations';
@@ -1531,7 +1537,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 (function(){
   'use strict';
   var chapter=new URLSearchParams(location.search).get('player');
-  var durations={learn:5000,triagers:12000,flywheel:8000,graph:8000};
+  var durations={learn:5000,triagers:18000,flywheel:8000,graph:8000};
   if(!durations[chapter] || !window.renderCaptureFrame) return;
   var duration=durations[chapter],elapsed=0,startedAt=0,frame=0,playing=false;
 
