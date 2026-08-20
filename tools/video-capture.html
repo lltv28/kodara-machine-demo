@@ -56,6 +56,7 @@ body{font-family:var(--fb);background:transparent;color:var(--ink);-webkit-font-
 .player-mode.compact-mode[data-player="triagers"] .phone-stage-caption{display:block;font-size:28px}
 .player-mode.compact-mode[data-player="triagers"] .phone-screen-state,.player-mode.compact-mode[data-player="triagers"] .phone-header{display:none}
 .player-mode.compact-mode[data-player="triagers"] .phone-compact-state{display:block}
+.player-mode.compact-mode[data-player="triagers"] .triager-demo-scene,.player-mode.compact-mode[data-player="triagers"] .triager-team{display:none}
 .player-mode.compact-mode[data-player="triagers"] .wheel-layer .fw,.player-mode.compact-mode[data-player="triagers"] .wheel-layer .fw-label{display:none}
 .player-mode.compact-mode[data-player="triagers"] .triager-conversation-demo{display:block}
 .player-mode.compact-mode[data-player="flywheel"] .story-core-title{font-size:54px}
@@ -214,20 +215,40 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .activity-path{fill:none;stroke:rgb(22,164,108);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.88}
 .activity-particle{fill:rgb(22,164,108);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .triager-conversation-demo{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;color:#18201d}
-.conversation-stack{--conversation-summary-h:96px;--conversation-active-h:390px;--conversation-gap:14px;position:absolute;left:41%;top:8.5%;width:37.5%;height:calc(var(--conversation-summary-h) + var(--conversation-summary-h) + var(--conversation-active-h) + var(--conversation-gap) + var(--conversation-gap));opacity:0}
+.conversation-stack{--conversation-summary-h:96px;--conversation-active-h:430px;--conversation-gap:14px;position:absolute;left:41%;top:4.5%;width:37.5%;height:calc(var(--conversation-summary-h) + var(--conversation-summary-h) + var(--conversation-active-h) + var(--conversation-gap) + var(--conversation-gap));opacity:0}
 .conversation-card{position:absolute;inset:0;pointer-events:none}
 .conversation-summary,.conversation-active{position:absolute;left:0;right:0;top:0;border:2px solid rgba(16,104,68,.16);border-radius:16px;background:rgba(255,253,251,.98);box-shadow:0 10px 28px rgba(30,41,59,.09);will-change:transform,opacity}
-.conversation-summary{height:var(--conversation-summary-h);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;padding:14px 20px;color:#68736d;font-size:32px;line-height:1.15}
+.conversation-summary{height:var(--conversation-summary-h);display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 18px;color:#68736d;font-size:30px;line-height:1.1}
 .conversation-summary strong,.conversation-active strong{font-weight:750;color:#18201d}
-.conversation-summary-result{color:rgb(16,104,68);white-space:nowrap}
+.conversation-summary-main{display:grid;gap:3px;min-width:0}
+.conversation-summary-preview{overflow:hidden;color:#68736d;font-size:26px;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
+.conversation-summary-result{color:rgb(16,104,68);font-size:27px;font-weight:750;white-space:nowrap}
+.conversation-avatar{width:48px;height:48px;display:grid;place-items:center;flex:0 0 auto;border-radius:50%;background:#e8ecea;color:#385146;font-size:24px;font-weight:800;line-height:1}
+.conversation-avatar.is-ai{background:rgb(16,104,68);color:#fff}
 .conversation-active{height:var(--conversation-active-h);overflow:hidden;clip-path:inset(0 0 0 0 round 16px)}
-.conversation-active-content{height:100%;padding:18px 24px 16px;will-change:transform,opacity}
-.conversation-active-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:10px;border-bottom:2px solid rgba(16,104,68,.12);font-size:32px}
-.conversation-active-status{color:rgb(16,104,68);font-weight:700;white-space:nowrap}
-.conversation-messages{display:grid;gap:10px;padding-top:12px}
-.conversation-message{width:92%;padding:10px 16px;border-radius:14px;background:#f0f3f1;color:#27312d;font-size:32px;line-height:1.18}
-.conversation-message.is-ai{justify-self:end;background:#eaf6f0;color:#0f6843;opacity:0;transform:translateY(8px);will-change:transform,opacity}
-.conversation-purchase{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:10px;padding-top:10px;border-top:2px solid rgba(16,104,68,.12);color:rgb(16,104,68);font-size:31px;opacity:0;transform:translateY(8px)}
+.conversation-active-content{height:100%;display:grid;grid-template-rows:72px minmax(0,1fr) auto 64px;padding:0;will-change:transform,opacity}
+.conversation-chat-head{display:flex;align-items:center;padding:12px 20px;border-bottom:2px solid rgba(16,104,68,.12)}
+.conversation-agent{display:flex;align-items:center;gap:12px}
+.conversation-agent-copy{display:grid;gap:3px}
+.conversation-agent-copy strong{font-size:30px;line-height:1}
+.conversation-online{display:flex;align-items:center;gap:7px;color:#68736d;font-size:23px;font-weight:650;line-height:1}
+.conversation-online::before{content:"";width:9px;height:9px;border-radius:50%;background:rgb(22,164,108)}
+.conversation-messages{display:grid;align-content:start;gap:12px;padding:12px 20px 8px}
+.conversation-row{display:flex;align-items:flex-end;gap:10px}
+.conversation-row.is-ai{justify-content:flex-end;opacity:0;will-change:opacity,transform}
+.conversation-row .conversation-avatar{width:42px;height:42px;font-size:21px}
+.conversation-message{position:relative;max-width:78%;padding:10px 14px;border-radius:16px 16px 16px 5px;background:#f0f3f1;color:#27312d;font-size:29px;line-height:1.15}
+.conversation-message::after{content:"";position:absolute;left:-5px;bottom:0;width:12px;height:12px;background:inherit;clip-path:polygon(0 100%,100% 0,100% 100%)}
+.conversation-sender{display:block;margin-bottom:3px;color:#68736d;font-size:21px;font-weight:750;line-height:1}
+.conversation-message.is-ai{display:grid;min-width:78px;border-radius:16px 16px 5px 16px;background:#eaf6f0;color:#0f6843}
+.conversation-message.is-ai::after{left:auto;right:-5px;transform:scaleX(-1)}
+.conversation-typing,.conversation-ai-copy{grid-area:1/1;align-self:center}
+.conversation-typing{display:flex;align-items:center;justify-content:center;gap:6px;min-height:28px;opacity:0}
+.conversation-typing i{width:8px;height:8px;border-radius:50%;background:rgb(16,104,68)}
+.conversation-ai-copy{opacity:0}
+.conversation-purchase{display:flex;align-items:center;justify-content:center;gap:18px;margin:0 20px 8px;padding:8px 14px;border:2px solid rgba(16,104,68,.16);border-radius:12px;background:#f3f9f6;color:rgb(16,104,68);font-size:27px;opacity:0;transform:translateY(8px)}
+.conversation-composer{align-self:center;height:48px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 20px 14px;padding:6px 7px 6px 14px;border:2px solid #dce3df;border-radius:14px;background:#fff;color:#68736d;font-size:26px;font-weight:600;white-space:nowrap}
+.conversation-send{padding:7px 12px;border-radius:10px;background:rgb(16,104,68);color:#fff;font-size:22px;font-weight:750}
 .conversation-brain-note{position:absolute;left:21.3%;top:71%;width:18%;text-align:center;color:#385146;font-size:30px;font-weight:750;line-height:1.15}
 .conversation-link-layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .conversation-link-active,.conversation-link-success{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
@@ -330,6 +351,18 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 }
 @media(min-width:460px) and (max-width:720px){
   :root{--demo-critical:34px;--demo-meta:26px}
+}
+@media(max-width:420px){
+  .player-mode.compact-mode[data-player="triagers"] .conversation-stack{--conversation-summary-h:90px;--conversation-active-h:500px;top:3%}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-summary{font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-summary-preview,.player-mode.compact-mode[data-player="triagers"] .conversation-summary-result{font-size:29px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-active-content{grid-template-rows:80px minmax(0,1fr) auto 72px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-agent-copy strong{font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-online{font-size:29px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-message{max-width:88%;padding:8px 12px;font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-sender{font-size:29px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase{font-size:31px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-composer,.player-mode.compact-mode[data-player="triagers"] .conversation-send{font-size:29px}
 }
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--fb);font-weight:700;font-size:1rem;letter-spacing:-.005em;white-space:nowrap;color:#fff;background:var(--accent-ink);border:1px solid var(--accent-ink);border-radius:999px;padding:13px 28px;text-decoration:none;box-shadow:var(--shadow-sm);transition:background .15s ease}
@@ -606,49 +639,61 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
               <div class="conversation-stack" aria-hidden="true">
                 <article class="conversation-card" data-conversation-index="0">
                   <div class="conversation-summary">
-                    <strong>Sandra</strong>
-                    <span class="conversation-summary-result" data-conversation-summary-tail>Assessment sold</span>
+                    <span class="conversation-avatar" aria-hidden="true">S</span>
+                    <span class="conversation-summary-main"><strong>Sandra</strong><span class="conversation-summary-preview" data-conversation-summary-preview>Assessment purchased</span></span>
+                    <span class="conversation-summary-result" data-conversation-summary-tail>$8</span>
                   </div>
                   <div class="conversation-active">
                     <div class="conversation-active-content">
-                      <div class="conversation-active-head"><strong>Sandra</strong><span class="conversation-active-status">Reading lead</span></div>
+                      <div class="conversation-chat-head">
+                        <span class="conversation-agent"><span class="conversation-avatar is-ai" aria-hidden="true">AI</span><span class="conversation-agent-copy"><strong>AI Triager</strong><span class="conversation-online">Online</span></span></span>
+                      </div>
                       <div class="conversation-messages">
-                        <div class="conversation-message">“Which option fits me without another call?”</div>
-                        <div class="conversation-message is-ai">Start with the $8 assessment.</div>
+                        <div class="conversation-row"><span class="conversation-avatar" aria-hidden="true">S</span><div class="conversation-message"><span class="conversation-sender">Sandra</span>Which option fits me best?</div></div>
+                        <div class="conversation-row is-ai"><div class="conversation-message is-ai"><span class="conversation-typing" aria-label="AI Triager is typing"><i></i><i></i><i></i></span><span class="conversation-ai-copy">Start with the $8 assessment.</span></div><span class="conversation-avatar is-ai" aria-hidden="true">AI</span></div>
                       </div>
                       <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
+                      <div class="conversation-composer"><span>AI handles this lead</span><span class="conversation-send">Send</span></div>
                     </div>
                   </div>
                 </article>
                 <article class="conversation-card" data-conversation-index="1">
                   <div class="conversation-summary">
-                    <strong>Michael</strong>
+                    <span class="conversation-avatar" aria-hidden="true">M</span>
+                    <span class="conversation-summary-main"><strong>Michael</strong><span class="conversation-summary-preview" data-conversation-summary-preview>Waiting for reply</span></span>
                     <span class="conversation-summary-result" data-conversation-summary-tail>Up next</span>
                   </div>
                   <div class="conversation-active">
                     <div class="conversation-active-content">
-                      <div class="conversation-active-head"><strong>Michael</strong><span class="conversation-active-status">Reading lead</span></div>
+                      <div class="conversation-chat-head">
+                        <span class="conversation-agent"><span class="conversation-avatar is-ai" aria-hidden="true">AI</span><span class="conversation-agent-copy"><strong>AI Triager</strong><span class="conversation-online">Online</span></span></span>
+                      </div>
                       <div class="conversation-messages">
-                        <div class="conversation-message">“I’m not ready for full service. What’s next?”</div>
-                        <div class="conversation-message is-ai">Start with the $8 assessment.</div>
+                        <div class="conversation-row"><span class="conversation-avatar" aria-hidden="true">M</span><div class="conversation-message"><span class="conversation-sender">Michael</span>What if I’m not ready for full service?</div></div>
+                        <div class="conversation-row is-ai"><div class="conversation-message is-ai"><span class="conversation-typing" aria-label="AI Triager is typing"><i></i><i></i><i></i></span><span class="conversation-ai-copy">Start with the $8 assessment.</span></div><span class="conversation-avatar is-ai" aria-hidden="true">AI</span></div>
                       </div>
                       <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
+                      <div class="conversation-composer"><span>AI handles this lead</span><span class="conversation-send">Send</span></div>
                     </div>
                   </div>
                 </article>
                 <article class="conversation-card" data-conversation-index="2">
                   <div class="conversation-summary">
-                    <strong>David</strong>
+                    <span class="conversation-avatar" aria-hidden="true">D</span>
+                    <span class="conversation-summary-main"><strong>David</strong><span class="conversation-summary-preview" data-conversation-summary-preview>Waiting for reply</span></span>
                     <span class="conversation-summary-result" data-conversation-summary-tail>Up next</span>
                   </div>
                   <div class="conversation-active">
                     <div class="conversation-active-content">
-                      <div class="conversation-active-head"><strong>David</strong><span class="conversation-active-status">Reading lead</span></div>
+                      <div class="conversation-chat-head">
+                        <span class="conversation-agent"><span class="conversation-avatar is-ai" aria-hidden="true">AI</span><span class="conversation-agent-copy"><strong>AI Triager</strong><span class="conversation-online">Online</span></span></span>
+                      </div>
                       <div class="conversation-messages">
-                        <div class="conversation-message">“Can this help if I already run ads?”</div>
-                        <div class="conversation-message is-ai">Yes. Start with the $8 assessment.</div>
+                        <div class="conversation-row"><span class="conversation-avatar" aria-hidden="true">D</span><div class="conversation-message"><span class="conversation-sender">David</span>Will this work with my existing ads?</div></div>
+                        <div class="conversation-row is-ai"><div class="conversation-message is-ai"><span class="conversation-typing" aria-label="AI Triager is typing"><i></i><i></i><i></i></span><span class="conversation-ai-copy">Yes. Start with the $8 assessment.</span></div><span class="conversation-avatar is-ai" aria-hidden="true">AI</span></div>
                       </div>
                       <div class="conversation-purchase"><strong>Assessment purchased</strong><strong>$8</strong></div>
+                      <div class="conversation-composer"><span>AI handles this lead</span><span class="conversation-send">Send</span></div>
                     </div>
                   </div>
                 </article>
@@ -1030,9 +1075,11 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       summary:conversationCard.querySelector('.conversation-summary'),
       active:conversationCard.querySelector('.conversation-active'),
       content:conversationCard.querySelector('.conversation-active-content'),
-      aiMessage:conversationCard.querySelector('.conversation-message.is-ai'),
-      status:conversationCard.querySelector('.conversation-active-status'),
+      aiRow:conversationCard.querySelector('.conversation-row.is-ai'),
+      typing:conversationCard.querySelector('.conversation-typing'),
+      aiCopy:conversationCard.querySelector('.conversation-ai-copy'),
       purchase:conversationCard.querySelector('.conversation-purchase'),
+      preview:conversationCard.querySelector('[data-conversation-summary-preview]'),
       tail:conversationCard.querySelector('[data-conversation-summary-tail]')
     });
   }
@@ -1201,6 +1248,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var p=zoomClamp(progressValue,0,1), cycleProgress=zoomClamp(p/.96,0,1), scaled=cycleProgress>=1 ? 3 : cycleProgress*3, slot=cycleProgress>=1 ? 2 : Math.floor(scaled), raw=cycleProgress>=1 ? 1 : scaled-slot;
     var activeIndex=slot, nextIndex=(slot+1)%3;
     var contentIn=slot===0 && p<.015 ? 1 : storyEase(zoomRange(raw,0,.025));
+    var typing=storyEase(zoomRange(raw,.08,.12))*(1-storyEase(zoomRange(raw,.16,.20)));
     var aiReply=storyEase(zoomRange(raw,.16,.27));
     var purchase=storyEase(zoomRange(raw,.42,.54));
     var solid=storyEase(zoomRange(raw,.50,.62));
@@ -1212,14 +1260,15 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var expand=storyEase(zoomRange(raw,.925,.985));
     var loopOpacity=1-storyEase(zoomRange(p,.96,.995));
     var pulse=transfer<=0 || transfer>=1 ? 0 : Math.sin(Math.PI*transfer);
-    return {slot:slot,raw:raw,activeIndex:activeIndex,nextIndex:nextIndex,contentIn:contentIn,aiReply:aiReply,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,contentOut:contentOut,collapse:collapse,expand:expand,loopOpacity:loopOpacity,pulse:pulse};
+    return {slot:slot,raw:raw,activeIndex:activeIndex,nextIndex:nextIndex,contentIn:contentIn,typing:typing,aiReply:aiReply,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,contentOut:contentOut,collapse:collapse,expand:expand,loopOpacity:loopOpacity,pulse:pulse};
   }
   function setConversationPanel(panel,y,opacity,scale){
     panel.style.opacity=String(zoomClamp(opacity,0,1));
     panel.style.transform='translate3d(0,'+y.toFixed(2)+'px,0) scale('+scale.toFixed(3)+')';
   }
-  function setConversationSummary(view,tail){
-    view.tail.textContent=tail;
+  function setConversationSummary(view,completed){
+    view.preview.textContent=completed ? 'Assessment purchased' : 'Waiting for reply';
+    view.tail.textContent=completed ? '$8' : 'Up next';
   }
   function getConversationGeometry(){
     if(conversationGeometry) return conversationGeometry;
@@ -1227,7 +1276,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var summaryHeight=parseFloat(styles.getPropertyValue('--conversation-summary-h'));
     var activeHeight=parseFloat(styles.getPropertyValue('--conversation-active-h'));
     var gap=parseFloat(styles.getPropertyValue('--conversation-gap'));
-    conversationGeometry={summaryHeight:summaryHeight,activeHeight:activeHeight,gap:gap};
+    conversationGeometry={top:conversationStack.offsetTop,summaryHeight:summaryHeight,activeHeight:activeHeight,gap:gap};
     return conversationGeometry;
   }
   function getConversationAccordionLayout(state,geometry,count){
@@ -1247,15 +1296,19 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var activeOpacity=isCurrent ? state.collapse>=1 ? 0 : 1 : isNext ? state.expand>0 ? 1 : 0 : 0;
     var contentOpacity=isCurrent ? state.contentIn*state.contentOut : 0;
     var completed=isCurrent || (!isNext && index<state.activeIndex);
-    setConversationSummary(view,completed ? 'Assessment sold' : 'Up next');
+    setConversationSummary(view,completed);
     setConversationPanel(view.summary,y,summaryOpacity,1);
     setConversationPanel(view.active,y,activeOpacity,.985+.015*openAmount);
     view.active.style.clipPath='inset(0 0 '+((1-openAmount)*(1-geometry.summaryHeight/geometry.activeHeight)*100).toFixed(2)+'% 0 round 16px)';
     view.content.style.opacity=String(contentOpacity);
     view.content.style.transform='translateY('+(6*(1-contentOpacity)).toFixed(2)+'px)';
-    view.aiMessage.style.opacity=String(isCurrent ? state.aiReply : 0);
-    view.aiMessage.style.transform='translateY('+(8*(1-state.aiReply)).toFixed(2)+'px)';
-    view.status.textContent=state.purchase>=.5 ? 'Assessment sold' : state.aiReply>=.5 ? 'Reply sent' : 'Reading lead';
+    var typingOpacity=isCurrent ? state.typing*state.contentOut : 0;
+    var replyOpacity=isCurrent ? state.aiReply*state.contentOut : 0;
+    var messageOpacity=Math.max(typingOpacity,replyOpacity);
+    view.aiRow.style.opacity=String(messageOpacity);
+    view.aiRow.style.transform='translateY('+(8*(1-messageOpacity)).toFixed(2)+'px)';
+    view.typing.style.opacity=String(typingOpacity);
+    view.aiCopy.style.opacity=String(replyOpacity);
     view.card.style.zIndex=openAmount>0 ? '2' : '1';
     view.purchase.style.opacity='0';
     if(isCurrent){
@@ -1268,7 +1321,7 @@ h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var state=computeConversationActivity(progress), geometry=getConversationGeometry();
     var layout=getConversationAccordionLayout(state,geometry,conversationCardViews.length);
     for(var i=0;i<conversationCardViews.length;i++) renderConversationCard(conversationCardViews[i],i,state,geometry,layout);
-    var linkY=65+layout.positions[state.activeIndex]+geometry.activeHeight/2;
+    var linkY=geometry.top+layout.positions[state.activeIndex]+geometry.activeHeight/2;
     var linkPath='M 520 '+linkY.toFixed(2)+' C 506 '+linkY.toFixed(2)+' 500 380 481 380';
     conversationLinkActive.setAttribute('d',linkPath);
     conversationLinkSuccess.setAttribute('d',linkPath);

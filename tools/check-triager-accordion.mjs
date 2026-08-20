@@ -4,6 +4,11 @@ import vm from 'node:vm';
 
 const html=readFileSync(new URL('./video-capture.html',import.meta.url),'utf8');
 
+assert.match(html,/class="conversation-chat-head"/,'open conversation should have a recognizable messenger header');
+assert.match(html,/class="conversation-composer"/,'open conversation should retain a recognizable message composer');
+assert.match(html,/class="conversation-typing"/,'AI reply should include a typing state');
+assert.doesNotMatch(html,/conversation-active-status/,'CRM-style status badge should not remain in the messenger header');
+
 function extractFunction(name){
   const start=html.indexOf(`function ${name}(`);
   assert.notEqual(start,-1,`missing ${name}`);
@@ -25,9 +30,9 @@ vm.runInNewContext([
 function card(){
   const nodes={
     summary:{style:{}}, active:{style:{}}, content:{style:{}}, purchase:{style:{}},
-    aiMessage:{style:{}}, activeStatus:{textContent:''}, tail:{textContent:''}
+    aiRow:{style:{}}, typing:{style:{}}, aiCopy:{style:{}}, preview:{textContent:''}, tail:{textContent:''}
   };
-  return {nodes,card:{style:{}},summary:nodes.summary,active:nodes.active,content:nodes.content,purchase:nodes.purchase,aiMessage:nodes.aiMessage,status:nodes.activeStatus,tail:nodes.tail};
+  return {nodes,card:{style:{}},summary:nodes.summary,active:nodes.active,content:nodes.content,purchase:nodes.purchase,aiRow:nodes.aiRow,typing:nodes.typing,aiCopy:nodes.aiCopy,preview:nodes.preview,tail:nodes.tail};
 }
 
 function render(progress){
@@ -42,20 +47,22 @@ function render(progress){
     active:Number(item.nodes.active.style.opacity),
     summary:Number(item.nodes.summary.style.opacity),
     content:Number(item.nodes.content.style.opacity),
-    aiReply:Number(item.nodes.aiMessage.style.opacity),
-    status:item.nodes.activeStatus.textContent,
+    aiReply:Number(item.nodes.aiRow.style.opacity),
+    typing:Number(item.nodes.typing.style.opacity),
+    preview:item.nodes.preview.textContent,
     tail:item.nodes.tail.textContent
   }));
 }
 
 assert.deepEqual(render(.05),[
-  {active:1,summary:0,content:1,aiReply:0,status:'Reading lead',tail:'Assessment sold'},
-  {active:0,summary:1,content:0,aiReply:0,status:'Reading lead',tail:'Up next'},
-  {active:0,summary:1,content:0,aiReply:0,status:'Reading lead',tail:'Up next'}
+  {active:1,summary:0,content:1,aiReply:1,typing:1,preview:'Assessment purchased',tail:'$8'},
+  {active:0,summary:1,content:0,aiReply:0,typing:0,preview:'Waiting for reply',tail:'Up next'},
+  {active:0,summary:1,content:0,aiReply:0,typing:0,preview:'Waiting for reply',tail:'Up next'}
 ]);
 assert.equal(render(0)[0].content,1,'initial frame should show a readable conversation before autoplay begins');
+assert.ok(context.computeConversationActivity(.05).typing>.9,'typing indicator should appear before the AI reply');
+assert.equal(context.computeConversationActivity(.09).typing,0,'typing indicator should clear once the AI reply appears');
 assert.equal(render(.09)[0].aiReply,1,'AI reply should appear after the lead message');
-assert.equal(render(.09)[0].status,'Reply sent','active status should match the visible conversation beat');
 assert.ok(render(.258)[0].content<1,'card content should fade before the shell collapses');
 assert.equal(render(.27)[0].content,0,'collapsed shell must not clip visible conversation text');
 assert.equal(render(.29).reduce((sum,item)=>sum+item.active,0),0,'all conversations should be collapsed before the next one opens');
