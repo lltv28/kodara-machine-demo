@@ -46,13 +46,13 @@ body{font-family:var(--fb);letter-spacing:var(--tracking-body);background:transp
 .player-mode[data-player="flywheel"] .zoom-section{transform:scale(.84)!important;transform-origin:620px 380px!important}
 .player-mode.compact-mode[data-player="learn"] .story-core-status,.player-mode.compact-mode[data-player="triagers"] .story-core-status,.player-mode.compact-mode[data-player="flywheel"] .story-core-status{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core,.player-mode.compact-mode[data-player="flywheel"] .story-core{width:190px}
-.player-mode.compact-mode[data-player="triagers"] .story-core{left:30.3%;top:50%;width:210px;opacity:var(--triager-loop-opacity,1)}
+.player-mode.compact-mode[data-player="triagers"] .story-core{left:28%;top:50%;width:180px;opacity:var(--triager-loop-opacity,1)}
 .player-mode.compact-mode[data-player="flywheel"] .cf-note{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core-title{font-size:52px}
 .player-mode.compact-mode[data-player="learn"] .source-title{font-size:34px}
 .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:46px;transform:translateY(-46px)}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:60%}
-.player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:30px;font-weight:600;letter-spacing:var(--tracking-heading)}
+.player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:23px;font-weight:600;letter-spacing:0}
 .player-mode.compact-mode[data-player="triagers"] .story-core-gain{left:50%;right:auto;top:-36%;--gain-y:6px;transform:translate(-50%,var(--gain-y))!important}
 .player-mode.compact-mode[data-player="triagers"] .triager-team-label text{font-size:38px}
 .player-mode.compact-mode[data-player="triagers"] .triager-worker .worker-core circle{fill:var(--accent);stroke:#fff;stroke-width:3}
@@ -224,37 +224,33 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .activity-path{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.88}
 .activity-particle{fill:var(--accent);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .triager-conversation-demo{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;color:var(--ink)}
-.conversation-app{position:absolute;left:42%;top:5%;width:39%;height:88%;display:grid;grid-template-columns:31% 69%;overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-md);opacity:0}
+.conversation-app{position:absolute;left:39%;top:8%;width:41%;height:84%;display:grid;grid-template-columns:72px minmax(0,1fr);overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-md);opacity:0}
 .conversation-inbox{background:#FAFAFA;border-right:1px solid var(--line-2)}
-.conversation-inbox-head{height:76px;display:grid;align-content:center;gap:4px;padding:0 12px;border-bottom:1px solid var(--line-2)}
-.conversation-inbox-head strong{font-size:25px;line-height:1}
-.conversation-inbox-count{color:#737373;font-size:18px;font-weight:600;white-space:nowrap}
-.conversation-inbox-row{height:118px;display:grid;grid-template-columns:34px minmax(0,1fr);align-content:center;gap:7px;padding:14px 10px;border-bottom:1px solid var(--line-2);background:transparent;will-change:opacity,transform}
+.conversation-inbox-head{height:76px;display:grid;place-content:center;gap:3px;border-bottom:1px solid var(--line-2);text-align:center}
+.conversation-inbox-head strong{font-size:27px;line-height:1}
+.conversation-inbox-count{color:#737373;font-size:16px;font-weight:600;line-height:1;white-space:nowrap}
+.conversation-inbox-row{position:relative;height:112px;display:grid;place-items:center;border-bottom:1px solid var(--line-2);background:transparent;will-change:opacity,transform}
 .conversation-inbox-row.is-selected{background:#fff;box-shadow:inset 3px 0 0 var(--accent)}
+.conversation-inbox-row.is-selected .conversation-avatar{color:var(--accent);box-shadow:0 0 0 3px rgba(46,125,82,.18)}
 .conversation-inbox-row.is-completed{background:rgba(46,125,82,.035)}
-.conversation-inbox-copy{display:grid;align-content:center;gap:5px;min-width:0}
-.conversation-inbox-copy strong{overflow:hidden;color:var(--ink);font-size:22px;line-height:1;text-overflow:ellipsis;white-space:nowrap}
-.conversation-inbox-meta{display:grid;gap:2px;min-width:0}
-.conversation-inbox-status{overflow:hidden;color:#737373;font-size:17px;font-weight:600;text-overflow:ellipsis;white-space:nowrap}
-.conversation-inbox-result{color:#737373;font-size:18px;font-weight:700;white-space:nowrap}
-.conversation-inbox-row.is-selected .conversation-inbox-status,.conversation-inbox-row.is-selected .conversation-inbox-result,.conversation-inbox-row.is-completed .conversation-inbox-status,.conversation-inbox-row.is-completed .conversation-inbox-result{color:var(--accent)}
+.conversation-inbox-row.is-completed .conversation-avatar{background:var(--accent);color:#fff;font-size:0}
+.conversation-inbox-row.is-completed .conversation-avatar::after{content:"\2713";font-size:25px;line-height:1}
+.conversation-inbox-copy{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .conversation-avatar{width:48px;height:48px;display:grid;place-items:center;flex:0 0 auto;border-radius:50%;background:#FAFAFA;color:#404040;font-size:24px;font-weight:700;line-height:1}
 .conversation-avatar.is-ai{background:var(--accent);color:#fff;box-shadow:var(--shadow-avatar)}
-.conversation-thread{min-width:0;display:grid;grid-template-rows:76px 54px minmax(0,1fr) auto 62px;background:#fff;transform-origin:top center;will-change:opacity,transform}
+.conversation-thread{min-width:0;display:grid;grid-template-rows:76px 48px minmax(0,1fr) 62px;background:#fff;transform-origin:top center;will-change:opacity,transform}
 .conversation-chat-head{display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line)}
 .conversation-agent{display:flex;align-items:center;gap:11px;min-width:0}
 .conversation-agent-copy{display:grid;gap:4px;min-width:0}
 .conversation-agent-copy strong{overflow:hidden;font-size:29px;line-height:1;text-overflow:ellipsis;white-space:nowrap}
 .conversation-online{color:#737373;font-size:21px;font-weight:600;line-height:1;white-space:nowrap}
-.conversation-steps{display:grid;grid-template-columns:repeat(3,1fr);align-items:end;padding:0 16px;border-bottom:1px solid var(--line)}
-.conversation-step{height:100%;display:grid;place-items:center;padding:2px 3px 0;border-bottom:3px solid transparent;color:#8A8A8A;font-size:20px;font-weight:650;line-height:1.05;text-align:center}
-.conversation-step.is-complete{color:#404040}
-.conversation-step.is-current{border-color:var(--accent);color:var(--accent)}
-.conversation-messages{display:grid;align-content:start;gap:14px;padding:18px 16px 10px;will-change:opacity,transform}
+.conversation-state{display:flex;align-items:center;padding:0 18px;border-bottom:1px solid var(--line);color:var(--accent);font-size:25px;font-weight:700;line-height:1}
+.conversation-body{position:relative;min-height:0;overflow:hidden}
+.conversation-messages{position:absolute;inset:0;display:grid;align-content:start;gap:16px;padding:24px 20px 12px;will-change:opacity,transform}
 .conversation-row{display:flex;align-items:flex-end;gap:10px}
 .conversation-row.is-ai{justify-content:flex-end;opacity:0;will-change:opacity,transform}
 .conversation-row .conversation-avatar{width:38px;height:38px;font-size:19px}
-.conversation-message{position:relative;max-width:82%;padding:10px 13px;border-radius:12px 12px 12px 5px;background:#FAFAFA;color:#404040;font-size:27px;line-height:1.16}
+.conversation-message{position:relative;max-width:82%;padding:11px 14px;border-radius:12px 12px 12px 5px;background:#FAFAFA;color:#404040;font-size:29px;line-height:1.16}
 .conversation-message::after{content:"";position:absolute;left:-5px;bottom:0;width:12px;height:12px;background:inherit;clip-path:polygon(0 100%,100% 0,100% 100%)}
 .conversation-message.is-ai{display:grid;min-width:78px;border-radius:12px 12px 5px 12px;background:rgba(46,125,82,.08);color:var(--accent-dark)}
 .conversation-message.is-ai::after{left:auto;right:-5px;transform:scaleX(-1)}
@@ -264,16 +260,15 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-typing i:nth-child(2){animation-delay:.12s}.conversation-typing i:nth-child(3){animation-delay:.24s}
 @keyframes conversationTyping{0%,60%,100%{opacity:.42;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 .conversation-ai-copy{opacity:0}
-.conversation-purchase{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:10px;margin:0 16px 12px;padding:10px 12px;border:1px solid rgba(46,125,82,.24);border-radius:var(--radius);background:var(--accent-soft);color:var(--accent);opacity:0;transform:translateY(8px)}
+.conversation-purchase{position:absolute;left:20px;right:20px;top:50%;display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:12px;padding:14px;border:1px solid rgba(46,125,82,.24);border-radius:var(--radius);background:var(--accent-soft);color:var(--accent);opacity:0;transform:translateY(calc(-50% + var(--purchase-y,8px)))}
 .conversation-purchase-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:#fff;font-size:19px;font-weight:700}
 .conversation-purchase-copy{display:grid;gap:2px;min-width:0}
 .conversation-purchase-copy strong{font-size:23px;line-height:1}
 .conversation-purchase-copy span{color:#557060;font-size:18px;font-weight:600;line-height:1.1}
 .conversation-purchase-value{font-size:27px;font-weight:700}
-.conversation-automation{height:62px;display:flex;align-items:center;gap:10px;padding:0 16px;border-top:1px solid var(--line);background:#FAFAFA;color:#737373;font-size:21px;font-weight:650;line-height:1.1}
+.conversation-automation{height:62px;display:flex;align-items:center;gap:10px;padding:0 18px;border-top:1px solid var(--line);background:#FAFAFA;color:#737373;font-size:23px;font-weight:650;line-height:1.1}
 .conversation-automation-mark{width:30px;height:30px;display:grid;place-items:center;flex:0 0 auto;border-radius:50%;background:var(--accent);color:#fff;font-size:15px;font-weight:700}
 .conversation-automation.is-complete{color:var(--accent)}
-.conversation-brain-note{position:absolute;left:21.3%;top:71%;width:18%;text-align:center;color:#404040;font-size:30px;font-weight:700;line-height:1.15}
 .conversation-link-layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .conversation-link-active,.conversation-link-success{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
 .conversation-link-active{stroke:rgba(26,26,26,.48);stroke-width:3;stroke-dasharray:9 11}
@@ -377,20 +372,18 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   :root{--demo-critical:34px;--demo-meta:26px}
 }
 @media(max-width:420px){
-  .player-mode.compact-mode[data-player="triagers"] .conversation-app{left:42%;top:3%;width:39%;height:92%;grid-template-columns:31% 69%}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-head strong{font-size:26px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-count{font-size:19px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-app{left:39%;top:6%;width:41%;height:84%;grid-template-columns:72px minmax(0,1fr)}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-head strong{font-size:30px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-count{font-size:20px}
   .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-row{height:124px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy strong{font-size:23px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-status,.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-result{font-size:18px}
   .player-mode.compact-mode[data-player="triagers"] .conversation-agent-copy strong{font-size:31px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-online{font-size:22px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-step{font-size:22px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-message{max-width:88%;font-size:30px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy strong{font-size:25px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy span{font-size:20px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-value{font-size:29px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{font-size:23px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-online{font-size:25px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-state{font-size:28px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-message{max-width:88%;font-size:32px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy strong{font-size:27px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy span{font-size:22px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-value{font-size:31px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{font-size:28px}
 }
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:500;font-size:1rem;letter-spacing:var(--tracking-body);white-space:nowrap;color:#fff;background:linear-gradient(to bottom,#3A9B68,#2E7D52);border:1px solid var(--accent-dark);border-radius:var(--radius);padding:11px 18px;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .15s ease}
@@ -669,10 +662,9 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                 <path class="conversation-link-success" pathLength="1" d="M 520 370 C 506 370 500 380 481 380"/>
                 <circle class="conversation-transfer-dot" r="8"/>
               </svg>
-              <div class="conversation-brain-note">AI Triagers active</div>
               <div class="conversation-app" aria-hidden="true">
                 <aside class="conversation-inbox">
-                  <div class="conversation-inbox-head"><strong>Inbox</strong><span class="conversation-inbox-count">3 buyer leads</span></div>
+                  <div class="conversation-inbox-head"><strong>3</strong><span class="conversation-inbox-count">Leads</span></div>
                   <div class="conversation-inbox-row" data-conversation-index="0">
                     <span class="conversation-avatar" aria-hidden="true">S</span>
                     <span class="conversation-inbox-copy"><strong>Sandra</strong><span class="conversation-inbox-meta"><span class="conversation-inbox-status">New lead</span><span class="conversation-inbox-result"></span></span></span>
@@ -688,18 +680,16 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                 </aside>
                 <section class="conversation-thread">
                   <div class="conversation-chat-head">
-                    <span class="conversation-agent"><span class="conversation-avatar" data-conversation-thread-initial aria-hidden="true">S</span><span class="conversation-agent-copy"><strong data-conversation-thread-name>Sandra</strong><span class="conversation-online">AI Triager working</span></span></span>
+                    <span class="conversation-agent"><span class="conversation-avatar" data-conversation-thread-initial aria-hidden="true">S</span><span class="conversation-agent-copy"><strong data-conversation-thread-name>Sandra</strong><span class="conversation-online">AI Triager</span></span></span>
                   </div>
-                  <div class="conversation-steps">
-                    <span class="conversation-step" data-conversation-step="new">New lead</span>
-                    <span class="conversation-step" data-conversation-step="responding">AI responding</span>
-                    <span class="conversation-step" data-conversation-step="purchased">Purchased</span>
+                  <div class="conversation-state" data-conversation-state>New lead</div>
+                  <div class="conversation-body">
+                    <div class="conversation-messages">
+                      <div class="conversation-row"><span class="conversation-avatar" data-conversation-message-initial aria-hidden="true">S</span><div class="conversation-message" data-conversation-question>Which option fits me?</div></div>
+                      <div class="conversation-row is-ai"><div class="conversation-message is-ai"><span class="conversation-typing" aria-label="AI Triager is typing"><i></i><i></i><i></i></span><span class="conversation-ai-copy" data-conversation-reply>Start with the $8 assessment.</span></div><span class="conversation-avatar is-ai" aria-hidden="true">AI</span></div>
+                    </div>
+                    <div class="conversation-purchase"><span class="conversation-purchase-icon" aria-hidden="true">✓</span><span class="conversation-purchase-copy"><strong>Assessment purchased</strong><span>Added to ad budget</span></span><strong class="conversation-purchase-value">$8</strong></div>
                   </div>
-                  <div class="conversation-messages">
-                    <div class="conversation-row"><span class="conversation-avatar" data-conversation-message-initial aria-hidden="true">S</span><div class="conversation-message" data-conversation-question>Which option fits me best?</div></div>
-                    <div class="conversation-row is-ai"><div class="conversation-message is-ai"><span class="conversation-typing" aria-label="AI Triager is typing"><i></i><i></i><i></i></span><span class="conversation-ai-copy" data-conversation-reply>Start with the $8 assessment.</span></div><span class="conversation-avatar is-ai" aria-hidden="true">AI</span></div>
-                  </div>
-                  <div class="conversation-purchase"><span class="conversation-purchase-icon" aria-hidden="true">✓</span><span class="conversation-purchase-copy"><strong>Assessment purchased</strong><span>Added to ad budget</span></span><strong class="conversation-purchase-value">$8</strong></div>
                   <div class="conversation-automation"><span class="conversation-automation-mark" data-conversation-automation-mark aria-hidden="true">AI</span><span data-conversation-automation>New lead received</span></div>
                 </section>
               </div>
@@ -1094,7 +1084,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var conversationAutomation=zoomSection && zoomSection.querySelector('.conversation-automation');
   var conversationAutomationText=zoomSection && zoomSection.querySelector('[data-conversation-automation]');
   var conversationAutomationMark=zoomSection && zoomSection.querySelector('[data-conversation-automation-mark]');
-  var conversationSteps=zoomSection ? zoomSection.querySelectorAll('[data-conversation-step]') : [];
+  var conversationState=zoomSection && zoomSection.querySelector('[data-conversation-state]');
   var conversationLinkActive=zoomSection && zoomSection.querySelector('.conversation-link-active');
   var conversationLinkSuccess=zoomSection && zoomSection.querySelector('.conversation-link-success');
   var conversationTransferDot=zoomSection && zoomSection.querySelector('.conversation-transfer-dot');
@@ -1278,9 +1268,9 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   function getConversationCopy(index){
     var conversations=[
-      {name:'Sandra',initial:'S',question:'Which option fits me best?',reply:'Start with the $8 assessment.'},
-      {name:'Michael',initial:'M',question:'What if I’m not ready for full service?',reply:'Start with the $8 assessment.'},
-      {name:'David',initial:'D',question:'Will this work with my existing ads?',reply:'Yes. Start with the $8 assessment.'}
+      {name:'Sandra',initial:'S',question:'Which option fits me?',reply:'Start with the $8 assessment.'},
+      {name:'Michael',initial:'M',question:'I’m not ready for full service.',reply:'Start with the $8 assessment.'},
+      {name:'David',initial:'D',question:'Will this work with my ads?',reply:'Yes. Start with the $8 assessment.'}
     ];
     return conversations[index] || conversations[0];
   }
@@ -1296,10 +1286,11 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   function refreshConversationLinkPaths(){
     conversationLinkPaths=[];
-    if(!conversationApp) return;
+    if(!conversationApp || !storyCore) return;
     for(var i=0;i<conversationInboxRows.length;i++){
-      var linkX=520, linkY=conversationApp.offsetTop+conversationInboxRows[i].offsetTop+conversationInboxRows[i].offsetHeight/2, linkMid=(linkX+481)/2;
-      conversationLinkPaths.push('M '+linkX+' '+linkY.toFixed(2)+' C '+linkMid.toFixed(2)+' '+linkY.toFixed(2)+' '+linkMid.toFixed(2)+' 380 481 380');
+      var linkX=conversationApp.offsetLeft, linkY=conversationApp.offsetTop+conversationInboxRows[i].offsetTop+conversationInboxRows[i].offsetHeight/2;
+      var brainX=storyCore.offsetLeft+storyCore.offsetWidth/2, brainY=storyCore.offsetTop, linkMid=(linkX+brainX)/2;
+      conversationLinkPaths.push('M '+linkX.toFixed(2)+' '+linkY.toFixed(2)+' C '+linkMid.toFixed(2)+' '+linkY.toFixed(2)+' '+linkMid.toFixed(2)+' '+brainY.toFixed(2)+' '+brainX.toFixed(2)+' '+brainY.toFixed(2));
     }
   }
   function renderConversationActivity(progress){
@@ -1321,7 +1312,8 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var contentOpacity=state.contentIn*state.contentOut;
     conversationThread.style.opacity=String(contentOpacity);
     conversationThread.style.transform='translateY('+(8*(1-contentOpacity)).toFixed(2)+'px) scaleY('+(0.985+0.015*contentOpacity).toFixed(3)+')';
-    conversationMessages.style.opacity=String(contentOpacity);
+    var messageContentOpacity=contentOpacity*(1-state.purchase);
+    conversationMessages.style.opacity=String(messageContentOpacity);
     conversationMessages.style.transform='translateY('+(6*(1-contentOpacity)).toFixed(2)+'px)';
     var typingOpacity=state.typing*state.contentOut, replyOpacity=state.aiReply*state.contentOut, messageOpacity=Math.max(typingOpacity,replyOpacity);
     conversationAiRow.style.opacity=String(messageOpacity);
@@ -1329,14 +1321,11 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     conversationTyping.style.opacity=String(typingOpacity);
     conversationAiCopy.style.opacity=String(replyOpacity);
     conversationPurchase.style.opacity=String(state.purchase*state.contentOut);
-    conversationPurchase.style.transform='translateY('+(8*(1-state.purchase)).toFixed(2)+'px)';
-    var stepOrder=['new','responding','purchased'], stepIndex=stepOrder.indexOf(state.stage);
-    for(var j=0;j<conversationSteps.length;j++){
-      conversationSteps[j].classList.toggle('is-complete',j<stepIndex);
-      conversationSteps[j].classList.toggle('is-current',j===stepIndex);
-    }
+    conversationPurchase.style.setProperty('--purchase-y',(8*(1-state.purchase)).toFixed(2)+'px');
+    conversationState.textContent=state.stage==='new' ? 'New lead' : state.stage==='responding' ? 'AI responding' : 'Purchased';
+    conversationState.dataset.state=state.stage;
     conversationAutomation.classList.toggle('is-complete',state.stage==='purchased');
-    conversationAutomationText.textContent=state.stage==='new' ? 'New lead received' : state.stage==='responding' ? 'AI Triager is responding' : 'AI response completed automatically';
+    conversationAutomationText.textContent=state.stage==='new' ? 'New lead received' : state.stage==='responding' ? 'AI Triager is responding' : 'Handled automatically';
     conversationAutomationMark.textContent=state.stage==='purchased' ? '✓' : 'AI';
     var linkPath=conversationLinkPaths[state.activeIndex];
     conversationLinkActive.setAttribute('d',linkPath);

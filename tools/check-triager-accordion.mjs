@@ -7,13 +7,14 @@ const html=readFileSync(new URL('./video-capture.html',import.meta.url),'utf8');
 assert.match(html,/class="conversation-app"/,'demo should use one recognizable product shell');
 assert.match(html,/class="conversation-inbox"/,'product shell should keep all three leads visible');
 assert.match(html,/class="conversation-thread"/,'selected lead should open in a dedicated conversation');
+assert.match(html,/class="conversation-body"/,'messages and purchase result should share the full conversation body');
 assert.match(html,/class="conversation-automation"/,'chat should identify the automatic action instead of faking a composer');
-assert.match(html,/AI response completed automatically/,'completed state should explain that the AI handled the response');
-assert.match(html,/data-conversation-step="new"/,'state rail should include the new lead state');
-assert.match(html,/data-conversation-step="responding"/,'state rail should include the AI response state');
-assert.match(html,/data-conversation-step="purchased"/,'state rail should include the purchase state');
-assert.match(html,/data-conversation-step="responding">AI responding</,'response state should remain explicit');
-assert.match(html,/data-conversation-step="purchased">Purchased</,'purchase state should remain explicit');
+assert.match(html,/Handled automatically/,'completed state should explain that the AI handled the response');
+assert.match(html,/class="conversation-state" data-conversation-state>New lead</,'one prominent label should communicate the current state');
+assert.doesNotMatch(html,/conversation-steps/,'three-column state rail should not squeeze the conversation');
+assert.doesNotMatch(html,/conversation-brain-note/,'redundant activity copy should not compete with the AI brain');
+assert.match(html,/grid-template-columns:72px minmax\(0,1fr\)/,'lead queue should leave most horizontal space for the conversation');
+assert.match(html,/conversation-inbox-row\.is-completed \.conversation-avatar::after\{content:"\\2713"/,'completed leads should use an unmistakable checkmark');
 assert.doesNotMatch(html,/conversation-composer/,'non-interactive demo must not resemble a disabled message composer');
 
 function extractFunction(name){
@@ -37,7 +38,7 @@ vm.runInNewContext([
 const atRaw=raw=>raw*.32;
 
 assert.deepEqual({...context.getConversationCopy(0)}, {
-  name:'Sandra',initial:'S',question:'Which option fits me best?',reply:'Start with the $8 assessment.'
+  name:'Sandra',initial:'S',question:'Which option fits me?',reply:'Start with the $8 assessment.'
 });
 assert.equal(context.computeConversationActivity(atRaw(.04)).stage,'new','conversation should begin as a new lead');
 assert.equal(context.computeConversationActivity(atRaw(.12)).stage,'responding','automatic response should be a distinct state');
