@@ -39,24 +39,33 @@ body{font-family:var(--fb);font-size:var(--type-body);letter-spacing:var(--track
 .video-story{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
 .video-story-head{width:100%;max-width:var(--rail-reading);margin-inline:auto;padding:0 0 var(--space-5);text-align:center}
 .video-story-intro{max-width:65ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.6}
-.video-chapters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);padding:0}
-.video-chapter{min-width:0;display:flex;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
+.video-chapters{display:grid;grid-template-columns:1fr;gap:var(--space-7);padding:0}
+.video-chapter{min-width:0;display:grid;grid-template-columns:minmax(320px,2fr) minmax(0,3fr);border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
 .video-chapter.is-active{border-color:var(--accent);box-shadow:var(--shadow-md)}
-.video-card-tab{order:1;display:flex;align-items:center;min-height:112px;padding:var(--space-5);border-bottom:1px solid var(--line);background:#fff}
-.video-card-tab h3{color:var(--ink);font-family:var(--fb);font-size:clamp(1.7rem,2.6vw,2.35rem);font-weight:600;line-height:1.12;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.video-chapter-media{order:2;position:relative;width:100%;height:auto;aspect-ratio:1/1;overflow:hidden;background:var(--bg)}
+.video-chapter-text{display:flex;min-width:0;flex-direction:column;justify-content:center;padding:var(--space-6)}
+.video-card-tab{display:flex;align-items:flex-end;min-height:0;border-bottom:0;background:#fff}
+.video-card-tab h3{color:var(--ink);font-family:var(--fb);font-size:clamp(2rem,2.7vw,2.5rem);font-weight:600;line-height:1.12;letter-spacing:var(--tracking-heading);text-wrap:balance}
+.video-chapter-media{grid-column:2;position:relative;width:100%;height:auto;aspect-ratio:1/1;overflow:hidden;border-left:1px solid var(--line);background:var(--bg)}
 .demo-player-frame{display:block;width:100%;height:100%;border:0;background:var(--bg);pointer-events:none}
-.video-chapter-copy{order:3;display:flex;flex:1;align-items:flex-start;min-height:138px;padding:var(--space-5)}
+.video-chapter-copy{display:flex;align-items:flex-start;min-height:0;padding-top:var(--space-4)}
 .video-chapter-copy p{max-width:65ch;color:var(--ink-2);font-size:var(--type-body);line-height:1.7;text-wrap:pretty}
+@media(max-width:899px){
+  .video-chapters{gap:var(--space-5)}
+  .video-chapter{display:flex;flex-direction:column}
+  .video-chapter-text{display:contents}
+  .video-card-tab{order:1;align-items:center;padding:var(--space-5);border-bottom:1px solid var(--line)}
+  .video-chapter-media{order:2;border-left:0}
+  .video-chapter-copy{order:3;padding:var(--space-5)}
+}
 @media(max-width:720px){
   :root{--type-section:clamp(2.5rem,10vw,3.25rem);--type-body:1.125rem;--type-body-large:1.25rem;--type-question:1.75rem;--type-quote:1.25rem}
   body{padding-inline:var(--page-gutter-mobile)}
   .video-story-head{padding-bottom:var(--space-4)}
   .video-chapters{grid-template-columns:1fr;gap:var(--space-4)}
   .video-chapter{border-radius:var(--radius-xl)}
-  .video-card-tab{min-height:0;padding:var(--space-4)}
+  .video-card-tab{padding:var(--space-4)}
   .video-card-tab h3{font-size:clamp(1.6rem,7vw,2rem);line-height:1.1;white-space:normal}
-  .video-chapter-copy{min-height:0;padding:var(--space-4)}
+  .video-chapter-copy{padding:var(--space-4)}
   .video-chapter-copy p{line-height:1.7}
 }
 /* ---------- shared card ---------- */
@@ -275,47 +284,55 @@ body{font-family:var(--fb);font-size:var(--type-body);letter-spacing:var(--track
     </div>
     <div class="video-chapters">
       <article class="video-chapter" id="demo-learn" data-chapter="learn">
-        <header class="video-card-tab">
-          <h3>First, the AI brain learns your business.</h3>
-        </header>
+        <div class="video-chapter-text">
+          <header class="video-card-tab">
+            <h3>First, the AI brain learns your business.</h3>
+          </header>
+          <div class="video-chapter-copy">
+            <p>It learns your offers, buyers, voice, and sales data so every AI salesperson works from the same source.</p>
+          </div>
+        </div>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=learn&amp;compact=1" title="Business knowledge flowing into the AI brain" loading="eager"></iframe>
         </div>
-        <div class="video-chapter-copy">
-          <p>It learns your offers, buyers, voice, and sales data so every AI salesperson works from the same source.</p>
-        </div>
       </article>
       <article class="video-chapter" id="demo-triagers" data-chapter="triagers">
-        <header class="video-card-tab">
-          <h3>Then, AI Triagers sell the assessment.</h3>
-        </header>
+        <div class="video-chapter-text">
+          <header class="video-card-tab">
+            <h3>Then, AI Triagers sell the assessment.</h3>
+          </header>
+          <div class="video-chapter-copy">
+            <p>They qualify and educate cold prospects with a personalized assessment that reveals the problem and shows whether they are a fit. The $8 shown is illustrative; exact pricing is set for each client.</p>
+          </div>
+        </div>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=triagers&amp;compact=1" title="AI Triagers handling buyer conversations and returning assessment sales" loading="lazy"></iframe>
         </div>
-        <div class="video-chapter-copy">
-          <p>They qualify and educate cold prospects with a personalized assessment that reveals the problem and shows whether they are a fit. The $8 shown is illustrative; exact pricing is set for each client.</p>
-        </div>
       </article>
       <article class="video-chapter" id="demo-flywheel" data-chapter="flywheel">
-        <header class="video-card-tab">
-          <h3>Every lead gets a useful next step.</h3>
-        </header>
+        <div class="video-chapter-text">
+          <header class="video-card-tab">
+            <h3>Every lead gets a useful next step.</h3>
+          </header>
+          <div class="video-chapter-copy">
+            <p>The hottest, most motivated buyers move immediately toward your highest-level service. Other buyers see a smaller offer, while non-buyers enter automated follow-up.</p>
+          </div>
+        </div>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=flywheel&amp;compact=1" title="AI Triagers assembling into the complete sales loop" loading="lazy"></iframe>
         </div>
-        <div class="video-chapter-copy">
-          <p>The hottest, most motivated buyers move immediately toward your highest-level service. Other buyers see a smaller offer, while non-buyers enter automated follow-up.</p>
-        </div>
       </article>
       <article class="video-chapter" id="demo-graph" data-chapter="graph">
-        <header class="video-card-tab">
-          <h3>Smaller sales can help pay for the next leads.</h3>
-        </header>
+        <div class="video-chapter-text">
+          <header class="video-card-tab">
+            <h3>Smaller sales can help pay for the next leads.</h3>
+          </header>
+          <div class="video-chapter-copy">
+            <p>Revenue from assessments and smaller offers can go back into traffic to help pay for the next leads. Self-funding is the goal, not a guaranteed result.</p>
+          </div>
+        </div>
         <div class="video-chapter-media">
           <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=graph&amp;compact=1" title="An ad-budget growth curve reaching progressively higher milestones" loading="lazy"></iframe>
-        </div>
-        <div class="video-chapter-copy">
-          <p>Revenue from assessments and smaller offers can go back into traffic to help pay for the next leads. Self-funding is the goal, not a guaranteed result.</p>
         </div>
       </article>
     </div>
