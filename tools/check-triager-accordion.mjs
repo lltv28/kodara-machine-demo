@@ -5,7 +5,10 @@ import vm from 'node:vm';
 const html=readFileSync(new URL('./video-capture.html',import.meta.url),'utf8');
 
 assert.match(html,/class="conversation-app"/,'demo should use one recognizable product shell');
+assert.match(html,/class="conversation-app" data-conversation-layout="vertical"/,'AI brain and lead workspace should use a vertical story layout');
 assert.match(html,/class="conversation-inbox"/,'product shell should keep all three leads visible');
+assert.match(html,/data-conversation-position>Lead 1 of 3</,'lead position should make the three independent conversations explicit');
+assert.match(html,/conversation-inbox-copy"><strong>Sandra<\/strong>/,'lead names should remain visible in the horizontal queue');
 assert.match(html,/class="conversation-thread"/,'selected lead should open in a dedicated conversation');
 assert.match(html,/class="conversation-body"/,'messages and purchase result should share the full conversation body');
 assert.match(html,/class="conversation-automation"/,'chat should identify the automatic action instead of faking a composer');
@@ -13,7 +16,7 @@ assert.match(html,/Handled automatically/,'completed state should explain that t
 assert.match(html,/class="conversation-state" data-conversation-state>New lead</,'one prominent label should communicate the current state');
 assert.doesNotMatch(html,/conversation-steps/,'three-column state rail should not squeeze the conversation');
 assert.doesNotMatch(html,/conversation-brain-note/,'redundant activity copy should not compete with the AI brain');
-assert.match(html,/grid-template-columns:72px minmax\(0,1fr\)/,'lead queue should leave most horizontal space for the conversation');
+assert.match(html,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\);grid-template-rows:38px/,'horizontal lead queue should keep all three conversations distinct below one position label');
 assert.match(html,/conversation-inbox-row\.is-completed \.conversation-avatar::after\{content:"\\2713"/,'completed leads should use an unmistakable checkmark');
 assert.doesNotMatch(html,/conversation-composer/,'non-interactive demo must not resemble a disabled message composer');
 
@@ -32,7 +35,7 @@ function extractFunction(name){
 const context={};
 vm.runInNewContext([
   'zoomClamp','zoomRange','storyEase','computeConversationActivity',
-  'getConversationCopy','getConversationRowState','getConversationBudget'
+  'getConversationCopy','getConversationRowState','getConversationBudget','getConversationPosition'
 ].map(extractFunction).join('\n'),context);
 
 const atRaw=raw=>raw*.32;
@@ -64,6 +67,7 @@ assert.equal(context.getConversationBudget(context.computeConversationActivity(.
 
 const secondLead=context.computeConversationActivity(.34);
 assert.equal(secondLead.activeIndex,1,'Michael should become the selected lead after Sandra');
+assert.equal(context.getConversationPosition(secondLead),'Lead 2 of 3','lead position should advance with the selected conversation');
 assert.deepEqual({...context.getConversationRowState(0,secondLead)},{status:'Purchased',result:'$8',mode:'completed'});
 assert.deepEqual({...context.getConversationRowState(1,secondLead)},{status:'New lead',result:'',mode:'active'});
 assert.equal(context.computeConversationActivity(1).loopOpacity,0,'loop reset should happen while the demo is hidden');
