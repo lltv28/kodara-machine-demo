@@ -4,11 +4,17 @@ import vm from 'node:vm';
 
 const html=readFileSync(new URL('./video-capture.html',import.meta.url),'utf8');
 
-assert.match(html,/class="conversation-chat-head"/,'open conversation should have a recognizable messenger header');
-assert.match(html,/class="conversation-composer"/,'open conversation should retain a recognizable message composer');
-assert.match(html,/class="conversation-typing"/,'AI reply should include a typing state');
-assert.match(html,/Replying automatically/,'non-interactive demo should describe automatic replies instead of showing a Send action');
-assert.doesNotMatch(html,/conversation-active-status/,'CRM-style status badge should not remain in the messenger header');
+assert.match(html,/class="conversation-app"/,'demo should use one recognizable product shell');
+assert.match(html,/class="conversation-inbox"/,'product shell should keep all three leads visible');
+assert.match(html,/class="conversation-thread"/,'selected lead should open in a dedicated conversation');
+assert.match(html,/class="conversation-automation"/,'chat should identify the automatic action instead of faking a composer');
+assert.match(html,/AI response completed automatically/,'completed state should explain that the AI handled the response');
+assert.match(html,/data-conversation-step="new"/,'state rail should include the new lead state');
+assert.match(html,/data-conversation-step="responding"/,'state rail should include the AI response state');
+assert.match(html,/data-conversation-step="purchased"/,'state rail should include the purchase state');
+assert.match(html,/data-conversation-step="responding">AI responding</,'response state should remain explicit');
+assert.match(html,/data-conversation-step="purchased">Purchased</,'purchase state should remain explicit');
+assert.doesNotMatch(html,/conversation-composer/,'non-interactive demo must not resemble a disabled message composer');
 
 function extractFunction(name){
   const start=html.indexOf(`function ${name}(`);
@@ -25,53 +31,40 @@ function extractFunction(name){
 const context={};
 vm.runInNewContext([
   'zoomClamp','zoomRange','storyEase','computeConversationActivity',
-  'setConversationPanel','setConversationSummary','getConversationAccordionLayout','renderConversationCard'
+  'getConversationCopy','getConversationRowState','getConversationBudget'
 ].map(extractFunction).join('\n'),context);
 
-function card(){
-  const nodes={
-    summary:{style:{}}, active:{style:{}}, content:{style:{}}, purchase:{style:{}},
-    aiRow:{style:{}}, typing:{style:{}}, aiCopy:{style:{}}, preview:{textContent:''}, tail:{textContent:''}
-  };
-  return {nodes,card:{style:{}},summary:nodes.summary,active:nodes.active,content:nodes.content,purchase:nodes.purchase,aiRow:nodes.aiRow,typing:nodes.typing,aiCopy:nodes.aiCopy,preview:nodes.preview,tail:nodes.tail};
-}
+const atRaw=raw=>raw*.32;
 
-function render(progress){
-  const state=context.computeConversationActivity(progress);
-  const cards=[card(),card(),card()];
-  const metric=name=>Number(html.match(new RegExp(`--conversation-${name}:([\\d.]+)px`))[1]);
-  const summaryHeight=metric('summary-h'), activeHeight=metric('active-h'), gap=metric('gap');
-  const geometry={summaryHeight,activeHeight,gap};
-  const layout=context.getConversationAccordionLayout(state,geometry,cards.length);
-  cards.forEach((item,index)=>context.renderConversationCard(item,index,state,geometry,layout));
-  return cards.map(item=>({
-    active:Number(item.nodes.active.style.opacity),
-    summary:Number(item.nodes.summary.style.opacity),
-    content:Number(item.nodes.content.style.opacity),
-    aiReply:Number(item.nodes.aiRow.style.opacity),
-    typing:Number(item.nodes.typing.style.opacity),
-    preview:item.nodes.preview.textContent,
-    tail:item.nodes.tail.textContent
-  }));
-}
+assert.deepEqual({...context.getConversationCopy(0)}, {
+  name:'Sandra',initial:'S',question:'Which option fits me best?',reply:'Start with the $8 assessment.'
+});
+assert.equal(context.computeConversationActivity(atRaw(.04)).stage,'new','conversation should begin as a new lead');
+assert.equal(context.computeConversationActivity(atRaw(.12)).stage,'responding','automatic response should be a distinct state');
+assert.equal(context.computeConversationActivity(atRaw(.50)).stage,'purchased','purchase should become a distinct state');
+assert.ok(context.computeConversationActivity(atRaw(.78)).purchase>.99,'purchase result should remain visible long enough to understand');
+assert.ok(context.computeConversationActivity(atRaw(.86)).contentOut>.99,'purchase result should dwell before the next lead replaces it');
+assert.ok(context.computeConversationActivity(atRaw(.94)).contentOut>.99,'purchase receipt should remain visible through the end hold');
+assert.ok(context.computeConversationActivity(atRaw(.50)).solid>0,'purchase should immediately begin confirming the green revenue route');
+assert.ok(context.computeConversationActivity(atRaw(.80)).impact>.99,'purchase should reach the AI brain and increment the ad budget');
 
-assert.deepEqual(render(.05),[
-  {active:1,summary:0,content:1,aiReply:1,typing:1,preview:'Purchased',tail:'$8'},
-  {active:0,summary:1,content:0,aiReply:0,typing:0,preview:'Waiting for reply',tail:'Up next'},
-  {active:0,summary:1,content:0,aiReply:0,typing:0,preview:'Waiting for reply',tail:'Up next'}
-]);
-assert.equal(render(0)[0].content,1,'initial frame should show a readable conversation before autoplay begins');
-assert.ok(context.computeConversationActivity(.05).typing>.9,'typing indicator should appear before the AI reply');
-assert.equal(context.computeConversationActivity(.09).typing,0,'typing indicator should clear once the AI reply appears');
-assert.equal(render(.09)[0].aiReply,1,'AI reply should appear after the lead message');
-assert.ok(render(.27)[0].content<1,'card content should fade before the shell collapses');
-assert.equal(render(.28)[0].content,0,'collapsed shell must not clip visible conversation text');
-assert.equal(render(.30).reduce((sum,item)=>sum+item.active,0),0,'all conversations should be collapsed before the next one opens');
-assert.ok(render(.31)[1].active>.5,'Michael should open only after Sandra collapses');
-for(const progress of [.27,.28,.295,.30,.31]){
-  for(const item of render(progress)) assert.equal(item.active*item.summary,0,'a card must never show its active and summary surfaces together');
-}
-assert.equal(render(.38)[1].active,1,'Michael should become the active card');
-assert.equal(render(.70)[2].active,1,'David should become the active card');
+const newLead=context.computeConversationActivity(atRaw(.04));
+assert.deepEqual({...context.getConversationRowState(0,newLead)},{status:'New lead',result:'',mode:'active'});
+assert.deepEqual({...context.getConversationRowState(1,newLead)},{status:'New lead',result:'',mode:'waiting'});
+
+const responding=context.computeConversationActivity(atRaw(.12));
+assert.deepEqual({...context.getConversationRowState(0,responding)},{status:'AI responding',result:'',mode:'active'});
+
+const purchased=context.computeConversationActivity(atRaw(.60));
+assert.deepEqual({...context.getConversationRowState(0,purchased)},{status:'Purchased',result:'$8',mode:'completed'});
+assert.equal(context.getConversationBudget(newLead),0,'the first lead should begin at a $0 ad budget');
+assert.equal(context.getConversationBudget(context.computeConversationActivity(atRaw(.80))),8,'the first purchase should add $8');
+assert.equal(context.getConversationBudget(context.computeConversationActivity(.32+atRaw(.80))),16,'the second purchase should raise the ad budget to $16');
+
+const secondLead=context.computeConversationActivity(.34);
+assert.equal(secondLead.activeIndex,1,'Michael should become the selected lead after Sandra');
+assert.deepEqual({...context.getConversationRowState(0,secondLead)},{status:'Purchased',result:'$8',mode:'completed'});
+assert.deepEqual({...context.getConversationRowState(1,secondLead)},{status:'New lead',result:'',mode:'active'});
 assert.equal(context.computeConversationActivity(1).loopOpacity,0,'loop reset should happen while the demo is hidden');
-console.log('triager accordion sequence valid');
+
+console.log('triager inbox sequence valid');
