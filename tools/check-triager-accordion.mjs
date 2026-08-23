@@ -16,7 +16,13 @@ assert.match(html,/Handled automatically/,'completed state should explain that t
 assert.match(html,/class="conversation-state" data-conversation-state>New lead</,'one prominent label should communicate the current state');
 assert.doesNotMatch(html,/conversation-steps/,'three-column state rail should not squeeze the conversation');
 assert.doesNotMatch(html,/conversation-brain-note/,'redundant activity copy should not compete with the AI brain');
-assert.match(html,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\);grid-template-rows:38px/,'horizontal lead queue should keep all three conversations distinct below one position label');
+assert.match(html,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\);grid-template-rows:36px/,'horizontal lead queue should keep all three conversations distinct below one position label');
+assert.match(html,/\.player-mode\.compact-mode\[data-player="triagers"\] \.story-core-title\{font-size:40px;transform:translateY\(-24px\)\}/,'AI brain title should sit inside the circle with balanced edge clearance');
+assert.match(html,/\.conversation-app\{position:absolute;left:23%;top:34%;width:54%;height:63%/,'conversation shell should use the available square without crowding either edge');
+assert.match(html,/\.conversation-inbox-row\{[^}]*gap:4px;padding:5px/,'lead tiles should preserve a visible gap around avatar and name');
+assert.match(html,/\.conversation-avatar\{width:40px;height:40px/,'lead avatars should fit inside the compact queue without crowding names');
+assert.match(html,/\.conversation-agent-copy\{display:flex;align-items:center/,'chat identity should use one horizontal baseline instead of overflowing its header');
+assert.match(html,/\.conversation-thread\{[^}]*grid-template-rows:64px 42px minmax\(0,1fr\) 54px/,'chat header, state, message, and activity rows should use a stable vertical rhythm');
 assert.match(html,/conversation-inbox-row\.is-completed \.conversation-avatar::after\{content:"\\2713"/,'completed leads should use an unmistakable checkmark');
 assert.doesNotMatch(html,/conversation-composer/,'non-interactive demo must not resemble a disabled message composer');
 
