@@ -44,38 +44,63 @@ vm.runInNewContext([
   'getConversationCopy','getConversationRowState','getConversationBudget','getConversationPosition'
 ].map(extractFunction).join('\n'),context);
 
-const atRaw=raw=>raw*.32;
+const duration=25000;
+const orientationEnd=.06;
+const summaryStart=.90;
+const resetStart=.96;
+const leadDuration=7000;
+const atLead=(slot,raw)=>(1500+(slot+raw)*leadDuration)/duration;
+
+assert.match(html,/durations=\{learn:5000,triagers:25000,flywheel:8000,graph:8000\}/,'triager sequence should have enough time to explain three leads');
+assert.equal(orientationEnd*duration,1500,'orientation should hold for 1.5 seconds');
+assert.equal(Math.round((resetStart-summaryStart)*duration),1500,'completed summary should hold for 1.5 seconds');
+assert.ok(.08*leadDuration>=500,'every meaningful transition should last at least half a second');
 
 assert.deepEqual({...context.getConversationCopy(0)}, {
   name:'Sandra',initial:'S',question:'Which option fits me?',reply:'Start with the $8 assessment.'
 });
-assert.equal(context.computeConversationActivity(atRaw(.04)).stage,'new','conversation should begin as a new lead');
-assert.equal(context.computeConversationActivity(atRaw(.12)).stage,'responding','automatic response should be a distinct state');
-assert.equal(context.computeConversationActivity(atRaw(.50)).stage,'purchased','purchase should become a distinct state');
-assert.ok(context.computeConversationActivity(atRaw(.78)).purchase>.99,'purchase result should remain visible long enough to understand');
-assert.ok(context.computeConversationActivity(atRaw(.86)).contentOut>.99,'purchase result should dwell before the next lead replaces it');
-assert.ok(context.computeConversationActivity(atRaw(.94)).contentOut>.99,'purchase receipt should remain visible through the end hold');
-assert.ok(context.computeConversationActivity(atRaw(.50)).solid>0,'purchase should immediately begin confirming the green revenue route');
-assert.ok(context.computeConversationActivity(atRaw(.80)).impact>.99,'purchase should reach the AI brain and increment the ad budget');
+const orientation=context.computeConversationActivity(.03);
+assert.equal(orientation.orientation,true,'first frame should orient the viewer before anything moves');
+assert.equal(orientation.stage,'new','orientation should begin with a recognizable new lead');
+assert.equal(orientation.contentIn,1,'first conversation should already be open during orientation');
+assert.equal(orientation.typing,0,'orientation should not compete with motion');
+assert.equal(orientation.purchase,0,'orientation should not compete with purchase feedback');
 
-const newLead=context.computeConversationActivity(atRaw(.04));
+assert.equal(context.computeConversationActivity(atLead(0,.15)).stage,'new','new lead should hold long enough to read');
+assert.equal(context.computeConversationActivity(atLead(0,.30)).stage,'responding','automatic response should be a distinct state');
+assert.equal(context.computeConversationActivity(atLead(0,.70)).stage,'purchased','purchase should become a distinct state');
+assert.ok(context.computeConversationActivity(atLead(0,.30)).typing>.99,'typing should finish its own reveal before the reply');
+assert.ok(context.computeConversationActivity(atLead(0,.42)).aiReply>.99,'AI reply should have a dedicated reveal');
+assert.ok(context.computeConversationActivity(atLead(0,.58)).messageOut<.01,'chat copy should clear before the purchase result appears');
+assert.ok(context.computeConversationActivity(atLead(0,.66)).purchase>.99,'purchase result should complete before the transfer begins');
+assert.ok(context.computeConversationActivity(atLead(0,.78)).transfer>.99,'revenue transfer should complete before the budget changes');
+assert.ok(context.computeConversationActivity(atLead(0,.86)).impact>.99,'purchase should reach the AI brain and increment the ad budget');
+assert.ok(context.computeConversationActivity(atLead(0,.92)).contentOut>.99,'completed conversation should visibly hold before collapsing');
+assert.ok(context.computeConversationActivity(atLead(0,.999)).contentOut<.01,'completed conversation should collapse before the next one opens');
+assert.equal(context.computeConversationActivity(atLead(1,0)).contentIn,0,'the next conversation should begin closed');
+
+const newLead=context.computeConversationActivity(atLead(0,.15));
 assert.deepEqual({...context.getConversationRowState(0,newLead)},{status:'New lead',result:'',mode:'active'});
 assert.deepEqual({...context.getConversationRowState(1,newLead)},{status:'New lead',result:'',mode:'waiting'});
 
-const responding=context.computeConversationActivity(atRaw(.12));
+const responding=context.computeConversationActivity(atLead(0,.30));
 assert.deepEqual({...context.getConversationRowState(0,responding)},{status:'AI responding',result:'',mode:'active'});
 
-const purchased=context.computeConversationActivity(atRaw(.60));
+const purchased=context.computeConversationActivity(atLead(0,.70));
 assert.deepEqual({...context.getConversationRowState(0,purchased)},{status:'Purchased',result:'$8',mode:'completed'});
 assert.equal(context.getConversationBudget(newLead),0,'the first lead should begin at a $0 ad budget');
-assert.equal(context.getConversationBudget(context.computeConversationActivity(atRaw(.80))),8,'the first purchase should add $8');
-assert.equal(context.getConversationBudget(context.computeConversationActivity(.32+atRaw(.80))),16,'the second purchase should raise the ad budget to $16');
+assert.equal(context.getConversationBudget(context.computeConversationActivity(atLead(0,.86))),8,'the first purchase should add $8');
+assert.equal(context.getConversationBudget(context.computeConversationActivity(atLead(1,.86))),16,'the second purchase should raise the ad budget to $16');
 
-const secondLead=context.computeConversationActivity(.34);
+const secondLead=context.computeConversationActivity(atLead(1,.15));
 assert.equal(secondLead.activeIndex,1,'Michael should become the selected lead after Sandra');
 assert.equal(context.getConversationPosition(secondLead),'Lead 2 of 3','lead position should advance with the selected conversation');
 assert.deepEqual({...context.getConversationRowState(0,secondLead)},{status:'Purchased',result:'$8',mode:'completed'});
 assert.deepEqual({...context.getConversationRowState(1,secondLead)},{status:'New lead',result:'',mode:'active'});
+const summary=context.computeConversationActivity(.93);
+assert.equal(summary.summary,true,'sequence should finish on a stable completed summary');
+assert.equal(context.getConversationBudget(summary),24,'summary should show the full ad-budget increase');
+assert.equal(context.getConversationPosition(summary),'3 leads handled','summary should state the completed outcome');
 assert.equal(context.computeConversationActivity(1).loopOpacity,0,'loop reset should happen while the demo is hidden');
 
 console.log('triager inbox sequence valid');
