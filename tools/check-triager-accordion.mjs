@@ -7,6 +7,7 @@ const html=readFileSync(new URL('./video-capture.html',import.meta.url),'utf8');
 assert.match(html,/class="conversation-chat-head"/,'open conversation should have a recognizable messenger header');
 assert.match(html,/class="conversation-composer"/,'open conversation should retain a recognizable message composer');
 assert.match(html,/class="conversation-typing"/,'AI reply should include a typing state');
+assert.match(html,/Replying automatically/,'non-interactive demo should describe automatic replies instead of showing a Send action');
 assert.doesNotMatch(html,/conversation-active-status/,'CRM-style status badge should not remain in the messenger header');
 
 function extractFunction(name){
@@ -55,7 +56,7 @@ function render(progress){
 }
 
 assert.deepEqual(render(.05),[
-  {active:1,summary:0,content:1,aiReply:1,typing:1,preview:'Assessment purchased',tail:'$8'},
+  {active:1,summary:0,content:1,aiReply:1,typing:1,preview:'Purchased',tail:'$8'},
   {active:0,summary:1,content:0,aiReply:0,typing:0,preview:'Waiting for reply',tail:'Up next'},
   {active:0,summary:1,content:0,aiReply:0,typing:0,preview:'Waiting for reply',tail:'Up next'}
 ]);
@@ -63,11 +64,11 @@ assert.equal(render(0)[0].content,1,'initial frame should show a readable conver
 assert.ok(context.computeConversationActivity(.05).typing>.9,'typing indicator should appear before the AI reply');
 assert.equal(context.computeConversationActivity(.09).typing,0,'typing indicator should clear once the AI reply appears');
 assert.equal(render(.09)[0].aiReply,1,'AI reply should appear after the lead message');
-assert.ok(render(.258)[0].content<1,'card content should fade before the shell collapses');
-assert.equal(render(.27)[0].content,0,'collapsed shell must not clip visible conversation text');
-assert.equal(render(.29).reduce((sum,item)=>sum+item.active,0),0,'all conversations should be collapsed before the next one opens');
-assert.ok(render(.307)[1].active>.5,'Michael should open only after Sandra collapses');
-for(const progress of [.258,.27,.29,.30,.307]){
+assert.ok(render(.27)[0].content<1,'card content should fade before the shell collapses');
+assert.equal(render(.28)[0].content,0,'collapsed shell must not clip visible conversation text');
+assert.equal(render(.30).reduce((sum,item)=>sum+item.active,0),0,'all conversations should be collapsed before the next one opens');
+assert.ok(render(.31)[1].active>.5,'Michael should open only after Sandra collapses');
+for(const progress of [.27,.28,.295,.30,.31]){
   for(const item of render(progress)) assert.equal(item.active*item.summary,0,'a card must never show its active and summary surfaces together');
 }
 assert.equal(render(.38)[1].active,1,'Michael should become the active card');
