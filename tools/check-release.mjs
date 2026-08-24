@@ -28,6 +28,11 @@ assert.match(page, /scroll-padding-bottom:/, 'Mobile focus must clear the sticky
 assert.match(page, /\.proof-more summary:focus-visible/, 'Disclosure controls need a visible focus state');
 assert.match(page, /prefers-reduced-motion:reduce/, 'The landing page must honor reduced motion');
 assert.match(renderer, /prefers-reduced-motion:reduce/, 'The demo renderer must honor reduced motion');
+assert.match(renderer, /var PLAYER_MODE=document\.documentElement\.classList\.contains\('player-mode'\)/, 'Reduced motion must work inside independent demo players');
+assert.match(renderer, /if\(REDUCE && PLAYER_MODE\)\{ window\.renderCaptureFrame\(chapter,chapter==='triagers'\?\.94:1\);send\('ready'\);return; \}/, 'Reduced-motion players must settle on a useful chapter end state');
+assert.match(renderer, /renderTriagerScrollActivity\(state\.triagerActivityProgress,\(!REDUCE \|\| PLAYER_MODE\) && state\.phase==='triagers'\)/, 'Reduced-motion Triager players must keep their completed conversation visible');
+assert.match(renderer, /zoomRange\(local,0,\.25\)/, 'Graph milestones need a 1.5-second hold in the eight-second loop');
+assert.match(renderer, /if\(p>=\.70\)/, 'The learning result needs a 1.5-second hold in the five-second loop');
 assert.match(page, /function loadFrame\(/, 'Demo renderers need a viewport-driven loader');
 assert.match(page, /rootMargin:'600px 0px'/, 'Demo renderers must preload shortly before entering view');
 

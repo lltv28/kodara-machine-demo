@@ -224,10 +224,10 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .activity-path{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.88}
 .activity-particle{fill:var(--accent);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .triager-conversation-demo{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;color:var(--ink)}
-.conversation-app{position:absolute;left:23%;top:34%;width:54%;height:63%;display:grid;grid-template-rows:112px minmax(0,1fr);overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-md);opacity:0}
+.conversation-app{position:absolute;left:21%;top:34%;width:58%;height:63%;display:grid;grid-template-rows:112px minmax(0,1fr);overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-md);opacity:0}
 .conversation-inbox{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:36px minmax(0,1fr);background:#FAFAFA;border-bottom:1px solid var(--line-2)}
 .conversation-inbox-head{grid-column:1/-1;display:grid;place-content:center;padding:0 10px;border-bottom:1px solid var(--line-2);background:#fff;text-align:center}
-.conversation-inbox-head strong{font-size:20px;line-height:1.08;text-wrap:balance}
+.conversation-inbox-head strong{font-size:22px;line-height:1.08;word-spacing:4px;text-wrap:balance}
 .conversation-selector{position:absolute;left:0;bottom:0;z-index:3;width:33.333%;height:4px;background:var(--accent);transform:translateX(var(--selected-x,0%));transform-origin:left center;will-change:transform}
 .conversation-inbox-row{position:relative;z-index:1;grid-row:2;display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px;min-width:0;padding:7px 10px;border-left:1px solid var(--line);background:transparent;will-change:opacity,transform}
 .conversation-inbox-row[data-conversation-index="0"]{border-left:0}
@@ -241,10 +241,16 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-inbox-row.is-completed .conversation-inbox-status{line-height:1.05;white-space:normal}
 .conversation-inbox-row.is-completed .conversation-inbox-result{font-weight:700}
 .conversation-inbox-copy{display:grid;gap:4px;min-width:0;text-align:left}
-.conversation-inbox-copy strong{overflow:hidden;max-width:100%;color:#404040;font-size:18px;line-height:1;text-overflow:ellipsis;white-space:nowrap}
+.conversation-inbox-copy strong{overflow:hidden;max-width:100%;color:#404040;font-size:22px;line-height:1;text-overflow:ellipsis;white-space:nowrap}
 .conversation-inbox-meta{display:flex;align-items:center;justify-content:space-between;gap:4px;min-width:0;color:#737373;font-size:14px;font-weight:600;line-height:1;white-space:nowrap}
 .conversation-inbox-status{overflow:hidden;text-overflow:ellipsis}
 .conversation-inbox-result{flex:0 0 auto}
+.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-row{grid-template-columns:1fr;justify-items:center;gap:4px;padding:6px 8px;text-align:center}
+.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy{display:block;width:100%;text-align:center}
+.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-status{display:none}
+.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-meta{justify-content:center;margin-top:3px}
+.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-row .conversation-avatar{border:2px solid var(--line-2);background:#fff}
+.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-row.is-completed .conversation-avatar{border-color:var(--accent);background:var(--accent)}
 .conversation-avatar{width:40px;height:40px;display:grid;place-items:center;flex:0 0 auto;border-radius:50%;background:#FAFAFA;color:#404040;font-size:20px;font-weight:700;line-height:1}
 .conversation-avatar.is-ai{background:var(--accent);color:#fff;box-shadow:var(--shadow-avatar)}
 .conversation-thread{min-width:0;display:grid;grid-template-rows:64px 42px minmax(0,1fr) 54px;background:#fff;transform-origin:top center;will-change:opacity,transform}
@@ -384,19 +390,20 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .player-mode.compact-mode[data-player="triagers"] .story-core{top:18.5%;width:196px}
   .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:44px;transform:translateY(-26px)}
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:21px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-app{left:23%;top:36%;width:54%;height:61%;grid-template-rows:112px minmax(0,1fr)}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-app{left:18%;top:35%;width:64%;height:62%;grid-template-rows:126px minmax(0,1fr)}
   .player-mode.compact-mode[data-player="triagers"] .conversation-inbox{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:36px minmax(0,1fr)}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-head strong{font-size:23px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy strong{font-size:21px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-meta{font-size:17px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-agent-copy strong{font-size:28px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-online{font-size:21px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-state{font-size:25px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-message{max-width:88%;font-size:30px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy strong{font-size:25px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy span{font-size:20px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-value{font-size:29px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{font-size:25px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-head strong{font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy strong{font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-meta{font-size:28px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-avatar{width:48px;height:48px;font-size:24px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-agent-copy strong{font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-online{font-size:28px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-state{font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-message{max-width:88%;font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy strong{font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy span{font-size:28px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-value{font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{font-size:34px}
 }
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:500;font-size:1rem;letter-spacing:var(--tracking-body);white-space:nowrap;color:#fff;background:linear-gradient(to bottom,#3A9B68,#2E7D52);border:1px solid var(--accent-dark);border-radius:var(--radius);padding:11px 18px;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .15s ease}
@@ -422,20 +429,20 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
    REDUCED MOTION - settle on the end-state, no motion
    ============================================================ */
 @media(prefers-reduced-motion:reduce){
-  .zoom-track{height:auto!important}
-  .zoom-pin{display:flex!important;transform:none!important;will-change:auto}
-  .zoom-beats{grid-template-columns:repeat(2,minmax(0,1fr));height:auto!important;min-height:0!important;gap:16px;margin:2px 0 0;padding:0;overflow:visible!important}
-  .zoom-beats::before,.zoom-beats::after{display:none}
-  .zoom-beat{position:relative!important;padding:0!important;text-align:left!important}
-  .zoom-beat-title::before{display:none}
-  .zoom-beat-copy{position:static!important;display:block!important;max-width:none!important;margin-top:6px!important;padding:0!important;opacity:1!important;visibility:visible!important;transform:none!important;animation:none!important}
-  .zoom-scene{display:grid!important;gap:var(--space-4)}
-  .zoom-layer{position:relative!important;inset:auto!important;opacity:1!important;transform:none!important}
-  .zoom-stage{aspect-ratio:auto!important}
-  .engine-link,.worker-core{animation:none!important}
-  .conversation-typing i{animation:none!important}
-  .flywheel-orbit-marker{display:none!important}
-  .flywheel-arrow{opacity:1!important}
+  html:not(.player-mode) .zoom-track{height:auto!important}
+  html:not(.player-mode) .zoom-pin{display:flex!important;transform:none!important;will-change:auto}
+  html:not(.player-mode) .zoom-beats{grid-template-columns:repeat(2,minmax(0,1fr));height:auto!important;min-height:0!important;gap:16px;margin:2px 0 0;padding:0;overflow:visible!important}
+  html:not(.player-mode) .zoom-beats::before,html:not(.player-mode) .zoom-beats::after{display:none}
+  html:not(.player-mode) .zoom-beat{position:relative!important;padding:0!important;text-align:left!important}
+  html:not(.player-mode) .zoom-beat-title::before{display:none}
+  html:not(.player-mode) .zoom-beat-copy{position:static!important;display:block!important;max-width:none!important;margin-top:6px!important;padding:0!important;opacity:1!important;visibility:visible!important;transform:none!important;animation:none!important}
+  html:not(.player-mode) .zoom-scene{display:grid!important;gap:var(--space-4)}
+  html:not(.player-mode) .zoom-layer{position:relative!important;inset:auto!important;opacity:1!important;transform:none!important}
+  html:not(.player-mode) .zoom-stage{aspect-ratio:auto!important}
+  html:not(.player-mode) .engine-link,html:not(.player-mode) .worker-core{animation:none!important}
+  html:not(.player-mode) .conversation-typing i{animation:none!important}
+  html:not(.player-mode) .flywheel-orbit-marker{display:none!important}
+  html:not(.player-mode) .flywheel-arrow{opacity:1!important}
 }
 /* JS-driven mirror (real OS setting, or ?reduce=1 for QA) */
 .wrap.reduce .zoom-track{height:auto!important}
@@ -813,7 +820,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var p=zoomClamp(progressValue,0,1), stops=[0,GRAPH_PEAKS[0],GRAPH_PEAKS[1],GRAPH_PEAKS[2],GRAPH_PEAKS[3]];
     if(p>=1) return 1;
     var segment=Math.min(3,Math.floor(p*4)), local=p*4-segment;
-    return stops[segment]+(stops[segment+1]-stops[segment])*storyEase(zoomRange(local,0,.44));
+    return stops[segment]+(stops[segment+1]-stops[segment])*storyEase(zoomRange(local,0,.25));
   }
   function computeGraphPlayerState(progressValue){
     var progress=zoomClamp(progressValue,0,1), state=computeScrollStoryState(CHART_TRANSITION_END);
@@ -950,9 +957,9 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   function computeKnowledgeScrollState(progressValue){
     if(!Number.isFinite(progressValue)) return null;
     var p=zoomClamp(progressValue,0,1);
-    if(p>=.78) return {sourceIndex:3,progress:1,pathProgress:1,knowledgeProgress:1,holding:true};
+    if(p>=.70) return {sourceIndex:3,progress:1,pathProgress:1,knowledgeProgress:1,holding:true};
     if(p<=.12) return {sourceIndex:0,progress:0,pathProgress:0,knowledgeProgress:0,holding:false};
-    var scaled=zoomRange(p,.12,.78)*4, sourceIndex=Math.min(3,Math.floor(scaled)), progress=scaled-sourceIndex;
+    var scaled=zoomRange(p,.12,.70)*4, sourceIndex=Math.min(3,Math.floor(scaled)), progress=scaled-sourceIndex;
     return {sourceIndex:sourceIndex,progress:progress,pathProgress:storyEase(zoomRange(progress,.05,.95)),knowledgeProgress:(sourceIndex+storyEase(zoomRange(progress,.10,.90)))/4,holding:false};
   }
   function computeTriagerActivity(progressValue){
@@ -1029,9 +1036,10 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   /* zoom-geometry:end */
   var CAPTURE=document.documentElement.classList.contains('capture-mode');
+  var PLAYER_MODE=document.documentElement.classList.contains('player-mode');
   var COMPACT=document.documentElement.classList.contains('compact-mode');
   var COMPACT_TRIAGER=COMPACT && document.documentElement.dataset.player==='triagers';
-  var REDUCE = !CAPTURE && (!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) || /[?&]reduce=1/.test(location.search));
+  var REDUCE = (PLAYER_MODE || !CAPTURE) && (!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) || /[?&]reduce=1/.test(location.search));
   var EMBED=document.documentElement.classList.contains('embed-mode');
   if(EMBED){
     var ctaLinks=document.querySelectorAll('.cta-btn');
@@ -1508,7 +1516,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     renderGraphState(state);
     renderStageCaption(state);
     if(!REDUCE && state.phase==='triagers-to-flywheel') renderTriagerExitConnection();
-    else renderTriagerScrollActivity(state.triagerActivityProgress,!REDUCE && state.phase==='triagers');
+    else renderTriagerScrollActivity(state.triagerActivityProgress,(!REDUCE || PLAYER_MODE) && state.phase==='triagers');
     if(state.phase!=='triagers'){
       style.setProperty('--sale-scale',String(1+.045*state.salePulse));
       style.setProperty('--sale-ring-opacity',String(.16*state.salePulse));
@@ -1536,7 +1544,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     heightTimer=setTimeout(reportHeight,60);
   }
   function activateScrollStory(){
-    if(storyActive || REDUCE || !zoomSection || !zoomTrack || !zoomPin || !zoomStage) return;
+    if(storyActive || (REDUCE && !PLAYER_MODE) || !zoomSection || !zoomTrack || !zoomPin || !zoomStage) return;
     storyActive=true;
     zoomSection.classList.remove('zoom-static');
     zoomSection.classList.add('zoom-active','zoom-guided');
@@ -1639,7 +1647,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       else if(!document.hidden && standaloneVisible && !standaloneFrame) standaloneFrame=requestAnimationFrame(runStandaloneStory);
     });
   } else if(!CAPTURE && zoomSection){ zoomSection.dataset.zoomMode='static'; }
-  if(REDUCE) wrap.classList.add('reduce');
+  if(REDUCE && !PLAYER_MODE) wrap.classList.add('reduce');
   /* report height to the parent lander (matches d-3-a {fdAppHeight} contract) */
   function reportHeight(){ parent.postMessage({fdAppHeight:Math.ceil(document.body.scrollHeight)+2}, '*'); }
   window.addEventListener('load',reportHeight);
@@ -1659,6 +1667,8 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var chapter=new URLSearchParams(location.search).get('player');
   var durations={learn:5000,triagers:25000,flywheel:8000,graph:8000};
   if(!durations[chapter] || !window.renderCaptureFrame) return;
+  var PLAYER_MODE=document.documentElement.classList.contains('player-mode');
+  var REDUCE=PLAYER_MODE && (!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) || /[?&]reduce=1/.test(location.search));
   var duration=durations[chapter],elapsed=0,startedAt=0,frame=0,playing=false;
 
   function fit(){
@@ -1693,7 +1703,9 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   });
   addEventListener('resize',fit);
   document.addEventListener('visibilitychange',function(){ if(document.hidden) pause(); });
-  fit();render();send('ready');
+  fit();
+  if(REDUCE && PLAYER_MODE){ window.renderCaptureFrame(chapter,chapter==='triagers'?.94:1);send('ready');return; }
+  render();send('ready');
 })();
 </script>
 </body></html>
