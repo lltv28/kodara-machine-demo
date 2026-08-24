@@ -54,6 +54,7 @@ assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*fon
 assert.match(page, /\.cta-btn\{[^}]*padding:12\.65px var\(--space-6\)/, 'Desktop CTA buttons must retain the approved horizontal padding');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{padding-inline:var\(--space-4\);/, 'Mobile CTA buttons must use responsive horizontal padding');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{[^}]*font-size:clamp\(1\.35rem,6\.15vw,1\.7rem\);white-space:nowrap/, 'Mobile CTA buttons must remain legible without wrapping');
+assert.match(page, /@media\(max-width:350px\)\{\s*\.cta-btn\{padding-inline:var\(--space-3\);font-size:1\.05rem\}/, 'Very narrow screens must keep the full CTA label inside the button');
 assert.match(page, /\.mid-cta-inner\{[^}]*flex-direction:column/, 'Mid-page CTA button must remain on its own line');
 assert.match(page, /\.primary-demo h1\{[^}]*font-size:clamp\(3\.3rem,4\.8vw,3\.6rem\)/, 'Hero typography must retain the approved 20% increase');
 assert.match(page, /--type-stat:clamp\(5\.1rem,9\.6vw,7\.8rem\)/, 'Stat typography must retain the approved 20% increase');
@@ -103,9 +104,16 @@ assert.doesNotMatch(page, /class="card video-story"/, 'Old four-demo story must 
 assert.doesNotMatch(page, /class="video-chapter"/, 'Old independent demo chapters must be removed');
 assert.match(page, /class="card founder-letter"/, 'Founder letter must follow the primary demo');
 assert.match(page, /class="founder-letter-copy" data-letter-copy/, 'Founder letter needs a measurable reading body');
+assert.match(page, /class="card buyer-situations"/, 'Landing page must help the three current buyer situations self-identify');
+assert.equal((page.match(/class="buyer-situation"/g) ?? []).length, 3, 'Buyer recognition must cover exactly three situations');
+assert.match(page, /class="card implementation-strip"/, 'Landing page must set concrete implementation expectations');
+assert.match(page, /Four to six weeks/, 'Implementation expectations must state the average launch window');
+assert.match(page, /Two to three weeks/, 'Implementation expectations must qualify fast-moving launches');
+assert.match(page, /About one hour per week/, 'Implementation expectations must state client involvement');
 assert.match(page, /class="card mechanism-features"/, 'Mechanism features must follow the founder letter');
 assert.ok(page.indexOf('class="card founder-letter"') < page.indexOf('class="card mid-cta"'), 'Founder letter must precede its CTA');
-assert.ok(page.indexOf('class="card mid-cta"') < page.indexOf('class="card mechanism-features"'), 'Letter CTA must precede mechanism features');
+assert.ok(page.indexOf('class="card mid-cta"') < page.indexOf('class="card buyer-situations"'), 'Letter CTA must precede buyer recognition');
+assert.ok(page.indexOf('class="card buyer-situations"') < page.indexOf('class="card mechanism-features"'), 'Buyer recognition must precede mechanism features');
 
 const letterMatch = page.match(/class="founder-letter-copy" data-letter-copy>([\s\S]*?)<\/div>/);
 assert.ok(letterMatch, 'Expected founder letter copy');
@@ -114,6 +122,9 @@ assert.ok(letterWords.length >= 450 && letterWords.length <= 600, `Founder lette
 
 const mechanismFeatures = page.match(/class="mechanism-feature"/g) ?? [];
 assert.equal(mechanismFeatures.length, 3, `Expected three mechanism features, found ${mechanismFeatures.length}`);
+assert.match(page, /<h3>AI Brain<\/h3>/, 'Mechanism must name the shared AI Brain');
+assert.match(page, /<h3>AI Triagers<\/h3>/, 'Mechanism must name AI Triagers');
+assert.match(page, /<h3>AI Salespeople<\/h3>/, 'Mechanism must name AI Salespeople');
 const mechanismPlaceholders = page.match(/data-placeholder="mechanism"/g) ?? [];
 assert.equal(mechanismPlaceholders.length, 3, 'Every mechanism feature needs a stable placeholder');
 assert.match(page, /class="card founder-highlight"/, 'Founder highlight must follow mechanism features');
@@ -131,7 +142,8 @@ assert.match(page, /Self-funding is the objective, not a guaranteed result\./, '
 
 const h1s = page.match(/<h1\b/g) ?? [];
 assert.equal(h1s.length, 1, `Expected one h1, found ${h1s.length}`);
-assert.match(page, /<h1[^>]*>[^<]*done-for-you AI sales department/i, 'Primary demo H1 must state the offer');
+assert.match(page, /<h1[^>]*>An AI Sales Department That Helps Pay for Its Own Leads\.<\/h1>/, 'Primary demo H1 must state the self-funding mechanism');
+assert.doesNotMatch(page, /Every lead you pay for should have a useful next step/i, 'The old soft founder-letter headline must not return');
 
 const iframes = [...page.matchAll(/<iframe\b[^>]*>/g)].map((match) => match[0]);
 assert.ok(iframes.every((tag) => /\btitle="[^"]+"/.test(tag)), 'Every iframe needs a useful title');
@@ -145,14 +157,14 @@ assert.match(wistiaPlayers[0], /media-id="6oj2gj3wqt"/, 'Sandra must remain the 
 const proofCards = page.match(/class="proof-card [^"]+"/g) ?? [];
 assert.equal(proofCards.length, 8, `Expected eight written proof cards, found ${proofCards.length}`);
 const faqItems = page.match(/class="faq-item"/g) ?? [];
-assert.equal(faqItems.length, 6, `Expected six FAQ items, found ${faqItems.length}`);
+assert.equal(faqItems.length, 7, `Expected seven FAQ items, found ${faqItems.length}`);
 assert.doesNotMatch(page, /class="site-footer"/, 'Removed footer must not return');
 assert.doesNotMatch(page, /mobile-cta/, 'Removed sticky CTA must not return');
 assert.ok(page.indexOf('class="card faq"') < page.indexOf('class="card cta"'), 'FAQ must precede the final CTA');
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.ok(ctaLinks.length > 0, 'Expected application links');
-assert.equal((page.match(/>Apply for a demo<\/a>/g) ?? []).length, ctaLinks.length, 'Every application CTA must use the compact, consistent label');
+assert.equal((page.match(/>Apply for a Free Live Demo<\/a>/g) ?? []).length, ctaLinks.length, 'Every application CTA must use the specific free-live-demo label');
 assert.ok(ctaLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Every CTA must use the live scheduler');
 assert.ok(ctaLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External CTA links must open safely');
 

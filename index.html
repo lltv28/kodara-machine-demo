@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="See how Kodara builds a done-for-you AI sales department that gives every lead a useful next step.">
+<meta name="description" content="See how Kodara builds a done-for-you AI sales department that qualifies leads, makes smaller sales, and is designed to help fund continued acquisition.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <title>Kodara · Done-for-you AI sales department</title>
 <script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('embed-mode');</script>
@@ -37,7 +37,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   display:flex;flex-direction:column;align-items:center;padding:10px var(--page-gutter) var(--page-gutter);overflow-x:hidden}
 .wrap{width:100%;max-width:var(--rail-wide);display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0;background:transparent}
-.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .outcome-features,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
+.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .buyer-situations,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .outcome-features,.embed-mode .implementation-strip,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;grid-template-columns:minmax(460px,.95fr) minmax(0,1.05fr);align-items:stretch;overflow:hidden;box-shadow:var(--shadow-md)}
@@ -71,7 +71,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .proof-snapshot+.primary-demo{margin-top:var(--space-6)}
 .primary-demo,.founder-highlight,.case-featured--portrait,.cta{border-radius:var(--radius-xl)}
 
-.proof-snapshot.card,.mechanism-features.card,.outcome-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.proof-snapshot.card,.buyer-situations.card,.mechanism-features.card,.outcome-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 
 .card-title{width:100%;max-width:var(--measure-display);margin-inline:auto;font-family:var(--fb);font-size:var(--type-section);font-weight:700;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 
@@ -124,6 +124,15 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .founder-letter-copy .founder-letter-emphasis{margin-block:var(--space-6);padding-left:var(--space-5);border-left:3px solid var(--accent);color:var(--ink);font-size:var(--type-card-small);font-weight:600;line-height:1.35}
 .founder-letter-signature{padding-top:var(--space-3);color:var(--ink)!important;font-weight:600}
 
+/* ---------- buyer recognition ---------- */
+.buyer-situations-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
+.buyer-situations-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.buyer-situations-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
+.buyer-situation{min-width:0;padding:var(--space-6);border-right:1px solid var(--line-2)}
+.buyer-situation:last-child{border-right:0}
+.buyer-situation h3{max-width:17ch;font-size:var(--type-card-small);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
+.buyer-situation p{max-width:34ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+
 /* ---------- mechanism features ---------- */
 .mechanism-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
 .mechanism-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
@@ -152,6 +161,18 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .outcome-caption h3{font-size:var(--type-card-small);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .outcome-caption p{margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .outcome-note{max-width:var(--measure-body);margin:var(--space-6) auto 0;color:var(--ink-3);font-size:var(--type-legal);line-height:1.5;text-align:center;text-wrap:pretty}
+
+/* ---------- implementation expectations ---------- */
+.implementation-strip{padding:var(--space-7);border-radius:var(--radius-xl);box-shadow:var(--shadow-md)}
+.implementation-strip-head{max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
+.implementation-strip h2{font-size:var(--type-section-long);font-weight:700;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
+.implementation-strip-head p{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.implementation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line-2)}
+.implementation-item{padding:var(--space-5) var(--space-6) 0;border-left:1px solid var(--line-2)}
+.implementation-item:first-child{border-left:0}
+.implementation-item strong,.implementation-item span{display:block}
+.implementation-item strong{font-size:var(--type-card-small);font-weight:700;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
+.implementation-item span{margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-label);line-height:1.45;text-wrap:pretty}
 
 /* ---------- video client stories ---------- */
 .case-studies-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
@@ -190,6 +211,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .founder-letter-head{margin-bottom:var(--space-5)}
   .founder-letter-copy p{margin-top:var(--space-4);line-height:1.5}
   .founder-letter-copy .founder-letter-emphasis{margin-block:var(--space-5);padding-left:var(--space-4)}
+  .buyer-situations-head{margin-bottom:var(--space-6)}
+  .buyer-situations-grid{grid-template-columns:1fr}
+  .buyer-situation{padding:var(--space-5);border-right:0;border-bottom:1px solid var(--line-2)}
+  .buyer-situation:last-child{border-bottom:0}
   .mechanism-head{margin-bottom:var(--space-6)}
   .mechanism-grid{grid-template-columns:1fr;gap:var(--space-7)}
   .mechanism-feature h3{max-width:20ch;margin-top:var(--space-4)}
@@ -202,6 +227,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .outcome-grid{grid-template-columns:1fr;gap:var(--space-7)}
   .outcome-placeholder,.outcome-feature:first-child .outcome-placeholder,.outcome-feature:last-child .outcome-placeholder{border:1px dashed var(--line-2);border-radius:var(--radius-lg)}
   .outcome-caption{padding:var(--space-5) 0 0}
+  .implementation-strip{padding:var(--space-6) var(--space-5)}
+  .implementation-grid{grid-template-columns:1fr}
+  .implementation-item{padding:var(--space-5) 0;border-left:0;border-bottom:1px solid var(--line-2)}
+  .implementation-item:last-child{padding-bottom:0;border-bottom:0}
   .case-featured,.case-support-grid{grid-template-columns:1fr}
   .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
   .case-featured--portrait{gap:var(--space-4);padding:var(--space-5)}
@@ -292,6 +321,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .faq-answer{padding-right:var(--space-6)}
 }
 @media(max-width:350px){
+  .cta-btn{padding-inline:var(--space-3);font-size:1.05rem}
   .proof-snapshot-logo-row{gap:var(--space-2) var(--space-3)}
   .proof-snapshot-logo{height:36px}
   .proof-snapshot-note{font-size:.95rem;line-height:1.35}
@@ -337,41 +367,39 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       </div>
     </div>
     <div class="primary-demo-copy">
-      <h1 id="primary-demo-title">Done-for-you AI sales department.</h1>
-      <p>Built around your business to give every lead a useful next step, without adding more manual follow-up.</p>
-      <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a demo</a>
+      <h1 id="primary-demo-title">An AI Sales Department That Helps Pay for Its Own Leads.</h1>
+      <p>Kodara builds the entire system for you. It qualifies cold leads, sells a personalized assessment for less than $20, and sends the hottest buyers toward your highest-level service.</p>
+      <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a Free Live Demo</a>
     </div>
   </section>
 
   <!-- ============ FOUNDER LETTER ============ -->
   <section class="card founder-letter" aria-labelledby="founder-letter-title">
     <header class="founder-letter-head">
-      <h2 id="founder-letter-title">Every lead you pay for should have a useful next step.</h2>
+      <h2 id="founder-letter-title">The expensive problem is what happens to the 90% of leads who go nowhere.</h2>
     </header>
     <div class="founder-letter-copy" data-letter-copy>
-      <p>If you are paying to bring people into your business, only a small percentage will be ready for your highest-level service today. Some need more information. Some need a smaller first step. Some are not ready to speak with your team. You already paid to reach those people, but most sales systems have nowhere to send them.</p>
+      <p>If you are paying to bring people into your business, only a small percentage will book a call, show up, and be ready for your highest-level service today. The rest do not necessarily have a bad problem or lack the money to solve it. Most are simply not ready to make the biggest possible decision the first time they meet you.</p>
 
-      <p>Most funnels give every lead the same two options. Book a sales call or disappear. The hottest prospects may book. Everyone else gets a few automated emails, sits in a database, and slowly goes cold. That does not mean those leads were worthless. It means the sales path was too narrow for different levels of interest and buying readiness.</p>
+      <p>You feel this in different ways. Your sales team has empty calendar space, no-shows, or calls with people who cannot buy. You are still doing the selling yourself and wasting hours on window shoppers. Or your business depends on referrals, so you cannot reliably turn up the flow of new opportunities when you want to grow.</p>
 
-      <p class="founder-letter-emphasis">The problem is not only how many leads you generate. The problem is how few useful next steps those leads receive.</p>
+      <p class="founder-letter-emphasis">Different symptoms. The same expensive leak: most of the leads you already paid to attract never become paying clients.</p>
 
-      <p>That is why we build an AI sales department around the business instead of adding one isolated chatbot. The department learns what you sell, who you help, how you diagnose the problem, and how you communicate. Then it uses that knowledge to meet each lead where that person is, rather than forcing every person into the same conversation.</p>
+      <p>That is why Kodara builds an AI sales department around your business instead of handing you one isolated chatbot. The department is designed to identify the people who deserve your time, make an appropriate smaller sale to people who are not ready for high ticket, and keep the relationship moving without requiring you to chase every lead manually.</p>
 
-      <p>First, the AI brain learns your products, services, voice, qualification rules, and business knowledge. It becomes the shared source your AI salespeople work from. This matters because a useful sales conversation cannot begin with generic answers. It has to reflect the real problem your buyer is trying to solve and the actual ways your business can help.</p>
+      <p>It starts with an AI Brain trained on your products, services, knowledge, voice, and qualification rules. That shared brain gives each AI salesperson the context to represent your business and speak about the real problem your buyer wants to solve. So the conversation begins with your expertise, not generic answers pulled from a public chatbot.</p>
 
-      <p>Then AI Triagers hold individual conversations and direct suitable prospects toward a low-cost personalized assessment. The assessment is usually priced below $20. It gives the buyer an immediate plan while also showing you that this person is willing to take a small paid step. That creates a different signal than a free download or an unanswered form submission.</p>
+      <p>Then AI Triagers speak with cold prospects and sell a personalized assessment, usually for less than $20. The assessment diagnoses an important problem and gives the buyer an immediate plan. But the small payment also does something a free PDF cannot do. It shows that the person is serious enough to pull out a card and take a real first step.</p>
 
-      <p>From there, the AI sales department can direct a qualified buyer toward your highest-level service, show another buyer a smaller offer, or continue the relationship through automated follow-up. The goal is not to pressure every lead into the same purchase. The goal is to give more of the people you paid to reach an appropriate way to move forward.</p>
+      <p>The hottest assessment buyers can move directly toward your highest-level service. People who are not ready can see a smaller digital offer matched to what they need now. And people who share their details without buying can continue through automated follow-up. You are no longer forcing every prospect through one yes-or-no sales path.</p>
 
-      <p class="founder-letter-emphasis">One lead source can support several useful sales paths instead of one yes-or-no decision.</p>
+      <p class="founder-letter-emphasis">The assessment revenue and smaller sales can help pay for the ads that bring in the next lead. That is how the department is designed to become a self-funding loop.</p>
 
-      <p>Kodara builds the system for you. We train the AI brain, build the assessment, create the AI Triagers and AI salespeople, connect the smaller offers and follow-up, and launch the advertising system around it. You do not receive a collection of disconnected tools and a list of instructions. You receive one client-specific department designed around your business.</p>
+      <p>Kodara builds and launches the entire system for you. We train the AI Brain, build the assessment, create the AI Triagers and AI salespeople, connect the smaller offers and follow-up, and launch the advertising system around it. You receive one client-specific department, not disconnected software and a list of instructions you have to implement yourself.</p>
 
-      <p>Your part is about an hour a week. You review decisions, share the knowledge we need, and keep our team aligned with your business. Kodara handles the remaining build and launch work. Revenue from assessments and smaller offers can also help pay for future leads, although self-funding is the objective and not a guaranteed result.</p>
+      <p>Most clients launch and begin selling in four to six weeks on average. Some fast-moving clients have launched in two to three weeks. Your part is about one hour per week to review decisions, share the knowledge we need, and keep our team aligned. Kodara handles the remaining build and launch work.</p>
 
-      <p>No one can promise a specific outcome without considering the offer, market, traffic, execution, and sales process. What we can do is build a more complete path for the leads you are already working to attract. A path that recognizes different buyers, gives them different next steps, and keeps more opportunities from being abandoned after one unanswered call or form.</p>
-
-      <p>If that sounds like the missing piece in your current sales system, the next step is a free live demo. We will show you how the department could fit your business and confirm whether your business qualifies.</p>
+      <p>Self-funding is the objective, not a guaranteed result. Your offer, market, traffic, execution, and sales process all matter. But if you already have a valuable service and too many leads are disappearing, the next step is a free live demo. Our team will show you how the department could work in your business and confirm whether your business qualifies.</p>
 
       <p class="founder-letter-signature">Lucas Tyson<br>Founder, Kodara</p>
     </div>
@@ -381,34 +409,56 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   <section class="card mid-cta" aria-labelledby="mid-cta-title">
     <div class="mid-cta-inner">
       <div class="mid-cta-copy">
-        <h2 id="mid-cta-title">See whether an AI sales department fits your business.</h2>
-        <p>Apply for a free live demo. Our team will show you how the done-for-you process could fit, then confirm whether your business qualifies.</p>
+        <h2 id="mid-cta-title">See what your AI sales department could look like.</h2>
+        <p>Apply for a free live demo. Our team will map the department to your current offers, leads, and sales process, then confirm whether your business qualifies.</p>
       </div>
-      <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a demo</a>
+      <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a Free Live Demo</a>
+    </div>
+  </section>
+
+  <!-- ============ BUYER RECOGNITION ============ -->
+  <section class="card buyer-situations" aria-labelledby="buyer-situations-title">
+    <header class="buyer-situations-head">
+      <h2 class="card-title" id="buyer-situations-title">Different symptoms. The same expensive leak.</h2>
+      <p class="buyer-situations-intro">The system is built for established businesses that are already generating demand but losing too much of its value.</p>
+    </header>
+    <div class="buyer-situations-grid">
+      <article class="buyer-situation">
+        <h3>Your sales team needs better calls.</h3>
+        <p>Calendars are being filled with no-shows, unqualified prospects, or people who cannot afford your highest-level service.</p>
+      </article>
+      <article class="buyer-situation">
+        <h3>You are still doing the selling.</h3>
+        <p>You are trying to run the business while spending valuable time educating and following up with people who may never buy.</p>
+      </article>
+      <article class="buyer-situation">
+        <h3>Growth still depends on referrals.</h3>
+        <p>You have a strong offer, but no acquisition system you can reliably turn up when you want more qualified opportunities.</p>
+      </article>
     </div>
   </section>
 
   <!-- ============ MECHANISM FEATURES ============ -->
   <section class="card mechanism-features" aria-labelledby="mechanism-title">
     <header class="mechanism-head">
-      <h2 class="card-title" id="mechanism-title">How the AI sales department works.</h2>
-      <p class="mechanism-intro">One shared brain gives each AI salesperson the context to guide every lead toward a useful next step.</p>
+      <h2 class="card-title" id="mechanism-title">Three AI roles. One sales department.</h2>
+      <p class="mechanism-intro">Each role handles one part of the sales path, but all three work from the same knowledge about your business.</p>
     </header>
     <div class="mechanism-grid">
       <article class="mechanism-feature">
         <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for the AI brain learning the business">AI brain visual placeholder</div>
-        <h3>It learns your business.</h3>
-        <p>The AI brain learns your offers, buyers, voice, qualification rules, and business knowledge before the department launches.</p>
+        <h3>AI Brain</h3>
+        <p>Learns your offers, buyers, voice, qualification rules, and business knowledge so every conversation represents your business.</p>
       </article>
       <article class="mechanism-feature">
         <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for AI Triagers holding personalized lead conversations">AI Triager visual placeholder</div>
-        <h3>It talks with each lead.</h3>
-        <p>AI Triagers hold personalized conversations and guide suitable prospects toward a low-cost assessment that clarifies their next step.</p>
+        <h3>AI Triagers</h3>
+        <p>Speak with cold prospects and sell a personalized assessment for less than $20, helping reveal who is serious about solving the problem.</p>
       </article>
       <article class="mechanism-feature">
         <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for AI salespeople routing leads to appropriate offers">Sales path visual placeholder</div>
-        <h3>It opens the right path.</h3>
-        <p>Qualified buyers can move toward your highest-level service while other leads see a smaller offer or continue through follow-up.</p>
+        <h3>AI Salespeople</h3>
+        <p>Send qualified buyers toward your highest-level service, present smaller offers to other buyers, and continue following up.</p>
       </article>
     </div>
   </section>
@@ -417,49 +467,62 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   <section class="card founder-highlight" aria-labelledby="founder-highlight-title">
     <div class="founder-portrait" data-placeholder="founder" role="img" aria-label="Placeholder for a vertical portrait of Lucas Tyson">Founder portrait placeholder</div>
     <div class="founder-highlight-copy">
-      <h2 id="founder-highlight-title">Built around the whole sales path.</h2>
-      <p>Lucas Tyson is the founder of Kodara. He leads the team that has installed AI sales departments for more than 350 businesses across more than 30 industries.</p>
-      <p>The work is focused on a practical problem: most businesses do not need another isolated AI tool. They need the pieces to work together around their offer, buyers, sales process, and traffic. Kodara combines those pieces into one client-specific department while the owner spends about an hour a week reviewing decisions and keeping the build aligned.</p>
+      <h2 id="founder-highlight-title">Built to remove the owner bottleneck.</h2>
+      <p>Lucas Tyson built Kodara after seeing what happens when growth depends too heavily on the owner. In his previous business, every new client meant more of his time or more people on payroll. Eventually, he became the bottleneck.</p>
+      <p>Kodara was created to solve that problem. The team has now installed AI sales departments for more than 350 businesses across more than 30 industries, combining qualification, education, follow-up, and monetization into one client-specific system.</p>
     </div>
   </section>
 
   <!-- ============ OUTCOME FEATURES ============ -->
   <section class="card outcome-features" aria-labelledby="outcome-title">
     <header class="outcome-head">
-      <h2 class="card-title" id="outcome-title">What changes when every lead has a path.</h2>
-      <p class="outcome-intro">The department is designed to recover more value from the attention you already pay to generate.</p>
+      <h2 class="card-title" id="outcome-title">What changes when the system is working.</h2>
+      <p class="outcome-intro">Your team spends less time guessing which leads matter and more time with buyers who are ready to move.</p>
     </header>
     <div class="outcome-grid">
       <article class="outcome-feature">
         <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing more leads moving into useful sales paths">Lead value visual placeholder</div>
         <div class="outcome-caption">
-          <h3>Get more from existing leads.</h3>
-          <p>People who are not ready for your highest-level service can still receive a relevant next step instead of disappearing.</p>
+          <h3>Spend time on better prospects.</h3>
+          <p>The paid assessment helps reveal who is serious before you or your salesperson commits time to a sales conversation.</p>
         </div>
       </article>
       <article class="outcome-feature">
         <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing better-qualified buyers reaching sales calls">Buyer quality visual placeholder</div>
         <div class="outcome-caption">
-          <h3>Send better-prepared buyers to calls.</h3>
-          <p>The assessment helps educate and qualify prospects before the most suitable buyers reach your sales conversation.</p>
+          <h3>Recover more acquisition cost.</h3>
+          <p>Assessment revenue and smaller sales can help pay for future advertising instead of leaving every cost dependent on high-ticket sales.</p>
         </div>
       </article>
       <article class="outcome-feature">
         <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing automated lead follow-up reducing owner workload">Follow-up visual placeholder</div>
         <div class="outcome-caption">
-          <h3>Reduce repetitive follow-up.</h3>
-          <p>AI salespeople keep appropriate conversations moving without asking the owner to manually chase every lead.</p>
+          <h3>Stop chasing every lead.</h3>
+          <p>AI salespeople continue educating, routing, and following up without asking the owner to manage every conversation manually.</p>
         </div>
       </article>
     </div>
     <p class="outcome-note">Revenue from assessments and smaller offers can help pay for future leads. Self-funding is the objective, not a guaranteed result.</p>
   </section>
 
+  <!-- ============ IMPLEMENTATION EXPECTATIONS ============ -->
+  <section class="card implementation-strip" aria-labelledby="implementation-title">
+    <header class="implementation-strip-head">
+      <h2 id="implementation-title">A white-glove build, with clear expectations.</h2>
+      <p>Kodara builds and launches the department around your business. You provide the knowledge and feedback that keep it accurate.</p>
+    </header>
+    <div class="implementation-grid">
+      <div class="implementation-item"><strong>Four to six weeks</strong><span>Average time for clients to launch and begin selling.</span></div>
+      <div class="implementation-item"><strong>Two to three weeks</strong><span>Achieved by some fast-moving clients, not the standard promise.</span></div>
+      <div class="implementation-item"><strong>About one hour per week</strong><span>Your time to review decisions and keep the build aligned.</span></div>
+    </div>
+  </section>
+
   <!-- ============ VIDEO CLIENT STORIES ============ -->
   <section class="card case-studies" aria-labelledby="case-studies-title">
     <div class="case-studies-head">
-      <h2 class="card-title" id="case-studies-title">See how business owners put AI to work.</h2>
-      <p class="case-studies-intro">Start with Sandra’s paid-ad results, then see how Leanne and Jose used AI to remove sales and delivery bottlenecks.</p>
+      <h2 class="card-title" id="case-studies-title">Proof tied to the way the system works.</h2>
+      <p class="case-studies-intro">Start with Sandra’s paid acquisition results, then see how Leanne and Jose used AI to reduce owner and delivery bottlenecks.</p>
     </div>
 
     <article class="case-featured case-featured--portrait" aria-labelledby="sandra-case-title">
@@ -512,7 +575,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   <!-- ============ CLIENT PROOF ============ -->
   <section class="card proof" aria-labelledby="proof-title">
     <div class="proof-head">
-      <h2 class="card-title" id="proof-title">What clients measured. And what they said.</h2>
+      <h2 class="card-title" id="proof-title">What clients measured after putting AI to work.</h2>
     </div>
     <div class="proof-grid proof-grid-primary">
       <article class="proof-card is-stat" aria-label="Leanne Ellington client result">
@@ -600,7 +663,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
     <div class="faq-list">
       <details class="faq-item" name="kodara-faq" open>
         <summary>What does Kodara actually do?</summary>
-        <p class="faq-answer">Kodara builds and launches a done-for-you AI sales department around your business. We train an AI brain on your products, services, knowledge, and voice. AI Triagers sell a low-cost personalized assessment, AI salespeople direct qualified buyers toward your highest-level service, smaller digital offers serve people who are not ready for that yet, and automated follow-up keeps working with leads who do not buy immediately.</p>
+        <p class="faq-answer">Kodara builds and launches a done-for-you AI sales department around your business. We train an AI Brain on your products, services, knowledge, and voice. AI Triagers sell a low-cost personalized assessment. AI salespeople direct qualified buyers toward your highest-level service, present smaller digital offers to people who are not ready for that yet, and continue following up with leads who do not buy immediately.</p>
       </details>
       <details class="faq-item" name="kodara-faq">
         <summary>Why start with a paid assessment?</summary>
@@ -608,7 +671,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       </details>
       <details class="faq-item" name="kodara-faq">
         <summary>How do I know this could work for me?</summary>
-        <p class="faq-answer">The system is designed for a business with an important problem it can diagnose, a highest-level service for qualified buyers, and enough knowledge to train the AI brain. The assessment and offer structure still need to match your business, market, traffic, close rate, and execution, so results vary.</p>
+        <p class="faq-answer">The system is designed for an established business with an important problem it can diagnose, a highest-level service for qualified buyers, and enough knowledge to train the AI Brain. It can fit businesses with underused sales calendars, owners who still handle sales themselves, or strong referral-led businesses that want a more controllable acquisition system. Results still vary by offer, market, traffic, close rate, and execution.</p>
       </details>
       <details class="faq-item" name="kodara-faq">
         <summary>How does the guarantee work?</summary>
@@ -616,7 +679,11 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       </details>
       <details class="faq-item" name="kodara-faq">
         <summary>What makes Kodara different?</summary>
-        <p class="faq-answer">Kodara does not build one isolated chatbot and leave you to connect the rest. Our team builds the AI brain, assessment, AI Triagers, AI salespeople, smaller digital offers, follow-up, and advertising system as one done-for-you AI sales department. You provide about one hour per week to review what we build and keep the team on track.</p>
+        <p class="faq-answer">Kodara does not build one isolated chatbot and leave you to connect the rest. Our team builds the AI Brain, assessment, AI Triagers, AI salespeople, smaller digital offers, follow-up, and advertising system as one done-for-you AI sales department. You provide about one hour per week to review what we build and keep the team on track.</p>
+      </details>
+      <details class="faq-item" name="kodara-faq">
+        <summary>How long does it take to launch?</summary>
+        <p class="faq-answer">Clients launch and begin selling in four to six weeks on average. Some fast-moving clients have launched in two to three weeks. Timing depends on how quickly your team can provide the business knowledge, feedback, and approvals needed to keep the build moving.</p>
       </details>
       <details class="faq-item" name="kodara-faq">
         <summary>What do I need to do next?</summary>
@@ -627,9 +694,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 
   <!-- ============ CTA BOOKEND ============ -->
   <section class="card cta" aria-label="Apply for a free live demo">
-    <p class="cta-line">See how a done-for-you AI sales department could fit your business.</p>
-    <p class="cta-sub">Apply for a free live demo. Our team will show you the done-for-you process and confirm whether your business qualifies.</p>
-    <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a demo</a>
+    <p class="cta-line">See what an AI sales department could do with the leads you already have.</p>
+    <p class="cta-sub">Complete the short application. If your business qualifies, choose a time for a free live demo built around your current offers, leads, and sales process.</p>
+    <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a Free Live Demo</a>
   </section>
 
 </main>
