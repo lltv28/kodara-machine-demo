@@ -34,7 +34,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   display:flex;flex-direction:column;align-items:center;padding:10px var(--page-gutter) var(--page-gutter);overflow-x:hidden}
 .wrap{width:100%;max-width:var(--rail-wide);display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0;background:transparent}
-.embed-mode .proof-snapshot,.embed-mode .process,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
+.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(460px,.95fr);align-items:stretch;overflow:hidden}
@@ -66,7 +66,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .card{--card-pad:var(--space-5);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
 .card+.card{margin-top:clamp(var(--space-8),8vw,var(--space-9))}
 
-.proof-snapshot.card,.process.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.cta.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.proof-snapshot.card,.mechanism-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.cta.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 
 .card-title{width:100%;max-width:var(--measure-display);margin-inline:auto;font-family:var(--fb);font-size:var(--type-section);font-weight:700;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
 
@@ -108,20 +108,28 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .mid-cta p{max-width:var(--measure-body);margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
 .mid-cta .cta-btn{flex:0 0 auto}
 
-/* ---------- done-for-you process ---------- */
-.process-head,.case-studies-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
-.process-intro,.case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
-.process-list{position:relative;display:grid;gap:var(--space-4);width:100%}
-.process-list::before{content:'';position:absolute;left:18px;top:24px;bottom:24px;width:2px;background:var(--accent-line)}
-.process-step{position:relative;display:grid;grid-template-columns:38px minmax(0,1fr);gap:var(--space-4);align-items:start}
-.process-node{position:relative;z-index:1;width:14px;height:14px;margin:30px 0 0 12px;border:3px solid #fff;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--accent-line)}
-.process-panel{padding:var(--space-5);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
-.process-panel h3{max-width:var(--measure-card-title);font-family:var(--fb);font-size:var(--type-card);font-weight:600;line-height:1.12;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.process-panel p{max-width:var(--measure-body);margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
-.process-your-part{width:100%;margin:var(--space-5) 0 0;padding:var(--space-5);border:1px solid var(--accent-line);border-radius:var(--radius-lg);background:var(--accent-soft);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
-.process-your-part strong{display:block;max-width:var(--measure-card-title);margin-bottom:var(--space-2);color:var(--accent-ink);font-family:var(--fb);font-size:var(--type-card-small);font-weight:600;line-height:1.12;letter-spacing:var(--tracking-heading);text-wrap:balance}
+/* ---------- founder letter ---------- */
+.founder-letter{max-width:900px;padding:clamp(36px,6vw,72px);background:#FDFDFC}
+.founder-letter-head{max-width:var(--rail-reading);margin:0 auto var(--space-6)}
+.founder-letter h2{max-width:16ch;font-size:var(--type-section);font-weight:700;line-height:1.06;letter-spacing:var(--tracking-display);text-wrap:balance}
+.founder-letter-copy{max-width:var(--rail-reading);margin-inline:auto}
+.founder-letter-copy p{margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.72;text-wrap:pretty}
+.founder-letter-copy p:first-child{margin-top:0}
+.founder-letter-copy .founder-letter-emphasis{margin-block:var(--space-6);padding-left:var(--space-5);border-left:3px solid var(--accent);color:var(--ink);font-size:var(--type-card-small);font-weight:600;line-height:1.35}
+.founder-letter-signature{padding-top:var(--space-3);color:var(--ink)!important;font-weight:600}
+
+/* ---------- mechanism features ---------- */
+.mechanism-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
+.mechanism-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
+.mechanism-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6)}
+.mechanism-feature{min-width:0}
+.mechanism-placeholder{display:flex;width:100%;aspect-ratio:4/3;align-items:center;justify-content:center;padding:var(--space-5);border:1px dashed var(--accent);border-radius:var(--radius-lg);background:linear-gradient(145deg,var(--accent-soft),#fff);color:var(--ink-3);font-size:var(--type-label);font-weight:600;line-height:1.4;text-align:center;text-wrap:balance}
+.mechanism-feature h3{max-width:16ch;margin-top:var(--space-5);font-size:var(--type-card-small);font-weight:600;line-height:1.12;letter-spacing:var(--tracking-heading);text-wrap:balance}
+.mechanism-feature p{max-width:34ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
 
 /* ---------- video client stories ---------- */
+.case-studies-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
+.case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
 .case-featured{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
 .case-featured--portrait{grid-template-columns:minmax(280px,360px) minmax(0,1fr);align-items:center;gap:var(--space-6);padding:var(--space-5)}
 .case-featured .case-media{border-right:1px solid var(--line-2)}
@@ -150,12 +158,15 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .case-person strong{font-size:var(--type-label);line-height:1.3}
 .case-person span{margin-top:3px;color:var(--ink-3);font-size:var(--type-meta);line-height:1.45}
 @media(max-width:720px){
-  .process-head,.case-studies-head{margin-bottom:24px}
-  .process-list{gap:var(--space-4)}
-  .process-list::before{left:9px}
-  .process-step{grid-template-columns:20px minmax(0,1fr);gap:12px}
-  .process-node{margin:27px 0 0 3px}
-  .process-panel,.process-your-part{padding:var(--space-4)}
+  .case-studies-head{margin-bottom:24px}
+  .founder-letter{padding:var(--space-6) var(--space-5)}
+  .founder-letter-head{margin-bottom:var(--space-5)}
+  .founder-letter-copy p{margin-top:var(--space-4);line-height:1.68}
+  .founder-letter-copy .founder-letter-emphasis{margin-block:var(--space-5);padding-left:var(--space-4)}
+  .mechanism-head{margin-bottom:var(--space-6)}
+  .mechanism-grid{grid-template-columns:1fr;gap:var(--space-7)}
+  .mechanism-feature h3{max-width:20ch;margin-top:var(--space-4)}
+  .mechanism-feature p{max-width:var(--measure-card-body)}
   .case-featured,.case-support-grid{grid-template-columns:1fr}
   .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
   .case-featured--portrait{gap:var(--space-4);padding:var(--space-4)}
@@ -241,7 +252,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   :root{--type-section:2.125rem;--type-section-long:1.875rem;--type-card:1.75rem;--type-card-small:1.625rem;--type-demo-title:1.625rem;--type-question:1.3125rem}
   body{padding-inline:var(--page-gutter-mobile)}
   .video-card-tab,.video-chapter-copy{padding-inline:var(--space-4)}
-  .process-panel,.process-your-part,.case-featured--portrait,.case-featured-copy,.case-support-copy,.proof-card{padding:var(--space-4)}
+  .founder-letter,.case-featured--portrait,.case-featured-copy,.case-support-copy,.proof-card{padding:var(--space-4)}
   .proof-grid{gap:var(--space-4)}
   .faq-item summary{padding-right:var(--space-6)}
   .faq-answer{padding-right:var(--space-6)}
@@ -289,36 +300,38 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
     </div>
   </section>
 
-  <!-- ============ DONE-FOR-YOU PROCESS ============ -->
-  <section class="card process" aria-labelledby="process-title">
-    <div class="process-head">
-      <h2 class="card-title" id="process-title">We build and launch the department for you.</h2>
-      <p class="process-intro">Kodara handles the client-specific build, launch, follow-up, and paid advertising.</p>
+  <!-- ============ FOUNDER LETTER ============ -->
+  <section class="card founder-letter" aria-labelledby="founder-letter-title">
+    <header class="founder-letter-head">
+      <h2 id="founder-letter-title">Every lead you pay for should have a useful next step.</h2>
+    </header>
+    <div class="founder-letter-copy" data-letter-copy>
+      <p>If you are paying to bring people into your business, only a small percentage will be ready for your highest-level service today. Some need more information. Some need a smaller first step. Some are not ready to speak with your team. You already paid to reach those people, but most sales systems have nowhere to send them.</p>
+
+      <p>Most funnels give every lead the same two options. Book a sales call or disappear. The hottest prospects may book. Everyone else gets a few automated emails, sits in a database, and slowly goes cold. That does not mean those leads were worthless. It means the sales path was too narrow for different levels of interest and buying readiness.</p>
+
+      <p class="founder-letter-emphasis">The problem is not only how many leads you generate. The problem is how few useful next steps those leads receive.</p>
+
+      <p>That is why we build an AI sales department around the business instead of adding one isolated chatbot. The department learns what you sell, who you help, how you diagnose the problem, and how you communicate. Then it uses that knowledge to meet each lead where that person is, rather than forcing every person into the same conversation.</p>
+
+      <p>First, the AI brain learns your products, services, voice, qualification rules, and business knowledge. It becomes the shared source your AI salespeople work from. This matters because a useful sales conversation cannot begin with generic answers. It has to reflect the real problem your buyer is trying to solve and the actual ways your business can help.</p>
+
+      <p>Then AI Triagers hold individual conversations and direct suitable prospects toward a low-cost personalized assessment. The assessment is usually priced below $20. It gives the buyer an immediate plan while also showing you that this person is willing to take a small paid step. That creates a different signal than a free download or an unanswered form submission.</p>
+
+      <p>From there, the AI sales department can direct a qualified buyer toward your highest-level service, show another buyer a smaller offer, or continue the relationship through automated follow-up. The goal is not to pressure every lead into the same purchase. The goal is to give more of the people you paid to reach an appropriate way to move forward.</p>
+
+      <p class="founder-letter-emphasis">One lead source can support several useful sales paths instead of one yes-or-no decision.</p>
+
+      <p>Kodara builds the system for you. We train the AI brain, build the assessment, create the AI Triagers and AI salespeople, connect the smaller offers and follow-up, and launch the advertising system around it. You do not receive a collection of disconnected tools and a list of instructions. You receive one client-specific department designed around your business.</p>
+
+      <p>Your part is about an hour a week. You review decisions, share the knowledge we need, and keep our team aligned with your business. Kodara handles the remaining build and launch work. Revenue from assessments and smaller offers can also help pay for future leads, although self-funding is the objective and not a guaranteed result.</p>
+
+      <p>No one can promise a specific outcome without considering the offer, market, traffic, execution, and sales process. What we can do is build a more complete path for the leads you are already working to attract. A path that recognizes different buyers, gives them different next steps, and keeps more opportunities from being abandoned after one unanswered call or form.</p>
+
+      <p>If that sounds like the missing piece in your current sales system, the next step is a free live demo. We will show you how the department could fit your business and confirm whether your business qualifies.</p>
+
+      <p class="founder-letter-signature">Lucas Tyson<br>Founder, Kodara</p>
     </div>
-    <div class="process-list">
-      <article class="process-step">
-        <span class="process-node" aria-hidden="true"></span>
-        <div class="process-panel">
-          <h3>We train the AI brain on your business.</h3>
-          <p>We map your offers, business knowledge, qualification rules, and communication style, then test the AI brain before launch.</p>
-        </div>
-      </article>
-      <article class="process-step">
-        <span class="process-node" aria-hidden="true"></span>
-        <div class="process-panel">
-          <h3>We build the complete sales path.</h3>
-          <p>We build the personalized assessment, AI Triagers, AI salespeople, smaller offers, automated follow-up, and the route into your highest-level service.</p>
-        </div>
-      </article>
-      <article class="process-step">
-        <span class="process-node" aria-hidden="true"></span>
-        <div class="process-panel">
-          <h3>We launch the traffic system.</h3>
-          <p>Launches average four to six weeks. Some fast-moving clients launch in two to three weeks. Exact scope and timing are agreed before work starts.</p>
-        </div>
-      </article>
-    </div>
-    <p class="process-your-part"><strong>Your part: about an hour a week.</strong>You review decisions and keep the team aligned. Kodara handles the remaining build and launch work.</p>
   </section>
 
   <!-- ============ MID-PAGE CTA ============ -->
@@ -329,6 +342,31 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
         <p>Apply for a free live demo. Our team will show you how the done-for-you process could fit, then confirm whether your business qualifies.</p>
       </div>
       <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a free live demo</a>
+    </div>
+  </section>
+
+  <!-- ============ MECHANISM FEATURES ============ -->
+  <section class="card mechanism-features" aria-labelledby="mechanism-title">
+    <header class="mechanism-head">
+      <h2 class="card-title" id="mechanism-title">How the AI sales department works.</h2>
+      <p class="mechanism-intro">One shared brain gives each AI salesperson the context to guide every lead toward a useful next step.</p>
+    </header>
+    <div class="mechanism-grid">
+      <article class="mechanism-feature">
+        <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for the AI brain learning the business">AI brain visual placeholder</div>
+        <h3>It learns your business.</h3>
+        <p>The AI brain learns your offers, buyers, voice, qualification rules, and business knowledge before the department launches.</p>
+      </article>
+      <article class="mechanism-feature">
+        <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for AI Triagers holding personalized lead conversations">AI Triager visual placeholder</div>
+        <h3>It talks with each lead.</h3>
+        <p>AI Triagers hold personalized conversations and guide suitable prospects toward a low-cost assessment that clarifies their next step.</p>
+      </article>
+      <article class="mechanism-feature">
+        <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for AI salespeople routing leads to appropriate offers">Sales path visual placeholder</div>
+        <h3>It opens the right path.</h3>
+        <p>Qualified buyers can move toward your highest-level service while other leads see a smaller offer or continue through follow-up.</p>
+      </article>
     </div>
   </section>
 

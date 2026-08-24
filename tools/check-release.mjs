@@ -38,6 +38,21 @@ assert.match(page, /class="primary-demo-copy"/, 'Primary demo needs page-owned s
 assert.match(page, /class="primary-demo-visual"[^>]*data-demo-slot/, 'Primary demo needs a stable visual integration slot');
 assert.doesNotMatch(page, /class="card video-story"/, 'Old four-demo story must be removed');
 assert.doesNotMatch(page, /class="video-chapter"/, 'Old independent demo chapters must be removed');
+assert.match(page, /class="card founder-letter"/, 'Founder letter must follow the primary demo');
+assert.match(page, /class="founder-letter-copy" data-letter-copy/, 'Founder letter needs a measurable reading body');
+assert.match(page, /class="card mechanism-features"/, 'Mechanism features must follow the founder letter');
+assert.ok(page.indexOf('class="card founder-letter"') < page.indexOf('class="card mid-cta"'), 'Founder letter must precede its CTA');
+assert.ok(page.indexOf('class="card mid-cta"') < page.indexOf('class="card mechanism-features"'), 'Letter CTA must precede mechanism features');
+
+const letterMatch = page.match(/class="founder-letter-copy" data-letter-copy>([\s\S]*?)<\/div>/);
+assert.ok(letterMatch, 'Expected founder letter copy');
+const letterWords = letterMatch[1].replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean);
+assert.ok(letterWords.length >= 450 && letterWords.length <= 600, `Founder letter has ${letterWords.length} words; expected 450-600`);
+
+const mechanismFeatures = page.match(/class="mechanism-feature"/g) ?? [];
+assert.equal(mechanismFeatures.length, 3, `Expected three mechanism features, found ${mechanismFeatures.length}`);
+const mechanismPlaceholders = page.match(/data-placeholder="mechanism"/g) ?? [];
+assert.equal(mechanismPlaceholders.length, 3, 'Every mechanism feature needs a stable placeholder');
 
 const h1s = page.match(/<h1\b/g) ?? [];
 assert.equal(h1s.length, 1, `Expected one h1, found ${h1s.length}`);
