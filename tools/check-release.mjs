@@ -29,6 +29,9 @@ assert.match(page, /--type-section:clamp\(3\.6rem,3\.252rem \+ 1\.416vw,4\.5rem\
 assert.match(page, /--type-control:1\.2rem;--type-button:1\.8rem;--type-label:1\.2rem;--type-meta:1\.2rem;--type-legal:1\.125rem/, 'Small typography tiers must retain their approved increases');
 assert.match(page, /--type-button:1\.8rem/, 'CTA typography must retain the approved 1.8rem size');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)[^}]*text-transform:capitalize/, 'CTA buttons must use their own line, bold type, and Capitalize Case');
+assert.match(page, /\.cta-btn\{[^}]*padding:12\.65px var\(--space-6\)/, 'Desktop CTA buttons must retain the approved horizontal padding');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{padding-inline:var\(--space-4\)\}/, 'Mobile CTA buttons must use responsive horizontal padding');
+assert.match(page, /\.mobile-cta\{[^}]*padding-inline:var\(--space-3\)/, 'Sticky mobile CTA must keep its narrow-safe horizontal padding');
 assert.match(page, /\.mid-cta-inner\{[^}]*flex-direction:column/, 'Mid-page CTA button must remain on its own line');
 assert.match(page, /scroll-padding-bottom:calc\(120px \+ env\(safe-area-inset-bottom\)\)/, 'Mobile focus clearance must accommodate enlarged CTA wrapping');
 assert.match(page, /\.primary-demo h1\{[^}]*font-size:clamp\(3\.3rem,4\.8vw,3\.6rem\)/, 'Hero typography must retain the approved 20% increase');
