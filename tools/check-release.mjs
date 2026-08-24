@@ -61,8 +61,8 @@ assert.match(page, /\.proof-stat\{[^}]*font-size:var\(--type-stat\)/, 'Proof sta
 assert.match(page, /\.proof-card blockquote::before\{[^}]*font-size:5\.4rem/, 'Quote marks must retain the approved 20% increase');
 assert.match(page, /\.faq-item summary::after\{[^}]*font-size:1\.8rem/, 'FAQ controls must retain the approved 20% increase');
 assert.match(page, /--bg:#F6F6F7;--surface:var\(--bg\)/, 'Neutral surfaces must use one cool-gray token');
-assert.match(page, /--page:#FAF8F5;--bg:#F6F6F7;--surface:var\(--bg\)/, 'Page canvas must use the approved warm-neutral layer');
-assert.match(page, /body\{[^}]*background:var\(--page\)/, 'Body must render the warm-neutral page canvas');
+assert.match(page, /--page:#fff;--bg:#F6F6F7;--surface:var\(--bg\)/, 'Page canvas must use pure white');
+assert.match(page, /body\{[^}]*background:var\(--page\)/, 'Body must render the page canvas token');
 assert.match(page, /--border-subtle:rgba\(26,26,26,\.06\)/, 'Missing WL-aligned subtle border token');
 assert.match(page, /--border-default:rgba\(26,26,26,\.09\)/, 'Missing WL-aligned default border token');
 assert.match(page, /--border-accent:rgba\(46,125,82,\.20\)/, 'Missing green accent border token');
