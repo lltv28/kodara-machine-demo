@@ -31,9 +31,7 @@ assert.match(page, /--type-button:1\.8rem/, 'CTA typography must retain the appr
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)[^}]*text-transform:capitalize/, 'CTA buttons must use their own line, bold type, and Capitalize Case');
 assert.match(page, /\.cta-btn\{[^}]*padding:12\.65px var\(--space-6\)/, 'Desktop CTA buttons must retain the approved horizontal padding');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{padding-inline:var\(--space-4\)\}/, 'Mobile CTA buttons must use responsive horizontal padding');
-assert.match(page, /\.mobile-cta\{[^}]*padding-inline:var\(--space-3\)/, 'Sticky mobile CTA must keep its narrow-safe horizontal padding');
 assert.match(page, /\.mid-cta-inner\{[^}]*flex-direction:column/, 'Mid-page CTA button must remain on its own line');
-assert.match(page, /scroll-padding-bottom:calc\(120px \+ env\(safe-area-inset-bottom\)\)/, 'Mobile focus clearance must accommodate enlarged CTA wrapping');
 assert.match(page, /\.primary-demo h1\{[^}]*font-size:clamp\(3\.3rem,4\.8vw,3\.6rem\)/, 'Hero typography must retain the approved 20% increase');
 assert.match(page, /--type-stat:clamp\(5\.1rem,9\.6vw,7\.8rem\)/, 'Stat typography must retain the approved 20% increase');
 assert.match(page, /\.proof-stat\{[^}]*font-size:var\(--type-stat\)/, 'Proof stats must consume the semantic stat tier');
@@ -54,7 +52,6 @@ assert.match(page, /<link rel="icon" href="assets\/favicon\.svg"/, 'Landing page
 assert.match(page, /--measure-body:/, 'Missing semantic body measure');
 assert.match(page, /text-wrap:balance/, 'Headlines must use balanced wrapping');
 assert.match(page, /text-wrap:pretty/, 'Body copy must use pretty wrapping');
-assert.match(page, /scroll-padding-bottom:/, 'Mobile focus must clear the sticky CTA');
 assert.match(page, /\.proof-more summary:focus-visible/, 'Disclosure controls need a visible focus state');
 assert.match(page, /prefers-reduced-motion:reduce/, 'The landing page must honor reduced motion');
 assert.match(page, /prefers-reduced-transparency:reduce/, 'Glassy demo surfaces need an opaque accessibility fallback');
@@ -121,9 +118,9 @@ const proofCards = page.match(/class="proof-card [^"]+"/g) ?? [];
 assert.equal(proofCards.length, 8, `Expected eight written proof cards, found ${proofCards.length}`);
 const faqItems = page.match(/class="faq-item"/g) ?? [];
 assert.equal(faqItems.length, 6, `Expected six FAQ items, found ${faqItems.length}`);
-assert.match(page, /class="site-footer"/, 'Page needs a minimal footer');
+assert.doesNotMatch(page, /class="site-footer"/, 'Removed footer must not return');
+assert.doesNotMatch(page, /mobile-cta/, 'Removed sticky CTA must not return');
 assert.ok(page.indexOf('class="card faq"') < page.indexOf('class="card cta"'), 'FAQ must precede the final CTA');
-assert.ok(page.indexOf('class="card cta"') < page.indexOf('class="site-footer"'), 'Final CTA must precede the footer');
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.ok(ctaLinks.length > 0, 'Expected application links');

@@ -37,7 +37,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   display:flex;flex-direction:column;align-items:center;padding:10px var(--page-gutter) var(--page-gutter);overflow-x:hidden}
 .wrap{width:100%;max-width:var(--rail-wide);display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0;background:transparent}
-.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .outcome-features,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta,.embed-mode .site-footer{display:none}
+.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .outcome-features,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;grid-template-columns:minmax(460px,.95fr) minmax(0,1.05fr);align-items:stretch;overflow:hidden;box-shadow:var(--shadow-md)}
@@ -96,7 +96,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .cta-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .proof-more summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .case-media wistia-player:focus-within{outline:2px solid var(--accent);outline-offset:4px}
-.mobile-cta{display:none}
 /* ---- beat labels inside the fused How-it-works card ---- */
 .beat{margin-top:34.5px}
 /* ---- closing CTA bookend ---- */
@@ -106,7 +105,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .cta .cta-btn{margin-inline:auto;color:var(--accent-dark);background:#fff;border-color:rgba(255,255,255,.72)}
 .cta .cta-btn:hover{background:var(--bg)}
 .cta .cta-btn:focus-visible{outline-color:#fff}
-.site-footer{width:100%;max-width:var(--rail-wide);margin-top:var(--space-7);padding:var(--space-5) 0 calc(var(--space-4) + env(safe-area-inset-bottom));border-top:1px solid var(--line-2);color:var(--ink-3);font-size:var(--type-legal);line-height:1.5;text-align:center}
 
 /* ---------- mid-page conversion point ---------- */
 .mid-cta{padding:0!important}
@@ -261,7 +259,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .faq-item summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:var(--radius-sm)}
 .faq-answer{max-width:var(--measure-body);padding:0 var(--space-7) var(--space-5) 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.6;text-wrap:pretty}
 @media(max-width:720px){
-  html{scroll-padding-bottom:calc(120px + env(safe-area-inset-bottom))}
   .faq-head{margin-bottom:var(--space-4)}
   .faq-item summary{padding:var(--space-4) 46px var(--space-4) 0}
   .faq-answer{padding:0 46px var(--space-4) 0}
@@ -279,10 +276,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   .proof-snapshot-logo--hr-block{--logo-width:120px;--logo-height:32px}
   .mid-cta-inner{align-items:stretch;padding:var(--space-4)}
   .mid-cta .cta-btn{width:100%}
-  .mobile-cta{position:fixed;left:var(--page-gutter-mobile);right:var(--page-gutter-mobile);bottom:max(13.8px,env(safe-area-inset-bottom));z-index:20;display:flex;width:auto;justify-content:center;min-height:59.8px;padding-inline:var(--space-3);transform:translateY(calc(100% + 32.2px));opacity:0;pointer-events:none;box-shadow:var(--shadow-md);transition:transform .2s ease,opacity .2s ease}
-  .mobile-cta.is-visible{transform:translateY(0);opacity:1;pointer-events:auto}
-  .embed-mode .mobile-cta{display:none}
-  .faq-item summary,.proof-more summary,.cta-btn,.case-media wistia-player{scroll-margin-bottom:calc(120px + env(safe-area-inset-bottom))}
 }
 @media(max-width:390px){
   :root{--type-section:2.55rem;--type-section-long:2.25rem;--type-card:2.1rem;--type-card-small:1.95rem;--type-question:1.575rem}
@@ -293,7 +286,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   .faq-answer{padding-right:var(--space-6)}
 }
 @media(prefers-reduced-transparency:reduce){.primary-demo-placeholder{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}}
-@media(prefers-reduced-motion:reduce){.mobile-cta{transition:none}}
+@media(prefers-reduced-motion:reduce){.cta-btn{transition:none}}
 
 </style>
 </head>
@@ -626,10 +619,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   </section>
 
 </main>
-<footer class="site-footer">
-  <p>&copy; 2026 Kodara. All rights reserved.</p>
-</footer>
-<a class="cta-btn mobile-cta" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a free live demo</a>
 <script>
 (function(){
   'use strict';
@@ -667,21 +656,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
     syncProofLayout();
     if(proofLayout.addEventListener) proofLayout.addEventListener('change',syncProofLayout);
     else proofLayout.addListener(syncProofLayout);
-  }
-
-  var mobileCta=document.querySelector('.mobile-cta');
-  var mobileCtaBlockers=Array.prototype.slice.call(document.querySelectorAll('.proof-snapshot,.primary-demo,.case-studies,.proof,.faq,.cta'));
-  if(mobileCta && mobileCtaBlockers.length && 'IntersectionObserver' in window){
-    var visibleCtaBlockers=new Set();
-    function syncMobileCta(){ mobileCta.classList.toggle('is-visible',visibleCtaBlockers.size===0); }
-    var ctaObserver=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting) visibleCtaBlockers.add(entry.target);
-        else visibleCtaBlockers.delete(entry.target);
-      });
-      syncMobileCta();
-    });
-    mobileCtaBlockers.forEach(function(section){ ctaObserver.observe(section); });
   }
 
   if(document.documentElement.classList.contains('embed-mode')){
