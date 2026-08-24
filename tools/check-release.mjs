@@ -26,7 +26,11 @@ assert.match(page, /--space-8:72px;--space-9:96px/, 'Large section spacing must 
 assert.match(page, /--type-body:1\.5rem/, 'Desktop body typography must retain the approved 20% increase');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.35rem/, 'Mobile body typography must retain the approved 20% increase');
 assert.match(page, /--type-section:clamp\(3\.6rem,3\.252rem \+ 1\.416vw,4\.5rem\)/, 'Section typography must retain the approved 20% increase');
-assert.match(page, /--type-control:1\.2rem;--type-label:1\.2rem;--type-meta:1\.2rem;--type-legal:1\.125rem/, 'Small typography tiers must retain the approved 20% increase');
+assert.match(page, /--type-control:1\.2rem;--type-button:1\.56rem;--type-label:1\.2rem;--type-meta:1\.2rem;--type-legal:1\.125rem/, 'Small typography tiers must retain their approved increases');
+assert.match(page, /--type-button:1\.56rem/, 'CTA typography must retain the approved 30% button increase');
+assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must use their own line and bold enlarged type');
+assert.match(page, /\.mid-cta-inner\{[^}]*flex-direction:column/, 'Mid-page CTA button must remain on its own line');
+assert.match(page, /scroll-padding-bottom:calc\(120px \+ env\(safe-area-inset-bottom\)\)/, 'Mobile focus clearance must accommodate enlarged CTA wrapping');
 assert.match(page, /\.primary-demo h1\{[^}]*font-size:clamp\(3\.3rem,4\.8vw,3\.6rem\)/, 'Hero typography must retain the approved 20% increase');
 assert.match(page, /--type-stat:clamp\(5\.1rem,9\.6vw,7\.8rem\)/, 'Stat typography must retain the approved 20% increase');
 assert.match(page, /\.proof-stat\{[^}]*font-size:var\(--type-stat\)/, 'Proof stats must consume the semantic stat tier');
