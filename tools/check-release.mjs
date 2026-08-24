@@ -29,8 +29,9 @@ assert.match(page, /\.case-quote\{[^}]*letter-spacing:var\(--tracking-body\)/, '
 assert.match(page, /--space-1:4\.6px;--space-2:9\.2px;--space-3:13\.8px;--space-4:18\.4px;--space-5:27\.6px;--space-6:36\.8px;--space-7:55\.2px/, 'Internal spacing tiers must retain the approved 15% increase');
 assert.match(page, /--space-8:80px;--space-9:112px/, 'Large section spacing must retain the expanded rhythm');
 assert.match(page, /--rail-wide:1280px/, 'Desktop content rail must retain the expanded 1280px width');
-assert.match(page, /--type-body:1\.5rem/, 'Desktop body typography must retain the approved 20% increase');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.35rem/, 'Mobile body typography must retain the approved 20% increase');
+assert.match(page, /--type-body:1\.375rem;--type-body-large:1\.5rem/, 'Desktop body typography must retain the approved 22px and 24px tiers');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.125rem;--type-body-large:1\.5rem/, 'Mobile body typography must retain the approved 18px and 24px tiers');
+assert.match(page, /body\{[^}]*font-size:var\(--type-body\);line-height:1\.5;/, 'Body copy must retain the approved 150% line height');
 assert.match(page, /--type-section:clamp\(3\.6rem,3\.252rem \+ 1\.416vw,4\.5rem\)/, 'Section typography must retain the approved 20% increase');
 assert.match(page, /--type-control:1\.2rem;--type-button:1\.7rem;--type-label:1\.2rem;--type-meta:1\.2rem;--type-legal:1\.125rem/, 'Small typography tiers must retain their approved increases');
 assert.match(page, /--type-button:1\.7rem/, 'CTA typography must retain the approved 1.7rem size');
