@@ -21,6 +21,8 @@ for (const [path, maximum] of budgets) {
 }
 
 assert.match(page, /--measure-display:/, 'Missing semantic display measure');
+assert.match(page, /<meta name="description" content="[^"]+">/, 'Landing page needs a search and share description');
+assert.match(page, /<link rel="icon" href="assets\/favicon\.svg"/, 'Landing page needs a local favicon');
 assert.match(page, /--measure-body:/, 'Missing semantic body measure');
 assert.match(page, /text-wrap:balance/, 'Headlines must use balanced wrapping');
 assert.match(page, /text-wrap:pretty/, 'Body copy must use pretty wrapping');
