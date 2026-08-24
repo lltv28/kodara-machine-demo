@@ -21,9 +21,11 @@ for (const [path, maximum] of budgets) {
 }
 
 assert.match(page, /--measure-display:/, 'Missing semantic display measure');
+assert.match(page, /--bg:#F6F6F7;--surface:var\(--bg\)/, 'Neutral surfaces must use one cool-gray token');
 assert.match(page, /--border-subtle:rgba\(26,26,26,\.06\)/, 'Missing WL-aligned subtle border token');
 assert.match(page, /--border-default:rgba\(26,26,26,\.09\)/, 'Missing WL-aligned default border token');
 assert.match(page, /--border-accent:rgba\(46,125,82,\.20\)/, 'Missing green accent border token');
+assert.doesNotMatch(page, /--accent-soft:/, 'Pale green section fills must not return');
 assert.match(page, /--radius-sm:8px/, 'Compact surfaces need the 8px radius tier');
 assert.match(page, /--radius:16px;--radius-lg:16px/, 'Support surfaces need the 16px radius tier');
 assert.match(page, /--radius-xl:24px/, 'Featured surfaces need the 24px radius tier');
@@ -40,6 +42,8 @@ assert.match(page, /prefers-reduced-motion:reduce/, 'The landing page must honor
 assert.match(page, /prefers-reduced-transparency:reduce/, 'Glassy demo surfaces need an opaque accessibility fallback');
 assert.match(page, /\.primary-demo-placeholder\{[^}]*backdrop-filter:blur\(8px\)/, 'Glass treatment must stay scoped to the primary demo placeholder');
 assert.match(page, /\.primary-demo,\.founder-highlight,\.case-featured--portrait,\.cta\{border-radius:var\(--radius-xl\)\}/, 'Featured surfaces need an explicit 24px role');
+assert.match(page, /\.cta\{[^}]*background:var\(--accent-dark\)[^}]*color:#fff/, 'Closing CTA must remain the single deep-green color block');
+assert.match(page, /\.cta \.cta-btn\{[^}]*color:var\(--accent-dark\)[^}]*background:#fff/, 'Closing CTA button must keep high contrast');
 assert.match(renderer, /prefers-reduced-motion:reduce/, 'The demo renderer must honor reduced motion');
 assert.match(renderer, /var PLAYER_MODE=document\.documentElement\.classList\.contains\('player-mode'\)/, 'Reduced motion must work inside independent demo players');
 assert.match(renderer, /if\(REDUCE && PLAYER_MODE\)\{ window\.renderCaptureFrame\(chapter,chapter==='triagers'\?\.94:1\);send\('ready'\);return; \}/, 'Reduced-motion players must settle on a useful chapter end state');
