@@ -36,44 +36,37 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .embed-mode body{padding:0;background:transparent}
 .embed-mode .proof-snapshot,.embed-mode .process,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
-/* ---------- four independent live chapters ---------- */
-.video-story{padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
-.video-story-head{width:100%;max-width:var(--rail-reading);margin-inline:auto;padding:0 0 var(--space-5);text-align:center}
-.video-story-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.55;text-wrap:pretty}
-.video-chapters{display:grid;grid-template-columns:1fr;gap:var(--space-7);padding:0}
-.video-chapter{min-width:0;display:grid;grid-template-columns:minmax(360px,.85fr) minmax(0,1.15fr);border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
-.video-chapter.is-active{border-color:var(--accent);box-shadow:var(--shadow-md)}
-.video-chapter-text{display:flex;min-width:0;flex-direction:column;justify-content:center;padding:var(--space-6)}
-.video-card-tab{display:flex;align-items:flex-end;min-height:0;border-bottom:0;background:#fff}
-.video-card-tab h3{max-width:var(--measure-card-title);color:var(--ink);font-family:var(--fb);font-size:var(--type-demo-title);font-weight:600;line-height:1.12;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.video-chapter-media{grid-column:2;position:relative;width:100%;height:auto;aspect-ratio:1/1;overflow:hidden;border-left:1px solid var(--line);background:var(--bg)}
-.demo-player-frame{display:block;width:100%;height:100%;border:0;background:var(--bg);pointer-events:none}
-.video-chapter-copy{display:flex;align-items:flex-start;min-height:0;padding-top:var(--space-4)}
-.video-chapter-copy p{max-width:var(--measure-card-body);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
+/* ---------- primary demo ---------- */
+.primary-demo{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(460px,.95fr);align-items:stretch;overflow:hidden}
+.primary-demo-copy{display:flex;min-width:0;flex-direction:column;align-items:flex-start;justify-content:center;padding:clamp(40px,4vw,48px)}
+.primary-demo h1{max-width:18ch;font-size:clamp(2.75rem,4vw,3rem);font-weight:700;line-height:1.02;letter-spacing:var(--tracking-display);text-wrap:balance}
+.primary-demo-copy p{max-width:31ch;margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.55;text-wrap:pretty}
+.primary-demo-copy .cta-btn{margin-top:var(--space-6)}
+.primary-demo-visual{display:flex;min-height:520px;aspect-ratio:1/1;align-items:center;justify-content:center;padding:var(--space-7);border-left:1px solid var(--line-2);background:linear-gradient(145deg,var(--accent-soft),#fff 70%)}
+.primary-demo-placeholder{width:100%;max-width:360px;padding:var(--space-6);border:1px dashed var(--accent);border-radius:var(--radius-lg);background:rgba(255,255,255,.82);text-align:center}
+.primary-demo-placeholder strong{display:block;font-size:var(--type-card-small);font-weight:600;line-height:1.15;text-wrap:balance}
+.primary-demo-placeholder p{max-width:28ch;margin:var(--space-3) auto 0;color:var(--ink-3);font-size:var(--type-label);line-height:1.5;text-wrap:pretty}
 @media(max-width:899px){
-  .video-chapters{gap:var(--space-5)}
-  .video-chapter{display:flex;flex-direction:column}
-  .video-chapter-text{display:contents}
-  .video-card-tab{order:1;align-items:center;padding:var(--space-5);border-bottom:1px solid var(--line)}
-  .video-chapter-media{order:2;border-left:0}
-  .video-chapter-copy{order:3;padding:var(--space-5)}
+  .primary-demo{grid-template-columns:1fr}
+  .primary-demo-copy{padding:var(--space-7)}
+  .primary-demo h1{max-width:16ch}
+  .primary-demo-visual{min-height:auto;border-top:1px solid var(--line-2);border-left:0}
 }
 @media(max-width:720px){
   :root{--type-section:clamp(2.125rem,9vw,2.25rem);--type-section-long:2rem;--type-card:1.875rem;--type-card-small:1.75rem;--type-demo-title:1.75rem;--type-body:1.125rem;--type-body-large:1.1875rem;--type-question:1.375rem;--type-quote:1.5rem;--measure-display:18ch;--measure-display-long:20ch;--measure-card-title:20ch;--measure-body:34ch;--measure-card-body:32ch}
   body{padding-inline:var(--page-gutter-mobile)}
-  .video-story-head{padding-bottom:var(--space-4)}
-  .video-chapters{grid-template-columns:1fr;gap:var(--space-4)}
-  .video-chapter{border-radius:var(--radius-xl)}
-  .video-card-tab{padding:var(--space-4)}
-  .video-card-tab h3{font-size:var(--type-demo-title);line-height:1.12;white-space:normal}
-  .video-chapter-copy{padding:var(--space-4)}
-  .video-chapter-copy p{line-height:1.55}
+  .primary-demo-copy{padding:var(--space-6) var(--space-5)}
+  .primary-demo h1{max-width:15ch;font-size:clamp(2.5rem,11vw,3rem);line-height:1.04}
+  .primary-demo-copy p{max-width:32ch;margin-top:var(--space-4)}
+  .primary-demo-copy .cta-btn{width:100%;margin-top:var(--space-5)}
+  .primary-demo-visual{padding:var(--space-5);aspect-ratio:1/1}
+  .primary-demo-placeholder{padding:var(--space-5)}
 }
 /* ---------- shared card ---------- */
 .card{--card-pad:var(--space-5);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
 .card+.card{margin-top:clamp(var(--space-8),8vw,var(--space-9))}
 
-.video-story.card,.proof-snapshot.card,.process.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.cta.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.proof-snapshot.card,.process.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.cta.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 
 .card-title{width:100%;max-width:var(--measure-display);margin-inline:auto;font-family:var(--fb);font-size:var(--type-section);font-weight:700;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
 
@@ -264,7 +257,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   <section class="card proof-snapshot" aria-label="AI salespeople credibility">
     <div class="proof-snapshot-inner">
       <div class="proof-snapshot-logos">
-        <h1 class="proof-snapshot-logo-label">Our AI salespeople have sold to people at:</h1>
+        <p class="proof-snapshot-logo-label">Our AI salespeople have sold to people at:</p>
         <div class="proof-snapshot-logo-row" role="list">
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/fidelity-investments.png" loading="lazy" decoding="async" alt="Fidelity Investments"></span>
           <span class="proof-snapshot-logo" role="listitem"><img src="assets/logos/highlevel.svg" loading="lazy" decoding="async" alt="HighLevel"></span>
@@ -281,65 +274,18 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
     <p class="proof-snapshot-note">Kodara has installed AI sales departments for more than 350 businesses across more than 30 industries. Individual results vary and are not guaranteed.</p>
   </section>
 
-  <!-- ============ HOW IT WORKS · four live chapters ============ -->
-  <section class="card video-story" aria-labelledby="video-story-title">
-    <div class="video-story-head">
-      <h2 class="card-title" id="video-story-title">See how the machine works</h2>
-      <p class="video-story-intro">First, the AI brain learns your business. Then AI Triagers sell a personalized assessment, and AI salespeople give every lead a useful next step.</p>
+  <!-- ============ PRIMARY DEMO ============ -->
+  <section class="card primary-demo" aria-labelledby="primary-demo-title">
+    <div class="primary-demo-copy">
+      <h1 id="primary-demo-title">Done-for-you AI sales department.</h1>
+      <p>Built around your business to give every lead a useful next step, without adding more manual follow-up.</p>
+      <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a free live demo</a>
     </div>
-    <div class="video-chapters">
-      <article class="video-chapter" id="demo-learn" data-chapter="learn">
-        <div class="video-chapter-text">
-          <header class="video-card-tab">
-            <h3>First, the AI brain learns your business.</h3>
-          </header>
-          <div class="video-chapter-copy">
-            <p>It learns your offers, buyers, voice, and sales data so every AI salesperson works from the same source.</p>
-          </div>
-        </div>
-        <div class="video-chapter-media">
-          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=learn&amp;compact=1" title="Business knowledge flowing into the AI brain" loading="eager"></iframe>
-        </div>
-      </article>
-      <article class="video-chapter" id="demo-triagers" data-chapter="triagers">
-        <div class="video-chapter-text">
-          <header class="video-card-tab">
-            <h3>Then, AI Triagers sell the assessment.</h3>
-          </header>
-          <div class="video-chapter-copy">
-            <p>They qualify and educate cold prospects with a personalized assessment that reveals the problem and shows whether they are a fit. The $8 shown is illustrative; exact pricing is set for each client.</p>
-          </div>
-        </div>
-        <div class="video-chapter-media">
-          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=triagers&amp;compact=1" title="AI Triagers handling buyer conversations and returning assessment sales" loading="lazy"></iframe>
-        </div>
-      </article>
-      <article class="video-chapter" id="demo-flywheel" data-chapter="flywheel">
-        <div class="video-chapter-text">
-          <header class="video-card-tab">
-            <h3>Every lead gets a useful next step.</h3>
-          </header>
-          <div class="video-chapter-copy">
-            <p>The hottest, most motivated buyers move immediately toward your highest-level service. Other buyers see a smaller offer, while non-buyers enter automated follow-up.</p>
-          </div>
-        </div>
-        <div class="video-chapter-media">
-          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=flywheel&amp;compact=1" title="AI Triagers assembling into the complete sales loop" loading="lazy"></iframe>
-        </div>
-      </article>
-      <article class="video-chapter" id="demo-graph" data-chapter="graph">
-        <div class="video-chapter-text">
-          <header class="video-card-tab">
-            <h3>Smaller sales can help pay for the next leads.</h3>
-          </header>
-          <div class="video-chapter-copy">
-            <p>Revenue from assessments and smaller offers can go back into traffic to help pay for the next leads. Self-funding is the goal, not a guaranteed result.</p>
-          </div>
-        </div>
-        <div class="video-chapter-media">
-          <iframe class="demo-player-frame" data-src="tools/video-capture.html?player=graph&amp;compact=1" title="An ad-budget growth curve reaching progressively higher milestones" loading="lazy"></iframe>
-        </div>
-      </article>
+    <div class="primary-demo-visual" data-demo-slot="primary" role="img" aria-label="Placeholder for the interactive Kodara AI sales department demo">
+      <div class="primary-demo-placeholder">
+        <strong>Interactive demo placeholder</strong>
+        <p>The finished AI sales department demo will load in this space.</p>
+      </div>
     </div>
   </section>
 
@@ -568,163 +514,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 <script>
 (function(){
   'use strict';
-  var chapters=Array.prototype.slice.call(document.querySelectorAll('.video-chapter'));
-  if(!chapters.length) return;
-  var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
-  var ratios=new Map();
-  var rendererVersion='20260823e';
-  var activeChapter=null;
-  var desktopPlayback=window.matchMedia && matchMedia('(min-width:721px)');
-
-  function desktopMulti(){ return !!(desktopPlayback && desktopPlayback.matches); }
-
-  function frameFor(chapter){ return chapter.querySelector('.demo-player-frame'); }
-  function sendAction(chapter,action){
-    var frame=frameFor(chapter);
-    if(frame && frame.contentWindow) frame.contentWindow.postMessage({fdDemoPlayerAction:action},'*');
-  }
-  function pauseChapter(chapter){
-    if(!chapter) return;
-    chapter.dataset.requestedState='pause';
-    if(chapter.dataset.playerState==='playing') sendAction(chapter,'pause');
-  }
-  function playChapter(chapter,forceReplay){
-    if(!chapter || document.hidden) return;
-    if(!frameFor(chapter)) return;
-    if(!forceReplay && chapter.dataset.playerState==='playing') return;
-    chapter.dataset.requestedState='play';
-    if(forceReplay || chapter.dataset.playerState==='finished') chapter.classList.remove('is-ended');
-    sendAction(chapter,forceReplay || chapter.dataset.playerState==='finished' ? 'replay' : 'play');
-  }
-  function visibleChapters(){
-    return chapters.filter(function(chapter){ return (ratios.get(chapter)||0)>=.15; });
-  }
-  function activateChapter(chapter){
-    if(!chapter || reduce) return;
-    chapters.forEach(function(item){ if(item!==chapter) pauseChapter(item); });
-    activeChapter=chapter;
-    playChapter(chapter,chapter.dataset.playerState==='finished');
-  }
-  function evaluateVisibility(){
-    if(reduce) return;
-    if(desktopMulti()){
-      activeChapter=null;
-      chapters.forEach(function(chapter){
-        if((ratios.get(chapter)||0)>=.15) playChapter(chapter,false);
-        else pauseChapter(chapter);
-      });
-      return;
-    }
-    if(activeChapter && (ratios.get(activeChapter)||0)>=.15){
-      playChapter(activeChapter,false);
-      return;
-    }
-    var next=visibleChapters()[0];
-    if(next) activateChapter(next);
-    else {
-      chapters.forEach(pauseChapter);
-      activeChapter=null;
-    }
-  }
-  function advanceSequence(chapter){
-    if(desktopMulti() || chapter!==activeChapter) return;
-    var visible=visibleChapters();
-    if(visible.length<2) return;
-    var index=visible.indexOf(chapter);
-    activateChapter(visible[(index+1+visible.length)%visible.length]);
-  }
-  function ratioInParent(chapter,frameTop,viewportHeight){
-    var rect=chapter.getBoundingClientRect(), top=frameTop+rect.top, bottom=top+rect.height;
-    return Math.max(0,Math.min(bottom,viewportHeight)-Math.max(top,0))/Math.max(1,Math.min(rect.height,viewportHeight));
-  }
-  function loadFrame(chapter){
-    var frame=frameFor(chapter);
-    if(!frame || frame.dataset.loaded==='1') return;
-    frame.dataset.loaded='1';
-    chapter.dataset.playerState='loading';
-    var playerUrl=new URL(frame.dataset.src,location.href);
-    playerUrl.searchParams.set('v',rendererVersion);
-    frame.src=playerUrl.href;
-  }
-
-  chapters.forEach(function(chapter){
-    var frame=frameFor(chapter);
-    ratios.set(chapter,0);
-    chapter.dataset.playerState='idle';
-    if(!frame) return;
-    frame.addEventListener('load',function(){
-      if(chapter.dataset.playerState==='loading') chapter.dataset.playerState='ready';
-      if(chapter.dataset.requestedState==='play') sendAction(chapter,'play');
-    });
-  });
-  if('IntersectionObserver' in window){
-    var frameLoader=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(!entry.isIntersecting) return;
-        frameLoader.unobserve(entry.target);
-        loadFrame(entry.target);
-      });
-    },{rootMargin:'600px 0px'});
-    chapters.forEach(function(chapter){
-      var frame=frameFor(chapter);
-      if(frame && frame.getAttribute('loading')==='eager') loadFrame(chapter);
-      else frameLoader.observe(chapter);
-    });
-  } else chapters.forEach(loadFrame);
-
-  document.addEventListener('visibilitychange',function(){
-    if(document.hidden) chapters.forEach(pauseChapter); else evaluateVisibility();
-  });
-  if(desktopPlayback){
-    if(desktopPlayback.addEventListener) desktopPlayback.addEventListener('change',evaluateVisibility);
-    else desktopPlayback.addListener(evaluateVisibility);
-  }
-  window.addEventListener('message',function(event){
-    if(!event.data) return;
-    if(event.data.fdDemoPlayer){
-      var chapter=chapters.find(function(item){ return frameFor(item) && frameFor(item).contentWindow===event.source; });
-      if(!chapter || event.data.chapter!==chapter.dataset.chapter) return;
-      var type=event.data.fdDemoPlayer;
-      if(type==='looped'){
-        chapter.dataset.playerState='playing';
-        advanceSequence(chapter);
-        return;
-      }
-      chapter.dataset.playerState=type==='ended' ? 'finished' : type;
-      if(type==='ready'){
-        if(chapter.dataset.requestedState==='play') sendAction(chapter,'play');
-      }
-      if(type==='playing'){
-        chapter.classList.add('is-playing','is-active');chapter.classList.remove('is-ended');
-        parent.postMessage({fdDemoEvent:'video-'+chapter.dataset.chapter+'-started'},'*');
-      }
-      if(type==='paused'){
-        chapter.classList.remove('is-playing','is-active');
-      }
-      if(type==='ended'){
-        chapter.classList.remove('is-playing');chapter.classList.add('is-ended');
-        parent.postMessage({fdDemoEvent:'video-'+chapter.dataset.chapter+'-completed'},'*');
-      }
-      return;
-    }
-    if(event.source!==parent || !event.data.fdViewport) return;
-    var viewport=event.data.fdViewport;
-    if(!Number.isFinite(viewport.frameTop)||!Number.isFinite(viewport.viewportHeight)) return;
-    chapters.forEach(function(chapter){ ratios.set(chapter,ratioInParent(chapter,viewport.frameTop,viewport.viewportHeight)); });
-    evaluateVisibility();
-  });
-  if(window===parent && 'IntersectionObserver' in window){
-    var observer=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){ ratios.set(entry.target,entry.intersectionRatio); });
-      evaluateVisibility();
-    },{threshold:[0,.05,.15,.3,.55,.75,1]});
-    chapters.forEach(function(chapter){ observer.observe(chapter); });
-  }
-})();
-</script>
-<script>
-(function(){
-  'use strict';
   var loaded=false;
   function loadWistia(){
     if(loaded) return;
@@ -762,7 +551,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   }
 
   var mobileCta=document.querySelector('.mobile-cta');
-  var mobileCtaBlockers=Array.prototype.slice.call(document.querySelectorAll('.proof-snapshot,.video-story,.case-studies,.proof,.faq,.cta'));
+  var mobileCtaBlockers=Array.prototype.slice.call(document.querySelectorAll('.proof-snapshot,.primary-demo,.case-studies,.proof,.faq,.cta'));
   if(mobileCta && mobileCtaBlockers.length && 'IntersectionObserver' in window){
     var visibleCtaBlockers=new Set();
     function syncMobileCta(){ mobileCta.classList.toggle('is-visible',visibleCtaBlockers.size===0); }

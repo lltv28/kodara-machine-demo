@@ -33,14 +33,17 @@ assert.match(renderer, /if\(REDUCE && PLAYER_MODE\)\{ window\.renderCaptureFrame
 assert.match(renderer, /renderTriagerScrollActivity\(state\.triagerActivityProgress,\(!REDUCE \|\| PLAYER_MODE\) && state\.phase==='triagers'\)/, 'Reduced-motion Triager players must keep their completed conversation visible');
 assert.match(renderer, /zoomRange\(local,0,\.25\)/, 'Graph milestones need a 1.5-second hold in the eight-second loop');
 assert.match(renderer, /if\(p>=\.70\)/, 'The learning result needs a 1.5-second hold in the five-second loop');
-assert.match(page, /function loadFrame\(/, 'Demo renderers need a viewport-driven loader');
-assert.match(page, /rootMargin:'600px 0px'/, 'Demo renderers must preload shortly before entering view');
+assert.match(page, /class="card primary-demo"/, 'Primary demo must follow the authority proof');
+assert.match(page, /class="primary-demo-copy"/, 'Primary demo needs page-owned sales copy');
+assert.match(page, /class="primary-demo-visual"[^>]*data-demo-slot/, 'Primary demo needs a stable visual integration slot');
+assert.doesNotMatch(page, /class="card video-story"/, 'Old four-demo story must be removed');
+assert.doesNotMatch(page, /class="video-chapter"/, 'Old independent demo chapters must be removed');
 
 const h1s = page.match(/<h1\b/g) ?? [];
 assert.equal(h1s.length, 1, `Expected one h1, found ${h1s.length}`);
+assert.match(page, /<h1[^>]*>[^<]*done-for-you AI sales department/i, 'Primary demo H1 must state the offer');
 
 const iframes = [...page.matchAll(/<iframe\b[^>]*>/g)].map((match) => match[0]);
-assert.ok(iframes.length > 0, 'Expected demo iframes');
 assert.ok(iframes.every((tag) => /\btitle="[^"]+"/.test(tag)), 'Every iframe needs a useful title');
 assert.ok(iframes.filter((tag) => /loading="eager"/.test(tag)).length <= 1, 'Only one iframe may load eagerly');
 
