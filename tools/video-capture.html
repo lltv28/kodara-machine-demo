@@ -225,19 +225,26 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .activity-particle{fill:var(--accent);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .triager-conversation-demo{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;color:var(--ink)}
 .conversation-app{position:absolute;left:23%;top:34%;width:54%;height:63%;display:grid;grid-template-rows:112px minmax(0,1fr);overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-md);opacity:0}
-.conversation-inbox{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:36px minmax(0,1fr);background:#FAFAFA;border-bottom:1px solid var(--line-2)}
+.conversation-inbox{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:36px minmax(0,1fr);background:#FAFAFA;border-bottom:1px solid var(--line-2)}
 .conversation-inbox-head{grid-column:1/-1;display:grid;place-content:center;padding:0 10px;border-bottom:1px solid var(--line-2);background:#fff;text-align:center}
 .conversation-inbox-head strong{font-size:20px;line-height:1.08;text-wrap:balance}
-.conversation-inbox-row{position:relative;grid-row:2;display:grid;grid-template-rows:auto auto;place-content:center;justify-items:center;gap:4px;padding:5px;border-left:1px solid var(--line);background:transparent;will-change:opacity,transform}
+.conversation-selector{position:absolute;left:0;bottom:0;z-index:3;width:33.333%;height:4px;background:var(--accent);transform:translateX(var(--selected-x,0%));transform-origin:left center;will-change:transform}
+.conversation-inbox-row{position:relative;z-index:1;grid-row:2;display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px;min-width:0;padding:7px 10px;border-left:1px solid var(--line);background:transparent;will-change:opacity,transform}
 .conversation-inbox-row[data-conversation-index="0"]{border-left:0}
-.conversation-inbox-row.is-selected{background:#fff;box-shadow:inset 0 -4px 0 var(--accent)}
+.conversation-inbox-row.is-selected{background:#fff}
 .conversation-inbox-row.is-selected .conversation-avatar{color:var(--accent);box-shadow:0 0 0 3px rgba(46,125,82,.18)}
 .conversation-inbox-row.is-completed{background:rgba(46,125,82,.035)}
 .conversation-inbox-row.is-completed .conversation-avatar{background:var(--accent);color:#fff;font-size:0}
 .conversation-inbox-row.is-completed .conversation-avatar::after{content:"\2713";font-size:25px;line-height:1}
-.conversation-inbox-copy{display:grid;min-width:0;text-align:center}
+.conversation-inbox-row.is-completed .conversation-inbox-status,.conversation-inbox-row.is-completed .conversation-inbox-result{color:var(--accent)}
+.conversation-inbox-row.is-completed .conversation-inbox-meta{align-items:start}
+.conversation-inbox-row.is-completed .conversation-inbox-status{line-height:1.05;white-space:normal}
+.conversation-inbox-row.is-completed .conversation-inbox-result{font-weight:700}
+.conversation-inbox-copy{display:grid;gap:4px;min-width:0;text-align:left}
 .conversation-inbox-copy strong{overflow:hidden;max-width:100%;color:#404040;font-size:18px;line-height:1;text-overflow:ellipsis;white-space:nowrap}
-.conversation-inbox-meta{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.conversation-inbox-meta{display:flex;align-items:center;justify-content:space-between;gap:4px;min-width:0;color:#737373;font-size:14px;font-weight:600;line-height:1;white-space:nowrap}
+.conversation-inbox-status{overflow:hidden;text-overflow:ellipsis}
+.conversation-inbox-result{flex:0 0 auto}
 .conversation-avatar{width:40px;height:40px;display:grid;place-items:center;flex:0 0 auto;border-radius:50%;background:#FAFAFA;color:#404040;font-size:20px;font-weight:700;line-height:1}
 .conversation-avatar.is-ai{background:var(--accent);color:#fff;box-shadow:var(--shadow-avatar)}
 .conversation-thread{min-width:0;display:grid;grid-template-rows:64px 42px minmax(0,1fr) 54px;background:#fff;transform-origin:top center;will-change:opacity,transform}
@@ -381,6 +388,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .player-mode.compact-mode[data-player="triagers"] .conversation-inbox{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:36px minmax(0,1fr)}
   .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-head strong{font-size:23px}
   .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy strong{font-size:21px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-meta{font-size:17px}
   .player-mode.compact-mode[data-player="triagers"] .conversation-agent-copy strong{font-size:28px}
   .player-mode.compact-mode[data-player="triagers"] .conversation-online{font-size:21px}
   .player-mode.compact-mode[data-player="triagers"] .conversation-state{font-size:25px}
@@ -670,6 +678,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
               <div class="conversation-app" data-conversation-layout="vertical" aria-hidden="true">
                 <aside class="conversation-inbox">
                   <div class="conversation-inbox-head"><strong data-conversation-position>Lead 1 of 3</strong></div>
+                  <div class="conversation-selector" aria-hidden="true"></div>
                   <div class="conversation-inbox-row" data-conversation-index="0">
                     <span class="conversation-avatar" aria-hidden="true">S</span>
                     <span class="conversation-inbox-copy"><strong>Sandra</strong><span class="conversation-inbox-meta"><span class="conversation-inbox-status">New lead</span><span class="conversation-inbox-result"></span></span></span>
@@ -1066,6 +1075,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var activityParticle=zoomSection && zoomSection.querySelector('.activity-particle');
   var conversationDemo=zoomSection && zoomSection.querySelector('.triager-conversation-demo');
   var conversationApp=zoomSection && zoomSection.querySelector('.conversation-app');
+  var conversationInbox=zoomSection && zoomSection.querySelector('.conversation-inbox');
   var conversationInboxRows=zoomSection ? zoomSection.querySelectorAll('.conversation-inbox-row') : [];
   var conversationInboxViews=[];
   for(var conversationRowIndex=0;conversationRowIndex<conversationInboxRows.length;conversationRowIndex++){
@@ -1258,27 +1268,28 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   function computeConversationActivity(progressValue){
     var p=zoomClamp(progressValue,0,1), loopOpacity=1-storyEase(zoomRange(p,.96,1));
     if(p<.06){
-      return {slot:0,raw:0,activeIndex:0,stage:'new',orientation:true,summary:false,focus:'lead',contentIn:1,typing:0,aiReply:0,messageOut:1,purchase:0,solid:0,transfer:0,connectorOpacity:1,impact:0,contentOut:1,loopOpacity:loopOpacity,pulse:0};
+      return {slot:0,raw:0,activeIndex:0,selectionIndex:0,stage:'new',orientation:true,summary:false,focus:'lead',contentIn:1,typing:0,aiReply:0,messageOut:1,purchase:0,solid:0,transfer:0,connectorOpacity:1,impact:0,contentOut:1,loopOpacity:loopOpacity,pulse:0};
     }
     if(p>=.90){
-      return {slot:2,raw:1,activeIndex:2,stage:'purchased',orientation:false,summary:true,focus:'summary',contentIn:1,typing:0,aiReply:1,messageOut:0,purchase:1,solid:1,transfer:1,connectorOpacity:1,impact:1,contentOut:1,loopOpacity:loopOpacity,pulse:0};
+      return {slot:2,raw:1,activeIndex:2,selectionIndex:2,stage:'purchased',orientation:false,summary:true,focus:'summary',contentIn:1,typing:0,aiReply:1,messageOut:0,purchase:1,solid:1,transfer:1,connectorOpacity:1,impact:1,contentOut:1,loopOpacity:loopOpacity,pulse:0};
     }
     var cycleProgress=zoomRange(p,.06,.90), scaled=cycleProgress*3, slot=Math.min(2,Math.floor(scaled)), raw=scaled-slot;
     var activeIndex=slot;
-    var contentIn=slot===0 ? 1 : storyEase(zoomRange(raw,0,.08));
-    var typing=storyEase(zoomRange(raw,.22,.30))*(1-storyEase(zoomRange(raw,.34,.42)));
-    var aiReply=storyEase(zoomRange(raw,.34,.42));
-    var messageOut=1-storyEase(zoomRange(raw,.50,.58));
-    var purchase=storyEase(zoomRange(raw,.58,.66));
+    var selectionIndex=slot===0 ? 0 : slot-1+storyEase(zoomRange(raw,0,.08));
+    var contentIn=slot===0 ? 1 : storyEase(zoomRange(raw,.08,.16));
+    var typing=storyEase(zoomRange(raw,.28,.36))*(1-storyEase(zoomRange(raw,.40,.48)));
+    var aiReply=storyEase(zoomRange(raw,.40,.48));
+    var messageOut=1-storyEase(zoomRange(raw,.52,.60));
+    var purchase=storyEase(zoomRange(raw,.60,.68));
     var solid=purchase;
-    var transfer=storyEase(zoomRange(raw,.70,.78));
-    var impact=storyEase(zoomRange(raw,.78,.86));
+    var transfer=storyEase(zoomRange(raw,.72,.80));
+    var impact=storyEase(zoomRange(raw,.80,.88));
     var contentOut=slot===2 ? 1 : 1-storyEase(zoomRange(raw,.92,1));
     var connectorOpacity=contentOut;
     var pulse=transfer<=0 || transfer>=1 ? 0 : Math.sin(Math.PI*transfer);
-    var stage=raw<.22 ? 'new' : raw<.58 ? 'responding' : 'purchased';
-    var focus=raw<.22 ? 'lead' : raw<.50 ? 'reply' : raw<.70 ? 'purchase' : raw<.78 ? 'transfer' : raw<.92 ? 'budget' : 'switch';
-    return {slot:slot,raw:raw,activeIndex:activeIndex,stage:stage,orientation:false,summary:false,focus:focus,contentIn:contentIn,typing:typing,aiReply:aiReply,messageOut:messageOut,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,contentOut:contentOut,loopOpacity:loopOpacity,pulse:pulse};
+    var stage=raw<.28 ? 'new' : raw<.60 ? 'responding' : 'purchased';
+    var focus=raw<.08 ? 'switch' : raw<.28 ? 'lead' : raw<.52 ? 'reply' : raw<.72 ? 'purchase' : raw<.80 ? 'transfer' : raw<.92 ? 'budget' : 'switch';
+    return {slot:slot,raw:raw,activeIndex:activeIndex,selectionIndex:selectionIndex,stage:stage,orientation:false,summary:false,focus:focus,contentIn:contentIn,typing:typing,aiReply:aiReply,messageOut:messageOut,purchase:purchase,solid:solid,transfer:transfer,connectorOpacity:connectorOpacity,impact:impact,contentOut:contentOut,loopOpacity:loopOpacity,pulse:pulse};
   }
   function getConversationCopy(index){
     var conversations=[
@@ -1289,9 +1300,9 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     return conversations[index] || conversations[0];
   }
   function getConversationRowState(index,state){
-    if(index<state.activeIndex) return {status:'Purchased',result:'$8',mode:'completed'};
-    if(index>state.activeIndex) return {status:'New lead',result:'',mode:'waiting'};
-    if(state.stage==='purchased') return {status:'Purchased',result:'$8',mode:'completed'};
+    if(index<state.activeIndex) return {status:'Assessment purchased',result:'$8',mode:'completed'};
+    if(index>state.activeIndex) return {status:'Waiting',result:'',mode:'waiting'};
+    if(state.stage==='purchased') return {status:'Assessment purchased',result:'$8',mode:'completed'};
     if(state.stage==='responding') return {status:'AI responding',result:'',mode:'active'};
     return {status:'New lead',result:'',mode:'active'};
   }
@@ -1316,7 +1327,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(conversationLinkPaths.length!==conversationInboxRows.length) refreshConversationLinkPaths();
     for(var i=0;i<conversationInboxViews.length;i++){
       var view=conversationInboxViews[i], row=view.row, rowState=getConversationRowState(i,state);
-      row.classList.toggle('is-selected',i===state.activeIndex);
+      row.classList.toggle('is-selected',i===state.activeIndex && (state.slot===0 || state.raw>=.08));
       row.classList.toggle('is-completed',rowState.mode==='completed');
       view.status.textContent=rowState.status;
       view.result.textContent=rowState.result;
@@ -1327,6 +1338,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     conversationQuestion.textContent=copy.question;
     conversationReply.textContent=copy.reply;
     conversationDemo.dataset.focus=state.focus;
+    if(conversationInbox) conversationInbox.style.setProperty('--selected-x',(state.selectionIndex*100).toFixed(2)+'%');
     var contentOpacity=state.contentIn*state.contentOut;
     conversationThread.style.opacity=String(contentOpacity);
     conversationThread.style.transform='translateY('+(12*(1-contentOpacity)).toFixed(2)+'px) scaleY('+(0.92+0.08*contentOpacity).toFixed(3)+')';
