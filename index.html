@@ -34,7 +34,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   display:flex;flex-direction:column;align-items:center;padding:10px var(--page-gutter) var(--page-gutter);overflow-x:hidden}
 .wrap{width:100%;max-width:var(--rail-wide);display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0;background:transparent}
-.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
+.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .outcome-features,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(460px,.95fr);align-items:stretch;overflow:hidden}
@@ -66,7 +66,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .card{--card-pad:var(--space-5);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
 .card+.card{margin-top:clamp(var(--space-8),8vw,var(--space-9))}
 
-.proof-snapshot.card,.mechanism-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.cta.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.proof-snapshot.card,.mechanism-features.card,.outcome-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.cta.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 
 .card-title{width:100%;max-width:var(--measure-display);margin-inline:auto;font-family:var(--fb);font-size:var(--type-section);font-weight:700;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
 
@@ -127,6 +127,26 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .mechanism-feature h3{max-width:16ch;margin-top:var(--space-5);font-size:var(--type-card-small);font-weight:600;line-height:1.12;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .mechanism-feature p{max-width:34ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
 
+/* ---------- founder highlight ---------- */
+.founder-highlight{display:grid;grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr);gap:clamp(32px,5vw,64px);align-items:center;padding:var(--space-6);border-color:var(--accent-line);background:var(--accent-soft)}
+.founder-portrait{display:flex;width:100%;aspect-ratio:4/5;align-items:center;justify-content:center;padding:var(--space-5);border:1px dashed var(--accent);border-radius:var(--radius-lg);background:rgba(255,255,255,.76);color:var(--ink-3);font-size:var(--type-label);font-weight:600;text-align:center}
+.founder-highlight-copy{padding-right:clamp(0px,3vw,32px)}
+.founder-highlight h2{max-width:15ch;font-size:var(--type-section-long);font-weight:700;line-height:1.06;letter-spacing:var(--tracking-display);text-wrap:balance}
+.founder-highlight p{max-width:45ch;margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.65;text-wrap:pretty}
+
+/* ---------- outcome features ---------- */
+.outcome-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
+.outcome-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
+.outcome-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.outcome-feature{min-width:0}
+.outcome-placeholder{display:flex;width:100%;aspect-ratio:4/3;align-items:center;justify-content:center;padding:var(--space-5);border:1px dashed var(--accent);border-right:0;background:linear-gradient(145deg,#fff,var(--accent-soft));color:var(--ink-3);font-size:var(--type-label);font-weight:600;line-height:1.4;text-align:center;text-wrap:balance}
+.outcome-feature:first-child .outcome-placeholder{border-radius:var(--radius-lg) 0 0 var(--radius-lg)}
+.outcome-feature:last-child .outcome-placeholder{border-right:1px dashed var(--accent);border-radius:0 var(--radius-lg) var(--radius-lg) 0}
+.outcome-caption{padding:var(--space-5) var(--space-4) 0}
+.outcome-caption h3{font-size:var(--type-card-small);font-weight:600;line-height:1.12;letter-spacing:var(--tracking-heading);text-wrap:balance}
+.outcome-caption p{margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
+.outcome-note{max-width:var(--measure-body);margin:var(--space-6) auto 0;color:var(--ink-3);font-size:var(--type-legal);line-height:1.5;text-align:center;text-wrap:pretty}
+
 /* ---------- video client stories ---------- */
 .case-studies-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
 .case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
@@ -167,6 +187,14 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   .mechanism-grid{grid-template-columns:1fr;gap:var(--space-7)}
   .mechanism-feature h3{max-width:20ch;margin-top:var(--space-4)}
   .mechanism-feature p{max-width:var(--measure-card-body)}
+  .founder-highlight{grid-template-columns:1fr;gap:var(--space-5);padding:var(--space-5)}
+  .founder-portrait{max-width:440px;margin-inline:auto}
+  .founder-highlight-copy{padding:0}
+  .founder-highlight h2{max-width:17ch}
+  .outcome-head{margin-bottom:var(--space-6)}
+  .outcome-grid{grid-template-columns:1fr;gap:var(--space-7)}
+  .outcome-placeholder,.outcome-feature:first-child .outcome-placeholder,.outcome-feature:last-child .outcome-placeholder{border:1px dashed var(--accent);border-radius:var(--radius-lg)}
+  .outcome-caption{padding:var(--space-4) 0 0}
   .case-featured,.case-support-grid{grid-template-columns:1fr}
   .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
   .case-featured--portrait{gap:var(--space-4);padding:var(--space-4)}
@@ -368,6 +396,48 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
         <p>Qualified buyers can move toward your highest-level service while other leads see a smaller offer or continue through follow-up.</p>
       </article>
     </div>
+  </section>
+
+  <!-- ============ FOUNDER HIGHLIGHT ============ -->
+  <section class="card founder-highlight" aria-labelledby="founder-highlight-title">
+    <div class="founder-portrait" data-placeholder="founder" role="img" aria-label="Placeholder for a vertical portrait of Lucas Tyson">Founder portrait placeholder</div>
+    <div class="founder-highlight-copy">
+      <h2 id="founder-highlight-title">Built around the whole sales path.</h2>
+      <p>Lucas Tyson is the founder of Kodara. He leads the team that has installed AI sales departments for more than 350 businesses across more than 30 industries.</p>
+      <p>The work is focused on a practical problem: most businesses do not need another isolated AI tool. They need the pieces to work together around their offer, buyers, sales process, and traffic. Kodara combines those pieces into one client-specific department while the owner spends about an hour a week reviewing decisions and keeping the build aligned.</p>
+    </div>
+  </section>
+
+  <!-- ============ OUTCOME FEATURES ============ -->
+  <section class="card outcome-features" aria-labelledby="outcome-title">
+    <header class="outcome-head">
+      <h2 class="card-title" id="outcome-title">What changes when every lead has a path.</h2>
+      <p class="outcome-intro">The department is designed to recover more value from the attention you already pay to generate.</p>
+    </header>
+    <div class="outcome-grid">
+      <article class="outcome-feature">
+        <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing more leads moving into useful sales paths">Lead value visual placeholder</div>
+        <div class="outcome-caption">
+          <h3>Get more from existing leads.</h3>
+          <p>People who are not ready for your highest-level service can still receive a relevant next step instead of disappearing.</p>
+        </div>
+      </article>
+      <article class="outcome-feature">
+        <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing better-qualified buyers reaching sales calls">Buyer quality visual placeholder</div>
+        <div class="outcome-caption">
+          <h3>Send better-prepared buyers to calls.</h3>
+          <p>The assessment helps educate and qualify prospects before the most suitable buyers reach your sales conversation.</p>
+        </div>
+      </article>
+      <article class="outcome-feature">
+        <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing automated lead follow-up reducing owner workload">Follow-up visual placeholder</div>
+        <div class="outcome-caption">
+          <h3>Reduce repetitive follow-up.</h3>
+          <p>AI salespeople keep appropriate conversations moving without asking the owner to manually chase every lead.</p>
+        </div>
+      </article>
+    </div>
+    <p class="outcome-note">Revenue from assessments and smaller offers can help pay for future leads. Self-funding is the objective, not a guaranteed result.</p>
   </section>
 
   <!-- ============ VIDEO CLIENT STORIES ============ -->
