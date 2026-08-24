@@ -143,7 +143,9 @@ assert.match(page, /Self-funding is the objective, not a guaranteed result\./, '
 const h1s = page.match(/<h1\b/g) ?? [];
 assert.equal(h1s.length, 1, `Expected one h1, found ${h1s.length}`);
 assert.match(page, /<h1[^>]*>An AI Sales Department That Helps Pay for Its Own Leads\.<\/h1>/, 'Primary demo H1 must state the self-funding mechanism');
+assert.match(page, /<h1[^>]*>An AI Sales Department That Helps Pay for Its Own Leads\.<\/h1>\s*<p>[^<]*Self-funding is the objective, not a guaranteed result\.<\/p>/, 'Hero must qualify the self-funding objective beside its claim');
 assert.doesNotMatch(page, /Every lead you pay for should have a useful next step/i, 'The old soft founder-letter headline must not return');
+assert.doesNotMatch(page, /90% of leads/i, 'Unverified exact lead-loss percentages must not appear');
 
 const iframes = [...page.matchAll(/<iframe\b[^>]*>/g)].map((match) => match[0]);
 assert.ok(iframes.every((tag) => /\btitle="[^"]+"/.test(tag)), 'Every iframe needs a useful title');
