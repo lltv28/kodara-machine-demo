@@ -21,6 +21,14 @@ for (const [path, maximum] of budgets) {
 }
 
 assert.match(page, /--measure-display:/, 'Missing semantic display measure');
+assert.match(page, /--border-subtle:rgba\(26,26,26,\.06\)/, 'Missing WL-aligned subtle border token');
+assert.match(page, /--border-default:rgba\(26,26,26,\.09\)/, 'Missing WL-aligned default border token');
+assert.match(page, /--border-accent:rgba\(46,125,82,\.20\)/, 'Missing green accent border token');
+assert.match(page, /--radius-sm:8px/, 'Compact surfaces need the 8px radius tier');
+assert.match(page, /--radius:16px;--radius-lg:16px/, 'Support surfaces need the 16px radius tier');
+assert.match(page, /--radius-xl:24px/, 'Featured surfaces need the 24px radius tier');
+assert.match(page, /--radius-pill:9999px/, 'Avatars and pill controls need a semantic full-radius token');
+assert.match(page, /--shadow-md:0 12px 32px rgba\(7,94,63,\.06\),0 2px 6px rgba\(26,26,26,\.04\)/, 'Featured surfaces need the layered green-tinted shadow');
 assert.match(page, /<meta name="description" content="[^"]+">/, 'Landing page needs a search and share description');
 assert.match(page, /<link rel="icon" href="assets\/favicon\.svg"/, 'Landing page needs a local favicon');
 assert.match(page, /--measure-body:/, 'Missing semantic body measure');
@@ -29,6 +37,9 @@ assert.match(page, /text-wrap:pretty/, 'Body copy must use pretty wrapping');
 assert.match(page, /scroll-padding-bottom:/, 'Mobile focus must clear the sticky CTA');
 assert.match(page, /\.proof-more summary:focus-visible/, 'Disclosure controls need a visible focus state');
 assert.match(page, /prefers-reduced-motion:reduce/, 'The landing page must honor reduced motion');
+assert.match(page, /prefers-reduced-transparency:reduce/, 'Glassy demo surfaces need an opaque accessibility fallback');
+assert.match(page, /\.primary-demo-placeholder\{[^}]*backdrop-filter:blur\(8px\)/, 'Glass treatment must stay scoped to the primary demo placeholder');
+assert.match(page, /\.primary-demo,\.founder-highlight,\.case-featured--portrait,\.cta\{border-radius:var\(--radius-xl\)\}/, 'Featured surfaces need an explicit 24px role');
 assert.match(renderer, /prefers-reduced-motion:reduce/, 'The demo renderer must honor reduced motion');
 assert.match(renderer, /var PLAYER_MODE=document\.documentElement\.classList\.contains\('player-mode'\)/, 'Reduced motion must work inside independent demo players');
 assert.match(renderer, /if\(REDUCE && PLAYER_MODE\)\{ window\.renderCaptureFrame\(chapter,chapter==='triagers'\?\.94:1\);send\('ready'\);return; \}/, 'Reduced-motion players must settle on a useful chapter end state');
