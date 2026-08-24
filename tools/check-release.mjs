@@ -38,6 +38,7 @@ assert.match(renderer, /if\(p>=\.70\)/, 'The learning result needs a 1.5-second 
 assert.match(page, /class="card primary-demo"/, 'Primary demo must follow the authority proof');
 assert.match(page, /class="primary-demo-copy"/, 'Primary demo needs page-owned sales copy');
 assert.match(page, /class="primary-demo-visual"[^>]*data-demo-slot/, 'Primary demo needs a stable visual integration slot');
+assert.ok(page.indexOf('class="primary-demo-visual"') < page.indexOf('class="primary-demo-copy"'), 'Primary demo visual must lead the split layout');
 assert.doesNotMatch(page, /class="primary-demo-visual"[^>]*role="img"/, 'Interactive demo slot must not hide future controls behind an image role');
 assert.match(page, /class="primary-demo-placeholder"[^>]*role="img"/, 'Static placeholder needs its own image semantics');
 assert.doesNotMatch(page, /class="card video-story"/, 'Old four-demo story must be removed');
