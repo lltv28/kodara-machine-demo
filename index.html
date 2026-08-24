@@ -252,11 +252,12 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .faq-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-5);text-align:center}
 .faq-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .faq-list{width:100%;border-top:1px solid var(--line-2)}
-.faq-item{border-bottom:1px solid var(--line-2)}
+.faq-item{border-bottom:1px solid var(--line-2);overflow:hidden}
 .faq-item summary{position:relative;padding:var(--space-5) var(--space-7) var(--space-5) 0;color:var(--ink);font-size:var(--type-question);font-weight:600;line-height:1.3;cursor:pointer;list-style:none;text-wrap:balance}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:'+';position:absolute;top:50%;right:4.6px;color:var(--accent-ink);font-family:var(--fb);font-size:1.8rem;font-weight:400;line-height:1;transform:translateY(-50%)}
-.faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+.faq-item summary::after{content:'+';position:absolute;top:50%;right:4.6px;color:var(--accent-ink);font-family:var(--fb);font-size:1.8rem;font-weight:400;line-height:1;transform:translateY(-50%);transition:transform .22s cubic-bezier(.22,1,.36,1)}
+.faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg);transition-duration:.3s}
+.faq-item.is-closing summary::after{transform:translateY(-50%) rotate(0);transition-duration:.22s}
 .faq-item summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:var(--radius-sm)}
 .faq-answer{width:100%;max-width:var(--measure-faq);padding:0 var(--space-7) var(--space-5) 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 @media(max-width:720px){
@@ -288,7 +289,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .faq-answer{padding-right:var(--space-6)}
 }
 @media(prefers-reduced-transparency:reduce){.primary-demo-placeholder{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}}
-@media(prefers-reduced-motion:reduce){.cta-btn{transition:none}}
+@media(prefers-reduced-motion:reduce){.cta-btn,.faq-item summary::after{transition:none}}
 
 </style>
 </head>
@@ -659,6 +660,111 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
     if(proofLayout.addEventListener) proofLayout.addEventListener('change',syncProofLayout);
     else proofLayout.addListener(syncProofLayout);
   }
+
+  function setupFaqAccordion(){
+    var faqItems=Array.prototype.slice.call(document.querySelectorAll('.faq-item'));
+    if(!faqItems.length) return;
+    var reduceMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)');
+    var activeAnimations=new WeakMap();
+
+    faqItems.forEach(function(item){ item.removeAttribute('name'); });
+
+    function finishFaqAnimation(item,expand,heightAnimation,answerAnimation){
+      var active=activeAnimations.get(item);
+      if(!active || active.height!==heightAnimation) return;
+      if(!expand) item.removeAttribute('open');
+      item.classList.remove('is-opening','is-closing');
+      item.style.height='';
+      item.style.overflow='';
+      answerAnimation.cancel();
+      heightAnimation.cancel();
+      activeAnimations.delete(item);
+      reportHeight();
+    }
+
+    function setFaqState(item,expand){
+      var active=activeAnimations.get(item);
+      var startHeight=item.getBoundingClientRect().height;
+      if(active){
+        active.height.cancel();
+        active.answer.cancel();
+        activeAnimations.delete(item);
+      }
+      if(expand) item.setAttribute('open','');
+      var summary=item.querySelector('summary');
+      var answer=item.querySelector('.faq-answer');
+      var borderHeight=item.offsetHeight-item.clientHeight;
+      var endHeight=(expand ? item.scrollHeight : summary.getBoundingClientRect().height)+borderHeight;
+      var reduce=reduceMotion && reduceMotion.matches;
+
+      item.classList.toggle('is-opening',expand);
+      item.classList.toggle('is-closing',!expand);
+      if(reduce || typeof item.animate!=='function'){
+        if(!expand) item.removeAttribute('open');
+        item.classList.remove('is-opening','is-closing');
+        item.style.height='';
+        item.style.overflow='';
+        reportHeight();
+        return;
+      }
+
+      item.style.height=startHeight+'px';
+      item.style.overflow='hidden';
+      var duration=expand ? 300 : 220;
+      var heightAnimation=item.animate([{height:startHeight+'px'},{height:endHeight+'px'}],{
+        duration:duration,
+        easing:'cubic-bezier(.22,1,.36,1)',
+        fill:'forwards'
+      });
+      var answerAnimation=answer.animate(expand ? [
+        {opacity:0,transform:'translateY(-6px)'},
+        {opacity:1,transform:'translateY(0)'}
+      ] : [
+        {opacity:1,transform:'translateY(0)'},
+        {opacity:0,transform:'translateY(-6px)'}
+      ],{
+        duration:duration,
+        easing:'cubic-bezier(.22,1,.36,1)',
+        fill:'forwards'
+      });
+      activeAnimations.set(item,{height:heightAnimation,answer:answerAnimation,expanding:expand});
+      heightAnimation.onfinish=function(){ finishFaqAnimation(item,expand,heightAnimation,answerAnimation); };
+    }
+
+    function toggleFaqItem(item){
+      var active=activeAnimations.get(item);
+      var expand=!item.open || Boolean(active && !active.expanding);
+      if(expand){
+        faqItems.forEach(function(other){
+          if(other!==item && other.open) setFaqState(other,false);
+        });
+      }
+      setFaqState(item,expand);
+    }
+
+    faqItems.forEach(function(item){
+      var summary=item.querySelector('summary');
+      var suppressKeyboardClick=false;
+      summary.addEventListener('click',function(event){
+        if(suppressKeyboardClick && event.detail===0){
+          suppressKeyboardClick=false;
+          event.preventDefault();
+          return;
+        }
+        suppressKeyboardClick=false;
+        event.preventDefault();
+        toggleFaqItem(item);
+      });
+      summary.addEventListener('keydown',function(event){
+        if(event.key!=='Enter' && event.key!==' ') return;
+        event.preventDefault();
+        if(event.repeat) return;
+        suppressKeyboardClick=true;
+        toggleFaqItem(item);
+      });
+    });
+  }
+  setupFaqAccordion();
 
   if(document.documentElement.classList.contains('embed-mode')){
     document.querySelectorAll('.cta-btn').forEach(function(link){
