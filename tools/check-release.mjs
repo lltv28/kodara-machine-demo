@@ -21,6 +21,11 @@ for (const [path, maximum] of budgets) {
 }
 
 assert.match(page, /--measure-display:/, 'Missing semantic display measure');
+assert.match(page, /--tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px/, 'Heading tracking must retain the approved -2px treatment without changing stat tracking');
+assert.match(page, /\.primary-demo h1\{[^}]*line-height:1\.1;[^}]*letter-spacing:var\(--tracking-display\)/, 'Hero heading must retain the shared heading rhythm');
+assert.match(page, /\.card-title\{[^}]*line-height:1\.1;[^}]*letter-spacing:var\(--tracking-display\)/, 'Section headings must retain the shared heading rhythm');
+assert.match(page, /\.mechanism-feature h3\{[^}]*line-height:1\.1;[^}]*letter-spacing:var\(--tracking-heading\)/, 'Feature headings must retain the shared heading rhythm');
+assert.match(page, /\.case-quote\{[^}]*letter-spacing:var\(--tracking-body\)/, 'Long testimonial copy must not inherit display tracking');
 assert.match(page, /--space-1:4\.6px;--space-2:9\.2px;--space-3:13\.8px;--space-4:18\.4px;--space-5:27\.6px;--space-6:36\.8px;--space-7:55\.2px/, 'Internal spacing tiers must retain the approved 15% increase');
 assert.match(page, /--space-8:80px;--space-9:112px/, 'Large section spacing must retain the expanded rhythm');
 assert.match(page, /--rail-wide:1280px/, 'Desktop content rail must retain the expanded 1280px width');
