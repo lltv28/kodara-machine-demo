@@ -52,7 +52,8 @@ assert.match(page, /\.card\{--card-pad:var\(--space-6\)/, 'Desktop cards must re
 assert.match(page, /@media\(max-width:720px\)[\s\S]*\.card\{--card-pad:var\(--space-5\)\}/, 'Mobile cards must retain the expanded 27.6px padding');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)[^}]*text-transform:capitalize/, 'CTA buttons must use their own line, bold type, and Capitalize Case');
 assert.match(page, /\.cta-btn\{[^}]*padding:12\.65px var\(--space-6\)/, 'Desktop CTA buttons must retain the approved horizontal padding');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{padding-inline:var\(--space-4\)\}/, 'Mobile CTA buttons must use responsive horizontal padding');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{padding-inline:var\(--space-4\);/, 'Mobile CTA buttons must use responsive horizontal padding');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{[^}]*font-size:clamp\(1\.35rem,6\.15vw,1\.7rem\);white-space:nowrap/, 'Mobile CTA buttons must remain legible without wrapping');
 assert.match(page, /\.mid-cta-inner\{[^}]*flex-direction:column/, 'Mid-page CTA button must remain on its own line');
 assert.match(page, /\.primary-demo h1\{[^}]*font-size:clamp\(3\.3rem,4\.8vw,3\.6rem\)/, 'Hero typography must retain the approved 20% increase');
 assert.match(page, /--type-stat:clamp\(5\.1rem,9\.6vw,7\.8rem\)/, 'Stat typography must retain the approved 20% increase');
@@ -60,6 +61,8 @@ assert.match(page, /\.proof-stat\{[^}]*font-size:var\(--type-stat\)/, 'Proof sta
 assert.match(page, /\.proof-card blockquote::before\{[^}]*font-size:5\.4rem/, 'Quote marks must retain the approved 20% increase');
 assert.match(page, /\.faq-item summary::after\{[^}]*font-size:1\.8rem/, 'FAQ controls must retain the approved 20% increase');
 assert.match(page, /--bg:#F6F6F7;--surface:var\(--bg\)/, 'Neutral surfaces must use one cool-gray token');
+assert.match(page, /--page:#FAF8F5;--bg:#F6F6F7;--surface:var\(--bg\)/, 'Page canvas must use the approved warm-neutral layer');
+assert.match(page, /body\{[^}]*background:var\(--page\)/, 'Body must render the warm-neutral page canvas');
 assert.match(page, /--border-subtle:rgba\(26,26,26,\.06\)/, 'Missing WL-aligned subtle border token');
 assert.match(page, /--border-default:rgba\(26,26,26,\.09\)/, 'Missing WL-aligned default border token');
 assert.match(page, /--border-accent:rgba\(46,125,82,\.20\)/, 'Missing green accent border token');
@@ -88,9 +91,12 @@ assert.match(renderer, /renderTriagerScrollActivity\(state\.triagerActivityProgr
 assert.match(renderer, /zoomRange\(local,0,\.25\)/, 'Graph milestones need a 1.5-second hold in the eight-second loop');
 assert.match(renderer, /if\(p>=\.70\)/, 'The learning result needs a 1.5-second hold in the five-second loop');
 assert.match(page, /class="card primary-demo"/, 'Primary demo must follow the authority proof');
+assert.match(page, /\.proof-snapshot\+\.primary-demo\{margin-top:var\(--space-6\)\}/, 'Authority proof and hero must use the compressed first-screen gap');
 assert.match(page, /class="primary-demo-copy"/, 'Primary demo needs page-owned sales copy');
 assert.match(page, /class="primary-demo-visual"[^>]*data-demo-slot/, 'Primary demo needs a stable visual integration slot');
 assert.ok(page.indexOf('class="primary-demo-visual"') < page.indexOf('class="primary-demo-copy"'), 'Primary demo visual must lead the split layout');
+assert.match(page, /@media\(max-width:899px\)[\s\S]*\.primary-demo-copy\{[^}]*order:1;[\s\S]*\.primary-demo-visual\{[^}]*order:2;/, 'Hero copy and CTA must precede the visual below desktop width');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*\.proof-snapshot-logo-row\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/, 'Mobile authority logos must use a compact three-column grid');
 assert.doesNotMatch(page, /class="primary-demo-visual"[^>]*role="img"/, 'Interactive demo slot must not hide future controls behind an image role');
 assert.match(page, /class="primary-demo-placeholder"[^>]*role="img"/, 'Static placeholder needs its own image semantics');
 assert.doesNotMatch(page, /class="card video-story"/, 'Old four-demo story must be removed');
@@ -146,6 +152,7 @@ assert.ok(page.indexOf('class="card faq"') < page.indexOf('class="card cta"'), '
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.ok(ctaLinks.length > 0, 'Expected application links');
+assert.equal((page.match(/>Apply for a demo<\/a>/g) ?? []).length, ctaLinks.length, 'Every application CTA must use the compact, consistent label');
 assert.ok(ctaLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Every CTA must use the live scheduler');
 assert.ok(ctaLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External CTA links must open safely');
 
@@ -156,5 +163,6 @@ const localReferences = [...page.matchAll(/\b(?:src|data-src)="([^"]+)"/g)]
 for (const reference of localReferences) {
   assert.ok(existsSync(resolve(root, reference)), `Missing local page asset: ${reference}`);
 }
+assert.doesNotMatch(page, /https:\/\/lltv28\.github\.io\/kodara-success-portal\/img\//, 'Critical testimonial portraits must be self-hosted');
 
 console.log('Release checks passed.');
