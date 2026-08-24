@@ -21,6 +21,9 @@ for (const [path, maximum] of budgets) {
 }
 
 assert.match(page, /--measure-display:/, 'Missing semantic display measure');
+assert.match(page, /--measure-faq:72ch/, 'Desktop FAQ answers must retain the approved 72ch measure');
+assert.match(page, /\.faq-answer\{width:100%;max-width:var\(--measure-faq\)/, 'FAQ answers must use the dedicated desktop measure');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*\.faq-answer\{max-width:none;/, 'Mobile FAQ answers must use the available width');
 assert.match(page, /--tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px/, 'Heading tracking must retain the approved -2px treatment without changing stat tracking');
 assert.match(page, /\.primary-demo h1\{[^}]*line-height:1\.1;[^}]*letter-spacing:var\(--tracking-display\)/, 'Hero heading must retain the shared heading rhythm');
 assert.match(page, /\.card-title\{[^}]*line-height:1\.1;[^}]*letter-spacing:var\(--tracking-display\)/, 'Section headings must retain the shared heading rhythm');

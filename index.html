@@ -22,7 +22,7 @@
   --shadow-md:0 12px 32px rgba(7,94,63,.06),0 2px 6px rgba(26,26,26,.04);
   --space-1:4.6px;--space-2:9.2px;--space-3:13.8px;--space-4:18.4px;--space-5:27.6px;--space-6:36.8px;--space-7:55.2px;--space-8:80px;--space-9:112px;
   --rail-wide:1280px;--rail-reading:720px;--page-gutter:24px;--page-gutter-mobile:16px;
-  --measure-display:20ch;--measure-display-long:28ch;--measure-card-title:24ch;--measure-body:56ch;--measure-card-body:38ch;
+  --measure-display:20ch;--measure-display-long:28ch;--measure-card-title:24ch;--measure-body:56ch;--measure-card-body:38ch;--measure-faq:72ch;
   --tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px;
   --fb:"Instrument Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;
   --type-section:clamp(3.6rem,3.252rem + 1.416vw,4.5rem);--type-section-long:clamp(3.3rem,3.072rem + .912vw,3.9rem);
@@ -258,11 +258,11 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .faq-item summary::after{content:'+';position:absolute;top:50%;right:4.6px;color:var(--accent-ink);font-family:var(--fb);font-size:1.8rem;font-weight:400;line-height:1;transform:translateY(-50%)}
 .faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg)}
 .faq-item summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:var(--radius-sm)}
-.faq-answer{max-width:var(--measure-body);padding:0 var(--space-7) var(--space-5) 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.faq-answer{width:100%;max-width:var(--measure-faq);padding:0 var(--space-7) var(--space-5) 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 @media(max-width:720px){
   .faq-head{margin-bottom:var(--space-4)}
   .faq-item summary{padding:var(--space-4) 46px var(--space-4) 0}
-  .faq-answer{padding:0 46px var(--space-4) 0}
+  .faq-answer{max-width:none;padding:0 46px var(--space-4) 0}
 }
 
 @media(max-width:720px){
