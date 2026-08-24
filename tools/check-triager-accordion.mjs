@@ -17,9 +17,9 @@ assert.match(html,/Handled automatically/,'completed state should explain that t
 assert.match(html,/class="conversation-state" data-conversation-state>New lead</,'one prominent label should communicate the current state');
 assert.doesNotMatch(html,/conversation-steps/,'three-column state rail should not squeeze the conversation');
 assert.doesNotMatch(html,/conversation-brain-note/,'redundant activity copy should not compete with the AI brain');
-assert.match(html,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\);grid-template-rows:36px/,'horizontal lead queue should keep all three conversations distinct below one position label');
+assert.match(html,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\);grid-template-rows:36px/,'desktop lead queue should keep all three conversations distinct below one position label');
 assert.match(html,/\.player-mode\.compact-mode\[data-player="triagers"\] \.story-core-title\{font-size:40px;transform:translateY\(-24px\)\}/,'AI brain title should sit inside the circle with balanced edge clearance');
-assert.match(html,/\.conversation-app\{position:absolute;left:21%;top:34%;width:58%;height:63%/,'conversation shell should use the available square without crowding either edge');
+assert.match(html,/\.conversation-app\{position:absolute;left:21%;top:33%;width:58%;height:65%/,'conversation shell should use more of the available square for comfortable vertical spacing');
 assert.match(html,/\.player-mode\.compact-mode\[data-player="triagers"\] \.conversation-inbox-row\{grid-template-columns:1fr;justify-items:center/,'compact lead cards should prioritize one centered person identity');
 assert.match(html,/\.conversation-inbox-meta\{display:flex/,'each persistent person card should expose its own status');
 assert.match(html,/\.player-mode\.compact-mode\[data-player="triagers"\] \.conversation-inbox-status\{display:none\}/,'compact lead cards should not repeat the prominent conversation state');
@@ -28,8 +28,11 @@ assert.match(html,/\.conversation-inbox-copy strong\{[^}]*font-size:22px/,'deskt
 assert.match(html,/\.conversation-selector\{[^}]*transform:translateX\(var\(--selected-x,0%\)\)/,'selector should move between the three people');
 assert.match(html,/\.conversation-avatar\{width:40px;height:40px/,'lead avatars should fit inside the compact queue without crowding names');
 assert.match(html,/\.conversation-agent-copy\{display:flex;align-items:center/,'chat identity should use one horizontal baseline instead of overflowing its header');
-assert.match(html,/\.conversation-thread\{[^}]*grid-template-rows:64px 42px minmax\(0,1fr\) 54px/,'chat header, state, message, and activity rows should use a stable vertical rhythm');
+assert.match(html,/\.conversation-thread\{[^}]*grid-template-rows:76px minmax\(0,1fr\) 62px/,'chat header, message body, and activity footer should use a spacious vertical rhythm');
+assert.match(html,/\.player-mode\.compact-mode\[data-player="triagers"\] \.conversation-state\{position:absolute;width:1px;height:1px/,'compact demo should retain the state for assistive technology without repeating it visually');
+assert.match(html,/\.conversation-messages\{[^}]*gap:20px;padding:26px 22px 18px/,'chat messages should have enough internal breathing room to scan quickly');
 assert.match(html,/@media\(max-width:420px\)\{[\s\S]*\.conversation-inbox-head strong\{font-size:34px\}[\s\S]*\.conversation-inbox-copy strong\{font-size:34px\}[\s\S]*\.conversation-message\{max-width:88%;font-size:34px\}/,'mobile critical Triager text should remain effectively at least 16px after square-player scaling');
+assert.match(html,/@media\(max-width:420px\)\{[\s\S]*\.conversation-app\{left:18%;top:34%;width:64%;height:66%;grid-template-rows:176px/,'mobile lead identities should have enough height to avoid crowding the conversation header');
 assert.match(html,/conversation-inbox-row\.is-completed \.conversation-avatar::after\{content:"\\2713"/,'completed leads should use an unmistakable checkmark');
 assert.match(html,/conversation-inbox-row\.is-completed \.conversation-inbox-result/,'completed person cards should retain the $8 receipt');
 assert.doesNotMatch(html,/conversation-composer/,'non-interactive demo must not resemble a disabled message composer');
