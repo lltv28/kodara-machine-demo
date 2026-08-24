@@ -9,7 +9,7 @@
 <style>
 :root{
   --bg:#F6F6F7;--surface:#FAFAFA;
-  --ink:#1A1A1A;--ink-2:rgba(26,26,26,.70);--ink-3:rgba(26,26,26,.60);
+  --ink:#1A1A1A;--ink-2:rgba(26,26,26,1);--ink-3:rgba(26,26,26,.60);
   --line:#E5E5E8;--line-2:#D5D7DB;
   --accent:#2E7D52;--accent-hover:#256B45;--accent-ink:#2E7D52;--accent-dark:#075E3F;
   --accent-soft:rgba(46,125,82,.06);--accent-line:rgba(46,125,82,.12);
@@ -572,7 +572,7 @@ body{font-family:var(--fb);font-size:var(--type-body);letter-spacing:var(--track
   if(!chapters.length) return;
   var reduce=!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches);
   var ratios=new Map();
-  var rendererVersion='20260823c';
+  var rendererVersion='20260823d';
   var activeChapter=null;
   var desktopPlayback=window.matchMedia && matchMedia('(min-width:721px)');
 
