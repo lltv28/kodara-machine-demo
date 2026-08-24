@@ -75,8 +75,17 @@ assert.ok(iframes.every((tag) => /\btitle="[^"]+"/.test(tag)), 'Every iframe nee
 assert.ok(iframes.filter((tag) => /loading="eager"/.test(tag)).length <= 1, 'Only one iframe may load eagerly');
 
 const wistiaPlayers = [...page.matchAll(/<wistia-player\b[^>]*>/g)].map((match) => match[0]);
-assert.ok(wistiaPlayers.length > 0, 'Expected testimonial players');
+assert.equal(wistiaPlayers.length, 3, `Expected three testimonial players, found ${wistiaPlayers.length}`);
 assert.ok(wistiaPlayers.every((tag) => /\baria-label="[^"]+"/.test(tag)), 'Every testimonial player needs an accessible name');
+assert.match(wistiaPlayers[0], /media-id="6oj2gj3wqt"/, 'Sandra must remain the featured testimonial');
+
+const proofCards = page.match(/class="proof-card [^"]+"/g) ?? [];
+assert.equal(proofCards.length, 8, `Expected eight written proof cards, found ${proofCards.length}`);
+const faqItems = page.match(/class="faq-item"/g) ?? [];
+assert.equal(faqItems.length, 6, `Expected six FAQ items, found ${faqItems.length}`);
+assert.match(page, /class="site-footer"/, 'Page needs a minimal footer');
+assert.ok(page.indexOf('class="card faq"') < page.indexOf('class="card cta"'), 'FAQ must precede the final CTA');
+assert.ok(page.indexOf('class="card cta"') < page.indexOf('class="site-footer"'), 'Final CTA must precede the footer');
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.ok(ctaLinks.length > 0, 'Expected application links');

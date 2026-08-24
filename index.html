@@ -34,7 +34,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   display:flex;flex-direction:column;align-items:center;padding:10px var(--page-gutter) var(--page-gutter);overflow-x:hidden}
 .wrap{width:100%;max-width:var(--rail-wide);display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0;background:transparent}
-.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .outcome-features,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
+.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .outcome-features,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta,.embed-mode .site-footer{display:none}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(460px,.95fr);align-items:stretch;overflow:hidden}
@@ -66,7 +66,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 .card{--card-pad:var(--space-5);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
 .card+.card{margin-top:clamp(var(--space-8),8vw,var(--space-9))}
 
-.proof-snapshot.card,.mechanism-features.card,.outcome-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card,.cta.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.proof-snapshot.card,.mechanism-features.card,.outcome-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 
 .card-title{width:100%;max-width:var(--measure-display);margin-inline:auto;font-family:var(--fb);font-size:var(--type-section);font-weight:700;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
 
@@ -96,9 +96,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
 /* ---- beat labels inside the fused How-it-works card ---- */
 .beat{margin-top:30px}
 /* ---- closing CTA bookend ---- */
-.cta{text-align:center}
+.cta{padding:clamp(var(--space-7),6vw,var(--space-8));border-color:var(--accent-line);background:var(--accent-soft);text-align:center;box-shadow:none}
 .cta .cta-line{width:100%;max-width:var(--measure-display-long);margin:0 auto var(--space-4);font-family:var(--fb);font-size:var(--type-section-long);font-weight:700;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
 .cta-sub{width:100%;max-width:var(--measure-body);margin:0 auto var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
+.site-footer{width:100%;max-width:var(--rail-wide);margin-top:var(--space-7);padding:var(--space-5) 0 calc(var(--space-4) + env(safe-area-inset-bottom));border-top:1px solid var(--line-2);color:var(--ink-3);font-size:var(--type-legal);line-height:1.5;text-align:center}
 
 /* ---------- mid-page conversion point ---------- */
 .mid-cta{padding:0!important}
@@ -618,6 +619,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.55;letter-sp
   </section>
 
 </main>
+<footer class="site-footer">
+  <p>&copy; 2026 Kodara. All rights reserved.</p>
+</footer>
 <a class="cta-btn mobile-cta" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a free live demo</a>
 <script>
 (function(){
