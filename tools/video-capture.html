@@ -46,11 +46,12 @@ body{font-family:var(--fb);letter-spacing:var(--tracking-body);background:transp
 .player-mode[data-player="flywheel"] .zoom-section{transform:scale(.84)!important;transform-origin:620px 380px!important}
 .player-mode.compact-mode[data-player="learn"] .story-core-status,.player-mode.compact-mode[data-player="triagers"] .story-core-status,.player-mode.compact-mode[data-player="flywheel"] .story-core-status{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core,.player-mode.compact-mode[data-player="flywheel"] .story-core{width:190px}
-.player-mode.compact-mode[data-player="triagers"] .story-core{left:50%;top:18%;width:174px;opacity:var(--triager-loop-opacity,1)}
+.player-mode.compact-mode[data-player="triagers"] .story-core{left:50%;top:18%;width:174px}
 .player-mode.compact-mode[data-player="flywheel"] .cf-note{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core-title{font-size:52px}
 .player-mode.compact-mode[data-player="learn"] .source-title{font-size:34px}
-.player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:40px;transform:translateY(-24px)}
+.player-mode.compact-mode[data-player="triagers"] .story-core-title{display:flex;align-items:center;justify-content:center;gap:10px;font-size:34px;white-space:nowrap;transform:translateY(-24px)}
+.player-mode.compact-mode[data-player="triagers"] .story-core-title br{display:none}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:60%}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:18px;font-weight:600;letter-spacing:0}
 .player-mode[data-player="triagers"] .cf-note{display:none}
@@ -63,7 +64,7 @@ body{font-family:var(--fb);letter-spacing:var(--tracking-body);background:transp
 .player-mode.compact-mode[data-player="triagers"] .phone-compact-state{display:block}
 .player-mode.compact-mode[data-player="triagers"] .triager-demo-scene,.player-mode.compact-mode[data-player="triagers"] .triager-team{display:none}
 .player-mode.compact-mode[data-player="triagers"] .wheel-layer .fw,.player-mode.compact-mode[data-player="triagers"] .wheel-layer .fw-label{display:none}
-.player-mode.compact-mode[data-player="triagers"] .triager-conversation-demo{display:block}
+.player-mode.compact-mode[data-player="triagers"] .triager-conversation-demo{display:block;opacity:1}
 .player-mode.compact-mode[data-player="flywheel"] .story-core-title{font-size:54px}
 .player-mode.compact-mode[data-player="flywheel"] .node-triagers,.player-mode.compact-mode[data-player="flywheel"] .node-ticket,.player-mode.compact-mode[data-player="flywheel"] .node-downsell,.player-mode.compact-mode[data-player="flywheel"] .triager-ad-node{opacity:1!important}
 .player-mode.compact-mode[data-player="flywheel"] .flywheel-node-label,.player-mode.compact-mode[data-player="flywheel"] .ads-label{opacity:1!important}
@@ -230,14 +231,13 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-brain-link,.conversation-person-link{fill:none;stroke:rgba(64,64,64,.30);stroke-width:4;stroke-linecap:round;stroke-dasharray:10 12;vector-effect:non-scaling-stroke}
 .conversation-brain-success,.conversation-person-success{fill:none;stroke:var(--accent);stroke-width:6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
 .conversation-lead-signal,.conversation-transfer-dot{fill:var(--accent);stroke:#fff;stroke-width:4;filter:url(#phone-shadow);opacity:0}
-.triager-hub{position:absolute;left:50%;top:46%;width:204px;height:204px;display:grid;align-content:center;justify-items:center;gap:7px;padding:16px;border:3px solid var(--accent);border-radius:50%;background:#fff;box-shadow:var(--shadow-md);text-align:center;transform:translate(-50%,-50%) scale(var(--hub-scale,1));will-change:transform}
-.triager-hub-title{color:#404040;font-size:30px;font-weight:700;line-height:1}
-.triager-hub-status{max-width:126px;color:#737373;font-size:21px;font-weight:650;line-height:1.12}
+.triager-hub{position:absolute;left:50%;top:46%;width:174px;height:174px;display:grid;place-items:center;padding:12px;border:3px solid var(--accent);border-radius:50%;background:#fff;box-shadow:var(--shadow-md);text-align:center;transform:translate(-50%,-50%) scale(var(--hub-scale,1));will-change:transform}
+.triager-hub-title{color:#404040;font-size:28px;font-weight:700;line-height:1;white-space:nowrap}
 .triager-hub.is-active{--hub-scale:1.035;border-color:var(--accent-dark)}
 .triager-hub.is-completed{background:rgba(46,125,82,.07)}
 .conversation-people{position:absolute;left:calc(50% - 300px);top:69%;width:600px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.conversation-person{min-height:116px;display:grid;grid-template-columns:1fr;align-content:center;justify-items:center;gap:7px;padding:12px;border:2px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm);text-align:center;transform:scale(1);transform-origin:center;transition:border-color .35s ease,background-color .35s ease,transform .35s ease;will-change:transform}
-.conversation-person.is-active{border-color:rgba(64,64,64,.60);transform:scale(1.035)}
+.conversation-person{--card-scale:1;--card-turn:0deg;height:180px;display:grid;grid-template-columns:1fr;align-content:center;justify-items:center;gap:6px;padding:12px;border:2px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm);text-align:center;transform:perspective(900px) rotateY(var(--card-turn)) scale(var(--card-scale));transform-origin:center;transition:border-color .35s ease,background-color .35s ease;will-change:transform}
+.conversation-person.is-active{--card-scale:1.035;border-color:rgba(64,64,64,.60)}
 .conversation-person.is-completed{border-color:var(--accent);background:rgba(46,125,82,.055)}
 .conversation-person-avatar{width:46px;height:46px;display:grid;place-items:center;border:2px solid var(--line-2);border-radius:50%;background:#FAFAFA;color:#404040;font-size:24px;font-weight:700;line-height:1}
 .conversation-person.is-active .conversation-person-avatar{border-color:#737373}
@@ -246,10 +246,10 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-person-copy{display:grid;justify-items:center;gap:5px;min-width:0}
 .conversation-person-name{color:#404040;font-size:32px;font-weight:700;line-height:1;white-space:nowrap}
 .conversation-person-meta{display:grid;justify-items:center;gap:2px;min-width:0}
-.conversation-person-status{color:#737373;font-size:25px;font-weight:650;line-height:1.05}
-.conversation-person-result{display:none;color:var(--accent);font-size:28px;font-weight:700;line-height:1}
+.conversation-person-status{color:#737373;font-size:22px;font-weight:650;line-height:1.05;white-space:nowrap}
+.conversation-person-result{visibility:hidden;color:var(--accent);font-size:26px;font-weight:700;line-height:1;white-space:nowrap}
 .conversation-person.is-completed .conversation-person-status,.conversation-person.is-completed .conversation-person-result{color:var(--accent)}
-.conversation-person.is-completed .conversation-person-result{display:inline}
+.conversation-person.is-completed .conversation-person-result{visibility:visible}
 @media(prefers-reduced-motion:reduce){.conversation-lead-signal,.conversation-transfer-dot{display:none}.conversation-person{transition:none}}
 .worker-core{transform-box:fill-box;transform-origin:center}
 .triager-worker.is-active .worker-core{transform:scale(1.18);filter:url(#phone-shadow)}
@@ -350,15 +350,14 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 }
 @media(max-width:420px){
   .player-mode.compact-mode[data-player="triagers"] .story-core{top:18%;width:174px}
-  .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:44px;transform:translateY(-22px)}
+  .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:34px;transform:translateY(-22px)}
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:58%}
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:25px}
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget-value{font-size:38px}
-  .triager-hub-title{font-size:34px}
-  .triager-hub-status{font-size:24px}
+  .triager-hub-title{font-size:30px}
   .conversation-person-name{font-size:36px}
-  .conversation-person-status{font-size:28px}
-  .conversation-person-result{font-size:32px}
+  .conversation-person-status{font-size:22px}
+  .conversation-person-result{font-size:28px}
 }
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:500;font-size:1rem;letter-spacing:var(--tracking-body);white-space:nowrap;color:#fff;background:linear-gradient(to bottom,#3A9B68,#2E7D52);border:1px solid var(--accent-dark);border-radius:var(--radius);padding:11px 18px;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .15s ease}
@@ -632,20 +631,19 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
             <div class="triager-conversation-demo" role="img" aria-label="AI Triagers handle three independent buyers, sell three assessments, and return $24 to the AI Brain ad budget">
               <div class="triager-lattice" aria-hidden="true">
                 <svg class="conversation-link-layer" viewBox="0 0 760 760" preserveAspectRatio="none">
-                  <path class="conversation-brain-link" d="M 380 248 L 380 220"/>
-                  <path class="conversation-brain-success" pathLength="1" d="M 380 248 L 380 220"/>
-                  <path class="conversation-person-link" d="M 180 525 C 180 480 280 470 322 430"/>
-                  <path class="conversation-person-link" d="M 380 525 L 380 452"/>
-                  <path class="conversation-person-link" d="M 580 525 C 580 480 480 470 438 430"/>
-                  <path class="conversation-person-success" data-conversation-link-index="0" pathLength="1" d="M 180 525 C 180 480 280 470 322 430"/>
-                  <path class="conversation-person-success" data-conversation-link-index="1" pathLength="1" d="M 380 525 L 380 452"/>
-                  <path class="conversation-person-success" data-conversation-link-index="2" pathLength="1" d="M 580 525 C 580 480 480 470 438 430"/>
+                  <path class="conversation-brain-link" d="M 380 263 L 380 220"/>
+                  <path class="conversation-brain-success" pathLength="1" d="M 380 263 L 380 220"/>
+                  <path class="conversation-person-link" d="M 180 525 C 180 480 280 452 322 415"/>
+                  <path class="conversation-person-link" d="M 380 525 L 380 437"/>
+                  <path class="conversation-person-link" d="M 580 525 C 580 480 480 452 438 415"/>
+                  <path class="conversation-person-success" data-conversation-link-index="0" pathLength="1" d="M 180 525 C 180 480 280 452 322 415"/>
+                  <path class="conversation-person-success" data-conversation-link-index="1" pathLength="1" d="M 380 525 L 380 437"/>
+                  <path class="conversation-person-success" data-conversation-link-index="2" pathLength="1" d="M 580 525 C 580 480 480 452 438 415"/>
                   <circle class="conversation-lead-signal" r="11"/>
                   <circle class="conversation-transfer-dot" r="11"/>
                 </svg>
                 <div class="triager-hub">
                   <strong class="triager-hub-title">AI Triagers</strong>
-                  <span class="triager-hub-status" data-conversation-hub-status>Handles 3 leads</span>
                 </div>
                 <div class="conversation-people">
                   <div class="conversation-person" data-conversation-index="0"><span class="conversation-person-avatar">S</span><span class="conversation-person-copy"><strong class="conversation-person-name">Sandra</strong><span class="conversation-person-meta"><span class="conversation-person-status">Talking now</span><span class="conversation-person-result"></span></span></span></div>
@@ -682,7 +680,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
           </div>
           <div class="story-core" role="img" aria-label="AI brain learning the business and coordinating the department">
             <div class="story-core-mark" aria-hidden="true">AI</div>
-            <div class="story-core-title">AI<br>Brain</div>
+            <div class="story-core-title"><span>AI</span><br><span>Brain</span></div>
             <div class="story-core-budget" aria-hidden="true"><span class="story-core-budget-label">Ad budget</span><strong class="story-core-budget-value">$0</strong></div>
             <div class="story-core-gain" aria-hidden="true">+$8</div>
             <div class="story-core-status" aria-hidden="true">Learning your business</div>
@@ -1022,12 +1020,14 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var activityParticle=zoomSection && zoomSection.querySelector('.activity-particle');
   var conversationDemo=zoomSection && zoomSection.querySelector('.triager-conversation-demo');
   var conversationHub=zoomSection && zoomSection.querySelector('.triager-hub');
-  var conversationHubStatus=zoomSection && zoomSection.querySelector('[data-conversation-hub-status]');
+  var conversationLoop=0;
   var conversationPeople=zoomSection ? zoomSection.querySelectorAll('.conversation-person') : [];
   var conversationPersonViews=[];
   for(var conversationPersonIndex=0;conversationPersonIndex<conversationPeople.length;conversationPersonIndex++){
     conversationPersonViews.push({
       node:conversationPeople[conversationPersonIndex],
+      avatar:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-avatar'),
+      name:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-name'),
       status:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-status'),
       result:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-result')
     });
@@ -1198,55 +1198,49 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     zoomSection.classList.toggle('is-manager-pulse',!state.knowledgeHolding && state.knowledgeStepProgress>=.95);
   }
   function computeConversationActivity(progressValue){
-    var p=zoomClamp(progressValue,0,1), loopOpacity=1-storyEase(zoomRange(p,.96,1));
-    if(p<.10){
-      return {slot:0,raw:0,activeIndex:0,stage:'ready',orientation:true,summary:false,incoming:0,purchase:0,transfer:0,impact:0,loopOpacity:loopOpacity,pulse:0};
-    }
-    if(p>=.875){
-      return {slot:2,raw:1,activeIndex:2,stage:'funded',orientation:false,summary:true,incoming:1,purchase:1,transfer:1,impact:1,loopOpacity:loopOpacity,pulse:0};
-    }
-    var cycleProgress=zoomRange(p,.10,.875), scaled=cycleProgress*3, slot=Math.min(2,Math.floor(scaled)), raw=scaled-slot;
+    var p=zoomClamp(progressValue,0,1), orientation=p<.06;
+    var cycleProgress=zoomRange(p,.06,1), scaled=cycleProgress*3, slot=Math.min(2,Math.floor(scaled)), raw=slot===2 ? Math.min(1,scaled-slot) : scaled-slot;
     var incoming=storyEase(zoomRange(raw,.12,.34));
     var purchase=storyEase(zoomRange(raw,.48,.64));
     var transfer=storyEase(zoomRange(raw,.64,.86));
     var impact=storyEase(zoomRange(raw,.84,.92));
+    var swap=storyEase(zoomRange(raw,.88,1));
+    var cardTurn=swap<=.5 ? 180*swap : -180*(1-swap);
+    if(Math.abs(cardTurn)<.001) cardTurn=0;
     var pulse=transfer<=0 || transfer>=1 ? 0 : Math.sin(Math.PI*transfer);
-    var stage=raw<.34 ? 'new' : raw<.48 ? 'qualifying' : raw<.64 ? 'purchased' : raw<.90 ? 'transferring' : 'funded';
-    return {slot:slot,raw:raw,activeIndex:slot,stage:stage,orientation:false,summary:false,incoming:incoming,purchase:purchase,transfer:transfer,impact:impact,loopOpacity:loopOpacity,pulse:pulse};
+    var stage=raw<.34 ? 'new' : raw<.48 ? 'qualifying' : raw<.64 ? 'purchased' : raw<.88 ? 'transferring' : 'rotating';
+    return {slot:slot,raw:raw,activeIndex:slot,stage:stage,orientation:orientation,incoming:incoming,purchase:purchase,transfer:transfer,impact:impact,swap:swap,cardTurn:cardTurn,pulse:pulse};
   }
-  function getConversationCopy(index){
+  function getConversationCopy(index,generation){
     var conversations=[
-      {name:'Sandra',initial:'S'},
-      {name:'Michael',initial:'M'},
-      {name:'David',initial:'D'}
+      [{name:'Sandra',initial:'S'},{name:'Mark',initial:'M'},{name:'Aisha',initial:'A'},{name:'Tom',initial:'T'}],
+      [{name:'Michael',initial:'M'},{name:'Emily',initial:'E'},{name:'Chris',initial:'C'},{name:'Nina',initial:'N'}],
+      [{name:'David',initial:'D'},{name:'James',initial:'J'},{name:'Priya',initial:'P'},{name:'Ben',initial:'B'}]
     ];
-    return conversations[index] || conversations[0];
+    var lane=conversations[index] || conversations[0];
+    return lane[Math.max(0,Math.floor(Number(generation)||0))%lane.length];
   }
-  function getConversationRowState(index,state){
-    if(state.summary) return {status:'Assessment sold',result:'$8',mode:'completed'};
-    if(index<state.activeIndex) return {status:'Assessment sold',result:'$8',mode:'completed'};
-    if(index>state.activeIndex) return {status:'Waiting',result:'',mode:'waiting'};
-    if(state.purchase>=.5) return {status:'Assessment sold',result:'$8',mode:'completed'};
-    return {status:'Talking now',result:'',mode:'active'};
+  function getConversationRowState(index,state,loopNumber){
+    var current=index===state.activeIndex, advanced=index<state.activeIndex || (current && state.swap>=.5);
+    var copy=getConversationCopy(index,(Number(loopNumber)||0)+(advanced ? 1 : 0));
+    var turn=current ? state.cardTurn : 0;
+    if(advanced || index>state.activeIndex) return {name:copy.name,initial:copy.initial,status:'Waiting',result:'',mode:'waiting',turn:turn};
+    if(state.purchase>=.5) return {name:copy.name,initial:copy.initial,status:'Assessment sold',result:'$8',mode:'completed',turn:turn};
+    return {name:copy.name,initial:copy.initial,status:'Talking now',result:'',mode:'active',turn:turn};
   }
-  function getConversationBudget(state){
-    return state.slot*8+(state.impact>=.5 ? 8 : 0);
-  }
-  function getConversationHubStatus(state){
-    if(state.summary) return '3 assessments sold';
-    if(state.orientation) return 'Handles 3 leads';
-    if(state.stage==='new') return 'Listening to '+getConversationCopy(state.activeIndex).name;
-    if(state.stage==='qualifying') return 'Recommends the $8 assessment';
-    if(state.stage==='purchased') return 'Assessment purchased';
-    return 'Adds $8 to ad budget';
+  function getConversationBudget(state,loopNumber){
+    return (Number(loopNumber)||0)*24+state.slot*8+(state.impact>=.5 ? 8 : 0);
   }
   function renderConversationActivity(progress){
     if(!conversationDemo || !conversationHub) return;
     var state=computeConversationActivity(progress);
     for(var i=0;i<conversationPersonViews.length;i++){
-      var view=conversationPersonViews[i], rowState=getConversationRowState(i,state), completed=rowState.mode==='completed';
+      var view=conversationPersonViews[i], rowState=getConversationRowState(i,state,conversationLoop), completed=rowState.mode==='completed';
       view.node.classList.toggle('is-active',rowState.mode==='active');
       view.node.classList.toggle('is-completed',completed);
+      view.node.style.setProperty('--card-turn',rowState.turn.toFixed(2)+'deg');
+      view.avatar.textContent=rowState.initial;
+      view.name.textContent=rowState.name;
       view.status.textContent=rowState.status;
       view.result.textContent=rowState.result;
       if(conversationLeadSuccessPaths[i]){
@@ -1255,34 +1249,33 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         conversationLeadSuccessPaths[i].style.opacity=String(linkProgress);
       }
     }
-    conversationHubStatus.textContent=getConversationHubStatus(state);
-    conversationHub.classList.toggle('is-active',!state.orientation && !state.summary && state.purchase<.5);
-    conversationHub.classList.toggle('is-completed',state.purchase>=.5 || state.summary);
-    conversationDemo.style.opacity=String(state.loopOpacity);
-    zoomSection.style.setProperty('--triager-loop-opacity',String(state.loopOpacity));
+    conversationHub.classList.toggle('is-active',!state.orientation && state.purchase<.5);
+    conversationHub.classList.toggle('is-completed',state.purchase>=.5 && state.swap<.5);
+    conversationDemo.style.opacity='1';
     if(conversationBrainSuccess){
-      var brainProgress=state.summary ? 1 : state.transfer;
+      var brainProgress=state.transfer;
       conversationBrainSuccess.style.strokeDashoffset=String(1-brainProgress);
       conversationBrainSuccess.style.opacity=String(brainProgress);
     }
-    if(!state.orientation && !state.summary && state.incoming>0 && state.incoming<1){
+    if(!state.orientation && state.incoming>0 && state.incoming<1){
       setParticleOnPath(conversationLeadPaths[state.activeIndex],state.incoming,conversationLeadSignal);
       conversationLeadSignal.style.opacity=String(Math.min(1,state.incoming*5,5*(1-state.incoming)));
     }else if(conversationLeadSignal) conversationLeadSignal.style.opacity='0';
-    if(!state.summary && state.transfer>0 && state.transfer<1){
+    if(state.transfer>0 && state.transfer<1){
       setParticleOnPath(conversationBrainSuccess,state.transfer,conversationTransferDot);
       conversationTransferDot.style.opacity=String(Math.min(1,state.transfer*5,5*(1-state.transfer)));
     }else if(conversationTransferDot) conversationTransferDot.style.opacity='0';
     zoomSection.classList.toggle('is-manager-pulse',state.transfer>0 && state.transfer<1);
     zoomSection.style.setProperty('--sale-scale',String(1+.045*state.pulse));
     zoomSection.style.setProperty('--sale-ring-opacity',String(.16*state.pulse));
-    var budget=getConversationBudget(state);
+    var budget=getConversationBudget(state,conversationLoop);
     if(coreBudgetValue) coreBudgetValue.textContent='$'+budget;
-    var gainOpacity=state.summary ? 0 : state.impact;
+    var gainOpacity=state.swap>0 ? 0 : state.impact;
     if(coreGain){ coreGain.style.opacity=String(gainOpacity); coreGain.style.setProperty('--gain-y',(6-10*state.impact).toFixed(2)+'px'); }
     if(storyCore) storyCore.setAttribute('aria-label','AI brain. Total ad budget $'+budget);
     if(coreStatus) coreStatus.textContent=state.impact>0 ? 'Makes $8 available for ads' : 'AI Triagers are handling 3 buyers';
   }
+  window.setConversationLoop=function(loopNumber){ conversationLoop=Math.max(0,Math.floor(Number(loopNumber)||0)); };
   function clearTriagerActivity(){
     for(var i=0;i<triagerPhones.length;i++) triagerPhones[i].classList.remove('is-connected');
     for(var j=0;j<triagerWorkers.length;j++) triagerWorkers[j].classList.remove('is-active');
@@ -1566,13 +1559,14 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var requestedDuration=Number(new URLSearchParams(location.search).get('duration'));
   var duration=Number.isFinite(requestedDuration) && requestedDuration>=3000 && requestedDuration<=60000 ? requestedDuration : durations[chapter];
   var autoLoop=playerParams.get('loop')!=='0';
-  var elapsed=0,startedAt=0,frame=0,playing=false;
+  var elapsed=0,startedAt=0,frame=0,playing=false,loopCount=0;
 
   function fit(){
     var scale=Math.max(.1,Math.min(innerWidth/760,innerHeight/760));
     document.querySelector('.wrap').style.transform='scale('+scale+')';
   }
   function render(){
+    if(window.setConversationLoop) window.setConversationLoop(loopCount);
     window.renderCaptureFrame(chapter,Math.min(1,elapsed/duration));
   }
   function send(type){ parent.postMessage({fdDemoPlayer:type,chapter:chapter,progress:Math.min(1,elapsed/duration)},'*'); }
@@ -1581,13 +1575,13 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     elapsed=Math.min(duration,now-startedAt);
     render();
     if(elapsed>=duration){
-      if(autoLoop){ elapsed=0;startedAt=now;render();send('looped'); }
+      if(autoLoop){ loopCount++;elapsed=0;startedAt=now;render();send('looped'); }
       else { playing=false;frame=0;send('completed');return; }
     }
     frame=requestAnimationFrame(tick);
   }
   function play(replay){
-    if(replay){ elapsed=0;render(); }
+    if(replay){ loopCount=0;elapsed=0;render(); }
     if(playing) return;
     playing=true;startedAt=performance.now()-elapsed;send('playing');frame=requestAnimationFrame(tick);
   }
@@ -1596,7 +1590,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     playing=false;cancelAnimationFrame(frame);frame=0;send('paused');
   }
   function reset(){
-    pause();elapsed=0;render();send('ready');
+    pause();loopCount=0;elapsed=0;render();send('ready');
   }
   addEventListener('message',function(event){
     if(event.source!==parent || !event.data) return;
