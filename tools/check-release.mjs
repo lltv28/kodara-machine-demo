@@ -55,7 +55,6 @@ assert.match(page, /\.cta-btn\{[^}]*padding:12\.65px var\(--space-6\)/, 'Desktop
 assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{padding-inline:var\(--space-4\);/, 'Mobile CTA buttons must use responsive horizontal padding');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{[^}]*font-size:clamp\(1\.35rem,6\.15vw,1\.7rem\);white-space:nowrap/, 'Mobile CTA buttons must remain legible without wrapping');
 assert.match(page, /@media\(max-width:350px\)\{\s*\.cta-btn\{padding-inline:var\(--space-3\);font-size:1\.05rem\}/, 'Very narrow screens must keep the full CTA label inside the button');
-assert.match(page, /\.mid-cta-inner\{[^}]*flex-direction:column/, 'Mid-page CTA button must remain on its own line');
 assert.match(page, /\.primary-demo h1\{[^}]*font-size:clamp\(3\.3rem,4\.8vw,3\.6rem\)/, 'Hero typography must retain the approved 20% increase');
 assert.match(page, /--type-stat:clamp\(5\.1rem,9\.6vw,7\.8rem\)/, 'Stat typography must retain the approved 20% increase');
 assert.match(page, /\.proof-stat\{[^}]*font-size:var\(--type-stat\)/, 'Proof stats must consume the semantic stat tier');
@@ -104,17 +103,22 @@ assert.doesNotMatch(page, /class="card video-story"/, 'Old four-demo story must 
 assert.doesNotMatch(page, /class="video-chapter"/, 'Old independent demo chapters must be removed');
 assert.match(page, /class="card founder-letter"/, 'Founder letter must follow the primary demo');
 assert.match(page, /class="founder-letter-copy" data-letter-copy/, 'Founder letter needs a measurable reading body');
-assert.match(page, /class="card buyer-situations"/, 'Landing page must help the three current buyer situations self-identify');
-assert.equal((page.match(/class="buyer-situation"/g) ?? []).length, 3, 'Buyer recognition must cover exactly three situations');
 assert.match(page, /class="card mechanism-features"/, 'Mechanism features must follow the founder letter');
-assert.ok(page.indexOf('class="card founder-letter"') < page.indexOf('class="card mid-cta"'), 'Founder letter must precede its CTA');
-assert.ok(page.indexOf('class="card mid-cta"') < page.indexOf('class="card buyer-situations"'), 'Letter CTA must precede buyer recognition');
-assert.ok(page.indexOf('class="card buyer-situations"') < page.indexOf('class="card mechanism-features"'), 'Buyer recognition must precede mechanism features');
+assert.doesNotMatch(page, /mid-cta/, 'Removed white mid-page CTA must not return');
+assert.doesNotMatch(page, /buyer-situation/, 'Removed buyer-symptoms section must not return');
+assert.match(page, /class="card founder-letter"[\s\S]*?<\/section>\s*<!-- ============ MECHANISM FEATURES ============ -->\s*<section class="card mechanism-features"/, 'Three AI roles must follow the founder letter directly');
 
 const letterMatch = page.match(/class="founder-letter-copy" data-letter-copy>([\s\S]*?)<\/div>/);
 assert.ok(letterMatch, 'Expected founder letter copy');
-const letterWords = letterMatch[1].replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean);
-assert.ok(letterWords.length >= 450 && letterWords.length <= 600, `Founder letter has ${letterWords.length} words; expected 450-600`);
+const letterBody = letterMatch[1].replace(/<p class="founder-letter-signature">[\s\S]*?<\/p>/, '');
+const letterParagraphs = letterBody.match(/<p(?:\s[^>]*)?>/g) ?? [];
+assert.equal(letterParagraphs.length, 15, `Founder letter has ${letterParagraphs.length} reading beats; expected 15`);
+const letterWords = letterBody.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean);
+assert.ok(letterWords.length >= 180 && letterWords.length <= 300, `Founder letter has ${letterWords.length} words; expected 180-300`);
+assert.match(letterBody, /sells 24\/7 in the background of your business/i, 'Founder letter must retain the VSL mechanism language');
+assert.match(letterBody, /two things happen at once/i, 'Founder letter must retain the VSL assessment transition');
+assert.match(letterBody, /put their money where their mouth is/i, 'Founder letter must retain the VSL buyer-intent language');
+assert.match(letterBody, /about one hour per week/i, 'Founder letter must retain the VSL client-involvement boundary');
 
 const mechanismFeatures = page.match(/class="mechanism-feature"/g) ?? [];
 assert.equal(mechanismFeatures.length, 3, `Expected three mechanism features, found ${mechanismFeatures.length}`);
@@ -159,7 +163,8 @@ assert.doesNotMatch(page, /mobile-cta/, 'Removed sticky CTA must not return');
 assert.ok(page.indexOf('class="card faq"') < page.indexOf('class="card cta"'), 'FAQ must precede the final CTA');
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.ok(ctaLinks.length > 0, 'Expected application links');
+assert.equal(ctaLinks.length, 1, 'Only the final green CTA may contain an application link');
+assert.match(page, /<section class="card cta"[\s\S]*?<a\b[^>]*class="[^"]*cta-btn[^"]*"/, 'Application link must remain inside the final green CTA');
 assert.equal((page.match(/>Apply for a Free Live Demo<\/a>/g) ?? []).length, ctaLinks.length, 'Every application CTA must use the specific free-live-demo label');
 assert.ok(ctaLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Every CTA must use the live scheduler');
 assert.ok(ctaLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External CTA links must open safely');

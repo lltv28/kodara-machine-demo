@@ -21,7 +21,7 @@ The AI sales roles that route qualified buyers toward the client's highest-level
 _Avoid_: Bots, agents
 
 **Founder letter**:
-The founder-written long-form sales argument that follows the primary demo and moves the reader from the lead-conversion problem to Kodara's mechanism and offer.
+The founder-written 15-beat sales argument that follows the primary demo and moves the reader from the lead-conversion problem directly into Kodara's three AI roles.
 _Avoid_: Blog post, company letter
 
 **Mechanism features**:

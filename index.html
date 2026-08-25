@@ -37,7 +37,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   display:flex;flex-direction:column;align-items:center;padding:10px var(--page-gutter) var(--page-gutter);overflow-x:hidden}
 .wrap{width:100%;max-width:var(--rail-wide);display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0;background:transparent}
-.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .buyer-situations,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
+.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;grid-template-columns:minmax(460px,.95fr) minmax(0,1.05fr);align-items:stretch;overflow:hidden;box-shadow:var(--shadow-md)}
@@ -72,7 +72,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .proof-snapshot+.primary-demo{margin-top:var(--space-6)}
 .primary-demo,.founder-highlight,.case-featured--portrait,.cta{border-radius:var(--radius-xl)}
 
-.proof-snapshot.card,.buyer-situations.card,.mechanism-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.proof-snapshot.card,.mechanism-features.card,.case-studies.card,.proof.card,.faq.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 
 .card-title{width:100%;max-width:var(--measure-display);margin-inline:auto;font-family:var(--fb);font-size:var(--type-section);font-weight:700;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 
@@ -108,13 +108,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .cta .cta-btn:hover{background:var(--bg)}
 .cta .cta-btn:focus-visible{outline-color:#fff}
 
-/* ---------- mid-page conversion point ---------- */
-.mid-cta{padding:0!important}
-.mid-cta-inner{display:flex;align-items:flex-start;flex-direction:column;gap:var(--space-5);padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-subtle)}
-.mid-cta-copy{max-width:650px}
-.mid-cta h2{max-width:var(--measure-card-title);font-family:var(--fb);font-size:var(--type-card);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.mid-cta p{max-width:var(--measure-body);margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-
 /* ---------- founder letter ---------- */
 .founder-letter{max-width:900px;padding:clamp(41.4px,6.9vw,82.8px);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
 .founder-letter-head{max-width:var(--rail-reading);margin:0 auto var(--space-6)}
@@ -122,17 +115,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .founder-letter-copy{max-width:var(--rail-reading);margin-inline:auto}
 .founder-letter-copy p{margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .founder-letter-copy p:first-child{margin-top:0}
-.founder-letter-copy .founder-letter-emphasis{margin-block:var(--space-6);padding-left:var(--space-5);border-left:3px solid var(--accent);color:var(--ink);font-size:var(--type-card-small);font-weight:600;line-height:1.35}
 .founder-letter-signature{padding-top:var(--space-3);color:var(--ink)!important;font-weight:600}
-
-/* ---------- buyer recognition ---------- */
-.buyer-situations-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
-.buyer-situations-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.buyer-situations-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
-.buyer-situation{min-width:0;padding:var(--space-6);border-right:1px solid var(--line-2)}
-.buyer-situation:last-child{border-right:0}
-.buyer-situation h3{max-width:17ch;font-size:var(--type-card-small);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.buyer-situation p{max-width:34ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 
 /* ---------- mechanism features ---------- */
 .mechanism-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
@@ -186,11 +169,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .founder-letter{padding:var(--space-6) var(--space-5)}
   .founder-letter-head{margin-bottom:var(--space-5)}
   .founder-letter-copy p{margin-top:var(--space-4);line-height:1.5}
-  .founder-letter-copy .founder-letter-emphasis{margin-block:var(--space-5);padding-left:var(--space-4)}
-  .buyer-situations-head{margin-bottom:var(--space-6)}
-  .buyer-situations-grid{grid-template-columns:1fr}
-  .buyer-situation{padding:var(--space-5);border-right:0;border-bottom:1px solid var(--line-2)}
-  .buyer-situation:last-child{border-bottom:0}
   .mechanism-head{margin-bottom:var(--space-6)}
   .mechanism-grid{grid-template-columns:1fr;gap:var(--space-7)}
   .mechanism-feature h3{max-width:20ch;margin-top:var(--space-4)}
@@ -275,8 +253,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .proof-snapshot-logo--clickfunnels{--logo-width:108px;--logo-height:20px}
   .proof-snapshot-logo--hr-block{--logo-width:96px;--logo-height:27px}
   .proof-snapshot-note{margin-top:var(--space-2);font-size:1rem;line-height:1.4}
-  .mid-cta-inner{align-items:stretch;padding:var(--space-5)}
-  .mid-cta .cta-btn{width:100%}
 }
 @media(max-width:390px){
   :root{--type-section:2.55rem;--type-section-long:2.25rem;--type-card:2.1rem;--type-card-small:1.95rem;--type-question:1.575rem}
@@ -338,72 +314,46 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       <h1 id="primary-demo-title">An AI sales department that helps pay for its own leads.</h1>
       <p>Kodara builds the entire system for you. It qualifies cold leads, sells a personalized assessment for less than $20, and sends the hottest buyers toward your highest-level service.</p>
       <p class="primary-demo-note">Self-funding is the objective, not a guaranteed result.</p>
-      <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a Free Live Demo</a>
     </div>
   </section>
 
   <!-- ============ FOUNDER LETTER ============ -->
   <section class="card founder-letter" aria-labelledby="founder-letter-title">
     <header class="founder-letter-head">
-      <h2 id="founder-letter-title">The expensive problem is not getting leads. It is what happens to the ones who never buy.</h2>
+      <h2 id="founder-letter-title">The expensive problem is what happens to the leads who are not ready yet.</h2>
     </header>
     <div class="founder-letter-copy" data-letter-copy>
-      <p>If you are paying to bring people into your business, only a small percentage will book a call, show up, and be ready for your highest-level service today. That does not make everyone else a bad lead. Most people are simply not ready to make the biggest possible decision the first time they meet you.</p>
+      <p>Most of the leads you pay for are not immediately ready to buy your highest-level service.</p>
 
-      <p>You feel this in different ways. Your sales team has gaps in its calendar, no-shows, or calls with people who are not ready to buy. You are still doing the selling yourself and wasting hours on window shoppers. Or your business depends on referrals, so you cannot reliably turn up the flow of new opportunities when you want to grow.</p>
+      <p>That does not make them bad leads. It means they need a better next step.</p>
 
-      <p class="founder-letter-emphasis">Different symptoms. The same expensive leak: most of the leads you already paid to attract never become paying clients.</p>
+      <p>Kodara builds an AI sales department that sells 24/7 in the background of your business.</p>
 
-      <p>That is why Kodara builds an AI sales department around your business instead of handing you one isolated chatbot. The department identifies the people worth your sales time, makes an appropriate smaller sale to people who are not ready for high ticket, and keeps the relationship moving without requiring you to chase every lead manually.</p>
+      <p>Your entire AI sales department is controlled by an AI Brain trained on everything in your business.</p>
 
-      <p>It starts with an AI Brain trained on your products, services, knowledge, voice, and qualification rules. That shared brain gives each AI salesperson the context to represent your business and speak about the real problem your buyer wants to solve. So the conversation begins with your expertise, not generic answers pulled from a public chatbot.</p>
+      <p>This helps your AI salespeople talk to potential leads about your products and services the same way you would.</p>
 
-      <p>Then AI Triagers speak with cold prospects and sell a personalized assessment, usually for less than $20. The assessment diagnoses an important problem and gives the buyer an immediate plan. But the small payment also does something a free PDF cannot do. It shows that the person is serious enough to pull out a card and take a real first step.</p>
+      <p>AI Triagers qualify and educate cold strangers by selling them a low-cost assessment for less than $20.</p>
 
-      <p>The hottest assessment buyers can move directly toward your highest-level service. People who are not ready can see a smaller digital offer matched to what they need now. And when someone shares their details without buying, the AI keeps following up. You are no longer forcing every prospect through one yes-or-no sales path.</p>
+      <p>The assessment gives someone an instant personalized plan that shows them their real issue and whether they are a match for your highest-level service.</p>
 
-      <p class="founder-letter-emphasis">The assessment revenue and smaller sales can help pay for the ads that bring in the next lead. That is how the department is designed to become a self-funding loop.</p>
+      <p>When someone buys that assessment, two things happen at once.</p>
 
-      <p>Kodara builds and launches the entire system for you. We train the AI Brain, build the assessment, create the AI Triagers and AI salespeople, connect the smaller offers and follow-up, and launch the advertising system around it. You receive one client-specific department, not disconnected software and a list of instructions you have to implement yourself.</p>
+      <p>First, it proves that person is serious about getting help because they just put their money where their mouth is.</p>
 
-      <p>Most clients launch and begin selling in four to six weeks on average. Some fast-moving clients have launched in two to three weeks. Your part is about one hour per week to review decisions, share the knowledge we need, and keep our team aligned. Kodara handles the remaining build and launch work.</p>
+      <p>Second, the cash they paid can help pay for the ads that bring in the next lead.</p>
 
-      <p>Self-funding is the objective, not a guaranteed result. Your offer, market, traffic, execution, and sales process all matter. But if you already have a valuable service and too many leads are disappearing, the next step is a free live demo. Our team will show you how the department could work in your business and confirm whether your business qualifies.</p>
+      <p>That is how the department is designed to create a self-funding loop. Self-funding is the objective, not a guaranteed result.</p>
+
+      <p>Your AI salespeople can catch the most qualified and motivated buyers and offer them your highest-level service.</p>
+
+      <p>For everyone else, the AI can present smaller digital products that match their interest level and financial ability.</p>
+
+      <p>Even people who do not buy on the spot can receive continued follow-up, so fewer leads are wasted.</p>
+
+      <p>Our team builds the entire process for you, while you provide about one hour per week to review the work and keep us on track.</p>
 
       <p class="founder-letter-signature">Lucas Tyson<br>Founder, Kodara</p>
-    </div>
-  </section>
-
-  <!-- ============ MID-PAGE CTA ============ -->
-  <section class="card mid-cta" aria-labelledby="mid-cta-title">
-    <div class="mid-cta-inner">
-      <div class="mid-cta-copy">
-        <h2 id="mid-cta-title">See what your AI sales department could look like.</h2>
-        <p>Apply for a free live demo. Our team will map the department to your current offers, leads, and sales process, then confirm whether your business qualifies.</p>
-      </div>
-      <a class="cta-btn" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="Apply for a free live demo (opens in a new tab)">Apply for a Free Live Demo</a>
-    </div>
-  </section>
-
-  <!-- ============ BUYER RECOGNITION ============ -->
-  <section class="card buyer-situations" aria-labelledby="buyer-situations-title">
-    <header class="buyer-situations-head">
-      <h2 class="card-title" id="buyer-situations-title">Different symptoms. The same expensive leak.</h2>
-      <p class="buyer-situations-intro">The system is built for established businesses that already attract leads but lose too many before they buy.</p>
-    </header>
-    <div class="buyer-situations-grid">
-      <article class="buyer-situation">
-        <h3>Your sales team needs better calls.</h3>
-        <p>Calendars are being filled with no-shows, unqualified prospects, or people who are not ready to invest in your highest-level service.</p>
-      </article>
-      <article class="buyer-situation">
-        <h3>You are still doing the selling.</h3>
-        <p>You are trying to run the business while spending valuable time educating and following up with people who may never buy.</p>
-      </article>
-      <article class="buyer-situation">
-        <h3>Growth still depends on referrals.</h3>
-        <p>You have a strong offer, but no acquisition system you can reliably turn up when you want more qualified opportunities.</p>
-      </article>
     </div>
   </section>
 
