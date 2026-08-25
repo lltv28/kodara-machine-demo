@@ -106,10 +106,6 @@ assert.match(page, /class="card founder-letter"/, 'Founder letter must follow th
 assert.match(page, /class="founder-letter-copy" data-letter-copy/, 'Founder letter needs a measurable reading body');
 assert.match(page, /class="card buyer-situations"/, 'Landing page must help the three current buyer situations self-identify');
 assert.equal((page.match(/class="buyer-situation"/g) ?? []).length, 3, 'Buyer recognition must cover exactly three situations');
-assert.match(page, /class="card implementation-strip"/, 'Landing page must set concrete implementation expectations');
-assert.match(page, /Four to six weeks/, 'Implementation expectations must state the average launch window');
-assert.match(page, /Two to three weeks/, 'Implementation expectations must qualify fast-moving launches');
-assert.match(page, /About one hour per week/, 'Implementation expectations must state client involvement');
 assert.match(page, /class="card mechanism-features"/, 'Mechanism features must follow the founder letter');
 assert.ok(page.indexOf('class="card founder-letter"') < page.indexOf('class="card mid-cta"'), 'Founder letter must precede its CTA');
 assert.ok(page.indexOf('class="card mid-cta"') < page.indexOf('class="card buyer-situations"'), 'Letter CTA must precede buyer recognition');
@@ -129,16 +125,11 @@ const mechanismPlaceholders = page.match(/data-placeholder="mechanism"/g) ?? [];
 assert.equal(mechanismPlaceholders.length, 3, 'Every mechanism feature needs a stable placeholder');
 assert.match(page, /class="card founder-highlight"/, 'Founder highlight must follow mechanism features');
 assert.match(page, /data-placeholder="founder"/, 'Founder highlight needs a stable portrait placeholder');
-assert.match(page, /class="card outcome-features"/, 'Outcome features must follow founder highlight');
 assert.ok(page.indexOf('class="card mechanism-features"') < page.indexOf('class="card founder-highlight"'), 'Mechanism features must precede founder highlight');
-assert.ok(page.indexOf('class="card founder-highlight"') < page.indexOf('class="card outcome-features"'), 'Founder highlight must precede outcome features');
-assert.ok(page.indexOf('class="card outcome-features"') < page.indexOf('class="card case-studies"'), 'Outcome features must precede proof stories');
-
-const outcomeFeatures = page.match(/class="outcome-feature"/g) ?? [];
-assert.equal(outcomeFeatures.length, 3, `Expected three outcome features, found ${outcomeFeatures.length}`);
-const outcomePlaceholders = page.match(/data-placeholder="outcome"/g) ?? [];
-assert.equal(outcomePlaceholders.length, 3, 'Every outcome feature needs a stable placeholder');
-assert.match(page, /Self-funding is the objective, not a guaranteed result\./, 'Outcome section must keep the self-funding boundary');
+assert.ok(page.indexOf('class="card founder-highlight"') < page.indexOf('class="card case-studies"'), 'Founder highlight must precede proof stories');
+assert.doesNotMatch(page, /class="card outcome-features"/, 'Removed outcome section must not return');
+assert.doesNotMatch(page, /class="card implementation-strip"/, 'Removed implementation strip must not return');
+assert.match(page, /Self-funding is the objective, not a guaranteed result\./, 'Landing page must keep the self-funding boundary');
 
 const h1s = page.match(/<h1\b/g) ?? [];
 assert.equal(h1s.length, 1, `Expected one h1, found ${h1s.length}`);

@@ -37,7 +37,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   display:flex;flex-direction:column;align-items:center;padding:10px var(--page-gutter) var(--page-gutter);overflow-x:hidden}
 .wrap{width:100%;max-width:var(--rail-wide);display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0;background:transparent}
-.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .buyer-situations,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .outcome-features,.embed-mode .implementation-strip,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
+.embed-mode .proof-snapshot,.embed-mode .founder-letter,.embed-mode .buyer-situations,.embed-mode .mechanism-features,.embed-mode .founder-highlight,.embed-mode .mid-cta,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta{display:none}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;grid-template-columns:minmax(460px,.95fr) minmax(0,1.05fr);align-items:stretch;overflow:hidden;box-shadow:var(--shadow-md)}
@@ -72,7 +72,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .proof-snapshot+.primary-demo{margin-top:var(--space-6)}
 .primary-demo,.founder-highlight,.case-featured--portrait,.cta{border-radius:var(--radius-xl)}
 
-.proof-snapshot.card,.buyer-situations.card,.mechanism-features.card,.outcome-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.proof-snapshot.card,.buyer-situations.card,.mechanism-features.card,.mid-cta.card,.case-studies.card,.proof.card,.faq.card{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
 
 .card-title{width:100%;max-width:var(--measure-display);margin-inline:auto;font-family:var(--fb);font-size:var(--type-section);font-weight:700;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 
@@ -150,31 +150,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .founder-highlight h2{max-width:15ch;font-size:var(--type-section-long);font-weight:700;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 .founder-highlight p{max-width:45ch;margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 
-/* ---------- outcome features ---------- */
-.outcome-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
-.outcome-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.outcome-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
-.outcome-feature{min-width:0}
-.outcome-placeholder{display:flex;width:100%;aspect-ratio:4/3;align-items:center;justify-content:center;padding:var(--space-5);border:1px dashed var(--line-2);border-right:0;background:linear-gradient(145deg,#fff,var(--bg));color:var(--ink-3);font-size:var(--type-label);font-weight:600;line-height:1.4;text-align:center;text-wrap:balance}
-.outcome-feature:first-child .outcome-placeholder{border-radius:var(--radius-lg) 0 0 var(--radius-lg)}
-.outcome-feature:last-child .outcome-placeholder{border-right:1px dashed var(--line-2);border-radius:0 var(--radius-lg) var(--radius-lg) 0}
-.outcome-caption{padding:var(--space-6) var(--space-5) 0}
-.outcome-caption h3{font-size:var(--type-card-small);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.outcome-caption p{margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.outcome-note{max-width:var(--measure-body);margin:var(--space-6) auto 0;color:var(--ink-3);font-size:var(--type-legal);line-height:1.5;text-align:center;text-wrap:pretty}
-
-/* ---------- implementation expectations ---------- */
-.implementation-strip{padding:var(--space-7);border-radius:var(--radius-xl);box-shadow:var(--shadow-md)}
-.implementation-strip-head{max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
-.implementation-strip h2{font-size:var(--type-section-long);font-weight:700;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
-.implementation-strip-head p{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.implementation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line-2)}
-.implementation-item{padding:var(--space-5) var(--space-6) 0;border-left:1px solid var(--line-2)}
-.implementation-item:first-child{border-left:0}
-.implementation-item strong,.implementation-item span{display:block}
-.implementation-item strong{font-size:var(--type-card-small);font-weight:700;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.implementation-item span{margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-label);line-height:1.45;text-wrap:pretty}
-
 /* ---------- video client stories ---------- */
 .case-studies-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
 .case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
@@ -224,14 +199,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .founder-portrait{max-width:440px;margin-inline:auto}
   .founder-highlight-copy{padding:0}
   .founder-highlight h2{max-width:17ch}
-  .outcome-head{margin-bottom:var(--space-6)}
-  .outcome-grid{grid-template-columns:1fr;gap:var(--space-7)}
-  .outcome-placeholder,.outcome-feature:first-child .outcome-placeholder,.outcome-feature:last-child .outcome-placeholder{border:1px dashed var(--line-2);border-radius:var(--radius-lg)}
-  .outcome-caption{padding:var(--space-5) 0 0}
-  .implementation-strip{padding:var(--space-6) var(--space-5)}
-  .implementation-grid{grid-template-columns:1fr}
-  .implementation-item{padding:var(--space-5) 0;border-left:0;border-bottom:1px solid var(--line-2)}
-  .implementation-item:last-child{padding-bottom:0;border-bottom:0}
   .case-featured,.case-support-grid{grid-template-columns:1fr}
   .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
   .case-featured--portrait{gap:var(--space-4);padding:var(--space-5)}
@@ -472,51 +439,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       <h2 id="founder-highlight-title">Built to remove the owner bottleneck.</h2>
       <p>Lucas Tyson built Kodara after seeing what happens when growth depends too heavily on the owner. In his previous business, every new client meant more of his time or more people on payroll. Eventually, he became the bottleneck.</p>
       <p>Kodara was created to solve that problem. The team has now installed AI sales departments for more than 350 businesses across more than 30 industries, combining qualification, education, follow-up, and monetization into one client-specific system.</p>
-    </div>
-  </section>
-
-  <!-- ============ OUTCOME FEATURES ============ -->
-  <section class="card outcome-features" aria-labelledby="outcome-title">
-    <header class="outcome-head">
-      <h2 class="card-title" id="outcome-title">What changes when the system is working.</h2>
-      <p class="outcome-intro">Your team spends less time guessing which leads matter and more time with buyers who are ready to move.</p>
-    </header>
-    <div class="outcome-grid">
-      <article class="outcome-feature">
-        <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing more leads moving into useful sales paths">Lead value visual placeholder</div>
-        <div class="outcome-caption">
-          <h3>Spend time on better prospects.</h3>
-          <p>The paid assessment helps reveal who is serious before you or your salesperson commits time to a sales conversation.</p>
-        </div>
-      </article>
-      <article class="outcome-feature">
-        <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing better-qualified buyers reaching sales calls">Buyer quality visual placeholder</div>
-        <div class="outcome-caption">
-          <h3>Recover more of your acquisition costs.</h3>
-          <p>Assessment revenue and smaller sales can help pay for future advertising instead of leaving every cost dependent on high-ticket sales.</p>
-        </div>
-      </article>
-      <article class="outcome-feature">
-        <div class="outcome-placeholder" data-placeholder="outcome" role="img" aria-label="Placeholder showing automated lead follow-up reducing owner workload">Follow-up visual placeholder</div>
-        <div class="outcome-caption">
-          <h3>Stop chasing every lead.</h3>
-          <p>AI salespeople continue educating, routing, and following up without asking the owner to manage every conversation manually.</p>
-        </div>
-      </article>
-    </div>
-    <p class="outcome-note">Revenue from assessments and smaller offers can help pay for future leads. Self-funding is the objective, not a guaranteed result.</p>
-  </section>
-
-  <!-- ============ IMPLEMENTATION EXPECTATIONS ============ -->
-  <section class="card implementation-strip" aria-labelledby="implementation-title">
-    <header class="implementation-strip-head">
-      <h2 id="implementation-title">A white-glove build, with clear expectations.</h2>
-      <p>Kodara builds and launches the department around your business. You provide the knowledge and feedback that keep it accurate.</p>
-    </header>
-    <div class="implementation-grid">
-      <div class="implementation-item"><strong>Four to six weeks</strong><span>Average time for clients to launch and begin selling.</span></div>
-      <div class="implementation-item"><strong>Two to three weeks</strong><span>Some fast-moving clients have launched this quickly.</span></div>
-      <div class="implementation-item"><strong>About one hour per week</strong><span>Your time to review decisions and keep the build aligned.</span></div>
     </div>
   </section>
 

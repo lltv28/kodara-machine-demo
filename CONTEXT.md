@@ -28,10 +28,6 @@ _Avoid_: Blog post, company letter
 The first three-part visual section explaining how the AI sales department works.
 _Avoid_: First feature cards, generic features
 
-**Outcome features**:
-The second three-part visual section explaining what changes for the business after the mechanism is installed.
-_Avoid_: Second feature cards, duplicate features
-
 **Founder highlight**:
 The portrait-and-bio section that establishes Lucas's relevant credibility and motivation for building Kodara.
 _Avoid_: About us, founder résumé
