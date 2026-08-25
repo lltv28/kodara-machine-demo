@@ -148,7 +148,7 @@ const mechanismPlayers = [...page.matchAll(/<iframe class="mechanism-player"[^>]
 assert.equal(mechanismPlayers.length, 3, `Expected three live mechanism players, found ${mechanismPlayers.length}`);
 assert.ok(mechanismPlayers.every((tag) => /loading="lazy"/.test(tag)), 'Role demos must load lazily');
 assert.match(page, /player=learn&amp;compact=1&amp;duration=5000&amp;loop=1/, 'AI Brain card must autoplay its five-second loop');
-assert.match(page, /player=triagers&amp;compact=1&amp;duration=15000&amp;loop=1/, 'AI Triager card must autoplay its fifteen-second loop');
+assert.match(page, /player=triagers&amp;compact=1&amp;duration=18000&amp;loop=1/, 'AI Triager card must autoplay its eighteen-second loop');
 assert.match(page, /player=flywheel&amp;compact=1&amp;duration=8000&amp;loop=1/, 'AI Salespeople card must autoplay its eight-second loop');
 assert.match(page, /function setupMechanismDemos\(\)/, 'Role demos need a viewport-aware playback controller');
 assert.match(page, /send\(index,'replay'\)/, 'Role demo controller must replay the active stage');
