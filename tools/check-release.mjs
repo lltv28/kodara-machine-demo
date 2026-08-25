@@ -7,8 +7,12 @@ const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
 const pagePath = resolve(root, 'index.html');
 const rendererPath = resolve(root, 'tools/video-capture.html');
+const notificationComponentPath = resolve(root, 'assets/ios-notification-demo/component.js');
+const notificationStylesPath = resolve(root, 'assets/ios-notification-demo/styles.css');
 const page = readFileSync(pagePath, 'utf8');
 const renderer = readFileSync(rendererPath, 'utf8');
+const notificationComponent = readFileSync(notificationComponentPath, 'utf8');
+const notificationStyles = readFileSync(notificationStylesPath, 'utf8');
 
 const budgets = new Map([
   [pagePath, 140 * 1024],
@@ -79,10 +83,11 @@ assert.match(page, /text-wrap:balance/, 'Headlines must use balanced wrapping');
 assert.match(page, /text-wrap:pretty/, 'Body copy must use pretty wrapping');
 assert.match(page, /\.proof-more summary:focus-visible/, 'Disclosure controls need a visible focus state');
 assert.match(page, /prefers-reduced-motion:reduce/, 'The landing page must honor reduced motion');
-assert.match(page, /prefers-reduced-transparency:reduce/, 'Glassy demo surfaces need an opaque accessibility fallback');
-assert.match(page, /\.primary-demo-placeholder\{[^}]*backdrop-filter:blur\(8px\)/, 'Glass treatment must stay scoped to the primary demo placeholder');
+assert.match(notificationStyles, /prefers-reduced-transparency: reduce/, 'Notification glass needs an opaque accessibility fallback');
+assert.match(notificationStyles, /prefers-reduced-motion: reduce/, 'Notification motion must honor reduced-motion preferences');
+assert.match(notificationComponent, /attachShadow\(\{ mode: "open" \}\)/, 'Notification UI must isolate its iOS styles from the landing page');
 assert.match(page, /\.primary-demo,\.founder-highlight,\.case-featured--portrait,\.cta\{border-radius:var\(--radius-xl\)\}/, 'Featured surfaces need an explicit 24px role');
-assert.match(page, /\.primary-demo,\.case-featured--portrait\{grid-template-columns:minmax\(0,3fr\) minmax\(320px,2fr\)\}/, 'Demo and featured testimonial must use the approved 60/40 media-text split');
+assert.match(page, /@media\(min-width:900px\)\{\.primary-demo,\.case-featured--portrait\{grid-template-columns:minmax\(0,3fr\) minmax\(320px,2fr\)\}\}/, 'Demo and featured testimonial must use the approved desktop-only 60/40 media-text split');
 assert.match(page, /\.founder-highlight\{grid-template-columns:minmax\(320px,2fr\) minmax\(0,3fr\)\}/, 'Founder card must use the approved 40/60 image-text split');
 assert.match(page, /\.cta\{[^}]*background:var\(--accent-dark\)[^}]*color:#fff/, 'Closing CTA must remain the single deep-green color block');
 assert.match(page, /\.cta \.cta-btn\{[^}]*color:var\(--accent-dark\)[^}]*background:#fff/, 'Closing CTA button must keep high contrast');
@@ -97,10 +102,14 @@ assert.match(page, /\.proof-snapshot\+\.primary-demo\{margin-top:var\(--space-6\
 assert.match(page, /class="primary-demo-copy"/, 'Primary demo needs page-owned sales copy');
 assert.match(page, /class="primary-demo-visual"[^>]*data-demo-slot/, 'Primary demo needs a stable visual integration slot');
 assert.ok(page.indexOf('class="primary-demo-visual"') < page.indexOf('class="primary-demo-copy"'), 'Primary demo visual must lead the split layout');
+assert.match(page, /<ios-notification-demo\b[^>]*aria-label="Live Kodara AI sales notifications"/, 'Primary demo must mount the native notification component');
+assert.doesNotMatch(page, /Interactive demo placeholder/, 'Primary demo placeholder must be removed after native integration');
+assert.match(page, /\.primary-demo-visual\{[^}]*background:var\(--accent\)/, 'Primary demo phone needs the approved solid green backdrop');
+assert.match(page, /<script defer src="assets\/ios-notification-demo\/model\.js"><\/script>/, 'Notification model must load as a local asset');
+assert.match(page, /<script defer src="assets\/ios-notification-demo\/component\.js"><\/script>/, 'Native notification component must load as a local asset');
 assert.match(page, /@media\(max-width:899px\)[\s\S]*\.primary-demo-copy\{[^}]*order:1;[\s\S]*\.primary-demo-visual\{[^}]*order:2;/, 'Hero copy and CTA must precede the visual below desktop width');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*\.proof-snapshot-logo-row\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/, 'Mobile authority logos must use a compact three-column grid');
 assert.doesNotMatch(page, /class="primary-demo-visual"[^>]*role="img"/, 'Interactive demo slot must not hide future controls behind an image role');
-assert.match(page, /class="primary-demo-placeholder"[^>]*role="img"/, 'Static placeholder needs its own image semantics');
 assert.doesNotMatch(page, /class="card video-story"/, 'Old four-demo story must be removed');
 assert.doesNotMatch(page, /class="video-chapter"/, 'Old independent demo chapters must be removed');
 assert.match(page, /class="card founder-letter"/, 'Founder letter must follow the primary demo');

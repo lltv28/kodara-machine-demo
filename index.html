@@ -46,10 +46,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .primary-demo-copy p{max-width:31ch;margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:pretty}
 .primary-demo-copy .primary-demo-note{max-width:42ch;margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-legal);line-height:1.45}
 .primary-demo-copy .cta-btn{margin-top:var(--space-6)}
-.primary-demo-visual{display:flex;width:100%;min-width:0;min-height:520px;aspect-ratio:1/1;align-items:center;justify-content:center;padding:var(--space-7);border-right:1px solid var(--line-2);background:linear-gradient(145deg,var(--bg),#fff 72%)}
-.primary-demo-placeholder{width:100%;min-width:0;max-width:360px;padding:var(--space-6);border:1px dashed var(--border-accent);border-radius:var(--radius-lg);background:rgba(255,255,255,.78);box-shadow:inset 0 1px 0 rgba(255,255,255,.72),var(--shadow-subtle);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);text-align:center}
-.primary-demo-placeholder strong{display:block;font-size:var(--type-card-small);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.primary-demo-placeholder p{max-width:28ch;margin:var(--space-3) auto 0;color:var(--ink-3);font-size:var(--type-label);line-height:1.5;text-wrap:pretty}
+.primary-demo-visual{display:flex;width:100%;min-width:0;min-height:520px;aspect-ratio:1/1;align-items:center;justify-content:center;padding:var(--space-7);border-right:1px solid var(--line-2);background:var(--accent)}
+.primary-demo-visual ios-notification-demo{display:block;flex:0 0 100%;width:100%;height:100%;max-height:760px}
 @media(max-width:899px){
   .primary-demo{grid-template-columns:minmax(0,1fr)}
   .primary-demo-copy{order:1;padding:var(--space-7)}
@@ -63,8 +61,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .primary-demo h1{max-width:16ch;font-size:clamp(2.7rem,12vw,3.15rem);line-height:1.1}
   .primary-demo-copy p{max-width:32ch;margin-top:var(--space-4);font-size:1.375rem;line-height:1.45}
   .primary-demo-copy .cta-btn{margin-top:var(--space-4)}
-  .primary-demo-visual{padding:var(--space-5);aspect-ratio:1/1}
-  .primary-demo-placeholder{padding:var(--space-5)}
+  .primary-demo-visual{min-height:0;padding:var(--space-4);aspect-ratio:auto}
+  .primary-demo-visual ios-notification-demo{flex:0 0 auto;width:min(100%,284px);height:auto;max-height:none;aspect-ratio:464/980}
 }
 /* ---------- shared card ---------- */
 .card{--card-pad:var(--space-6);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
@@ -138,7 +136,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .case-featured{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}
 .case-featured--portrait{align-items:center;gap:var(--space-6);padding:var(--space-6);border-radius:var(--radius-xl);box-shadow:var(--shadow-md)}
-.primary-demo,.case-featured--portrait{grid-template-columns:minmax(0,3fr) minmax(320px,2fr)}
+@media(min-width:900px){.primary-demo,.case-featured--portrait{grid-template-columns:minmax(0,3fr) minmax(320px,2fr)}}
 .founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}
 .case-featured .case-media{border-right:1px solid var(--line-2)}
 .case-featured--portrait .case-media{display:block;width:100%;aspect-ratio:3/4;background:#fff;border:1px solid var(--line-2);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
@@ -275,7 +273,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .primary-demo-copy p{font-size:1.25rem;line-height:1.4}
   .proof-snapshot+.primary-demo{margin-top:var(--space-4)}
 }
-@media(prefers-reduced-transparency:reduce){.primary-demo-placeholder{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}}
 @media(prefers-reduced-motion:reduce){.cta-btn,.faq-item summary::after{transition:none}}
 
 </style>
@@ -307,10 +304,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   <!-- ============ PRIMARY DEMO ============ -->
   <section class="card primary-demo" aria-labelledby="primary-demo-title">
     <div class="primary-demo-visual" data-demo-slot="primary">
-      <div class="primary-demo-placeholder" role="img" aria-label="Placeholder for the interactive Kodara AI sales department demo">
-        <strong>Interactive demo placeholder</strong>
-        <p>The finished AI sales department demo will load in this space.</p>
-      </div>
+      <ios-notification-demo aria-label="Live Kodara AI sales notifications"></ios-notification-demo>
     </div>
     <div class="primary-demo-copy">
       <h1 id="primary-demo-title">An AI sales department that helps pay for its own leads.</h1>
@@ -573,6 +567,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   </section>
 
 </main>
+<script defer src="assets/ios-notification-demo/model.js"></script>
+<script defer src="assets/ios-notification-demo/component.js"></script>
 <script>
 (function(){
   'use strict';
