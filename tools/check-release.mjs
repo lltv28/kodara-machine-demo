@@ -86,6 +86,8 @@ assert.match(page, /prefers-reduced-motion:reduce/, 'The landing page must honor
 assert.match(notificationStyles, /prefers-reduced-transparency: reduce/, 'Notification glass needs an opaque accessibility fallback');
 assert.match(notificationStyles, /prefers-reduced-motion: reduce/, 'Notification motion must honor reduced-motion preferences');
 assert.match(notificationComponent, /attachShadow\(\{ mode: "open" \}\)/, 'Notification UI must isolate its iOS styles from the landing page');
+assert.doesNotMatch(notificationStyles, /\.showcase|\.demo-intro|\.scenario-picker|\.replay-button/, 'Standalone demo-page styles must not ship in the landing component');
+assert.doesNotMatch(notificationComponent, /new URLSearchParams|data-replay|data-workflow/, 'Standalone capture and control behavior must not leak into landing-page URLs');
 assert.match(page, /\.primary-demo,\.founder-highlight,\.case-featured--portrait,\.cta\{border-radius:var\(--radius-xl\)\}/, 'Featured surfaces need an explicit 24px role');
 assert.match(page, /@media\(min-width:900px\)\{\.primary-demo,\.case-featured--portrait\{grid-template-columns:minmax\(0,3fr\) minmax\(320px,2fr\)\}\}/, 'Demo and featured testimonial must use the approved desktop-only 60/40 media-text split');
 assert.match(page, /\.founder-highlight\{grid-template-columns:minmax\(320px,2fr\) minmax\(0,3fr\)\}/, 'Founder card must use the approved 40/60 image-text split');
@@ -102,7 +104,7 @@ assert.match(page, /\.proof-snapshot\+\.primary-demo\{margin-top:var\(--space-6\
 assert.match(page, /class="primary-demo-copy"/, 'Primary demo needs page-owned sales copy');
 assert.match(page, /class="primary-demo-visual"[^>]*data-demo-slot/, 'Primary demo needs a stable visual integration slot');
 assert.ok(page.indexOf('class="primary-demo-visual"') < page.indexOf('class="primary-demo-copy"'), 'Primary demo visual must lead the split layout');
-assert.match(page, /<ios-notification-demo\b[^>]*aria-label="Live Kodara AI sales notifications"/, 'Primary demo must mount the native notification component');
+assert.match(page, /<ios-notification-demo\b[^>]*role="group"[^>]*tabindex="-1"[^>]*aria-label="Live Kodara AI sales notifications"/, 'Primary demo must mount an accessible native notification component');
 assert.doesNotMatch(page, /Interactive demo placeholder/, 'Primary demo placeholder must be removed after native integration');
 assert.match(page, /\.primary-demo-visual\{[^}]*background:var\(--accent\)/, 'Primary demo phone needs the approved solid green backdrop');
 assert.match(page, /<script defer src="assets\/ios-notification-demo\/model\.js"><\/script>/, 'Notification model must load as a local asset');

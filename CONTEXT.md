@@ -5,7 +5,7 @@ This context describes the page sections that explain and sell Kodara's done-for
 ## Language
 
 **Primary demo**:
-The single main visual explanation placed immediately below the authority logos. It uses a split layout with page-owned sales copy on the left and the interactive demo on the right, and it replaces the previous four-demo sequence.
+The single main visual explanation placed immediately below the authority logos. It uses a split layout with the interactive demo on the left and page-owned sales copy on the right. On smaller screens, the copy appears first and the demo follows. It replaces the previous four-demo sequence.
 _Avoid_: Demo grid, four-demo section
 
 **AI Brain**:

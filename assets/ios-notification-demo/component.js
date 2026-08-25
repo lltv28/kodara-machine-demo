@@ -95,7 +95,9 @@ class IOSNotificationDemo extends HTMLElement {
   }
 }
 
-customElements.define("ios-notification-demo", IOSNotificationDemo);
+if (!customElements.get("ios-notification-demo")) {
+  customElements.define("ios-notification-demo", IOSNotificationDemo);
+}
 
 const {
   ACTIVITY_TIMELINE,
@@ -123,14 +125,7 @@ const showLessButton = root.querySelector("[data-show-less]");
 const clearAllButton = root.querySelector("[data-clear-all]");
 const clearGroupButton = root.querySelector("[data-clear-group]");
 const liveRegion = root.querySelector("[data-live-region]");
-const replayButton = root.querySelector("[data-replay]");
-const workflowButtons = [...root.querySelectorAll("[data-workflow]")];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const query = new URLSearchParams(window.location.search);
-const requestedStaticCount = Number.parseInt(query.get("static-count"), 10);
-const requestedFocus = WORKFLOW_GROUPS.some(({ id }) => id === query.get("focus"))
-  ? query.get("focus")
-  : null;
 
 const state = {
   activeByGroup: activityStateAt(0),
@@ -138,9 +133,6 @@ const state = {
   generation: 0,
   isVisible: false,
   selectedGroupId: null,
-  staticCount: Number.isInteger(requestedStaticCount)
-    ? Math.min(ACTIVITY_TIMELINE.length, Math.max(0, requestedStaticCount))
-    : null,
   timers: new Set(),
 };
 
@@ -171,19 +163,6 @@ function schedule(callback, delay, generation = state.generation) {
     if (generation === state.generation && state.isVisible) callback();
   }, delay);
   state.timers.add(timer);
-}
-
-function setWorkflowButtonState() {
-  const selectedId = state.selectedGroupId ?? "all";
-  for (const button of workflowButtons) {
-    const selected = button.dataset.workflow === selectedId;
-    button.classList.toggle("is-active", selected);
-    button.setAttribute("aria-pressed", String(selected));
-  }
-}
-
-function focusWorkflowButton(id = "all") {
-  workflowButtons.find((button) => button.dataset.workflow === id)?.focus();
 }
 
 function updateCardAvailability() {
@@ -322,7 +301,6 @@ function setGroupExpanded(groupId) {
     notificationRegion.scrollTop = 0;
   }
 
-  setWorkflowButtonState();
   renderCurrentView();
 }
 
@@ -545,7 +523,7 @@ function renderActivityState(count) {
   updateNotificationPresence();
 }
 
-function renderFrozenState(count, focusId = requestedFocus) {
+function renderFrozenState(count, focusId = null) {
   renderActivityState(count);
   setGroupExpanded(focusId);
   phoneScreen.dataset.activityState = count === ACTIVITY_TIMELINE.length
@@ -559,10 +537,6 @@ function playActivity() {
   setGroupExpanded(null);
 
   if (!state.isVisible) return;
-  if (state.staticCount !== null) {
-    renderFrozenState(state.staticCount);
-    return;
-  }
   if (reduceMotion.matches) {
     renderFrozenState(ACTIVITY_TIMELINE.length);
     return;
@@ -589,16 +563,6 @@ function scheduleNextNotification(notifications, index, generation) {
   }, arrivalDelay(), generation);
 }
 
-function focusWorkflow(id) {
-  state.generation += 1;
-  clearTimers();
-  if (id === "all") {
-    renderFrozenState(ACTIVITY_TIMELINE.length, null);
-    return;
-  }
-  renderFrozenState(ACTIVITY_TIMELINE.length, id);
-}
-
 function setVisible(isVisible) {
   if (state.isVisible === isVisible) return;
   state.isVisible = isVisible;
@@ -609,22 +573,17 @@ function setVisible(isVisible) {
   }
 }
 
-for (const button of workflowButtons) {
-  button.addEventListener("click", () => focusWorkflow(button.dataset.workflow));
-}
-
-replayButton?.addEventListener("click", playActivity);
 showLessButton.addEventListener("click", () => {
   setGroupExpanded(null);
 });
 clearAllButton.addEventListener("click", () => {
-  focusWorkflowButton();
+  demoElement.focus({ preventScroll: true });
   clearNotifications();
 });
 clearGroupButton.addEventListener("click", () => {
   if (state.selectedGroupId !== null) {
     const groupId = state.selectedGroupId;
-    focusWorkflowButton();
+    demoElement.focus({ preventScroll: true });
     clearNotifications(groupId);
   }
 });
