@@ -236,18 +236,22 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .triager-hub.is-active{--hub-scale:1.035;border-color:var(--accent-dark)}
 .triager-hub.is-completed{background:rgba(46,125,82,.07)}
 .conversation-people{position:absolute;left:calc(50% - 300px);top:69%;width:600px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.conversation-person{--card-scale:1;--card-turn:0deg;height:180px;display:grid;grid-template-columns:1fr;align-content:center;justify-items:center;gap:6px;padding:12px;border:2px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm);text-align:center;transform:perspective(900px) rotateY(var(--card-turn)) scale(var(--card-scale));transform-origin:center;transition:border-color .35s ease,background-color .35s ease;will-change:transform}
+.conversation-person{--card-scale:1;--card-turn:0deg;height:180px;display:grid;grid-template-columns:1fr;align-content:center;justify-items:center;gap:6px;padding:12px;border:2px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm);text-align:center;transform:perspective(900px) rotateY(var(--card-turn)) scale(var(--card-scale));transform-origin:center;transition:border-color .35s ease,background-color .35s ease,box-shadow .35s ease;will-change:transform,opacity}
 .conversation-person.is-active{--card-scale:1.035;border-color:rgba(64,64,64,.60)}
 .conversation-person.is-completed{border-color:var(--accent);background:rgba(46,125,82,.055)}
-.conversation-person-avatar{width:46px;height:46px;display:grid;place-items:center;border:2px solid var(--line-2);border-radius:50%;background:#FAFAFA;color:#404040;font-size:24px;font-weight:700;line-height:1}
+.conversation-person-avatar{position:relative;width:46px;height:46px;display:grid;place-items:center;border:2px solid var(--line-2);border-radius:50%;background:#FAFAFA;color:#404040;font-size:24px;font-weight:700;line-height:1}
+.conversation-person-avatar::after{content:"\2713";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:30px;opacity:0;transform:scale(.72);transition:opacity .28s ease,transform .28s ease}
 .conversation-person.is-active .conversation-person-avatar{border-color:#737373}
-.conversation-person.is-completed .conversation-person-avatar{border-color:var(--accent);background:var(--accent);color:#fff;font-size:0}
-.conversation-person.is-completed .conversation-person-avatar::after{content:"\2713";font-size:30px}
+.conversation-person.is-completed .conversation-person-avatar{border-color:var(--accent);background:var(--accent);color:transparent}
+.conversation-person.is-completed .conversation-person-avatar::after{opacity:1;transform:scale(1)}
 .conversation-person-copy{width:100%;display:grid;place-items:center;gap:5px;min-width:0;text-align:center}
 .conversation-person-name{color:#404040;font-size:32px;font-weight:700;line-height:1;white-space:nowrap}
 .conversation-person-meta{width:100%;display:grid;place-items:center;min-width:0;text-align:center}
 .conversation-person-status{width:100%;min-width:0;text-align:center;color:#737373;font-size:22px;font-weight:650;line-height:1.05;white-space:nowrap}
 .conversation-person.is-completed .conversation-person-status{color:var(--accent);font-size:20px}
+html.player-mode[data-player="triagers"]:not(.reduce-mode) .conversation-person{transition:border-color .35s ease,background-color .35s ease,box-shadow .35s ease!important}
+html.player-mode[data-player="triagers"]:not(.reduce-mode) .conversation-person-avatar{transition:border-color .28s ease,background-color .28s ease,color .2s ease!important}
+html.player-mode[data-player="triagers"]:not(.reduce-mode) .triager-hub{transition:border-color .35s ease,background-color .35s ease,box-shadow .35s ease!important}
 @media(prefers-reduced-motion:reduce){.conversation-lead-signal,.conversation-transfer-dot{display:none}.conversation-person{transition:none}}
 .worker-core{transform-box:fill-box;transform-origin:center}
 .triager-worker.is-active .worker-core{transform:scale(1.18);filter:url(#phone-shadow)}
@@ -1231,25 +1235,36 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var release=storyEase(zoomRange(state.swap,.62,1));
     return state.transfer*(1-release);
   }
+  function getConversationCrossfade(value){
+    var progress=zoomClamp(value,0,1);
+    return progress<.5 ? 1-storyEase(progress*2) : storyEase((progress-.5)*2);
+  }
   function renderConversationActivity(progress){
     if(!conversationDemo || !conversationHub) return;
     var state=computeConversationActivity(progress);
+    var activeStrength=storyEase(zoomRange(state.raw,0,.12))*(1-storyEase(zoomRange(state.purchase,.2,.8)));
     for(var i=0;i<conversationPersonViews.length;i++){
       var view=conversationPersonViews[i], rowState=getConversationRowState(i,state,conversationLoop), completed=rowState.mode==='completed';
       view.node.classList.toggle('is-active',rowState.mode==='active');
       view.node.classList.toggle('is-completed',completed);
       view.node.style.setProperty('--card-turn',rowState.turn.toFixed(2)+'deg');
+      view.node.style.setProperty('--card-scale',String(1+(i===state.activeIndex ? .035*activeStrength : 0)));
+      var cardOpacity=i===state.activeIndex ? getConversationCrossfade(state.swap) : 1;
+      view.node.style.opacity=String(cardOpacity);
       view.avatar.textContent=rowState.initial;
       view.name.textContent=rowState.name;
       view.status.textContent=rowState.status;
+      var saleOpacity=i===state.activeIndex && state.swap<.5 ? getConversationCrossfade(state.purchase) : 1;
+      view.avatar.style.opacity=view.status.style.opacity=String(saleOpacity);
       if(conversationLeadSuccessPaths[i]){
-        var linkProgress=completed ? 1 : i===state.activeIndex ? state.purchase : 0;
+        var linkProgress=completed ? 1 : i===state.activeIndex ? Math.min(1,state.purchase*2) : 0;
         conversationLeadSuccessPaths[i].style.strokeDashoffset=String(1-linkProgress);
         conversationLeadSuccessPaths[i].style.opacity=String(linkProgress);
       }
     }
     conversationHub.classList.toggle('is-active',!state.orientation && state.purchase<.5);
     conversationHub.classList.toggle('is-completed',state.purchase>=.5 && state.swap<.5);
+    conversationHub.style.setProperty('--hub-scale',String(1+.035*activeStrength));
     conversationDemo.style.opacity='1';
     if(conversationBrainSuccess){
       var brainProgress=getConversationBrainConnectorProgress(state);

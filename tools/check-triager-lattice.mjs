@@ -58,7 +58,7 @@ const context={};
 vm.runInNewContext([
   'zoomClamp','zoomRange','storyEase','computeConversationActivity',
   'getConversationCopy','getConversationRowState','getConversationBudget',
-  'getConversationBrainConnectorProgress'
+  'getConversationBrainConnectorProgress','getConversationCrossfade'
 ].map(extractFunction).join('\n'),context);
 
 const duration=18000;
@@ -108,6 +108,14 @@ const highlighted=context.computeConversationActivity(atLead(0,.90));
 assert.equal(context.getConversationBrainConnectorProgress(highlighted),1,'Brain revenue connector should become fully green before its card rotates away');
 const releasing=context.computeConversationActivity(atLead(0,.96));
 assert.ok(context.getConversationBrainConnectorProgress(releasing)>0 && context.getConversationBrainConnectorProgress(releasing)<1,'Brain revenue connector should retract near the end of card replacement');
+assert.equal(context.getConversationCrossfade(0),1,'copy should begin fully visible');
+assert.ok(context.getConversationCrossfade(.25)>0 && context.getConversationCrossfade(.25)<1,'copy should fade across the first half of a state change');
+assert.equal(context.getConversationCrossfade(.5),0,'copy should be hidden at the exact state-change midpoint');
+assert.equal(context.getConversationCrossfade(.25),context.getConversationCrossfade(.75),'outgoing and incoming fades should use a balanced rhythm');
+assert.equal(context.getConversationCrossfade(1),1,'replacement copy should finish fully visible');
+assert.match(html,/linkProgress=completed \? 1 : i===state\.activeIndex \? Math\.min\(1,state\.purchase\*2\) : 0/,'sale connector should reach full green continuously at the completed-state threshold');
+assert.match(html,/view\.node\.style\.opacity=String\(cardOpacity\)/,'buyer replacement should fade through its rotation midpoint');
+assert.match(html,/view\.avatar\.style\.opacity=view\.status\.style\.opacity=String\(saleOpacity\)/,'sale-state icon and status should crossfade together');
 assert.deepEqual({...context.getConversationRowState(1,secondLead,0)},{name:'Michael',initial:'M',status:'Talking now',mode:'active',turn:0});
 
 const cycleEnd=context.computeConversationActivity(1);
