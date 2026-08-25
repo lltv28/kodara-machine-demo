@@ -10,7 +10,7 @@ Run the dependency-free checks before publishing:
 
 ```sh
 node tools/check-release.mjs
-node tools/check-triager-accordion.mjs
+node tools/check-triager-lattice.mjs
 ```
 
 Production budgets:

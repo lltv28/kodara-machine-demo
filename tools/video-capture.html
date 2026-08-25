@@ -225,7 +225,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .activity-path{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.88}
 .activity-particle{fill:var(--accent);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .triager-conversation-demo{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;color:var(--ink);opacity:0}
-.triager-lattice{position:absolute;inset:0}
+.triager-lattice{position:absolute;left:240px;top:0;width:760px;height:760px}
 .conversation-link-layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .conversation-brain-link,.conversation-person-link{fill:none;stroke:rgba(64,64,64,.30);stroke-width:4;stroke-linecap:round;stroke-dasharray:10 12;vector-effect:non-scaling-stroke}
 .conversation-brain-success,.conversation-person-success{fill:none;stroke:var(--accent);stroke-width:6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
@@ -235,7 +235,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .triager-hub-status{max-width:126px;color:#737373;font-size:21px;font-weight:650;line-height:1.12}
 .triager-hub.is-active{--hub-scale:1.035;border-color:var(--accent-dark)}
 .triager-hub.is-completed{background:rgba(46,125,82,.07)}
-.conversation-people{position:absolute;left:calc(50% - 300px);top:72%;width:600px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.conversation-people{position:absolute;left:calc(50% - 300px);top:69%;width:600px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .conversation-person{min-height:116px;display:grid;grid-template-columns:1fr;align-content:center;justify-items:center;gap:7px;padding:12px;border:2px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm);text-align:center;transform:scale(1);transform-origin:center;transition:border-color .35s ease,background-color .35s ease,transform .35s ease;will-change:transform}
 .conversation-person.is-active{border-color:rgba(64,64,64,.60);transform:scale(1.035)}
 .conversation-person.is-completed{border-color:var(--accent);background:rgba(46,125,82,.055)}
@@ -244,10 +244,10 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-person.is-completed .conversation-person-avatar{border-color:var(--accent);background:var(--accent);color:#fff;font-size:0}
 .conversation-person.is-completed .conversation-person-avatar::after{content:"\2713";font-size:30px}
 .conversation-person-copy{display:grid;justify-items:center;gap:5px;min-width:0}
-.conversation-person-name{color:#404040;font-size:28px;font-weight:700;line-height:1;white-space:nowrap}
-.conversation-person-meta{display:flex;align-items:baseline;justify-content:center;gap:7px;min-width:0}
-.conversation-person-status{color:#737373;font-size:22px;font-weight:650;line-height:1.05}
-.conversation-person-result{display:none;color:var(--accent);font-size:24px;font-weight:700;line-height:1}
+.conversation-person-name{color:#404040;font-size:32px;font-weight:700;line-height:1;white-space:nowrap}
+.conversation-person-meta{display:grid;justify-items:center;gap:2px;min-width:0}
+.conversation-person-status{color:#737373;font-size:25px;font-weight:650;line-height:1.05}
+.conversation-person-result{display:none;color:var(--accent);font-size:28px;font-weight:700;line-height:1}
 .conversation-person.is-completed .conversation-person-status,.conversation-person.is-completed .conversation-person-result{color:var(--accent)}
 .conversation-person.is-completed .conversation-person-result{display:inline}
 @media(prefers-reduced-motion:reduce){.conversation-lead-signal,.conversation-transfer-dot{display:none}.conversation-person{transition:none}}
@@ -356,9 +356,9 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget-value{font-size:38px}
   .triager-hub-title{font-size:36px}
   .triager-hub-status{font-size:27px}
-  .conversation-person-name{font-size:34px}
-  .conversation-person-status{font-size:27px}
-  .conversation-person-result{font-size:30px}
+  .conversation-person-name{font-size:36px}
+  .conversation-person-status{font-size:28px}
+  .conversation-person-result{font-size:32px}
 }
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:500;font-size:1rem;letter-spacing:var(--tracking-body);white-space:nowrap;color:#fff;background:linear-gradient(to bottom,#3A9B68,#2E7D52);border:1px solid var(--accent-dark);border-radius:var(--radius);padding:11px 18px;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .15s ease}
@@ -631,15 +631,15 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
             </div>
             <div class="triager-conversation-demo" role="img" aria-label="AI Triagers handle three independent buyers, sell three assessments, and return $24 to the AI Brain ad budget">
               <div class="triager-lattice" aria-hidden="true">
-                <svg class="conversation-link-layer" viewBox="0 0 1240 760" preserveAspectRatio="none">
-                  <path class="conversation-brain-link" d="M 620 270 L 620 220"/>
-                  <path class="conversation-brain-success" pathLength="1" d="M 620 270 L 620 220"/>
-                  <path class="conversation-person-link" d="M 420 548 C 420 492 520 478 562 430"/>
-                  <path class="conversation-person-link" d="M 620 548 L 620 442"/>
-                  <path class="conversation-person-link" d="M 820 548 C 820 492 720 478 678 430"/>
-                  <path class="conversation-person-success" data-conversation-link-index="0" pathLength="1" d="M 420 548 C 420 492 520 478 562 430"/>
-                  <path class="conversation-person-success" data-conversation-link-index="1" pathLength="1" d="M 620 548 L 620 442"/>
-                  <path class="conversation-person-success" data-conversation-link-index="2" pathLength="1" d="M 820 548 C 820 492 720 478 678 430"/>
+                <svg class="conversation-link-layer" viewBox="0 0 760 760" preserveAspectRatio="none">
+                  <path class="conversation-brain-link" d="M 380 270 L 380 220"/>
+                  <path class="conversation-brain-success" pathLength="1" d="M 380 270 L 380 220"/>
+                  <path class="conversation-person-link" d="M 180 525 C 180 480 280 470 322 430"/>
+                  <path class="conversation-person-link" d="M 380 525 L 380 442"/>
+                  <path class="conversation-person-link" d="M 580 525 C 580 480 480 470 438 430"/>
+                  <path class="conversation-person-success" data-conversation-link-index="0" pathLength="1" d="M 180 525 C 180 480 280 470 322 430"/>
+                  <path class="conversation-person-success" data-conversation-link-index="1" pathLength="1" d="M 380 525 L 380 442"/>
+                  <path class="conversation-person-success" data-conversation-link-index="2" pathLength="1" d="M 580 525 C 580 480 480 470 438 430"/>
                   <circle class="conversation-lead-signal" r="11"/>
                   <circle class="conversation-transfer-dot" r="11"/>
                 </svg>
@@ -1202,10 +1202,10 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(p<.10){
       return {slot:0,raw:0,activeIndex:0,stage:'ready',orientation:true,summary:false,incoming:0,purchase:0,transfer:0,impact:0,loopOpacity:loopOpacity,pulse:0};
     }
-    if(p>=.88){
+    if(p>=.875){
       return {slot:2,raw:1,activeIndex:2,stage:'funded',orientation:false,summary:true,incoming:1,purchase:1,transfer:1,impact:1,loopOpacity:loopOpacity,pulse:0};
     }
-    var cycleProgress=zoomRange(p,.10,.88), scaled=cycleProgress*3, slot=Math.min(2,Math.floor(scaled)), raw=scaled-slot;
+    var cycleProgress=zoomRange(p,.10,.875), scaled=cycleProgress*3, slot=Math.min(2,Math.floor(scaled)), raw=scaled-slot;
     var incoming=storyEase(zoomRange(raw,.12,.34));
     var purchase=storyEase(zoomRange(raw,.48,.64));
     var transfer=storyEase(zoomRange(raw,.64,.86));
@@ -1223,10 +1223,10 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     return conversations[index] || conversations[0];
   }
   function getConversationRowState(index,state){
-    if(state.summary) return {status:'Sold',result:'$8',mode:'completed'};
-    if(index<state.activeIndex) return {status:'Sold',result:'$8',mode:'completed'};
+    if(state.summary) return {status:'Assessment sold',result:'$8',mode:'completed'};
+    if(index<state.activeIndex) return {status:'Assessment sold',result:'$8',mode:'completed'};
     if(index>state.activeIndex) return {status:'Waiting',result:'',mode:'waiting'};
-    if(state.purchase>=.5) return {status:'Sold',result:'$8',mode:'completed'};
+    if(state.purchase>=.5) return {status:'Assessment sold',result:'$8',mode:'completed'};
     return {status:'Talking now',result:'',mode:'active'};
   }
   function getConversationBudget(state){
@@ -1261,7 +1261,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     conversationDemo.style.opacity=String(state.loopOpacity);
     zoomSection.style.setProperty('--triager-loop-opacity',String(state.loopOpacity));
     if(conversationBrainSuccess){
-      var brainProgress=state.summary || state.slot>0 ? 1 : state.transfer;
+      var brainProgress=state.summary ? 1 : state.transfer;
       conversationBrainSuccess.style.strokeDashoffset=String(1-brainProgress);
       conversationBrainSuccess.style.opacity=String(brainProgress);
     }
