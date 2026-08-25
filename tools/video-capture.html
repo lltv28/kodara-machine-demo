@@ -246,8 +246,8 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-person-copy{width:100%;display:grid;place-items:center;gap:5px;min-width:0;text-align:center}
 .conversation-person-name{color:#404040;font-size:32px;font-weight:700;line-height:1;white-space:nowrap}
 .conversation-person-meta{width:100%;display:grid;place-items:center;min-width:0;text-align:center}
-.conversation-person-status{width:100%;text-align:center;color:#737373;font-size:22px;font-weight:650;line-height:1.05;white-space:nowrap}
-.conversation-person.is-completed .conversation-person-status{color:var(--accent)}
+.conversation-person-status{width:100%;min-width:0;text-align:center;color:#737373;font-size:22px;font-weight:650;line-height:1.05;white-space:nowrap}
+.conversation-person.is-completed .conversation-person-status{color:var(--accent);font-size:20px}
 @media(prefers-reduced-motion:reduce){.conversation-lead-signal,.conversation-transfer-dot{display:none}.conversation-person{transition:none}}
 .worker-core{transform-box:fill-box;transform-origin:center}
 .triager-worker.is-active .worker-core{transform:scale(1.18);filter:url(#phone-shadow)}

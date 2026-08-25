@@ -24,7 +24,8 @@ assert.match(html,/\.triager-hub-title\{[^}]*white-space:nowrap/,'AI Triagers sh
 assert.match(html,/\.conversation-people\{position:absolute;left:calc\(50% - 300px\);top:69%;width:600px/,'three people should use a stable bottom row');
 assert.match(html,/\.conversation-person\{[^}]*height:180px/,'buyer cards should keep stable equal heights through status changes');
 assert.match(html,/\.conversation-person-status\{[^}]*white-space:nowrap/,'buyer status should stay on one line below the name');
-assert.match(html,/\.conversation-person-status\{[^}]*width:100%;text-align:center/,'buyer status should remain centered across every card state');
+assert.match(html,/\.conversation-person-status\{[^}]*width:100%;min-width:0;text-align:center/,'buyer status should shrink to and remain centered within every card');
+assert.match(html,/\.conversation-person\.is-completed \.conversation-person-status\{[^}]*font-size:20px/,'the longest status should fit inside its prospect card');
 assert.doesNotMatch(html,/conversation-person-result/,'prospect cards should not display assessment pricing');
 assert.match(html,/data-player="triagers"\] \.story-core\{[^}]*display:flex;[^}]*align-items:center;justify-content:center/,'AI Brain content should use one centered stack');
 assert.match(html,/data-player="triagers"\] \.story-core-budget\{[^}]*position:static;[^}]*place-items:center/,'ad budget label and value should stay centered in the Brain');
