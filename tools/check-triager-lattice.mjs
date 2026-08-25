@@ -57,7 +57,8 @@ function extractFunction(name){
 const context={};
 vm.runInNewContext([
   'zoomClamp','zoomRange','storyEase','computeConversationActivity',
-  'getConversationCopy','getConversationRowState','getConversationBudget'
+  'getConversationCopy','getConversationRowState','getConversationBudget',
+  'getConversationBrainConnectorProgress'
 ].map(extractFunction).join('\n'),context);
 
 const duration=18000;
@@ -103,7 +104,10 @@ assert.deepEqual({...context.getConversationRowState(0,rotated,0)},{name:'Mark',
 const secondLead=context.computeConversationActivity(atLead(1,.20));
 assert.equal(secondLead.activeIndex,1,'Michael should become active after Sandra');
 assert.deepEqual({...context.getConversationRowState(0,secondLead,0)},{name:'Mark',initial:'M',status:'Waiting',mode:'waiting',turn:0});
-assert.match(html,/brainProgress=state\.transfer\*\(1-state\.swap\)/,'Brain revenue connector should retract smoothly during each card replacement');
+const highlighted=context.computeConversationActivity(atLead(0,.90));
+assert.equal(context.getConversationBrainConnectorProgress(highlighted),1,'Brain revenue connector should become fully green before its card rotates away');
+const releasing=context.computeConversationActivity(atLead(0,.96));
+assert.ok(context.getConversationBrainConnectorProgress(releasing)>0 && context.getConversationBrainConnectorProgress(releasing)<1,'Brain revenue connector should retract near the end of card replacement');
 assert.deepEqual({...context.getConversationRowState(1,secondLead,0)},{name:'Michael',initial:'M',status:'Talking now',mode:'active',turn:0});
 
 const cycleEnd=context.computeConversationActivity(1);

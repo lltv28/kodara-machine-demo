@@ -1227,6 +1227,10 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   function getConversationBudget(state,loopNumber){
     return (Number(loopNumber)||0)*24+state.slot*8+(state.impact>=.5 ? 8 : 0);
   }
+  function getConversationBrainConnectorProgress(state){
+    var release=storyEase(zoomRange(state.swap,.62,1));
+    return state.transfer*(1-release);
+  }
   function renderConversationActivity(progress){
     if(!conversationDemo || !conversationHub) return;
     var state=computeConversationActivity(progress);
@@ -1248,7 +1252,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     conversationHub.classList.toggle('is-completed',state.purchase>=.5 && state.swap<.5);
     conversationDemo.style.opacity='1';
     if(conversationBrainSuccess){
-      var brainProgress=state.transfer*(1-state.swap);
+      var brainProgress=getConversationBrainConnectorProgress(state);
       conversationBrainSuccess.style.strokeDashoffset=String(1-brainProgress);
       conversationBrainSuccess.style.opacity=String(brainProgress);
     }
