@@ -225,48 +225,44 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .activity-path{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.88}
 .activity-particle{fill:var(--accent);stroke:#fff;stroke-width:2;filter:url(#phone-shadow);opacity:0}
 .triager-conversation-demo{display:none;position:absolute;inset:0;z-index:3;pointer-events:none;color:var(--ink)}
-.conversation-app{position:absolute;left:21%;top:33%;width:58%;height:65%;display:grid;grid-template-rows:126px minmax(0,1fr);overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-md);opacity:0}
-.conversation-inbox{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:36px minmax(0,1fr);background:#FAFAFA;border-bottom:1px solid var(--line-2)}
-.conversation-inbox-head{grid-column:1/-1;display:grid;place-content:center;padding:0 10px;border-bottom:1px solid var(--line-2);background:#fff;text-align:center}
-.conversation-inbox-head strong{font-size:22px;line-height:1.08;word-spacing:4px;text-wrap:balance}
-.conversation-selector{position:absolute;left:0;bottom:0;z-index:3;width:33.333%;height:4px;background:var(--accent);transform:translateX(var(--selected-x,0%));transform-origin:left center;will-change:transform}
-.conversation-app.is-summary .conversation-selector{opacity:0}
-.conversation-inbox-row{position:relative;z-index:1;grid-row:2;display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:8px;min-width:0;padding:7px 10px;border-left:1px solid var(--line);background:transparent;will-change:opacity,transform}
-.conversation-inbox-row[data-conversation-index="0"]{border-left:0}
-.conversation-inbox-row.is-selected{background:#fff}
+.conversation-app{position:absolute;left:21%;top:31%;width:58%;height:66.5%;display:grid;grid-template-rows:84px minmax(0,1fr);overflow:visible;border:1px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-md);opacity:0}
+.conversation-app::before{content:"";position:absolute;left:50%;bottom:100%;height:28px;border-left:3px dashed rgba(46,125,82,.46);transform:translateX(-50%)}
+.conversation-app-head{position:relative;z-index:4;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px solid var(--line-2);border-radius:var(--radius) var(--radius) 0 0;background:#fff}
+.conversation-app-head-copy{display:grid;gap:3px;min-width:0;text-align:left}
+.conversation-app-head-title{overflow:hidden;color:#404040;font-size:22px;font-weight:700;line-height:1.05;text-overflow:ellipsis;white-space:nowrap}
+.conversation-position{color:#737373;font-size:15px;font-weight:650;line-height:1}
+.conversation-selector-people{display:flex;align-items:center;gap:9px}
+.conversation-selector-person{width:36px;height:36px;display:grid;place-items:center;border:2px solid var(--line-2);border-radius:50%;background:#fff;color:#737373;font-size:17px;font-weight:700;line-height:1;transition:border-color .3s ease,background-color .3s ease,color .3s ease,transform .3s ease}
+.conversation-selector-person.is-selected{border-color:var(--accent);background:var(--accent);color:#fff;transform:scale(1.1)}
+.conversation-selector-person.is-completed{border-color:var(--accent);background:var(--accent);color:#fff;font-size:0}
+.conversation-selector-person.is-completed::after{content:"\2713";font-size:24px}
+.conversation-inbox{min-height:0;display:flex;flex-direction:column;overflow:hidden;border-radius:0 0 var(--radius) var(--radius);background:#FAFAFA}
+.conversation-inbox-row{position:relative;z-index:1;min-width:0;min-height:0;flex:0 0 50px;overflow:hidden;border-top:1px solid var(--line);background:#FAFAFA;transition:flex-grow .42s cubic-bezier(.22,1,.36,1),background-color .3s ease;will-change:flex-grow}
+.conversation-inbox-row:first-child{border-top:0}
+.conversation-inbox-row.is-selected{flex:1 1 50px;background:#fff}
+.conversation-panel-head{height:50px;display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:10px;padding:5px 14px;background:transparent}
+.conversation-inbox-row.is-selected .conversation-panel-head{background:rgba(46,125,82,.045)}
 .conversation-inbox-row.is-selected .conversation-avatar{color:var(--accent);box-shadow:0 0 0 3px rgba(46,125,82,.18)}
 .conversation-inbox-row.is-selected .conversation-inbox-copy strong,.conversation-inbox-row.is-completed .conversation-inbox-copy strong{font-weight:700}
 .conversation-inbox-row.is-completed{background:rgba(46,125,82,.035)}
 .conversation-inbox-row.is-completed .conversation-avatar{background:var(--accent);color:#fff;font-size:0}
-.conversation-inbox-row.is-completed .conversation-avatar::after{content:"\2713";font-size:25px;line-height:1}
+.conversation-inbox-row.is-completed .conversation-avatar::after{content:"\2713";font-size:28px;line-height:1}
 .conversation-inbox-row.is-completed .conversation-inbox-status,.conversation-inbox-row.is-completed .conversation-inbox-result{color:var(--accent)}
-.conversation-inbox-row.is-completed .conversation-inbox-meta{align-items:start}
-.conversation-inbox-row.is-completed .conversation-inbox-status{line-height:1.05;white-space:normal}
+.conversation-inbox-row.is-completed .conversation-inbox-status{line-height:1.05}
 .conversation-inbox-row.is-completed .conversation-inbox-result{font-weight:700}
-.conversation-inbox-copy{display:grid;gap:4px;min-width:0;text-align:left}
+.conversation-inbox-copy{display:block;min-width:0;text-align:left}
 .conversation-inbox-copy strong{overflow:hidden;max-width:100%;color:#404040;font-size:22px;font-weight:600;line-height:1;text-overflow:ellipsis;white-space:nowrap}
-.conversation-inbox-meta{display:flex;align-items:center;justify-content:space-between;gap:4px;min-width:0;color:#737373;font-size:14px;font-weight:600;line-height:1;white-space:nowrap}
+.conversation-inbox-meta{display:flex;align-items:flex-end;justify-content:center;gap:4px;min-width:0;color:#737373;font-size:14px;font-weight:650;line-height:1;white-space:nowrap;text-align:right}
 .conversation-inbox-status{overflow:hidden;text-overflow:ellipsis}
-.conversation-inbox-result{flex:0 0 auto}
-.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-row{grid-template-columns:1fr;justify-items:center;gap:7px;padding:9px 10px 15px;text-align:center}
-.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy{display:block;width:100%;text-align:center}
-.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-status{display:none}
-.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-meta{justify-content:center;margin-top:5px}
-.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-row .conversation-avatar{border:2px solid var(--line-2);background:#fff}
-.player-mode.compact-mode[data-player="triagers"] .conversation-inbox-row.is-completed .conversation-avatar{border-color:var(--accent);background:var(--accent)}
+.conversation-inbox-result{display:none}
 .conversation-avatar{width:40px;height:40px;display:grid;place-items:center;flex:0 0 auto;border-radius:50%;background:#FAFAFA;color:#404040;font-size:20px;font-weight:700;line-height:1}
 .conversation-avatar.is-ai{background:var(--accent);color:#fff;box-shadow:var(--shadow-avatar)}
-.conversation-thread{position:relative;min-width:0;display:grid;grid-template-rows:76px minmax(0,1fr) 62px;background:#fff;transform-origin:top center;will-change:opacity,transform}
-.conversation-chat-head{display:flex;align-items:center;padding:14px 22px;border-bottom:1px solid var(--line)}
-.conversation-agent{display:flex;align-items:center;gap:9px;min-width:0}
-.conversation-agent-copy{display:flex;align-items:center;gap:9px;min-width:0}
-.conversation-agent-copy strong{overflow:hidden;font-size:27px;line-height:1;text-overflow:ellipsis;white-space:nowrap}
-.conversation-online{color:#737373;font-size:19px;font-weight:600;line-height:1;white-space:nowrap}
+.conversation-thread{position:relative;min-width:0;height:calc(100% - 50px);display:grid;grid-template-rows:minmax(0,1fr) 46px;background:#fff;transform-origin:top center;will-change:opacity,transform}
 .conversation-state{display:flex;align-items:center;padding:0 16px;border-bottom:1px solid var(--line);color:var(--accent);font-size:23px;font-weight:700;line-height:1}
 .player-mode.compact-mode[data-player="triagers"] .conversation-state{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;border:0;clip-path:inset(50%);white-space:nowrap}
 .conversation-body{position:relative;min-height:0;overflow:hidden}
 .conversation-handoff{position:absolute;inset:0;z-index:2;display:grid;place-items:center;padding:18px;color:#737373;font-size:23px;font-weight:650;text-align:center;opacity:0;transform:translateY(6px);pointer-events:none}
-.conversation-messages{position:absolute;inset:0;display:grid;align-content:start;gap:20px;padding:26px 22px 18px;will-change:opacity,transform}
+.conversation-messages{position:absolute;inset:0;display:grid;align-content:start;gap:14px;padding:18px 18px 12px;will-change:opacity,transform}
 .conversation-row{display:flex;align-items:flex-end;gap:9px}
 .conversation-row.is-ai{justify-content:flex-end;opacity:0;will-change:opacity,transform}
 .conversation-row .conversation-avatar{width:34px;height:34px;font-size:17px}
@@ -282,13 +278,13 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 @keyframes conversationTyping{0%,60%,100%{opacity:.42;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 @media(prefers-reduced-motion:no-preference){html.player-mode:not(.reduce-mode) .conversation-typing i{animation:conversationTyping .9s ease-in-out infinite!important}}
 .conversation-ai-copy{opacity:0}
-.conversation-purchase{position:absolute;left:22px;right:22px;top:50%;display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:12px;padding:16px;border:1px solid rgba(46,125,82,.24);border-radius:var(--radius);background:var(--accent-soft);color:var(--accent);opacity:0;transform:translateY(calc(-50% + var(--purchase-y,8px)))}
+.conversation-purchase{position:absolute;left:22px;right:22px;top:50%;display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:12px;padding:16px;border:2px solid rgba(46,125,82,.30);border-radius:var(--radius);background:#fff;color:var(--accent);box-shadow:0 8px 22px rgba(46,125,82,.10);opacity:0;transform:translateY(calc(-50% + var(--purchase-y,8px)))}
 .conversation-purchase-icon{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:#fff;font-size:18px;font-weight:700}
 .conversation-purchase-copy{display:grid;gap:2px;min-width:0}
 .conversation-purchase-copy strong{font-size:21px;line-height:1}
 .conversation-purchase-copy span{color:#557060;font-size:17px;font-weight:600;line-height:1.1}
 .conversation-purchase-value{font-size:25px;font-weight:700}
-.conversation-automation{height:62px;display:flex;align-items:center;gap:11px;padding:0 22px;border-top:1px solid var(--line);background:#FAFAFA;color:#737373;font-size:21px;font-weight:650;line-height:1.1}
+.conversation-automation{height:46px;display:flex;align-items:center;gap:9px;padding:0 18px;border-top:1px solid var(--line);background:#FAFAFA;color:#737373;font-size:19px;font-weight:650;line-height:1.1}
 .conversation-automation-mark{width:28px;height:28px;display:grid;place-items:center;flex:0 0 auto;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;font-weight:700}
 .conversation-automation.is-complete{color:var(--accent)}
 .conversation-link-layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
@@ -394,46 +390,39 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   :root{--demo-critical:34px;--demo-meta:26px}
 }
 @media(max-width:420px){
-  .player-mode.compact-mode[data-player="triagers"] .story-core{top:16%;width:176px}
-  .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:40px;transform:translateY(-22px)}
-  .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:24px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-app{left:21%;top:35%;width:58%;height:62.5%;grid-template-rows:138px minmax(0,1fr)}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:38px minmax(0,1fr)}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-head strong{font-size:34px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-row{gap:4px;padding:5px 8px 8px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy strong{font-size:34px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-meta{font-size:28px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-result{display:none}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-avatar{width:42px;height:42px;font-size:22px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-chat-head{display:none}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-agent-copy strong{font-size:34px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-online{font-size:26px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-thread{grid-template-rows:minmax(0,1fr) 48px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-messages{gap:14px;padding:20px 18px 12px}
+  .player-mode.compact-mode[data-player="triagers"] .story-core{top:20%;width:164px}
+  .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:38px;transform:translateY(-20px)}
+  .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:22px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-app-head{gap:10px;padding:9px 14px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-app-head-title{font-size:32px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-position{font-size:26px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-selector-people{gap:7px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-selector-person{width:38px;height:38px;font-size:20px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-panel-head{grid-template-columns:38px minmax(0,1fr) auto;gap:9px;padding:4px 12px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy strong{font-size:32px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-meta{font-size:26px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-avatar{width:38px;height:38px;font-size:20px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-thread{grid-template-rows:minmax(0,1fr) 46px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-messages{gap:10px;padding:14px 16px 10px}
   .player-mode.compact-mode[data-player="triagers"] .conversation-state{font-size:34px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-message{max-width:92%;padding:10px 13px;font-size:34px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase{left:18px;right:18px;padding:13px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy strong{font-size:34px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy span{font-size:28px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-message{max-width:94%;padding:9px 12px;font-size:32px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-row .conversation-avatar.is-ai{font-size:24px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase{left:16px;right:16px;padding:12px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy strong{font-size:32px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy span{font-size:26px}
   .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-value{font-size:34px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{height:54px;padding:0 18px;font-size:34px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{height:46px;padding:0 16px;font-size:30px}
 }
 @media(max-width:340px){
-  .player-mode.compact-mode[data-player="triagers"] .conversation-app{grid-template-rows:132px minmax(0,1fr)}
   .player-mode.compact-mode[data-player="triagers"] .conversation-thread{grid-template-rows:minmax(0,1fr) 44px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-messages{gap:10px;padding:14px 14px 8px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-message{padding:8px 11px;line-height:1.16}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-messages{gap:8px;padding:12px 12px 8px}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-message{padding:8px 10px;font-size:38px;line-height:1.16}
   .player-mode.compact-mode[data-player="triagers"] .conversation-purchase{left:14px;right:14px;gap:8px;padding:11px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{height:48px;padding:0 14px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-result{display:none}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-head strong,
+  .player-mode.compact-mode[data-player="triagers"] .conversation-app-head-title,
   .player-mode.compact-mode[data-player="triagers"] .conversation-inbox-copy strong,
-  .player-mode.compact-mode[data-player="triagers"] .conversation-agent-copy strong,
-  .player-mode.compact-mode[data-player="triagers"] .conversation-message,
   .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-copy strong,
   .player-mode.compact-mode[data-player="triagers"] .conversation-purchase-value,
-  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{font-size:40px}
-  .player-mode.compact-mode[data-player="triagers"] .conversation-online{display:none}
+  .player-mode.compact-mode[data-player="triagers"] .conversation-automation{font-size:38px}
 }
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:500;font-size:1rem;letter-spacing:var(--tracking-body);white-space:nowrap;color:#fff;background:linear-gradient(to bottom,#3A9B68,#2E7D52);border:1px solid var(--accent-dark);border-radius:var(--radius);padding:11px 18px;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .15s ease}
@@ -713,37 +702,37 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                 <circle class="conversation-transfer-dot" r="10"/>
               </svg>
               <div class="conversation-app" data-conversation-layout="vertical" aria-hidden="true">
+                <header class="conversation-app-head">
+                  <span class="conversation-app-head-copy"><strong class="conversation-app-head-title">3 independent conversations</strong><span class="conversation-position" data-conversation-position>Lead 1 of 3</span></span>
+                  <span class="conversation-selector-people" aria-hidden="true">
+                    <span class="conversation-selector-person is-selected" data-conversation-selector-index="0">S</span>
+                    <span class="conversation-selector-person" data-conversation-selector-index="1">M</span>
+                    <span class="conversation-selector-person" data-conversation-selector-index="2">D</span>
+                  </span>
+                </header>
                 <aside class="conversation-inbox">
-                  <div class="conversation-inbox-head"><strong data-conversation-position>Lead 1 of 3</strong></div>
-                  <div class="conversation-selector" aria-hidden="true"></div>
                   <div class="conversation-inbox-row" data-conversation-index="0">
-                    <span class="conversation-avatar" aria-hidden="true">S</span>
-                    <span class="conversation-inbox-copy"><strong>Sandra</strong><span class="conversation-inbox-meta"><span class="conversation-inbox-status">New lead</span><span class="conversation-inbox-result"></span></span></span>
+                    <div class="conversation-panel-head"><span class="conversation-avatar" aria-hidden="true">S</span><span class="conversation-inbox-copy"><strong>Sandra</strong></span><span class="conversation-inbox-meta"><span class="conversation-inbox-status">New lead</span><span class="conversation-inbox-result"></span></span></div>
+                    <section class="conversation-thread">
+                      <div class="conversation-state" data-conversation-state>New lead</div>
+                      <div class="conversation-body">
+                        <div class="conversation-handoff" data-conversation-handoff>Opening Michael</div>
+                        <div class="conversation-messages">
+                          <div class="conversation-row"><span class="conversation-avatar" data-conversation-message-initial aria-hidden="true">S</span><div class="conversation-message" data-conversation-question>Which option fits me?</div></div>
+                          <div class="conversation-row is-ai"><div class="conversation-message is-ai"><span class="conversation-typing" aria-label="AI Triager is typing"><i></i><i></i><i></i></span><span class="conversation-ai-copy" data-conversation-reply>The $8 assessment shows your next step.</span></div><span class="conversation-avatar is-ai" aria-hidden="true">AI</span></div>
+                        </div>
+                        <div class="conversation-purchase"><span class="conversation-purchase-icon" data-conversation-purchase-icon aria-hidden="true">✓</span><span class="conversation-purchase-copy"><strong data-conversation-purchase-title>Assessment purchased</strong><span data-conversation-purchase-subtitle>Added to ad budget</span></span><strong class="conversation-purchase-value" data-conversation-purchase-value>$8</strong></div>
+                      </div>
+                      <div class="conversation-automation"><span class="conversation-automation-mark" data-conversation-automation-mark aria-hidden="true">AI</span><span data-conversation-automation>New lead received</span></div>
+                    </section>
                   </div>
                   <div class="conversation-inbox-row" data-conversation-index="1">
-                    <span class="conversation-avatar" aria-hidden="true">M</span>
-                    <span class="conversation-inbox-copy"><strong>Michael</strong><span class="conversation-inbox-meta"><span class="conversation-inbox-status">New lead</span><span class="conversation-inbox-result"></span></span></span>
+                    <div class="conversation-panel-head"><span class="conversation-avatar" aria-hidden="true">M</span><span class="conversation-inbox-copy"><strong>Michael</strong></span><span class="conversation-inbox-meta"><span class="conversation-inbox-status">Waiting</span><span class="conversation-inbox-result"></span></span></div>
                   </div>
                   <div class="conversation-inbox-row" data-conversation-index="2">
-                    <span class="conversation-avatar" aria-hidden="true">D</span>
-                    <span class="conversation-inbox-copy"><strong>David</strong><span class="conversation-inbox-meta"><span class="conversation-inbox-status">New lead</span><span class="conversation-inbox-result"></span></span></span>
+                    <div class="conversation-panel-head"><span class="conversation-avatar" aria-hidden="true">D</span><span class="conversation-inbox-copy"><strong>David</strong></span><span class="conversation-inbox-meta"><span class="conversation-inbox-status">Waiting</span><span class="conversation-inbox-result"></span></span></div>
                   </div>
                 </aside>
-                <section class="conversation-thread">
-                  <div class="conversation-chat-head">
-                    <span class="conversation-agent"><span class="conversation-avatar" data-conversation-thread-initial aria-hidden="true">S</span><span class="conversation-agent-copy"><strong data-conversation-thread-name>Sandra</strong><span class="conversation-online" data-conversation-thread-role>Buyer</span></span></span>
-                  </div>
-                  <div class="conversation-state" data-conversation-state>New lead</div>
-                  <div class="conversation-body">
-                    <div class="conversation-handoff" data-conversation-handoff>Opening Michael</div>
-                    <div class="conversation-messages">
-                      <div class="conversation-row"><span class="conversation-avatar" data-conversation-message-initial aria-hidden="true">S</span><div class="conversation-message" data-conversation-question>Which option fits me?</div></div>
-                      <div class="conversation-row is-ai"><div class="conversation-message is-ai"><span class="conversation-typing" aria-label="AI Triager is typing"><i></i><i></i><i></i></span><span class="conversation-ai-copy" data-conversation-reply>Start with the $8 assessment.</span></div><span class="conversation-avatar is-ai" aria-hidden="true">AI</span></div>
-                    </div>
-                    <div class="conversation-purchase"><span class="conversation-purchase-icon" data-conversation-purchase-icon aria-hidden="true">✓</span><span class="conversation-purchase-copy"><strong data-conversation-purchase-title>Assessment purchased</strong><span data-conversation-purchase-subtitle>Added to ad budget</span></span><strong class="conversation-purchase-value" data-conversation-purchase-value>$8</strong></div>
-                  </div>
-                  <div class="conversation-automation"><span class="conversation-automation-mark" data-conversation-automation-mark aria-hidden="true">AI</span><span data-conversation-automation>New lead received</span></div>
-                </section>
               </div>
             </div>
             <div class="zoom-layer graph-layer" aria-hidden="true">
@@ -1116,6 +1105,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var conversationApp=zoomSection && zoomSection.querySelector('.conversation-app');
   var conversationInbox=zoomSection && zoomSection.querySelector('.conversation-inbox');
   var conversationInboxRows=zoomSection ? zoomSection.querySelectorAll('.conversation-inbox-row') : [];
+  var conversationSelectorPeople=zoomSection ? zoomSection.querySelectorAll('.conversation-selector-person') : [];
   var conversationInboxViews=[];
   for(var conversationRowIndex=0;conversationRowIndex<conversationInboxRows.length;conversationRowIndex++){
     conversationInboxViews.push({
@@ -1134,9 +1124,6 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   var conversationPurchaseIcon=zoomSection && zoomSection.querySelector('[data-conversation-purchase-icon]');
   var conversationPurchaseTitle=zoomSection && zoomSection.querySelector('[data-conversation-purchase-title]');
   var conversationPurchaseValue=zoomSection && zoomSection.querySelector('[data-conversation-purchase-value]');
-  var conversationThreadName=zoomSection && zoomSection.querySelector('[data-conversation-thread-name]');
-  var conversationThreadRole=zoomSection && zoomSection.querySelector('[data-conversation-thread-role]');
-  var conversationThreadInitial=zoomSection && zoomSection.querySelector('[data-conversation-thread-initial]');
   var conversationMessageInitial=zoomSection && zoomSection.querySelector('[data-conversation-message-initial]');
   var conversationQuestion=zoomSection && zoomSection.querySelector('[data-conversation-question]');
   var conversationReply=zoomSection && zoomSection.querySelector('[data-conversation-reply]');
@@ -1381,21 +1368,21 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   }
   function renderConversationActivity(progress){
     if(!conversationDemo || !conversationApp || !conversationThread) return;
-    var state=computeConversationActivity(progress), copy=getConversationCopy(state.displayIndex<0 ? 0 : state.displayIndex);
+    var state=computeConversationActivity(progress), openIndex=state.summary ? 2 : state.displayIndex, copy=getConversationCopy(openIndex);
     if(conversationLinkPaths.length!==conversationInboxRows.length) refreshConversationLinkPaths();
     for(var i=0;i<conversationInboxViews.length;i++){
       var view=conversationInboxViews[i], row=view.row, rowState=getConversationRowState(i,state);
-      row.classList.toggle('is-selected',!state.summary && i===state.activeIndex && (state.slot===0 || state.raw>=.10));
+      row.classList.toggle('is-selected',i===openIndex);
       row.classList.toggle('is-completed',rowState.mode==='completed');
-      view.status.textContent=rowState.status;
+      view.status.textContent=rowState.mode==='completed' ? 'Purchased' : rowState.mode==='active' ? 'Active' : rowState.status;
       view.result.textContent=rowState.result;
+      if(conversationSelectorPeople[i]){
+        conversationSelectorPeople[i].classList.toggle('is-selected',i===state.activeIndex && !state.summary);
+        conversationSelectorPeople[i].classList.toggle('is-completed',rowState.mode==='completed');
+      }
     }
-    conversationThreadName.textContent=state.summary ? 'Summary' : copy.name;
-    if(conversationThreadRole){
-      conversationThreadRole.textContent='Buyer';
-      conversationThreadRole.style.display=state.summary ? 'none' : '';
-    }
-    conversationThreadInitial.textContent=state.summary ? 'AI' : copy.initial;
+    var activeConversationPanel=conversationInboxRows[openIndex];
+    if(activeConversationPanel && conversationThread.parentNode!==activeConversationPanel) activeConversationPanel.appendChild(conversationThread);
     conversationMessageInitial.textContent=copy.initial;
     conversationQuestion.textContent=copy.question;
     conversationReply.textContent=copy.reply;
@@ -1409,7 +1396,6 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       conversationHandoff.style.transform='translateY('+(6*(1-state.handoffOpacity)).toFixed(2)+'px)';
     }
     conversationDemo.dataset.focus=state.focus;
-    if(conversationInbox) conversationInbox.style.setProperty('--selected-x',(state.selectionIndex*100).toFixed(2)+'%');
     var contentOpacity=state.contentIn;
     var messageContentOpacity=contentOpacity*state.messageOut;
     conversationMessages.style.opacity=String(messageContentOpacity);
