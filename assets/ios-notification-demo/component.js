@@ -24,14 +24,12 @@ class IOSNotificationDemo extends HTMLElement {
 
         .phone-stage {
           flex: 0 0 auto;
-          width: auto;
-          height: 100%;
-          max-width: 100%;
-          max-height: 100%;
-          aspect-ratio: 464 / 980;
+          width: min(100%, 620px);
+          height: auto;
+          aspect-ratio: 1;
         }
       </style>
-      <section class="phone-column" aria-label="Interactive iPhone notification preview">
+      <section class="phone-column" aria-label="Live AI sales notification feed">
         <div class="phone-stage" data-phone-stage>
           <div class="phone-canvas" data-phone-canvas>
             <div class="phone-frame">
@@ -45,10 +43,6 @@ class IOSNotificationDemo extends HTMLElement {
                 <div class="wallpaper-shade" aria-hidden="true"></div>
 
                 <div class="status-bar" aria-hidden="true">
-                  <div class="status-left">
-                    <span>CC</span>
-                    <span class="muted-bell"><i></i></span>
-                  </div>
                   <div class="dynamic-island"></div>
                   <div class="status-icons">
                     <span class="cellular-icon"><i></i><i></i><i></i><i></i></span>
@@ -80,10 +74,6 @@ class IOSNotificationDemo extends HTMLElement {
                   <div class="notification-feed" data-notification-feed></div>
                 </div>
 
-                <div class="quick-actions" aria-hidden="true">
-                  <span class="quick-action flashlight-icon"><i></i></span>
-                  <span class="quick-action camera-icon"><i></i></span>
-                </div>
                 <span class="home-indicator" aria-hidden="true"></span>
               </div>
             </div>
@@ -113,7 +103,6 @@ const {
 const demoElement = document.querySelector("ios-notification-demo");
 const root = demoElement.shadowRoot;
 const phoneStage = root.querySelector("[data-phone-stage]");
-const phoneCanvas = root.querySelector("[data-phone-canvas]");
 const phoneScreen = root.querySelector(".phone-screen");
 const notificationRegion = root.querySelector("[data-notification-region]");
 const notificationFeed = root.querySelector("[data-notification-feed]");
@@ -126,6 +115,7 @@ const clearAllButton = root.querySelector("[data-clear-all]");
 const clearGroupButton = root.querySelector("[data-clear-group]");
 const liveRegion = root.querySelector("[data-live-region]");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const FEED_CARD_LIMIT = 3;
 
 const state = {
   activeByGroup: activityStateAt(0),
@@ -145,11 +135,6 @@ function totalNotificationCount() {
     (total, notifications) => total + notifications.length,
     0,
   );
-}
-
-function updatePhoneScale() {
-  const width = phoneStage.getBoundingClientRect().width;
-  phoneCanvas.style.setProperty("--phone-scale", String(width / 464));
 }
 
 function clearTimers() {
@@ -196,11 +181,7 @@ function createNotificationCard(notification, groupId) {
     <div class="notification-actions" aria-hidden="true" inert></div>
   `;
 
-  const workerName = group.id === "triager"
-    ? group.role
-    : `${group.role} ${group.route}`;
-  card.querySelector(".notification-app-name").textContent =
-    `${workerName} - ${group.workerId}`;
+  card.querySelector(".notification-app-name").textContent = group.role;
   card.querySelector(".notification-title").textContent = notification.title;
   card.querySelector(".notification-body").textContent = notification.body;
   const actionsContainer = card.querySelector(".notification-actions");
@@ -265,7 +246,9 @@ function setActionsAvailable(card, available) {
 }
 
 function eventsForCurrentView() {
-  if (state.selectedGroupId === null) return [...state.activeFeed].reverse();
+  if (state.selectedGroupId === null) {
+    return [...state.activeFeed].reverse().slice(0, FEED_CARD_LIMIT);
+  }
   return [...state.activeByGroup[state.selectedGroupId]]
     .reverse()
     .map((notification) => ({ ...notification, groupId: state.selectedGroupId }));
@@ -358,11 +341,8 @@ function installSwipeDismiss(card) {
   card.addEventListener("pointercancel", finishSwipe);
 }
 
-function animateFeedInsertion(card, previousPositions, trimmedCard) {
-  if (reduceMotion.matches) {
-    trimmedCard?.remove();
-    return;
-  }
+function animateFeedInsertion(card, previousPositions) {
+  if (reduceMotion.matches) return;
 
   card.classList.add("is-arriving");
   const animations = [];
@@ -383,16 +363,10 @@ function animateFeedInsertion(card, previousPositions, trimmedCard) {
     const previousTop = previousPositions.get(existingCard.dataset.notificationId);
     if (previousTop === undefined) continue;
     const delta = previousTop - existingCard.getBoundingClientRect().top;
-    const keyframes = existingCard === trimmedCard
-      ? [
-          { opacity: 1, transform: `translateY(${delta}px)` },
-          { opacity: 1, offset: 0.68, transform: "translateY(0)" },
-          { opacity: 0, transform: "translateY(14px)" },
-        ]
-      : [
-          { transform: `translateY(${delta}px)` },
-          { transform: "translateY(0)" },
-        ];
+    const keyframes = [
+      { transform: `translateY(${delta}px)` },
+      { transform: "translateY(0)" },
+    ];
     animations.push(existingCard.animate(keyframes, {
       duration: 520,
       easing: "cubic-bezier(0.22, 1, 0.36, 1)",
@@ -402,7 +376,6 @@ function animateFeedInsertion(card, previousPositions, trimmedCard) {
 
   Promise.allSettled(animations.map((animation) => animation.finished)).then(() => {
     for (const animation of animations) animation.cancel();
-    trimmedCard?.remove();
     if (card.isConnected) {
       card.classList.remove("is-arriving");
     }
@@ -472,11 +445,12 @@ function addNotification({ groupId, ...notification }, animate = true) {
   const card = createNotificationCard(notification, groupId);
   notificationFeed.prepend(card);
   const cards = notificationFeed.querySelectorAll(".notification-card");
-  const trimmedCard = cards.length > MAX_VISIBLE_NOTIFICATIONS
+  const trimmedCard = cards.length > FEED_CARD_LIMIT
     ? cards[cards.length - 1]
     : null;
+  trimmedCard?.remove();
   updateNotificationPresence();
-  animateFeedInsertion(card, previousPositions, trimmedCard);
+  animateFeedInsertion(card, previousPositions);
 
   const group = getWorkflowGroup(groupId);
   liveRegion.textContent = `${group.role} ${group.workerId}. ${notification.title}. ${notification.body}`;
@@ -604,9 +578,5 @@ document.addEventListener("visibilitychange", () => {
 
 reduceMotion.addEventListener("change", playActivity);
 
-const resizeObserver = new ResizeObserver(updatePhoneScale);
-resizeObserver.observe(phoneStage);
-
-updatePhoneScale();
 renderActivityState(INITIAL_FEED_COUNT);
 phoneScreen.dataset.activityState = "waiting";

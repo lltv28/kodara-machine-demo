@@ -8,10 +8,12 @@ const root = resolve(here, '..');
 const pagePath = resolve(root, 'index.html');
 const rendererPath = resolve(root, 'tools/video-capture.html');
 const notificationComponentPath = resolve(root, 'assets/ios-notification-demo/component.js');
+const notificationModelPath = resolve(root, 'assets/ios-notification-demo/model.js');
 const notificationStylesPath = resolve(root, 'assets/ios-notification-demo/styles.css');
 const page = readFileSync(pagePath, 'utf8');
 const renderer = readFileSync(rendererPath, 'utf8');
 const notificationComponent = readFileSync(notificationComponentPath, 'utf8');
+const notificationModel = readFileSync(notificationModelPath, 'utf8');
 const notificationStyles = readFileSync(notificationStylesPath, 'utf8');
 
 const budgets = new Map([
@@ -88,6 +90,8 @@ assert.match(notificationStyles, /prefers-reduced-motion: reduce/, 'Notification
 assert.match(notificationComponent, /attachShadow\(\{ mode: "open" \}\)/, 'Notification UI must isolate its iOS styles from the landing page');
 assert.doesNotMatch(notificationStyles, /\.showcase|\.demo-intro|\.scenario-picker|\.replay-button/, 'Standalone demo-page styles must not ship in the landing component');
 assert.doesNotMatch(notificationComponent, /new URLSearchParams|data-replay|data-workflow/, 'Standalone capture and control behavior must not leak into landing-page URLs');
+assert.match(notificationModel, /WORKFLOW_GROUPS\.length !== 2/, 'Notification demo must retain the assessment and sales-call workflows');
+assert.doesNotMatch(notificationModel, /Pocket Coach|downsell/i, 'Pocket Coach notifications must not return to the primary demo');
 assert.match(page, /\.primary-demo,\.founder-highlight,\.case-featured--portrait,\.cta\{border-radius:var\(--radius-xl\)\}/, 'Featured surfaces need an explicit 24px role');
 assert.match(page, /@media\(min-width:900px\)\{\.primary-demo,\.case-featured--portrait\{grid-template-columns:minmax\(0,3fr\) minmax\(320px,2fr\)\}\}/, 'Demo and featured testimonial must use the approved desktop-only 60/40 media-text split');
 assert.match(page, /\.founder-highlight\{grid-template-columns:minmax\(320px,2fr\) minmax\(0,3fr\)\}/, 'Founder card must use the approved 40/60 image-text split');
@@ -139,7 +143,18 @@ assert.match(page, /<h3>AI Brain<\/h3>/, 'Mechanism must name the shared AI Brai
 assert.match(page, /<h3>AI Triagers<\/h3>/, 'Mechanism must name AI Triagers');
 assert.match(page, /<h3>AI Salespeople<\/h3>/, 'Mechanism must name AI Salespeople');
 const mechanismPlaceholders = page.match(/data-placeholder="mechanism"/g) ?? [];
-assert.equal(mechanismPlaceholders.length, 3, 'Every mechanism feature needs a stable placeholder');
+assert.equal(mechanismPlaceholders.length, 0, 'Live role demos must replace every mechanism placeholder');
+const mechanismPlayers = [...page.matchAll(/<iframe class="mechanism-player"[^>]*>/g)].map((match) => match[0]);
+assert.equal(mechanismPlayers.length, 3, `Expected three live mechanism players, found ${mechanismPlayers.length}`);
+assert.ok(mechanismPlayers.every((tag) => /loading="lazy"/.test(tag)), 'Role demos must load lazily');
+assert.match(page, /player=learn&amp;compact=1&amp;duration=5000&amp;loop=0/, 'AI Brain card must use the five-second learning player');
+assert.match(page, /player=triagers&amp;compact=1&amp;duration=8000&amp;loop=0/, 'AI Triager card must use the eight-second conversation player');
+assert.match(page, /player=flywheel&amp;compact=1&amp;duration=8000&amp;loop=0/, 'AI Salespeople card must use the eight-second flywheel player');
+assert.match(page, /function setupMechanismDemos\(\)/, 'Role demos need a viewport-aware playback controller');
+assert.match(page, /send\(index,'replay'\)/, 'Role demo controller must replay the active stage');
+assert.match(page, /send\(index,'pause'\)/, 'Role demo controller must pause inactive stages');
+assert.match(renderer, /var requestedDuration=Number\(new URLSearchParams\(location\.search\)\.get\('duration'\)\)/, 'Demo players must accept a section-specific duration');
+assert.match(renderer, /send\('completed'\)/, 'Demo players must report a controlled completion state');
 assert.match(page, /class="card founder-highlight"/, 'Founder highlight must follow mechanism features');
 assert.match(page, /data-placeholder="founder"/, 'Founder highlight needs a stable portrait placeholder');
 assert.ok(page.indexOf('class="card mechanism-features"') < page.indexOf('class="card founder-highlight"'), 'Mechanism features must precede founder highlight');

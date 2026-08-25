@@ -47,7 +47,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .primary-demo-copy .primary-demo-note{max-width:42ch;margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-legal);line-height:1.45}
 .primary-demo-copy .cta-btn{margin-top:var(--space-6)}
 .primary-demo-visual{display:flex;width:100%;min-width:0;min-height:520px;aspect-ratio:1/1;align-items:center;justify-content:center;padding:var(--space-7);border-right:1px solid var(--line-2);background:var(--accent)}
-.primary-demo-visual ios-notification-demo{display:block;flex:0 0 100%;width:100%;height:100%;max-height:760px}
+.primary-demo-visual ios-notification-demo{display:block;flex:0 0 100%;width:100%;height:auto;max-width:620px;aspect-ratio:1}
 @media(max-width:899px){
   .primary-demo{grid-template-columns:minmax(0,1fr)}
   .primary-demo-copy{order:1;padding:var(--space-7)}
@@ -61,8 +61,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .primary-demo h1{max-width:16ch;font-size:clamp(2.7rem,12vw,3.15rem);line-height:1.1}
   .primary-demo-copy p{max-width:32ch;margin-top:var(--space-4);font-size:1.375rem;line-height:1.45}
   .primary-demo-copy .cta-btn{margin-top:var(--space-4)}
-  .primary-demo-visual{min-height:0;padding:var(--space-4);aspect-ratio:auto}
-  .primary-demo-visual ios-notification-demo{flex:0 0 auto;width:min(100%,284px);height:auto;max-height:none;aspect-ratio:464/980}
+  .primary-demo-visual{min-height:0;padding:var(--space-4);aspect-ratio:1}
+  .primary-demo-visual ios-notification-demo{flex:0 0 auto;width:100%;height:auto;max-width:620px;aspect-ratio:1}
 }
 /* ---------- shared card ---------- */
 .card{--card-pad:var(--space-6);position:relative;width:100%;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);padding:var(--card-pad)}
@@ -119,9 +119,13 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .mechanism-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
 .mechanism-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .mechanism-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6)}
-.mechanism-feature{min-width:0}
-.mechanism-placeholder{display:flex;width:100%;aspect-ratio:4/3;align-items:center;justify-content:center;padding:var(--space-5);border:1px dashed var(--line-2);border-radius:var(--radius-lg);background:linear-gradient(145deg,var(--bg),#fff);color:var(--ink-3);font-size:var(--type-label);font-weight:600;line-height:1.4;text-align:center;text-wrap:balance}
-.mechanism-feature h3{max-width:16ch;margin-top:var(--space-5);font-size:var(--type-card-small);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
+.mechanism-feature{min-width:0;overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);transition:border-color .24s ease,box-shadow .24s ease}
+.mechanism-feature.is-active{border-color:var(--accent);box-shadow:var(--shadow-md)}
+.mechanism-demo{position:relative;width:100%;aspect-ratio:1;overflow:hidden;border-bottom:1px solid var(--line-2);background:var(--bg)}
+.mechanism-player{display:block;width:100%;height:100%;border:0;background:var(--bg);opacity:.78;filter:saturate(.86);transition:opacity .24s ease,filter .24s ease}
+.mechanism-feature.is-active .mechanism-player,.mechanism-feature.is-complete .mechanism-player{opacity:1;filter:none}
+.mechanism-copy{padding:var(--space-5)}
+.mechanism-feature h3{max-width:16ch;font-size:var(--type-card-small);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .mechanism-feature p{max-width:34ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 
 /* ---------- founder highlight ---------- */
@@ -171,7 +175,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .founder-letter-copy p{margin-top:var(--space-4);line-height:1.5}
   .mechanism-head{margin-bottom:var(--space-6)}
   .mechanism-grid{grid-template-columns:1fr;gap:var(--space-7)}
-  .mechanism-feature h3{max-width:20ch;margin-top:var(--space-4)}
+  .mechanism-copy{padding:var(--space-5)}
+  .mechanism-feature h3{max-width:20ch}
   .mechanism-feature p{max-width:var(--measure-card-body)}
   .founder-highlight{grid-template-columns:1fr;gap:var(--space-5);padding:var(--space-5)}
   .founder-portrait{max-width:440px;margin-inline:auto}
@@ -273,7 +278,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   .primary-demo-copy p{font-size:1.25rem;line-height:1.4}
   .proof-snapshot+.primary-demo{margin-top:var(--space-4)}
 }
-@media(prefers-reduced-motion:reduce){.cta-btn,.faq-item summary::after{transition:none}}
+@media(prefers-reduced-motion:reduce){.cta-btn,.faq-item summary::after,.mechanism-feature,.mechanism-player{transition:none}}
 
 </style>
 </head>
@@ -356,24 +361,36 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   <!-- ============ MECHANISM FEATURES ============ -->
   <section class="card mechanism-features" aria-labelledby="mechanism-title">
     <header class="mechanism-head">
-      <h2 class="card-title" id="mechanism-title">Three AI roles. One sales department.</h2>
-      <p class="mechanism-intro">Each role handles one part of the sales path, but all three work from the same knowledge about your business.</p>
+      <h2 class="card-title" id="mechanism-title">Three AI roles. One connected sales department.</h2>
+      <p class="mechanism-intro">Each role handles one part of the sales path. Together, they help turn more of the leads you already pay for into buyers and sales conversations.</p>
     </header>
     <div class="mechanism-grid">
-      <article class="mechanism-feature">
-        <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for the AI brain learning the business">AI brain visual placeholder</div>
-        <h3>AI Brain</h3>
-        <p>Learns your offers, buyers, voice, qualification rules, and business knowledge so every conversation represents your business.</p>
+      <article class="mechanism-feature" data-role-demo="learn">
+        <div class="mechanism-demo">
+          <iframe class="mechanism-player" src="tools/video-capture.html?player=learn&amp;compact=1&amp;duration=5000&amp;loop=0" title="AI Brain learning the business" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+        </div>
+        <div class="mechanism-copy">
+          <h3>AI Brain</h3>
+          <p>Learns your offers, buyers, voice, qualification rules, and business knowledge so every AI salesperson can represent your business.</p>
+        </div>
       </article>
-      <article class="mechanism-feature">
-        <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for AI Triagers holding personalized lead conversations">AI Triager visual placeholder</div>
-        <h3>AI Triagers</h3>
-        <p>Speak with cold prospects and sell a personalized assessment for less than $20, helping reveal who is serious about solving the problem.</p>
+      <article class="mechanism-feature" data-role-demo="triagers">
+        <div class="mechanism-demo">
+          <iframe class="mechanism-player" src="tools/video-capture.html?player=triagers&amp;compact=1&amp;duration=8000&amp;loop=0" title="AI Triagers speaking with cold prospects" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+        </div>
+        <div class="mechanism-copy">
+          <h3>AI Triagers</h3>
+          <p>Speak with cold prospects and sell a personalized assessment for less than $20, which helps reveal who is serious about solving the problem.</p>
+        </div>
       </article>
-      <article class="mechanism-feature">
-        <div class="mechanism-placeholder" data-placeholder="mechanism" role="img" aria-label="Placeholder for AI salespeople routing leads to appropriate offers">Sales path visual placeholder</div>
-        <h3>AI Salespeople</h3>
-        <p>Send qualified buyers toward your highest-level service, present smaller offers to other buyers, and continue following up.</p>
+      <article class="mechanism-feature" data-role-demo="flywheel">
+        <div class="mechanism-demo">
+          <iframe class="mechanism-player" src="tools/video-capture.html?player=flywheel&amp;compact=1&amp;duration=8000&amp;loop=0" title="AI Salespeople routing buyers through the sales department" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+        </div>
+        <div class="mechanism-copy">
+          <h3>AI Salespeople</h3>
+          <p>Send qualified buyers toward your highest-level service, while presenting smaller offers and continued follow-up to everyone else.</p>
+        </div>
       </article>
     </div>
   </section>
@@ -594,6 +611,161 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
     },{rootMargin:'600px 0px'});
     observer.observe(stories);
   } else loadWistia();
+
+  function setupMechanismDemos(){
+    var section=document.querySelector('.mechanism-features');
+    if(!section) return;
+    var cards=Array.prototype.slice.call(section.querySelectorAll('.mechanism-feature'));
+    var frames=cards.map(function(card){ return card.querySelector('.mechanism-player'); });
+    var desktop=window.matchMedia && matchMedia('(min-width:900px)');
+    var reduceMotion=window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)');
+    var ready=new Set();
+    var mobileVisible=new Set();
+    var mobilePlaying=new Set();
+    var mobileTimers=new Map();
+    var sectionVisible=false;
+    var desktopRunning=false;
+    var activeIndex=-1;
+    var sequenceTimer=0;
+
+    function send(index,action){
+      var frame=frames[index];
+      if(!frame || !frame.contentWindow || !ready.has(index)) return;
+      frame.contentWindow.postMessage({fdDemoPlayerAction:action},'*');
+    }
+    function clearSequenceTimer(){
+      if(sequenceTimer){ clearTimeout(sequenceTimer);sequenceTimer=0; }
+    }
+    function clearMobileTimer(index){
+      var timer=mobileTimers.get(index);
+      if(timer) clearTimeout(timer);
+      mobileTimers.delete(index);
+    }
+    function setCardState(index,state){
+      cards[index].classList.toggle('is-active',state==='active');
+      cards[index].classList.toggle('is-complete',state==='complete');
+    }
+    function pauseAll(){
+      frames.forEach(function(frame,index){ send(index,'pause'); });
+      mobilePlaying.clear();
+    }
+    function resetAll(){
+      frames.forEach(function(frame,index){ send(index,'reset');setCardState(index,'idle'); });
+    }
+    function startDesktop(index){
+      if(!desktop.matches || reduceMotion.matches || !sectionVisible || ready.size!==frames.length) return;
+      clearSequenceTimer();
+      desktopRunning=true;
+      activeIndex=index;
+      cards.forEach(function(card,cardIndex){
+        setCardState(cardIndex,cardIndex<index?'complete':cardIndex===index?'active':'idle');
+        if(cardIndex!==index) send(cardIndex,'pause');
+      });
+      send(index,'replay');
+    }
+    function stopDesktop(reset){
+      clearSequenceTimer();
+      desktopRunning=false;
+      activeIndex=-1;
+      pauseAll();
+      if(reset) resetAll();
+    }
+    function startMobile(index){
+      if(desktop.matches || reduceMotion.matches || !mobileVisible.has(index) || !ready.has(index) || mobilePlaying.has(index)) return;
+      clearMobileTimer(index);
+      setCardState(index,'active');
+      mobilePlaying.add(index);
+      send(index,'replay');
+    }
+    function stopMobile(index){
+      clearMobileTimer(index);
+      mobilePlaying.delete(index);
+      send(index,'pause');
+      setCardState(index,'idle');
+    }
+    function maybeStartDesktop(){
+      if(desktop.matches && sectionVisible && !desktopRunning && ready.size===frames.length) startDesktop(0);
+    }
+
+    window.addEventListener('message',function(event){
+      if(!event.data || !event.data.fdDemoPlayer) return;
+      var index=frames.findIndex(function(frame){ return frame.contentWindow===event.source; });
+      if(index<0) return;
+      var status=event.data.fdDemoPlayer;
+      if(status==='ready'){
+        ready.add(index);
+        if(reduceMotion.matches) setCardState(index,'complete');
+        else if(desktop.matches) maybeStartDesktop();
+        else startMobile(index);
+        return;
+      }
+      if(status!=='completed') return;
+      if(desktop.matches){
+        if(!desktopRunning || index!==activeIndex) return;
+        setCardState(index,'complete');
+        sequenceTimer=setTimeout(function(){
+          if(!sectionVisible || !desktop.matches) return;
+          if(index<cards.length-1) startDesktop(index+1);
+          else { resetAll();startDesktop(0); }
+        },index===cards.length-1?1600:900);
+      } else {
+        mobilePlaying.delete(index);
+        setCardState(index,'complete');
+        clearMobileTimer(index);
+        mobileTimers.set(index,setTimeout(function(){ startMobile(index); },1400));
+      }
+    });
+
+    if('IntersectionObserver' in window){
+      var sectionObserver=new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.target!==section) return;
+          sectionVisible=entry.isIntersecting && entry.intersectionRatio>=.2;
+          if(desktop.matches){
+            if(sectionVisible) maybeStartDesktop();
+            else stopDesktop(true);
+          }
+        });
+      },{rootMargin:'100px 0px',threshold:[0,.2]});
+      sectionObserver.observe(section);
+
+      var cardObserver=new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          var index=cards.indexOf(entry.target);
+          if(index<0) return;
+          if(entry.isIntersecting && entry.intersectionRatio>=.55) mobileVisible.add(index);
+          else mobileVisible.delete(index);
+          if(desktop.matches || reduceMotion.matches) return;
+          if(mobileVisible.has(index)) startMobile(index);
+          else stopMobile(index);
+        });
+      },{threshold:[0,.55]});
+      cards.forEach(function(card){ cardObserver.observe(card); });
+    } else {
+      sectionVisible=true;
+      cards.forEach(function(card,index){ mobileVisible.add(index); });
+    }
+
+    function syncMechanismMode(){
+      clearSequenceTimer();
+      mobileTimers.forEach(function(timer){ clearTimeout(timer); });
+      mobileTimers.clear();
+      pauseAll();
+      resetAll();
+      desktopRunning=false;
+      activeIndex=-1;
+      if(reduceMotion.matches){
+        cards.forEach(function(card,index){ setCardState(index,'complete'); });
+      } else if(desktop.matches) maybeStartDesktop();
+      else mobileVisible.forEach(function(index){ startMobile(index); });
+    }
+    if(desktop.addEventListener) desktop.addEventListener('change',syncMechanismMode);
+    else desktop.addListener(syncMechanismMode);
+    if(reduceMotion.addEventListener) reduceMotion.addEventListener('change',syncMechanismMode);
+    else reduceMotion.addListener(syncMechanismMode);
+    maybeStartDesktop();
+  }
+  setupMechanismDemos();
 
   var proofMore=document.querySelector('.proof-more');
   var proofLayout=window.matchMedia && matchMedia('(max-width:720px)');

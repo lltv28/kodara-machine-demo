@@ -81,59 +81,19 @@
         },
       ],
     },
-    {
-      id: "downsell",
-      label: "Downsell",
-      role: "AI Salesperson",
-      route: "Downsell",
-      workerId: "D-031",
-      notifications: [
-        {
-          id: "downsell-1",
-          title: "New Sale! $97/month AI Pocket Coach",
-          body: "Nia started their AI Pocket Coach subscription and is excited to get started.",
-        },
-        {
-          id: "downsell-2",
-          title: "New Sale! $97/month AI Pocket Coach",
-          body: "Ethan started their AI Pocket Coach subscription and is excited to get started.",
-        },
-        {
-          id: "downsell-3",
-          title: "New Sale! $97/month AI Pocket Coach",
-          body: "Maya started their AI Pocket Coach subscription and is excited to get started.",
-        },
-        {
-          id: "downsell-4",
-          title: "New Sale! $97/month AI Pocket Coach",
-          body: "Oliver started their AI Pocket Coach subscription and is excited to get started.",
-        },
-        {
-          id: "downsell-5",
-          title: "New Sale! $97/month AI Pocket Coach",
-          body: "Zoe started their AI Pocket Coach subscription and is excited to get started.",
-          actions: ["View customer", "Open activity"],
-        },
-      ],
-    },
   ];
 
   const ACTIVITY_ORDER = [
     ["triager", "triager-1"],
     ["high-ticket", "high-ticket-1"],
-    ["downsell", "downsell-1"],
     ["triager", "triager-2"],
     ["high-ticket", "high-ticket-2"],
-    ["downsell", "downsell-2"],
     ["triager", "triager-3"],
     ["high-ticket", "high-ticket-3"],
-    ["downsell", "downsell-3"],
     ["triager", "triager-4"],
     ["high-ticket", "high-ticket-4"],
-    ["downsell", "downsell-4"],
     ["triager", "triager-5"],
     ["high-ticket", "high-ticket-5"],
-    ["downsell", "downsell-5"],
   ];
 
   const ACTIVITY_TIMELINE = ACTIVITY_ORDER.map(([groupId, notificationId]) => {
@@ -168,7 +128,7 @@
     const ids = new Set();
     const timelineIds = new Set(ACTIVITY_TIMELINE.map(({ id }) => id));
 
-    if (WORKFLOW_GROUPS.length !== 3) return false;
+    if (WORKFLOW_GROUPS.length !== 2) return false;
     if (ACTIVITY_TIMELINE.length !== WORKFLOW_GROUPS.length * MAX_VISIBLE_NOTIFICATIONS) {
       return false;
     }
@@ -179,7 +139,7 @@
         !group.label ||
         !group.role ||
         !group.route ||
-        !/^[THD]-\d{3}$/.test(group.workerId) ||
+        !/^[TH]-\d{3}$/.test(group.workerId) ||
         group.notifications.length !== MAX_VISIBLE_NOTIFICATIONS ||
         ids.has(group.id)
       ) {

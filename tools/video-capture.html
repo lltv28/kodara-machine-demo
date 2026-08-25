@@ -1724,13 +1724,17 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 <script>
 (function(){
   'use strict';
-  var chapter=new URLSearchParams(location.search).get('player');
+  var playerParams=new URLSearchParams(location.search);
+  var chapter=playerParams.get('player');
   var durations={learn:5000,triagers:25000,flywheel:8000,graph:8000};
   if(!durations[chapter] || !window.renderCaptureFrame) return;
   var PLAYER_MODE=document.documentElement.classList.contains('player-mode');
   var REDUCE=PLAYER_MODE && (!!(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) || /[?&]reduce=1/.test(location.search));
   if(REDUCE) document.documentElement.classList.add('reduce-mode');
-  var duration=durations[chapter],elapsed=0,startedAt=0,frame=0,playing=false;
+  var requestedDuration=Number(new URLSearchParams(location.search).get('duration'));
+  var duration=Number.isFinite(requestedDuration) && requestedDuration>=3000 && requestedDuration<=60000 ? requestedDuration : durations[chapter];
+  var autoLoop=playerParams.get('loop')!=='0';
+  var elapsed=0,startedAt=0,frame=0,playing=false;
 
   function fit(){
     var scale=Math.max(.1,Math.min(innerWidth/760,innerHeight/760));
@@ -1744,7 +1748,10 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(!playing) return;
     elapsed=Math.min(duration,now-startedAt);
     render();
-    if(elapsed>=duration){ elapsed=0;startedAt=now;render();send('looped'); }
+    if(elapsed>=duration){
+      if(autoLoop){ elapsed=0;startedAt=now;render();send('looped'); }
+      else { playing=false;frame=0;send('completed');return; }
+    }
     frame=requestAnimationFrame(tick);
   }
   function play(replay){
@@ -1756,11 +1763,15 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     if(!playing) return;
     playing=false;cancelAnimationFrame(frame);frame=0;send('paused');
   }
+  function reset(){
+    pause();elapsed=0;render();send('ready');
+  }
   addEventListener('message',function(event){
     if(event.source!==parent || !event.data) return;
     if(event.data.fdDemoPlayerAction==='play') play(false);
     if(event.data.fdDemoPlayerAction==='pause') pause();
     if(event.data.fdDemoPlayerAction==='replay') play(true);
+    if(event.data.fdDemoPlayerAction==='reset') reset();
   });
   addEventListener('resize',fit);
   document.addEventListener('visibilitychange',function(){ if(document.hidden) pause(); });
