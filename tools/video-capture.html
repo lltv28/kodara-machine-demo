@@ -1198,9 +1198,9 @@ html.player-mode[data-player="triagers"]:not(.reduce-mode) .triager-hub{transiti
     zoomSection.classList.toggle('is-manager-pulse',!state.knowledgeHolding && state.knowledgeStepProgress>=.95);
   }
   function computeConversationActivity(progressValue){
-    var p=zoomClamp(progressValue,0,1), orientation=p<.06;
-    var cycleProgress=zoomRange(p,.06,1), scaled=cycleProgress*3, slot=Math.min(2,Math.floor(scaled)), raw=slot===2 ? Math.min(1,scaled-slot) : scaled-slot;
-    var incoming=storyEase(zoomRange(raw,.12,.34));
+    var p=zoomClamp(progressValue,0,1), orientation=p<.01;
+    var cycleProgress=zoomRange(p,.01,1), scaled=cycleProgress*3, slot=Math.min(2,Math.floor(scaled)), raw=slot===2 ? Math.min(1,scaled-slot) : scaled-slot;
+    var incoming=storyEase(zoomRange(raw,.02,.24));
     var purchase=storyEase(zoomRange(raw,.48,.64));
     var transfer=storyEase(zoomRange(raw,.64,.86));
     var impact=storyEase(zoomRange(raw,.84,.92));
@@ -1231,9 +1231,10 @@ html.player-mode[data-player="triagers"]:not(.reduce-mode) .triager-hub{transiti
   function getConversationBudget(state,loopNumber){
     return (Number(loopNumber)||0)*24+state.slot*8+(state.impact>=.5 ? 8 : 0);
   }
-  function getConversationBrainConnectorProgress(state){
+  function getConversationBrainConnectorOpacity(state){
+    var enter=storyEase(zoomRange(state.transfer,0,.18));
     var release=storyEase(zoomRange(state.swap,.62,1));
-    return state.transfer*(1-release);
+    return enter*(1-release);
   }
   function getConversationCrossfade(value){
     var progress=zoomClamp(value,0,1);
@@ -1267,9 +1268,9 @@ html.player-mode[data-player="triagers"]:not(.reduce-mode) .triager-hub{transiti
     conversationHub.style.setProperty('--hub-scale',String(1+.035*activeStrength));
     conversationDemo.style.opacity='1';
     if(conversationBrainSuccess){
-      var brainProgress=getConversationBrainConnectorProgress(state);
-      conversationBrainSuccess.style.strokeDashoffset=String(1-brainProgress);
-      conversationBrainSuccess.style.opacity=String(brainProgress);
+      var brainOpacity=getConversationBrainConnectorOpacity(state);
+      conversationBrainSuccess.style.strokeDashoffset='0';
+      conversationBrainSuccess.style.opacity=String(brainOpacity);
     }
     if(!state.orientation && state.incoming>0 && state.incoming<1){
       setParticleOnPath(conversationLeadPaths[state.activeIndex],state.incoming,conversationLeadSignal);

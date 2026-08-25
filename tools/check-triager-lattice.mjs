@@ -58,15 +58,15 @@ const context={};
 vm.runInNewContext([
   'zoomClamp','zoomRange','storyEase','computeConversationActivity',
   'getConversationCopy','getConversationRowState','getConversationBudget',
-  'getConversationBrainConnectorProgress','getConversationCrossfade'
+  'getConversationBrainConnectorOpacity','getConversationCrossfade'
 ].map(extractFunction).join('\n'),context);
 
 const duration=18000;
-const atLead=(slot,raw)=>(.06+(slot+raw)*(.94/3));
+const atLead=(slot,raw)=>(.01+(slot+raw)*(.99/3));
 
 assert.match(html,/durations=\{learn:5000,triagers:18000,flywheel:8000,graph:8000\}/,'triager sequence should allow eighteen seconds for three leads');
-assert.equal(.06*duration,1080,'opening layout should orient the viewer for just over one second');
-assert.ok(.22*(.94/3)*duration>=1200,'each moving signal should remain easy to follow');
+assert.ok((.01+.02*(.99/3))*duration<=350,'first moving signal should begin within 350ms');
+assert.ok(.22*(.99/3)*duration>=1200,'each moving signal should remain easy to follow');
 
 assert.deepEqual({...context.getConversationCopy(0,0)}, {name:'Sandra',initial:'S'});
 assert.deepEqual({...context.getConversationCopy(0,1)}, {name:'Mark',initial:'M'});
@@ -75,11 +75,14 @@ assert.deepEqual({...context.getConversationCopy(1,1)}, {name:'Emily',initial:'E
 assert.deepEqual({...context.getConversationCopy(2,0)}, {name:'David',initial:'D'});
 assert.deepEqual({...context.getConversationCopy(2,1)}, {name:'James',initial:'J'});
 
-const orientation=context.computeConversationActivity(.05);
+const orientation=context.computeConversationActivity(.005);
 assert.equal(orientation.orientation,true,'first frame should orient the viewer before anything moves');
 assert.equal(orientation.stage,'new');
 assert.equal(orientation.incoming,0);
 assert.deepEqual({...context.getConversationRowState(0,orientation,0)},{name:'Sandra',initial:'S',status:'Talking now',mode:'active',turn:0});
+const started=context.computeConversationActivity(.02);
+assert.equal(started.orientation,false,'Triager activity should not remain in an opening hold');
+assert.ok(started.incoming>0,'first buyer signal should already be moving');
 
 const incoming=context.computeConversationActivity(atLead(0,.23));
 assert.equal(incoming.stage,'new');
@@ -105,9 +108,10 @@ const secondLead=context.computeConversationActivity(atLead(1,.20));
 assert.equal(secondLead.activeIndex,1,'Michael should become active after Sandra');
 assert.deepEqual({...context.getConversationRowState(0,secondLead,0)},{name:'Mark',initial:'M',status:'Waiting',mode:'waiting',turn:0});
 const highlighted=context.computeConversationActivity(atLead(0,.90));
-assert.equal(context.getConversationBrainConnectorProgress(highlighted),1,'Brain revenue connector should become fully green before its card rotates away');
+assert.equal(context.getConversationBrainConnectorOpacity(highlighted),1,'Brain revenue connector should become fully green before its card rotates away');
 const releasing=context.computeConversationActivity(atLead(0,.96));
-assert.ok(context.getConversationBrainConnectorProgress(releasing)>0 && context.getConversationBrainConnectorProgress(releasing)<1,'Brain revenue connector should retract near the end of card replacement');
+assert.ok(context.getConversationBrainConnectorOpacity(releasing)>0 && context.getConversationBrainConnectorOpacity(releasing)<1,'Brain revenue connector should fade near the end of card replacement');
+assert.match(html,/conversationBrainSuccess\.style\.strokeDashoffset='0'/,'Brain connector should illuminate its full path instead of drawing a partial green bar');
 assert.equal(context.getConversationCrossfade(0),1,'copy should begin fully visible');
 assert.ok(context.getConversationCrossfade(.25)>0 && context.getConversationCrossfade(.25)<1,'copy should fade across the first half of a state change');
 assert.equal(context.getConversationCrossfade(.5),0,'copy should be hidden at the exact state-change midpoint');
