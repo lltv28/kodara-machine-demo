@@ -230,7 +230,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-brain-link,.conversation-person-link{fill:none;stroke:rgba(64,64,64,.30);stroke-width:4;stroke-linecap:round;stroke-dasharray:10 12;vector-effect:non-scaling-stroke}
 .conversation-brain-success,.conversation-person-success{fill:none;stroke:var(--accent);stroke-width:6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
 .conversation-lead-signal,.conversation-transfer-dot{fill:var(--accent);stroke:#fff;stroke-width:4;filter:url(#phone-shadow);opacity:0}
-.triager-hub{position:absolute;left:50%;top:46%;width:166px;aspect-ratio:1;display:grid;align-content:center;justify-items:center;gap:7px;padding:18px;border:3px solid var(--accent);border-radius:50%;background:#fff;box-shadow:var(--shadow-md);text-align:center;transform:translate(-50%,-50%) scale(var(--hub-scale,1));will-change:transform}
+.triager-hub{position:absolute;left:50%;top:46%;width:204px;height:204px;display:grid;align-content:center;justify-items:center;gap:7px;padding:16px;border:3px solid var(--accent);border-radius:50%;background:#fff;box-shadow:var(--shadow-md);text-align:center;transform:translate(-50%,-50%) scale(var(--hub-scale,1));will-change:transform}
 .triager-hub-title{color:#404040;font-size:30px;font-weight:700;line-height:1}
 .triager-hub-status{max-width:126px;color:#737373;font-size:21px;font-weight:650;line-height:1.12}
 .triager-hub.is-active{--hub-scale:1.035;border-color:var(--accent-dark)}
@@ -354,8 +354,8 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:58%}
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:25px}
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget-value{font-size:38px}
-  .triager-hub-title{font-size:36px}
-  .triager-hub-status{font-size:27px}
+  .triager-hub-title{font-size:34px}
+  .triager-hub-status{font-size:24px}
   .conversation-person-name{font-size:36px}
   .conversation-person-status{font-size:28px}
   .conversation-person-result{font-size:32px}
@@ -632,13 +632,13 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
             <div class="triager-conversation-demo" role="img" aria-label="AI Triagers handle three independent buyers, sell three assessments, and return $24 to the AI Brain ad budget">
               <div class="triager-lattice" aria-hidden="true">
                 <svg class="conversation-link-layer" viewBox="0 0 760 760" preserveAspectRatio="none">
-                  <path class="conversation-brain-link" d="M 380 270 L 380 220"/>
-                  <path class="conversation-brain-success" pathLength="1" d="M 380 270 L 380 220"/>
+                  <path class="conversation-brain-link" d="M 380 248 L 380 220"/>
+                  <path class="conversation-brain-success" pathLength="1" d="M 380 248 L 380 220"/>
                   <path class="conversation-person-link" d="M 180 525 C 180 480 280 470 322 430"/>
-                  <path class="conversation-person-link" d="M 380 525 L 380 442"/>
+                  <path class="conversation-person-link" d="M 380 525 L 380 452"/>
                   <path class="conversation-person-link" d="M 580 525 C 580 480 480 470 438 430"/>
                   <path class="conversation-person-success" data-conversation-link-index="0" pathLength="1" d="M 180 525 C 180 480 280 470 322 430"/>
-                  <path class="conversation-person-success" data-conversation-link-index="1" pathLength="1" d="M 380 525 L 380 442"/>
+                  <path class="conversation-person-success" data-conversation-link-index="1" pathLength="1" d="M 380 525 L 380 452"/>
                   <path class="conversation-person-success" data-conversation-link-index="2" pathLength="1" d="M 580 525 C 580 480 480 470 438 430"/>
                   <circle class="conversation-lead-signal" r="11"/>
                   <circle class="conversation-transfer-dot" r="11"/>

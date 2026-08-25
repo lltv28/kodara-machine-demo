@@ -15,10 +15,13 @@ assert.match(html,/class="conversation-brain-success" pathLength="1"/,'sale reve
 assert.match(html,/class="conversation-lead-signal"/,'active buyer activity should visibly travel to the hub');
 assert.match(html,/class="conversation-transfer-dot"/,'sale revenue should visibly travel to the Brain');
 assert.match(html,/\.triager-hub\{position:absolute;left:50%;top:46%/,'hub should occupy the fixed center of the square');
+assert.match(html,/\.triager-hub\{[^}]*width:204px;height:204px/,'hub must keep equal explicit dimensions when its status wraps');
 assert.match(html,/\.conversation-people\{position:absolute;left:calc\(50% - 300px\);top:69%;width:600px/,'three people should use a stable bottom row');
 assert.match(html,/\.conversation-person\{[^}]*min-height:116px/,'people should read as independent nodes rather than compressed chat rows');
 assert.match(html,/\.triager-lattice\{position:absolute;left:240px;top:0;width:760px;height:760px\}/,'lattice should use a native square coordinate system inside the legacy renderer');
 assert.match(html,/viewBox="0 0 760 760"/,'lattice connector geometry should be authored in square coordinates');
+assert.match(html,/d="M 380 248 L 380 220"/,'Brain connector should meet the top edge of the corrected circular hub');
+assert.match(html,/d="M 380 525 L 380 452"/,'center buyer connector should meet the bottom edge of the corrected circular hub');
 assert.match(html,/\.conversation-person-name\{[^}]*font-size:32px/,'desktop names should remain legible after player scaling');
 assert.match(html,/@media\(max-width:420px\)\{[\s\S]*\.conversation-person-name\{font-size:36px\}[\s\S]*\.conversation-person-status\{font-size:28px\}/,'small embeds should enlarge person labels before scaling');
 assert.match(html,/@media\(prefers-reduced-motion:reduce\)\{[\s\S]*\.conversation-lead-signal,[\s\S]*\.conversation-transfer-dot\{display:none/,'reduced motion should remove moving signals');
