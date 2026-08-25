@@ -211,7 +211,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 /* ============================================================
    SECTION 3 - TRUST STRIP
    ============================================================ */
-.proof-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
+.case-studies+.proof{margin-top:var(--space-5)}
 .proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5)}
 .proof-card{position:relative;display:flex;min-width:0;min-height:230px;flex-direction:column;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
 .proof-stat{display:block;color:var(--accent-ink);font-family:var(--fb);font-size:var(--type-stat);font-weight:700;line-height:.82;letter-spacing:var(--tracking-stat)}
@@ -228,7 +228,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
 .proof-more summary{display:none}
 .proof-grid-more{margin-top:var(--space-5)}
 @media(max-width:720px){
-  .proof-head{margin-bottom:var(--space-5)}
+  .case-studies+.proof{margin-top:var(--space-4)}
   .proof-grid{grid-template-columns:1fr;gap:var(--space-4)}
   .proof-card{min-height:210px;padding:var(--space-5)}
   .proof-card blockquote{max-width:none;padding-left:36.8px;font-size:var(--type-quote)}
@@ -497,10 +497,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
   </section>
 
   <!-- ============ CLIENT PROOF ============ -->
-  <section class="card proof" aria-labelledby="proof-title">
-    <div class="proof-head">
-      <h2 class="card-title" id="proof-title">What clients measured after putting AI to work.</h2>
-    </div>
+  <section class="card proof" aria-label="More client results">
     <div class="proof-grid proof-grid-primary">
       <article class="proof-card is-stat" aria-label="Leanne Ellington client result">
         <strong class="proof-stat">$19K</strong>

@@ -127,6 +127,9 @@ assert.match(page, /class="card founder-highlight"/, 'Founder highlight must fol
 assert.match(page, /data-placeholder="founder"/, 'Founder highlight needs a stable portrait placeholder');
 assert.ok(page.indexOf('class="card mechanism-features"') < page.indexOf('class="card founder-highlight"'), 'Mechanism features must precede founder highlight');
 assert.ok(page.indexOf('class="card founder-highlight"') < page.indexOf('class="card case-studies"'), 'Founder highlight must precede proof stories');
+assert.match(page, /\.case-studies\+\.proof\{margin-top:var\(--space-5\)\}/, 'Video and written testimonials must use one continuous proof rhythm');
+assert.doesNotMatch(page, /What clients measured after putting AI to work\./, 'Written testimonials must not repeat the proof headline');
+assert.match(page, /class="card proof" aria-label="More client results"/, 'Written testimonials need an accessible section name without a visible heading');
 assert.doesNotMatch(page, /class="card outcome-features"/, 'Removed outcome section must not return');
 assert.doesNotMatch(page, /class="card implementation-strip"/, 'Removed implementation strip must not return');
 assert.match(page, /Self-funding is the objective, not a guaranteed result\./, 'Landing page must keep the self-funding boundary');
