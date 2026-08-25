@@ -10,7 +10,7 @@ assert.match(html,/class="triager-hub"/,'one stationary AI Triager hub should an
 assert.match(html,/class="triager-hub-title">AI Triagers</,'hub should identify the role in plain language');
 assert.doesNotMatch(html,/data-conversation-hub-status/,'hub should contain only its one-line role label');
 assert.match(html,/class="story-core-title"><span>AI<\/span><br><span>Brain<\/span>/,'Brain label should expose separate words for compact one-line layout');
-assert.match(html,/data-player="triagers"\] \.story-core-title\{display:flex;[^}]*gap:10px/,'compact Brain label should preserve a visible one-line word gap');
+assert.match(html,/data-player="triagers"\] \.story-core-title\{[^}]*display:flex;[^}]*gap:10px/,'compact Brain label should preserve a visible one-line word gap');
 assert.match(html,/data-player="triagers"\] \.story-core-title br\{display:none\}/,'Triager player should render AI Brain on one line');
 assert.equal((html.match(/class="conversation-person" data-conversation-index=/g) || []).length,3,'square demo should show exactly three independent people');
 assert.equal((html.match(/data-conversation-link-index=/g) || []).length,3,'each person should keep one persistent connector to the hub');
@@ -24,6 +24,11 @@ assert.match(html,/\.triager-hub-title\{[^}]*white-space:nowrap/,'AI Triagers sh
 assert.match(html,/\.conversation-people\{position:absolute;left:calc\(50% - 300px\);top:69%;width:600px/,'three people should use a stable bottom row');
 assert.match(html,/\.conversation-person\{[^}]*height:180px/,'buyer cards should keep stable equal heights through status changes');
 assert.match(html,/\.conversation-person-status\{[^}]*white-space:nowrap/,'buyer status should stay on one line below the name');
+assert.match(html,/\.conversation-person-status\{[^}]*width:100%;text-align:center/,'buyer status should remain centered across every card state');
+assert.doesNotMatch(html,/conversation-person-result/,'prospect cards should not display assessment pricing');
+assert.match(html,/data-player="triagers"\] \.story-core\{[^}]*display:flex;[^}]*align-items:center;justify-content:center/,'AI Brain content should use one centered stack');
+assert.match(html,/data-player="triagers"\] \.story-core-budget\{[^}]*position:static;[^}]*place-items:center/,'ad budget label and value should stay centered in the Brain');
+assert.match(html,/data-player="triagers"\] \.story-core-gain\{display:none\}/,'the Brain should be the only visible financial display');
 assert.match(html,/rotateY\(var\(--card-turn\)\)/,'buyer replacement should rotate through the card plane');
 assert.match(html,/\.triager-lattice\{position:absolute;left:240px;top:0;width:760px;height:760px\}/,'lattice should use a native square coordinate system inside the legacy renderer');
 assert.match(html,/viewBox="0 0 760 760"/,'lattice connector geometry should be authored in square coordinates');
@@ -72,7 +77,7 @@ const orientation=context.computeConversationActivity(.05);
 assert.equal(orientation.orientation,true,'first frame should orient the viewer before anything moves');
 assert.equal(orientation.stage,'new');
 assert.equal(orientation.incoming,0);
-assert.deepEqual({...context.getConversationRowState(0,orientation,0)},{name:'Sandra',initial:'S',status:'Talking now',result:'',mode:'active',turn:0});
+assert.deepEqual({...context.getConversationRowState(0,orientation,0)},{name:'Sandra',initial:'S',status:'Talking now',mode:'active',turn:0});
 
 const incoming=context.computeConversationActivity(atLead(0,.23));
 assert.equal(incoming.stage,'new');
@@ -84,7 +89,7 @@ assert.equal(qualifying.stage,'qualifying');
 const purchased=context.computeConversationActivity(atLead(0,.58));
 assert.equal(purchased.stage,'purchased');
 assert.ok(purchased.purchase>.5,'purchase should become a distinct, readable state');
-assert.deepEqual({...context.getConversationRowState(0,purchased,0)},{name:'Sandra',initial:'S',status:'Assessment sold',result:'$8',mode:'completed',turn:0});
+assert.deepEqual({...context.getConversationRowState(0,purchased,0)},{name:'Sandra',initial:'S',status:'Assessment sold',mode:'completed',turn:0});
 
 const transferring=context.computeConversationActivity(atLead(0,.75));
 assert.ok(transferring.transfer>0 && transferring.transfer<1,'revenue should visibly travel to the Brain');
@@ -92,21 +97,21 @@ assert.ok(transferring.transfer>0 && transferring.transfer<1,'revenue should vis
 const rotated=context.computeConversationActivity(atLead(0,.96));
 assert.equal(rotated.stage,'rotating');
 assert.equal(context.getConversationBudget(rotated,0),8,'first completed sale should raise the ad budget to $8');
-assert.deepEqual({...context.getConversationRowState(0,rotated,0)},{name:'Mark',initial:'M',status:'Waiting',result:'',mode:'waiting',turn:rotated.cardTurn});
+assert.deepEqual({...context.getConversationRowState(0,rotated,0)},{name:'Mark',initial:'M',status:'Waiting',mode:'waiting',turn:rotated.cardTurn});
 
 const secondLead=context.computeConversationActivity(atLead(1,.20));
 assert.equal(secondLead.activeIndex,1,'Michael should become active after Sandra');
-assert.deepEqual({...context.getConversationRowState(0,secondLead,0)},{name:'Mark',initial:'M',status:'Waiting',result:'',mode:'waiting',turn:0});
+assert.deepEqual({...context.getConversationRowState(0,secondLead,0)},{name:'Mark',initial:'M',status:'Waiting',mode:'waiting',turn:0});
 assert.match(html,/brainProgress=state\.transfer\*\(1-state\.swap\)/,'Brain revenue connector should retract smoothly during each card replacement');
-assert.deepEqual({...context.getConversationRowState(1,secondLead,0)},{name:'Michael',initial:'M',status:'Talking now',result:'',mode:'active',turn:0});
+assert.deepEqual({...context.getConversationRowState(1,secondLead,0)},{name:'Michael',initial:'M',status:'Talking now',mode:'active',turn:0});
 
 const cycleEnd=context.computeConversationActivity(1);
 assert.equal(cycleEnd.stage,'rotating');
 assert.equal(context.getConversationBudget(cycleEnd,0),24);
-assert.deepEqual({...context.getConversationRowState(2,cycleEnd,0)},{name:'James',initial:'J',status:'Waiting',result:'',mode:'waiting',turn:0});
+assert.deepEqual({...context.getConversationRowState(2,cycleEnd,0)},{name:'James',initial:'J',status:'Waiting',mode:'waiting',turn:0});
 const nextCycle=context.computeConversationActivity(0);
 assert.equal(context.getConversationBudget(nextCycle,1),24,'ad budget should not reset between loops');
-assert.deepEqual({...context.getConversationRowState(0,nextCycle,1)},{name:'Mark',initial:'M',status:'Talking now',result:'',mode:'active',turn:0});
+assert.deepEqual({...context.getConversationRowState(0,nextCycle,1)},{name:'Mark',initial:'M',status:'Talking now',mode:'active',turn:0});
 assert.match(html,/window\.renderCaptureFrame=function\(chapter,progress,loopNumber\)/,'generic player should pass loop context into the renderer');
 assert.match(html,/window\.renderCaptureFrame\(chapter,Math\.min\(1,elapsed\/duration\),loopCount\)/,'player should render each chapter with its current loop count');
 assert.doesNotMatch(html,/setConversationLoop/,'Triager loop state should not leak through a chapter-specific global callback');

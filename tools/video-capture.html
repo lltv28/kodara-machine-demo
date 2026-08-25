@@ -46,16 +46,16 @@ body{font-family:var(--fb);letter-spacing:var(--tracking-body);background:transp
 .player-mode[data-player="flywheel"] .zoom-section{transform:scale(.84)!important;transform-origin:620px 380px!important}
 .player-mode.compact-mode[data-player="learn"] .story-core-status,.player-mode.compact-mode[data-player="triagers"] .story-core-status,.player-mode.compact-mode[data-player="flywheel"] .story-core-status{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core,.player-mode.compact-mode[data-player="flywheel"] .story-core{width:190px}
-.player-mode.compact-mode[data-player="triagers"] .story-core{left:50%;top:18%;width:174px}
+.player-mode.compact-mode[data-player="triagers"] .story-core{left:50%;top:18%;width:174px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:14px;text-align:center}
 .player-mode.compact-mode[data-player="flywheel"] .cf-note{display:none}
 .player-mode.compact-mode[data-player="learn"] .story-core-title{font-size:52px}
 .player-mode.compact-mode[data-player="learn"] .source-title{font-size:34px}
-.player-mode.compact-mode[data-player="triagers"] .story-core-title{display:flex;align-items:center;justify-content:center;gap:10px;font-size:34px;white-space:nowrap;transform:translateY(-24px)}
+.player-mode.compact-mode[data-player="triagers"] .story-core-title{position:static;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;font-size:34px;line-height:1;white-space:nowrap;transform:none}
 .player-mode.compact-mode[data-player="triagers"] .story-core-title br{display:none}
-.player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:60%}
+.player-mode.compact-mode[data-player="triagers"] .story-core-budget{position:static;left:auto;top:auto;width:100%;display:grid;place-items:center;gap:2px;transform:none}
 .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:18px;font-weight:600;letter-spacing:0}
 .player-mode[data-player="triagers"] .cf-note{display:none}
-.player-mode.compact-mode[data-player="triagers"] .story-core-gain{left:calc(100% + 14px);right:auto;top:50%;--gain-y:6px;transform:translateY(calc(-50% + var(--gain-y)))!important}
+.player-mode.compact-mode[data-player="triagers"] .story-core-gain{display:none}
 .player-mode.compact-mode[data-player="triagers"] .triager-team-label text{font-size:38px}
 .player-mode.compact-mode[data-player="triagers"] .triager-worker .worker-core circle{fill:var(--accent);stroke:#fff;stroke-width:3}
 .player-mode.compact-mode[data-player="triagers"] .triager-worker.is-active .worker-core circle{fill:var(--accent-dark)}
@@ -243,13 +243,11 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-person.is-active .conversation-person-avatar{border-color:#737373}
 .conversation-person.is-completed .conversation-person-avatar{border-color:var(--accent);background:var(--accent);color:#fff;font-size:0}
 .conversation-person.is-completed .conversation-person-avatar::after{content:"\2713";font-size:30px}
-.conversation-person-copy{display:grid;justify-items:center;gap:5px;min-width:0}
+.conversation-person-copy{width:100%;display:grid;place-items:center;gap:5px;min-width:0;text-align:center}
 .conversation-person-name{color:#404040;font-size:32px;font-weight:700;line-height:1;white-space:nowrap}
-.conversation-person-meta{display:grid;justify-items:center;gap:2px;min-width:0}
-.conversation-person-status{color:#737373;font-size:22px;font-weight:650;line-height:1.05;white-space:nowrap}
-.conversation-person-result{visibility:hidden;color:var(--accent);font-size:26px;font-weight:700;line-height:1;white-space:nowrap}
-.conversation-person.is-completed .conversation-person-status,.conversation-person.is-completed .conversation-person-result{color:var(--accent)}
-.conversation-person.is-completed .conversation-person-result{visibility:visible}
+.conversation-person-meta{width:100%;display:grid;place-items:center;min-width:0;text-align:center}
+.conversation-person-status{width:100%;text-align:center;color:#737373;font-size:22px;font-weight:650;line-height:1.05;white-space:nowrap}
+.conversation-person.is-completed .conversation-person-status{color:var(--accent)}
 @media(prefers-reduced-motion:reduce){.conversation-lead-signal,.conversation-transfer-dot{display:none}.conversation-person{transition:none}}
 .worker-core{transform-box:fill-box;transform-origin:center}
 .triager-worker.is-active .worker-core{transform:scale(1.18);filter:url(#phone-shadow)}
@@ -350,14 +348,13 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 }
 @media(max-width:420px){
   .player-mode.compact-mode[data-player="triagers"] .story-core{top:18%;width:174px}
-  .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:34px;transform:translateY(-22px)}
-  .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:58%}
+  .player-mode.compact-mode[data-player="triagers"] .story-core-title{font-size:34px;transform:none}
+  .player-mode.compact-mode[data-player="triagers"] .story-core-budget{top:auto}
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget-label{font-size:25px}
   .player-mode.compact-mode[data-player="triagers"] .story-core-budget-value{font-size:38px}
   .triager-hub-title{font-size:30px}
   .conversation-person-name{font-size:36px}
   .conversation-person-status{font-size:22px}
-  .conversation-person-result{font-size:28px}
 }
 /* ---- CTA button (one intent: hero + closing bookend) ---- */
 .cta-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;font-family:var(--fb);font-weight:500;font-size:1rem;letter-spacing:var(--tracking-body);white-space:nowrap;color:#fff;background:linear-gradient(to bottom,#3A9B68,#2E7D52);border:1px solid var(--accent-dark);border-radius:var(--radius);padding:11px 18px;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .15s ease}
@@ -646,9 +643,9 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
                   <strong class="triager-hub-title">AI Triagers</strong>
                 </div>
                 <div class="conversation-people">
-                  <div class="conversation-person" data-conversation-index="0"><span class="conversation-person-avatar">S</span><span class="conversation-person-copy"><strong class="conversation-person-name">Sandra</strong><span class="conversation-person-meta"><span class="conversation-person-status">Talking now</span><span class="conversation-person-result"></span></span></span></div>
-                  <div class="conversation-person" data-conversation-index="1"><span class="conversation-person-avatar">M</span><span class="conversation-person-copy"><strong class="conversation-person-name">Michael</strong><span class="conversation-person-meta"><span class="conversation-person-status">Waiting</span><span class="conversation-person-result"></span></span></span></div>
-                  <div class="conversation-person" data-conversation-index="2"><span class="conversation-person-avatar">D</span><span class="conversation-person-copy"><strong class="conversation-person-name">David</strong><span class="conversation-person-meta"><span class="conversation-person-status">Waiting</span><span class="conversation-person-result"></span></span></span></div>
+                  <div class="conversation-person" data-conversation-index="0"><span class="conversation-person-avatar">S</span><span class="conversation-person-copy"><strong class="conversation-person-name">Sandra</strong><span class="conversation-person-meta"><span class="conversation-person-status">Talking now</span></span></span></div>
+                  <div class="conversation-person" data-conversation-index="1"><span class="conversation-person-avatar">M</span><span class="conversation-person-copy"><strong class="conversation-person-name">Michael</strong><span class="conversation-person-meta"><span class="conversation-person-status">Waiting</span></span></span></div>
+                  <div class="conversation-person" data-conversation-index="2"><span class="conversation-person-avatar">D</span><span class="conversation-person-copy"><strong class="conversation-person-name">David</strong><span class="conversation-person-meta"><span class="conversation-person-status">Waiting</span></span></span></div>
                 </div>
               </div>
             </div>
@@ -1028,8 +1025,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       node:conversationPeople[conversationPersonIndex],
       avatar:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-avatar'),
       name:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-name'),
-      status:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-status'),
-      result:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-result')
+      status:conversationPeople[conversationPersonIndex].querySelector('.conversation-person-status')
     });
   }
   var conversationLeadPaths=zoomSection ? zoomSection.querySelectorAll('.conversation-person-link') : [];
@@ -1224,9 +1220,9 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var current=index===state.activeIndex, advanced=index<state.activeIndex || (current && state.swap>=.5);
     var copy=getConversationCopy(index,(Number(loopNumber)||0)+(advanced ? 1 : 0));
     var turn=current ? state.cardTurn : 0;
-    if(advanced || index>state.activeIndex) return {name:copy.name,initial:copy.initial,status:'Waiting',result:'',mode:'waiting',turn:turn};
-    if(state.purchase>=.5) return {name:copy.name,initial:copy.initial,status:'Assessment sold',result:'$8',mode:'completed',turn:turn};
-    return {name:copy.name,initial:copy.initial,status:'Talking now',result:'',mode:'active',turn:turn};
+    if(advanced || index>state.activeIndex) return {name:copy.name,initial:copy.initial,status:'Waiting',mode:'waiting',turn:turn};
+    if(state.purchase>=.5) return {name:copy.name,initial:copy.initial,status:'Assessment sold',mode:'completed',turn:turn};
+    return {name:copy.name,initial:copy.initial,status:'Talking now',mode:'active',turn:turn};
   }
   function getConversationBudget(state,loopNumber){
     return (Number(loopNumber)||0)*24+state.slot*8+(state.impact>=.5 ? 8 : 0);
@@ -1242,7 +1238,6 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
       view.avatar.textContent=rowState.initial;
       view.name.textContent=rowState.name;
       view.status.textContent=rowState.status;
-      view.result.textContent=rowState.result;
       if(conversationLeadSuccessPaths[i]){
         var linkProgress=completed ? 1 : i===state.activeIndex ? state.purchase : 0;
         conversationLeadSuccessPaths[i].style.strokeDashoffset=String(1-linkProgress);
