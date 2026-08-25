@@ -24,7 +24,7 @@ assert.doesNotMatch(html,/conversation-brain-note/,'redundant activity copy shou
 assert.match(html,/\.conversation-app\{position:absolute;left:21%;top:31%;width:58%;height:66\.5%;display:grid;grid-template-rows:84px minmax\(0,1fr\)/,'conversation shell should use the narrow square while leaving room for the attached brain');
 assert.match(html,/\.conversation-app::before\{[^}]*border-left:3px dashed/,'AI brain should remain visibly attached to the conversation workspace');
 assert.match(html,/\.conversation-inbox\{[^}]*position:relative;[^}]*overflow:visible/,'lead stack should provide a visible layered card deck');
-assert.match(html,/\.conversation-inbox-row\{[^}]*position:absolute;[^}]*inset:8px 14px 16px 8px/,'all three conversations should share one large readable card frame');
+assert.match(html,/\.conversation-inbox-row\{[^}]*position:absolute;[^}]*inset:6px 12px 14px 6px/,'active conversation should stay closely aligned with the product header while preserving the card stack');
 assert.match(html,/\.conversation-inbox-row\.is-selected\{[^}]*z-index:4;[^}]*transform:translate\(0,0\) scale\(1\)/,'selected conversation should sit clearly at the front of the deck');
 assert.match(html,/\.conversation-inbox-row\.is-next\{[^}]*z-index:3;[^}]*translate\(10px,10px\) scale\(\.975\)/,'next person should remain visibly queued behind the active card');
 assert.match(html,/\.conversation-inbox-row\.is-far\{[^}]*z-index:2;[^}]*translate\(18px,18px\) scale\(\.95\)/,'third person should remain visible as the deepest card');
@@ -34,8 +34,12 @@ assert.match(html,/\.conversation-inbox-copy strong\{[^}]*font-size:22px/,'deskt
 assert.match(html,/\.conversation-avatar\{width:40px;height:40px/,'lead avatars should fit inside the compact queue without crowding names');
 assert.match(html,/\.conversation-thread\{[^}]*grid-template-rows:minmax\(0,1fr\) 46px/,'expanded person should prioritize the messages and compact AI status footer');
 assert.match(html,/\.player-mode\.compact-mode\[data-player="triagers"\] \.conversation-state\{position:absolute;width:1px;height:1px/,'compact demo should retain the state for assistive technology without repeating it visually');
-assert.match(html,/\.conversation-messages\{[^}]*gap:14px;padding:18px 18px 12px/,'chat messages should have enough internal breathing room to scan quickly');
+assert.match(html,/\.conversation-messages\{[^}]*gap:14px;padding:18px 14px 12px/,'conversation messages should share the same horizontal rail as the person header');
+assert.match(html,/\.conversation-row\{display:grid;grid-template-columns:40px minmax\(0,1fr\);align-items:end;gap:10px/,'buyer messages should use the shared icon and text columns');
+assert.match(html,/\.conversation-row\.is-ai\{grid-template-columns:minmax\(0,1fr\) 40px;justify-items:end/,'AI replies should mirror the same shared columns');
+assert.match(html,/\.conversation-automation\{[^}]*display:grid;[^}]*grid-template-columns:40px minmax\(0,1fr\);[^}]*gap:10px;padding:0 14px/,'automation footer should align its text with the person and message rails');
 assert.match(html,/@media\(max-width:420px\)\{[\s\S]*\.story-core\{top:20%;width:164px\}[\s\S]*\.conversation-app-head-title\{font-size:32px\}[\s\S]*\.conversation-inbox-copy strong\{font-size:32px\}[\s\S]*\.conversation-message\{max-width:94%;padding:9px 12px;font-size:32px\}/,'small-card text should remain readable while the brain is attached to the product frame');
+assert.match(html,/@media\(max-width:420px\)\{[\s\S]*\.story-core-budget\{top:55%\}[\s\S]*\.conversation-panel-head\{grid-template-columns:40px minmax\(0,1fr\) auto;gap:10px;padding:4px 12px\}[\s\S]*\.conversation-messages\{gap:10px;padding:14px 12px 10px\}[\s\S]*\.conversation-automation\{height:46px;padding:0 12px;font-size:30px\}/,'mobile brain and shared text rail should remain optically centered');
 assert.match(html,/conversation-inbox-row\.is-completed \.conversation-avatar::after\{content:"\\2713"/,'completed leads should use an unmistakable checkmark');
 assert.match(html,/\.conversation-purchase\{[^}]*border:2px solid rgba\(46,125,82,.30\)/,'purchase should receive a dedicated high-contrast outcome frame');
 assert.match(html,/data-conversation-handoff/,'conversation changes should have an explicit handoff state instead of a blank body');
