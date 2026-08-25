@@ -82,6 +82,7 @@ assert.match(page, /prefers-reduced-motion:reduce/, 'The landing page must honor
 assert.match(page, /prefers-reduced-transparency:reduce/, 'Glassy demo surfaces need an opaque accessibility fallback');
 assert.match(page, /\.primary-demo-placeholder\{[^}]*backdrop-filter:blur\(8px\)/, 'Glass treatment must stay scoped to the primary demo placeholder');
 assert.match(page, /\.primary-demo,\.founder-highlight,\.case-featured--portrait,\.cta\{border-radius:var\(--radius-xl\)\}/, 'Featured surfaces need an explicit 24px role');
+assert.match(page, /\.primary-demo,\.founder-highlight,\.case-featured--portrait\{grid-template-columns:minmax\(0,3fr\) minmax\(320px,2fr\)\}/, 'Media-and-text cards must use the approved 60/40 desktop split');
 assert.match(page, /\.cta\{[^}]*background:var\(--accent-dark\)[^}]*color:#fff/, 'Closing CTA must remain the single deep-green color block');
 assert.match(page, /\.cta \.cta-btn\{[^}]*color:var\(--accent-dark\)[^}]*background:#fff/, 'Closing CTA button must keep high contrast');
 assert.match(renderer, /prefers-reduced-motion:reduce/, 'The demo renderer must honor reduced motion');
