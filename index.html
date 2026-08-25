@@ -367,7 +367,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
     <div class="mechanism-grid">
       <article class="mechanism-feature" data-role-demo="learn">
         <div class="mechanism-demo">
-          <iframe class="mechanism-player" src="tools/video-capture.html?player=learn&amp;compact=1&amp;duration=5000&amp;loop=0" title="AI Brain learning the business" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+          <iframe class="mechanism-player" src="tools/video-capture.html?player=learn&amp;compact=1&amp;duration=5000&amp;loop=1" title="AI Brain learning the business" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
         </div>
         <div class="mechanism-copy">
           <h3>AI Brain</h3>
@@ -376,7 +376,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       </article>
       <article class="mechanism-feature" data-role-demo="triagers">
         <div class="mechanism-demo">
-          <iframe class="mechanism-player" src="tools/video-capture.html?player=triagers&amp;compact=1&amp;duration=8000&amp;loop=0" title="AI Triagers speaking with cold prospects" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+          <iframe class="mechanism-player" src="tools/video-capture.html?player=triagers&amp;compact=1&amp;duration=8000&amp;loop=1" title="AI Triagers speaking with cold prospects" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
         </div>
         <div class="mechanism-copy">
           <h3>AI Triagers</h3>
@@ -385,7 +385,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       </article>
       <article class="mechanism-feature" data-role-demo="flywheel">
         <div class="mechanism-demo">
-          <iframe class="mechanism-player" src="tools/video-capture.html?player=flywheel&amp;compact=1&amp;duration=8000&amp;loop=0" title="AI Salespeople routing buyers through the sales department" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+          <iframe class="mechanism-player" src="tools/video-capture.html?player=flywheel&amp;compact=1&amp;duration=8000&amp;loop=1" title="AI Salespeople routing buyers through the sales department" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
         </div>
         <div class="mechanism-copy">
           <h3>AI Salespeople</h3>
@@ -621,70 +621,40 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
     var reduceMotion=window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)');
     var ready=new Set();
     var mobileVisible=new Set();
-    var mobilePlaying=new Set();
-    var mobileTimers=new Map();
+    var playing=new Set();
     var sectionVisible=false;
-    var desktopRunning=false;
-    var activeIndex=-1;
-    var sequenceTimer=0;
 
     function send(index,action){
       var frame=frames[index];
       if(!frame || !frame.contentWindow || !ready.has(index)) return;
       frame.contentWindow.postMessage({fdDemoPlayerAction:action},'*');
     }
-    function clearSequenceTimer(){
-      if(sequenceTimer){ clearTimeout(sequenceTimer);sequenceTimer=0; }
+    function setPlaying(index,shouldPlay){
+      if(shouldPlay && ready.has(index) && !playing.has(index) && !document.hidden){
+        playing.add(index);
+        cards[index].classList.add('is-active');
+        cards[index].classList.remove('is-complete');
+        send(index,'replay');
+      } else if(!shouldPlay && playing.has(index)){
+        playing.delete(index);
+        cards[index].classList.remove('is-active');
+        send(index,'pause');
+      }
     }
-    function clearMobileTimer(index){
-      var timer=mobileTimers.get(index);
-      if(timer) clearTimeout(timer);
-      mobileTimers.delete(index);
-    }
-    function setCardState(index,state){
-      cards[index].classList.toggle('is-active',state==='active');
-      cards[index].classList.toggle('is-complete',state==='complete');
-    }
-    function pauseAll(){
-      frames.forEach(function(frame,index){ send(index,'pause'); });
-      mobilePlaying.clear();
-    }
-    function resetAll(){
-      frames.forEach(function(frame,index){ send(index,'reset');setCardState(index,'idle'); });
-    }
-    function startDesktop(index){
-      if(!desktop.matches || reduceMotion.matches || !sectionVisible || ready.size!==frames.length) return;
-      clearSequenceTimer();
-      desktopRunning=true;
-      activeIndex=index;
-      cards.forEach(function(card,cardIndex){
-        setCardState(cardIndex,cardIndex<index?'complete':cardIndex===index?'active':'idle');
-        if(cardIndex!==index) send(cardIndex,'pause');
+    function syncMechanismPlayback(){
+      if(reduceMotion.matches){
+        cards.forEach(function(card,index){
+          setPlaying(index,false);
+          card.classList.add('is-complete');
+        });
+        return;
+      }
+      var playDesktop=desktop.matches && sectionVisible && ready.size===frames.length;
+      cards.forEach(function(card,index){
+        var shouldPlay=playDesktop || (!desktop.matches && mobileVisible.has(index));
+        setPlaying(index,shouldPlay);
+        if(!shouldPlay) card.classList.remove('is-complete');
       });
-      send(index,'replay');
-    }
-    function stopDesktop(reset){
-      clearSequenceTimer();
-      desktopRunning=false;
-      activeIndex=-1;
-      pauseAll();
-      if(reset) resetAll();
-    }
-    function startMobile(index){
-      if(desktop.matches || reduceMotion.matches || !mobileVisible.has(index) || !ready.has(index) || mobilePlaying.has(index)) return;
-      clearMobileTimer(index);
-      setCardState(index,'active');
-      mobilePlaying.add(index);
-      send(index,'replay');
-    }
-    function stopMobile(index){
-      clearMobileTimer(index);
-      mobilePlaying.delete(index);
-      send(index,'pause');
-      setCardState(index,'idle');
-    }
-    function maybeStartDesktop(){
-      if(desktop.matches && sectionVisible && !desktopRunning && ready.size===frames.length) startDesktop(0);
     }
 
     window.addEventListener('message',function(event){
@@ -694,26 +664,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       var status=event.data.fdDemoPlayer;
       if(status==='ready'){
         ready.add(index);
-        if(reduceMotion.matches) setCardState(index,'complete');
-        else if(desktop.matches) maybeStartDesktop();
-        else startMobile(index);
-        return;
+        syncMechanismPlayback();
       }
-      if(status!=='completed') return;
-      if(desktop.matches){
-        if(!desktopRunning || index!==activeIndex) return;
-        setCardState(index,'complete');
-        sequenceTimer=setTimeout(function(){
-          if(!sectionVisible || !desktop.matches) return;
-          if(index<cards.length-1) startDesktop(index+1);
-          else { resetAll();startDesktop(0); }
-        },index===cards.length-1?1600:900);
-      } else {
-        mobilePlaying.delete(index);
-        setCardState(index,'complete');
-        clearMobileTimer(index);
-        mobileTimers.set(index,setTimeout(function(){ startMobile(index); },1400));
-      }
+      if(status==='paused') playing.delete(index);
     });
 
     if('IntersectionObserver' in window){
@@ -721,10 +674,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
         entries.forEach(function(entry){
           if(entry.target!==section) return;
           sectionVisible=entry.isIntersecting && entry.intersectionRatio>=.2;
-          if(desktop.matches){
-            if(sectionVisible) maybeStartDesktop();
-            else stopDesktop(true);
-          }
+          if(desktop.matches) syncMechanismPlayback();
         });
       },{rootMargin:'100px 0px',threshold:[0,.2]});
       sectionObserver.observe(section);
@@ -735,9 +685,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
           if(index<0) return;
           if(entry.isIntersecting && entry.intersectionRatio>=.55) mobileVisible.add(index);
           else mobileVisible.delete(index);
-          if(desktop.matches || reduceMotion.matches) return;
-          if(mobileVisible.has(index)) startMobile(index);
-          else stopMobile(index);
+          if(!desktop.matches) syncMechanismPlayback();
         });
       },{threshold:[0,.55]});
       cards.forEach(function(card){ cardObserver.observe(card); });
@@ -746,24 +694,12 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.5;letter-spa
       cards.forEach(function(card,index){ mobileVisible.add(index); });
     }
 
-    function syncMechanismMode(){
-      clearSequenceTimer();
-      mobileTimers.forEach(function(timer){ clearTimeout(timer); });
-      mobileTimers.clear();
-      pauseAll();
-      resetAll();
-      desktopRunning=false;
-      activeIndex=-1;
-      if(reduceMotion.matches){
-        cards.forEach(function(card,index){ setCardState(index,'complete'); });
-      } else if(desktop.matches) maybeStartDesktop();
-      else mobileVisible.forEach(function(index){ startMobile(index); });
-    }
-    if(desktop.addEventListener) desktop.addEventListener('change',syncMechanismMode);
-    else desktop.addListener(syncMechanismMode);
-    if(reduceMotion.addEventListener) reduceMotion.addEventListener('change',syncMechanismMode);
-    else reduceMotion.addListener(syncMechanismMode);
-    maybeStartDesktop();
+    if(desktop.addEventListener) desktop.addEventListener('change',syncMechanismPlayback);
+    else desktop.addListener(syncMechanismPlayback);
+    if(reduceMotion.addEventListener) reduceMotion.addEventListener('change',syncMechanismPlayback);
+    else reduceMotion.addListener(syncMechanismPlayback);
+    document.addEventListener('visibilitychange',syncMechanismPlayback);
+    syncMechanismPlayback();
   }
   setupMechanismDemos();
 

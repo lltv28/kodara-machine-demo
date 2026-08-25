@@ -147,12 +147,14 @@ assert.equal(mechanismPlaceholders.length, 0, 'Live role demos must replace ever
 const mechanismPlayers = [...page.matchAll(/<iframe class="mechanism-player"[^>]*>/g)].map((match) => match[0]);
 assert.equal(mechanismPlayers.length, 3, `Expected three live mechanism players, found ${mechanismPlayers.length}`);
 assert.ok(mechanismPlayers.every((tag) => /loading="lazy"/.test(tag)), 'Role demos must load lazily');
-assert.match(page, /player=learn&amp;compact=1&amp;duration=5000&amp;loop=0/, 'AI Brain card must use the five-second learning player');
-assert.match(page, /player=triagers&amp;compact=1&amp;duration=8000&amp;loop=0/, 'AI Triager card must use the eight-second conversation player');
-assert.match(page, /player=flywheel&amp;compact=1&amp;duration=8000&amp;loop=0/, 'AI Salespeople card must use the eight-second flywheel player');
+assert.match(page, /player=learn&amp;compact=1&amp;duration=5000&amp;loop=1/, 'AI Brain card must autoplay its five-second loop');
+assert.match(page, /player=triagers&amp;compact=1&amp;duration=8000&amp;loop=1/, 'AI Triager card must autoplay its eight-second loop');
+assert.match(page, /player=flywheel&amp;compact=1&amp;duration=8000&amp;loop=1/, 'AI Salespeople card must autoplay its eight-second loop');
 assert.match(page, /function setupMechanismDemos\(\)/, 'Role demos need a viewport-aware playback controller');
 assert.match(page, /send\(index,'replay'\)/, 'Role demo controller must replay the active stage');
 assert.match(page, /send\(index,'pause'\)/, 'Role demo controller must pause inactive stages');
+assert.match(page, /function syncMechanismPlayback\(\)/, 'Role demos need one simultaneous visibility sync');
+assert.doesNotMatch(page, /sequenceTimer|startDesktop/, 'Role demos must not wait for a desktop sequence');
 assert.match(renderer, /var requestedDuration=Number\(new URLSearchParams\(location\.search\)\.get\('duration'\)\)/, 'Demo players must accept a section-specific duration');
 assert.match(renderer, /send\('completed'\)/, 'Demo players must report a controlled completion state');
 assert.match(page, /class="card founder-highlight"/, 'Founder highlight must follow mechanism features');
