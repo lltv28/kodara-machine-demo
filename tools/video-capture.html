@@ -236,10 +236,12 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
 .conversation-selector-person.is-selected{border-color:var(--accent);background:var(--accent);color:#fff;transform:scale(1.1)}
 .conversation-selector-person.is-completed{border-color:var(--accent);background:var(--accent);color:#fff;font-size:0}
 .conversation-selector-person.is-completed::after{content:"\2713";font-size:24px}
-.conversation-inbox{min-height:0;display:flex;flex-direction:column;overflow:hidden;border-radius:0 0 var(--radius) var(--radius);background:#FAFAFA}
-.conversation-inbox-row{position:relative;z-index:1;min-width:0;min-height:0;flex:0 0 50px;overflow:hidden;border-top:1px solid var(--line);background:#FAFAFA;transition:flex-grow .42s cubic-bezier(.22,1,.36,1),background-color .3s ease;will-change:flex-grow}
-.conversation-inbox-row:first-child{border-top:0}
-.conversation-inbox-row.is-selected{flex:1 1 50px;background:#fff}
+.conversation-inbox{min-height:0;position:relative;overflow:visible;border-radius:0 0 var(--radius) var(--radius);background:#F7F8F7}
+.conversation-inbox-row{position:absolute;inset:8px 14px 16px 8px;z-index:1;min-width:0;min-height:0;overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm);opacity:0;transform:translate(18px,18px) scale(.95);transform-origin:top center;transition:opacity .42s ease,transform .48s cubic-bezier(.22,1,.36,1),box-shadow .42s ease;will-change:opacity,transform}
+.conversation-inbox-row.is-selected{z-index:4;opacity:1;transform:translate(0,0) scale(1);box-shadow:var(--shadow-md)}
+.conversation-inbox-row.is-next{z-index:3;opacity:.74;transform:translate(10px,10px) scale(.975)}
+.conversation-inbox-row.is-far{z-index:2;opacity:.44;transform:translate(18px,18px) scale(.95)}
+.conversation-inbox-row.is-before{z-index:1;opacity:0;transform:translate(-24px,-10px) scale(.94)}
 .conversation-panel-head{height:50px;display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:10px;padding:5px 14px;background:transparent}
 .conversation-inbox-row.is-selected .conversation-panel-head{background:rgba(46,125,82,.045)}
 .conversation-inbox-row.is-selected .conversation-avatar{color:var(--accent);box-shadow:0 0 0 3px rgba(46,125,82,.18)}
@@ -703,7 +705,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
               </svg>
               <div class="conversation-app" data-conversation-layout="vertical" aria-hidden="true">
                 <header class="conversation-app-head">
-                  <span class="conversation-app-head-copy"><strong class="conversation-app-head-title">3 independent conversations</strong><span class="conversation-position" data-conversation-position>Lead 1 of 3</span></span>
+                  <span class="conversation-app-head-copy"><strong class="conversation-app-head-title">3 conversations</strong><span class="conversation-position" data-conversation-position>Lead 1 of 3</span></span>
                   <span class="conversation-selector-people" aria-hidden="true">
                     <span class="conversation-selector-person is-selected" data-conversation-selector-index="0">S</span>
                     <span class="conversation-selector-person" data-conversation-selector-index="1">M</span>
@@ -1371,8 +1373,11 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     var state=computeConversationActivity(progress), openIndex=state.summary ? 2 : state.displayIndex, copy=getConversationCopy(openIndex);
     if(conversationLinkPaths.length!==conversationInboxRows.length) refreshConversationLinkPaths();
     for(var i=0;i<conversationInboxViews.length;i++){
-      var view=conversationInboxViews[i], row=view.row, rowState=getConversationRowState(i,state);
+      var view=conversationInboxViews[i], row=view.row, rowState=getConversationRowState(i,state), distance=i-openIndex;
       row.classList.toggle('is-selected',i===openIndex);
+      row.classList.toggle('is-next',distance===1);
+      row.classList.toggle('is-far',distance>1);
+      row.classList.toggle('is-before',distance<0);
       row.classList.toggle('is-completed',rowState.mode==='completed');
       view.status.textContent=rowState.mode==='completed' ? 'Purchased' : rowState.mode==='active' ? 'Active' : rowState.status;
       view.result.textContent=rowState.result;
