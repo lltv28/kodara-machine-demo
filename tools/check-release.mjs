@@ -99,7 +99,7 @@ assert.match(page, /\.cta\{[^}]*background:var\(--accent-dark\)[^}]*color:#fff/,
 assert.match(page, /\.cta \.cta-btn\{[^}]*color:var\(--accent-dark\)[^}]*background:#fff/, 'Closing CTA button must keep high contrast');
 assert.match(renderer, /prefers-reduced-motion:reduce/, 'The demo renderer must honor reduced motion');
 assert.match(renderer, /var PLAYER_MODE=document\.documentElement\.classList\.contains\('player-mode'\)/, 'Reduced motion must work inside independent demo players');
-assert.match(renderer, /if\(REDUCE && PLAYER_MODE\)\{ window\.renderCaptureFrame\(chapter,chapter==='triagers'\?\.94:1\);send\('ready'\);return; \}/, 'Reduced-motion players must settle on a useful chapter end state');
+assert.match(renderer, /if\(REDUCE && PLAYER_MODE\)\{ window\.renderCaptureFrame\(chapter,chapter==='triagers'\?\.964:1,0\);send\('ready'\);return; \}/, 'Reduced-motion players must settle on a useful chapter end state');
 assert.match(renderer, /renderTriagerScrollActivity\(state\.triagerActivityProgress,\(!REDUCE \|\| PLAYER_MODE\) && state\.phase==='triagers'\)/, 'Reduced-motion Triager players must keep their completed conversation visible');
 assert.match(renderer, /zoomRange\(local,0,\.25\)/, 'Graph milestones need a 1.5-second hold in the eight-second loop');
 assert.match(renderer, /if\(p>=\.70\)/, 'The learning result needs a 1.5-second hold in the five-second loop');

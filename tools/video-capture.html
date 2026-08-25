@@ -628,7 +628,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
         <div class="fw-label" style="left:83.3%;top:81.4%">Smaller offer</div>
         <div class="fw-label" style="left:16.7%;top:81.4%">Helps fund new leads</div>
             </div>
-            <div class="triager-conversation-demo" role="img" aria-label="AI Triagers handle three independent buyers, sell three assessments, and return $24 to the AI Brain ad budget">
+            <div class="triager-conversation-demo" role="img" aria-label="AI Triagers handle three independent prospects, sell three assessments, and return $24 to the AI Brain ad budget">
               <div class="triager-lattice" aria-hidden="true">
                 <svg class="conversation-link-layer" viewBox="0 0 760 760" preserveAspectRatio="none">
                   <path class="conversation-brain-link" d="M 380 263 L 380 220"/>
@@ -1253,7 +1253,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     conversationHub.classList.toggle('is-completed',state.purchase>=.5 && state.swap<.5);
     conversationDemo.style.opacity='1';
     if(conversationBrainSuccess){
-      var brainProgress=state.transfer;
+      var brainProgress=state.transfer*(1-state.swap);
       conversationBrainSuccess.style.strokeDashoffset=String(1-brainProgress);
       conversationBrainSuccess.style.opacity=String(brainProgress);
     }
@@ -1270,12 +1270,11 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     zoomSection.style.setProperty('--sale-ring-opacity',String(.16*state.pulse));
     var budget=getConversationBudget(state,conversationLoop);
     if(coreBudgetValue) coreBudgetValue.textContent='$'+budget;
-    var gainOpacity=state.swap>0 ? 0 : state.impact;
+    var gainOpacity=state.impact*(1-state.swap);
     if(coreGain){ coreGain.style.opacity=String(gainOpacity); coreGain.style.setProperty('--gain-y',(6-10*state.impact).toFixed(2)+'px'); }
     if(storyCore) storyCore.setAttribute('aria-label','AI brain. Total ad budget $'+budget);
     if(coreStatus) coreStatus.textContent=state.impact>0 ? 'Makes $8 available for ads' : 'AI Triagers are handling 3 buyers';
   }
-  window.setConversationLoop=function(loopNumber){ conversationLoop=Math.max(0,Math.floor(Number(loopNumber)||0)); };
   function clearTriagerActivity(){
     for(var i=0;i<triagerPhones.length;i++) triagerPhones[i].classList.remove('is-connected');
     for(var j=0;j<triagerWorkers.length;j++) triagerWorkers[j].classList.remove('is-active');
@@ -1412,11 +1411,12 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     }
     setNarrativeState(state.beat);
   }
-  window.renderCaptureFrame=function(chapter,progress){
+  window.renderCaptureFrame=function(chapter,progress,loopNumber){
     var ranges={learn:[0,MANAGER_END],triagers:[TRIAGER_INTRO_END,TRIAGER_END],flywheel:[FLYWHEEL_ASSEMBLY_END,FLYWHEEL_END]};
     var range=ranges[chapter];
     if(!CAPTURE || (!range && chapter!=='graph')) return false;
     activateScrollStory();
+    if(chapter==='triagers') conversationLoop=Math.max(0,Math.floor(Number(loopNumber)||0));
     var local=zoomClamp(Number(progress)||0,0,1);
     var sample=Math.min(local,.999999);
     var global=range ? range[0]+(range[1]-range[0])*sample : CHART_TRANSITION_END;
@@ -1566,8 +1566,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
     document.querySelector('.wrap').style.transform='scale('+scale+')';
   }
   function render(){
-    if(window.setConversationLoop) window.setConversationLoop(loopCount);
-    window.renderCaptureFrame(chapter,Math.min(1,elapsed/duration));
+    window.renderCaptureFrame(chapter,Math.min(1,elapsed/duration),loopCount);
   }
   function send(type){ parent.postMessage({fdDemoPlayer:type,chapter:chapter,progress:Math.min(1,elapsed/duration)},'*'); }
   function tick(now){
@@ -1602,7 +1601,7 @@ h1{font-family:var(--fb);font-weight:700;font-size:clamp(2.4rem,1.4rem+3.6vw,4re
   addEventListener('resize',fit);
   document.addEventListener('visibilitychange',function(){ if(document.hidden) pause(); });
   fit();
-  if(REDUCE && PLAYER_MODE){ window.renderCaptureFrame(chapter,chapter==='triagers'?.94:1);send('ready');return; }
+  if(REDUCE && PLAYER_MODE){ window.renderCaptureFrame(chapter,chapter==='triagers'?.964:1,0);send('ready');return; }
   render();send('ready');
 })();
 </script>

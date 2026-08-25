@@ -5,6 +5,7 @@ import vm from 'node:vm';
 const html=readFileSync(new URL('./video-capture.html',import.meta.url),'utf8');
 
 assert.match(html,/class="triager-lattice"/,'compact demo should use the square lattice composition');
+assert.match(html,/AI Triagers handle three independent prospects/,'accessible description should describe unsold leads as prospects');
 assert.match(html,/class="triager-hub"/,'one stationary AI Triager hub should anchor the story');
 assert.match(html,/class="triager-hub-title">AI Triagers</,'hub should identify the role in plain language');
 assert.doesNotMatch(html,/data-conversation-hub-status/,'hub should contain only its one-line role label');
@@ -96,7 +97,7 @@ assert.deepEqual({...context.getConversationRowState(0,rotated,0)},{name:'Mark',
 const secondLead=context.computeConversationActivity(atLead(1,.20));
 assert.equal(secondLead.activeIndex,1,'Michael should become active after Sandra');
 assert.deepEqual({...context.getConversationRowState(0,secondLead,0)},{name:'Mark',initial:'M',status:'Waiting',result:'',mode:'waiting',turn:0});
-assert.match(html,/brainProgress=state\.transfer/,'each $8 sale should redraw the Brain revenue connector');
+assert.match(html,/brainProgress=state\.transfer\*\(1-state\.swap\)/,'Brain revenue connector should retract smoothly during each card replacement');
 assert.deepEqual({...context.getConversationRowState(1,secondLead,0)},{name:'Michael',initial:'M',status:'Talking now',result:'',mode:'active',turn:0});
 
 const cycleEnd=context.computeConversationActivity(1);
@@ -106,5 +107,12 @@ assert.deepEqual({...context.getConversationRowState(2,cycleEnd,0)},{name:'James
 const nextCycle=context.computeConversationActivity(0);
 assert.equal(context.getConversationBudget(nextCycle,1),24,'ad budget should not reset between loops');
 assert.deepEqual({...context.getConversationRowState(0,nextCycle,1)},{name:'Mark',initial:'M',status:'Talking now',result:'',mode:'active',turn:0});
+assert.match(html,/window\.renderCaptureFrame=function\(chapter,progress,loopNumber\)/,'generic player should pass loop context into the renderer');
+assert.match(html,/window\.renderCaptureFrame\(chapter,Math\.min\(1,elapsed\/duration\),loopCount\)/,'player should render each chapter with its current loop count');
+assert.doesNotMatch(html,/setConversationLoop/,'Triager loop state should not leak through a chapter-specific global callback');
+assert.match(html,/chapter==='triagers'\?\.964:1/,'reduced-motion mode should settle on a coherent completed-sale state');
+const reducedState=context.computeConversationActivity(.964);
+assert.equal(context.getConversationBudget(reducedState,0),24,'reduced-motion snapshot should show the complete $24 ad budget');
+assert.equal(context.getConversationRowState(2,reducedState,0).mode,'completed','reduced-motion snapshot should keep the third completed sale visible');
 
 console.log('triager square lattice sequence valid');
