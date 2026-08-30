@@ -12,17 +12,20 @@ assert.ok(statSync(pagePath).size <= 140 * 1024, 'Landing page exceeds the 140KB
 
 // Design-system invariants.
 assert.match(page, /--rail-wide:1240px/, 'Desktop content rail must stay at 1240px');
-assert.match(page, /--type-hero:clamp\(2\.75rem,4\.8vw,4rem\)/, 'Hero must use the approved healthcare display scale');
-assert.match(page, /--type-body:1\.25rem;--type-body-large:1\.375rem/, 'Desktop body text must retain the readable 20px and 22px tiers');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.125rem;--type-body-large:1\.25rem/, 'Mobile body text must retain the readable 18px and 20px tiers');
+assert.match(page, /--type-hero:clamp\(3\.25rem,5\.4vw,4\.75rem\)/, 'Hero must use the approved healthcare display scale');
+assert.match(page, /--type-section:clamp\(3rem,4\.6vw,3\.75rem\)/, 'Section headings must retain the approved 48px to 60px scale');
+assert.match(page, /--type-body:1\.3125rem;--type-body-large:1\.5rem/, 'Desktop body text must retain the readable 21px and 24px tiers');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.1875rem;--type-body-large:1\.375rem/, 'Mobile body text must retain the readable 19px and 22px tiers');
 assert.match(page, /--tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px/, 'Heading tracking must use the shared -2px treatment');
 assert.match(page, /--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px/, 'Internal spacing must use the shared 4px scale');
 assert.match(page, /--radius-sm:8px/, 'Compact surfaces need the 8px radius tier');
 assert.match(page, /--radius:16px;--radius-lg:16px/, 'Support surfaces need the 16px radius tier');
 assert.match(page, /--radius-xl:24px/, 'Featured surfaces need the 24px radius tier');
-assert.match(page, /--page:#FCFDFC;--panel:#fff;--bg:#F1F6F5;--surface:var\(--bg\)/, 'Page surfaces must use the healthcare palette');
+assert.match(page, /--page:#fff;--panel:#fff;--bg:#fff;--surface:#fff/, 'Neutral page surfaces must stay white');
+assert.doesNotMatch(page, /#FCFDFC|#F1F6F5|#E6EFED/i, 'Light green page backgrounds must not return');
 assert.match(page, /--ink:#20362D;--ink-2:#304E42;--ink-3:#567066/, 'Text must use the healthcare green-black palette');
 assert.match(page, /--accent:#106844;--accent-hover:#0C5537;--accent-ink:#106844;--accent-dark:#0C4F34/, 'Actions must use the Kodara green palette');
+assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate feature backgrounds and framing must not return');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
 assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced-motion preferences');
 assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
@@ -45,11 +48,23 @@ assert.ok(page.indexOf('class="card faq"') < page.indexOf('class="card cta"'), '
 assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder letter must not return');
 
 // Current VSL offer language.
-assert.match(page, /<h1[^>]*>The AI Version of You, built in 30 days\.<\/h1>/, 'Hero must lead with the 30-day AI Version promise');
+assert.match(page, /<h1[^>]*>The AI Version of You, built and launched in 30 days\.<\/h1>/, 'Hero must lead with the complete 30-day AI Version promise');
 assert.match(page, /Give us about one hour per week\.[^<]*\$500-\$2,000 digital programs[^<]*entirely online/, 'Hero must state the time, price, and online-delivery boundaries');
+assert.match(page, /first 10 beta users within 30 days or you receive a full refund/, 'Hero must state the qualifying-client guarantee');
+assert.match(page, /Less than 28%/, 'Demand narrative must include the healthcare-trust signal');
+assert.match(page, /260 million health and wellness messages/, 'Demand narrative must include the current AI-demand signal');
+assert.match(page, /major opportunity for independent health and wellness experts/, 'Demand narrative must connect the signals to the expert opportunity');
+assert.match(page, /Thousands of clients and patients can access your approved educational programs at once across the open Internet/, 'The page must state the scale and open-Internet outcome without implying medical care');
+assert.match(page, /do not imply endorsement, affiliation, client status, or purchase history/, 'The authority wall must state every proof boundary');
+assert.match(page, /Your signed agreement controls eligibility, timing, definitions, and the exact remedy/, 'The offer panel must state the signed-agreement boundary');
 assert.match(page, /more than 100,000 healthcare leads/, 'Client discovery must name the healthcare data foundation');
 assert.match(page, /live search and demand signals/, 'Client discovery must explain the live-demand mechanism');
 assert.match(page, /first 10 beta users will be onboarded, or you receive a full refund/, 'FAQ must state the current qualifying-client guarantee');
+assert.match(page, /Dr\. Vora[\s\S]{0,500}client-discovery model[\s\S]{0,500}30 patients[\s\S]{0,500}first five weeks/, 'Client proof must include Dr. Vora and the VSL mechanism');
+assert.match(page, /Ashley[\s\S]{0,500}client-discovery model[\s\S]{0,500}fully transitioned[\s\S]{0,500}in-person classes[\s\S]{0,500}two months/, 'Client proof must include Ashley and the VSL mechanism');
+assert.match(page, /AI engineers and operators with decades of healthcare experience/, 'Team credibility must match the VSL');
+assert.match(page, /More than 100,000 healthcare leads generated online were used to train Kodara/, 'The healthcare-data claim must match the VSL exactly');
+assert.doesNotMatch(page, /purchased through AI systems built by our team/, 'The authority wall must not imply proof absent from the VSL');
 assert.doesNotMatch(page, /first 10 real users|or you do not pay/i, 'Old guarantee language must not return');
 assert.doesNotMatch(page, /Apply for a Free Live Demo|free live demo/i, 'The page must not promise an unverified free live demo');
 assert.doesNotMatch(page, /professional, clinical, and compliance boundaries|data-handling and privacy requirements/i, 'Unsupported safety and privacy claims must not return');
@@ -62,15 +77,16 @@ const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification
 assert.equal(qualificationLinks.length, 5, 'Qualification links must appear in the header, hero, product overview, final CTA, and footer');
 assert.ok(qualificationLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Qualification links must use the live scheduler');
 assert.ok(qualificationLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External qualification links must open safely');
+assert.equal((page.match(/>Apply To See If You Qualify/g) ?? []).length, 5, 'Every qualification link must use the VSL-aligned application action');
 
 // Demo retirement and replacement contract.
 assert.doesNotMatch(page, /<ios-notification-demo\b/, 'The previous notification demo must not remain mounted');
 assert.doesNotMatch(page, /assets\/ios-notification-demo\/(?:model|component)\.js/, 'The previous notification runtime must not load');
 assert.doesNotMatch(page, /<iframe\b[^>]*mechanism-player|data-player-src|setupMechanismDemos|DEMO_RENDERER_BUILD/, 'Previous mechanism demos and playback controller must be removed');
-const replacementSlots = [...page.matchAll(/data-demo-placeholder="([^"]+)"/g)].map((match) => match[1]);
-assert.deepEqual(replacementSlots, ['primary', 'expertise', 'ai-version', 'client-discovery'], 'The four stable replacement slots must follow the product narrative');
-assert.match(page, /\.demo-replacement-slot\{[^}]*aspect-ratio:1/, 'Primary replacement slot must reserve a stable square');
-assert.match(page, /\.mechanism-demo\{[^}]*aspect-ratio:1/, 'Mechanism replacement slots must reserve stable square canvases');
+assert.doesNotMatch(page, /data-demo-placeholder|data-placeholder|placeholder/i, 'Visible placeholder content must not ship');
+assert.equal((page.match(/class="mechanism-proof"/g) ?? []).length, 3, 'The mechanism must use three finished proof visuals');
+assert.match(page, /class="offer-demo"/, 'Primary offer visual must replace the empty demo slot');
+assert.match(page, /class="founder-proof"/, 'Founder proof must replace the empty portrait slot');
 
 // Homepage information architecture.
 assert.equal((page.match(/class="audience-path"/g) ?? []).length, 4, 'Expected four clear audience pathways');

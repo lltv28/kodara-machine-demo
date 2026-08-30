@@ -2,22 +2,30 @@
 
 This context describes the company-style homepage that explains Kodara's done-for-you AI Version of You.
 
+## Visual surfaces
+
+White is the only neutral page, section, card, and media surface. Green may appear as a solid, high-contrast brand surface for intentional calls to action or product framing. Do not use pale green, tinted green, or green-gradient backgrounds.
+
+## Typography
+
+Instrument Sans remains the page typeface, with IBM Plex Mono reserved for compact process labels. Desktop body copy uses 21px and 24px tiers; mobile uses 19px and 22px. Desktop section headings use a 48px-60px range, while mobile section headings use a 40px-48px range. This strengthens hierarchy for an audience over 40 without enlarging reading text or crowding cards.
+
 ## Language
 
 **Site hero**:
-The trust-first opening beneath the company header. It states the 30-day AI Version of You promise, the one-hour-per-week involvement boundary, and the $500-$2,000 digital-program model beside a replaceable practitioner portrait. Its primary action leads to the product overview; its secondary action opens the qualification scheduler.
+The trust-first opening beneath the company header. It states that the AI Version will be built and launched in 30 days, names the one-hour-per-week involvement boundary and $500-$2,000 digital-program model, and gives qualifying clients the 10-beta-user refund guarantee. A finished offer panel replaces the former portrait placeholder.
 _Avoid_: Authority-logo opener, demo-first hero, generic AI agency hero
 
 **Authority proof**:
-The healthcare-first proof immediately beneath the hero. It leads with the verified 350+ practitioner claim, then separately identifies organizations where people have purchased from AI systems built by the team. Those organizations are not presented as Kodara clients. Category education follows before the product demonstration.
+The healthcare-first proof immediately beneath the hero. It leads with the verified 350+ expert claim. The organization wall provides neutral market context and explicitly does not imply endorsement, affiliation, client status, or purchase history. Category education follows before the product explanation.
 _Avoid_: Client logo wall, trusted-by logos, unqualified healthcare endorsements
 
 **Category education**:
-The current-versus-future delivery comparison explaining the calendar bottleneck before presenting Kodara. Appointment-based delivery is contrasted with approved educational information and digital programs delivered online. It does not present AI programs as medical care.
+The VSL-aligned demand argument explaining why health and wellness expertise is moving online, using the supplied trust and AI-message signals before presenting the calendar bottleneck. Appointment-based delivery is contrasted with approved digital programs capable of serving thousands online. It does not present AI programs as medical care.
 _Avoid_: Generic AI trend copy, unsupported patient outcomes, medical advice claims
 
 **Primary demo**:
-The main visual explanation after category education. The old notification demo has been removed. A stable square replacement slot remains on the left with page-owned sales copy on the right. On smaller screens, the copy appears first and the replacement slot follows.
+The main visual explanation after category education. A finished three-part offer visual connects the expert's knowledge, the AI Version, and the first 10 beta users. On smaller screens, the copy appears first and the visual follows.
 _Avoid_: Restoring a previous demo, sales notification demo, self-funding demo, demo grid
 
 **AI Version of You**:
@@ -37,7 +45,7 @@ The agentic model built from more than 100,000 healthcare leads. It analyzes liv
 _Avoid_: Ad flywheel, self-funding acquisition
 
 **Product overview**:
-The three sequential product chapters explaining expertise extraction, the AI Version of You, and agentic client discovery with program matching. Each capability gets a full-width alternating visual-and-copy chapter. The old Brain, Triager, and Flywheel demos have been removed and replaced with stable square integration slots.
+The three sequential product chapters explaining expertise extraction, the AI Version of You, and agentic client discovery with program matching. Each chapter uses a concrete VSL proof point: one hour per week, $500-$2,000 programs, or the 100,000+ healthcare-lead training foundation.
 _Avoid_: Three equal feature cards, generic feature grid, long sales letter
 
 **Alternatives framing**:
@@ -53,22 +61,22 @@ The audience-orientation section for doctors and practitioners, clinic owners, c
 _Avoid_: Persona cards with invented outcomes, broad "everyone" positioning
 
 **Why Kodara exists**:
-The concise portrait-and-story section establishing Lucas Tyson's relevant marketing credibility, the personal health experience that motivated the company, and the principle that expertise should be able to work beyond the appointment.
-_Avoid_: Long founder sales letter, founder résumé
+The concise proof-and-story section establishing Lucas Tyson's relevant marketing credibility, the personal health experience that motivated the company, and the principle that expertise should be able to work beyond the appointment.
+_Avoid_: Long founder sales letter, generic biography
 
 **Experience and approval**:
-The institutional credibility section combining the verified 350+ practitioner claim, the 100,000+ healthcare-lead foundation, and the expert's pre-launch review and approval. It does not claim HIPAA compliance, clinical validation, formal privacy controls, or another certification unless separately documented.
+The institutional credibility section names the AI engineers and operators with decades of healthcare experience, the verified 350+ expert claim, the 100,000+ healthcare leads generated online and used to train Kodara, and the expert's pre-launch approval. It does not claim HIPAA compliance, clinical validation, formal privacy controls, or another certification unless separately documented.
 _Avoid_: Compliance badge wall, generic security claims, hidden safety copy
 
 **Proof section**:
-The Sandra and Leanne video stories showing an entirely online business, greater consistency, and reduced dependence on the owner's personal time.
+The Sandra and Leanne video stories plus the supplied Dr. Vora and Ashley results. Together they show entirely online delivery, greater consistency, patient enrollment, and reduced dependence on in-person work. The adjacent disclaimer states that individual outcomes vary.
 _Avoid_: Generic client-results grid, unrelated agency proof
 
 **Offer boundary**:
 For qualifying clients, the current offer states that the first AI Version will be completed and launched and the first 10 beta users onboarded within the first 30 days on the launch timeline, or the client receives a full refund. The signed agreement controls all eligibility, definitions, timing, and remedy.
 
 **Application action**:
-The header, hero secondary action, post-product action, final CTA, and footer link say "See If You Qualify" and open the live scheduler. The hero primary button says "See How It Works" and moves visitors to the product overview. The page does not promise a free live demo.
+The header, hero secondary action, post-product action, final CTA, and footer link say "Apply To See If You Qualify" and open the live scheduler. The hero primary button says "See How It Works" and moves visitors to the product overview. The page does not promise a free live demo or an AI conversation that the destination has not been verified to provide.
 
 **Company navigation**:
-The header keeps the primary path concise: what Kodara builds, why it matters, the launch process, client stories, and FAQs. The multi-column footer adds the audience pathways, company story, and review-and-approval section. Unverified privacy, terms, contact, company, and location details remain visibly marked as placeholders until verified.
+The header keeps the primary path concise: what Kodara builds, why it matters, the launch process, client stories, and FAQs. The multi-column footer adds the audience pathways, company story, and review-and-approval section. Unverified privacy, terms, contact, company, and location links are omitted instead of shown as unfinished content.
