@@ -9,6 +9,7 @@ const pagePath = resolve(root, 'index.html');
 const page = readFileSync(pagePath, 'utf8');
 
 assert.ok(statSync(pagePath).size <= 140 * 1024, 'Landing page exceeds the 140KB release budget');
+assert.match(page, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f7c1f59890e8b25c13e26ffca667c2709a446cbd68a53bc0bd06ca3d4b782a9\?tag=!clicked&ref_url=[\s\S]*?<\/head>/, 'Kodara click tracking must load from the document head');
 
 // Official Kodara brand assets.
 const brandAssets = [
@@ -61,8 +62,9 @@ assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:1000px;[^}]*aspect-ratio:16
 assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain the production Vidalytics VSL');
 assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Hero must load the approved Vidalytics VSL source');
 assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
-assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"/, 'Hero application CTA must sit below the VSL stage');
-assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"[^>]*>[^<]+<\/a>\s*<p class="hero-guarantee">/, 'Hero guarantee must sit below the application CTA');
+assert.match(page, /<div id="kodara-triager"><\/div>\s*<script\s+src="https:\/\/embed\.kodara\.com\/v1\/widget\.js"\s+data-target="kodara-triager"\s+data-widget-id="lucas-codex-testing">\s*<\/script>/, 'Hero must load the approved Kodara triager widget');
+assert.match(page, /data-widget-id="lucas-codex-testing">\s*<\/script>\s*<p class="hero-guarantee">/, 'Hero guarantee must sit below the triager widget');
+assert.doesNotMatch(page, /hero-vsl-cta/, 'Replaced hero qualification button must not remain');
 const primaryNav = page.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? '';
 assert.equal((primaryNav.match(/<a\b/g) ?? []).length, 3, 'Primary navigation must stay limited to three orientation links');
 assert.match(primaryNav, />How It Works<[^]*>Results<[^]*>FAQ</, 'Primary navigation must use the agreed labels and order');
@@ -113,12 +115,12 @@ assert.doesNotMatch(page, /professional, clinical, and compliance boundaries|dat
 assert.doesNotMatch(page, /AI sales department|paid assessment|self-funding|highest-level service|smaller digital offers/i, 'Legacy sales-department copy must not return');
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(ctaLinks.length, 3, 'Header, hero, and final sections must contain one primary button each');
+assert.equal(ctaLinks.length, 2, 'Header and final sections must contain one primary button each');
 const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification-link[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(qualificationLinks.length, 3, 'Qualification links must appear only in the header, hero, and final CTA');
+assert.equal(qualificationLinks.length, 2, 'Qualification links must appear only in the header and final CTA');
 assert.ok(qualificationLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Qualification links must use the live scheduler');
 assert.ok(qualificationLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External qualification links must open safely');
-assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 3, 'Every qualification link must use one concise action label');
+assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 2, 'Every qualification link must use one concise action label');
 
 // Demo retirement and replacement contract.
 assert.doesNotMatch(page, /<ios-notification-demo\b/, 'The previous notification demo must not remain mounted');
