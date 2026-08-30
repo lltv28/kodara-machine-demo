@@ -29,7 +29,7 @@ assert.doesNotMatch(page, /assets\/favicon\.svg/, 'The previous generated favico
 
 // Design-system invariants.
 assert.match(page, /--rail-wide:1240px/, 'Desktop content rail must stay at 1240px');
-assert.match(page, /--type-hero:clamp\(3\.5rem,5vw,4\.5rem\)/, 'Hero must use the approved 56px to 72px display scale');
+assert.match(page, /--type-hero:clamp\(3rem,4vw,3\.5rem\)/, 'Hero must use the approved 48px to 56px long-headline scale');
 assert.match(page, /--type-section:clamp\(2\.75rem,4vw,3\.25rem\)/, 'Section headings must retain the approved 44px to 52px scale');
 assert.match(page, /--type-section-long:clamp\(2\.75rem,3\.8vw,3\.25rem\)/, 'Long section headings must stay within the 44px to 52px section tier');
 assert.match(page, /--type-card-small:clamp\(1\.875rem,2\.2vw,2\.125rem\)/, 'Supporting card headings must stay within the 30px to 34px tier');
@@ -86,7 +86,7 @@ assert.ok(sectionIndex('faq') < sectionIndex('cta'), 'FAQ must precede the final
 assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder letter must not return');
 
 // Current VSL offer language.
-assert.match(page, /<h1[^>]*>The AI Version of You, built and launched in 30 days\.<\/h1>/, 'Hero must lead with the complete 30-day AI Version promise');
+assert.match(page, /<h1[^>]*>We Will Turn Your Health Expertise Into An AI You Can Sell To Clients Entirely Online<\/h1>/, 'Hero must lead with the approved online AI offer');
 assert.match(page, /<p class="hero-region-eyebrow" id="hero-region-eyebrow">Limited Availability for Health &amp; Wellness Experts<\/p>\s*<h1/, 'Hero must place the generic regional availability line above the headline');
 assert.match(page, /<p id="hero-region-subheadline">We’re currently helping health and wellness business owners build the AI Version of their expertise\.<\/p>/, 'Hero must server-render the exact generic regional copy');
 assert.match(page, /\.hero-region-eyebrow\{[^}]*min-block-size:1\.4em[^}]*text-wrap:balance/, 'Hero audience personalization must reserve its desktop height and balance wrapping');
