@@ -1,8 +1,10 @@
-# Kodara Machine Demo
+# Kodara AI Version of You Landing Page
 
-Mobile-test deployment of the self-contained Kodara sales flywheel demo.
+Kodara's healthcare landing page, hosted on Cloudflare Pages.
 
-Live site: https://lltv28.github.io/kodara-machine-demo/
+Live site: https://kodarahealth.com/
+
+The hero uses a Cloudflare Pages Function at `/api/visitor-region` to resolve an allowlisted US state or Canadian province. The function reads only Cloudflare's trusted `CF-Connecting-IP` header and keeps `IPWHOIS_API_KEY` in the server environment. The browser receives only the approved region name or a generic result.
 
 ## Release checks
 
@@ -11,6 +13,7 @@ Run the dependency-free checks before publishing:
 ```sh
 node tools/check-release.mjs
 node tools/check-triager-lattice.mjs
+node --test tests/*.test.mjs
 ```
 
 Production budgets:

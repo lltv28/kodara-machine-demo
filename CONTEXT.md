@@ -13,7 +13,7 @@ Instrument Sans remains the page typeface. Process labels use the same family in
 ## Language
 
 **Site hero**:
-The trust-first opening beneath the company header uses a centered cinema stack: headline, one supporting sentence, stable 16:9 VSL stage, one application action, and compact guarantee reassurance below it. It states that the AI Version will be built and launched in 30 days, names the one-hour-per-week involvement boundary and $500-$2,000 digital-program model, and gives qualifying clients the 10-beta-user refund guarantee. Until the final VSL source is connected, the stage uses a branded offer poster rather than a fake video player.
+The trust-first opening beneath the company header uses a centered cinema stack: headline, one supporting sentence, stable 16:9 VSL stage, one application action, and compact guarantee reassurance below it. The supporting sentence may name an approved US state or Canadian province when Cloudflare and IPWhois resolve one within 350ms; every other visitor sees the generic version without a layout shift. The browser may cache only the approved region name for the current session, and analytics may receive only the personalization mode and approved region name. The page gives qualifying clients the 10-beta-user refund guarantee. Until the final VSL source is connected, the stage uses a branded offer poster rather than a fake video player.
 _Avoid_: Authority-logo opener, demo-first hero, generic AI agency hero
 
 **Authority proof**:
@@ -70,7 +70,7 @@ _Avoid_: Generic client-results grid, unrelated agency proof
 For qualifying clients, the current offer states that the first AI Version will be completed and launched and the first 10 beta users onboarded within the first 30 days on the launch timeline, or the client receives a full refund. The signed agreement controls all eligibility, definitions, timing, and remedy.
 
 **Application action**:
-The header navigation is limited to How It Works, Results, and FAQ. The header, hero, final CTA, and footer link say "See If You Qualify" and open the live scheduler. The page does not add a repeated mid-page action or promise a free live demo or AI conversation that the destination has not been verified to provide.
+The header navigation is limited to How It Works, Results, and FAQ. The header, hero, and final CTA say "See If You Qualify" and open the live scheduler. The footer does not repeat the application action. The page does not add a repeated mid-page action or promise a free live demo or AI conversation that the destination has not been verified to provide.
 
 **Company navigation**:
-The header keeps the primary path concise: How It Works, Results, and FAQ, followed by one qualification action. Mobile keeps only the brand and qualification action. The multi-column footer adds the audience pathways, company story, and review-and-approval section. Important legal language remains complete but is collapsed behind a native disclosure by default. Unverified privacy, terms, contact, company, and location links are omitted instead of shown as unfinished content.
+The header keeps the primary path concise: How It Works, Results, and FAQ, followed by one qualification action. Mobile keeps only the brand and qualification action. The institutional footer contains Kodara company information and copyright on the left, with the complete legal disclosure as permanently visible, unbolded fine print on the right. The footer contains no navigation or application action. Unverified privacy, terms, contact, and location links are omitted instead of shown as unfinished content.

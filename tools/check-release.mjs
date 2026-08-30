@@ -10,6 +10,22 @@ const page = readFileSync(pagePath, 'utf8');
 
 assert.ok(statSync(pagePath).size <= 140 * 1024, 'Landing page exceeds the 140KB release budget');
 
+// Official Kodara brand assets.
+const brandAssets = [
+  'assets/brand/kodara-wordmark.svg',
+  'assets/brand/favicon-32.png',
+  'assets/brand/favicon-48.png',
+  'assets/brand/apple-touch-icon-180.png',
+  'assets/brand/favicon-192.png',
+  'assets/brand/favicon-512.png',
+];
+for (const asset of brandAssets) {
+  assert.ok(existsSync(resolve(root, asset)), `Missing official brand asset: ${asset}`);
+  assert.ok(page.includes(asset), `Official brand asset is not wired into the page: ${asset}`);
+}
+assert.equal((page.match(/assets\/brand\/kodara-wordmark\.svg/g) ?? []).length, 2, 'Official wordmark must appear in the header and footer');
+assert.doesNotMatch(page, /assets\/favicon\.svg/, 'The previous generated favicon must not remain in use');
+
 // Design-system invariants.
 assert.match(page, /--rail-wide:1240px/, 'Desktop content rail must stay at 1240px');
 assert.match(page, /--type-hero:clamp\(3\.5rem,5vw,4\.5rem\)/, 'Hero must use the approved 56px to 72px display scale');
@@ -66,7 +82,11 @@ assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder l
 
 // Current VSL offer language.
 assert.match(page, /<h1[^>]*>The AI Version of You, built and launched in 30 days\.<\/h1>/, 'Hero must lead with the complete 30-day AI Version promise');
-assert.match(page, /Give us about one hour per week\.[^<]*\$500-\$2,000 digital programs[^<]*entirely online/, 'Hero must state the time, price, and online-delivery boundaries');
+assert.match(page, /<p id="hero-region-subheadline">We’re currently helping health and wellness business owners build the AI Version of their expertise\.<\/p>/, 'Hero must server-render the exact generic regional copy');
+assert.match(page, /\.site-hero-copy>p\{[^}]*min-block-size:4\.5em[^}]*text-wrap:balance/, 'Hero personalization must reserve its desktop height and balance wrapping');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.site-hero-copy>p\{[^}]*min-block-size:6em/, 'Hero personalization must reserve its mobile height');
+assert.match(page, /@media\(max-width:340px\)\{\.site-hero-copy>p\{min-block-size:7\.5em\}\}/, 'Hero personalization must reserve five lines on narrow mobile screens');
+assert.match(page, /<script type="module" src="assets\/js\/region-personalization\.mjs"><\/script>/, 'Hero regional personalization client is not loaded');
 assert.match(page, /first 10 beta users within 30 days or you receive a full refund/, 'Hero must state the qualifying-client guarantee');
 assert.match(page, /Less than 28%/, 'Demand narrative must include the healthcare-trust signal');
 assert.match(page, /260 million health and wellness messages/, 'Demand narrative must include the current AI-demand signal');
@@ -90,10 +110,10 @@ assert.doesNotMatch(page, /AI sales department|paid assessment|self-funding|high
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.equal(ctaLinks.length, 3, 'Header, hero, and final sections must contain one primary button each');
 const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification-link[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(qualificationLinks.length, 4, 'Qualification links must appear in the header, hero, final CTA, and footer');
+assert.equal(qualificationLinks.length, 3, 'Qualification links must appear only in the header, hero, and final CTA');
 assert.ok(qualificationLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Qualification links must use the live scheduler');
 assert.ok(qualificationLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External qualification links must open safely');
-assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 4, 'Every qualification link must use one concise action label');
+assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 3, 'Every qualification link must use one concise action label');
 
 // Demo retirement and replacement contract.
 assert.doesNotMatch(page, /<ios-notification-demo\b/, 'The previous notification demo must not remain mounted');
@@ -116,9 +136,15 @@ assert.equal((page.match(/class="credibility-item"/g) ?? []).length, 3, 'Expecte
 assert.equal((page.match(/class="case-kicker"/g) ?? []).length, 2, 'Video testimonials must use a consistent client-story label');
 assert.equal((page.match(/class="case-fact"/g) ?? []).length, 2, 'Video testimonials must explain what Kodara helped build');
 assert.equal((page.match(/class="case-role"/g) ?? []).length, 2, 'Written outcomes must include consistent role context');
-assert.equal((page.match(/class="footer-group"/g) ?? []).length, 4, 'Expected four footer navigation groups');
+assert.equal((page.match(/class="footer-group"/g) ?? []).length, 0, 'Footer navigation groups must stay removed');
+assert.doesNotMatch(page, /<footer[\s\S]*?<nav\b/, 'Footer must contain company information and disclaimers only');
+assert.match(page, /class="site-footer-brand-block"[\s\S]*© 2026 Kodara LLC\. All rights reserved\.[\s\S]*class="footer-disclaimers"/, 'Footer must place Kodara LLC information before the disclaimer columns');
+assert.doesNotMatch(page, /<footer[\s\S]*qualification-link/, 'Footer must not repeat the primary application action');
 assert.equal((page.match(/class="footer-disclaimer"/g) ?? []).length, 3, 'Expected three important footer disclaimers');
-assert.match(page, /<details class="footer-disclaimers">\s*<summary>Important disclaimers<\/summary>/, 'Footer disclaimers must remain complete but collapsed by default');
+assert.match(page, /<section class="footer-disclaimers" aria-label="Legal disclaimers">\s*<div class="footer-disclaimer-list">/, 'Footer disclaimers must remain complete and permanently visible without a visible section heading');
+assert.doesNotMatch(page, />Important disclaimers</, 'Footer must not show an Important disclaimers heading');
+assert.match(page, /\.footer-disclaimer\{font-size:\.625rem;font-weight:400;line-height:1\.25\}/, 'Footer disclaimer line boxes must use compact, unbolded fine-print typography');
+assert.match(page, /\.footer-disclaimer h3\{display:inline;color:inherit;font:inherit\}/, 'Footer disclaimer headings must inherit the parent fine-print line box');
 assert.match(page, /<h3>Earnings Disclaimer<\/h3>/, 'Footer must include the earnings disclaimer');
 assert.match(page, /<h3>Medical Information Disclaimer<\/h3>/, 'Footer must include the medical information disclaimer');
 assert.match(page, /<h3>AI Disclaimer<\/h3>/, 'Footer must include the AI disclaimer');
@@ -129,7 +155,6 @@ assert.equal((page.match(/<section class="[^"]*card[^"]*"/g) ?? []).length, 2, '
 assert.match(page, /<h2 id="founder-highlight-title">Why Kodara exists\.<\/h2>/, 'Founder section must use the concise company-story framing');
 assert.match(page, /class="founder-principle"/, 'Founder section must end with the guiding principle');
 assert.match(page, /id="review-approval"/, 'The review-and-approval section needs an intent-revealing anchor');
-assert.match(page, /href="#review-approval">Review &amp; Approval<\/a>/, 'Footer navigation must link to review and approval');
 
 // Proof, FAQ, and accessibility.
 assert.equal((page.match(/class="proof-snapshot-logo proof-snapshot-logo--/g) ?? []).length, 6, 'Authority wall must contain six healthcare logos');
@@ -142,7 +167,6 @@ assert.ok(wistiaPlayers.every((tag) => /aria-label="[^"]+"/.test(tag)), 'Every t
 assert.equal((page.match(/class="faq-item"/g) ?? []).length, 9, 'Expected nine offer FAQs');
 assert.match(page, /function setupFaqAccordion\(\)/, 'FAQ motion controller is missing');
 assert.match(page, /matchMedia\('\(prefers-reduced-motion:reduce\)'\)/, 'FAQ motion must respect reduced motion');
-assert.match(page, /@media\(prefers-reduced-motion:reduce\)\{\.footer-disclaimers>summary::after\{transition:none\}\}/, 'Footer disclosure motion must respect reduced motion');
 
 const localReferences = [...page.matchAll(/\b(?:src|data-src)="([^"]+)"/g)]
   .map((match) => match[1].replaceAll('&amp;', '&'))
