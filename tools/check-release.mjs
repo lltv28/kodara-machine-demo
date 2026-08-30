@@ -6,198 +6,103 @@ import { dirname, resolve } from 'node:path';
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
 const pagePath = resolve(root, 'index.html');
-const rendererPath = resolve(root, 'tools/video-capture.html');
-const notificationComponentPath = resolve(root, 'assets/ios-notification-demo/component.js');
-const notificationModelPath = resolve(root, 'assets/ios-notification-demo/model.js');
-const notificationStylesPath = resolve(root, 'assets/ios-notification-demo/styles.css');
 const page = readFileSync(pagePath, 'utf8');
-const renderer = readFileSync(rendererPath, 'utf8');
-const notificationComponent = readFileSync(notificationComponentPath, 'utf8');
-const notificationModel = readFileSync(notificationModelPath, 'utf8');
-const notificationStyles = readFileSync(notificationStylesPath, 'utf8');
 
-const budgets = new Map([
-  [pagePath, 140 * 1024],
-  [rendererPath, 205 * 1024],
-]);
+assert.ok(statSync(pagePath).size <= 140 * 1024, 'Landing page exceeds the 140KB release budget');
 
-for (const [path, maximum] of budgets) {
-  const bytes = statSync(path).size;
-  assert.ok(bytes <= maximum, `${path} is ${bytes} bytes; budget is ${maximum}`);
-}
-
-assert.match(page, /--measure-display:/, 'Missing semantic display measure');
-assert.match(page, /--measure-faq:72ch/, 'Desktop FAQ answers must retain the approved 72ch measure');
-assert.match(page, /\.faq-answer\{width:100%;max-width:var\(--measure-faq\)/, 'FAQ answers must use the dedicated desktop measure');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*\.faq-answer\{max-width:none;/, 'Mobile FAQ answers must use the available width');
-assert.match(page, /\.faq-item summary::after\{[^}]*transition:transform \.22s cubic-bezier\(\.22,1,\.36,1\)/, 'FAQ indicator must use the approved closing duration and easing');
-assert.match(page, /\.faq-item\[open\] summary::after\{[^}]*transition-duration:\.3s/, 'FAQ indicator must use the approved opening duration');
-assert.match(page, /function setupFaqAccordion\(\)/, 'FAQ accordion motion controller is missing');
-assert.match(page, /summary\.addEventListener\('click'/, 'FAQ animation must preserve summary click and keyboard activation');
-assert.match(page, /summary\.addEventListener\('keydown'/, 'FAQ animation must preserve explicit Enter and Space activation');
-assert.match(page, /if\(event\.key!==\'Enter\' && event\.key!==\' \'\) return;\s*event\.preventDefault\(\);\s*if\(event\.repeat\) return;/, 'FAQ keyboard handling must prevent native repeated-key scrolling');
-assert.match(page, /suppressKeyboardClick && event\.detail===0/, 'FAQ keyboard handling must suppress a synthetic follow-up click');
-assert.match(page, /item\.removeAttribute\('name'\)/, 'Scripted FAQ motion must prevent native group closing from skipping animation');
-assert.match(page, /matchMedia\('\(prefers-reduced-motion:reduce\)'\)/, 'FAQ motion must respect reduced-motion preferences');
-assert.match(page, /item\.animate\(\[\{height:/, 'FAQ accordion must animate measured height rather than a fixed max-height');
-assert.match(page, /--tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px/, 'Heading tracking must retain the approved -2px treatment without changing stat tracking');
-assert.match(page, /\.primary-demo h1\{[^}]*line-height:1\.1;[^}]*letter-spacing:var\(--tracking-display\)/, 'Hero heading must retain the shared heading rhythm');
-assert.match(page, /\.card-title\{[^}]*line-height:1\.1;[^}]*letter-spacing:var\(--tracking-display\)/, 'Section headings must retain the shared heading rhythm');
-assert.match(page, /\.mechanism-feature h3\{[^}]*line-height:1\.1;[^}]*letter-spacing:var\(--tracking-heading\)/, 'Feature headings must retain the shared heading rhythm');
-assert.match(page, /\.case-quote\{[^}]*letter-spacing:var\(--tracking-body\)/, 'Long testimonial copy must not inherit display tracking');
-assert.match(page, /--space-1:4\.6px;--space-2:9\.2px;--space-3:13\.8px;--space-4:18\.4px;--space-5:27\.6px;--space-6:36\.8px;--space-7:55\.2px/, 'Internal spacing tiers must retain the approved 15% increase');
-assert.match(page, /--space-8:80px;--space-9:112px/, 'Large section spacing must retain the expanded rhythm');
-assert.match(page, /--rail-wide:1280px/, 'Desktop content rail must retain the expanded 1280px width');
-assert.match(page, /--type-body:1\.375rem;--type-body-large:1\.5rem/, 'Desktop body typography must retain the approved 22px and 24px tiers');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.125rem;--type-body-large:1\.5rem/, 'Mobile body typography must retain the approved 18px and 24px tiers');
-assert.match(page, /body\{[^}]*font-size:var\(--type-body\);line-height:1\.5;/, 'Body copy must retain the approved 150% line height');
-assert.match(page, /--type-section:clamp\(3\.6rem,3\.252rem \+ 1\.416vw,4\.5rem\)/, 'Section typography must retain the approved 20% increase');
-assert.match(page, /--type-control:1\.2rem;--type-button:1\.7rem;--type-label:1\.2rem;--type-meta:1\.2rem;--type-legal:1\.125rem/, 'Small typography tiers must retain their approved increases');
-assert.match(page, /--type-button:1\.7rem/, 'CTA typography must retain the approved 1.7rem size');
-assert.match(page, /\.card\{--card-pad:var\(--space-6\)/, 'Desktop cards must retain the expanded 36.8px padding');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*\.card\{--card-pad:var\(--space-5\)\}/, 'Mobile cards must retain the expanded 27.6px padding');
-assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)[^}]*text-transform:capitalize/, 'CTA buttons must use their own line, bold type, and Capitalize Case');
-assert.match(page, /\.cta-btn\{[^}]*padding:12\.65px var\(--space-6\)/, 'Desktop CTA buttons must retain the approved horizontal padding');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{padding-inline:var\(--space-4\);/, 'Mobile CTA buttons must use responsive horizontal padding');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*\.cta-btn\{[^}]*font-size:clamp\(1\.35rem,6\.15vw,1\.7rem\);white-space:nowrap/, 'Mobile CTA buttons must remain legible without wrapping');
-assert.match(page, /@media\(max-width:350px\)\{\s*\.cta-btn\{padding-inline:var\(--space-3\);font-size:1\.05rem\}/, 'Very narrow screens must keep the full CTA label inside the button');
-assert.match(page, /\.primary-demo h1\{[^}]*font-size:clamp\(3\.3rem,4\.8vw,3\.6rem\)/, 'Hero typography must retain the approved 20% increase');
-assert.match(page, /--type-stat:clamp\(5\.1rem,9\.6vw,7\.8rem\)/, 'Stat typography must retain the approved 20% increase');
-assert.match(page, /\.proof-stat\{[^}]*font-size:var\(--type-stat\)/, 'Proof stats must consume the semantic stat tier');
-assert.match(page, /\.proof-card blockquote::before\{[^}]*font-size:5\.4rem/, 'Quote marks must retain the approved 20% increase');
-assert.match(page, /\.faq-item summary::after\{[^}]*font-size:1\.8rem/, 'FAQ controls must retain the approved 20% increase');
-assert.match(page, /--bg:#F6F6F7;--surface:var\(--bg\)/, 'Neutral surfaces must use one cool-gray token');
-assert.match(page, /--page:#fff;--bg:#F6F6F7;--surface:var\(--bg\)/, 'Page canvas must use pure white');
-assert.match(page, /body\{[^}]*background:var\(--page\)/, 'Body must render the page canvas token');
-assert.match(page, /--border-subtle:rgba\(26,26,26,\.06\)/, 'Missing WL-aligned subtle border token');
-assert.match(page, /--border-default:rgba\(26,26,26,\.09\)/, 'Missing WL-aligned default border token');
-assert.match(page, /--border-accent:rgba\(46,125,82,\.20\)/, 'Missing green accent border token');
-assert.doesNotMatch(page, /--accent-soft:/, 'Pale green section fills must not return');
+// Design-system invariants.
+assert.match(page, /--rail-wide:1240px/, 'Desktop content rail must stay at 1240px');
+assert.match(page, /--type-hero:clamp\(2\.75rem,4\.8vw,4rem\)/, 'Hero must use the approved healthcare display scale');
+assert.match(page, /--type-body:1\.25rem;--type-body-large:1\.375rem/, 'Desktop body text must retain the readable 20px and 22px tiers');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.125rem;--type-body-large:1\.25rem/, 'Mobile body text must retain the readable 18px and 20px tiers');
+assert.match(page, /--tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px/, 'Heading tracking must use the shared -2px treatment');
+assert.match(page, /--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px/, 'Internal spacing must use the shared 4px scale');
 assert.match(page, /--radius-sm:8px/, 'Compact surfaces need the 8px radius tier');
 assert.match(page, /--radius:16px;--radius-lg:16px/, 'Support surfaces need the 16px radius tier');
 assert.match(page, /--radius-xl:24px/, 'Featured surfaces need the 24px radius tier');
-assert.match(page, /--radius-pill:9999px/, 'Avatars and pill controls need a semantic full-radius token');
-assert.match(page, /--shadow-md:0 12px 32px rgba\(7,94,63,\.06\),0 2px 6px rgba\(26,26,26,\.04\)/, 'Featured surfaces need the layered green-tinted shadow');
-assert.match(page, /<meta name="description" content="[^"]+">/, 'Landing page needs a search and share description');
-assert.match(page, /<link rel="icon" href="assets\/favicon\.svg"/, 'Landing page needs a local favicon');
-assert.match(page, /--measure-body:/, 'Missing semantic body measure');
-assert.match(page, /text-wrap:balance/, 'Headlines must use balanced wrapping');
-assert.match(page, /text-wrap:pretty/, 'Body copy must use pretty wrapping');
-assert.match(page, /\.proof-more summary:focus-visible/, 'Disclosure controls need a visible focus state');
-assert.match(page, /prefers-reduced-motion:reduce/, 'The landing page must honor reduced motion');
-assert.match(notificationStyles, /prefers-reduced-transparency: reduce/, 'Notification glass needs an opaque accessibility fallback');
-assert.match(notificationStyles, /prefers-reduced-motion: reduce/, 'Notification motion must honor reduced-motion preferences');
-assert.match(notificationComponent, /attachShadow\(\{ mode: "open" \}\)/, 'Notification UI must isolate its iOS styles from the landing page');
-assert.doesNotMatch(notificationStyles, /\.showcase|\.demo-intro|\.scenario-picker|\.replay-button/, 'Standalone demo-page styles must not ship in the landing component');
-assert.doesNotMatch(notificationComponent, /new URLSearchParams|data-replay|data-workflow/, 'Standalone capture and control behavior must not leak into landing-page URLs');
-assert.match(notificationModel, /WORKFLOW_GROUPS\.length !== 2/, 'Notification demo must retain the assessment and sales-call workflows');
-assert.doesNotMatch(notificationModel, /Pocket Coach|downsell/i, 'Pocket Coach notifications must not return to the primary demo');
-assert.match(page, /\.primary-demo,\.founder-highlight,\.case-featured--portrait,\.cta\{border-radius:var\(--radius-xl\)\}/, 'Featured surfaces need an explicit 24px role');
-assert.match(page, /@media\(min-width:900px\)\{\.primary-demo,\.case-featured--portrait\{grid-template-columns:minmax\(0,3fr\) minmax\(320px,2fr\)\}\}/, 'Demo and featured testimonial must use the approved desktop-only 60/40 media-text split');
-assert.match(page, /\.founder-highlight\{grid-template-columns:minmax\(320px,2fr\) minmax\(0,3fr\)\}/, 'Founder card must use the approved 40/60 image-text split');
-assert.match(page, /\.cta\{[^}]*background:var\(--accent-dark\)[^}]*color:#fff/, 'Closing CTA must remain the single deep-green color block');
-assert.match(page, /\.cta \.cta-btn\{[^}]*color:var\(--accent-dark\)[^}]*background:#fff/, 'Closing CTA button must keep high contrast');
-assert.match(renderer, /prefers-reduced-motion:reduce/, 'The demo renderer must honor reduced motion');
-assert.match(renderer, /var PLAYER_MODE=document\.documentElement\.classList\.contains\('player-mode'\)/, 'Reduced motion must work inside independent demo players');
-assert.match(renderer, /if\(REDUCE && PLAYER_MODE\)\{ window\.renderCaptureFrame\(chapter,chapter==='triagers'\?\.964:1,0\);send\('ready'\);return; \}/, 'Reduced-motion players must settle on a useful chapter end state');
-assert.match(renderer, /renderTriagerScrollActivity\(state\.triagerActivityProgress,\(!REDUCE \|\| PLAYER_MODE\) && state\.phase==='triagers'\)/, 'Reduced-motion Triager players must keep their completed conversation visible');
-assert.match(renderer, /zoomRange\(local,0,\.25\)/, 'Graph milestones need a 1.5-second hold in the eight-second loop');
-assert.match(renderer, /if\(p>=\.70\)/, 'The learning result needs a 1.5-second hold in the five-second loop');
-assert.match(page, /class="card primary-demo"/, 'Primary demo must follow the authority proof');
-assert.match(page, /\.proof-snapshot\+\.primary-demo\{margin-top:var\(--space-6\)\}/, 'Authority proof and hero must use the compressed first-screen gap');
-assert.match(page, /class="primary-demo-copy"/, 'Primary demo needs page-owned sales copy');
-assert.match(page, /class="primary-demo-visual"[^>]*data-demo-slot/, 'Primary demo needs a stable visual integration slot');
-assert.ok(page.indexOf('class="primary-demo-visual"') < page.indexOf('class="primary-demo-copy"'), 'Primary demo visual must lead the split layout');
-assert.match(page, /<ios-notification-demo\b[^>]*role="group"[^>]*tabindex="-1"[^>]*aria-label="Live Kodara AI sales notifications"/, 'Primary demo must mount an accessible native notification component');
-assert.doesNotMatch(page, /Interactive demo placeholder/, 'Primary demo placeholder must be removed after native integration');
-assert.match(page, /\.primary-demo-visual\{[^}]*background:var\(--accent\)/, 'Primary demo phone needs the approved solid green backdrop');
-assert.match(page, /<script defer src="assets\/ios-notification-demo\/model\.js"><\/script>/, 'Notification model must load as a local asset');
-assert.match(page, /<script defer src="assets\/ios-notification-demo\/component\.js"><\/script>/, 'Native notification component must load as a local asset');
-assert.match(page, /@media\(max-width:899px\)[\s\S]*\.primary-demo-copy\{[^}]*order:1;[\s\S]*\.primary-demo-visual\{[^}]*order:2;/, 'Hero copy and CTA must precede the visual below desktop width');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*\.proof-snapshot-logo-row\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/, 'Mobile authority logos must use a compact three-column grid');
-assert.doesNotMatch(page, /class="primary-demo-visual"[^>]*role="img"/, 'Interactive demo slot must not hide future controls behind an image role');
-assert.doesNotMatch(page, /class="card video-story"/, 'Old four-demo story must be removed');
-assert.doesNotMatch(page, /class="video-chapter"/, 'Old independent demo chapters must be removed');
-assert.match(page, /class="card founder-letter"/, 'Founder letter must follow the primary demo');
-assert.match(page, /class="founder-letter-copy" data-letter-copy/, 'Founder letter needs a measurable reading body');
-assert.match(page, /class="card mechanism-features"/, 'Mechanism features must follow the founder letter');
-assert.doesNotMatch(page, /mid-cta/, 'Removed white mid-page CTA must not return');
-assert.doesNotMatch(page, /buyer-situation/, 'Removed buyer-symptoms section must not return');
-assert.match(page, /class="card founder-letter"[\s\S]*?<\/section>\s*<!-- ============ MECHANISM FEATURES ============ -->\s*<section class="card mechanism-features"/, 'Three AI roles must follow the founder letter directly');
+assert.match(page, /--page:#FCFDFC;--panel:#fff;--bg:#F1F6F5;--surface:var\(--bg\)/, 'Page surfaces must use the healthcare palette');
+assert.match(page, /--ink:#20362D;--ink-2:#304E42;--ink-3:#567066/, 'Text must use the healthcare green-black palette');
+assert.match(page, /--accent:#106844;--accent-hover:#0C5537;--accent-ink:#106844;--accent-dark:#0C4F34/, 'Actions must use the Kodara green palette');
+assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
+assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced-motion preferences');
+assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
 
-const letterMatch = page.match(/class="founder-letter-copy" data-letter-copy>([\s\S]*?)<\/div>/);
-assert.ok(letterMatch, 'Expected founder letter copy');
-const letterBody = letterMatch[1].replace(/<p class="founder-letter-signature">[\s\S]*?<\/p>/, '');
-const letterParagraphs = letterBody.match(/<p(?:\s[^>]*)?>/g) ?? [];
-assert.equal(letterParagraphs.length, 15, `Founder letter has ${letterParagraphs.length} reading beats; expected 15`);
-const letterWords = letterBody.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).filter(Boolean);
-assert.ok(letterWords.length >= 180 && letterWords.length <= 300, `Founder letter has ${letterWords.length} words; expected 180-300`);
-assert.match(letterBody, /sells 24\/7 in the background of your business/i, 'Founder letter must retain the VSL mechanism language');
-assert.match(letterBody, /two things happen at once/i, 'Founder letter must retain the VSL assessment transition');
-assert.match(letterBody, /put their money where their mouth is/i, 'Founder letter must retain the VSL buyer-intent language');
-assert.match(letterBody, /about one hour per week/i, 'Founder letter must retain the VSL client-involvement boundary');
-
-const mechanismFeatures = page.match(/class="mechanism-feature"/g) ?? [];
-assert.equal(mechanismFeatures.length, 3, `Expected three mechanism features, found ${mechanismFeatures.length}`);
-assert.match(page, /<h3>AI Brain<\/h3>/, 'Mechanism must name the shared AI Brain');
-assert.match(page, /<h3>AI Triagers<\/h3>/, 'Mechanism must name AI Triagers');
-assert.match(page, /<h3>AI Salespeople<\/h3>/, 'Mechanism must name AI Salespeople');
-const mechanismPlaceholders = page.match(/data-placeholder="mechanism"/g) ?? [];
-assert.equal(mechanismPlaceholders.length, 0, 'Live role demos must replace every mechanism placeholder');
-const mechanismPlayers = [...page.matchAll(/<iframe class="mechanism-player"[^>]*>/g)].map((match) => match[0]);
-assert.equal(mechanismPlayers.length, 3, `Expected three live mechanism players, found ${mechanismPlayers.length}`);
-assert.ok(mechanismPlayers.every((tag) => /loading="lazy"/.test(tag)), 'Role demos must load lazily');
-assert.match(page, /player=learn&amp;compact=1&amp;duration=5000&amp;loop=1/, 'AI Brain card must autoplay its five-second loop');
-assert.match(page, /player=triagers&amp;compact=1&amp;duration=18000&amp;loop=1/, 'AI Triager card must autoplay its eighteen-second loop');
-assert.match(page, /player=flywheel&amp;compact=1&amp;duration=8000&amp;loop=1/, 'AI Salespeople card must autoplay its eight-second loop');
-assert.match(page, /function setupMechanismDemos\(\)/, 'Role demos need a viewport-aware playback controller');
-assert.match(page, /send\(index,'replay'\)/, 'Role demo controller must replay the active stage');
-assert.match(page, /send\(index,'pause'\)/, 'Role demo controller must pause inactive stages');
-assert.match(page, /function syncMechanismPlayback\(\)/, 'Role demos need one simultaneous visibility sync');
-assert.doesNotMatch(page, /sequenceTimer|startDesktop/, 'Role demos must not wait for a desktop sequence');
-assert.match(renderer, /var requestedDuration=Number\(new URLSearchParams\(location\.search\)\.get\('duration'\)\)/, 'Demo players must accept a section-specific duration');
-assert.match(renderer, /send\('completed'\)/, 'Demo players must report a controlled completion state');
-assert.match(page, /class="card founder-highlight"/, 'Founder highlight must follow mechanism features');
-assert.match(page, /data-placeholder="founder"/, 'Founder highlight needs a stable portrait placeholder');
-assert.ok(page.indexOf('class="card mechanism-features"') < page.indexOf('class="card founder-highlight"'), 'Mechanism features must precede founder highlight');
-assert.ok(page.indexOf('class="card founder-highlight"') < page.indexOf('class="card case-studies"'), 'Founder highlight must precede proof stories');
-assert.match(page, /\.case-studies\+\.proof\{margin-top:var\(--space-5\)\}/, 'Video and written testimonials must use one continuous proof rhythm');
-assert.doesNotMatch(page, /What clients measured after putting AI to work\./, 'Written testimonials must not repeat the proof headline');
-assert.match(page, /class="card proof" aria-label="More client results"/, 'Written testimonials need an accessible section name without a visible heading');
-assert.doesNotMatch(page, /class="card outcome-features"/, 'Removed outcome section must not return');
-assert.doesNotMatch(page, /class="card implementation-strip"/, 'Removed implementation strip must not return');
-assert.match(page, /Self-funding is the objective, not a guaranteed result\./, 'Landing page must keep the self-funding boundary');
-
-const h1s = page.match(/<h1\b/g) ?? [];
-assert.equal(h1s.length, 1, `Expected one h1, found ${h1s.length}`);
-assert.match(page, /<h1[^>]*>An AI sales department that helps pay for its own leads\.<\/h1>/, 'Primary demo H1 must state the self-funding mechanism in spoken sentence case');
-assert.match(page, /<h1[^>]*>An AI sales department that helps pay for its own leads\.<\/h1>\s*<p>[^<]+<\/p>\s*<p class="primary-demo-note">Self-funding is the objective, not a guaranteed result\.<\/p>/, 'Hero must qualify the self-funding objective beside its claim');
-assert.doesNotMatch(page, /Every lead you pay for should have a useful next step/i, 'The old soft founder-letter headline must not return');
-assert.doesNotMatch(page, /90% of leads/i, 'Unverified exact lead-loss percentages must not appear');
-
-const iframes = [...page.matchAll(/<iframe\b[^>]*>/g)].map((match) => match[0]);
-assert.ok(iframes.every((tag) => /\btitle="[^"]+"/.test(tag)), 'Every iframe needs a useful title');
-assert.ok(iframes.filter((tag) => /loading="eager"/.test(tag)).length <= 1, 'Only one iframe may load eagerly');
-
-const wistiaPlayers = [...page.matchAll(/<wistia-player\b[^>]*>/g)].map((match) => match[0]);
-assert.equal(wistiaPlayers.length, 3, `Expected three testimonial players, found ${wistiaPlayers.length}`);
-assert.ok(wistiaPlayers.every((tag) => /\baria-label="[^"]+"/.test(tag)), 'Every testimonial player needs an accessible name');
-assert.match(wistiaPlayers[0], /media-id="6oj2gj3wqt"/, 'Sandra must remain the featured testimonial');
-
-const proofCards = page.match(/class="proof-card [^"]+"/g) ?? [];
-assert.equal(proofCards.length, 8, `Expected eight written proof cards, found ${proofCards.length}`);
-const faqItems = page.match(/class="faq-item"/g) ?? [];
-assert.equal(faqItems.length, 7, `Expected seven FAQ items, found ${faqItems.length}`);
-assert.doesNotMatch(page, /class="site-footer"/, 'Removed footer must not return');
-assert.doesNotMatch(page, /mobile-cta/, 'Removed sticky CTA must not return');
+// Core page structure.
+for (const className of ['site-header', 'site-hero', 'proof-snapshot', 'education-section', 'primary-demo', 'mechanism-features', 'midpage-action', 'alternatives-section', 'case-studies', 'process-section', 'audience-section', 'founder-highlight', 'credibility-section', 'faq', 'cta', 'site-footer']) {
+  assert.match(page, new RegExp(`class="[^"]*${className}`), `Missing ${className} section`);
+}
+assert.ok(page.indexOf('class="site-hero"') < page.indexOf('class="card proof-snapshot"'), 'Authority proof must follow the hero');
+assert.ok(page.indexOf('class="card proof-snapshot"') < page.indexOf('class="education-section"'), 'Category education must follow authority proof');
+assert.ok(page.indexOf('class="education-section"') < page.indexOf('class="card primary-demo"'), 'The replacement demo slot must follow category education');
+assert.ok(page.indexOf('class="card primary-demo"') < page.indexOf('class="card mechanism-features'), 'Product overview must follow the primary demo');
+assert.ok(page.indexOf('class="card mechanism-features') < page.indexOf('class="alternatives-section"'), 'Alternatives framing must follow the product overview');
+assert.ok(page.indexOf('class="alternatives-section"') < page.indexOf('class="card case-studies"'), 'Client proof must follow the alternatives framing');
+assert.ok(page.indexOf('class="card case-studies"') < page.indexOf('class="process-section'), 'Launch process must follow client proof');
+assert.ok(page.indexOf('class="process-section') < page.indexOf('class="audience-section"'), 'Audience pathways must follow the launch process');
+assert.ok(page.indexOf('class="card case-studies"') < page.indexOf('class="card founder-highlight"'), 'The concise founder story must follow client proof');
+assert.ok(page.indexOf('class="card founder-highlight"') < page.indexOf('class="credibility-section'), 'Institutional credibility must follow the founder story');
 assert.ok(page.indexOf('class="card faq"') < page.indexOf('class="card cta"'), 'FAQ must precede the final CTA');
+assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder letter must not return');
+
+// Current VSL offer language.
+assert.match(page, /<h1[^>]*>The AI Version of You, built in 30 days\.<\/h1>/, 'Hero must lead with the 30-day AI Version promise');
+assert.match(page, /Give us about one hour per week\.[^<]*\$500-\$2,000 digital programs[^<]*entirely online/, 'Hero must state the time, price, and online-delivery boundaries');
+assert.match(page, /more than 100,000 healthcare leads/, 'Client discovery must name the healthcare data foundation');
+assert.match(page, /live search and demand signals/, 'Client discovery must explain the live-demand mechanism');
+assert.match(page, /first 10 beta users will be onboarded, or you receive a full refund/, 'FAQ must state the current qualifying-client guarantee');
+assert.doesNotMatch(page, /first 10 real users|or you do not pay/i, 'Old guarantee language must not return');
+assert.doesNotMatch(page, /Apply for a Free Live Demo|free live demo/i, 'The page must not promise an unverified free live demo');
+assert.doesNotMatch(page, /professional, clinical, and compliance boundaries|data-handling and privacy requirements/i, 'Unsupported safety and privacy claims must not return');
+assert.doesNotMatch(page, /AI sales department|paid assessment|self-funding|highest-level service|smaller digital offers/i, 'Legacy sales-department copy must not return');
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(ctaLinks.length, 1, 'Only the final green CTA may contain an application link');
-assert.match(page, /<section class="card cta"[\s\S]*?<a\b[^>]*class="[^"]*cta-btn[^"]*"/, 'Application link must remain inside the final green CTA');
-assert.equal((page.match(/>Apply for a Free Live Demo<\/a>/g) ?? []).length, ctaLinks.length, 'Every application CTA must use the specific free-live-demo label');
-assert.ok(ctaLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Every CTA must use the live scheduler');
-assert.ok(ctaLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External CTA links must open safely');
+assert.equal(ctaLinks.length, 4, 'Header, hero, product overview, and final sections must contain one primary button each');
+assert.match(page, /class="cta-btn" href="#how-it-works">See How It Works<\/a>/, 'Hero primary action must navigate to the product overview');
+const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification-link[^"]*"[^>]*>/g)].map((match) => match[0]);
+assert.equal(qualificationLinks.length, 5, 'Qualification links must appear in the header, hero, product overview, final CTA, and footer');
+assert.ok(qualificationLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Qualification links must use the live scheduler');
+assert.ok(qualificationLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External qualification links must open safely');
+
+// Demo retirement and replacement contract.
+assert.doesNotMatch(page, /<ios-notification-demo\b/, 'The previous notification demo must not remain mounted');
+assert.doesNotMatch(page, /assets\/ios-notification-demo\/(?:model|component)\.js/, 'The previous notification runtime must not load');
+assert.doesNotMatch(page, /<iframe\b[^>]*mechanism-player|data-player-src|setupMechanismDemos|DEMO_RENDERER_BUILD/, 'Previous mechanism demos and playback controller must be removed');
+const replacementSlots = [...page.matchAll(/data-demo-placeholder="([^"]+)"/g)].map((match) => match[1]);
+assert.deepEqual(replacementSlots, ['primary', 'expertise', 'ai-version', 'client-discovery'], 'The four stable replacement slots must follow the product narrative');
+assert.match(page, /\.demo-replacement-slot\{[^}]*aspect-ratio:1/, 'Primary replacement slot must reserve a stable square');
+assert.match(page, /\.mechanism-demo\{[^}]*aspect-ratio:1/, 'Mechanism replacement slots must reserve stable square canvases');
+
+// Homepage information architecture.
+assert.equal((page.match(/class="audience-path"/g) ?? []).length, 4, 'Expected four clear audience pathways');
+assert.equal((page.match(/class="delivery-model(?: |")/g) ?? []).length, 2, 'Expected the current-versus-future delivery comparison');
+assert.equal((page.match(/class="alternative-item"/g) ?? []).length, 3, 'Expected three alternatives and bottlenecks');
+assert.equal((page.match(/class="process-step"/g) ?? []).length, 3, 'Expected a three-step launch process');
+assert.equal((page.match(/class="credibility-item"/g) ?? []).length, 3, 'Expected three institutional credibility signals');
+assert.equal((page.match(/class="footer-group"/g) ?? []).length, 4, 'Expected four footer navigation groups');
+assert.equal((page.match(/class="footer-disclaimer"/g) ?? []).length, 3, 'Expected three important footer disclaimers');
+assert.match(page, /<h3>Earnings Disclaimer<\/h3>/, 'Footer must include the earnings disclaimer');
+assert.match(page, /<h3>Medical Information Disclaimer<\/h3>/, 'Footer must include the medical information disclaimer');
+assert.match(page, /<h3>AI Disclaimer<\/h3>/, 'Footer must include the AI disclaimer');
+assert.match(page, /beta-user guarantee concerns onboarding beta users and is not a guarantee of sales, revenue, or profit/, 'Earnings disclaimer must limit the beta-user guarantee');
+assert.match(page, /does not practice medicine or provide medical advice, diagnosis, or treatment/, 'Medical disclaimer must state the medical-information boundary');
+assert.match(page, /AI-generated information may be incomplete, inaccurate, or outdated/, 'AI disclaimer must state the model-output boundary');
+assert.equal((page.match(/class="[^"]*section-band[^"]*"/g) ?? []).length, 3, 'Expected three restrained full-width section bands');
+assert.match(page, /<h2 id="founder-highlight-title">Why Kodara exists\.<\/h2>/, 'Founder section must use the concise company-story framing');
+assert.match(page, /class="founder-principle"/, 'Founder section must end with the guiding principle');
+assert.match(page, /id="review-approval"/, 'The review-and-approval section needs an intent-revealing anchor');
+assert.match(page, /href="#review-approval">Review &amp; Approval<\/a>/, 'Footer navigation must link to review and approval');
+
+// Proof, FAQ, and accessibility.
+assert.equal((page.match(/class="proof-snapshot-logo proof-snapshot-logo--/g) ?? []).length, 6, 'Authority wall must contain six healthcare logos');
+for (const brand of ['Massage Envy', 'Gameday Men’s Health', 'Visiting Angels', 'Ellie Mental Health', 'Mayo Clinic', 'Johns Hopkins University']) {
+  assert.ok(page.includes(`alt="${brand}"`), `Authority wall must include ${brand}`);
+}
+const wistiaPlayers = [...page.matchAll(/<wistia-player\b[^>]*>/g)].map((match) => match[0]);
+assert.equal(wistiaPlayers.length, 2, 'Expected the two healthcare testimonial videos');
+assert.ok(wistiaPlayers.every((tag) => /aria-label="[^"]+"/.test(tag)), 'Every testimonial video needs an accessible name');
+assert.equal((page.match(/class="faq-item"/g) ?? []).length, 9, 'Expected nine offer FAQs');
+assert.match(page, /function setupFaqAccordion\(\)/, 'FAQ motion controller is missing');
+assert.match(page, /matchMedia\('\(prefers-reduced-motion:reduce\)'\)/, 'FAQ motion must respect reduced motion');
 
 const localReferences = [...page.matchAll(/\b(?:src|data-src)="([^"]+)"/g)]
   .map((match) => match[1].replaceAll('&amp;', '&'))
@@ -206,6 +111,5 @@ const localReferences = [...page.matchAll(/\b(?:src|data-src)="([^"]+)"/g)]
 for (const reference of localReferences) {
   assert.ok(existsSync(resolve(root, reference)), `Missing local page asset: ${reference}`);
 }
-assert.doesNotMatch(page, /https:\/\/lltv28\.github\.io\/kodara-success-portal\/img\//, 'Critical testimonial portraits must be self-hosted');
 
 console.log('Release checks passed.');
