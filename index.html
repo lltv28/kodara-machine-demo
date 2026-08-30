@@ -25,12 +25,12 @@
   --measure-display:22ch;--measure-display-long:28ch;--measure-card-title:24ch;--measure-body:62ch;--measure-card-body:42ch;--measure-faq:72ch;
   --tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px;
   --fb:"Instrument Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;
-  --type-hero:clamp(3.25rem,5.4vw,4.75rem);--type-section:clamp(3rem,4.6vw,3.75rem);--type-section-long:clamp(2.75rem,4vw,3.375rem);
-  --type-card:clamp(2.25rem,3vw,2.875rem);--type-card-small:clamp(2rem,2.6vw,2.375rem);
-  --type-body:1.3125rem;--type-body-large:1.5rem;
-  --type-question:clamp(1.75rem,2.4vw,2.125rem);
-  --type-control:1.2rem;--type-button:1.875rem;--type-label:1.0625rem;--type-meta:1rem;--type-legal:1rem;
-  --type-quote:clamp(1.75rem,2.4vw,2.125rem);--type-stat:clamp(4.5rem,8vw,6.5rem);
+  --type-hero:clamp(3.5rem,5vw,4.5rem);--type-section:clamp(2.75rem,4vw,3.25rem);--type-section-long:clamp(2.75rem,3.8vw,3.25rem);
+  --type-card:clamp(1.875rem,2.5vw,2.25rem);--type-card-small:clamp(1.875rem,2.2vw,2.125rem);
+  --type-body:1.25rem;--type-body-large:1.375rem;
+  --type-question:clamp(1.375rem,1.8vw,1.625rem);
+  --type-control:1.125rem;--type-button:1.375rem;--type-label:1rem;--type-meta:.9375rem;--type-legal:.9375rem;
+  --type-quote:clamp(1.5rem,2vw,1.75rem);--type-stat:clamp(4rem,7vw,6rem);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
@@ -38,7 +38,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   display:flex;flex-direction:column;align-items:center;padding:var(--space-5) var(--page-gutter) var(--page-gutter);overflow-x:hidden}
 .wrap{width:100%;max-width:var(--rail-wide);display:flex;flex-direction:column;align-items:center}
 .embed-mode body{padding:0;background:transparent}
-.embed-mode .site-header,.embed-mode .site-hero,.embed-mode .proof-snapshot,.embed-mode .education-section,.embed-mode .mechanism-features,.embed-mode .midpage-action,.embed-mode .alternatives-section,.embed-mode .process-section,.embed-mode .audience-section,.embed-mode .founder-highlight,.embed-mode .credibility-section,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta,.embed-mode .site-footer{display:none}
+.embed-mode .site-header,.embed-mode .site-hero,.embed-mode .proof-snapshot,.embed-mode .education-section,.embed-mode .mechanism-features,.embed-mode .audience-section,.embed-mode .founder-highlight,.embed-mode .credibility-section,.embed-mode .case-studies,.embed-mode .proof,.embed-mode .faq,.embed-mode .cta,.embed-mode .site-footer{display:none}
 
 /* ---------- company header ---------- */
 .site-header{display:flex;width:100%;max-width:var(--rail-wide);min-height:72px;align-items:center;justify-content:space-between;gap:var(--space-5);margin-bottom:var(--space-6)}
@@ -48,7 +48,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .site-nav a{color:var(--ink-2);font-size:1rem;font-weight:600;text-decoration:none;white-space:nowrap}
 .site-nav a:hover{color:var(--accent)}
 .site-nav a:focus-visible,.brand:focus-visible{outline:3px solid var(--accent-dark);outline-offset:5px;border-radius:var(--radius-sm)}
-.site-header .cta-btn{min-height:58px;padding:12px 28px;font-size:1.25rem;white-space:nowrap}
+.site-header .cta-btn{min-height:60px;padding:14px 28px;font-size:var(--type-button);white-space:nowrap}
 @media(max-width:1100px){.site-nav{display:none}}
 
 /* ---------- centered cinema hero ---------- */
@@ -79,18 +79,13 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .primary-demo-copy{order:1;padding:var(--space-7)}
   .primary-demo h2{max-width:18ch}
   .primary-demo-visual{order:2;min-height:auto;border-top:1px solid var(--line-2);border-right:0}
-  .mechanism-feature{grid-template-columns:1fr;gap:var(--space-5);padding:0}
-  .mechanism-feature:nth-child(even) .mechanism-demo,.mechanism-feature:nth-child(even) .mechanism-copy{order:initial}
-  .mechanism-copy{padding:0}
-  .mechanism-feature h3{max-width:20ch}
-  .mechanism-feature p{max-width:var(--measure-card-body)}
 }
 @media(max-width:720px){
-  :root{--type-hero:clamp(2.875rem,11.5vw,3.375rem);--type-section:clamp(2.5rem,10vw,3rem);--type-section-long:2.5rem;--type-card:2.125rem;--type-card-small:2rem;--type-body:1.1875rem;--type-body-large:1.375rem;--type-question:1.625rem;--type-quote:1.75rem;--measure-display:18ch;--measure-display-long:20ch;--measure-card-title:20ch;--measure-body:34ch;--measure-card-body:32ch}
+  :root{--type-hero:clamp(2.625rem,11vw,3rem);--type-section:clamp(2.125rem,9.5vw,2.5rem);--type-section-long:2.125rem;--type-card:1.75rem;--type-card-small:1.5rem;--type-body:1.125rem;--type-body-large:1.25rem;--type-question:1.375rem;--type-quote:1.5rem;--measure-display:18ch;--measure-display-long:20ch;--measure-card-title:20ch;--measure-body:34ch;--measure-card-body:32ch}
   body{padding-inline:var(--page-gutter-mobile)}
   .primary-demo-copy{padding:var(--space-4) var(--space-5)}
   .primary-demo h2{max-width:18ch;font-size:var(--type-section-long);line-height:1.1}
-  .primary-demo-copy p{max-width:32ch;margin-top:var(--space-4);font-size:1.375rem;line-height:1.45}
+  .primary-demo-copy p{max-width:32ch;margin-top:var(--space-4);font-size:1.25rem;line-height:1.5}
   .primary-demo-copy .cta-btn{margin-top:var(--space-4)}
   .primary-demo-visual{min-height:0;padding:var(--space-4);aspect-ratio:1}
   .offer-demo{width:100%;max-width:620px}
@@ -122,7 +117,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .proof-snapshot-note{margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-legal);line-height:1.45;text-align:center}
 
 /* ---- CTA button ---- */
-.cta-btn{display:flex;width:max-content;max-width:100%;align-items:center;justify-content:center;min-height:72px;font-family:var(--fb);font-weight:700;font-size:var(--type-button);line-height:1.2;letter-spacing:var(--tracking-body);color:#fff;background:var(--accent);border:1px solid var(--accent-dark);border-radius:var(--radius-sm);padding:18px 42px;text-align:center;text-decoration:none;text-transform:capitalize;box-shadow:0 10px 28px rgba(16,104,68,.22);transition:transform .18s ease,background-color .18s ease,box-shadow .18s ease}
+.cta-btn{display:flex;width:max-content;max-width:100%;align-items:center;justify-content:center;min-height:60px;font-family:var(--fb);font-weight:700;font-size:var(--type-button);line-height:1.2;letter-spacing:var(--tracking-body);color:#fff;background:var(--accent);border:1px solid var(--accent-dark);border-radius:var(--radius-sm);padding:15px 32px;text-align:center;text-decoration:none;text-transform:capitalize;box-shadow:0 10px 28px rgba(16,104,68,.22);transition:transform .18s ease,background-color .18s ease,box-shadow .18s ease}
 .cta-btn:hover{background:var(--accent-hover);box-shadow:0 14px 34px rgba(16,104,68,.26);transform:translateY(-2px)}
 .cta-btn:active{transform:scale(.98)}
 .cta-btn:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px}
@@ -145,11 +140,19 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .mechanism-demo{position:relative;width:100%;aspect-ratio:1;overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
 .mechanism-proof{display:flex;width:100%;height:100%;flex-direction:column;align-items:center;justify-content:center;padding:var(--space-6);text-align:center}
 .mechanism-proof strong{color:var(--accent-ink);font-size:clamp(3.2rem,7vw,5.5rem);font-weight:700;line-height:.92;letter-spacing:var(--tracking-stat)}
+.mechanism-proof--price strong{font-size:clamp(2.75rem,5.4vw,4.5rem)}
 .mechanism-proof span{max-width:22ch;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-label);font-weight:600;line-height:1.45;text-wrap:balance}
 .mechanism-copy{padding:var(--space-5) 0}
-.mechanism-step{display:block;margin-bottom:var(--space-3);color:var(--accent-ink);font-family:var(--mono);font-size:var(--type-meta);font-weight:600}
+.mechanism-step{display:block;margin-bottom:var(--space-3);color:var(--accent-ink);font-family:var(--fb);font-size:var(--type-label);font-weight:700;line-height:1.3}
 .mechanism-feature h3{max-width:17ch;font-size:var(--type-card);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .mechanism-feature p{max-width:42ch;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
+@media(max-width:899px){
+  .mechanism-feature{grid-template-columns:1fr;gap:var(--space-5);padding:0}
+  .mechanism-feature:nth-child(even) .mechanism-demo,.mechanism-feature:nth-child(even) .mechanism-copy{order:initial}
+  .mechanism-copy{padding:0}
+  .mechanism-feature h3{max-width:20ch}
+  .mechanism-feature p{max-width:var(--measure-card-body)}
+}
 
 /* ---------- category education ---------- */
 .education-section{width:100%}
@@ -166,30 +169,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .delivery-model h3{font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading)}
 .delivery-model ul{display:grid;gap:var(--space-3);margin-top:var(--space-5);padding-left:1.15em;color:var(--ink-2);font-size:var(--type-body);line-height:1.5}
 
-/* ---------- mid-page action ---------- */
-.midpage-action{display:flex;width:100%;align-items:center;justify-content:space-between;gap:var(--space-6);padding:var(--space-6) 0}
-.midpage-action p{max-width:36ch;font-size:var(--type-card-small);font-weight:600;line-height:1.2;letter-spacing:var(--tracking-heading);text-wrap:balance}
-
-/* ---------- alternatives ---------- */
-.alternatives-section{display:grid;width:100%;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);gap:clamp(48px,8vw,112px);align-items:start}
-.alternatives-copy h2{max-width:14ch;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
-.alternatives-copy>p{max-width:40ch;margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
-.alternatives-list{display:grid;gap:var(--space-6)}
-.alternative-item{padding:0}
-.alternative-item h3{font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.alternative-item p{max-width:52ch;margin-top:var(--space-2);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-
-/* ---------- launch process ---------- */
-.process-section{width:100%}
-.process-head{max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
-.process-head h2{font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
-.process-head p{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.process-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6)}
-.process-step{padding:0}
-.process-number{display:block;margin-bottom:var(--space-4);color:var(--accent-ink);font-family:var(--mono);font-size:var(--type-meta);font-weight:600}
-.process-step h3{font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.process-step p{max-width:34ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-
 /* ---------- audience pathways ---------- */
 .audience-section{display:grid;width:100%;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);gap:clamp(48px,8vw,112px);align-items:start}
 .audience-copy h2{max-width:14ch;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
@@ -201,14 +180,27 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .audience-path p{max-width:52ch;margin-top:var(--space-2);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 
 /* ---------- founder highlight ---------- */
-.founder-highlight{display:grid;gap:clamp(40px,6vw,72px);align-items:center}
-.founder-proof{display:grid;width:100%;gap:var(--space-6)}
-.founder-proof div{padding:0}
-.founder-proof strong,.founder-proof span{display:block}.founder-proof strong{color:var(--accent-ink);font-size:clamp(3rem,6vw,5rem);font-weight:700;line-height:.9;letter-spacing:var(--tracking-stat)}.founder-proof span{max-width:24ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-label);font-weight:600;line-height:1.45}
+.founder-highlight{display:grid;width:100%;gap:clamp(40px,6vw,72px);align-items:center}
+.founder-media{margin:0;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
+.founder-media img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 34%}
+.founder-caption{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-3);padding:var(--space-4) var(--space-5)}
+.founder-caption strong,.founder-caption span{display:block}
+.founder-caption strong{color:var(--ink);font-size:var(--type-label);line-height:1.3}
+.founder-caption span{color:var(--ink-3);font-size:var(--type-meta);line-height:1.4}
 .founder-highlight-copy{padding-right:clamp(0px,3.5vw,32px)}
 .founder-highlight h2{max-width:15ch;font-size:var(--type-section-long);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 .founder-highlight p{max-width:48ch;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .founder-highlight .founder-principle{color:var(--ink);font-weight:600}
+.founder-credentials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);margin-top:var(--space-6)}
+.founder-credential strong,.founder-credential span{display:block}
+.founder-credential strong{color:var(--accent-ink);font-size:var(--type-card-small);font-weight:700;line-height:1;letter-spacing:var(--tracking-heading)}
+.founder-credential span{max-width:25ch;margin-top:var(--space-2);color:var(--ink-2);font-size:var(--type-meta);font-weight:600;line-height:1.45}
+@media(max-width:899px){
+  .founder-highlight{grid-template-columns:1fr;gap:var(--space-6)}
+  .founder-media{width:100%;max-width:520px;margin-inline:auto}
+  .founder-highlight-copy{padding:0}
+  .founder-highlight h2{max-width:17ch}
+}
 
 /* ---------- experience and approval ---------- */
 .credibility-section{width:100%}
@@ -225,8 +217,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .case-featured{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
 .case-featured--portrait{align-items:center;gap:var(--space-6);padding:var(--space-6);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
-@media(min-width:900px){.primary-demo,.case-featured--portrait{grid-template-columns:minmax(0,3fr) minmax(320px,2fr)}}
-.founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}
+@media(min-width:900px){.primary-demo,.case-featured--portrait{grid-template-columns:minmax(0,3fr) minmax(320px,2fr)}.founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}}
 .case-featured .case-media{border-right:1px solid var(--line-2)}
 .case-featured--portrait .case-media{display:block;width:100%;aspect-ratio:3/4;background:var(--panel);border:1px solid var(--line-2);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
 .case-featured--portrait .case-media wistia-player{height:auto;aspect-ratio:3/4}
@@ -247,6 +238,11 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .case-quote{margin-top:var(--space-4);padding-left:var(--space-4);border-left:3px solid var(--accent);color:var(--ink);font-family:var(--fb);font-size:var(--type-quote);font-weight:600;line-height:1.3;letter-spacing:var(--tracking-body);text-wrap:pretty}
 .case-mechanism{max-width:var(--measure-body);margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-label);line-height:1.5;text-wrap:pretty}
 .case-mechanism strong{color:var(--ink)}
+.case-kicker{display:block;margin-bottom:var(--space-3);color:var(--accent-ink);font-size:var(--type-label);font-weight:700;line-height:1.3}
+.case-fact{max-width:var(--measure-body);margin-top:var(--space-4)}
+.case-fact span,.case-fact strong{display:block}
+.case-fact span{color:var(--ink-3);font-size:var(--type-meta);font-weight:600;line-height:1.4}
+.case-fact strong{margin-top:var(--space-1);color:var(--ink);font-size:var(--type-label);font-weight:650;line-height:1.45}
 .case-person{display:grid;grid-template-columns:52px minmax(0,1fr);gap:var(--space-3);align-items:center;margin-top:auto;padding-top:var(--space-5)}
 .case-person img{display:block;width:52px;height:52px;border:1px solid var(--line);border-radius:var(--radius-pill);object-fit:cover;background:var(--surface)}
 .case-person strong,.case-person span{display:block}
@@ -254,28 +250,25 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .case-person span{margin-top:var(--space-1);color:var(--ink-3);font-size:var(--type-meta);line-height:1.45}
 .case-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);margin-top:var(--space-5)}
 .case-outcome{padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
-.case-outcome strong{display:block;color:var(--accent-ink);font-size:var(--type-card);line-height:1;letter-spacing:var(--tracking-heading)}
+.case-outcome>strong{display:block;color:var(--accent-ink);font-size:var(--type-card);line-height:1;letter-spacing:var(--tracking-heading)}
 .case-outcome h3{margin-top:var(--space-4);font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading)}
 .case-outcome p{margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.case-role{display:block;margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-meta);font-weight:650;line-height:1.4}
 @media(max-width:720px){
   .card{--card-pad:var(--space-5)}
   .case-studies-head{margin-bottom:var(--space-5)}
   .mechanism-head{margin-bottom:var(--space-6)}
   .mechanism-grid{gap:var(--space-7)}
-  .education-head,.demand-signals,.delivery-comparison,.alternatives-section{grid-template-columns:1fr}
+  .education-head,.demand-signals,.delivery-comparison{grid-template-columns:1fr}
   .education-head{gap:var(--space-5)}
   .delivery-comparison{gap:var(--space-4);margin-top:var(--space-6)}
   .delivery-model{padding:var(--space-5)}
   .demand-signal{padding:0}
-  .midpage-action{align-items:flex-start;flex-direction:column}
-  .midpage-action .cta-btn{width:100%}
-  .alternatives-section{gap:var(--space-6)}
-  .process-grid{grid-template-columns:1fr}
-  .process-step{padding:0}
   .founder-highlight{grid-template-columns:1fr;gap:var(--space-5)}
-  .founder-proof{max-width:440px;margin-inline:auto}
+  .founder-media{width:100%;max-width:440px;margin-inline:auto}
   .founder-highlight-copy{padding:0}
   .founder-highlight h2{max-width:17ch}
+  .founder-credentials{grid-template-columns:1fr;gap:var(--space-4)}
   .audience-section{grid-template-columns:1fr;gap:var(--space-6)}
   .audience-copy h2{max-width:17ch}
   .audience-path{grid-template-columns:36px minmax(0,1fr);gap:var(--space-3)}
@@ -335,7 +328,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 @media(max-width:720px){
   .site-header{min-height:56px;margin-bottom:var(--space-4)}
   .brand-word{display:none}
-  .site-header .cta-btn{min-height:52px;padding:10px 18px;font-size:1.125rem}
+  .site-header .cta-btn{min-height:58px;padding:12px 18px;font-size:1.25rem}
   .site-hero{padding:var(--space-5) 0 var(--space-7)}
   .site-hero h1{max-width:14ch}
   .site-hero-copy>p{max-width:32ch;font-size:var(--type-body-large)}
@@ -346,7 +339,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .hero-vsl-poster span{margin-top:var(--space-2);font-size:var(--type-label)}
   .hero-vsl-cta{width:100%;margin-top:var(--space-5)}
   .cta{padding:var(--space-7) var(--space-4)}
-  .cta-btn{min-height:66px;padding:16px var(--space-5);font-size:clamp(1.6rem,6vw,1.8rem);white-space:nowrap}
+  .cta-btn{min-height:58px;padding:14px var(--space-5);font-size:1.25rem;white-space:nowrap}
   .cta .cta-btn{width:100%}
   .site-hero+.proof-snapshot{margin-top:var(--space-6)}
   .proof-snapshot+.primary-demo{margin-top:var(--space-6)}
@@ -365,7 +358,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .proof-snapshot-note{margin-top:var(--space-2);font-size:1rem;line-height:1.4}
 }
 @media(max-width:390px){
-  :root{--type-hero:2.875rem;--type-section:2.5rem;--type-section-long:2.375rem;--type-card:2.125rem;--type-card-small:2rem;--type-question:1.625rem}
+  :root{--type-hero:2.625rem;--type-section:2.25rem;--type-section-long:2.125rem;--type-card:1.75rem;--type-card-small:1.5rem;--type-question:1.375rem}
   body{padding-inline:var(--page-gutter-mobile)}
   .brand-word{display:none}
   .primary-demo-copy{padding-inline:var(--space-4)}
@@ -375,7 +368,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .faq-answer{padding-right:var(--space-6)}
 }
 @media(max-width:350px){
-  .cta-btn{min-height:60px;padding-inline:var(--space-3);font-size:1.45rem}
+  .cta-btn{min-height:58px;padding-inline:var(--space-3);font-size:1.25rem}
   .proof-snapshot-logo-row{gap:var(--space-2) var(--space-3)}
   .proof-snapshot-logo{height:48px}
   .proof-snapshot-note{font-size:.95rem;line-height:1.35}
@@ -395,16 +388,21 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .footer-group a,.footer-group span{color:var(--ink-3);font-size:var(--type-legal);font-weight:500;line-height:1.45;text-decoration:none}
 .footer-group a:hover{color:var(--accent)}
 .footer-group a:focus-visible,.site-footer-brand:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px;border-radius:var(--radius-sm)}
-.footer-disclaimers{display:grid;grid-column:1/-1;grid-template-columns:minmax(150px,190px) minmax(0,1fr);gap:var(--space-5);padding-top:var(--space-6);border-top:1px solid var(--line-2)}
-.footer-disclaimers h2{color:var(--ink);font-size:1.25rem;font-weight:600;line-height:1.2;letter-spacing:-1px}
-.footer-disclaimer-list{display:grid;gap:var(--space-4);max-width:900px}
+.footer-disclaimers{grid-column:1/-1;padding-top:var(--space-5);border-top:1px solid var(--line-2)}
+.footer-disclaimers>summary{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);color:var(--ink);font-size:var(--type-label);font-weight:700;line-height:1.3;cursor:pointer;list-style:none}
+.footer-disclaimers>summary::-webkit-details-marker{display:none}
+.footer-disclaimers>summary::after{content:'+';color:var(--accent-ink);font-size:1.5rem;font-weight:500;line-height:1;transition:transform .2s ease}
+.footer-disclaimers[open]>summary::after{transform:rotate(45deg)}
+.footer-disclaimers>summary:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px;border-radius:var(--radius-sm)}
+.footer-disclaimer-list{display:grid;gap:var(--space-4);max-width:900px;margin-top:var(--space-5)}
 .footer-disclaimer h3{color:var(--ink);font-size:var(--type-legal);font-weight:700;line-height:1.4}
 .footer-disclaimer p{margin-top:var(--space-1);color:var(--ink-3);font-size:var(--type-legal);line-height:1.5;text-wrap:pretty}
 .footer-legal{display:flex;grid-column:1/-1;justify-content:space-between;gap:var(--space-5);padding-top:var(--space-5);border-top:1px solid var(--line-2)}
 .footer-legal p{max-width:70ch;font-size:var(--type-legal);line-height:1.5}
 @media(max-width:1040px){.site-footer-inner{grid-template-columns:repeat(2,minmax(0,1fr))}.site-footer-brand-block{grid-column:1/-1}}
-@media(max-width:720px){.footer-disclaimers{grid-template-columns:1fr;gap:var(--space-5)}.footer-disclaimer-list{gap:var(--space-4)}}
+@media(max-width:720px){.footer-disclaimer-list{gap:var(--space-4);margin-top:var(--space-4)}}
 @media(max-width:560px){.site-footer{padding-inline:var(--page-gutter-mobile)}.site-footer-inner{grid-template-columns:1fr;gap:var(--space-6)}.site-footer-brand-block{grid-column:auto}.footer-legal{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.footer-disclaimers>summary::after{transition:none}}
 
 </style>
 </head>
@@ -513,8 +511,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   <!-- ============ MECHANISM FEATURES ============ -->
   <section class="mechanism-features" id="how-it-works" aria-labelledby="mechanism-title">
     <header class="mechanism-head">
-      <h2 class="card-title" id="mechanism-title">One system turns what you know into a business that works online.</h2>
-      <p class="mechanism-intro">You bring your expertise and about one hour per week. Our team extracts what you know, builds the experience, and launches it.</p>
+      <h2 class="card-title" id="mechanism-title">Your expertise, built and launched in three steps.</h2>
+      <p class="mechanism-intro">You give us about one hour per week. Kodara handles the extraction, build, review, launch, and beta-user onboarding.</p>
     </header>
     <div class="mechanism-grid">
       <article class="mechanism-feature">
@@ -522,19 +520,19 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           <div class="mechanism-proof"><strong>1 hour</strong><span>Focused interviews each week to extract what you know</span></div>
         </div>
         <div class="mechanism-copy">
-          <span class="mechanism-step">01 / EXTRACT</span>
-          <h3>We extract and organize your expertise.</h3>
-          <p>Focused interviews and your existing materials show us how you think, explain problems, and guide clients. You do not have to write a course or build the system yourself.</p>
+          <span class="mechanism-step">Step 1 · Share</span>
+          <h3>Share what you know.</h3>
+          <p>Give us about one hour per week for focused interviews, existing materials, feedback, and decisions. You do not have to write a course or build the system yourself.</p>
         </div>
       </article>
       <article class="mechanism-feature">
         <div class="mechanism-demo">
-          <div class="mechanism-proof"><strong>$500-$2,000</strong><span>Digital programs built around your approved expertise</span></div>
+          <div class="mechanism-proof mechanism-proof--price"><strong>$500-$2,000</strong><span>Digital programs built around your approved expertise</span></div>
         </div>
         <div class="mechanism-copy">
-          <span class="mechanism-step">02 / BUILD</span>
-          <h3>We build the AI Version of You.</h3>
-          <p>Our team creates the $500-$2,000 digital programs, website, branding, and AI experience. You test and approve everything before launch.</p>
+          <span class="mechanism-step">Step 2 · Build</span>
+          <h3>Review what we build.</h3>
+          <p>Our team creates the $500-$2,000 digital programs, website, branding, and AI experience. You test and approve what represents you before launch.</p>
         </div>
       </article>
       <article class="mechanism-feature">
@@ -542,38 +540,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           <div class="mechanism-proof"><strong>100,000+</strong><span>Healthcare leads generated online used to train Kodara</span></div>
         </div>
         <div class="mechanism-copy">
-          <span class="mechanism-step">03 / LAUNCH</span>
-          <h3>We help the right people find it.</h3>
-          <p>Built from more than 100,000 healthcare leads generated online, Kodara analyzes live search and demand signals to reach people likely to want your expertise, then routes them to the best-fit program.</p>
+          <span class="mechanism-step">Step 3 · Launch</span>
+          <h3>Launch and onboard users.</h3>
+          <p>Built from more than 100,000 healthcare leads generated online, Kodara helps the right people find your expertise. For qualifying clients, we onboard your first 10 beta users within 30 days or you receive a full refund. Your signed agreement controls the terms.</p>
         </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ============ MID-PAGE ACTION ============ -->
-  <section class="midpage-action" aria-label="See if Kodara is a fit">
-    <p>See what a 30-day launch could look like around your expertise.</p>
-    <a class="cta-btn qualification-link" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="See if you qualify (opens in a new tab)">See If You Qualify</a>
-  </section>
-
-  <!-- ============ ALTERNATIVES ============ -->
-  <section class="alternatives-section" aria-labelledby="alternatives-title">
-    <div class="alternatives-copy">
-      <h2 id="alternatives-title">Why the usual approaches can leave the bottleneck in place.</h2>
-      <p>The problem is not whether people want your help. The problem is that most growth options still depend on more of your time.</p>
-    </div>
-    <div class="alternatives-list">
-      <article class="alternative-item">
-        <h3>More leads still create more appointments.</h3>
-        <p>If every new client requires more personal delivery, more demand puts more pressure on the same calendar.</p>
-      </article>
-      <article class="alternative-item">
-        <h3>A course can become another business to operate.</h3>
-        <p>You still have to plan it, build it, market it, answer questions, and keep it moving unless a team handles the work.</p>
-      </article>
-      <article class="alternative-item">
-        <h3>Generic AI does not automatically understand your method.</h3>
-        <p>Your AI Version is built from the interviews, materials, frameworks, and client questions you choose to provide and approve.</p>
       </article>
     </div>
   </section>
@@ -590,9 +560,11 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
         <wistia-player media-id="6oj2gj3wqt" aspect="0.75" aria-label="Sandra Parker client testimonial video"></wistia-player>
       </div>
       <div class="case-featured-copy">
+        <span class="case-kicker">Client story</span>
         <h3 class="case-title" id="sandra-case-title">Sandra is working less while helping more people.</h3>
         <p class="case-copy">Sandra says her entirely online programs made the business more consistent and enjoyable without adding a hundred more calls.</p>
         <blockquote class="case-quote">“My business feels better now because it feels consistent, and I’m able to enjoy it more.”</blockquote>
+        <p class="case-fact"><span>What Kodara helped build</span><strong>An entirely online program that supports better-fit clients without adding more calls.</strong></p>
         <div class="case-person">
           <img src="assets/testimonials/sandra.jpg" width="104" height="104" loading="lazy" decoding="async" alt="Sandra Parker">
           <div><strong>Sandra Parker</strong><span>Sobriety coach - Just The Tonic</span></div>
@@ -606,8 +578,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           <wistia-player media-id="fay3lgo8op" aspect="1.791044776119403" aria-label="Leanne Ellington client testimonial video"></wistia-player>
         </div>
         <div class="case-support-copy">
+          <span class="case-kicker">Client story</span>
           <h3 class="case-title" id="leanne-case-title">Leanne’s virtual business gave her room to launch a passion project.</h3>
           <p class="case-copy">Her largely automated virtual business created enough time and space to launch a passion project she could not pursue while doing everything one-to-one.</p>
+          <p class="case-fact"><span>What Kodara helped build</span><strong>A largely automated virtual business that reduced dependence on one-to-one delivery.</strong></p>
           <div class="case-person">
             <img src="assets/testimonials/leanne.jpg" width="104" height="104" loading="lazy" decoding="async" alt="Leanne Ellington">
             <div><strong>Leanne Ellington</strong><span>Body image and emotional health coach</span></div>
@@ -617,35 +591,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 
     </div>
     <div class="case-outcomes">
-      <article class="case-outcome"><strong>30+ patients</strong><h3>Dr. Vora reached people beyond his appointment calendar.</h3><p>Dr. Vora is a cardiologist. After launching his AI with Kodara’s client-discovery model, he enrolled more than 30 patients in his first five weeks.</p></article>
-      <article class="case-outcome"><strong>2 months</strong><h3>Ashley replaced her in-person classes with her AI business.</h3><p>Ashley is a yoga instructor. After working with our team and client-discovery model, she fully transitioned out of in-person classes within two months.</p></article>
+      <article class="case-outcome"><strong>30+ patients</strong><span class="case-role">Dr. Vora · Cardiologist</span><h3>Reached people beyond his appointment calendar.</h3><p>After launching his AI with Kodara’s client-discovery model, Dr. Vora enrolled more than 30 patients in his first five weeks.</p></article>
+      <article class="case-outcome"><strong>2 months</strong><span class="case-role">Ashley · Yoga instructor</span><h3>Replaced her in-person classes with her AI business.</h3><p>After working with our team and client-discovery model, Ashley fully transitioned out of in-person classes within two months.</p></article>
     </div>
     <p class="proof-note">Individual experiences are not typical and do not guarantee a specific result. Results vary by program, audience, implementation, and participation.</p>
-  </section>
-
-  <!-- ============ LAUNCH PROCESS ============ -->
-  <section class="process-section" id="process" aria-labelledby="process-title">
-    <header class="process-head">
-      <h2 id="process-title">Your AI Version is built, approved, and launched in 30 days.</h2>
-      <p>You give us about one hour per week. Kodara handles the extraction, build, testing, launch, and beta-user onboarding.</p>
-    </header>
-    <div class="process-grid">
-      <article class="process-step">
-        <span class="process-number">STEP 01</span>
-        <h3>Share what you know.</h3>
-        <p>Give us about one hour per week for focused interviews, existing materials, feedback, and decisions.</p>
-      </article>
-      <article class="process-step">
-        <span class="process-number">STEP 02</span>
-        <h3>Review what we build.</h3>
-        <p>We create the digital programs, AI experience, website, and branding. You test and approve what represents you.</p>
-      </article>
-      <article class="process-step">
-        <span class="process-number">STEP 03</span>
-        <h3>Launch and onboard users.</h3>
-        <p>For qualifying clients, we launch your first AI Version and onboard your first 10 beta users within 30 days, or you receive a full refund. Your signed agreement controls the terms.</p>
-      </article>
-    </div>
   </section>
 
   <!-- ============ WHO IT IS FOR ============ -->
@@ -676,16 +625,19 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 
   <!-- ============ WHY KODARA EXISTS ============ -->
   <section class="founder-highlight" id="about" aria-labelledby="founder-highlight-title">
-    <div class="founder-proof" aria-label="Lucas Tyson's relevant experience">
-      <div><strong>$50M+</strong><span>online marketing agency built by age 25</span></div>
-      <div><strong>100,000+</strong><span>leads and appointments generated for healthcare companies, doctors, and wellness experts</span></div>
-    </div>
+    <figure class="founder-media">
+      <img src="assets/lucas-tyson.jpg" width="1200" height="1200" loading="lazy" decoding="async" alt="Lucas Tyson speaking at an event">
+      <figcaption class="founder-caption"><strong>Lucas Tyson</strong><span>Founder, Kodara</span></figcaption>
+    </figure>
     <div class="founder-highlight-copy">
       <h2 id="founder-highlight-title">Why Kodara exists.</h2>
-      <p>When valuable expertise can only be delivered through appointments, the number of people you can help is limited by your calendar. More leads do not solve that bottleneck if every new client still requires more of your time.</p>
       <p>After watching his girlfriend Michelle spend countless hours and thousands of dollars searching for answers to Graves disease, Lucas Tyson saw how difficult it can be to access the right expertise at the right moment.</p>
-      <p>Lucas built an online marketing agency to more than $50 million by age 25 and helped generate more than 100,000 leads and appointments. Kodara brings that experience to health and wellness experts who want their knowledge to work beyond the appointment.</p>
+      <p>Kodara brings his experience building an online marketing agency to more than $50 million and generating more than 100,000 leads and appointments to health and wellness experts who want their knowledge to work beyond the appointment.</p>
       <p class="founder-principle">The idea is simple: your expertise should be able to help people even when you are not personally in the room.</p>
+      <div class="founder-credentials" aria-label="Lucas Tyson's relevant experience">
+        <div class="founder-credential"><strong>$50M+</strong><span>Online marketing agency built by age 25</span></div>
+        <div class="founder-credential"><strong>100,000+</strong><span>Leads and appointments generated for healthcare companies, doctors, and wellness experts</span></div>
+      </div>
     </div>
   </section>
 
@@ -777,7 +729,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       <a href="#how-it-works">AI Version of You</a>
       <a href="#how-it-works">Digital Programs</a>
       <a href="#how-it-works">Client Discovery</a>
-      <a href="#process">Launch Process</a>
+      <a href="#how-it-works">Launch Process</a>
     </nav>
     <nav class="footer-group" aria-label="Who Kodara is for">
       <h2>Who It’s For</h2>
@@ -796,8 +748,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       <h2>Information</h2>
       <a class="qualification-link" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener">See If You Qualify</a>
     </div>
-    <section class="footer-disclaimers" aria-labelledby="footer-disclaimers-title">
-      <h2 id="footer-disclaimers-title">Important Disclaimers</h2>
+    <details class="footer-disclaimers">
+      <summary>Important disclaimers</summary>
       <div class="footer-disclaimer-list">
         <article class="footer-disclaimer">
           <h3>Earnings Disclaimer</h3>
@@ -812,7 +764,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           <p>Users interact with artificial intelligence, not the featured expert personally. AI-generated information may be incomplete, inaccurate, or outdated and should not be relied upon without appropriate professional judgment or independent verification. Search, demand, and interest signals are predictive indicators and do not guarantee any person’s interest, enrollment, purchase, or outcome.</p>
         </article>
       </div>
-    </section>
+    </details>
     <div class="footer-legal">
       <p>© 2026 Kodara. All rights reserved.</p>
     </div>

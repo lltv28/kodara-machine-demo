@@ -4,11 +4,11 @@ This context describes the company-style homepage that explains Kodara's done-fo
 
 ## Visual surfaces
 
-White is the only neutral page, section, card, and media surface. Text-led sections, stats, process explanations, pathways, credibility copy, founder copy, and text CTAs remain open on the white canvas and use spacing rather than outlines or divider bands. Card outlines are reserved for product features, testimonials and results, and FAQ disclosures. The closing CTA may use a solid green contained surface. Hairlines are reserved for structural boundaries inside media, controls, and the footer. Do not use pale green, tinted green, or green-gradient backgrounds.
+White is the only neutral page, section, card, and media surface. Text-led sections, stats, process explanations, pathways, credibility copy, founder copy, and text CTAs remain open on the white canvas and use spacing rather than outlines or divider bands. Card outlines are reserved for product features, testimonials and results, FAQ disclosures, and authentic media such as the founder portrait. The closing CTA may use a solid green contained surface. Hairlines are reserved for structural boundaries inside media, controls, and the footer. Do not use pale green, tinted green, or green-gradient backgrounds.
 
 ## Typography
 
-Instrument Sans remains the page typeface, with IBM Plex Mono reserved for compact process labels. Desktop body copy uses 21px and 24px tiers; mobile uses 19px and 22px. Desktop section headings use a 48px-60px range, while mobile section headings use a 40px-48px range. Primary CTA labels use a 30px desktop tier with a 72px minimum target, and mobile CTA labels use a responsive 26px-29px tier with a 66px minimum target. Very narrow screens use a 23px tier and 60px target so the action remains on one line. This strengthens hierarchy for an audience over 40 without enlarging reading text or crowding cards.
+Instrument Sans remains the page typeface. Process labels use the same family in sentence case so they read as navigation rather than code. Desktop body copy uses 20px and 22px tiers; mobile uses 18px and 20px. Desktop display headings use a 56px-72px hero tier, a 44px-52px section tier, and a 30px-36px card tier. Mobile uses a 42px-48px hero tier, a 34px-40px section tier, and a 24px-28px card tier. Primary CTA labels use 22px type and a 60px minimum desktop target, then 20px type and a 58px minimum mobile target. This produces a clear institutional hierarchy for an audience over 40 without crowding cards or allowing buttons to dominate the page.
 
 ## Language
 
@@ -44,39 +44,33 @@ _Avoid_: Low-ticket assessment, smaller offer, online course
 The agentic model built from more than 100,000 healthcare leads. It analyzes live search and demand signals to identify people likely to want the expert's help and route them to the best-fit digital program.
 _Avoid_: Ad flywheel, self-funding acquisition
 
-**Product overview**:
-The three sequential product chapters explaining expertise extraction, the AI Version of You, and agentic client discovery with program matching. Each chapter uses a concrete VSL proof point: one hour per week, $500-$2,000 programs, or the 100,000+ healthcare-lead training foundation.
+**Product overview and launch process**:
+The three sequential chapters combine what Kodara builds with how the client participates: share expertise, review the AI Version and programs, then launch and onboard users. Each chapter uses a concrete VSL proof point: one hour per week, $500-$2,000 programs, or the 100,000+ healthcare-lead training foundation. The third chapter retains the qualifying-client guarantee and signed-agreement boundary.
 _Avoid_: Three equal feature cards, generic feature grid, long sales letter
 
-**Alternatives framing**:
-The comparison section explaining why more leads, a self-built course, and generic AI do not automatically remove the expert's calendar bottleneck. It explains tradeoffs without claiming every alternative fails for every business.
-_Avoid_: Competitor attacks, absolute claims, invented comparisons
-
-**Launch process**:
-The explicit three-step path from sharing expertise, to reviewing the build, to launching and onboarding beta users. About one hour per week and the signed-agreement boundary remain visible.
-_Avoid_: Invented onboarding details, hidden approval step, unqualified guarantee language
+The page intentionally avoids a separate alternatives section, a second process section, and a mid-page application block. The category argument, primary demo, and three product chapters should carry the narrative without repeating the same calendar-bottleneck or launch language.
 
 **Who Kodara is for**:
 The audience-orientation section for doctors and practitioners, clinic owners, coaches and wellness experts, and healthcare educators. It helps visitors identify whether their expertise and calendar bottleneck fit the offer without creating unsupported vertical-specific promises.
 _Avoid_: Persona cards with invented outcomes, broad "everyone" positioning
 
 **Why Kodara exists**:
-The concise proof-and-story section establishing Lucas Tyson's relevant marketing credibility, the personal health experience that motivated the company, and the principle that expertise should be able to work beyond the appointment.
-_Avoid_: Long founder sales letter, generic biography
+The concise founder section pairs a real Lucas Tyson speaking photograph with the personal health experience that motivated the company, the principle that expertise should work beyond the appointment, and two compact verified credentials.
+_Avoid_: Metrics-only founder treatment, long founder sales letter, stock portrait, generic biography
 
 **Experience and approval**:
 The institutional credibility section names the AI engineers and operators with decades of healthcare experience, the verified 350+ expert claim, the 100,000+ healthcare leads generated online and used to train Kodara, and the expert's pre-launch approval. It does not claim HIPAA compliance, clinical validation, formal privacy controls, or another certification unless separately documented.
 _Avoid_: Compliance badge wall, generic security claims, hidden safety copy
 
 **Proof section**:
-The Sandra and Leanne video stories plus the supplied Dr. Vora and Ashley results. Together they show entirely online delivery, greater consistency, patient enrollment, and reduced dependence on in-person work. The adjacent disclaimer states that individual outcomes vary.
+The Sandra and Leanne video stories use consistent client-story labels, verified role and organization context where available, and a concise statement of what Kodara helped build. The supplied Dr. Vora and Ashley results include a role line before the result narrative. Together they show entirely online delivery, greater consistency, patient enrollment, and reduced dependence on in-person work. The adjacent disclaimer states that individual outcomes vary.
 _Avoid_: Generic client-results grid, unrelated agency proof
 
 **Offer boundary**:
 For qualifying clients, the current offer states that the first AI Version will be completed and launched and the first 10 beta users onboarded within the first 30 days on the launch timeline, or the client receives a full refund. The signed agreement controls all eligibility, definitions, timing, and remedy.
 
 **Application action**:
-The header navigation is limited to How It Works, Results, and FAQ. The header, hero, post-product action, final CTA, and footer link say "See If You Qualify" and open the live scheduler. The page does not promise a free live demo or an AI conversation that the destination has not been verified to provide.
+The header navigation is limited to How It Works, Results, and FAQ. The header, hero, final CTA, and footer link say "See If You Qualify" and open the live scheduler. The page does not add a repeated mid-page action or promise a free live demo or AI conversation that the destination has not been verified to provide.
 
 **Company navigation**:
-The header keeps the primary path concise: How It Works, Results, and FAQ, followed by one qualification action. Mobile keeps only the brand and qualification action. The multi-column footer adds the audience pathways, company story, and review-and-approval section. Unverified privacy, terms, contact, company, and location links are omitted instead of shown as unfinished content.
+The header keeps the primary path concise: How It Works, Results, and FAQ, followed by one qualification action. Mobile keeps only the brand and qualification action. The multi-column footer adds the audience pathways, company story, and review-and-approval section. Important legal language remains complete but is collapsed behind a native disclosure by default. Unverified privacy, terms, contact, company, and location links are omitted instead of shown as unfinished content.
