@@ -13,7 +13,7 @@ Instrument Sans remains the page typeface, with IBM Plex Mono reserved for compa
 ## Language
 
 **Site hero**:
-The trust-first opening beneath the company header. It states that the AI Version will be built and launched in 30 days, names the one-hour-per-week involvement boundary and $500-$2,000 digital-program model, and gives qualifying clients the 10-beta-user refund guarantee. A finished offer panel replaces the former portrait placeholder.
+The trust-first opening beneath the company header uses a centered cinema stack: headline, concise offer context, stable 16:9 VSL stage, and one application action. It states that the AI Version will be built and launched in 30 days, names the one-hour-per-week involvement boundary and $500-$2,000 digital-program model, and gives qualifying clients the 10-beta-user refund guarantee. Until the final VSL source is connected, the stage uses a branded offer poster rather than a fake video player.
 _Avoid_: Authority-logo opener, demo-first hero, generic AI agency hero
 
 **Authority proof**:

@@ -29,6 +29,9 @@ assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
 assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced-motion preferences');
 assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
+assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*text-align:center/, 'Hero must use the centered cinema stack');
+assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:1000px;[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas');
+assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"/, 'Hero application CTA must sit below the VSL stage');
 
 // Core page structure.
 for (const className of ['site-header', 'site-hero', 'proof-snapshot', 'education-section', 'primary-demo', 'mechanism-features', 'midpage-action', 'alternatives-section', 'case-studies', 'process-section', 'audience-section', 'founder-highlight', 'credibility-section', 'faq', 'cta', 'site-footer']) {
@@ -72,7 +75,6 @@ assert.doesNotMatch(page, /AI sales department|paid assessment|self-funding|high
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.equal(ctaLinks.length, 4, 'Header, hero, product overview, and final sections must contain one primary button each');
-assert.match(page, /class="cta-btn" href="#how-it-works">See How It Works<\/a>/, 'Hero primary action must navigate to the product overview');
 const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification-link[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.equal(qualificationLinks.length, 5, 'Qualification links must appear in the header, hero, product overview, final CTA, and footer');
 assert.ok(qualificationLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Qualification links must use the live scheduler');
