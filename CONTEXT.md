@@ -76,7 +76,7 @@ _Avoid_: Generic client-results grid, unrelated agency proof
 For qualifying clients, the current offer states that the first AI Version will be completed and launched and the first 10 beta users onboarded within the first 30 days on the launch timeline, or the client receives a full refund. The signed agreement controls all eligibility, definitions, timing, and remedy.
 
 **Application action**:
-The header, hero secondary action, post-product action, final CTA, and footer link say "Apply To See If You Qualify" and open the live scheduler. The hero primary button says "See How It Works" and moves visitors to the product overview. The page does not promise a free live demo or an AI conversation that the destination has not been verified to provide.
+The header navigation is limited to How It Works, Results, and FAQ. The header, hero, post-product action, final CTA, and footer link say "See If You Qualify" and open the live scheduler. The page does not promise a free live demo or an AI conversation that the destination has not been verified to provide.
 
 **Company navigation**:
-The header keeps the primary path concise: what Kodara builds, why it matters, the launch process, client stories, and FAQs. The multi-column footer adds the audience pathways, company story, and review-and-approval section. Unverified privacy, terms, contact, company, and location links are omitted instead of shown as unfinished content.
+The header keeps the primary path concise: How It Works, Results, and FAQ, followed by one qualification action. Mobile keeps only the brand and qualification action. The multi-column footer adds the audience pathways, company story, and review-and-approval section. Unverified privacy, terms, contact, company, and location links are omitted instead of shown as unfinished content.

@@ -33,6 +33,9 @@ assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*te
 assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:1000px;[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas');
 assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"/, 'Hero application CTA must sit below the VSL stage');
 assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"[^>]*>[^<]+<\/a>\s*<p class="hero-guarantee">/, 'Hero guarantee must sit below the application CTA');
+const primaryNav = page.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? '';
+assert.equal((primaryNav.match(/<a\b/g) ?? []).length, 3, 'Primary navigation must stay limited to three orientation links');
+assert.match(primaryNav, />How It Works<[^]*>Results<[^]*>FAQ</, 'Primary navigation must use the agreed labels and order');
 
 // Core page structure.
 for (const className of ['site-header', 'site-hero', 'proof-snapshot', 'education-section', 'primary-demo', 'mechanism-features', 'midpage-action', 'alternatives-section', 'case-studies', 'process-section', 'audience-section', 'founder-highlight', 'credibility-section', 'faq', 'cta', 'site-footer']) {
@@ -77,10 +80,10 @@ assert.doesNotMatch(page, /AI sales department|paid assessment|self-funding|high
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.equal(ctaLinks.length, 4, 'Header, hero, product overview, and final sections must contain one primary button each');
 const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification-link[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(qualificationLinks.length, 5, 'Qualification links must appear in the header, hero, product overview, final CTA, and footer');
+assert.equal(qualificationLinks.length, 5, 'Qualification links must appear in the header, hero, mid-page action, final CTA, and footer');
 assert.ok(qualificationLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Qualification links must use the live scheduler');
 assert.ok(qualificationLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External qualification links must open safely');
-assert.equal((page.match(/>Apply To See If You Qualify/g) ?? []).length, 5, 'Every qualification link must use the VSL-aligned application action');
+assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 5, 'Every qualification link must use one concise action label');
 
 // Demo retirement and replacement contract.
 assert.doesNotMatch(page, /<ios-notification-demo\b/, 'The previous notification demo must not remain mounted');
