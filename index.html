@@ -191,7 +191,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 /* ---------- founder highlight ---------- */
 .founder-highlight{display:grid;width:100%;gap:clamp(40px,6vw,72px);align-items:center}
 .founder-media{margin:0;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
-.founder-media img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 34%}
+.founder-media img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:center 34%}
 .founder-caption{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-3);padding:var(--space-4) var(--space-5)}
 .founder-caption strong,.founder-caption span{display:block}
 .founder-caption strong{color:var(--ink);font-size:var(--type-label);line-height:1.3}
@@ -317,20 +317,22 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .proof-card blockquote::before{font-size:4.5rem}
 }
 
+.faq{width:100%;max-width:var(--rail-reading)}
 .faq-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-5);text-align:center}
 .faq-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .faq-list{display:grid;width:100%;gap:var(--space-3)}
 .faq-item{border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle);overflow:hidden}
-.faq-item summary{position:relative;padding:var(--space-5) var(--space-7) var(--space-5) var(--space-5);color:var(--ink);font-size:var(--type-question);font-weight:600;line-height:1.3;cursor:pointer;list-style:none;text-wrap:balance}
+.faq-item summary{position:relative;padding:var(--space-5) calc(var(--space-7) + var(--space-4)) var(--space-5) var(--space-5);color:var(--ink);font-size:var(--type-question);font-weight:600;line-height:1.3;cursor:pointer;list-style:none;text-wrap:balance}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:'+';position:absolute;top:50%;right:var(--space-1);color:var(--accent-ink);font-family:var(--fb);font-size:1.8rem;font-weight:400;line-height:1;transform:translateY(-50%);transition:transform .22s cubic-bezier(.22,1,.36,1)}
+.faq-item summary::after{content:'+';position:absolute;top:50%;right:var(--space-5);display:grid;width:32px;height:32px;place-items:center;color:var(--accent-ink);font-family:var(--fb);font-size:1.8rem;font-weight:400;line-height:1;transform:translateY(-50%);transition:transform .22s cubic-bezier(.22,1,.36,1)}
 .faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg);transition-duration:.3s}
 .faq-item.is-closing summary::after{transform:translateY(-50%) rotate(0);transition-duration:.22s}
 .faq-item summary:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px;border-radius:var(--radius-sm)}
 .faq-answer{width:100%;max-width:var(--measure-faq);padding:0 var(--space-7) var(--space-5) var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 @media(max-width:720px){
   .faq-head{margin-bottom:var(--space-4)}
-  .faq-item summary{padding:var(--space-4) 46px var(--space-4) var(--space-4)}
+  .faq-item summary{padding:var(--space-4) calc(var(--space-7) + var(--space-2)) var(--space-4) var(--space-4)}
+  .faq-item summary::after{right:var(--space-4)}
   .faq-answer{max-width:none;padding:0 46px var(--space-4) var(--space-4)}
 }
 
@@ -371,7 +373,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .primary-demo-copy{padding-inline:var(--space-4)}
   .case-featured--portrait,.case-featured-copy,.case-support-copy,.proof-card{padding:var(--space-5)}
   .proof-grid{gap:var(--space-4)}
-  .faq-item summary{padding-right:var(--space-6)}
   .faq-answer{padding-right:var(--space-6)}
 }
 @media(max-width:340px){.hero-region-eyebrow{min-block-size:4.2em}#hero-region-subheadline{min-block-size:7.5em}}
@@ -424,7 +425,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     <div class="site-hero-copy">
       <p class="hero-region-eyebrow" id="hero-region-eyebrow">Limited Availability for Health &amp; Wellness Experts</p>
       <h1 id="hero-title">We Will Turn Your Health Expertise Into An AI You Can Sell To Clients Entirely Online</h1>
-      <p id="hero-region-subheadline">We’re currently helping health and wellness business owners build the AI Version of their expertise.</p>
+      <p id="hero-region-subheadline">We guarantee to launch and get your first 10 beta users in just 30 days, or else you get a full refund.</p>
     </div>
     <div class="hero-vsl-stage" aria-label="Video sales presentation">
       <div id="vidalytics_embed_CA0308FsT4_Z8w5E" style="width:100%;position:relative;padding-top:56.25%"></div>

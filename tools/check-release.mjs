@@ -50,6 +50,10 @@ for (const className of ['demand-signal', 'audience-path', 'credibility-item']) 
   assert.doesNotMatch(page, new RegExp(`\\.${className.replace(' ', '\\s+')}\\{[^}]*border:`), `${className} must remain open text without a card outline`);
 }
 assert.match(page, /\.faq-list\{display:grid;[^}]*gap:var\(--space-3\)/, 'FAQ items must use spaced cards instead of divider rows');
+assert.match(page, /\.faq\{width:100%;max-width:var\(--rail-reading\)\}/, 'FAQ must keep one stable reading width in open and closed states');
+assert.match(page, /\.faq-item summary::after\{[^}]*right:var\(--space-5\);display:grid;width:32px;height:32px;place-items:center/, 'FAQ icons must use a fixed, centered desktop alignment box');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.faq-item summary\{padding:var\(--space-4\) calc\(var\(--space-7\) \+ var\(--space-2\)\) var\(--space-4\) var\(--space-4\)\}[\s\S]*?\.faq-item summary::after\{right:var\(--space-4\)\}/, 'FAQ questions and icons must keep aligned mobile insets');
+assert.doesNotMatch(page, /@media\(max-width:390px\)\{[^}]*\.faq-item summary\{padding-right:/, 'Narrow screens must not override the shared FAQ icon column');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
 assert.match(page, /--type-button:1\.375rem/, 'Primary CTA type must remain prominent without overpowering the page');
 assert.match(page, /\.cta-btn\{[^}]*min-height:60px;[^}]*padding:15px 32px/, 'Primary CTA buttons must keep a readable desktop target');
@@ -88,7 +92,7 @@ assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder l
 // Current VSL offer language.
 assert.match(page, /<h1[^>]*>We Will Turn Your Health Expertise Into An AI You Can Sell To Clients Entirely Online<\/h1>/, 'Hero must lead with the approved online AI offer');
 assert.match(page, /<p class="hero-region-eyebrow" id="hero-region-eyebrow">Limited Availability for Health &amp; Wellness Experts<\/p>\s*<h1/, 'Hero must place the generic regional availability line above the headline');
-assert.match(page, /<p id="hero-region-subheadline">We’re currently helping health and wellness business owners build the AI Version of their expertise\.<\/p>/, 'Hero must server-render the exact generic regional copy');
+assert.match(page, /<p id="hero-region-subheadline">We guarantee to launch and get your first 10 beta users in just 30 days, or else you get a full refund\.<\/p>/, 'Hero must server-render the approved guarantee');
 assert.match(page, /\.hero-region-eyebrow\{[^}]*min-block-size:1\.4em[^}]*text-wrap:balance/, 'Hero audience personalization must reserve its desktop height and balance wrapping');
 assert.match(page, /#hero-region-subheadline\{[^}]*min-block-size:4\.5em[^}]*text-wrap:balance/, 'Hero subheadline personalization must reserve its desktop height and balance wrapping');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-region-eyebrow\{[^}]*min-block-size:2\.8em[\s\S]*?#hero-region-subheadline\{[^}]*min-block-size:6em/, 'Hero personalization must reserve both mobile text areas');
@@ -131,6 +135,7 @@ assert.equal((page.match(/class="mechanism-proof(?: |")/g) ?? []).length, 3, 'Th
 assert.match(page, /class="offer-demo"/, 'Primary offer visual must replace the empty demo slot');
 assert.match(page, /class="founder-media"/, 'Founder section must include an authentic founder portrait');
 assert.match(page, /src="assets\/lucas-tyson\.jpg"/, 'Founder portrait must use the approved local image');
+assert.match(page, /\.founder-media img\{[^}]*width:100%;height:auto;aspect-ratio:1\/1;[^}]*object-fit:cover/, 'Founder portrait must keep a square, responsive edge-to-edge crop');
 assert.equal((page.match(/class="founder-credential"/g) ?? []).length, 2, 'Founder credentials must support the human story without replacing it');
 assert.match(page, /@media\(max-width:899px\)\{[\s\S]*?\.founder-highlight\{grid-template-columns:1fr/, 'Founder presentation must stack before tablet copy becomes cramped');
 

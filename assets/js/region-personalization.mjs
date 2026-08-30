@@ -13,7 +13,7 @@ const APPROVED_REGIONS = new Set([
 
 const STORAGE_KEY = 'kodara:visitor-region';
 
-export const GENERIC_COPY = 'We’re currently helping health and wellness business owners build the AI Version of their expertise.';
+export const GENERIC_COPY = 'We guarantee to launch and get your first 10 beta users in just 30 days, or else you get a full refund.';
 export const GENERIC_EYEBROW = 'Limited Availability for Health & Wellness Experts';
 
 export function isApprovedRegion(region) {
@@ -21,9 +21,7 @@ export function isApprovedRegion(region) {
 }
 
 export function copyForRegion(region) {
-  return isApprovedRegion(region)
-    ? `We’re currently helping health and wellness business owners in ${region} build the AI Version of their expertise.`
-    : GENERIC_COPY;
+  return GENERIC_COPY;
 }
 
 export function eyebrowForRegion(region) {
