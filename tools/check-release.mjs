@@ -58,6 +58,9 @@ assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced
 assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
 assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*text-align:center/, 'Hero must use the centered cinema stack');
 assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:1000px;[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas');
+assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain the production Vidalytics VSL');
+assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Hero must load the approved Vidalytics VSL source');
+assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
 assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"/, 'Hero application CTA must sit below the VSL stage');
 assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"[^>]*>[^<]+<\/a>\s*<p class="hero-guarantee">/, 'Hero guarantee must sit below the application CTA');
 const primaryNav = page.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? '';

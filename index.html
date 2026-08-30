@@ -62,10 +62,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .site-hero h1{max-width:16ch;font-size:var(--type-hero);font-weight:650;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
 #hero-region-subheadline{max-width:48ch;min-block-size:4.5em;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .site-hero>.hero-guarantee{max-width:55ch;margin-top:var(--space-4);color:var(--ink);font-size:var(--type-label);font-weight:650;line-height:1.45}
-.hero-vsl-stage{position:relative;width:100%;max-width:1000px;aspect-ratio:16/9;margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--accent);box-shadow:var(--shadow-md)}
-.hero-vsl-poster{display:flex;width:100%;height:100%;flex-direction:column;align-items:center;justify-content:center;padding:clamp(28px,6vw,72px);color:#fff}
-.hero-vsl-poster strong{max-width:14ch;font-size:clamp(2.5rem,6vw,5.5rem);font-weight:700;line-height:1;letter-spacing:var(--tracking-display);text-wrap:balance}
-.hero-vsl-poster span{max-width:28ch;margin-top:var(--space-4);font-size:var(--type-card-small);font-weight:600;line-height:1.25;text-wrap:balance}
+.hero-vsl-stage{position:relative;width:100%;max-width:1000px;aspect-ratio:16/9;margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--ink);box-shadow:var(--shadow-md)}
 .hero-vsl-cta{margin-top:var(--space-6)}
 
 /* ---------- primary demo ---------- */
@@ -340,9 +337,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   #hero-region-subheadline{max-width:32ch;min-block-size:6em;font-size:var(--type-body-large)}
   .site-hero>.hero-guarantee{max-width:34ch;margin-top:var(--space-3)}
   .hero-vsl-stage{margin-top:var(--space-6);border-radius:var(--radius-lg)}
-  .hero-vsl-poster{padding:var(--space-5)}
-  .hero-vsl-poster strong{font-size:clamp(2rem,10vw,3rem)}
-  .hero-vsl-poster span{margin-top:var(--space-2);font-size:var(--type-label)}
   .hero-vsl-cta{width:100%;margin-top:var(--space-5)}
   .cta{padding:var(--space-7) var(--space-4)}
   .cta-btn{min-height:58px;padding:14px var(--space-5);font-size:1.25rem;white-space:nowrap}
@@ -426,10 +420,14 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       <p id="hero-region-subheadline">We’re currently helping health and wellness business owners build the AI Version of their expertise.</p>
     </div>
     <div class="hero-vsl-stage" aria-label="Video sales presentation">
-      <div class="hero-vsl-poster">
-        <strong>Your AI Version of You</strong>
-        <span>Built and launched in 30 days.</span>
-      </div>
+      <div id="vidalytics_embed_CA0308FsT4_Z8w5E" style="width:100%;position:relative;padding-top:56.25%"></div>
+      <script>
+      (function(v,i,d,a,l,y,t,c,s){
+        y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={}}if(!v[c]){v[c]={}}if(!v[y]){v[y]={}}var vl='Loader',vli=v[y][vl],vsl=v[c][vl+'Script'],vlf=v[c][vl+'Loaded'],ve='Embed';
+        if(!vsl){vsl=function(u,cb){if(t){cb();return}s=i.createElement('script');s.type='text/javascript';s.async=1;s.src=u;if(s.readyState){s.onreadystatechange=function(){if(s.readyState==='loaded'||s.readyState==='complete'){s.onreadystatechange=null;vlf=1;cb()}}}else{s.onload=function(){vlf=1;cb()}}i.getElementsByTagName('head')[0].appendChild(s)}}
+        vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc()}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a)})})
+      })(window,document,'Vidalytics','vidalytics_embed_CA0308FsT4_Z8w5E','https://fast.vidalytics.com/embeds/U18KMfDU/CA0308FsT4_Z8w5E/');
+      </script>
     </div>
     <a class="cta-btn qualification-link hero-vsl-cta" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="See if you qualify (opens in a new tab)">See If You Qualify</a>
     <p class="hero-guarantee">For qualifying clients, we onboard your first 10 beta users within 30 days or you receive a full refund.</p>
