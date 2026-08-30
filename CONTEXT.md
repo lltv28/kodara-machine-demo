@@ -4,7 +4,7 @@ This context describes the company-style homepage that explains Kodara's done-fo
 
 ## Visual surfaces
 
-White is the only neutral page, section, card, and media surface. Most sections remain open on the white canvas and use spacing rather than outer cards or divider bands. The shared major-card treatment is reserved for the product demo, mid-page action, founder feature, and closing CTA. Repeated stats, steps, pathways, alternatives, testimonials, and FAQs may use smaller cards where the boundary helps visitors scan distinct items. Hairlines are reserved for structural boundaries inside media, controls, and the footer. Green may appear as a solid, high-contrast brand surface for intentional calls to action or product framing. Do not use pale green, tinted green, or green-gradient backgrounds.
+White is the only neutral page, section, card, and media surface. Text-led sections, stats, process explanations, pathways, credibility copy, founder copy, and text CTAs remain open on the white canvas and use spacing rather than outlines or divider bands. Card outlines are reserved for product features, testimonials and results, and FAQ disclosures. The closing CTA may use a solid green contained surface. Hairlines are reserved for structural boundaries inside media, controls, and the footer. Do not use pale green, tinted green, or green-gradient backgrounds.
 
 ## Typography
 

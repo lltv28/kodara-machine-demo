@@ -157,7 +157,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .education-head h2{max-width:15ch;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 .education-head p{max-width:52ch;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.55;text-wrap:pretty}
 .demand-signals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-7)}
-.demand-signal{padding:var(--space-5);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle)}
+.demand-signal{padding:var(--space-4) 0}
 .demand-signal strong,.demand-signal span{display:block}.demand-signal strong{color:var(--accent-ink);font-size:var(--type-card-small);line-height:1.05;letter-spacing:var(--tracking-heading)}.demand-signal span{margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-label);line-height:1.45}
 .education-opportunity{max-width:52ch;margin:var(--space-6) auto 0;color:var(--ink);font-size:var(--type-body-large);font-weight:600;line-height:1.5;text-align:center;text-wrap:pretty}
 .delivery-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6);margin-top:var(--space-7)}
@@ -167,15 +167,15 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .delivery-model ul{display:grid;gap:var(--space-3);margin-top:var(--space-5);padding-left:1.15em;color:var(--ink-2);font-size:var(--type-body);line-height:1.5}
 
 /* ---------- mid-page action ---------- */
-.midpage-action{display:flex;width:100%;align-items:center;justify-content:space-between;gap:var(--space-6);padding:var(--space-6)}
+.midpage-action{display:flex;width:100%;align-items:center;justify-content:space-between;gap:var(--space-6);padding:var(--space-6) 0}
 .midpage-action p{max-width:36ch;font-size:var(--type-card-small);font-weight:600;line-height:1.2;letter-spacing:var(--tracking-heading);text-wrap:balance}
 
 /* ---------- alternatives ---------- */
 .alternatives-section{display:grid;width:100%;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);gap:clamp(48px,8vw,112px);align-items:start}
 .alternatives-copy h2{max-width:14ch;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 .alternatives-copy>p{max-width:40ch;margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
-.alternatives-list{display:grid;gap:var(--space-4)}
-.alternative-item{padding:var(--space-5);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle)}
+.alternatives-list{display:grid;gap:var(--space-6)}
+.alternative-item{padding:0}
 .alternative-item h3{font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .alternative-item p{max-width:52ch;margin-top:var(--space-2);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 
@@ -184,8 +184,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .process-head{max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
 .process-head h2{font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 .process-head p{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.process-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}
-.process-step{padding:var(--space-5);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle)}
+.process-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6)}
+.process-step{padding:0}
 .process-number{display:block;margin-bottom:var(--space-4);color:var(--accent-ink);font-family:var(--mono);font-size:var(--type-meta);font-weight:600}
 .process-step h3{font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .process-step p{max-width:34ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
@@ -194,16 +194,16 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .audience-section{display:grid;width:100%;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);gap:clamp(48px,8vw,112px);align-items:start}
 .audience-copy h2{max-width:14ch;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 .audience-copy p{max-width:40ch;margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
-.audience-list{display:grid;gap:var(--space-4)}
-.audience-path{display:grid;grid-template-columns:44px minmax(0,1fr);gap:var(--space-4);padding:var(--space-5);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle)}
+.audience-list{display:grid;gap:var(--space-6)}
+.audience-path{display:grid;grid-template-columns:44px minmax(0,1fr);gap:var(--space-4);padding:0}
 .audience-number{padding-top:4px;color:var(--accent-ink);font-family:var(--mono);font-size:var(--type-meta);font-weight:600}
 .audience-path h3{font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .audience-path p{max-width:52ch;margin-top:var(--space-2);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 
 /* ---------- founder highlight ---------- */
-.founder-highlight{display:grid;gap:clamp(40px,6vw,72px);align-items:center;padding:var(--space-6)}
-.founder-proof{display:grid;width:100%;gap:var(--space-4)}
-.founder-proof div{padding:var(--space-5);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle)}
+.founder-highlight{display:grid;gap:clamp(40px,6vw,72px);align-items:center}
+.founder-proof{display:grid;width:100%;gap:var(--space-6)}
+.founder-proof div{padding:0}
 .founder-proof strong,.founder-proof span{display:block}.founder-proof strong{color:var(--accent-ink);font-size:clamp(3rem,6vw,5rem);font-weight:700;line-height:.9;letter-spacing:var(--tracking-stat)}.founder-proof span{max-width:24ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-label);font-weight:600;line-height:1.45}
 .founder-highlight-copy{padding-right:clamp(0px,3.5vw,32px)}
 .founder-highlight h2{max-width:15ch;font-size:var(--type-section-long);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
@@ -215,8 +215,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .credibility-head{max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
 .credibility-head h2{font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 .credibility-head p{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.credibility-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}
-.credibility-item{padding:var(--space-5);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle)}
+.credibility-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6)}
+.credibility-item{padding:0}
 .credibility-item strong{display:block;color:var(--accent-ink);font-size:clamp(2.1rem,3.8vw,3.4rem);font-weight:700;line-height:1;letter-spacing:var(--tracking-stat)}
 .credibility-item p{max-width:32ch;margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 
@@ -266,13 +266,13 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .education-head{gap:var(--space-5)}
   .delivery-comparison{gap:var(--space-4);margin-top:var(--space-6)}
   .delivery-model{padding:var(--space-5)}
-  .demand-signal{padding:var(--space-5)}
+  .demand-signal{padding:0}
   .midpage-action{align-items:flex-start;flex-direction:column}
   .midpage-action .cta-btn{width:100%}
   .alternatives-section{gap:var(--space-6)}
   .process-grid{grid-template-columns:1fr}
-  .process-step{padding:var(--space-5)}
-  .founder-highlight{grid-template-columns:1fr;gap:var(--space-5);padding:var(--space-5)}
+  .process-step{padding:0}
+  .founder-highlight{grid-template-columns:1fr;gap:var(--space-5)}
   .founder-proof{max-width:440px;margin-inline:auto}
   .founder-highlight-copy{padding:0}
   .founder-highlight h2{max-width:17ch}
@@ -280,7 +280,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .audience-copy h2{max-width:17ch}
   .audience-path{grid-template-columns:36px minmax(0,1fr);gap:var(--space-3)}
   .credibility-grid{grid-template-columns:1fr}
-  .credibility-item{padding:var(--space-5)}
+  .credibility-item{padding:0}
   .case-featured,.case-support-grid,.case-outcomes{grid-template-columns:1fr}
   .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
   .case-featured--portrait{gap:var(--space-4);padding:var(--space-5)}
@@ -551,7 +551,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ MID-PAGE ACTION ============ -->
-  <section class="card midpage-action" aria-label="See if Kodara is a fit">
+  <section class="midpage-action" aria-label="See if Kodara is a fit">
     <p>See what a 30-day launch could look like around your expertise.</p>
     <a class="cta-btn qualification-link" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="See if you qualify (opens in a new tab)">See If You Qualify</a>
   </section>
@@ -675,7 +675,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ WHY KODARA EXISTS ============ -->
-  <section class="card founder-highlight" id="about" aria-labelledby="founder-highlight-title">
+  <section class="founder-highlight" id="about" aria-labelledby="founder-highlight-title">
     <div class="founder-proof" aria-label="Lucas Tyson's relevant experience">
       <div><strong>$50M+</strong><span>online marketing agency built by age 25</span></div>
       <div><strong>100,000+</strong><span>leads and appointments generated for healthcare companies, doctors, and wellness experts</span></div>
