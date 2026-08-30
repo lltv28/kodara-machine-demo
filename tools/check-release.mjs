@@ -32,6 +32,7 @@ assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en da
 assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*text-align:center/, 'Hero must use the centered cinema stack');
 assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:1000px;[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas');
 assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"/, 'Hero application CTA must sit below the VSL stage');
+assert.match(page, /class="cta-btn qualification-link hero-vsl-cta"[^>]*>[^<]+<\/a>\s*<p class="hero-guarantee">/, 'Hero guarantee must sit below the application CTA');
 
 // Core page structure.
 for (const className of ['site-header', 'site-hero', 'proof-snapshot', 'education-section', 'primary-demo', 'mechanism-features', 'midpage-action', 'alternatives-section', 'case-studies', 'process-section', 'audience-section', 'founder-highlight', 'credibility-section', 'faq', 'cta', 'site-footer']) {
