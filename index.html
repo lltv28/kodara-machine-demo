@@ -32,11 +32,11 @@ head.appendChild(script);
   --shadow-sm:0 8px 24px rgba(12,79,52,.06),0 1px 3px rgba(32,54,45,.04);
   --shadow-md:0 24px 80px rgba(12,79,52,.12),0 3px 10px rgba(32,54,45,.05);
   --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:80px;--space-9:120px;
-  --rail-wide:1240px;--rail-reading:760px;--page-gutter:24px;--page-gutter-mobile:16px;
+  --rail-wide:1240px;--rail-reading:760px;--hero-primary-width:1000px;--page-gutter:24px;--page-gutter-mobile:16px;
   --measure-display:22ch;--measure-display-long:28ch;--measure-card-title:24ch;--measure-body:62ch;--measure-card-body:42ch;--measure-faq:72ch;
   --tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px;
   --fb:"Instrument Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace;
-  --type-hero:clamp(3rem,4vw,3.5rem);--type-section:clamp(2.75rem,4vw,3.25rem);--type-section-long:clamp(2.75rem,3.8vw,3.25rem);
+  --type-hero:clamp(3rem,3.8vw,3.25rem);--type-section:clamp(2.75rem,4vw,3.25rem);--type-section-long:clamp(2.75rem,3.8vw,3.25rem);
   --type-card:clamp(1.875rem,2.5vw,2.25rem);--type-card-small:clamp(1.875rem,2.2vw,2.125rem);
   --type-body:1.25rem;--type-body-large:1.375rem;
   --type-question:clamp(1.375rem,1.8vw,1.625rem);
@@ -66,10 +66,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .site-hero{display:flex;width:100%;flex-direction:column;align-items:center;padding:clamp(32px,5vw,64px) 0;text-align:center}
 .site-hero-copy{display:flex;width:100%;flex-direction:column;align-items:center}
 .hero-region-eyebrow{max-width:70ch;min-block-size:1.4em;margin-bottom:var(--space-3);color:var(--accent-dark);font-size:var(--type-label);font-weight:700;line-height:1.4;text-wrap:balance}
-.site-hero h1{max-width:32ch;font-size:var(--type-hero);font-weight:650;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
-#hero-region-subheadline{max-width:48ch;min-block-size:4.5em;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
+.site-hero h1{width:100%;max-width:var(--hero-primary-width);font-size:var(--type-hero);font-weight:650;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
+#hero-region-subheadline{width:100%;max-width:min(var(--hero-primary-width),65ch);min-block-size:4.5em;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .site-hero>.hero-guarantee{max-width:55ch;margin-top:var(--space-4);color:var(--ink);font-size:var(--type-label);font-weight:650;line-height:1.45}
-.hero-vsl-stage{position:relative;width:100%;max-width:1000px;aspect-ratio:16/9;margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--ink);box-shadow:var(--shadow-md)}
+.hero-vsl-stage{position:relative;width:100%;max-width:var(--hero-primary-width);aspect-ratio:16/9;margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--ink);box-shadow:var(--shadow-md)}
 #kodara-triager{width:100%;max-width:1000px;min-height:60px;margin-top:var(--space-6)}
 
 /* ---------- primary demo ---------- */

@@ -29,7 +29,8 @@ assert.doesNotMatch(page, /assets\/favicon\.svg/, 'The previous generated favico
 
 // Design-system invariants.
 assert.match(page, /--rail-wide:1240px/, 'Desktop content rail must stay at 1240px');
-assert.match(page, /--type-hero:clamp\(3rem,4vw,3\.5rem\)/, 'Hero must use the approved 48px to 56px long-headline scale');
+assert.match(page, /--hero-primary-width:1000px/, 'Hero headline and VSL must share the approved desktop width');
+assert.match(page, /--type-hero:clamp\(3rem,3\.8vw,3\.25rem\)/, 'Hero must use the approved 48px to 52px long-headline scale');
 assert.match(page, /--type-section:clamp\(2\.75rem,4vw,3\.25rem\)/, 'Section headings must retain the approved 44px to 52px scale');
 assert.match(page, /--type-section-long:clamp\(2\.75rem,3\.8vw,3\.25rem\)/, 'Long section headings must stay within the 44px to 52px section tier');
 assert.match(page, /--type-card-small:clamp\(1\.875rem,2\.2vw,2\.125rem\)/, 'Supporting card headings must stay within the 30px to 34px tier');
@@ -62,7 +63,9 @@ assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.site-header \.cta-btn\{[^
 assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced-motion preferences');
 assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
 assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*text-align:center/, 'Hero must use the centered cinema stack');
-assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:1000px;[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas');
+assert.match(page, /\.site-hero h1\{width:100%;max-width:var\(--hero-primary-width\)/, 'Hero headline must share the VSL desktop width');
+assert.match(page, /#hero-region-subheadline\{width:100%;max-width:min\(var\(--hero-primary-width\),65ch\)/, 'Hero subheadline must align to the shared frame without exceeding its readable measure');
+assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:var\(--hero-primary-width\);[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas at the shared desktop width');
 assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain the production Vidalytics VSL');
 assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Hero must load the approved Vidalytics VSL source');
 assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
