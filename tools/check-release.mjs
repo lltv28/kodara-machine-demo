@@ -27,9 +27,6 @@ assert.match(page, /--ink:#20362D;--ink-2:#304E42;--ink-3:#567066/, 'Text must u
 assert.match(page, /--accent:#106844;--accent-hover:#0C5537;--accent-ink:#106844;--accent-dark:#0C4F34/, 'Actions must use the Kodara green palette');
 assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate feature backgrounds and framing must not return');
 assert.doesNotMatch(page, /\.section-band::before/, 'Full-width divider bands must not return');
-for (const className of ['education-section', 'midpage-action', 'alternatives-section', 'process-section', 'audience-section', 'credibility-section']) {
-  assert.match(page, new RegExp(`class="[^"]*card[^"]*${className}|class="[^"]*${className}[^"]*card`), `${className} must use the shared card theme`);
-}
 assert.match(page, /\.faq-list\{display:grid;[^}]*gap:var\(--space-3\)/, 'FAQ items must use spaced cards instead of divider rows');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
 assert.match(page, /--type-button:1\.875rem/, 'Primary CTA type must remain prominent for the over-40 audience');
@@ -116,7 +113,7 @@ assert.match(page, /<h3>AI Disclaimer<\/h3>/, 'Footer must include the AI discla
 assert.match(page, /beta-user guarantee concerns onboarding beta users and is not a guarantee of sales, revenue, or profit/, 'Earnings disclaimer must limit the beta-user guarantee');
 assert.match(page, /does not practice medicine or provide medical advice, diagnosis, or treatment/, 'Medical disclaimer must state the medical-information boundary');
 assert.match(page, /AI-generated information may be incomplete, inaccurate, or outdated/, 'AI disclaimer must state the model-output boundary');
-assert.equal((page.match(/<section class="[^"]*card[^"]*"/g) ?? []).length, 13, 'Expected all major content sections to use the shared card theme');
+assert.equal((page.match(/<section class="[^"]*card[^"]*"/g) ?? []).length, 4, 'Major cards must remain limited to four hierarchy-defining sections');
 assert.match(page, /<h2 id="founder-highlight-title">Why Kodara exists\.<\/h2>/, 'Founder section must use the concise company-story framing');
 assert.match(page, /class="founder-principle"/, 'Founder section must end with the guiding principle');
 assert.match(page, /id="review-approval"/, 'The review-and-approval section needs an intent-revealing anchor');

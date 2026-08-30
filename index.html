@@ -79,7 +79,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .primary-demo-copy{order:1;padding:var(--space-7)}
   .primary-demo h2{max-width:18ch}
   .primary-demo-visual{order:2;min-height:auto;border-top:1px solid var(--line-2);border-right:0}
-  .mechanism-feature{grid-template-columns:1fr;gap:var(--space-5);padding:var(--space-5)}
+  .mechanism-feature{grid-template-columns:1fr;gap:var(--space-5);padding:0}
   .mechanism-feature:nth-child(even) .mechanism-demo,.mechanism-feature:nth-child(even) .mechanism-copy{order:initial}
   .mechanism-copy{padding:0}
   .mechanism-feature h3{max-width:20ch}
@@ -138,8 +138,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 /* ---------- mechanism features ---------- */
 .mechanism-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
 .mechanism-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.mechanism-grid{display:grid;gap:var(--space-5)}
-.mechanism-feature{display:grid;min-width:0;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);gap:clamp(40px,7vw,88px);align-items:center;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle)}
+.mechanism-grid{display:grid;gap:var(--space-8)}
+.mechanism-feature{display:grid;min-width:0;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);gap:clamp(40px,7vw,88px);align-items:center}
 .mechanism-feature:nth-child(even) .mechanism-demo{order:2}
 .mechanism-feature:nth-child(even) .mechanism-copy{order:1}
 .mechanism-demo{position:relative;width:100%;aspect-ratio:1;overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
@@ -261,7 +261,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .card{--card-pad:var(--space-5)}
   .case-studies-head{margin-bottom:var(--space-5)}
   .mechanism-head{margin-bottom:var(--space-6)}
-  .mechanism-grid{gap:var(--space-4)}
+  .mechanism-grid{gap:var(--space-7)}
   .education-head,.demand-signals,.delivery-comparison,.alternatives-section{grid-template-columns:1fr}
   .education-head{gap:var(--space-5)}
   .delivery-comparison{gap:var(--space-4);margin-top:var(--space-6)}
@@ -441,7 +441,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ EARLY PROOF ============ -->
-  <section class="card proof-snapshot" aria-label="Kodara credibility">
+  <section class="proof-snapshot" aria-label="Kodara credibility">
     <div class="proof-snapshot-lead">
       <strong>350+</strong>
       <p>We’ve helped more than 350 doctors, practitioners, clinic owners, and wellness experts build AI versions of their knowledge and expertise.</p>
@@ -463,7 +463,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ CATEGORY EDUCATION ============ -->
-  <section class="card education-section" id="why-it-matters" aria-labelledby="education-title">
+  <section class="education-section" id="why-it-matters" aria-labelledby="education-title">
     <div class="education-head">
       <h2 id="education-title">The demand for health and wellness expertise is moving online.</h2>
       <p>People are already searching online for answers, options, and experts they can trust. But most real expertise is still delivered one person at a time, in one place, at one scheduled time.</p>
@@ -511,7 +511,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ MECHANISM FEATURES ============ -->
-  <section class="card mechanism-features" id="how-it-works" aria-labelledby="mechanism-title">
+  <section class="mechanism-features" id="how-it-works" aria-labelledby="mechanism-title">
     <header class="mechanism-head">
       <h2 class="card-title" id="mechanism-title">One system turns what you know into a business that works online.</h2>
       <p class="mechanism-intro">You bring your expertise and about one hour per week. Our team extracts what you know, builds the experience, and launches it.</p>
@@ -557,7 +557,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ ALTERNATIVES ============ -->
-  <section class="card alternatives-section" aria-labelledby="alternatives-title">
+  <section class="alternatives-section" aria-labelledby="alternatives-title">
     <div class="alternatives-copy">
       <h2 id="alternatives-title">Why the usual approaches can leave the bottleneck in place.</h2>
       <p>The problem is not whether people want your help. The problem is that most growth options still depend on more of your time.</p>
@@ -579,7 +579,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ VIDEO CLIENT STORIES ============ -->
-  <section class="card case-studies" id="stories" aria-labelledby="case-studies-title">
+  <section class="case-studies" id="stories" aria-labelledby="case-studies-title">
     <div class="case-studies-head">
       <h2 class="card-title" id="case-studies-title">What happens when your expertise can work without you.</h2>
       <p class="case-studies-intro">Different experts built different online businesses. Each one reduced how much growth depended on being personally present.</p>
@@ -624,7 +624,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ LAUNCH PROCESS ============ -->
-  <section class="card process-section" id="process" aria-labelledby="process-title">
+  <section class="process-section" id="process" aria-labelledby="process-title">
     <header class="process-head">
       <h2 id="process-title">Your AI Version is built, approved, and launched in 30 days.</h2>
       <p>You give us about one hour per week. Kodara handles the extraction, build, testing, launch, and beta-user onboarding.</p>
@@ -649,7 +649,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ WHO IT IS FOR ============ -->
-  <section class="card audience-section" id="who-its-for" aria-labelledby="audience-title">
+  <section class="audience-section" id="who-its-for" aria-labelledby="audience-title">
     <div class="audience-copy">
       <h2 id="audience-title">Built for experts whose knowledge is limited by the calendar.</h2>
       <p>Kodara works with health and wellness businesses that already have valuable expertise and want to help more people without adding more one-to-one work.</p>
@@ -690,7 +690,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ EXPERIENCE AND APPROVAL ============ -->
-  <section class="card credibility-section" id="review-approval" aria-labelledby="credibility-title">
+  <section class="credibility-section" id="review-approval" aria-labelledby="credibility-title">
     <header class="credibility-head">
       <h2 id="credibility-title">Built by AI engineers and healthcare operators.</h2>
       <p>Lucas built the team required to do this properly, including AI engineers and operators with decades of healthcare experience. You remain in control of what carries your name.</p>
@@ -712,7 +712,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section class="card faq" id="faq" aria-labelledby="faq-title">
+  <section class="faq" id="faq" aria-labelledby="faq-title">
     <div class="faq-head">
       <h2 class="card-title" id="faq-title">Questions before you apply.</h2>
       <p class="faq-intro">What we build, how your expertise is protected, what the process requires, and what happens next.</p>
