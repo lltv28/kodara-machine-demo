@@ -58,8 +58,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 /* ---------- centered cinema hero ---------- */
 .site-hero{display:flex;width:100%;flex-direction:column;align-items:center;padding:clamp(32px,5vw,64px) 0;text-align:center}
 .site-hero-copy{display:flex;width:100%;flex-direction:column;align-items:center}
+.hero-region-eyebrow{max-width:70ch;min-block-size:1.4em;margin-bottom:var(--space-3);color:var(--accent-dark);font-size:var(--type-label);font-weight:700;line-height:1.4;text-wrap:balance}
 .site-hero h1{max-width:16ch;font-size:var(--type-hero);font-weight:650;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
-.site-hero-copy>p{max-width:48ch;min-block-size:4.5em;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
+#hero-region-subheadline{max-width:48ch;min-block-size:4.5em;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .site-hero>.hero-guarantee{max-width:55ch;margin-top:var(--space-4);color:var(--ink);font-size:var(--type-label);font-weight:650;line-height:1.45}
 .hero-vsl-stage{position:relative;width:100%;max-width:1000px;aspect-ratio:16/9;margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--accent);box-shadow:var(--shadow-md)}
 .hero-vsl-poster{display:flex;width:100%;height:100%;flex-direction:column;align-items:center;justify-content:center;padding:clamp(28px,6vw,72px);color:#fff}
@@ -334,8 +335,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .brand img{width:108px}
   .site-header .cta-btn{min-height:58px;padding:12px 18px;font-size:1.25rem}
   .site-hero{padding:var(--space-5) 0 var(--space-7)}
+  .hero-region-eyebrow{max-width:32ch;min-block-size:2.8em;margin-bottom:var(--space-2)}
   .site-hero h1{max-width:14ch}
-  .site-hero-copy>p{max-width:32ch;min-block-size:6em;font-size:var(--type-body-large)}
+  #hero-region-subheadline{max-width:32ch;min-block-size:6em;font-size:var(--type-body-large)}
   .site-hero>.hero-guarantee{max-width:34ch;margin-top:var(--space-3)}
   .hero-vsl-stage{margin-top:var(--space-6);border-radius:var(--radius-lg)}
   .hero-vsl-poster{padding:var(--space-5)}
@@ -371,7 +373,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .faq-item summary{padding-right:var(--space-6)}
   .faq-answer{padding-right:var(--space-6)}
 }
-@media(max-width:340px){.site-hero-copy>p{min-block-size:7.5em}}
+@media(max-width:340px){.hero-region-eyebrow{min-block-size:4.2em}#hero-region-subheadline{min-block-size:7.5em}}
 @media(max-width:350px){
   .cta-btn{min-height:58px;padding-inline:var(--space-3);font-size:1.25rem}
   .proof-snapshot-logo-row{gap:var(--space-2) var(--space-3)}
@@ -419,6 +421,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   <!-- ============ HERO ============ -->
   <section class="site-hero" aria-labelledby="hero-title">
     <div class="site-hero-copy">
+      <p class="hero-region-eyebrow" id="hero-region-eyebrow">Limited Availability for Health &amp; Wellness Experts</p>
       <h1 id="hero-title">The AI Version of You, built and launched in 30 days.</h1>
       <p id="hero-region-subheadline">We’re currently helping health and wellness business owners build the AI Version of their expertise.</p>
     </div>

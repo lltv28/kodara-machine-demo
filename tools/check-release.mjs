@@ -82,10 +82,12 @@ assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder l
 
 // Current VSL offer language.
 assert.match(page, /<h1[^>]*>The AI Version of You, built and launched in 30 days\.<\/h1>/, 'Hero must lead with the complete 30-day AI Version promise');
+assert.match(page, /<p class="hero-region-eyebrow" id="hero-region-eyebrow">Limited Availability for Health &amp; Wellness Experts<\/p>\s*<h1/, 'Hero must place the generic regional availability line above the headline');
 assert.match(page, /<p id="hero-region-subheadline">We’re currently helping health and wellness business owners build the AI Version of their expertise\.<\/p>/, 'Hero must server-render the exact generic regional copy');
-assert.match(page, /\.site-hero-copy>p\{[^}]*min-block-size:4\.5em[^}]*text-wrap:balance/, 'Hero personalization must reserve its desktop height and balance wrapping');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.site-hero-copy>p\{[^}]*min-block-size:6em/, 'Hero personalization must reserve its mobile height');
-assert.match(page, /@media\(max-width:340px\)\{\.site-hero-copy>p\{min-block-size:7\.5em\}\}/, 'Hero personalization must reserve five lines on narrow mobile screens');
+assert.match(page, /\.hero-region-eyebrow\{[^}]*min-block-size:1\.4em[^}]*text-wrap:balance/, 'Hero audience personalization must reserve its desktop height and balance wrapping');
+assert.match(page, /#hero-region-subheadline\{[^}]*min-block-size:4\.5em[^}]*text-wrap:balance/, 'Hero subheadline personalization must reserve its desktop height and balance wrapping');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-region-eyebrow\{[^}]*min-block-size:2\.8em[\s\S]*?#hero-region-subheadline\{[^}]*min-block-size:6em/, 'Hero personalization must reserve both mobile text areas');
+assert.match(page, /@media\(max-width:340px\)\{\.hero-region-eyebrow\{min-block-size:4\.2em\}#hero-region-subheadline\{min-block-size:7\.5em\}\}/, 'Hero personalization must reserve its narrow-mobile text heights');
 assert.match(page, /<script type="module" src="assets\/js\/region-personalization\.mjs"><\/script>/, 'Hero regional personalization client is not loaded');
 assert.match(page, /first 10 beta users within 30 days or you receive a full refund/, 'Hero must state the qualifying-client guarantee');
 assert.match(page, /Less than 28%/, 'Demand narrative must include the healthcare-trust signal');

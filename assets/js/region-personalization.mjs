@@ -14,6 +14,7 @@ const APPROVED_REGIONS = new Set([
 const STORAGE_KEY = 'kodara:visitor-region';
 
 export const GENERIC_COPY = 'We’re currently helping health and wellness business owners build the AI Version of their expertise.';
+export const GENERIC_EYEBROW = 'Limited Availability for Health & Wellness Experts';
 
 export function isApprovedRegion(region) {
   return typeof region === 'string' && APPROVED_REGIONS.has(region);
@@ -23,6 +24,12 @@ export function copyForRegion(region) {
   return isApprovedRegion(region)
     ? `We’re currently helping health and wellness business owners in ${region} build the AI Version of their expertise.`
     : GENERIC_COPY;
+}
+
+export function eyebrowForRegion(region) {
+  return isApprovedRegion(region)
+    ? `Limited Availability for ${region} Health & Wellness Experts`
+    : GENERIC_EYEBROW;
 }
 
 export function analyticsProperties(context) {
@@ -44,12 +51,14 @@ function track(context) {
 
 async function initialize() {
   if (document.documentElement.classList.contains('embed-mode')) return;
+  const eyebrow = document.getElementById('hero-region-eyebrow');
   const subheadline = document.getElementById('hero-region-subheadline');
-  if (!subheadline) return;
+  if (!eyebrow || !subheadline) return;
 
   try {
     const cachedRegion = sessionStorage.getItem(STORAGE_KEY);
     if (isApprovedRegion(cachedRegion)) {
+      eyebrow.textContent = eyebrowForRegion(cachedRegion);
       subheadline.textContent = copyForRegion(cachedRegion);
       track({ personalization: 'region', visitor_region: cachedRegion });
       return;
@@ -66,6 +75,7 @@ async function initialize() {
   } catch {}
 
   if (context.personalization === 'region') {
+    eyebrow.textContent = eyebrowForRegion(context.visitor_region);
     subheadline.textContent = copyForRegion(context.visitor_region);
     try { sessionStorage.setItem(STORAGE_KEY, context.visitor_region); } catch {}
   }

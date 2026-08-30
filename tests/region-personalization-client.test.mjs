@@ -4,8 +4,10 @@ import test from 'node:test';
 
 import {
   GENERIC_COPY,
+  GENERIC_EYEBROW,
   analyticsProperties,
   copyForRegion,
+  eyebrowForRegion,
   isApprovedRegion,
 } from '../assets/js/region-personalization.mjs';
 
@@ -15,6 +17,7 @@ test('approved regions produce exact personalized copy', () => {
     'We’re currently helping health and wellness business owners in California build the AI Version of their expertise.',
   );
   assert.equal(isApprovedRegion('Newfoundland and Labrador'), true);
+  assert.equal(eyebrowForRegion('California'), 'Limited Availability for California Health & Wellness Experts');
 });
 
 test('unknown region produces exact generic copy', () => {
@@ -23,6 +26,8 @@ test('unknown region produces exact generic copy', () => {
     GENERIC_COPY,
     'We’re currently helping health and wellness business owners build the AI Version of their expertise.',
   );
+  assert.equal(eyebrowForRegion('England'), GENERIC_EYEBROW);
+  assert.equal(GENERIC_EYEBROW, 'Limited Availability for Health & Wellness Experts');
 });
 
 test('analytics accepts only personalization and approved visitor region', () => {

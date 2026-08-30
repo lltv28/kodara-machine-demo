@@ -13,7 +13,7 @@ Instrument Sans remains the page typeface. Process labels use the same family in
 ## Language
 
 **Site hero**:
-The trust-first opening beneath the company header uses a centered cinema stack: headline, one supporting sentence, stable 16:9 VSL stage, one application action, and compact guarantee reassurance below it. The supporting sentence may name an approved US state or Canadian province when Cloudflare and IPWhois resolve one within 350ms; every other visitor sees the generic version without a layout shift. The browser may cache only the approved region name for the current session, and analytics may receive only the personalization mode and approved region name. The page gives qualifying clients the 10-beta-user refund guarantee. Until the final VSL source is connected, the stage uses a branded offer poster rather than a fake video player.
+The trust-first opening beneath the company header uses a centered cinema stack: a region-aware audience line, headline, one supporting sentence, stable 16:9 VSL stage, one application action, and compact guarantee reassurance below it. The audience line and supporting sentence may name an approved US state or Canadian province when Cloudflare and IPWhois resolve one within 350ms; every other visitor sees the generic versions without a layout shift. The browser may cache only the approved region name for the current session, and analytics may receive only the personalization mode and approved region name. The page gives qualifying clients the 10-beta-user refund guarantee. Until the final VSL source is connected, the stage uses a branded offer poster rather than a fake video player.
 _Avoid_: Authority-logo opener, demo-first hero, generic AI agency hero
 
 **Authority proof**:
