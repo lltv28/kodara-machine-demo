@@ -27,6 +27,8 @@ assert.match(page, /--ink:#20362D;--ink-2:#304E42;--ink-3:#567066/, 'Text must u
 assert.match(page, /--accent:#106844;--accent-hover:#0C5537;--accent-ink:#106844;--accent-dark:#0C4F34/, 'Actions must use the Kodara green palette');
 assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate feature backgrounds and framing must not return');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
+assert.match(page, /--type-button:1\.625rem/, 'Primary CTA type must remain prominent for the over-40 audience');
+assert.match(page, /\.cta-btn\{[^}]*min-height:64px;[^}]*padding:16px 36px/, 'Primary CTA buttons must keep a large desktop target');
 assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced-motion preferences');
 assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
 assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*text-align:center/, 'Hero must use the centered cinema stack');

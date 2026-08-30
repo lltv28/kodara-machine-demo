@@ -29,7 +29,7 @@
   --type-card:clamp(2.25rem,3vw,2.875rem);--type-card-small:clamp(2rem,2.6vw,2.375rem);
   --type-body:1.3125rem;--type-body-large:1.5rem;
   --type-question:clamp(1.75rem,2.4vw,2.125rem);
-  --type-control:1.2rem;--type-button:1.4375rem;--type-label:1.0625rem;--type-meta:1rem;--type-legal:1rem;
+  --type-control:1.2rem;--type-button:1.625rem;--type-label:1.0625rem;--type-meta:1rem;--type-legal:1rem;
   --type-quote:clamp(1.75rem,2.4vw,2.125rem);--type-stat:clamp(4.5rem,8vw,6.5rem);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -48,7 +48,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .site-nav a{color:var(--ink-2);font-size:1rem;font-weight:600;text-decoration:none;white-space:nowrap}
 .site-nav a:hover{color:var(--accent)}
 .site-nav a:focus-visible,.brand:focus-visible{outline:3px solid var(--accent-dark);outline-offset:5px;border-radius:var(--radius-sm)}
-.site-header .cta-btn{min-height:48px;padding:8px 20px;font-size:1.05rem;white-space:nowrap}
+.site-header .cta-btn{min-height:54px;padding:10px 24px;font-size:1.125rem;white-space:nowrap}
 @media(max-width:1100px){.site-nav{display:none}}
 
 /* ---------- centered cinema hero ---------- */
@@ -127,7 +127,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .proof-snapshot-note{margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-legal);line-height:1.45;text-align:center}
 
 /* ---- CTA button ---- */
-.cta-btn{display:flex;width:max-content;max-width:100%;align-items:center;justify-content:center;min-height:56px;font-family:var(--fb);font-weight:700;font-size:var(--type-button);line-height:1.3;letter-spacing:var(--tracking-body);color:#fff;background:var(--accent);border:1px solid var(--accent-dark);border-radius:var(--radius-sm);padding:12px var(--space-6);text-align:center;text-decoration:none;text-transform:capitalize;box-shadow:0 10px 28px rgba(16,104,68,.22);transition:transform .18s ease,background-color .18s ease,box-shadow .18s ease}
+.cta-btn{display:flex;width:max-content;max-width:100%;align-items:center;justify-content:center;min-height:64px;font-family:var(--fb);font-weight:700;font-size:var(--type-button);line-height:1.25;letter-spacing:var(--tracking-body);color:#fff;background:var(--accent);border:1px solid var(--accent-dark);border-radius:var(--radius-sm);padding:16px 36px;text-align:center;text-decoration:none;text-transform:capitalize;box-shadow:0 10px 28px rgba(16,104,68,.22);transition:transform .18s ease,background-color .18s ease,box-shadow .18s ease}
 .cta-btn:hover{background:var(--accent-hover);box-shadow:0 14px 34px rgba(16,104,68,.26);transform:translateY(-2px)}
 .cta-btn:active{transform:scale(.98)}
 .cta-btn:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px}
@@ -349,7 +349,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 @media(max-width:720px){
   .site-header{min-height:56px;margin-bottom:var(--space-4)}
   .brand-word{display:none}
-  .site-header .cta-btn{min-height:44px;padding:7px 14px;font-size:.95rem}
+  .site-header .cta-btn{min-height:48px;padding:8px 16px;font-size:1.05rem}
   .site-hero{padding:var(--space-5) 0 var(--space-7)}
   .site-hero h1{max-width:14ch}
   .site-hero-copy>p{max-width:32ch;font-size:var(--type-body-large)}
@@ -360,7 +360,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .hero-vsl-poster span{margin-top:var(--space-2);font-size:var(--type-label)}
   .hero-vsl-cta{width:100%;margin-top:var(--space-5)}
   .cta{padding:var(--space-7) var(--space-4)}
-  .cta-btn{padding-inline:var(--space-3);font-size:clamp(1.35rem,5.6vw,1.45rem);white-space:nowrap}
+  .cta-btn{min-height:60px;padding:14px var(--space-4);font-size:clamp(1.45rem,5.8vw,1.6rem);white-space:nowrap}
   .cta .cta-btn{width:100%}
   .site-hero+.proof-snapshot{margin-top:var(--space-6)}
   .proof-snapshot+.primary-demo{margin-top:var(--space-6)}
@@ -389,7 +389,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .faq-answer{padding-right:var(--space-6)}
 }
 @media(max-width:350px){
-  .cta-btn{padding-inline:var(--space-2);font-size:1.25rem}
+  .cta-btn{padding-inline:var(--space-3);font-size:1.35rem}
   .proof-snapshot-logo-row{gap:var(--space-2) var(--space-3)}
   .proof-snapshot-logo{height:48px}
   .proof-snapshot-note{font-size:.95rem;line-height:1.35}
