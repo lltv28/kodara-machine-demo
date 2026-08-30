@@ -8,7 +8,7 @@ White is the only neutral page, section, card, and media surface. Green may appe
 
 ## Typography
 
-Instrument Sans remains the page typeface, with IBM Plex Mono reserved for compact process labels. Desktop body copy uses 21px and 24px tiers; mobile uses 19px and 22px. Desktop section headings use a 48px-60px range, while mobile section headings use a 40px-48px range. Primary CTA labels use a 26px desktop tier with a 64px minimum target, and mobile CTA labels use a responsive 23px-26px tier with a 60px minimum target. This strengthens hierarchy for an audience over 40 without enlarging reading text or crowding cards.
+Instrument Sans remains the page typeface, with IBM Plex Mono reserved for compact process labels. Desktop body copy uses 21px and 24px tiers; mobile uses 19px and 22px. Desktop section headings use a 48px-60px range, while mobile section headings use a 40px-48px range. Primary CTA labels use a 30px desktop tier with a 72px minimum target, and mobile CTA labels use a responsive 26px-29px tier with a 66px minimum target. Very narrow screens use a 23px tier and 60px target so the action remains on one line. This strengthens hierarchy for an audience over 40 without enlarging reading text or crowding cards.
 
 ## Language
 
