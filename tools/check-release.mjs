@@ -26,6 +26,11 @@ assert.doesNotMatch(page, /#FCFDFC|#F1F6F5|#E6EFED/i, 'Light green page backgrou
 assert.match(page, /--ink:#20362D;--ink-2:#304E42;--ink-3:#567066/, 'Text must use the healthcare green-black palette');
 assert.match(page, /--accent:#106844;--accent-hover:#0C5537;--accent-ink:#106844;--accent-dark:#0C4F34/, 'Actions must use the Kodara green palette');
 assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate feature backgrounds and framing must not return');
+assert.doesNotMatch(page, /\.section-band::before/, 'Full-width divider bands must not return');
+for (const className of ['education-section', 'midpage-action', 'alternatives-section', 'process-section', 'audience-section', 'credibility-section']) {
+  assert.match(page, new RegExp(`class="[^"]*card[^"]*${className}|class="[^"]*${className}[^"]*card`), `${className} must use the shared card theme`);
+}
+assert.match(page, /\.faq-list\{display:grid;[^}]*gap:var\(--space-3\)/, 'FAQ items must use spaced cards instead of divider rows');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
 assert.match(page, /--type-button:1\.875rem/, 'Primary CTA type must remain prominent for the over-40 audience');
 assert.match(page, /\.cta-btn\{[^}]*min-height:72px;[^}]*padding:18px 42px/, 'Primary CTA buttons must keep a large desktop target');
@@ -43,17 +48,18 @@ assert.match(primaryNav, />How It Works<[^]*>Results<[^]*>FAQ</, 'Primary naviga
 for (const className of ['site-header', 'site-hero', 'proof-snapshot', 'education-section', 'primary-demo', 'mechanism-features', 'midpage-action', 'alternatives-section', 'case-studies', 'process-section', 'audience-section', 'founder-highlight', 'credibility-section', 'faq', 'cta', 'site-footer']) {
   assert.match(page, new RegExp(`class="[^"]*${className}`), `Missing ${className} section`);
 }
-assert.ok(page.indexOf('class="site-hero"') < page.indexOf('class="card proof-snapshot"'), 'Authority proof must follow the hero');
-assert.ok(page.indexOf('class="card proof-snapshot"') < page.indexOf('class="education-section"'), 'Category education must follow authority proof');
-assert.ok(page.indexOf('class="education-section"') < page.indexOf('class="card primary-demo"'), 'The replacement demo slot must follow category education');
-assert.ok(page.indexOf('class="card primary-demo"') < page.indexOf('class="card mechanism-features'), 'Product overview must follow the primary demo');
-assert.ok(page.indexOf('class="card mechanism-features') < page.indexOf('class="alternatives-section"'), 'Alternatives framing must follow the product overview');
-assert.ok(page.indexOf('class="alternatives-section"') < page.indexOf('class="card case-studies"'), 'Client proof must follow the alternatives framing');
-assert.ok(page.indexOf('class="card case-studies"') < page.indexOf('class="process-section'), 'Launch process must follow client proof');
-assert.ok(page.indexOf('class="process-section') < page.indexOf('class="audience-section"'), 'Audience pathways must follow the launch process');
-assert.ok(page.indexOf('class="card case-studies"') < page.indexOf('class="card founder-highlight"'), 'The concise founder story must follow client proof');
-assert.ok(page.indexOf('class="card founder-highlight"') < page.indexOf('class="credibility-section'), 'Institutional credibility must follow the founder story');
-assert.ok(page.indexOf('class="card faq"') < page.indexOf('class="card cta"'), 'FAQ must precede the final CTA');
+const sectionIndex = (className) => page.search(new RegExp(`<(?:section|header|footer) class="[^"]*\\b${className}\\b`));
+assert.ok(sectionIndex('site-hero') < sectionIndex('proof-snapshot'), 'Authority proof must follow the hero');
+assert.ok(sectionIndex('proof-snapshot') < sectionIndex('education-section'), 'Category education must follow authority proof');
+assert.ok(sectionIndex('education-section') < sectionIndex('primary-demo'), 'The replacement demo slot must follow category education');
+assert.ok(sectionIndex('primary-demo') < sectionIndex('mechanism-features'), 'Product overview must follow the primary demo');
+assert.ok(sectionIndex('mechanism-features') < sectionIndex('alternatives-section'), 'Alternatives framing must follow the product overview');
+assert.ok(sectionIndex('alternatives-section') < sectionIndex('case-studies'), 'Client proof must follow the alternatives framing');
+assert.ok(sectionIndex('case-studies') < sectionIndex('process-section'), 'Launch process must follow client proof');
+assert.ok(sectionIndex('process-section') < sectionIndex('audience-section'), 'Audience pathways must follow the launch process');
+assert.ok(sectionIndex('case-studies') < sectionIndex('founder-highlight'), 'The concise founder story must follow client proof');
+assert.ok(sectionIndex('founder-highlight') < sectionIndex('credibility-section'), 'Institutional credibility must follow the founder story');
+assert.ok(sectionIndex('faq') < sectionIndex('cta'), 'FAQ must precede the final CTA');
 assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder letter must not return');
 
 // Current VSL offer language.
@@ -110,7 +116,7 @@ assert.match(page, /<h3>AI Disclaimer<\/h3>/, 'Footer must include the AI discla
 assert.match(page, /beta-user guarantee concerns onboarding beta users and is not a guarantee of sales, revenue, or profit/, 'Earnings disclaimer must limit the beta-user guarantee');
 assert.match(page, /does not practice medicine or provide medical advice, diagnosis, or treatment/, 'Medical disclaimer must state the medical-information boundary');
 assert.match(page, /AI-generated information may be incomplete, inaccurate, or outdated/, 'AI disclaimer must state the model-output boundary');
-assert.equal((page.match(/class="[^"]*section-band[^"]*"/g) ?? []).length, 3, 'Expected three restrained full-width section bands');
+assert.equal((page.match(/<section class="[^"]*card[^"]*"/g) ?? []).length, 13, 'Expected all major content sections to use the shared card theme');
 assert.match(page, /<h2 id="founder-highlight-title">Why Kodara exists\.<\/h2>/, 'Founder section must use the concise company-story framing');
 assert.match(page, /class="founder-principle"/, 'Founder section must end with the guiding principle');
 assert.match(page, /id="review-approval"/, 'The review-and-approval section needs an intent-revealing anchor');

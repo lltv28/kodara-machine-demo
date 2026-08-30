@@ -4,7 +4,7 @@ This context describes the company-style homepage that explains Kodara's done-fo
 
 ## Visual surfaces
 
-White is the only neutral page, section, card, and media surface. Green may appear as a solid, high-contrast brand surface for intentional calls to action or product framing. Do not use pale green, tinted green, or green-gradient backgrounds.
+White is the only neutral page, section, card, and media surface. Major content sections use the shared white-card treatment with a subtle border, consistent radius, and restrained green-tinted shadow. Repeated stats, steps, pathways, alternatives, and FAQs use smaller cards instead of divider rows. Hairlines are reserved for structural boundaries inside media, controls, and the footer. Green may appear as a solid, high-contrast brand surface for intentional calls to action or product framing. Do not use pale green, tinted green, or green-gradient backgrounds.
 
 ## Typography
 
