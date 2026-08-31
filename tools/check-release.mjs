@@ -179,8 +179,8 @@ assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:var\(--rail-media\);[^}]*as
 assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain the production Vidalytics VSL');
 assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Hero must load the approved Vidalytics VSL source');
 assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
-assert.match(page, /<h2 class="hero-triager-title">See if you qualify;<\/h2>\s*<div id="kodara-triager"><\/div>/, 'Hero must introduce the triager with the approved qualification heading');
-assert.match(page, /class="hero-vsl-stage"[\s\S]*?<div class="proof-snapshot-logos hero-proof-logos">[\s\S]*?<h2 class="hero-triager-title">See if you qualify;<\/h2>/, 'Authority logos must appear between the VSL and qualification widget');
+assert.match(page, /<h2 class="hero-triager-title">See if you qualify:<\/h2>\s*<div id="kodara-triager"><\/div>/, 'Hero must introduce the triager with the approved qualification heading');
+assert.match(page, /class="hero-vsl-stage"[\s\S]*?<div class="proof-snapshot-logos hero-proof-logos">[\s\S]*?<h2 class="hero-triager-title">See if you qualify:<\/h2>/, 'Authority logos must appear between the VSL and qualification widget');
 assert.doesNotMatch(page, /Organization names are shown for market context/, 'Homepage authority strip must not show the removed organization disclaimer');
 assert.match(page, /\.hero-proof-logos\{width:100%;margin-top:var\(--space-7\);padding-top:0\}/, 'Hero authority logos need deliberate desktop spacing without a duplicate top inset');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-proof-logos\{margin-top:var\(--space-6\);padding:0\}/, 'Hero authority logos need compact mobile spacing');
