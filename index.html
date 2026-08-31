@@ -188,6 +188,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .client-result-card{display:flex;min-width:0;flex-direction:column;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
 .client-result-person{display:grid;grid-template-columns:52px minmax(0,1fr);gap:var(--space-3);align-items:center}
 .client-result-avatar{display:block;width:52px;height:52px;border:1px solid var(--line);border-radius:var(--radius-pill);object-fit:cover;background:var(--surface)}
+.client-result-avatar--mirrored{transform:scaleX(-1)}
 .client-result-avatar--fallback{display:grid;place-items:center;color:var(--accent-ink);font-size:var(--type-label);font-weight:750;letter-spacing:.01em}
 .client-result-role{display:block;color:var(--ink-3);font-size:var(--type-label);font-weight:650;line-height:1.4}
 .client-result-card h3{max-width:var(--measure-display);margin-top:var(--space-4);font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
@@ -489,7 +490,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     <div class="client-results-grid" aria-label="Client results at a glance">
       <article class="client-result-card">
         <div class="client-result-person">
-          <span class="client-result-avatar client-result-avatar--fallback" role="img" aria-label="Dr. Vora">DV</span>
+          <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/amit-vora.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Amit N. Vora">
           <span class="client-result-role">Dr. Vora, Cardiologist</span>
         </div>
         <h3>Enrolled 30+ patients in his first five weeks.</h3>
@@ -500,8 +501,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       </article>
       <article class="client-result-card">
         <div class="client-result-person">
-          <span class="client-result-avatar client-result-avatar--fallback" role="img" aria-label="Ashley">A</span>
-          <span class="client-result-role">Ashley, Yoga instructor</span>
+          <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/ashley-holly.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Ashley Holly">
+          <span class="client-result-role">Ashley Holly, Yoga instructor</span>
         </div>
         <h3>Replaced her in-person classes within two months.</h3>
         <ul class="client-result-points">

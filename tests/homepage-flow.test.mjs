@@ -115,6 +115,8 @@ test('approved process and client proof remain visible', () => {
   assert.equal((stories.match(/class="client-result-points"/gu) ?? []).length, 4, 'Each result summary needs its own supporting facts');
   assert.equal((stories.match(/class="client-result-person"/gu) ?? []).length, 4, 'Each result summary needs a client identity row');
   assert.equal((stories.match(/class="client-result-avatar(?:\s[^"]*)?"/gu) ?? []).length, 4, 'Each result summary needs a circular client avatar');
+  assert.match(stories, /class="client-result-avatar client-result-avatar--mirrored" src="assets\/testimonials\/amit-vora\.jpg"[^>]*alt="Amit N\. Vora"/u, 'Dr. Vora must use the approved mirrored portrait');
+  assert.match(stories, /class="client-result-avatar client-result-avatar--mirrored" src="assets\/testimonials\/ashley-holly\.jpg"[^>]*alt="Ashley Holly"/u, 'Ashley must use the approved mirrored portrait');
   for (const card of resultCards) {
     assert.equal((card.match(/<li>/gu) ?? []).length, 2, 'Each result summary must contain exactly two supporting facts');
   }
@@ -131,7 +133,7 @@ test('approved process and client proof remain visible', () => {
   assert.match(stories, /Enrolled 30\+ patients in his first five weeks\./u);
   assert.match(stories, /Replaced her in-person classes within two months\./u);
 
-  for (const proof of ['Sandra Parker', 'Leanne Ellington', 'Dr. Vora', 'Ashley']) {
+  for (const proof of ['Sandra Parker', 'Leanne Ellington', 'Dr. Vora', 'Ashley Holly']) {
     assert.match(content, new RegExp(proof.replace('.', '\\.')), `Client proof must retain ${proof}`);
   }
 });
