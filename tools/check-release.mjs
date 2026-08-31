@@ -24,11 +24,15 @@ assert.match(confirmation, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f
 assert.match(confirmation, /data-video-slot="call-confirmation"/, 'Confirmation page needs the call-confirmation video slot');
 assert.match(confirmation, /data-video-slot="case-study"/, 'Confirmation page needs the case-study video slot');
 assert.equal((confirmation.match(/data-video-slot="faq-[0-9]{2}"/g) ?? []).length, 10, 'Confirmation page needs ten FAQ video slots');
+assert.equal((confirmation.match(/class="faq-video-card"/g) ?? []).length, 10, 'Confirmation page needs ten visible FAQ video cards');
+assert.doesNotMatch(confirmation, /<details class="faq-video-item"/, 'Confirmation FAQ videos must not be hidden in accordions');
 assert.match(confirmation, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Confirmation page must replay the approved Vidalytics presentation');
 assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Confirmation page must use the approved Vidalytics source');
 assert.equal((confirmation.match(/<wistia-player\b/g) ?? []).length, 2, 'Confirmation page needs the two approved testimonial videos');
 assert.match(confirmationStyles, /--rail-wide:1240px/, 'Confirmation page must use the shared 1240px content rail');
 assert.match(confirmationStyles, /--accent:#106844/, 'Confirmation page must use the shared Kodara green');
+assert.match(confirmationStyles, /\.faq-video-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation FAQ videos must use a two-column desktop grid');
+assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.faq-video-grid\{grid-template-columns:1fr\}/, 'Confirmation FAQ videos must stack on smaller screens');
 assert.doesNotMatch(confirmation + confirmationStyles, /[—–]/, 'Confirmation page must not contain em or en dashes');
 
 // Official Kodara brand assets.
