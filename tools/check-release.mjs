@@ -25,7 +25,12 @@ assert.ok(statSync(confirmationStylesPath).size <= 32 * 1024, 'Confirmation styl
 assert.ok(existsSync(resolve(root, 'assets/fonts/instrument-sans-latin.woff2')), 'Missing reusable Instrument Sans font asset');
 assert.match(confirmation, /<meta name="robots" content="noindex,nofollow">/, 'Confirmation page must stay out of search results');
 assert.match(confirmation, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f7c1f59890e8b25c13e26ffca667c2709a446cbd68a53bc0bd06ca3d4b782a9\?tag=!clicked&ref_url=[\s\S]*?<\/head>/, 'Confirmation tracking must load from the document head');
-assert.match(confirmation, /data-video-slot="call-confirmation"/, 'Confirmation page needs the call-confirmation video slot');
+assert.match(confirmation, /id="call-confirmation" class="vsl-stage confirmation-video" data-video-slot="call-confirmation"/, 'Confirmation page needs the call-confirmation video frame');
+assert.match(confirmation, /id="vidalytics_embed_VNXQCkfkzn95oP5v"/, 'Confirmation page needs the approved call-confirmation video');
+assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/VNXQCkfkzn95oP5v\//, 'Call-confirmation video must use the approved Vidalytics source');
+assert.match(confirmation, /class="call-details-widget" data-url="https:\/\/app\.iclosed\.io\/embed" style="width:100%;height:340px"/, 'iClosed call details must appear below the confirmation video');
+assert.match(confirmation, /<script src="https:\/\/app\.iclosed\.io\/assets\/widget\.js" async><\/script>/, 'Confirmation page must load the iClosed widget');
+assert.doesNotMatch(confirmation, /Reserved space for the call confirmation video|This media slot is ready for the final video embed/, 'Call-confirmation placeholder content must not remain');
 assert.match(confirmation, /data-video-slot="case-study"/, 'Confirmation page needs the case-study video slot');
 assert.doesNotMatch(confirmation, /Before we speak\.|class="prepare"|class="prepare-list"/, 'Confirmation page must not restore the redundant preparation section');
 assert.match(confirmation, /<section id="case-study" aria-labelledby="case-study-title">[\s\S]*?<header class="section-head">[\s\S]*?<div class="featured-video case-study-video" data-video-slot="case-study">/, 'Case study must use the shared centered one-column video layout');
@@ -45,6 +50,7 @@ for (const mediaId of faqMediaIds) {
 assert.doesNotMatch(confirmation, /FAQ Video|Video answer will appear here\./, 'FAQ placeholder content must not remain');
 assert.match(confirmation, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Confirmation page must replay the approved Vidalytics presentation');
 assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Confirmation page must use the approved Vidalytics source');
+assert.equal((confirmation.match(/id="vidalytics_embed_[^"]+"/g) ?? []).length, 2, 'Confirmation page needs the call-confirmation video and full-presentation replay');
 assert.equal((confirmation.match(/media-id="1mynmgx2fa"/g) ?? []).length, 1, 'Confirmation page needs the approved case study video exactly once');
 assert.match(confirmation, /https:\/\/fast\.wistia\.com\/embed\/1mynmgx2fa\.js/, 'Case study video must load from the approved Wistia source');
 assert.match(confirmation, /<wistia-player media-id="1mynmgx2fa" aspect="1\.7777777777777777" aria-label="[^"]+">/, 'Case study video needs a stable 16:9 frame and accessible name');

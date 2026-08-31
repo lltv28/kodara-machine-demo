@@ -31,14 +31,11 @@
       <h1 id="confirmation-title">Your Call Is Confirmed.</h1>
       <p>Watch the short videos below before we speak so you can arrive with clear questions and make the most of our time together.</p>
       <p class="email-note">Your date, time, and meeting link are in your confirmation email.</p>
-      <div class="featured-video" data-video-slot="call-confirmation">
-        <div class="video-slot" role="img" aria-label="Reserved space for the call confirmation video">
-          <div class="video-slot-inner">
-            <strong>Call Confirmation Video</strong>
-            <span>This media slot is ready for the final video embed.</span>
-          </div>
-        </div>
+      <div id="call-confirmation" class="vsl-stage confirmation-video" data-video-slot="call-confirmation" aria-label="Kodara call confirmation video">
+        <div id="vidalytics_embed_VNXQCkfkzn95oP5v"></div>
       </div>
+      <div class="call-details-widget" data-url="https://app.iclosed.io/embed" style="width:100%;height:340px" aria-label="Your confirmed call details"></div>
+      <script src="https://app.iclosed.io/assets/widget.js" async></script>
     </section>
 
     <section id="case-study" aria-labelledby="case-study-title">
@@ -261,12 +258,20 @@
       document.head.appendChild(playerScript);
     }
 
-    loadWhenNear('#full-presentation',function(){
+    function loadVidalytics(embedId,embedUrl){
       (function(v,i,d,a,l,y,t,c,s){
         y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={}}if(!v[c]){v[c]={}}if(!v[y]){v[y]={}}var vl='Loader',vli=v[y][vl],vsl=v[c][vl+'Script'],vlf=v[c][vl+'Loaded'],ve='Embed';
         if(!vsl){vsl=function(u,cb){if(t){cb();return}s=i.createElement('script');s.type='text/javascript';s.async=1;s.src=u;if(s.readyState){s.onreadystatechange=function(){if(s.readyState==='loaded'||s.readyState==='complete'){s.onreadystatechange=null;vlf=1;cb()}}}else{s.onload=function(){vlf=1;cb()}}i.getElementsByTagName('head')[0].appendChild(s)}}
         vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc()}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a)})})
-      })(window,document,'Vidalytics','vidalytics_embed_CA0308FsT4_Z8w5E','https://fast.vidalytics.com/embeds/U18KMfDU/CA0308FsT4_Z8w5E/');
+      })(window,document,'Vidalytics',embedId,embedUrl);
+    }
+
+    loadWhenNear('#call-confirmation',function(){
+      loadVidalytics('vidalytics_embed_VNXQCkfkzn95oP5v','https://fast.vidalytics.com/embeds/U18KMfDU/VNXQCkfkzn95oP5v/');
+    });
+
+    loadWhenNear('#full-presentation',function(){
+      loadVidalytics('vidalytics_embed_CA0308FsT4_Z8w5E','https://fast.vidalytics.com/embeds/U18KMfDU/CA0308FsT4_Z8w5E/');
     });
 
     loadWhenNear('#case-study',function(){

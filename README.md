@@ -6,9 +6,7 @@ Live site: https://kodarahealth.com/
 
 Post-booking page: `/confirmation/`
 
-The confirmation page reuses the production Vidalytics presentation, one approved Wistia case study, two approved Wistia client stories, and ten Wistia FAQ videos from the Kodara project. Replace the remaining media container identified by this `data-video-slot` value when its final embed is available:
-
-- `call-confirmation`
+The confirmation page uses the approved Vidalytics call-confirmation video, iClosed call-details widget, production Vidalytics presentation, one Wistia case study, two Wistia client stories, and ten Wistia FAQ videos from the Kodara project.
 
 The confirmation page press grid links to four verified features from Business Insider, Yahoo Finance, AP News, and MSN using local article captures and publisher wordmarks.
 

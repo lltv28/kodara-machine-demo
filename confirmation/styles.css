@@ -100,6 +100,8 @@ button,summary{font:inherit}
 
 .vsl-stage{position:relative;width:100%;max-width:1000px;aspect-ratio:16/9;margin:0 auto;overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--ink);box-shadow:var(--shadow-md)}
 .vsl-stage>div{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;padding-top:0!important}
+.confirmation-video{margin-top:var(--space-7)}
+.call-details-widget{max-width:1000px;margin:var(--space-5) auto 0}
 
 .testimonial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6)}
 .testimonial-card{display:flex;min-width:0;flex-direction:column;overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm)}
