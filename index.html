@@ -206,8 +206,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .case-support-copy{display:flex;flex:1;flex-direction:column;padding:var(--space-6)}
 .case-media{position:relative;aspect-ratio:16/9;background:var(--surface);overflow:hidden}
 .case-media wistia-player{display:block;width:100%;height:100%}
-.case-media--portrait-fit{display:grid;place-items:center}
-.case-media--portrait-fit wistia-player{width:auto;max-width:100%;height:100%;aspect-ratio:3/4}
+.case-media--portrait-fit{display:grid;place-items:center;background:var(--panel)}
+.case-portrait-player{height:100%;aspect-ratio:3/4;background:var(--surface);overflow:hidden}
+.case-portrait-player wistia-player{width:100%;height:100%}
 .case-media wistia-player:not(:defined){background-position:center;background-size:cover;background-repeat:no-repeat}
 .case-media wistia-player[media-id='6oj2gj3wqt']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/6oj2gj3wqt/swatch')}
 .case-media wistia-player[media-id='fay3lgo8op']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/fay3lgo8op/swatch')}
@@ -248,6 +249,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .case-support-grid{grid-template-columns:1fr}
   .case-support-copy{padding:var(--space-5)}
   .case-support-grid{gap:var(--space-4);margin-top:var(--space-4)}
+  .case-media--portrait-fit{aspect-ratio:3/4}
+  .case-portrait-player{width:100%;height:100%}
 }
 
 /* ============================================================
@@ -538,7 +541,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     <div class="case-support-grid">
       <article class="case-support" aria-labelledby="sandra-case-title">
         <div class="case-media case-media--portrait-fit">
-          <wistia-player media-id="6oj2gj3wqt" aspect="0.75" aria-label="Sandra Parker client testimonial video"></wistia-player>
+          <div class="case-portrait-player">
+            <wistia-player media-id="6oj2gj3wqt" aspect="0.75" aria-label="Sandra Parker client testimonial video"></wistia-player>
+          </div>
         </div>
         <div class="case-support-copy">
           <span class="case-kicker">Client story</span>

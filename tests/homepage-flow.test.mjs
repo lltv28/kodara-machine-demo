@@ -125,6 +125,7 @@ test('approved process and client proof remain visible', () => {
   const videoStories = stories.match(/<div class="case-support-grid">([\s\S]*?)<\/div>\s*<p class="proof-note">/u)?.[1] ?? '';
   assert.equal((videoStories.match(/<article class="case-support"/gu) ?? []).length, 2, 'Sandra and Leanne need equal video-story cards');
   assert.match(videoStories, /media-id="6oj2gj3wqt"/u, 'Sandra’s video must remain in the paired story grid');
+  assert.match(videoStories, /class="case-media case-media--portrait-fit">\s*<div class="case-portrait-player">\s*<wistia-player media-id="6oj2gj3wqt"/u, 'Sandra’s portrait video must retain a dedicated 3:4 frame instead of being cropped into widescreen');
   assert.match(videoStories, /media-id="fay3lgo8op"/u, 'Leanne’s video must remain in the paired story grid');
   assert.match(stories, /Enrolled 30\+ patients in his first five weeks\./u);
   assert.match(stories, /Replaced her in-person classes within two months\./u);
