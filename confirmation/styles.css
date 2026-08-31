@@ -33,9 +33,9 @@
   --space-7:48px;
   --space-8:72px;
   --space-9:112px;
-  --type-hero:clamp(3.25rem,6vw,4.5rem);
+  --type-hero:clamp(3.5rem,6vw,4.5rem);
   --type-section:clamp(2.75rem,4.5vw,3.25rem);
-  --type-card:clamp(1.75rem,2.4vw,2.125rem);
+  --type-card:clamp(1.875rem,2.4vw,2.125rem);
   --type-body:1.25rem;
   --type-body-large:1.375rem;
   --type-question:1.375rem;
@@ -81,10 +81,10 @@ button,summary{font:inherit}
 .confirmation-hero .email-note{margin-top:var(--space-4);color:var(--ink-3);font-size:1rem}
 
 .featured-video{width:100%;max-width:1000px;margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-md)}
-.video-slot{display:grid;aspect-ratio:16/9;place-items:center;padding:var(--space-6);background:var(--accent-dark);color:#fff;text-align:center}
+.video-slot{display:grid;aspect-ratio:16/9;place-items:center;padding:var(--space-6);background:#fff;color:var(--ink);text-align:center}
 .video-slot-inner{display:grid;gap:var(--space-2);max-width:30ch}
 .video-slot strong{font-size:var(--type-card);font-weight:650;line-height:1.1;letter-spacing:-1px;text-wrap:balance}
-.video-slot span{color:rgba(255,255,255,.82);font-size:1rem;line-height:1.4}
+.video-slot span{color:var(--ink-3);font-size:1rem;line-height:1.4}
 
 .section-head{max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
 .section-head h2,.split-copy h2{margin:0;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
@@ -101,7 +101,7 @@ button,summary{font:inherit}
 .split-copy p{margin-left:0;margin-right:0}
 .split-media{overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm)}
 
-.vsl-stage{position:relative;width:100%;max-width:1000px;aspect-ratio:16/9;margin:0 auto;overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--accent-dark);box-shadow:var(--shadow-md)}
+.vsl-stage{position:relative;width:100%;max-width:1000px;aspect-ratio:16/9;margin:0 auto;overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-md)}
 .vsl-stage>div{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;padding-top:0!important}
 
 .testimonial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6)}
@@ -129,7 +129,7 @@ button,summary{font:inherit}
 .faq-video-item summary::after{content:"+";position:absolute;top:50%;right:var(--space-5);display:grid;width:32px;height:32px;place-items:center;transform:translateY(-50%);color:var(--accent);font-size:1.7rem;font-weight:500;line-height:1}
 .faq-video-item[open] summary::after{transform:translateY(-50%) rotate(45deg)}
 .faq-video-body{padding:0 var(--space-5) var(--space-5)}
-.faq-video-body .video-slot{border-radius:var(--radius-sm)}
+.faq-video-body .video-slot{border:1px solid var(--line);border-radius:var(--radius-sm)}
 
 .final-reminder{max-width:1000px;margin-inline:auto;padding:clamp(40px,7vw,80px);border-radius:var(--radius-xl);background:var(--accent);color:#fff;text-align:center}
 .final-reminder h2{max-width:16ch;margin:0 auto;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
