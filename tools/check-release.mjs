@@ -256,6 +256,11 @@ assert.equal((page.match(/class="case-role"/g) ?? []).length, 2, 'Written outcom
 assert.equal((page.match(/class="footer-group"/g) ?? []).length, 0, 'Footer navigation groups must stay removed');
 assert.doesNotMatch(page, /<footer[\s\S]*?<nav\b/, 'Footer must contain company information and disclaimers only');
 assert.match(page, /class="site-footer-brand-block"[\s\S]*© 2026 Kodara LLC\. All rights reserved\.[\s\S]*class="site-footer-legal"/, 'Footer must place Kodara LLC information before the legal columns');
+for (const [name, document] of [['homepage', page], ['confirmation page', confirmation]]) {
+  assert.match(document, /<p class="footer-policy-links"><a href="https:\/\/www\.kodara\.com\/terms">Terms<\/a><a href="https:\/\/www\.kodara\.com\/privacy-policy">Privacy Policy<\/a><\/p>/, `${name} footer must link to the official terms and privacy policy`);
+}
+assert.match(page, /\.footer-policy-links\{display:flex;flex-wrap:wrap;gap:var\(--space-2\) var\(--space-4\);[^}]*font-size:\.75rem!important/, 'Homepage policy links must use compact, wrapping footer typography');
+assert.match(confirmationStyles, /\.footer-policy-links\{display:flex;flex-wrap:wrap;gap:var\(--space-2\) var\(--space-4\);[^}]*font-size:\.75rem!important/, 'Confirmation policy links must match the homepage footer treatment');
 assert.doesNotMatch(page, /<footer[\s\S]*qualification-link/, 'Footer must not repeat the primary application action');
 assert.doesNotMatch(page, /class="[^"]*disclaimer/i, 'Footer legal copy must avoid blocker-sensitive disclaimer class names');
 assert.equal((page.match(/class="site-footer-note"/g) ?? []).length, 3, 'Expected three important footer notes');

@@ -155,6 +155,10 @@ button,summary{font:inherit}
 .site-footer-brand img{width:118px;height:auto}
 .site-footer-brand-block>p{max-width:30ch;margin:var(--space-3) 0 0;color:var(--ink-3);font-size:var(--type-legal);line-height:1.55}
 .site-footer-brand-block .footer-copyright{margin-top:var(--space-5);font-size:.75rem;line-height:1.4;white-space:nowrap}
+.footer-policy-links{display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-4);margin-top:var(--space-2)!important;font-size:.75rem!important;line-height:1.4!important}
+.footer-policy-links a{color:var(--ink-2);text-underline-offset:3px}
+.footer-policy-links a:hover{color:var(--accent)}
+.footer-policy-links a:focus-visible{outline:2px solid var(--accent-dark);outline-offset:3px;border-radius:2px}
 .site-footer-legal{color:var(--ink-3)}
 .site-footer-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5);margin-top:0}
 .site-footer-note{display:block;visibility:visible;color:var(--ink-3);font-size:.625rem;font-weight:400;line-height:1.25}
