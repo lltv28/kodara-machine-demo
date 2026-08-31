@@ -117,7 +117,7 @@ test('approved process and client proof remain visible', () => {
     assert.equal((card.match(/<li>/gu) ?? []).length, 2, 'Each result summary must contain exactly two supporting facts');
   }
   assert.match(stories, /class="testimonial-stars" aria-hidden="true">(?:<span>★<\/span>){5}<\/div>/u, 'The testimonial bridge must contain five decorative gold star icons');
-  assert.match(stories, /My business feels better now because it feels consistent/u, 'The testimonial bridge must use Sandra’s supplied quote');
+  assert.match(stories, /I’m now on track to make double what I made last year\. My business feels consistent now, and I’m able to enjoy it more\./u, 'The testimonial bridge must use Sandra’s approved combined quote');
   assert.ok(position(stories, 'class="client-results-grid"') < position(stories, 'class="testimonial-spotlight"'), 'Result summaries must precede the featured quote');
   assert.ok(position(stories, 'class="testimonial-spotlight"') < position(stories, 'class="case-featured'), 'The featured quote must introduce the deeper video stories');
   assert.match(stories, /Enrolled 30\+ patients in his first five weeks\./u);
