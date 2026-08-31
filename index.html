@@ -203,6 +203,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 @media(max-width:899px){.client-results-grid{grid-template-columns:1fr}}
 @media(min-width:900px){.founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}}
 .case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);align-items:stretch;margin-top:var(--space-5)}
+.case-support-grid+.client-results-grid{margin-top:clamp(var(--space-7),7vw,var(--space-8))}
 .case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
 .case-support--wide{display:grid;grid-column:1/-1;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);align-items:center}
 .case-support-copy{display:flex;flex:1;flex-direction:column;padding:var(--space-6)}
@@ -256,6 +257,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .case-support--wide{display:flex;grid-column:auto}
   .case-support-copy{padding:var(--space-5)}
   .case-support-grid{gap:var(--space-4);margin-top:var(--space-4)}
+  .case-support-grid+.client-results-grid{margin-top:var(--space-7)}
   .case-support--portrait .case-media--portrait-fit{aspect-ratio:3/4}
   .case-portrait-player{width:100%;height:100%}
   .case-support--wide .case-media{aspect-ratio:16/9}
@@ -493,53 +495,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       <p class="case-studies-intro">Different experts built different online businesses. Each one reduced how much growth depended on being personally present.</p>
     </div>
 
-    <div class="client-results-grid" aria-label="Client results at a glance">
-      <article class="client-result-card">
-        <div class="client-result-person">
-          <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/amit-vora.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Amit N. Vora">
-          <span class="client-result-role">Dr. Vora, Cardiologist</span>
-        </div>
-        <h3>Enrolled 30+ patients in his first five weeks.</h3>
-        <ul class="client-result-points">
-          <li>Used Kodara’s client-discovery model.</li>
-          <li>Reached people beyond his appointment calendar.</li>
-        </ul>
-      </article>
-      <article class="client-result-card">
-        <div class="client-result-person">
-          <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/ashley-holly.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Ashley Holly">
-          <span class="client-result-role">Ashley Holly, Yoga instructor</span>
-        </div>
-        <h3>Replaced her in-person classes within two months.</h3>
-        <ul class="client-result-points">
-          <li>Built an AI business around her expertise.</li>
-          <li>Reduced dependence on one-to-one delivery.</li>
-        </ul>
-      </article>
-      <article class="client-result-card">
-        <div class="client-result-person">
-          <img class="client-result-avatar" src="assets/testimonials/sandra.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Sandra Parker">
-          <span class="client-result-role">Sandra Parker, Sobriety coach</span>
-        </div>
-        <h3>Built an entirely online program without adding more calls.</h3>
-        <ul class="client-result-points">
-          <li>Her business became more consistent and enjoyable.</li>
-          <li>Better-fit clients could get help without more one-to-one calls.</li>
-        </ul>
-      </article>
-      <article class="client-result-card">
-        <div class="client-result-person">
-          <img class="client-result-avatar" src="assets/testimonials/leanne.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Leanne Ellington">
-          <span class="client-result-role">Leanne Ellington, Emotional health coach</span>
-        </div>
-        <h3>Made room to launch a passion project.</h3>
-        <ul class="client-result-points">
-          <li>Moved delivery into a largely automated virtual business.</li>
-          <li>Reduced dependence on one-to-one work.</li>
-        </ul>
-      </article>
-    </div>
-
     <figure class="testimonial-spotlight">
       <div class="testimonial-stars" aria-hidden="true"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
       <blockquote>“I’m now on track to make double what I made last year. My business feels consistent now, and I’m able to enjoy it more.”</blockquote>
@@ -595,6 +550,53 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
             <div><strong>Leanne Ellington</strong><span>Body image and emotional health coach</span></div>
           </div>
         </div>
+      </article>
+    </div>
+
+    <div class="client-results-grid" aria-label="Client results at a glance">
+      <article class="client-result-card">
+        <div class="client-result-person">
+          <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/amit-vora.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Amit N. Vora">
+          <span class="client-result-role">Dr. Vora, Cardiologist</span>
+        </div>
+        <h3>Enrolled 30+ patients in his first five weeks.</h3>
+        <ul class="client-result-points">
+          <li>Used Kodara’s client-discovery model.</li>
+          <li>Reached people beyond his appointment calendar.</li>
+        </ul>
+      </article>
+      <article class="client-result-card">
+        <div class="client-result-person">
+          <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/ashley-holly.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Ashley Holly">
+          <span class="client-result-role">Ashley Holly, Yoga instructor</span>
+        </div>
+        <h3>Replaced her in-person classes within two months.</h3>
+        <ul class="client-result-points">
+          <li>Built an AI business around her expertise.</li>
+          <li>Reduced dependence on one-to-one delivery.</li>
+        </ul>
+      </article>
+      <article class="client-result-card">
+        <div class="client-result-person">
+          <img class="client-result-avatar" src="assets/testimonials/sandra.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Sandra Parker">
+          <span class="client-result-role">Sandra Parker, Sobriety coach</span>
+        </div>
+        <h3>Built an entirely online program without adding more calls.</h3>
+        <ul class="client-result-points">
+          <li>Her business became more consistent and enjoyable.</li>
+          <li>Better-fit clients could get help without more one-to-one calls.</li>
+        </ul>
+      </article>
+      <article class="client-result-card">
+        <div class="client-result-person">
+          <img class="client-result-avatar" src="assets/testimonials/leanne.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Leanne Ellington">
+          <span class="client-result-role">Leanne Ellington, Emotional health coach</span>
+        </div>
+        <h3>Made room to launch a passion project.</h3>
+        <ul class="client-result-points">
+          <li>Moved delivery into a largely automated virtual business.</li>
+          <li>Reduced dependence on one-to-one work.</li>
+        </ul>
       </article>
     </div>
     <p class="proof-note">Individual experiences are not typical and do not guarantee a specific result. Results vary by program, audience, implementation, and participation.</p>
