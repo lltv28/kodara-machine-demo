@@ -1,4 +1,8 @@
 export const CHART_SCALE = Object.freeze({ minimum: 70, maximum: 1050 });
+export const LANDING_SEQUENCE_DURATION_MS = 16000;
+
+const COMPLETE_HOLD_MS = 2000;
+const RESET_DURATION_MS = 500;
 
 export const QUARTER_PATTERNS = Object.freeze([
   Object.freeze([0.025, -0.018, 0.035]),
@@ -50,6 +54,14 @@ export function getCueOffsetsMs(payload) {
   return offsets;
 }
 
+export function scaleCueOffsetsMs(payload, durationMs = LANDING_SEQUENCE_DURATION_MS) {
+  const sourceDurationMs = Math.round(payload?.search_sequence?.duration * 1000);
+  if (!Number.isFinite(durationMs) || durationMs <= 0 || !Number.isFinite(sourceDurationMs) || sourceDurationMs <= 0) {
+    throw new Error('Search chart playback durations must be positive and finite.');
+  }
+  return getCueOffsetsMs(payload).map((offset) => Math.round((offset * durationMs) / sourceDurationMs));
+}
+
 const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
 const DESKTOP_LAYOUT = Object.freeze({
   width: 1680,
@@ -60,7 +72,7 @@ const DESKTOP_LAYOUT = Object.freeze({
   verticalSpan: 491,
   yearLabelY: 570,
   axisTitleY: 630,
-  axisFontSize: 32,
+  axisFontSize: 26,
   years: [2016, 2018, 2020, 2022, 2024, 2026],
 });
 const MOBILE_LAYOUT = Object.freeze({
@@ -72,7 +84,7 @@ const MOBILE_LAYOUT = Object.freeze({
   verticalSpan: 388,
   yearLabelY: 500,
   axisTitleY: 545,
-  axisFontSize: 30,
+  axisFontSize: 24,
   years: [2016, 2020, 2024, 2026],
 });
 const GRID_VALUES = Object.freeze([100, 400, 700, 1000]);
@@ -189,7 +201,8 @@ export async function initSearchDemandChart(root) {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let timers = [];
   let currentStep = 0;
-  let hasPlayed = false;
+  let isInPlaybackRange = false;
+  let observer = null;
 
   const clearTimers = () => {
     timers.forEach(window.clearTimeout);
@@ -205,7 +218,7 @@ export async function initSearchDemandChart(root) {
 
     const [estimates, cues] = await Promise.all([estimatesResponse.json(), cuesResponse.json()]);
     const series = buildSearchSeries(estimates);
-    const cueOffsetsMs = getCueOffsetsMs(cues);
+    const cueOffsetsMs = scaleCueOffsetsMs(cues);
     const cueNames = cues.search_sequence.estimated_keyword_cues.map(({ keyword: name }) => name);
     if (cueOffsetsMs.length !== series.length || cueNames.some((name, index) => name !== series[index].name)) {
       throw new Error('Search chart cue order must match all nine series.');
@@ -241,6 +254,12 @@ export async function initSearchDemandChart(root) {
       const item = series[bounded - 1];
       keyword.textContent = item.name;
       multiple.textContent = `${(item.values.at(-1) / item.values[0]).toFixed(1)}x since 2016`;
+      if (animate && typeof keyword.animate === 'function') {
+        [keyword, multiple].forEach((element) => element.animate([
+          { opacity: 0.35, transform: 'translateY(4px)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ], { duration: 320, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }));
+      }
     };
 
     const redraw = () => {
@@ -250,9 +269,9 @@ export async function initSearchDemandChart(root) {
     redraw();
     root.dataset.chartState = 'ready';
 
-    const play = () => {
-      if (hasPlayed) return;
-      hasPlayed = true;
+    const scheduleCycle = () => {
+      clearTimers();
+      root.classList.remove('is-resetting');
       root.dataset.chartState = 'playing';
       setSearchStep(0, false);
       cueOffsetsMs.forEach((offset, index) => {
@@ -260,7 +279,15 @@ export async function initSearchDemandChart(root) {
       });
       timers.push(window.setTimeout(() => {
         root.dataset.chartState = 'complete';
-      }, Math.round(cues.search_sequence.duration * 1000)));
+      }, LANDING_SEQUENCE_DURATION_MS));
+      timers.push(window.setTimeout(() => {
+        if (!isInPlaybackRange) return;
+        root.dataset.chartState = 'resetting';
+        root.classList.add('is-resetting');
+      }, LANDING_SEQUENCE_DURATION_MS + COMPLETE_HOLD_MS));
+      timers.push(window.setTimeout(() => {
+        if (isInPlaybackRange) scheduleCycle();
+      }, LANDING_SEQUENCE_DURATION_MS + COMPLETE_HOLD_MS + RESET_DURATION_MS));
     };
 
     let renderedNarrow = root.getBoundingClientRect().width <= 620;
@@ -274,22 +301,31 @@ export async function initSearchDemandChart(root) {
     resizeObserver?.observe(root);
 
     if (reduceMotion.matches) {
-      hasPlayed = true;
       root.dataset.chartState = 'complete';
       setSearchStep(series.length, false);
     } else if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        observer.disconnect();
-        play();
-      }, { threshold: 0.25 });
+      observer = new IntersectionObserver((entries) => {
+        const nextInPlaybackRange = entries.some((entry) => entry.isIntersecting);
+        if (nextInPlaybackRange === isInPlaybackRange) return;
+        isInPlaybackRange = nextInPlaybackRange;
+        if (isInPlaybackRange) {
+          scheduleCycle();
+        } else {
+          clearTimers();
+          [keyword, multiple].forEach((element) => element.getAnimations?.().forEach((animation) => animation.cancel()));
+          root.classList.remove('is-resetting');
+          root.dataset.chartState = 'paused';
+        }
+      }, { rootMargin: '180px 0px', threshold: 0.01 });
       observer.observe(root);
     } else {
-      play();
+      isInPlaybackRange = true;
+      scheduleCycle();
     }
 
     window.addEventListener('pagehide', () => {
       clearTimers();
+      observer?.disconnect();
       resizeObserver?.disconnect();
     }, { once: true });
   } catch (error) {

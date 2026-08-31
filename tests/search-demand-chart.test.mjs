@@ -6,9 +6,11 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CHART_SCALE,
+  LANDING_SEQUENCE_DURATION_MS,
   QUARTER_PATTERNS,
   buildSearchSeries,
   getCueOffsetsMs,
+  scaleCueOffsetsMs,
 } from '../assets/js/search-demand-chart.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -59,6 +61,11 @@ test('chart schedule follows the supplied transcript-relative cue order and dura
   assert.equal(cues.motion_language.easing, 'cubic-bezier(0.16, 1, 0.3, 1)');
 });
 
+test('landing chart stretches the source timing to a calmer 16-second sequence', () => {
+  assert.equal(LANDING_SEQUENCE_DURATION_MS, 16000);
+  assert.deepEqual(scaleCueOffsetsMs(cues), [2184, 3460, 4737, 6014, 7802, 9079, 10228, 12399, 13931]);
+});
+
 test('chart rejects cue schedules that are unordered or outlast the sequence', () => {
   const unordered = structuredClone(cues);
   unordered.search_sequence.estimated_keyword_cues[1].relative_start = 1;
@@ -69,9 +76,13 @@ test('chart rejects cue schedules that are unordered or outlast the sequence', (
   assert.throws(() => getCueOffsetsMs(incomplete), /before the sequence ends/u);
 });
 
-test('chart runtime triggers once in view and completes immediately for reduced motion', () => {
+test('chart runtime starts before entry, loops while nearby, and completes immediately for reduced motion', () => {
   assert.match(chartModuleSource, /new IntersectionObserver/u);
-  assert.match(chartModuleSource, /observer\.disconnect\(\)/u);
+  assert.match(chartModuleSource, /rootMargin: '180px 0px'/u);
+  assert.match(chartModuleSource, /scheduleCycle/u);
+  assert.match(chartModuleSource, /is-resetting/u);
+  assert.match(chartModuleSource, /root\.dataset\.chartState = 'paused'/u);
+  assert.match(chartModuleSource, /getAnimations\?\.\(\)[\s\S]*?animation\.cancel\(\)/u);
   assert.match(chartModuleSource, /prefers-reduced-motion: reduce/u);
   assert.match(chartModuleSource, /setSearchStep\(series\.length, false\)/u);
   assert.match(chartModuleSource, /nextNarrow === renderedNarrow/u);

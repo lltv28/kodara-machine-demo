@@ -54,7 +54,7 @@ These are supplied company experience claims. Do not increase, extrapolate, or t
 
 ### Illustrative online demand
 
-The stat cards lead into a native SVG chart showing the supplied nine health and wellness search themes from 2016 through 2026. It uses the exact source anchor data, deterministic quarterly variation, shared 70-1050 scale, transcript-relative reveal cues, and Instrument Sans chart styling. The chart runs once when it enters the viewport. Reduced-motion visitors see the completed nine-line state immediately.
+The stat cards lead into a native SVG chart showing the supplied nine health and wellness search themes from 2016 through 2026. It uses the exact source anchor data, deterministic quarterly variation, shared 70-1050 scale, transcript-relative reveal cues, and Instrument Sans chart styling. The chart starts shortly before it enters the viewport, uses a 16-second landing-page playback, holds its completed state, and softly resets into another cycle while it remains nearby. Playback stops outside that range. Reduced-motion visitors see the completed nine-line state immediately.
 
 The chart is explicitly labeled as illustrative estimates. It must not be described as verified Google Trends, historical search volume, measured market growth, or a prediction of client results.
 
