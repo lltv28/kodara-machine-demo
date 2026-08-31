@@ -41,6 +41,7 @@ head.appendChild(script);
   --type-body:1.25rem;--type-body-large:1.375rem;
   --type-question:clamp(1.375rem,1.8vw,1.625rem);
   --type-control:1.125rem;--type-button:1.375rem;--type-label:1rem;--type-meta:.9375rem;--type-legal:.9375rem;
+  --type-hero-eyebrow:1.3rem;--type-hero-subheadline:1.7875rem;
   --type-quote:clamp(1.5rem,2vw,1.75rem);--type-stat:clamp(4rem,7vw,6rem);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -65,12 +66,12 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 /* ---------- centered cinema hero ---------- */
 .site-hero{display:flex;width:100%;flex-direction:column;align-items:center;padding:clamp(32px,5vw,64px) 0;text-align:center}
 .site-hero-copy{display:flex;width:100%;flex-direction:column;align-items:center}
-.hero-region-eyebrow{max-width:70ch;min-block-size:1.4em;margin-bottom:var(--space-3);color:var(--accent-dark);font-size:var(--type-label);font-weight:700;line-height:1.4;text-wrap:balance}
+.hero-region-eyebrow{max-width:70ch;min-block-size:1.4em;margin-bottom:var(--space-3);color:var(--accent-dark);font-size:var(--type-hero-eyebrow);font-weight:700;line-height:1.4;text-wrap:balance}
 .site-hero h1{width:100%;max-width:var(--hero-primary-width);font-size:var(--type-hero);font-weight:650;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
-#hero-region-subheadline{width:100%;max-width:min(var(--hero-primary-width),65ch);min-block-size:4.5em;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
+#hero-region-subheadline{width:100%;max-width:min(var(--hero-primary-width),65ch);min-block-size:4.5em;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-hero-subheadline);line-height:1.5;text-wrap:balance}
 .site-hero>.hero-guarantee{max-width:55ch;margin-top:var(--space-4);color:var(--ink);font-size:var(--type-label);font-weight:650;line-height:1.45}
 .hero-vsl-stage{position:relative;width:100%;max-width:var(--hero-primary-width);aspect-ratio:16/9;margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--ink);box-shadow:var(--shadow-md)}
-#kodara-triager{width:100%;max-width:1000px;min-height:60px;margin-top:var(--space-6)}
+#kodara-triager{width:100%;max-width:1000px;min-height:60px;margin-top:var(--space-6);scroll-margin-top:clamp(24px,6vh,64px)}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;align-items:stretch;overflow:hidden}
@@ -90,7 +91,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .primary-demo-visual{order:2;min-height:auto;border-top:1px solid var(--line-2);border-right:0}
 }
 @media(max-width:720px){
-  :root{--type-hero:clamp(2.625rem,11vw,3rem);--type-section:clamp(2.125rem,9.5vw,2.5rem);--type-section-long:2.125rem;--type-card:1.75rem;--type-card-small:1.5rem;--type-body:1.125rem;--type-body-large:1.25rem;--type-question:1.375rem;--type-quote:1.5rem;--measure-display:18ch;--measure-display-long:20ch;--measure-card-title:20ch;--measure-body:34ch;--measure-card-body:32ch}
+  :root{--type-hero:clamp(2.625rem,11vw,3rem);--type-section:clamp(2.125rem,9.5vw,2.5rem);--type-section-long:2.125rem;--type-card:1.75rem;--type-card-small:1.5rem;--type-body:1.125rem;--type-body-large:1.25rem;--type-hero-subheadline:1.625rem;--type-question:1.375rem;--type-quote:1.5rem;--measure-display:18ch;--measure-display-long:20ch;--measure-card-title:20ch;--measure-body:34ch;--measure-card-body:32ch}
   body{padding-inline:var(--page-gutter-mobile)}
   .primary-demo-copy{padding:var(--space-4) var(--space-5)}
   .primary-demo h2{max-width:18ch;font-size:var(--type-section-long);line-height:1.1}
@@ -342,7 +343,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .site-hero{padding:var(--space-5) 0 var(--space-7)}
   .hero-region-eyebrow{max-width:32ch;min-block-size:2.8em;margin-bottom:var(--space-2)}
   .site-hero h1{max-width:14ch}
-  #hero-region-subheadline{max-width:32ch;min-block-size:6em;font-size:var(--type-body-large)}
+  #hero-region-subheadline{max-width:32ch;min-block-size:6em;font-size:var(--type-hero-subheadline)}
   .site-hero>.hero-guarantee{max-width:34ch;margin-top:var(--space-3)}
   .hero-vsl-stage{margin-top:var(--space-6);border-radius:var(--radius-lg)}
   #kodara-triager{min-height:58px;margin-top:var(--space-5)}
@@ -414,7 +415,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     <a href="#stories">Results</a>
     <a href="#faq">FAQ</a>
   </nav>
-  <a class="cta-btn qualification-link" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="See if you qualify (opens in a new tab)">See If You Qualify</a>
+  <a class="cta-btn qualification-link" href="#kodara-triager" aria-label="See if you qualify">See If You Qualify</a>
 </header>
 
 <main class="wrap" id="top">
@@ -720,7 +721,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   <section class="card cta" aria-label="Apply to see if you qualify to build your AI Version">
     <p class="cta-line">Launch your AI Version and onboard your first 10 beta users in 30 days.</p>
     <p class="cta-sub">For qualifying clients, if we do not complete both under the terms of your signed agreement, you receive a full refund.</p>
-    <a class="cta-btn qualification-link" href="https://app.iclosed.io/e/kodara/strategy-call" target="_blank" rel="noopener" aria-label="See if you qualify (opens in a new tab)">See If You Qualify</a>
+    <a class="cta-btn qualification-link" href="#kodara-triager" aria-label="See if you qualify">See If You Qualify</a>
   </section>
 
 </main>
@@ -880,14 +881,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   }
   setupFaqAccordion();
 
-  if(document.documentElement.classList.contains('embed-mode')){
-    document.querySelectorAll('.cta-btn').forEach(function(link){
-      link.addEventListener('click',function(event){
-        event.preventDefault();
-        parent.postMessage({fdCtaIntent:'strategy-call'},'*');
-      });
-    });
-  }
   function reportHeight(){ parent.postMessage({fdAppHeight:Math.ceil(document.body.scrollHeight)+2},'*'); }
   window.addEventListener('load',reportHeight);
   window.addEventListener('resize',reportHeight);

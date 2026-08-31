@@ -77,6 +77,11 @@ assert.match(page, /--type-section-long:clamp\(2\.75rem,3\.8vw,3\.25rem\)/, 'Lon
 assert.match(page, /--type-card-small:clamp\(1\.875rem,2\.2vw,2\.125rem\)/, 'Supporting card headings must stay within the 30px to 34px tier');
 assert.match(page, /--type-body:1\.25rem;--type-body-large:1\.375rem/, 'Desktop body text must retain the readable 20px and 22px tiers');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.125rem;--type-body-large:1\.25rem/, 'Mobile body text must retain the readable 18px and 20px tiers');
+assert.match(page, /--type-hero-eyebrow:1\.3rem;--type-hero-subheadline:1\.7875rem/, 'Hero eyebrow and guarantee must retain their approved 30% desktop increase');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-hero-subheadline:1\.625rem/, 'Hero guarantee must retain its approved 30% mobile increase');
+assert.match(page, /\.hero-region-eyebrow\{[^}]*font-size:var\(--type-hero-eyebrow\)/, 'Hero audience line must use its dedicated type token');
+assert.match(page, /#hero-region-subheadline\{[^}]*font-size:var\(--type-hero-subheadline\)/, 'Hero guarantee must use its dedicated type token');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*?#hero-region-subheadline\{[^}]*font-size:var\(--type-hero-subheadline\)/, 'Mobile hero guarantee must not fall back to the shared body tier');
 assert.match(page, /--tracking-body:0;--tracking-heading:-2px;--tracking-display:-2px;--tracking-stat:-1px/, 'Heading tracking must use the shared -2px treatment');
 assert.match(page, /--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px/, 'Internal spacing must use the shared 4px scale');
 assert.match(page, /--radius-sm:8px/, 'Compact surfaces need the 8px radius tier');
@@ -170,8 +175,11 @@ const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)]
 assert.equal(ctaLinks.length, 2, 'Header and final sections must contain one primary button each');
 const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification-link[^"]*"[^>]*>/g)].map((match) => match[0]);
 assert.equal(qualificationLinks.length, 2, 'Qualification links must appear only in the header and final CTA');
-assert.ok(qualificationLinks.every((tag) => /href="https:\/\/app\.iclosed\.io\/e\/kodara\/strategy-call"/.test(tag)), 'Qualification links must use the live scheduler');
-assert.ok(qualificationLinks.every((tag) => /target="_blank"/.test(tag) && /rel="noopener"/.test(tag)), 'External qualification links must open safely');
+assert.ok(qualificationLinks.every((tag) => /href="#kodara-triager"/.test(tag)), 'Every qualification link must return visitors to the triager widget');
+assert.ok(qualificationLinks.every((tag) => !/target=|rel=|opens in a new tab/.test(tag)), 'In-page qualification links must remain in the current page');
+assert.doesNotMatch(page, /app\.iclosed\.io\/e\/kodara\/strategy-call/, 'The retired external scheduler destination must not remain');
+assert.match(page, /#kodara-triager\{[^}]*scroll-margin-top:clamp\(24px,6vh,64px\)/, 'The triager anchor must land with comfortable viewport spacing');
+assert.doesNotMatch(page, /fdCtaIntent:'strategy-call'/, 'Embed mode must not override the triager scroll path');
 assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 2, 'Every qualification link must use one concise action label');
 
 // Demo retirement and replacement contract.
