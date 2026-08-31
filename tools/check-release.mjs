@@ -48,6 +48,23 @@ assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/C
 assert.equal(confirmationPlayers.length, 12, 'Confirmation page needs two testimonial videos and ten FAQ videos');
 assert.equal((confirmation.match(/data-press-slot="press-[0-9]{2}"/g) ?? []).length, 4, 'Confirmation page needs four replaceable press slots');
 assert.equal((confirmation.match(/class="press-card"/g) ?? []).length, 4, 'Confirmation page needs four visible press cards');
+const pressFeatures = [
+  ['Business Insider', 'assets/press/business-insider.svg', 'assets/press/business-insider-article.jpg', 'markets.businessinsider.com/news/currencies/kodara-announces-new-ai-product-building-service-for-established-experts-1036482546'],
+  ['Yahoo Finance', 'assets/press/yahoo-finance.svg', 'assets/press/yahoo-finance-article.jpg', 'finance.yahoo.com/technology/ai/articles/established-experts-racing-clone-knowledge-112500919.html'],
+  ['AP News', 'assets/press/ap-news.svg', 'assets/press/ap-news-article.jpg', 'apnews.com/press-release/getnews/press-release-ec5d282d406940b070c752d01d70e383'],
+  ['MSN', 'assets/press/msn.svg', 'assets/press/msn-article.jpg', 'msn.com/en-us/news/other/what-separates-the-5-percent-of-ai-projects-that-actually-make-money/ar-AA28XP85'],
+];
+for (const [publisher, wordmark, capture, articlePath] of pressFeatures) {
+  assert.ok(existsSync(resolve(root, wordmark)), `Missing ${publisher} press wordmark`);
+  assert.ok(existsSync(resolve(root, capture)), `Missing ${publisher} article capture`);
+  assert.ok(confirmation.includes(`../${wordmark}`), `${publisher} wordmark is not wired into the confirmation page`);
+  assert.ok(confirmation.includes(`../${capture}`), `${publisher} article capture is not wired into the confirmation page`);
+  assert.ok(confirmation.includes(articlePath), `${publisher} press card is not linked to the verified article`);
+}
+assert.equal((confirmation.match(/class="press-logo"/g) ?? []).length, 4, 'Every press card needs a stable logo area');
+assert.equal((confirmation.match(/assets\/press\/[a-z-]+-article\.jpg" width="1185" height="667"/g) ?? []).length, 4, 'Every press card needs a dimensioned 16:9 article capture');
+assert.equal((confirmation.match(/<a class="press-card"[^>]*target="_blank" rel="noopener noreferrer"/g) ?? []).length, 4, 'Every press feature must be one safe external link');
+assert.doesNotMatch(confirmation, /Press Feature|Publication name|Interview or article title|will be added here/, 'Press placeholders must not remain');
 assert.match(confirmationStyles, /--rail-wide:1240px/, 'Confirmation page must use the shared 1240px content rail');
 assert.match(confirmationStyles, /--accent:#106844/, 'Confirmation page must use the shared Kodara green');
 for (const token of ['--shadow-sm', '--shadow-md', '--space-8', '--space-9', '--type-section', '--type-card', '--type-body', '--type-body-large', '--type-question', '--type-label', '--type-meta', '--type-legal', '--tracking-heading', '--tracking-display']) {
@@ -59,6 +76,8 @@ assert.match(confirmationStyles, /\.site-footer-inner\{[^}]*grid-template-column
 assert.match(confirmationStyles, /\.brand:focus-visible,\.site-footer-brand:focus-visible\{outline:3px solid var\(--accent-dark\)/, 'Confirmation brand links need the shared focus treatment');
 assert.match(confirmationStyles, /\.press-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation press features must use a two-column desktop grid');
 assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.press-grid\{grid-template-columns:1fr\}/, 'Confirmation press features must stack on smaller screens');
+assert.match(confirmationStyles, /\.press-card-media\{aspect-ratio:16\/9;/, 'Press captures must use the shared 16:9 media frame');
+assert.match(confirmationStyles, /\.press-card h3\{[^}]*font-size:clamp\(1\.35rem,1\.9vw,1\.75rem\)/, 'Press headlines must remain legible across desktop and mobile');
 assert.match(confirmationStyles, /\.faq-video-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation FAQ videos must use a two-column desktop grid');
 assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.faq-video-grid\{grid-template-columns:1fr\}/, 'Confirmation FAQ videos must stack on smaller screens');
 assert.match(confirmationStyles, /\.faq-video-media\{aspect-ratio:16\/9;/, 'Confirmation FAQ videos must reserve a stable 16:9 frame');

@@ -11,7 +11,7 @@ The confirmation page reuses the production Vidalytics presentation, two approve
 - `call-confirmation`
 - `case-study`
 
-Replace the four press containers identified by `data-press-slot="press-01"` through `data-press-slot="press-04"` when verified publication assets and links are available.
+The confirmation page press grid links to four verified features from Business Insider, Yahoo Finance, AP News, and MSN using local article captures and publisher wordmarks.
 
 The hero uses a Cloudflare Pages Function at `/api/visitor-region` to resolve an allowlisted US state or Canadian province. The function reads only Cloudflare's trusted `CF-Connecting-IP` header and keeps `IPWHOIS_API_KEY` in the server environment. The browser receives only the approved region name or a generic result.
 
