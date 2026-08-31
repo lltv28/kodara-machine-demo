@@ -30,6 +30,9 @@ assert.match(confirmation, /id="vidalytics_embed_VNXQCkfkzn95oP5v"/, 'Confirmati
 assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/VNXQCkfkzn95oP5v\//, 'Call-confirmation video must use the approved Vidalytics source');
 assert.match(confirmation, /class="call-details-widget" data-url="https:\/\/app\.iclosed\.io\/embed" style="width:100%;height:340px"/, 'iClosed call details must appear below the confirmation video');
 assert.match(confirmation, /<script src="https:\/\/app\.iclosed\.io\/assets\/widget\.js" async><\/script>/, 'Confirmation page must load the iClosed widget');
+assert.match(confirmation, /class="call-details-widget"[\s\S]*?<script src="https:\/\/app\.iclosed\.io\/assets\/widget\.js" async><\/script>\s*<div class="proof-snapshot-logos confirmation-proof-logos"/, 'Confirmation authority logos must appear immediately below the iClosed widget');
+assert.match(confirmation, /<p class="proof-snapshot-logo-label">Trusted by companies like:<\/p>/, 'Confirmation authority strip must use the approved title');
+assert.equal((confirmation.match(/class="proof-snapshot-logo proof-snapshot-logo--/g) ?? []).length, 6, 'Confirmation authority strip must contain six healthcare logos');
 assert.doesNotMatch(confirmation, /Reserved space for the call confirmation video|This media slot is ready for the final video embed/, 'Call-confirmation placeholder content must not remain');
 assert.match(confirmation, /data-video-slot="case-study"/, 'Confirmation page needs the case-study video slot');
 assert.doesNotMatch(confirmation, /Before we speak\.|class="prepare"|class="prepare-list"/, 'Confirmation page must not restore the redundant preparation section');
@@ -75,6 +78,17 @@ assert.equal((confirmation.match(/assets\/press\/[a-z-]+-article\.jpg" width="11
 assert.equal((confirmation.match(/<a class="press-card"[^>]*target="_blank" rel="noopener noreferrer"/g) ?? []).length, 4, 'Every press feature must be one safe external link');
 assert.doesNotMatch(confirmation, /Press Feature|Publication name|Interview or article title|will be added here/, 'Press placeholders must not remain');
 assert.match(confirmationStyles, /--rail-wide:1240px/, 'Confirmation page must use the shared 1240px content rail');
+assert.match(confirmationStyles, /--rail-media:1000px/, 'Confirmation page must use the shared 1000px media rail');
+assert.match(confirmationStyles, /--rail-reading:760px/, 'Confirmation page must use the shared 760px reading rail');
+assert.match(confirmationStyles, /--measure-display:22ch/, 'Confirmation page must use the shared display measure');
+assert.match(confirmationStyles, /--measure-body:62ch/, 'Confirmation page must use the shared body measure');
+assert.match(confirmationStyles, /--measure-card-body:42ch/, 'Confirmation page must use the shared card-body measure');
+assert.doesNotMatch(confirmationStyles, /max-width:(?:1000px|1100px|13ch|16ch|22ch|30ch|54ch|58ch|78ch)/, 'Confirmation page must not restore legacy one-off content widths');
+assert.match(confirmationStyles, /\.featured-video\{[^}]*max-width:var\(--rail-media\)/, 'Confirmation featured video must use the media rail');
+assert.match(confirmationStyles, /\.section-head h2\{max-width:var\(--measure-display\)/, 'Confirmation section headings must use the display measure');
+assert.match(confirmationStyles, /\.section-head p\{max-width:var\(--measure-body\)/, 'Confirmation section copy must use the body measure');
+assert.match(confirmationStyles, /\.press-library\{max-width:var\(--rail-wide\)/, 'Confirmation press grid must use the wide rail');
+assert.match(confirmationStyles, /\.faq-video-library\{max-width:var\(--rail-wide\)/, 'Confirmation FAQ grid must use the wide rail');
 assert.match(confirmationStyles, /--accent:#106844/, 'Confirmation page must use the shared Kodara green');
 for (const token of ['--shadow-sm', '--shadow-md', '--space-8', '--space-9', '--type-section', '--type-card', '--type-body', '--type-body-large', '--type-question', '--type-label', '--type-meta', '--type-legal', '--tracking-heading', '--tracking-display']) {
   assert.equal(cssToken(confirmationStyles, token), cssToken(page, token), `Confirmation page must share root token ${token}`);
@@ -92,6 +106,8 @@ assert.match(confirmationStyles, /\.press-card h3\{[^}]*font-size:clamp\(1\.35re
 assert.match(confirmationStyles, /\.faq-video-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation FAQ videos must use a two-column desktop grid');
 assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.faq-video-grid\{grid-template-columns:1fr\}/, 'Confirmation FAQ videos must stack on smaller screens');
 assert.match(confirmationStyles, /\.faq-video-media\{aspect-ratio:16\/9;/, 'Confirmation FAQ videos must reserve a stable 16:9 frame');
+assert.match(confirmationStyles, /\.proof-snapshot-logo-row\{display:grid;grid-template-columns:repeat\(6,minmax\(0,1fr\)\)/, 'Confirmation authority logos must use the shared six-column desktop layout');
+assert.match(confirmationStyles, /@media\(max-width:720px\)[\s\S]*\.proof-snapshot-logo-row\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation authority logos must use the shared two-column mobile layout');
 assert.doesNotMatch(confirmation + confirmationStyles, /[—–]/, 'Confirmation page must not contain em or en dashes');
 
 // Official Kodara brand assets.
@@ -111,8 +127,9 @@ assert.equal((page.match(/assets\/brand\/kodara-wordmark\.svg/g) ?? []).length, 
 assert.doesNotMatch(page, /assets\/favicon\.svg/, 'The previous generated favicon must not remain in use');
 
 // Design-system invariants.
-assert.match(page, /--rail-wide:1240px/, 'Desktop content rail must stay at 1240px');
-assert.match(page, /--hero-primary-width:1000px/, 'Hero headline and VSL must share the approved desktop width');
+assert.match(page, /--rail-wide:1240px;--rail-media:1000px;--rail-reading:760px/, 'The page must use the approved wide, media, and reading rails');
+assert.match(page, /--measure-display:22ch;--measure-body:62ch;--measure-card-body:42ch/, 'The page must use one display, body, and card text measure');
+assert.doesNotMatch(page, /--hero-primary-width|--measure-display-long|--measure-card-title|--measure-faq/, 'Legacy one-off width tokens must not return');
 assert.match(page, /--type-hero:clamp\(3rem,3\.8vw,3\.25rem\)/, 'Hero must use the approved 48px to 52px long-headline scale');
 assert.match(page, /--type-section:clamp\(2\.75rem,4vw,3\.25rem\)/, 'Section headings must retain the approved 44px to 52px scale');
 assert.match(page, /--type-section-long:clamp\(2\.75rem,3\.8vw,3\.25rem\)/, 'Long section headings must stay within the 44px to 52px section tier');
@@ -141,8 +158,15 @@ for (const className of ['demand-signal', 'audience-path', 'credibility-item']) 
 assert.match(page, /\.faq-list\{display:grid;[^}]*gap:var\(--space-3\)/, 'FAQ items must use spaced cards instead of divider rows');
 assert.match(page, /\.faq\{width:100%;max-width:var\(--rail-reading\)\}/, 'FAQ must keep one stable reading width in open and closed states');
 assert.match(page, /\.education-head\{max-width:var\(--rail-reading\);margin:0 auto var\(--space-7\);text-align:center\}/, 'Demand section must use the centered institutional heading structure');
-assert.match(page, /\.education-head h2\{font-size:var\(--type-section\);font-weight:650;line-height:1\.1;letter-spacing:var\(--tracking-display\);text-wrap:balance\}/, 'Demand heading must match the institutional section-heading tier');
+assert.match(page, /\.education-head h2\{max-width:var\(--measure-display\);margin-inline:auto;font-size:var\(--type-section\);font-weight:650;line-height:1\.1;letter-spacing:var\(--tracking-display\);text-wrap:balance\}/, 'Demand heading must match the centered display tier');
 assert.match(page, /\.education-head p\{max-width:var\(--measure-body\);margin:var\(--space-4\) auto 0;color:var\(--ink-2\);font-size:var\(--type-body\);line-height:1\.5;text-wrap:pretty\}/, 'Demand subheadline must match the centered institutional supporting-copy tier');
+assert.match(page, /\.audience-copy h2\{max-width:var\(--measure-display\)/, 'Audience heading must use the shared display measure');
+assert.match(page, /\.founder-highlight h2\{max-width:var\(--measure-display\)/, 'Founder heading must use the shared display measure');
+assert.match(page, /\.case-title\{max-width:var\(--measure-display\)/, 'Case-study headings must use the shared display measure');
+assert.match(page, /\.credibility-item p\{max-width:var\(--measure-card-body\)/, 'Credibility-card copy must use the shared card measure');
+assert.match(page, /\.faq-answer\{width:100%;max-width:var\(--measure-body\)/, 'FAQ answers must use the shared body measure');
+assert.match(page, /\.site-footer\{width:auto;margin:var\(--space-9\) calc\(var\(--page-gutter\) \* -1\) 0/, 'Full-width footer must align to the page gutter without scrollbar overflow');
+assert.doesNotMatch(page, /\.site-footer\{width:100vw/, 'Footer must not use viewport width that includes the scrollbar');
 assert.match(page, /<header class="education-head">\s*<h2 id="education-title">[\s\S]*?<\/h2>\s*<p>[\s\S]*?<\/p>\s*<\/header>\s*<div class="demand-signals"/, 'Demand section must place its centered headline and subheadline before the three-column signals');
 assert.match(page, /<h2 id="education-title">The demand for health and wellness expertise is exploding online\.<\/h2>/, 'Demand headline must use the approved exploding-online language');
 assert.match(page, /\[hidden\]\{display:none!important\}/, 'Temporarily hidden homepage chapters must remain visually suppressed');
@@ -159,14 +183,14 @@ assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.site-header \.cta-btn\{[^
 assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced-motion preferences');
 assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
 assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*text-align:center/, 'Hero must use the centered cinema stack');
-assert.match(page, /\.site-hero h1\{width:100%;max-width:var\(--hero-primary-width\)/, 'Hero headline must share the VSL desktop width');
-assert.match(page, /#hero-region-subheadline\{width:100%;max-width:min\(var\(--hero-primary-width\),65ch\)/, 'Hero subheadline must align to the shared frame without exceeding its readable measure');
-assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:var\(--hero-primary-width\);[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas at the shared desktop width');
+assert.match(page, /\.site-hero h1\{width:100%;max-width:var\(--rail-media\)/, 'Hero headline must share the media rail');
+assert.match(page, /#hero-region-subheadline\{width:100%;max-width:min\(var\(--rail-media\),var\(--measure-body\)\)/, 'Hero subheadline must align to the media rail without exceeding the body measure');
+assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:var\(--rail-media\);[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas at the media rail');
 assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain the production Vidalytics VSL');
 assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Hero must load the approved Vidalytics VSL source');
 assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
-assert.match(page, /<h2 class="hero-triager-title">See if you qualify\.<\/h2>\s*<div id="kodara-triager"><\/div>/, 'Hero must introduce the triager with the approved qualification heading');
-assert.match(page, /class="hero-vsl-stage"[\s\S]*?<div class="proof-snapshot-logos hero-proof-logos">[\s\S]*?<h2 class="hero-triager-title">See if you qualify\.<\/h2>/, 'Authority logos must appear between the VSL and qualification widget');
+assert.match(page, /<h2 class="hero-triager-title">See if you qualify<\/h2>\s*<div id="kodara-triager"><\/div>/, 'Hero must introduce the triager with the approved qualification heading');
+assert.match(page, /class="hero-vsl-stage"[\s\S]*?<div class="proof-snapshot-logos hero-proof-logos">[\s\S]*?<h2 class="hero-triager-title">See if you qualify<\/h2>/, 'Authority logos must appear between the VSL and qualification widget');
 assert.match(page, /\.hero-proof-logos\{width:100%;margin-top:var\(--space-7\);padding-top:0\}/, 'Hero authority logos need deliberate desktop spacing without a duplicate top inset');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-proof-logos\{margin-top:var\(--space-6\);padding:0\}/, 'Hero authority logos need compact mobile spacing');
 assert.match(page, /\.hero-triager-title\{[^}]*font-size:var\(--type-card\);[^}]*text-wrap:balance/, 'Triager heading must use the shared card-heading tier');
@@ -288,6 +312,7 @@ assert.match(page, /id="review-approval"/, 'The review-and-approval section need
 
 // Proof, FAQ, and accessibility.
 assert.equal((page.match(/class="proof-snapshot-logo proof-snapshot-logo--/g) ?? []).length, 6, 'Authority wall must contain six healthcare logos');
+assert.match(page, /<p class="proof-snapshot-logo-label">Trusted by companies like:<\/p>/, 'Homepage authority strip must use the approved title');
 for (const brand of ['Massage Envy', 'Gameday Men’s Health', 'Visiting Angels', 'Ellie Mental Health', 'Mayo Clinic', 'Johns Hopkins University']) {
   assert.ok(page.includes(`alt="${brand}"`), `Authority wall must include ${brand}`);
 }

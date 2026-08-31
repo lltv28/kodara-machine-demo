@@ -12,88 +12,88 @@
 
   const WORKFLOW_GROUPS = [
     {
-      id: "triager",
-      label: "AI Triager",
-      role: "AI Triager",
-      route: "Lead qualification",
-      workerId: "T-184",
+      id: "enrollment",
+      label: "AI Version of You",
+      role: "AI Version of You",
+      route: "Program enrollment",
+      workerId: "E-184",
       notifications: [
         {
-          id: "triager-1",
-          title: "New Sale! $17 Marketing Assessment",
-          body: "Amara purchased the Marketing assessment for their dental business and is now being offered a sales consultation.",
+          id: "enrollment-1",
+          title: "New Program Enrollment! $997",
+          body: "Amara enrolled in a virtual wellness program after speaking with your AI Version.",
         },
         {
-          id: "triager-2",
-          title: "New Sale! $17 Marketing Assessment",
-          body: "Liam purchased the Marketing assessment for their roofing business and is now being offered a sales consultation.",
+          id: "enrollment-2",
+          title: "New Program Enrollment! $997",
+          body: "Liam enrolled in a virtual wellness program after speaking with your AI Version.",
         },
         {
-          id: "triager-3",
-          title: "New Sale! $17 Marketing Assessment",
-          body: "Sofia purchased the Marketing assessment for their med spa business and is now being offered a sales consultation.",
+          id: "enrollment-3",
+          title: "New Program Enrollment! $997",
+          body: "Sofia enrolled in a virtual wellness program after speaking with your AI Version.",
         },
         {
-          id: "triager-4",
-          title: "New Sale! $17 Marketing Assessment",
-          body: "Jordan purchased the Marketing assessment for their landscaping business and is now being offered a sales consultation.",
+          id: "enrollment-4",
+          title: "New Program Enrollment! $997",
+          body: "Jordan enrolled in a virtual wellness program after speaking with your AI Version.",
         },
         {
-          id: "triager-5",
-          title: "New Sale! $17 Marketing Assessment",
-          body: "Priya purchased the Marketing assessment for their accounting business and is now being offered a sales consultation.",
-          actions: ["View lead", "Open chat"],
+          id: "enrollment-5",
+          title: "New Program Enrollment! $997",
+          body: "Priya enrolled in a virtual wellness program after speaking with your AI Version.",
+          actions: ["View user", "Open program"],
         },
       ],
     },
     {
-      id: "high-ticket",
-      label: "High ticket",
-      role: "AI Salesperson",
-      route: "High Ticket Upsell",
-      workerId: "H-072",
+      id: "new-user",
+      label: "Kodara",
+      role: "Client discovery",
+      route: "AI onboarding",
+      workerId: "U-072",
       notifications: [
         {
-          id: "high-ticket-1",
-          title: "New Sales Call Confirmed! Tuesday at 2:30 PM",
-          body: "Mateo who runs a roofing business is confirmed on the calendar and excited to learn more.",
+          id: "new-user-1",
+          title: "New AI User Onboarded",
+          body: "Mateo started using your AI Version and was matched with the program that fits what he needs.",
         },
         {
-          id: "high-ticket-2",
-          title: "New Sales Call Confirmed! Wednesday at 11:00 AM",
-          body: "Aisha who runs a med spa business is confirmed on the calendar and excited to learn more.",
+          id: "new-user-2",
+          title: "New AI User Onboarded",
+          body: "Aisha started using your AI Version and was matched with the program that fits what she needs.",
         },
         {
-          id: "high-ticket-3",
-          title: "New Sales Call Confirmed! Thursday at 4:15 PM",
-          body: "Daniel who runs a dental business is confirmed on the calendar and excited to learn more.",
+          id: "new-user-3",
+          title: "New AI User Onboarded",
+          body: "Daniel started using your AI Version and was matched with the program that fits what he needs.",
         },
         {
-          id: "high-ticket-4",
-          title: "New Sales Call Confirmed! Friday at 9:30 AM",
-          body: "Chloe who runs a landscaping business is confirmed on the calendar and excited to learn more.",
+          id: "new-user-4",
+          title: "New AI User Onboarded",
+          body: "Chloe started using your AI Version and was matched with the program that fits what she needs.",
         },
         {
-          id: "high-ticket-5",
-          title: "New Sales Call Confirmed! Monday at 1:00 PM",
-          body: "Marcus who runs a commercial cleaning business is confirmed on the calendar and excited to learn more.",
-          actions: ["View lead", "Open calendar"],
+          id: "new-user-5",
+          title: "New AI User Onboarded",
+          body: "Marcus started using your AI Version and was matched with the program that fits what he needs.",
+          actions: ["View user", "Open AI"],
         },
       ],
     },
   ];
 
   const ACTIVITY_ORDER = [
-    ["triager", "triager-1"],
-    ["high-ticket", "high-ticket-1"],
-    ["triager", "triager-2"],
-    ["high-ticket", "high-ticket-2"],
-    ["triager", "triager-3"],
-    ["high-ticket", "high-ticket-3"],
-    ["triager", "triager-4"],
-    ["high-ticket", "high-ticket-4"],
-    ["triager", "triager-5"],
-    ["high-ticket", "high-ticket-5"],
+    ["enrollment", "enrollment-1"],
+    ["new-user", "new-user-1"],
+    ["enrollment", "enrollment-2"],
+    ["new-user", "new-user-2"],
+    ["enrollment", "enrollment-3"],
+    ["new-user", "new-user-3"],
+    ["enrollment", "enrollment-4"],
+    ["new-user", "new-user-4"],
+    ["enrollment", "enrollment-5"],
+    ["new-user", "new-user-5"],
   ];
 
   const ACTIVITY_TIMELINE = ACTIVITY_ORDER.map(([groupId, notificationId]) => {
@@ -139,7 +139,7 @@
         !group.label ||
         !group.role ||
         !group.route ||
-        !/^[TH]-\d{3}$/.test(group.workerId) ||
+        !/^[EU]-\d{3}$/.test(group.workerId) ||
         group.notifications.length !== MAX_VISIBLE_NOTIFICATIONS ||
         ids.has(group.id)
       ) {

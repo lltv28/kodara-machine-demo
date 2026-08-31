@@ -29,7 +29,7 @@ class IOSNotificationDemo extends HTMLElement {
           aspect-ratio: 1;
         }
       </style>
-      <section class="phone-column" aria-label="Live AI sales notification feed">
+      <section class="phone-column" aria-label="Illustrative AI Version of You activity feed">
         <div class="phone-stage" data-phone-stage>
           <div class="phone-canvas" data-phone-canvas>
             <div class="phone-frame">
@@ -56,7 +56,7 @@ class IOSNotificationDemo extends HTMLElement {
                   <strong>1:02</strong>
                 </div>
 
-                <div class="notification-region" data-notification-region aria-label="AI sales notifications">
+                <div class="notification-region" data-notification-region aria-label="Program and AI-user notifications">
                   <div class="notification-center-titlebar" data-center-titlebar hidden>
                     <span>Notification Center</span>
                     <button type="button" aria-label="Clear all notifications" data-clear-all><i aria-hidden="true"></i></button>
@@ -68,7 +68,7 @@ class IOSNotificationDemo extends HTMLElement {
                     </span>
                     <div>
                       <button class="notification-show-less" type="button" data-show-less><i aria-hidden="true"></i>Show less</button>
-                      <button class="notification-group-clear" type="button" aria-label="Clear selected AI notifications" data-clear-group><i aria-hidden="true"></i></button>
+                      <button class="notification-group-clear" type="button" aria-label="Clear selected Kodara notifications" data-clear-group><i aria-hidden="true"></i></button>
                     </div>
                   </div>
                   <div class="notification-feed" data-notification-feed></div>
