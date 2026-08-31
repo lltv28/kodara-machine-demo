@@ -214,8 +214,10 @@ assert.match(page, /<h1[^>]*>Give Us 30 Days To Turn Your Health Expertise Into 
 assert.match(page, /<p class="hero-region-eyebrow" id="hero-region-eyebrow">Limited Availability for Health &amp; Wellness Experts<\/p>\s*<h1/, 'Hero must place the generic regional availability line above the headline');
 assert.match(page, /<p id="hero-region-subheadline">If we don't get your first 10 beta users in the first month, you get a full refund!<\/p>/, 'Hero must server-render the approved guarantee');
 assert.match(page, /\.hero-region-eyebrow\{[^}]*min-block-size:1\.4em[^}]*text-wrap:balance/, 'Hero audience personalization must reserve its desktop height and balance wrapping');
-assert.match(page, /#hero-region-subheadline\{[^}]*min-block-size:4\.5em[^}]*text-wrap:balance/, 'Hero subheadline personalization must reserve its desktop height and balance wrapping');
+assert.match(page, /#hero-region-subheadline\{[^}]*min-block-size:3em[^}]*text-wrap:balance/, 'Static hero guarantee must reserve only its rendered desktop height');
+assert.match(page, /\.hero-vsl-stage\{[^}]*margin-top:var\(--space-5\)/, 'Desktop VSL must sit close to the guarantee without crowding it');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-region-eyebrow\{[^}]*min-block-size:2\.8em[\s\S]*?#hero-region-subheadline\{[^}]*min-block-size:6em/, 'Hero personalization must reserve both mobile text areas');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-vsl-stage\{margin-top:var\(--space-4\)/, 'Mobile VSL must use a compact gap below the guarantee');
 assert.match(page, /@media\(max-width:340px\)\{\.hero-region-eyebrow\{min-block-size:4\.2em\}#hero-region-subheadline\{min-block-size:7\.5em\}\}/, 'Hero personalization must reserve its narrow-mobile text heights');
 assert.match(page, /<script type="module" src="assets\/js\/region-personalization\.mjs"><\/script>/, 'Hero regional personalization client is not loaded');
 assert.match(page, /Qualifying clients are protected by the 30-day refund terms in their signed agreement/, 'Launch process must state the qualifying-client guarantee boundary');
