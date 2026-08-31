@@ -395,12 +395,12 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .site-footer-brand-block p{max-width:30ch;margin-top:var(--space-3);font-size:var(--type-legal);line-height:1.55}
 .site-footer-brand:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px;border-radius:var(--radius-sm)}
 .site-footer-brand-block .footer-copyright{margin-top:var(--space-5);font-size:.75rem;line-height:1.4;white-space:nowrap}
-.footer-disclaimers{color:var(--ink-3)}
-.footer-disclaimer{font-size:.625rem;font-weight:400;line-height:1.25}
-.footer-disclaimer-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5);margin-top:0}
-.footer-disclaimer h3{display:inline;color:inherit;font:inherit}
-.footer-disclaimer p{display:inline;margin:0;color:inherit;font:inherit;text-wrap:pretty}
-@media(max-width:720px){.site-footer-inner{grid-template-columns:1fr;gap:var(--space-6)}.footer-disclaimer-list{grid-template-columns:1fr;gap:var(--space-3)}}
+.site-footer-legal{color:var(--ink-3)}
+.site-footer-note{display:block;visibility:visible;font-size:.625rem;font-weight:400;line-height:1.25}
+.site-footer-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5);margin-top:0}
+.site-footer-note h3{display:inline;color:inherit;font:inherit}
+.site-footer-note p{display:inline;margin:0;color:inherit;font:inherit;text-wrap:pretty}
+@media(max-width:720px){.site-footer-inner{grid-template-columns:1fr;gap:var(--space-6)}.site-footer-notes{grid-template-columns:1fr;gap:var(--space-3)}}
 @media(max-width:560px){.site-footer{padding-inline:var(--page-gutter-mobile)}}
 
 </style>
@@ -732,17 +732,17 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       <p>Kodara builds and launches the AI Version of You for health and wellness experts, then helps onboard the first beta users.</p>
       <p class="footer-copyright">© 2026 Kodara LLC. All rights reserved.</p>
     </div>
-    <section class="footer-disclaimers" aria-label="Legal disclaimers">
-      <div class="footer-disclaimer-list">
-        <article class="footer-disclaimer">
+    <section class="site-footer-legal" aria-label="Legal disclaimers">
+      <div class="site-footer-notes">
+        <article class="site-footer-note">
           <h3>Earnings Disclaimer</h3>
           <p>Client examples and testimonials reflect individual experiences. Results vary, and Kodara does not guarantee sales, revenue, profit, paying clients or patients, business growth, or any other financial outcome. References to programs priced between $500 and $2,000 describe potential pricing selected by individual clients and are not earnings projections. The beta-user guarantee concerns onboarding beta users and is not a guarantee of sales, revenue, or profit.</p>
         </article>
-        <article class="footer-disclaimer">
+        <article class="site-footer-note">
           <h3>Medical Information Disclaimer</h3>
           <p>Kodara does not practice medicine or provide medical advice, diagnosis, or treatment through its AI systems. The AI programs are intended to provide general educational information based on materials supplied and approved by the applicable health or wellness expert. They are not a substitute for individualized advice, diagnosis, or treatment from a qualified healthcare professional. Contact emergency services in an emergency.</p>
         </article>
-        <article class="footer-disclaimer">
+        <article class="site-footer-note">
           <h3>AI Disclaimer</h3>
           <p>Users interact with artificial intelligence, not the featured expert personally. AI-generated information may be incomplete, inaccurate, or outdated and should not be relied upon without appropriate professional judgment or independent verification. Search, demand, and interest signals are predictive indicators and do not guarantee any person’s interest, enrollment, purchase, or outcome.</p>
         </article>
