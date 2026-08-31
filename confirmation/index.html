@@ -41,18 +41,13 @@
       </div>
     </section>
 
-    <section aria-labelledby="case-study-title">
+    <section id="case-study" aria-labelledby="case-study-title">
       <header class="section-head">
         <h2 id="case-study-title">See what this can look like in practice.</h2>
-        <p>This case study will show how one expert turned their knowledge into an online AI offer, how the experience was built, and what changed after launch.</p>
+        <p>This case study shows how one expert turned their knowledge into an online AI offer, how the experience was built, and what changed after launch.</p>
       </header>
       <div class="featured-video case-study-video" data-video-slot="case-study">
-        <div class="video-slot" role="img" aria-label="Reserved space for the case study video">
-          <div class="video-slot-inner">
-            <strong>Case Study Video</strong>
-            <span>This media slot is ready for the final video embed.</span>
-          </div>
-        </div>
+        <wistia-player media-id="1mynmgx2fa" aspect="1.7777777777777777" aria-label="Kodara client case study video"></wistia-player>
       </div>
     </section>
 
@@ -272,6 +267,11 @@
         if(!vsl){vsl=function(u,cb){if(t){cb();return}s=i.createElement('script');s.type='text/javascript';s.async=1;s.src=u;if(s.readyState){s.onreadystatechange=function(){if(s.readyState==='loaded'||s.readyState==='complete'){s.onreadystatechange=null;vlf=1;cb()}}}else{s.onload=function(){vlf=1;cb()}}i.getElementsByTagName('head')[0].appendChild(s)}}
         vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc()}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a)})})
       })(window,document,'Vidalytics','vidalytics_embed_CA0308FsT4_Z8w5E','https://fast.vidalytics.com/embeds/U18KMfDU/CA0308FsT4_Z8w5E/');
+    });
+
+    loadWhenNear('#case-study',function(){
+      loadScriptOnce('https://fast.wistia.com/player.js',false);
+      loadScriptOnce('https://fast.wistia.com/embed/1mynmgx2fa.js',true);
     });
 
     loadWhenNear('#client-stories',function(){

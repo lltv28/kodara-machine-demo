@@ -28,7 +28,7 @@ assert.match(confirmation, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f
 assert.match(confirmation, /data-video-slot="call-confirmation"/, 'Confirmation page needs the call-confirmation video slot');
 assert.match(confirmation, /data-video-slot="case-study"/, 'Confirmation page needs the case-study video slot');
 assert.doesNotMatch(confirmation, /Before we speak\.|class="prepare"|class="prepare-list"/, 'Confirmation page must not restore the redundant preparation section');
-assert.match(confirmation, /<section aria-labelledby="case-study-title">[\s\S]*?<header class="section-head">[\s\S]*?<div class="featured-video case-study-video" data-video-slot="case-study">/, 'Case study must use the shared centered one-column video layout');
+assert.match(confirmation, /<section id="case-study" aria-labelledby="case-study-title">[\s\S]*?<header class="section-head">[\s\S]*?<div class="featured-video case-study-video" data-video-slot="case-study">/, 'Case study must use the shared centered one-column video layout');
 assert.equal((confirmation.match(/data-video-slot="faq-[0-9]{2}"/g) ?? []).length, 10, 'Confirmation page needs ten FAQ video slots');
 assert.equal((confirmation.match(/class="faq-video-card"/g) ?? []).length, 10, 'Confirmation page needs ten visible FAQ video cards');
 assert.doesNotMatch(confirmation, /<details class="faq-video-item"/, 'Confirmation FAQ videos must not be hidden in accordions');
@@ -45,7 +45,10 @@ for (const mediaId of faqMediaIds) {
 assert.doesNotMatch(confirmation, /FAQ Video|Video answer will appear here\./, 'FAQ placeholder content must not remain');
 assert.match(confirmation, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Confirmation page must replay the approved Vidalytics presentation');
 assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Confirmation page must use the approved Vidalytics source');
-assert.equal(confirmationPlayers.length, 12, 'Confirmation page needs two testimonial videos and ten FAQ videos');
+assert.equal((confirmation.match(/media-id="1mynmgx2fa"/g) ?? []).length, 1, 'Confirmation page needs the approved case study video exactly once');
+assert.match(confirmation, /https:\/\/fast\.wistia\.com\/embed\/1mynmgx2fa\.js/, 'Case study video must load from the approved Wistia source');
+assert.match(confirmation, /<wistia-player media-id="1mynmgx2fa" aspect="1\.7777777777777777" aria-label="[^"]+">/, 'Case study video needs a stable 16:9 frame and accessible name');
+assert.equal(confirmationPlayers.length, 13, 'Confirmation page needs one case study, two testimonial, and ten FAQ videos');
 assert.equal((confirmation.match(/data-press-slot="press-[0-9]{2}"/g) ?? []).length, 4, 'Confirmation page needs four replaceable press slots');
 assert.equal((confirmation.match(/class="press-card"/g) ?? []).length, 4, 'Confirmation page needs four visible press cards');
 const pressFeatures = [
