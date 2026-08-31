@@ -152,6 +152,19 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 /* ---------- video client stories ---------- */
 .case-studies-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
 .case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.client-results-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5)}
+.client-result-card{display:flex;min-width:0;flex-direction:column;padding:var(--space-6);border:1px solid var(--line-2);border-top:3px solid var(--accent);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
+.client-result-role{display:block;color:var(--ink-3);font-size:var(--type-label);font-weight:650;line-height:1.4}
+.client-result-card h3{max-width:var(--measure-display);margin-top:var(--space-4);font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
+.client-result-points{display:grid;gap:var(--space-2);margin-top:var(--space-4);padding:0;list-style:none}
+.client-result-points li{display:grid;grid-template-columns:8px minmax(0,1fr);gap:var(--space-3);align-items:start;color:var(--ink-2);font-size:var(--type-body);line-height:1.45}
+.client-result-points li::before{width:7px;height:7px;margin-top:.55em;border-radius:50%;background:var(--accent);content:""}
+.testimonial-spotlight{width:100%;max-width:var(--rail-reading);margin:clamp(var(--space-7),7vw,var(--space-8)) auto;padding-inline:var(--space-5);text-align:center}
+.testimonial-sparkles{display:flex;justify-content:center;gap:.45em;color:var(--accent);font-size:1.75rem;line-height:1}
+.testimonial-sparkles span{display:block}
+.testimonial-spotlight blockquote{margin-top:var(--space-4);font-size:clamp(2rem,3.4vw,2.75rem);font-weight:650;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
+.testimonial-spotlight cite{display:block;margin-top:var(--space-4);color:var(--ink-3);font-size:var(--type-label);font-style:normal;font-weight:650;line-height:1.4}
+@media(max-width:899px){.client-results-grid{grid-template-columns:1fr}}
 .case-featured{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
 .case-featured--portrait{align-items:center;gap:var(--space-6);padding:var(--space-6);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
 @media(min-width:900px){.case-featured--portrait{grid-template-columns:minmax(0,3fr) minmax(320px,2fr)}.founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}}
@@ -172,7 +185,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .case-title{max-width:var(--measure-display);font-family:var(--fb);font-size:var(--type-card);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .case-support .case-title{font-size:var(--type-card-small)}
 .case-copy{max-width:var(--measure-card-body);margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.case-quote{max-width:var(--measure-card-body);margin-top:var(--space-4);padding-left:var(--space-4);border-left:3px solid var(--accent);color:var(--ink);font-family:var(--fb);font-size:var(--type-quote);font-weight:600;line-height:1.3;letter-spacing:var(--tracking-body);text-wrap:pretty}
 .case-mechanism{max-width:var(--measure-card-body);margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-label);line-height:1.5;text-wrap:pretty}
 .case-mechanism strong{color:var(--ink)}
 .case-kicker{display:block;margin-bottom:var(--space-3);color:var(--accent-ink);font-size:var(--type-label);font-weight:700;line-height:1.3}
@@ -185,11 +197,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .case-person strong,.case-person span{display:block}
 .case-person strong{font-size:var(--type-label);line-height:1.3}
 .case-person span{margin-top:var(--space-1);color:var(--ink-3);font-size:var(--type-meta);line-height:1.45}
-.case-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);margin-top:var(--space-5)}
-.case-outcome{padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
-.case-outcome h3{max-width:var(--measure-display);margin-top:var(--space-3);font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading)}
-.case-outcome p{max-width:var(--measure-card-body);margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.case-role{display:block;color:var(--ink-3);font-size:var(--type-meta);font-weight:650;line-height:1.4}
 @media(max-width:720px){
   .card{--card-pad:var(--space-5)}
   .case-studies-head{margin-bottom:var(--space-5)}
@@ -199,18 +206,22 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .homepage-stat strong{font-size:clamp(2.8rem,14vw,4rem)}
   .mechanism-feature{min-height:0;padding:var(--space-5)}
   .mechanism-copy{padding:0}
+  .client-results-grid{gap:var(--space-4)}
+  .client-result-card{padding:var(--space-5)}
+  .testimonial-spotlight{margin:var(--space-7) auto;padding-inline:var(--space-2)}
+  .testimonial-sparkles{font-size:1.5rem}
+  .testimonial-spotlight blockquote{font-size:var(--type-card-small)}
   .founder-highlight{grid-template-columns:1fr;gap:var(--space-5)}
   .founder-media{width:100%;max-width:440px;margin-inline:auto}
   .founder-highlight-copy{padding:0}
   .founder-credentials{grid-template-columns:1fr;gap:var(--space-4)}
-  .case-featured,.case-support-grid,.case-outcomes{grid-template-columns:1fr}
+  .case-featured,.case-support-grid{grid-template-columns:1fr}
   .case-featured .case-media{border-right:0;border-bottom:1px solid var(--line-2)}
   .case-featured--portrait{gap:var(--space-4);padding:var(--space-5)}
   .case-featured--portrait .case-media{aspect-ratio:3/4;border:1px solid var(--line-2)}
   .case-featured-copy,.case-support-copy{padding:var(--space-5)}
   .case-featured--portrait .case-featured-copy{padding:0}
   .case-support-grid{gap:var(--space-4);margin-top:var(--space-4)}
-  .case-outcomes{gap:var(--space-4);margin-top:var(--space-4)}
 }
 
 /* ============================================================
@@ -424,6 +435,47 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       <p class="case-studies-intro">Different experts built different online businesses. Each one reduced how much growth depended on being personally present.</p>
     </div>
 
+    <div class="client-results-grid" aria-label="Client results at a glance">
+      <article class="client-result-card">
+        <span class="client-result-role">Dr. Vora, Cardiologist</span>
+        <h3>Enrolled 30+ patients in his first five weeks.</h3>
+        <ul class="client-result-points">
+          <li>Used Kodara’s client-discovery model.</li>
+          <li>Reached people beyond his appointment calendar.</li>
+        </ul>
+      </article>
+      <article class="client-result-card">
+        <span class="client-result-role">Ashley, Yoga instructor</span>
+        <h3>Replaced her in-person classes within two months.</h3>
+        <ul class="client-result-points">
+          <li>Built an AI business around her expertise.</li>
+          <li>Reduced dependence on one-to-one delivery.</li>
+        </ul>
+      </article>
+      <article class="client-result-card">
+        <span class="client-result-role">Sandra Parker, Sobriety coach</span>
+        <h3>Built an entirely online program without adding more calls.</h3>
+        <ul class="client-result-points">
+          <li>Her business became more consistent and enjoyable.</li>
+          <li>Better-fit clients could get help without more one-to-one calls.</li>
+        </ul>
+      </article>
+      <article class="client-result-card">
+        <span class="client-result-role">Leanne Ellington, Emotional health coach</span>
+        <h3>Made room to launch a passion project.</h3>
+        <ul class="client-result-points">
+          <li>Moved delivery into a largely automated virtual business.</li>
+          <li>Reduced dependence on one-to-one work.</li>
+        </ul>
+      </article>
+    </div>
+
+    <figure class="testimonial-spotlight">
+      <div class="testimonial-sparkles" aria-hidden="true"><span>✦</span><span>✦</span><span>✦</span><span>✦</span><span>✦</span></div>
+      <blockquote>“My business feels better now because it feels consistent, and I’m able to enjoy it more.”</blockquote>
+      <figcaption><cite>Sandra Parker, Just The Tonic</cite></figcaption>
+    </figure>
+
     <article class="case-featured case-featured--portrait" aria-labelledby="sandra-case-title">
       <div class="case-media">
         <wistia-player media-id="6oj2gj3wqt" aspect="0.75" aria-label="Sandra Parker client testimonial video"></wistia-player>
@@ -432,7 +484,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
         <span class="case-kicker">Client story</span>
         <h3 class="case-title" id="sandra-case-title">Sandra is working less while helping more people.</h3>
         <p class="case-copy">Sandra says her entirely online programs made the business more consistent and enjoyable without adding a hundred more calls.</p>
-        <blockquote class="case-quote">“My business feels better now because it feels consistent, and I’m able to enjoy it more.”</blockquote>
         <p class="case-fact"><span>What Kodara helped build</span><strong>An entirely online program that supports better-fit clients without adding more calls.</strong></p>
         <div class="case-person">
           <img src="assets/testimonials/sandra.jpg" width="104" height="104" loading="lazy" decoding="async" alt="Sandra Parker">
@@ -457,11 +508,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           </div>
         </div>
       </article>
-
-    </div>
-    <div class="case-outcomes">
-      <article class="case-outcome"><span class="case-role">Dr. Vora, Cardiologist</span><h3>Enrolled 30+ patients in his first five weeks.</h3><p>His AI used Kodara’s client-discovery model to reach people beyond his appointment calendar.</p></article>
-      <article class="case-outcome"><span class="case-role">Ashley, Yoga instructor</span><h3>Replaced her in-person classes within two months.</h3><p>Her AI business helped her transition away from one-to-one, in-person delivery.</p></article>
     </div>
     <p class="proof-note">Individual experiences are not typical and do not guarantee a specific result. Results vary by program, audience, implementation, and participation.</p>
   </section>

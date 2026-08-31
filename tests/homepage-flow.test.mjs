@@ -83,6 +83,7 @@ test('homepage keeps the approved integrations and one final qualification actio
 test('approved process and client proof remain visible', () => {
   const content = body(homepage);
   const process = content.match(/<section class="mechanism-features"[\s\S]*?<\/section>/u)?.[0] ?? '';
+  const stories = content.match(/<section class="case-studies"[\s\S]*?<\/section>/u)?.[0] ?? '';
   assert.doesNotMatch(process, /\shidden(?:\s|>)/u, 'The three-step process must be visible');
   assert.doesNotMatch(process, /class="mechanism-demo"/u, 'The three-step process must not use decorative image boxes');
   assert.match(process, /Share what you know\./u);
@@ -90,9 +91,18 @@ test('approved process and client proof remain visible', () => {
   assert.match(process, /Launch and onboard users\./u);
   assert.equal((process.match(/class="mechanism-step"/gu) ?? []).length, 3, 'Each process card needs a clear step label');
 
-  assert.doesNotMatch(content, /<article class="case-outcome"><strong>/u, 'Client outcome cards must not split the result into a separate green statistic');
-  assert.match(content, /Enrolled 30\+ patients in his first five weeks\./u);
-  assert.match(content, /Replaced her in-person classes within two months\./u);
+  const resultCards = [...stories.matchAll(/<article class="client-result-card">([\s\S]*?)<\/article>/gu)].map((match) => match[1]);
+  assert.equal(resultCards.length, 4, 'Client proof must begin with four consistent result summaries');
+  assert.equal((stories.match(/class="client-result-points"/gu) ?? []).length, 4, 'Each result summary needs its own supporting facts');
+  for (const card of resultCards) {
+    assert.equal((card.match(/<li>/gu) ?? []).length, 2, 'Each result summary must contain exactly two supporting facts');
+  }
+  assert.match(stories, /class="testimonial-sparkles" aria-hidden="true">(?:<span>✦<\/span>){5}<\/div>/u, 'The testimonial bridge must contain five decorative brand stars');
+  assert.match(stories, /My business feels better now because it feels consistent/u, 'The testimonial bridge must use Sandra’s supplied quote');
+  assert.ok(position(stories, 'class="client-results-grid"') < position(stories, 'class="testimonial-spotlight"'), 'Result summaries must precede the featured quote');
+  assert.ok(position(stories, 'class="testimonial-spotlight"') < position(stories, 'class="case-featured'), 'The featured quote must introduce the deeper video stories');
+  assert.match(stories, /Enrolled 30\+ patients in his first five weeks\./u);
+  assert.match(stories, /Replaced her in-person classes within two months\./u);
 
   for (const proof of ['Sandra Parker', 'Leanne Ellington', 'Dr. Vora', 'Ashley']) {
     assert.match(content, new RegExp(proof.replace('.', '\\.')), `Client proof must retain ${proof}`);

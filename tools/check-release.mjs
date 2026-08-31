@@ -232,6 +232,14 @@ assert.match(page, /live search and demand signals/, 'Client discovery must expl
 assert.match(page, /first 10 beta users will be onboarded, or you receive a full refund/, 'FAQ must state the current qualifying-client guarantee');
 assert.match(page, /Dr\. Vora[\s\S]{0,500}Enrolled 30\+ patients in his first five weeks[\s\S]{0,500}client-discovery model/, 'Client proof must include Dr. Vora and the VSL mechanism');
 assert.match(page, /Ashley[\s\S]{0,500}Replaced her in-person classes within two months[\s\S]{0,500}AI business/, 'Client proof must include Ashley and the VSL mechanism');
+assert.equal((page.match(/class="client-result-card"/g) ?? []).length, 4, 'Client proof must use four consistent result-summary cards');
+assert.equal((page.match(/class="client-result-points"/g) ?? []).length, 4, 'Each result-summary card must contain concise supporting facts');
+const clientResultCards = [...page.matchAll(/<article class="client-result-card">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
+assert.ok(clientResultCards.every((card) => (card.match(/<li>/g) ?? []).length === 2), 'Each result-summary card must contain exactly two supporting facts');
+assert.match(page, /class="testimonial-sparkles" aria-hidden="true">(?:<span>✦<\/span>){5}<\/div>/, 'Client proof must include five decorative brand stars');
+assert.match(page, /\.client-results-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Client results must use a balanced two-column desktop grid');
+assert.match(page, /@media\(max-width:899px\)\{\.client-results-grid\{grid-template-columns:1fr\}\}/, 'Client results must stack cleanly at tablet and mobile widths');
+assert.match(page, /\.client-result-points\{[^}]*padding:0/, 'Client result facts must align with their card headings');
 assert.doesNotMatch(page, /purchased through AI systems built by our team/, 'The authority wall must not imply proof absent from the VSL');
 assert.doesNotMatch(page, /first 10 real users|or you do not pay/i, 'Old guarantee language must not return');
 assert.doesNotMatch(page, /Apply for a Free Live Demo|free live demo/i, 'The page must not promise an unverified free live demo');
@@ -270,7 +278,7 @@ assert.doesNotMatch(page, /class="(?:midpage-action|alternatives-section|process
 assert.equal((page.match(/class="homepage-stat(?: |")/g) ?? []).length, 4, 'Expected four verified proof and delivery stat cards');
 assert.equal((page.match(/class="case-kicker"/g) ?? []).length, 2, 'Video testimonials must use a consistent client-story label');
 assert.equal((page.match(/class="case-fact"/g) ?? []).length, 2, 'Video testimonials must explain what Kodara helped build');
-assert.equal((page.match(/class="case-role"/g) ?? []).length, 2, 'Written outcomes must include consistent role context');
+assert.equal((page.match(/class="client-result-role"/g) ?? []).length, 4, 'Every result summary must include consistent role context');
 assert.equal((page.match(/class="footer-group"/g) ?? []).length, 0, 'Footer navigation groups must stay removed');
 assert.doesNotMatch(page, /<footer[\s\S]*?<nav\b/, 'Footer must contain company information and disclaimers only');
 assert.match(page, /class="site-footer-brand-block"[\s\S]*© 2026 Kodara LLC\. All rights reserved\.[\s\S]*class="site-footer-legal"/, 'Footer must place Kodara LLC information before the legal columns');

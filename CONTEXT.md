@@ -79,7 +79,7 @@ The three visible chapters are sequential:
 
 ### Proof section
 
-The Sandra and Leanne video stories use consistent client-story labels, verified role and organization context where available, and a concise explanation of what Kodara helped build. The Dr. Vora and Ashley results include role context. The adjacent disclaimer states that individual outcomes vary.
+The proof section uses a three-layer sequence: four concise result summaries, Sandra's featured quote with five decorative brand stars, and the deeper Sandra and Leanne video stories. The stars are decorative and must not be described as a customer rating without verified evidence. Result summaries use only supplied outcomes and exactly two supporting facts. The video stories retain verified role and organization context where available and explain what Kodara helped build. The adjacent disclaimer states that individual outcomes vary.
 
 Do not add unsupported outcomes, implied medical results, or new testimonial claims.
 
