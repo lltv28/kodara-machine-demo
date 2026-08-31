@@ -123,7 +123,8 @@ test('approved process and client proof remain visible', () => {
   assert.ok(position(stories, 'class="client-results-grid"') < position(stories, 'class="testimonial-spotlight"'), 'Result summaries must precede the featured quote');
   assert.ok(position(stories, 'class="testimonial-spotlight"') < position(stories, 'class="case-support-grid"'), 'The featured quote must introduce the deeper video stories');
   const videoStories = stories.match(/<div class="case-support-grid">([\s\S]*?)<\/div>\s*<p class="proof-note">/u)?.[1] ?? '';
-  assert.equal((videoStories.match(/<article class="case-support"/gu) ?? []).length, 2, 'Sandra and Leanne need equal video-story cards');
+  assert.equal((videoStories.match(/<article class="case-support(?:\s[^"]*)?"/gu) ?? []).length, 2, 'Sandra and Leanne need paired video-story cards');
+  assert.match(videoStories, /<article class="case-support case-support--portrait"[^>]*>[\s\S]*?media-id="6oj2gj3wqt"/u, 'Sandra’s story must use the taller portrait-card treatment');
   assert.match(videoStories, /media-id="6oj2gj3wqt"/u, 'Sandra’s video must remain in the paired story grid');
   assert.match(videoStories, /class="case-media case-media--portrait-fit">\s*<div class="case-portrait-player">\s*<wistia-player media-id="6oj2gj3wqt"/u, 'Sandra’s portrait video must retain a dedicated 3:4 frame instead of being cropped into widescreen');
   assert.match(videoStories, /media-id="fay3lgo8op"/u, 'Leanne’s video must remain in the paired story grid');

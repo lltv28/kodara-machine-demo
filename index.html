@@ -201,12 +201,13 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .testimonial-spotlight cite{display:block;margin-top:var(--space-4);color:var(--ink-3);font-size:var(--type-label);font-style:normal;font-weight:650;line-height:1.4}
 @media(max-width:899px){.client-results-grid{grid-template-columns:1fr}}
 @media(min-width:900px){.founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}}
-.case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);margin-top:var(--space-5)}
+.case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);align-items:start;margin-top:var(--space-5)}
 .case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
 .case-support-copy{display:flex;flex:1;flex-direction:column;padding:var(--space-6)}
 .case-media{position:relative;aspect-ratio:16/9;background:var(--surface);overflow:hidden}
 .case-media wistia-player{display:block;width:100%;height:100%}
 .case-media--portrait-fit{display:grid;place-items:center;background:var(--panel)}
+.case-support--portrait .case-media--portrait-fit{aspect-ratio:4/3}
 .case-portrait-player{height:100%;aspect-ratio:3/4;background:var(--surface);overflow:hidden}
 .case-portrait-player wistia-player{width:100%;height:100%}
 .case-media wistia-player:not(:defined){background-position:center;background-size:cover;background-repeat:no-repeat}
@@ -249,7 +250,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .case-support-grid{grid-template-columns:1fr}
   .case-support-copy{padding:var(--space-5)}
   .case-support-grid{gap:var(--space-4);margin-top:var(--space-4)}
-  .case-media--portrait-fit{aspect-ratio:3/4}
+  .case-support--portrait .case-media--portrait-fit{aspect-ratio:3/4}
   .case-portrait-player{width:100%;height:100%}
 }
 
@@ -539,7 +540,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     </figure>
 
     <div class="case-support-grid">
-      <article class="case-support" aria-labelledby="sandra-case-title">
+      <article class="case-support case-support--portrait" aria-labelledby="sandra-case-title">
         <div class="case-media case-media--portrait-fit">
           <div class="case-portrait-player">
             <wistia-player media-id="6oj2gj3wqt" aspect="0.75" aria-label="Sandra Parker client testimonial video"></wistia-player>
