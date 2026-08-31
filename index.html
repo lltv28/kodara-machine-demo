@@ -81,11 +81,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 
 /* ---------- proof and delivery stats ---------- */
 .homepage-stats{display:grid;width:100%;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-5)}
-.homepage-stat{display:flex;min-width:0;min-height:220px;flex-direction:column;justify-content:flex-end;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
+.homepage-stat{display:flex;min-width:0;min-height:270px;flex-direction:column;justify-content:flex-start;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
 .homepage-stat strong,.homepage-stat span{display:block}
-.homepage-stat strong{color:var(--accent-ink);font-size:clamp(2.7rem,4.5vw,4.25rem);font-weight:700;line-height:.95;letter-spacing:var(--tracking-stat);white-space:nowrap}
-.homepage-stat span{max-width:var(--measure-card-body);margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-label);font-weight:600;line-height:1.45;text-wrap:pretty}
-.homepage-stat--term{border-color:var(--line-strong)}
+.homepage-stat strong{color:var(--accent-ink);font-size:clamp(2.6rem,3.8vw,3.75rem);font-weight:700;line-height:.95;letter-spacing:var(--tracking-stat);white-space:nowrap}
+.homepage-stat span{max-width:var(--measure-card-body);margin-top:var(--space-5);color:var(--ink-2);font-size:var(--type-body);font-weight:600;line-height:1.45;text-wrap:pretty}
 .proof-snapshot-logos{padding-top:var(--space-5)}
 .proof-snapshot-logo-label{color:var(--ink-2);font-size:var(--type-label);font-weight:600;line-height:1.4;text-align:center}
 .proof-snapshot-logo-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:center;gap:var(--space-4);width:100%;max-width:var(--rail-wide);margin:var(--space-4) auto 0}
@@ -118,20 +117,14 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .mechanism-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
 .mechanism-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 .mechanism-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5)}
-.mechanism-feature{display:flex;min-width:0;flex-direction:column;overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
-.mechanism-demo{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid var(--line-2);background:var(--panel)}
-.mechanism-proof{display:flex;width:100%;height:100%;flex-direction:column;align-items:center;justify-content:center;padding:var(--space-6);text-align:center}
-.mechanism-proof strong{color:var(--accent-ink);font-size:clamp(2.75rem,4vw,4rem);font-weight:700;line-height:.92;letter-spacing:var(--tracking-stat);white-space:nowrap}
-.mechanism-proof--price strong{font-size:clamp(2.25rem,3.4vw,3.5rem)}
-.mechanism-proof span{max-width:var(--measure-card-body);margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-label);font-weight:600;line-height:1.45;text-wrap:balance}
-.mechanism-copy{display:flex;flex:1;flex-direction:column;padding:var(--space-6)}
-.mechanism-step{display:block;margin-bottom:var(--space-3);color:var(--accent-ink);font-family:var(--fb);font-size:var(--type-label);font-weight:700;line-height:1.3}
+.mechanism-feature{display:flex;min-width:0;min-height:290px;flex-direction:column;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
+.mechanism-copy{display:flex;flex:1;flex-direction:column;padding:0}
+.mechanism-step{display:block;margin-bottom:var(--space-5);color:var(--accent-ink);font-family:var(--fb);font-size:var(--type-body);font-weight:700;line-height:1.3}
 .mechanism-feature h3{max-width:var(--measure-display);font-size:var(--type-card);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
-.mechanism-feature p{max-width:var(--measure-card-body);margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body);line-height:1.55;text-wrap:pretty}
+.mechanism-feature p{max-width:var(--measure-card-body);margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 @media(max-width:899px){
-  .homepage-stats,.mechanism-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .mechanism-feature:last-child{grid-column:1/-1}
-  .mechanism-feature:last-child .mechanism-demo{aspect-ratio:2/1}
+  .homepage-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mechanism-grid{grid-template-columns:1fr}
 }
 
 /* ---------- founder highlight ---------- */
@@ -194,20 +187,18 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .case-person span{margin-top:var(--space-1);color:var(--ink-3);font-size:var(--type-meta);line-height:1.45}
 .case-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);margin-top:var(--space-5)}
 .case-outcome{padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
-.case-outcome>strong{display:block;color:var(--accent-ink);font-size:var(--type-card);line-height:1;letter-spacing:var(--tracking-heading)}
-.case-outcome h3{max-width:var(--measure-display);margin-top:var(--space-4);font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading)}
+.case-outcome h3{max-width:var(--measure-display);margin-top:var(--space-3);font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading)}
 .case-outcome p{max-width:var(--measure-card-body);margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.case-role{display:block;margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-meta);font-weight:650;line-height:1.4}
+.case-role{display:block;color:var(--ink-3);font-size:var(--type-meta);font-weight:650;line-height:1.4}
 @media(max-width:720px){
   .card{--card-pad:var(--space-5)}
   .case-studies-head{margin-bottom:var(--space-5)}
   .mechanism-head{margin-bottom:var(--space-6)}
   .homepage-stats,.mechanism-grid{grid-template-columns:1fr;gap:var(--space-4)}
-  .homepage-stat{min-height:180px;padding:var(--space-5)}
+  .homepage-stat{min-height:190px;padding:var(--space-5)}
   .homepage-stat strong{font-size:clamp(2.8rem,14vw,4rem)}
-  .mechanism-feature:last-child{grid-column:auto}
-  .mechanism-feature:last-child .mechanism-demo,.mechanism-demo{aspect-ratio:3/2}
-  .mechanism-copy{padding:var(--space-5)}
+  .mechanism-feature{min-height:0;padding:var(--space-5)}
+  .mechanism-copy{padding:0}
   .founder-highlight{grid-template-columns:1fr;gap:var(--space-5)}
   .founder-media{width:100%;max-width:440px;margin-inline:auto}
   .founder-highlight-copy{padding:0}
@@ -376,22 +367,22 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ PROOF AND DELIVERY STATS ============ -->
-  <section class="homepage-stats" aria-label="Kodara experience and qualifying client launch terms">
+  <section class="homepage-stats" aria-label="Kodara experience and results">
     <article class="homepage-stat">
       <strong>350+</strong>
-      <span>Health and wellness experts helped</span>
+      <span>Health and wellness experts running their businesses online with Kodara</span>
     </article>
     <article class="homepage-stat">
-      <strong>100,000+</strong>
-      <span>Healthcare leads generated online used to train Kodara</span>
+      <strong>$50M+</strong>
+      <span>Revenue generated by our team for online knowledge-based products</span>
     </article>
-    <article class="homepage-stat homepage-stat--term">
-      <strong>30 days</strong>
-      <span>To launch the first AI Version for qualifying clients</span>
+    <article class="homepage-stat">
+      <strong>105,000+</strong>
+      <span>Leads &amp; consultations generated by our team and used to train the Kodara AI model</span>
     </article>
-    <article class="homepage-stat homepage-stat--term">
-      <strong>10</strong>
-      <span>Beta users onboarded for qualifying clients</span>
+    <article class="homepage-stat">
+      <strong>30+</strong>
+      <span>Health, wellness, and medical modalities where we have helped clients create their AI</span>
     </article>
   </section>
 
@@ -403,33 +394,24 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     </header>
     <div class="mechanism-grid">
       <article class="mechanism-feature">
-        <div class="mechanism-demo">
-          <div class="mechanism-proof"><strong>1 hour</strong><span>Focused interviews each week to extract what you know</span></div>
-        </div>
         <div class="mechanism-copy">
-          <span class="mechanism-step">Step 1 · Share</span>
+          <span class="mechanism-step">Step 1</span>
           <h3>Share what you know.</h3>
-          <p>Give us about one hour per week for focused interviews, existing materials, feedback, and decisions. You do not have to write a course or build the system yourself.</p>
+          <p>Give us about one hour per week for focused interviews, existing materials, feedback, and decisions.</p>
         </div>
       </article>
       <article class="mechanism-feature">
-        <div class="mechanism-demo">
-          <div class="mechanism-proof mechanism-proof--price"><strong>$500-$2,000</strong><span>Digital programs built around your approved expertise</span></div>
-        </div>
         <div class="mechanism-copy">
-          <span class="mechanism-step">Step 2 · Build</span>
+          <span class="mechanism-step">Step 2</span>
           <h3>Review what we build.</h3>
-          <p>Our team creates the $500-$2,000 digital programs, website, branding, and AI experience. You test and approve what represents you before launch.</p>
+          <p>We create your $500-$2,000 digital programs, website, branding, and AI experience. You test and approve everything before launch.</p>
         </div>
       </article>
       <article class="mechanism-feature">
-        <div class="mechanism-demo">
-          <div class="mechanism-proof"><strong>100,000+</strong><span>Healthcare leads generated online used to train Kodara</span></div>
-        </div>
         <div class="mechanism-copy">
-          <span class="mechanism-step">Step 3 · Launch</span>
+          <span class="mechanism-step">Step 3</span>
           <h3>Launch and onboard users.</h3>
-          <p>Kodara helps the right people find your expertise and onboard the first users. For qualifying clients, we onboard 10 beta users within 30 days or you receive a full refund. Your signed agreement controls the terms.</p>
+          <p>Kodara helps suitable people find your expertise and onboards your first beta users. Qualifying clients are protected by the 30-day refund terms in their signed agreement.</p>
         </div>
       </article>
     </div>
@@ -478,8 +460,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 
     </div>
     <div class="case-outcomes">
-      <article class="case-outcome"><strong>30+ patients</strong><span class="case-role">Dr. Vora · Cardiologist</span><h3>Reached people beyond his appointment calendar.</h3><p>After launching his AI with Kodara’s client-discovery model, Dr. Vora enrolled more than 30 patients in his first five weeks.</p></article>
-      <article class="case-outcome"><strong>2 months</strong><span class="case-role">Ashley · Yoga instructor</span><h3>Replaced her in-person classes with her AI business.</h3><p>After working with our team and client-discovery model, Ashley fully transitioned out of in-person classes within two months.</p></article>
+      <article class="case-outcome"><span class="case-role">Dr. Vora, Cardiologist</span><h3>Enrolled 30+ patients in his first five weeks.</h3><p>His AI used Kodara’s client-discovery model to reach people beyond his appointment calendar.</p></article>
+      <article class="case-outcome"><span class="case-role">Ashley, Yoga instructor</span><h3>Replaced her in-person classes within two months.</h3><p>Her AI business helped her transition away from one-to-one, in-person delivery.</p></article>
     </div>
     <p class="proof-note">Individual experiences are not typical and do not guarantee a specific result. Results vary by program, audience, implementation, and participation.</p>
   </section>
