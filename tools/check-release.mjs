@@ -12,6 +12,10 @@ const confirmationStylesPath = resolve(root, 'confirmation/styles.css');
 const confirmation = readFileSync(confirmationPath, 'utf8');
 const confirmationStyles = readFileSync(confirmationStylesPath, 'utf8');
 
+function cssToken(source, name) {
+  return source.match(new RegExp(`${name}:([^;}]+)`))?.[1];
+}
+
 assert.ok(statSync(pagePath).size <= 140 * 1024, 'Landing page exceeds the 140KB release budget');
 assert.match(page, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f7c1f59890e8b25c13e26ffca667c2709a446cbd68a53bc0bd06ca3d4b782a9\?tag=!clicked&ref_url=[\s\S]*?<\/head>/, 'Kodara click tracking must load from the document head');
 
@@ -23,6 +27,8 @@ assert.match(confirmation, /<meta name="robots" content="noindex,nofollow">/, 'C
 assert.match(confirmation, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f7c1f59890e8b25c13e26ffca667c2709a446cbd68a53bc0bd06ca3d4b782a9\?tag=!clicked&ref_url=[\s\S]*?<\/head>/, 'Confirmation tracking must load from the document head');
 assert.match(confirmation, /data-video-slot="call-confirmation"/, 'Confirmation page needs the call-confirmation video slot');
 assert.match(confirmation, /data-video-slot="case-study"/, 'Confirmation page needs the case-study video slot');
+assert.doesNotMatch(confirmation, /Before we speak\.|class="prepare"|class="prepare-list"/, 'Confirmation page must not restore the redundant preparation section');
+assert.match(confirmation, /<section aria-labelledby="case-study-title">[\s\S]*?<header class="section-head">[\s\S]*?<div class="featured-video case-study-video" data-video-slot="case-study">/, 'Case study must use the shared centered one-column video layout');
 assert.equal((confirmation.match(/data-video-slot="faq-[0-9]{2}"/g) ?? []).length, 10, 'Confirmation page needs ten FAQ video slots');
 assert.equal((confirmation.match(/class="faq-video-card"/g) ?? []).length, 10, 'Confirmation page needs ten visible FAQ video cards');
 assert.doesNotMatch(confirmation, /<details class="faq-video-item"/, 'Confirmation FAQ videos must not be hidden in accordions');
@@ -33,6 +39,13 @@ assert.equal((confirmation.match(/data-press-slot="press-[0-9]{2}"/g) ?? []).len
 assert.equal((confirmation.match(/class="press-card"/g) ?? []).length, 4, 'Confirmation page needs four visible press cards');
 assert.match(confirmationStyles, /--rail-wide:1240px/, 'Confirmation page must use the shared 1240px content rail');
 assert.match(confirmationStyles, /--accent:#106844/, 'Confirmation page must use the shared Kodara green');
+for (const token of ['--shadow-sm', '--shadow-md', '--space-8', '--space-9', '--type-section', '--type-card', '--type-body', '--type-body-large', '--type-question', '--type-label', '--type-meta', '--type-legal', '--tracking-heading', '--tracking-display']) {
+  assert.equal(cssToken(confirmationStyles, token), cssToken(page, token), `Confirmation page must share root token ${token}`);
+}
+assert.match(confirmationStyles, /body\{[\s\S]*?line-height:1\.6;/, 'Confirmation body must share the root line height');
+assert.match(confirmationStyles, /\.final-reminder\{[^}]*border-radius:var\(--radius\);[^}]*background:var\(--accent-dark\)/, 'Confirmation reminder must use the root CTA surface');
+assert.match(confirmationStyles, /\.site-footer-inner\{[^}]*grid-template-columns:minmax\(240px,\.75fr\) minmax\(0,2\.25fr\);[^}]*gap:var\(--space-7\)/, 'Confirmation footer must share root desktop geometry');
+assert.match(confirmationStyles, /\.brand:focus-visible,\.site-footer-brand:focus-visible\{outline:3px solid var\(--accent-dark\)/, 'Confirmation brand links need the shared focus treatment');
 assert.match(confirmationStyles, /\.press-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation press features must use a two-column desktop grid');
 assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.press-grid\{grid-template-columns:1fr\}/, 'Confirmation press features must stack on smaller screens');
 assert.match(confirmationStyles, /\.faq-video-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation FAQ videos must use a two-column desktop grid');
