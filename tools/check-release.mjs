@@ -250,9 +250,10 @@ assert.equal((page.match(/class="client-result-card"/g) ?? []).length, 4, 'Clien
 assert.equal((page.match(/class="client-result-points"/g) ?? []).length, 4, 'Each result-summary card must contain concise supporting facts');
 const clientResultCards = [...page.matchAll(/<article class="client-result-card">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
 assert.ok(clientResultCards.every((card) => (card.match(/<li>/g) ?? []).length === 2), 'Each result-summary card must contain exactly two supporting facts');
-assert.match(page, /class="testimonial-sparkles" aria-hidden="true">(?:<span>✦<\/span>){5}<\/div>/, 'Client proof must include five decorative brand stars');
+assert.match(page, /class="testimonial-stars" aria-hidden="true">(?:<span>★<\/span>){5}<\/div>/, 'Client proof must include five decorative gold star icons');
 assert.match(page, /\.client-results-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Client results must use a balanced two-column desktop grid');
 assert.match(page, /@media\(max-width:899px\)\{\.client-results-grid\{grid-template-columns:1fr\}\}/, 'Client results must stack cleanly at tablet and mobile widths');
+assert.doesNotMatch(page, /\.client-result-card\{[^}]*border-top:/, 'Client result cards must not use a green top accent');
 assert.match(page, /\.client-result-points\{[^}]*padding:0/, 'Client result facts must align with their card headings');
 assert.doesNotMatch(page, /purchased through AI systems built by our team/, 'The authority wall must not imply proof absent from the VSL');
 assert.doesNotMatch(page, /first 10 real users|or you do not pay/i, 'Old guarantee language must not return');
