@@ -128,7 +128,9 @@ button,summary{font:inherit}
 .faq-video-library{max-width:1100px;margin-inline:auto}
 .faq-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6)}
 .faq-video-card{min-width:0;overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm)}
-.faq-video-card .video-slot{border-bottom:1px solid var(--line)}
+.faq-video-media{aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--line);background:#fff}
+.faq-video-media wistia-player{display:block;width:100%;aspect-ratio:16/9}
+.faq-video-media wistia-player:not(:defined){background:#fff}
 .faq-video-card h3{min-block-size:3.2em;margin:0;padding:var(--space-5);font-size:var(--type-question);font-weight:600;line-height:1.3;text-wrap:pretty}
 
 .final-reminder{width:100%;margin-inline:auto;padding:clamp(var(--space-7),7vw,88px);border:1px solid var(--accent-dark);border-radius:var(--radius);background:var(--accent-dark);color:#fff;text-align:center;box-shadow:none}

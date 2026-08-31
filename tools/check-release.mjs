@@ -32,9 +32,20 @@ assert.match(confirmation, /<section aria-labelledby="case-study-title">[\s\S]*?
 assert.equal((confirmation.match(/data-video-slot="faq-[0-9]{2}"/g) ?? []).length, 10, 'Confirmation page needs ten FAQ video slots');
 assert.equal((confirmation.match(/class="faq-video-card"/g) ?? []).length, 10, 'Confirmation page needs ten visible FAQ video cards');
 assert.doesNotMatch(confirmation, /<details class="faq-video-item"/, 'Confirmation FAQ videos must not be hidden in accordions');
+const faqMediaIds = ['r2pkkov5rg', 'e47ppehwjh', 'l7fyqetxpn', 's7951l4xa5', 'sw43ey69ww', 'dn09mavlp6', 'jc5cxpk769', 'ckuwnunnj1', 'usi9w4dm7f', '8dfm3p5r86'];
+const confirmationPlayers = [...confirmation.matchAll(/<wistia-player\b[^>]*>/g)].map((match) => match[0]);
+const faqPlayers = confirmationPlayers.filter((tag) => faqMediaIds.some((mediaId) => tag.includes(`media-id="${mediaId}"`)));
+assert.equal(faqPlayers.length, 10, 'Confirmation page needs all ten approved Kodara FAQ videos');
+assert.ok(faqPlayers.every((tag) => /aspect="1\.7777777777777777"/.test(tag)), 'Every FAQ video must reserve its native 16:9 frame');
+assert.ok(faqPlayers.every((tag) => /aria-label="FAQ video: [^"]+"/.test(tag)), 'Every FAQ video needs an accessible question');
+for (const mediaId of faqMediaIds) {
+  assert.equal((confirmation.match(new RegExp(`media-id="${mediaId}"`, 'g')) ?? []).length, 1, `FAQ media ${mediaId} must be embedded exactly once`);
+  assert.match(confirmation, new RegExp(`https:\\/\\/fast\\.wistia\\.com\\/embed\\/'?\\+mediaId\\+'?\\.js|['"]${mediaId}['"]`), `FAQ media ${mediaId} must be lazy loaded`);
+}
+assert.doesNotMatch(confirmation, /FAQ Video|Video answer will appear here\./, 'FAQ placeholder content must not remain');
 assert.match(confirmation, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Confirmation page must replay the approved Vidalytics presentation');
 assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Confirmation page must use the approved Vidalytics source');
-assert.equal((confirmation.match(/<wistia-player\b/g) ?? []).length, 2, 'Confirmation page needs the two approved testimonial videos');
+assert.equal(confirmationPlayers.length, 12, 'Confirmation page needs two testimonial videos and ten FAQ videos');
 assert.equal((confirmation.match(/data-press-slot="press-[0-9]{2}"/g) ?? []).length, 4, 'Confirmation page needs four replaceable press slots');
 assert.equal((confirmation.match(/class="press-card"/g) ?? []).length, 4, 'Confirmation page needs four visible press cards');
 assert.match(confirmationStyles, /--rail-wide:1240px/, 'Confirmation page must use the shared 1240px content rail');
@@ -50,6 +61,7 @@ assert.match(confirmationStyles, /\.press-grid\{display:grid;grid-template-colum
 assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.press-grid\{grid-template-columns:1fr\}/, 'Confirmation press features must stack on smaller screens');
 assert.match(confirmationStyles, /\.faq-video-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation FAQ videos must use a two-column desktop grid');
 assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.faq-video-grid\{grid-template-columns:1fr\}/, 'Confirmation FAQ videos must stack on smaller screens');
+assert.match(confirmationStyles, /\.faq-video-media\{aspect-ratio:16\/9;/, 'Confirmation FAQ videos must reserve a stable 16:9 frame');
 assert.doesNotMatch(confirmation + confirmationStyles, /[—–]/, 'Confirmation page must not contain em or en dashes');
 
 // Official Kodara brand assets.
@@ -119,8 +131,10 @@ assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:var\(--hero-primary-width\)
 assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain the production Vidalytics VSL');
 assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Hero must load the approved Vidalytics VSL source');
 assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
+assert.match(page, /<h2 class="hero-triager-title">See if you qualify\.<\/h2>\s*<div id="kodara-triager"><\/div>/, 'Hero must introduce the triager with the approved qualification heading');
+assert.match(page, /\.hero-triager-title\{[^}]*font-size:var\(--type-card\);[^}]*text-wrap:balance/, 'Triager heading must use the shared card-heading tier');
 assert.match(page, /<div id="kodara-triager"><\/div>\s*<script\s+src="https:\/\/embed\.kodara\.com\/v1\/widget\.js"\s+data-target="kodara-triager"\s+data-widget-id="lucas-codex-testing">\s*<\/script>/, 'Hero must load the approved Kodara triager widget');
-assert.match(page, /data-widget-id="lucas-codex-testing">\s*<\/script>\s*<p class="hero-guarantee">/, 'Hero guarantee must sit below the triager widget');
+assert.doesNotMatch(page, /class="hero-guarantee"/, 'Duplicate post-widget guarantee must not return');
 assert.doesNotMatch(page, /hero-vsl-cta/, 'Replaced hero qualification button must not remain');
 const primaryNav = page.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? '';
 assert.equal((primaryNav.match(/<a\b/g) ?? []).length, 3, 'Primary navigation must stay limited to three orientation links');
@@ -155,7 +169,7 @@ assert.match(page, /first 10 beta users within 30 days or you receive a full ref
 assert.match(page, /Less than 28%/, 'Demand narrative must include the healthcare-trust signal');
 assert.match(page, /260 million health and wellness messages/, 'Demand narrative must include the current AI-demand signal');
 assert.match(page, /major opportunity for independent health and wellness experts/, 'Demand narrative must connect the signals to the expert opportunity');
-assert.match(page, /Thousands of clients and patients can access your approved educational programs at once across the open Internet/, 'The page must state the scale and open-Internet outcome without implying medical care');
+assert.match(page, /serve thousands without adding another appointment/, 'The page must state the scale outcome without implying medical care');
 assert.match(page, /do not imply endorsement, affiliation, client status, or purchase history/, 'The authority wall must state every proof boundary');
 assert.match(page, /Your signed agreement controls eligibility, timing, definitions, and the exact remedy/, 'The offer panel must state the signed-agreement boundary');
 assert.match(page, /more than 100,000 healthcare leads/, 'Client discovery must name the healthcare data foundation');
@@ -197,7 +211,7 @@ assert.match(page, /@media\(max-width:899px\)\{[\s\S]*?\.founder-highlight\{grid
 
 // Homepage information architecture.
 assert.equal((page.match(/class="audience-path"/g) ?? []).length, 4, 'Expected four clear audience pathways');
-assert.equal((page.match(/class="delivery-model(?: |")/g) ?? []).length, 2, 'Expected the current-versus-future delivery comparison');
+assert.doesNotMatch(page, /delivery-comparison|delivery-model/, 'Removed delivery comparison must not return');
 assert.equal((page.match(/class="mechanism-step"/g) ?? []).length, 3, 'Expected the launch process to be merged into three product chapters');
 assert.doesNotMatch(page, /class="(?:midpage-action|alternatives-section|process-section)"/, 'Redundant mid-page action, alternatives, and process sections must stay removed');
 assert.equal((page.match(/class="credibility-item"/g) ?? []).length, 3, 'Expected three institutional credibility signals');

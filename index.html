@@ -69,9 +69,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .hero-region-eyebrow{max-width:70ch;min-block-size:1.4em;margin-bottom:var(--space-3);color:var(--accent-dark);font-size:var(--type-hero-eyebrow);font-weight:700;line-height:1.4;text-wrap:balance}
 .site-hero h1{width:100%;max-width:var(--hero-primary-width);font-size:var(--type-hero);font-weight:650;line-height:1.08;letter-spacing:var(--tracking-display);text-wrap:balance}
 #hero-region-subheadline{width:100%;max-width:min(var(--hero-primary-width),65ch);min-block-size:4.5em;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-hero-subheadline);line-height:1.5;text-wrap:balance}
-.site-hero>.hero-guarantee{max-width:55ch;margin-top:var(--space-4);color:var(--ink);font-size:var(--type-label);font-weight:650;line-height:1.45}
 .hero-vsl-stage{position:relative;width:100%;max-width:var(--hero-primary-width);aspect-ratio:16/9;margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:var(--ink);box-shadow:var(--shadow-md)}
-#kodara-triager{width:100%;max-width:1000px;min-height:60px;margin-top:var(--space-6);scroll-margin-top:clamp(24px,6vh,64px)}
+.hero-triager-title{margin-top:var(--space-7);font-size:var(--type-card);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
+#kodara-triager{width:100%;max-width:1000px;min-height:60px;margin-top:var(--space-4);scroll-margin-top:clamp(24px,6vh,64px)}
 
 /* ---------- primary demo ---------- */
 .primary-demo{display:grid;align-items:stretch;overflow:hidden}
@@ -173,12 +173,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .demand-signal{padding:var(--space-4) 0}
 .demand-signal strong,.demand-signal span{display:block}.demand-signal strong{color:var(--accent-ink);font-size:var(--type-card-small);line-height:1.05;letter-spacing:var(--tracking-heading)}.demand-signal span{margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-label);line-height:1.45}
 .education-opportunity{max-width:52ch;margin:var(--space-6) auto 0;color:var(--ink);font-size:var(--type-body-large);font-weight:600;line-height:1.5;text-align:center;text-wrap:pretty}
-.delivery-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6);margin-top:var(--space-7)}
-.delivery-model{padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel)}
-.delivery-model.is-future{border-color:var(--border-accent);background:var(--bg)}
-.delivery-model h3{font-size:var(--type-card-small);font-weight:600;line-height:1.15;letter-spacing:var(--tracking-heading)}
-.delivery-model ul{display:grid;gap:var(--space-3);margin-top:var(--space-5);padding-left:1.15em;color:var(--ink-2);font-size:var(--type-body);line-height:1.5}
-
 /* ---------- audience pathways ---------- */
 .audience-section{display:grid;width:100%;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);gap:clamp(48px,8vw,112px);align-items:start}
 .audience-copy h2{max-width:14ch;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
@@ -269,9 +263,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .case-studies-head{margin-bottom:var(--space-5)}
   .mechanism-head{margin-bottom:var(--space-6)}
   .mechanism-grid{gap:var(--space-7)}
-  .demand-signals,.delivery-comparison{grid-template-columns:1fr}
-  .delivery-comparison{gap:var(--space-4);margin-top:var(--space-6)}
-  .delivery-model{padding:var(--space-5)}
+  .demand-signals{grid-template-columns:1fr}
   .demand-signal{padding:0}
   .founder-highlight{grid-template-columns:1fr;gap:var(--space-5)}
   .founder-media{width:100%;max-width:440px;margin-inline:auto}
@@ -344,9 +336,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .hero-region-eyebrow{max-width:32ch;min-block-size:2.8em;margin-bottom:var(--space-2)}
   .site-hero h1{max-width:14ch}
   #hero-region-subheadline{max-width:32ch;min-block-size:6em;font-size:var(--type-hero-subheadline)}
-  .site-hero>.hero-guarantee{max-width:34ch;margin-top:var(--space-3)}
   .hero-vsl-stage{margin-top:var(--space-6);border-radius:var(--radius-lg)}
-  #kodara-triager{min-height:58px;margin-top:var(--space-5)}
+  .hero-triager-title{margin-top:var(--space-6)}
+  #kodara-triager{min-height:58px;margin-top:var(--space-3)}
   .cta{padding:var(--space-7) var(--space-4)}
   .cta-btn{min-height:58px;padding:14px var(--space-5);font-size:1.25rem;white-space:nowrap}
   .cta .cta-btn{width:100%}
@@ -437,13 +429,13 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       })(window,document,'Vidalytics','vidalytics_embed_CA0308FsT4_Z8w5E','https://fast.vidalytics.com/embeds/U18KMfDU/CA0308FsT4_Z8w5E/');
       </script>
     </div>
+    <h2 class="hero-triager-title">See if you qualify.</h2>
     <div id="kodara-triager"></div>
     <script
       src="https://embed.kodara.com/v1/widget.js"
       data-target="kodara-triager"
       data-widget-id="lucas-codex-testing">
     </script>
-    <p class="hero-guarantee">For qualifying clients, we onboard your first 10 beta users within 30 days or you receive a full refund.</p>
   </section>
 
   <!-- ============ EARLY PROOF ============ -->
@@ -480,24 +472,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       <div class="demand-signal"><strong>One calendar</strong><span>still limits most expertise to one person, one location, and one scheduled time.</span></div>
     </div>
     <p class="education-opportunity">That creates a major opportunity for independent health and wellness experts to make trusted expertise accessible online through AI and the Internet.</p>
-    <div class="delivery-comparison">
-      <article class="delivery-model">
-        <h3>Appointment-based delivery</h3>
-        <ul>
-          <li>One person receives help at one scheduled time.</li>
-          <li>Your availability limits how many people you can serve.</li>
-          <li>Growth usually creates more work for you or your team.</li>
-        </ul>
-      </article>
-      <article class="delivery-model is-future">
-        <h3>Your expertise, delivered online</h3>
-        <ul>
-          <li>Thousands of clients and patients can access your approved educational programs at once across the open Internet.</li>
-          <li>$500-$2,000 digital programs can be sold and delivered entirely online.</li>
-          <li>You review what represents you before anything launches.</li>
-        </ul>
-      </article>
-    </div>
   </section>
 
   <!-- ============ PRIMARY DEMO ============ -->

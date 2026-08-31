@@ -6,11 +6,10 @@ Live site: https://kodarahealth.com/
 
 Post-booking page: `/confirmation/`
 
-The confirmation page reuses the production Vidalytics presentation and the two approved Wistia client stories. Replace the media containers identified by these `data-video-slot` values when final embeds are available:
+The confirmation page reuses the production Vidalytics presentation, two approved Wistia client stories, and ten Wistia FAQ videos from the Kodara project. Replace the remaining media containers identified by these `data-video-slot` values when final embeds are available:
 
 - `call-confirmation`
 - `case-study`
-- `faq-01` through `faq-10`
 
 Replace the four press containers identified by `data-press-slot="press-01"` through `data-press-slot="press-04"` when verified publication assets and links are available.
 
