@@ -7,9 +7,29 @@ const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
 const pagePath = resolve(root, 'index.html');
 const page = readFileSync(pagePath, 'utf8');
+const confirmationPath = resolve(root, 'confirmation/index.html');
+const confirmationStylesPath = resolve(root, 'confirmation/styles.css');
+const confirmation = readFileSync(confirmationPath, 'utf8');
+const confirmationStyles = readFileSync(confirmationStylesPath, 'utf8');
 
 assert.ok(statSync(pagePath).size <= 140 * 1024, 'Landing page exceeds the 140KB release budget');
 assert.match(page, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f7c1f59890e8b25c13e26ffca667c2709a446cbd68a53bc0bd06ca3d4b782a9\?tag=!clicked&ref_url=[\s\S]*?<\/head>/, 'Kodara click tracking must load from the document head');
+
+// Post-booking confirmation page.
+assert.ok(statSync(confirmationPath).size <= 64 * 1024, 'Confirmation page exceeds the 64KB release budget');
+assert.ok(statSync(confirmationStylesPath).size <= 32 * 1024, 'Confirmation styles exceed the 32KB release budget');
+assert.ok(existsSync(resolve(root, 'assets/fonts/instrument-sans-latin.woff2')), 'Missing reusable Instrument Sans font asset');
+assert.match(confirmation, /<meta name="robots" content="noindex,nofollow">/, 'Confirmation page must stay out of search results');
+assert.match(confirmation, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f7c1f59890e8b25c13e26ffca667c2709a446cbd68a53bc0bd06ca3d4b782a9\?tag=!clicked&ref_url=[\s\S]*?<\/head>/, 'Confirmation tracking must load from the document head');
+assert.match(confirmation, /data-video-slot="call-confirmation"/, 'Confirmation page needs the call-confirmation video slot');
+assert.match(confirmation, /data-video-slot="case-study"/, 'Confirmation page needs the case-study video slot');
+assert.equal((confirmation.match(/data-video-slot="faq-[0-9]{2}"/g) ?? []).length, 10, 'Confirmation page needs ten FAQ video slots');
+assert.match(confirmation, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Confirmation page must replay the approved Vidalytics presentation');
+assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Confirmation page must use the approved Vidalytics source');
+assert.equal((confirmation.match(/<wistia-player\b/g) ?? []).length, 2, 'Confirmation page needs the two approved testimonial videos');
+assert.match(confirmationStyles, /--rail-wide:1240px/, 'Confirmation page must use the shared 1240px content rail');
+assert.match(confirmationStyles, /--accent:#106844/, 'Confirmation page must use the shared Kodara green');
+assert.doesNotMatch(confirmation + confirmationStyles, /[—–]/, 'Confirmation page must not contain em or en dashes');
 
 // Official Kodara brand assets.
 const brandAssets = [

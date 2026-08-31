@@ -4,6 +4,14 @@ Kodara's healthcare landing page, hosted on Cloudflare Pages.
 
 Live site: https://kodarahealth.com/
 
+Post-booking page: `/confirmation/`
+
+The confirmation page reuses the production Vidalytics presentation and the two approved Wistia client stories. Replace the media containers identified by these `data-video-slot` values when final embeds are available:
+
+- `call-confirmation`
+- `case-study`
+- `faq-01` through `faq-10`
+
 The hero uses a Cloudflare Pages Function at `/api/visitor-region` to resolve an allowlisted US state or Canadian province. The function reads only Cloudflare's trusted `CF-Connecting-IP` header and keeps `IPWHOIS_API_KEY` in the server environment. The browser receives only the approved region name or a generic result.
 
 ## Release checks
