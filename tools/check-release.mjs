@@ -52,6 +52,10 @@ for (const className of ['demand-signal', 'audience-path', 'credibility-item']) 
 }
 assert.match(page, /\.faq-list\{display:grid;[^}]*gap:var\(--space-3\)/, 'FAQ items must use spaced cards instead of divider rows');
 assert.match(page, /\.faq\{width:100%;max-width:var\(--rail-reading\)\}/, 'FAQ must keep one stable reading width in open and closed states');
+assert.match(page, /\.education-head\{max-width:var\(--rail-reading\);margin:0 auto var\(--space-7\);text-align:center\}/, 'Demand section must use the centered institutional heading structure');
+assert.match(page, /\.education-head h2\{font-size:var\(--type-section\);font-weight:650;line-height:1\.1;letter-spacing:var\(--tracking-display\);text-wrap:balance\}/, 'Demand heading must match the institutional section-heading tier');
+assert.match(page, /\.education-head p\{max-width:var\(--measure-body\);margin:var\(--space-4\) auto 0;color:var\(--ink-2\);font-size:var\(--type-body\);line-height:1\.5;text-wrap:pretty\}/, 'Demand subheadline must match the centered institutional supporting-copy tier');
+assert.match(page, /<header class="education-head">\s*<h2 id="education-title">[\s\S]*?<\/h2>\s*<p>[\s\S]*?<\/p>\s*<\/header>\s*<div class="demand-signals"/, 'Demand section must place its centered headline and subheadline before the three-column signals');
 assert.match(page, /\.faq-item summary::after\{[^}]*right:var\(--space-5\);display:grid;width:32px;height:32px;place-items:center/, 'FAQ icons must use a fixed, centered desktop alignment box');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.faq-item summary\{padding:var\(--space-4\) calc\(var\(--space-7\) \+ var\(--space-2\)\) var\(--space-4\) var\(--space-4\)\}[\s\S]*?\.faq-item summary::after\{right:var\(--space-4\)\}/, 'FAQ questions and icons must keep aligned mobile insets');
 assert.doesNotMatch(page, /@media\(max-width:390px\)\{[^}]*\.faq-item summary\{padding-right:/, 'Narrow screens must not override the shared FAQ icon column');

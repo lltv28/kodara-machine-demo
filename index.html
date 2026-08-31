@@ -165,10 +165,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 
 /* ---------- category education ---------- */
 .education-section{width:100%}
-.education-head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr);gap:clamp(40px,8vw,112px);align-items:start}
-.education-head h2{max-width:15ch;font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
-.education-head p{max-width:52ch;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.55;text-wrap:pretty}
-.demand-signals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-7)}
+.education-head{max-width:var(--rail-reading);margin:0 auto var(--space-7);text-align:center}
+.education-head h2{font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
+.education-head p{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.demand-signals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6)}
 .demand-signal{padding:var(--space-4) 0}
 .demand-signal strong,.demand-signal span{display:block}.demand-signal strong{color:var(--accent-ink);font-size:var(--type-card-small);line-height:1.05;letter-spacing:var(--tracking-heading)}.demand-signal span{margin-top:var(--space-3);color:var(--ink-2);font-size:var(--type-label);line-height:1.45}
 .education-opportunity{max-width:52ch;margin:var(--space-6) auto 0;color:var(--ink);font-size:var(--type-body-large);font-weight:600;line-height:1.5;text-align:center;text-wrap:pretty}
@@ -268,8 +268,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .case-studies-head{margin-bottom:var(--space-5)}
   .mechanism-head{margin-bottom:var(--space-6)}
   .mechanism-grid{gap:var(--space-7)}
-  .education-head,.demand-signals,.delivery-comparison{grid-template-columns:1fr}
-  .education-head{gap:var(--space-5)}
+  .demand-signals,.delivery-comparison{grid-template-columns:1fr}
   .delivery-comparison{gap:var(--space-4);margin-top:var(--space-6)}
   .delivery-model{padding:var(--space-5)}
   .demand-signal{padding:0}
@@ -470,10 +469,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 
   <!-- ============ CATEGORY EDUCATION ============ -->
   <section class="education-section" id="why-it-matters" aria-labelledby="education-title">
-    <div class="education-head">
+    <header class="education-head">
       <h2 id="education-title">The demand for health and wellness expertise is moving online.</h2>
       <p>People are already searching online for answers, options, and experts they can trust. But most real expertise is still delivered one person at a time, in one place, at one scheduled time.</p>
-    </div>
+    </header>
     <div class="demand-signals" aria-label="Signals behind the demand for online health and wellness expertise">
       <div class="demand-signal"><strong>Less than 28%</strong><span>of people have a high degree of trust in the American medical system solving their problems.</span></div>
       <div class="demand-signal"><strong>260M+</strong><span>More than 260 million health and wellness messages are now sent each day.</span></div>
