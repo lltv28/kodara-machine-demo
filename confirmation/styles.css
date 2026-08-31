@@ -117,8 +117,6 @@ button,summary{font:inherit}
 .proof-snapshot-logo--ellie{--logo-width:142px;--logo-height:52px}
 .proof-snapshot-logo--mayo{--logo-width:58px;--logo-height:58px}
 .proof-snapshot-logo--johns-hopkins{--logo-width:164px;--logo-height:44px}
-.proof-snapshot-note{max-width:var(--measure-body);margin:var(--space-3) auto 0;color:var(--ink-3);font-size:var(--type-legal);line-height:1.45;text-align:center}
-
 .testimonial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6)}
 .testimonial-card{display:flex;min-width:0;flex-direction:column;overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm)}
 .testimonial-media{display:grid;min-height:360px;place-items:center;overflow:hidden;border-bottom:1px solid var(--line);background:#fff}
@@ -221,7 +219,6 @@ button,summary{font:inherit}
   .proof-snapshot-logo--ellie{--logo-width:120px;--logo-height:45px}
   .proof-snapshot-logo--mayo{--logo-width:48px;--logo-height:48px}
   .proof-snapshot-logo--johns-hopkins{--logo-width:142px;--logo-height:40px}
-  .proof-snapshot-note{margin-top:var(--space-2);font-size:1rem;line-height:1.4}
   .testimonial-media{min-height:280px}
   .testimonial-media--portrait wistia-player{width:min(58%,280px)}
   .testimonial-copy{padding:var(--space-5)}
@@ -241,7 +238,6 @@ button,summary{font:inherit}
   .testimonial-media{min-height:250px}
   .proof-snapshot-logo-row{gap:var(--space-2) var(--space-3)}
   .proof-snapshot-logo{height:48px}
-  .proof-snapshot-note{font-size:.95rem;line-height:1.35}
 }
 
 @media(prefers-reduced-motion:reduce){

@@ -33,6 +33,7 @@ assert.match(confirmation, /<script src="https:\/\/app\.iclosed\.io\/assets\/wid
 assert.match(confirmation, /class="call-details-widget"[\s\S]*?<script src="https:\/\/app\.iclosed\.io\/assets\/widget\.js" async><\/script>\s*<div class="proof-snapshot-logos confirmation-proof-logos"/, 'Confirmation authority logos must appear immediately below the iClosed widget');
 assert.match(confirmation, /<p class="proof-snapshot-logo-label">Trusted by companies like:<\/p>/, 'Confirmation authority strip must use the approved title');
 assert.equal((confirmation.match(/class="proof-snapshot-logo proof-snapshot-logo--/g) ?? []).length, 6, 'Confirmation authority strip must contain six healthcare logos');
+assert.doesNotMatch(confirmation, /Organization names are shown for market context/, 'Confirmation authority strip must not show the removed organization disclaimer');
 assert.doesNotMatch(confirmation, /Reserved space for the call confirmation video|This media slot is ready for the final video embed/, 'Call-confirmation placeholder content must not remain');
 assert.match(confirmation, /data-video-slot="case-study"/, 'Confirmation page needs the case-study video slot');
 assert.doesNotMatch(confirmation, /Before we speak\.|class="prepare"|class="prepare-list"/, 'Confirmation page must not restore the redundant preparation section');
@@ -191,6 +192,7 @@ assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT
 assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
 assert.match(page, /<h2 class="hero-triager-title">See if you qualify;<\/h2>\s*<div id="kodara-triager"><\/div>/, 'Hero must introduce the triager with the approved qualification heading');
 assert.match(page, /class="hero-vsl-stage"[\s\S]*?<div class="proof-snapshot-logos hero-proof-logos">[\s\S]*?<h2 class="hero-triager-title">See if you qualify;<\/h2>/, 'Authority logos must appear between the VSL and qualification widget');
+assert.doesNotMatch(page, /Organization names are shown for market context/, 'Homepage authority strip must not show the removed organization disclaimer');
 assert.match(page, /\.hero-proof-logos\{width:100%;margin-top:var\(--space-7\);padding-top:0\}/, 'Hero authority logos need deliberate desktop spacing without a duplicate top inset');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-proof-logos\{margin-top:var\(--space-6\);padding:0\}/, 'Hero authority logos need compact mobile spacing');
 assert.match(page, /\.hero-triager-title\{[^}]*font-size:var\(--type-card\);[^}]*text-wrap:balance/, 'Triager heading must use the shared card-heading tier');
@@ -232,7 +234,6 @@ assert.match(page, /Less than 28%/, 'Demand narrative must include the healthcar
 assert.match(page, /260 million health and wellness messages/, 'Demand narrative must include the current AI-demand signal');
 assert.match(page, /major opportunity for independent health and wellness experts/, 'Demand narrative must connect the signals to the expert opportunity');
 assert.match(page, /serve thousands without adding another appointment/, 'The page must state the scale outcome without implying medical care');
-assert.match(page, /do not imply endorsement, affiliation, client status, or purchase history/, 'The authority wall must state every proof boundary');
 assert.match(page, /Your signed agreement controls eligibility, timing, definitions, and the exact remedy/, 'The offer panel must state the signed-agreement boundary');
 assert.match(page, /more than 100,000 healthcare leads/, 'Client discovery must name the healthcare data foundation');
 assert.match(page, /live search and demand signals/, 'Client discovery must explain the live-demand mechanism');
