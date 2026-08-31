@@ -132,6 +132,9 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .cta-btn:hover{background:var(--accent-hover);box-shadow:0 14px 34px rgba(16,104,68,.26);transform:translateY(-2px)}
 .cta-btn:active{transform:scale(.98)}
 .cta-btn:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px}
+.section-cta{display:flex;width:100%;justify-content:center;margin-top:var(--space-7)}
+.section-cta .cta-btn{width:min(100%,320px)}
+.section-cta+section{margin-top:clamp(var(--space-8),8vw,var(--space-9))}
 .case-media wistia-player:focus-within{outline:3px solid var(--accent-dark);outline-offset:4px}
 /* ---- closing CTA bookend ---- */
 .cta{padding:clamp(var(--space-7),7vw,88px);border-color:var(--accent-dark);background:var(--accent-dark);color:#fff;text-align:center;box-shadow:none}
@@ -525,6 +528,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     </div>
   </section>
 
+  <div class="section-cta">
+    <a class="cta-btn qualification-link" href="#kodara-triager" aria-label="See if you qualify">See If You Qualify</a>
+  </div>
+
   <!-- ============ PRIMARY DEMO ============ -->
   <section class="card primary-demo" aria-labelledby="primary-demo-title" hidden>
     <div class="primary-demo-visual">
@@ -629,6 +636,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     </div>
     <p class="proof-note">Individual experiences are not typical and do not guarantee a specific result. Results vary by program, audience, implementation, and participation.</p>
   </section>
+
+  <div class="section-cta">
+    <a class="cta-btn qualification-link" href="#kodara-triager" aria-label="See if you qualify">See If You Qualify</a>
+  </div>
 
   <!-- ============ WHY KODARA EXISTS ============ -->
   <section class="founder-highlight" id="about" aria-labelledby="founder-highlight-title">

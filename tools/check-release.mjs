@@ -224,15 +224,19 @@ assert.doesNotMatch(page, /professional, clinical, and compliance boundaries|dat
 assert.doesNotMatch(page, /AI sales department|paid assessment|self-funding|highest-level service|smaller digital offers/i, 'Legacy sales-department copy must not return');
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(ctaLinks.length, 2, 'Header and final sections must contain one primary button each');
+assert.equal(ctaLinks.length, 4, 'Header, two mid-page decision points, and final section must each contain one primary button');
 const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification-link[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(qualificationLinks.length, 2, 'Qualification links must appear only in the header and final CTA');
+assert.equal(qualificationLinks.length, 4, 'Qualification links must appear in the header, two mid-page decision points, and final CTA');
 assert.ok(qualificationLinks.every((tag) => /href="#kodara-triager"/.test(tag)), 'Every qualification link must return visitors to the triager widget');
 assert.ok(qualificationLinks.every((tag) => !/target=|rel=|opens in a new tab/.test(tag)), 'In-page qualification links must remain in the current page');
 assert.doesNotMatch(page, /app\.iclosed\.io\/e\/kodara\/strategy-call/, 'The retired external scheduler destination must not remain');
 assert.match(page, /#kodara-triager\{[^}]*scroll-margin-top:clamp\(24px,6vh,64px\)/, 'The triager anchor must land with comfortable viewport spacing');
 assert.doesNotMatch(page, /fdCtaIntent:'strategy-call'/, 'Embed mode must not override the triager scroll path');
-assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 2, 'Every qualification link must use one concise action label');
+assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 4, 'Every qualification link must use one concise action label');
+assert.equal((page.match(/class="section-cta"/g) ?? []).length, 2, 'Expected exactly two restrained mid-page qualification actions');
+assert.match(page, /id="review-approval"[\s\S]*?<\/section>\s*<div class="section-cta">/, 'The first mid-page CTA must follow team credibility');
+assert.match(page, /class="proof-note">Individual experiences[\s\S]*?<\/section>\s*<div class="section-cta">/, 'The second mid-page CTA must follow the complete client-results section');
+assert.match(page, /\.section-cta\{display:flex;width:100%;justify-content:center;margin-top:var\(--space-7\)\}/, 'Mid-page CTAs must remain centered open-layout actions');
 
 // Demo retirement and replacement contract.
 assert.doesNotMatch(page, /<ios-notification-demo\b/, 'The previous notification demo must not remain mounted');
