@@ -153,34 +153,23 @@ assert.match(page, /--ink:#20362D;--ink-2:#304E42;--ink-3:#567066/, 'Text must u
 assert.match(page, /--accent:#106844;--accent-hover:#0C5537;--accent-ink:#106844;--accent-dark:#0C4F34/, 'Actions must use the Kodara green palette');
 assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate feature backgrounds and framing must not return');
 assert.doesNotMatch(page, /\.section-band::before/, 'Full-width divider bands must not return');
-for (const className of ['demand-signal', 'audience-path', 'credibility-item']) {
-  assert.doesNotMatch(page, new RegExp(`\\.${className.replace(' ', '\\s+')}\\{[^}]*border:`), `${className} must remain open text without a card outline`);
-}
 assert.match(page, /\.faq-list\{display:grid;[^}]*gap:var\(--space-3\)/, 'FAQ items must use spaced cards instead of divider rows');
 assert.match(page, /\.faq\{width:100%;max-width:var\(--rail-reading\)\}/, 'FAQ must keep one stable reading width in open and closed states');
-assert.match(page, /\.education-head\{max-width:var\(--rail-reading\);margin:0 auto var\(--space-7\);text-align:center\}/, 'Demand section must use the centered institutional heading structure');
-assert.match(page, /\.education-head h2\{max-width:var\(--measure-display\);margin-inline:auto;font-size:var\(--type-section\);font-weight:650;line-height:1\.1;letter-spacing:var\(--tracking-display\);text-wrap:balance\}/, 'Demand heading must match the centered display tier');
-assert.match(page, /\.education-head p\{max-width:var\(--measure-body\);margin:var\(--space-4\) auto 0;color:var\(--ink-2\);font-size:var\(--type-body\);line-height:1\.5;text-wrap:pretty\}/, 'Demand subheadline must match the centered institutional supporting-copy tier');
-assert.match(page, /\.audience-copy h2\{max-width:var\(--measure-display\)/, 'Audience heading must use the shared display measure');
+assert.match(page, /\.homepage-stats\{display:grid;width:100%;grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/, 'Homepage stats must use one balanced four-card desktop row');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.homepage-stats,\.mechanism-grid\{grid-template-columns:1fr;gap:var\(--space-4\)\}/, 'Homepage stats and process must stack before mobile cards become cramped');
 assert.match(page, /\.founder-highlight h2\{max-width:var\(--measure-display\)/, 'Founder heading must use the shared display measure');
 assert.match(page, /\.case-title\{max-width:var\(--measure-display\)/, 'Case-study headings must use the shared display measure');
-assert.match(page, /\.credibility-item p\{max-width:var\(--measure-card-body\)/, 'Credibility-card copy must use the shared card measure');
 assert.match(page, /\.faq-answer\{width:100%;max-width:var\(--measure-body\)/, 'FAQ answers must use the shared body measure');
 assert.match(page, /\.site-footer\{width:auto;margin:var\(--space-9\) calc\(var\(--page-gutter\) \* -1\) 0/, 'Full-width footer must align to the page gutter without scrollbar overflow');
 assert.doesNotMatch(page, /\.site-footer\{width:100vw/, 'Footer must not use viewport width that includes the scrollbar');
-assert.match(page, /<header class="education-head">\s*<h2 id="education-title">[\s\S]*?<\/h2>\s*<p>[\s\S]*?<\/p>\s*<\/header>\s*<div class="demand-signals"/, 'Demand section must place its centered headline and subheadline before the three-column signals');
-assert.match(page, /<h2 id="education-title">The demand for health and wellness expertise is exploding online\.<\/h2>/, 'Demand headline must use the approved exploding-online language');
-assert.match(page, /\[hidden\]\{display:none!important\}/, 'Temporarily hidden homepage chapters must remain visually suppressed');
-assert.match(page, /<section class="card primary-demo"[^>]*\shidden>/, 'The primary product demo must remain hidden for the simplified homepage flow');
-assert.match(page, /<section class="mechanism-features"[^>]*\shidden>/, 'The three-step mechanism must remain hidden for the simplified homepage flow');
+assert.match(page, /<section class="mechanism-features" id="how-it-works" aria-labelledby="mechanism-title">/, 'The approved three-step process must be visible');
+assert.doesNotMatch(page, /<section class="(?:education-section|audience-section|credibility-section|proof-snapshot)|<section class="card primary-demo"/, 'Removed narrative chapters must not return to the homepage');
 assert.match(page, /\.faq-item summary::after\{[^}]*right:var\(--space-5\);display:grid;width:32px;height:32px;place-items:center/, 'FAQ icons must use a fixed, centered desktop alignment box');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.faq-item summary\{padding:var\(--space-4\) calc\(var\(--space-7\) \+ var\(--space-2\)\) var\(--space-4\) var\(--space-4\)\}[\s\S]*?\.faq-item summary::after\{right:var\(--space-4\)\}/, 'FAQ questions and icons must keep aligned mobile insets');
 assert.doesNotMatch(page, /@media\(max-width:390px\)\{[^}]*\.faq-item summary\{padding-right:/, 'Narrow screens must not override the shared FAQ icon column');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
 assert.match(page, /--type-button:1\.375rem/, 'Primary CTA type must remain prominent without overpowering the page');
 assert.match(page, /\.cta-btn\{[^}]*min-height:60px;[^}]*padding:15px 32px/, 'Primary CTA buttons must keep a readable desktop target');
-assert.match(page, /\.site-header \.cta-btn\{[^}]*min-height:60px;[^}]*font-size:var\(--type-button\)/, 'Header qualification action must use the primary desktop CTA tier');
-assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.site-header \.cta-btn\{[^}]*min-height:58px;[^}]*font-size:1\.25rem/, 'Header qualification action must keep a readable mobile target');
 assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced-motion preferences');
 assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
 assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*text-align:center/, 'Hero must use the centered cinema stack');
@@ -199,22 +188,22 @@ assert.match(page, /\.hero-triager-title\{[^}]*font-size:var\(--type-card\);[^}]
 assert.match(page, /<div id="kodara-triager"><\/div>\s*<script\s+src="https:\/\/embed\.kodara\.com\/v1\/widget\.js"\s+data-target="kodara-triager"\s+data-widget-id="lucas-codex-testing">\s*<\/script>/, 'Hero must load the approved Kodara triager widget');
 assert.doesNotMatch(page, /class="hero-guarantee"/, 'Duplicate post-widget guarantee must not return');
 assert.doesNotMatch(page, /hero-vsl-cta/, 'Replaced hero qualification button must not remain');
-const primaryNav = page.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? '';
-assert.equal((primaryNav.match(/<a\b/g) ?? []).length, 3, 'Primary navigation must stay limited to three orientation links');
-assert.match(primaryNav, />How It Works<[^]*>Results<[^]*>FAQ</, 'Primary navigation must use the agreed labels and order');
-assert.match(primaryNav, /<a href="#how-it-works" hidden>How It Works<\/a>/, 'The navigation link to the hidden three-step chapter must also remain hidden');
+const homepageHeader = page.match(/<header class="site-header">[\s\S]*?<\/header>/)?.[0] ?? '';
+const confirmationHeader = confirmation.match(/<header class="site-header">[\s\S]*?<\/header>/)?.[0] ?? '';
+for (const [name, header] of [['homepage', homepageHeader], ['confirmation page', confirmationHeader]]) {
+  assert.equal((header.match(/<a\b/g) ?? []).length, 1, `${name} header must contain only the linked Kodara logo`);
+  assert.doesNotMatch(header, /<nav\b|cta-btn|header-state/, `${name} header must not contain navigation, an action, or status text`);
+}
+assert.match(page, /\.site-header\{[^}]*align-items:center;justify-content:center;/, 'Homepage logo-only header must stay centered');
+assert.match(confirmationStyles, /\.site-header\{[\s\S]*?align-items:center;\s*justify-content:center;/, 'Confirmation logo-only header must stay centered');
 
 // Core page structure.
-for (const className of ['site-header', 'site-hero', 'proof-snapshot', 'education-section', 'primary-demo', 'mechanism-features', 'case-studies', 'audience-section', 'founder-highlight', 'credibility-section', 'faq', 'cta', 'site-footer']) {
+for (const className of ['site-header', 'site-hero', 'homepage-stats', 'mechanism-features', 'case-studies', 'founder-highlight', 'faq', 'cta', 'site-footer']) {
   assert.match(page, new RegExp(`class="[^"]*${className}`), `Missing ${className} section`);
 }
 const sectionIndex = (className) => page.search(new RegExp(`<(?:section|header|footer) class="[^"]*\\b${className}\\b`));
-assert.ok(sectionIndex('site-hero') < sectionIndex('proof-snapshot'), 'Authority proof must follow the hero');
-assert.ok(sectionIndex('proof-snapshot') < sectionIndex('education-section'), 'Category education must follow authority proof');
-assert.ok(sectionIndex('education-section') < sectionIndex('audience-section'), 'Audience pathways must immediately follow category education');
-assert.ok(sectionIndex('audience-section') < sectionIndex('credibility-section'), 'Institutional credibility must immediately follow audience pathways');
-assert.ok(sectionIndex('credibility-section') < sectionIndex('primary-demo'), 'Hidden product chapters must remain after the visible opening narrative');
-assert.ok(sectionIndex('primary-demo') < sectionIndex('mechanism-features'), 'Product overview must follow the primary demo');
+assert.ok(sectionIndex('site-hero') < sectionIndex('homepage-stats'), 'Four verified stats must immediately follow the qualification hero');
+assert.ok(sectionIndex('homepage-stats') < sectionIndex('mechanism-features'), 'The launch process must follow the stat row');
 assert.ok(sectionIndex('mechanism-features') < sectionIndex('case-studies'), 'Client proof must follow the product and launch chapters');
 assert.ok(sectionIndex('case-studies') < sectionIndex('founder-highlight'), 'The concise founder story must follow client proof');
 assert.ok(sectionIndex('faq') < sectionIndex('cta'), 'FAQ must precede the final CTA');
@@ -229,19 +218,17 @@ assert.match(page, /#hero-region-subheadline\{[^}]*min-block-size:4\.5em[^}]*tex
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-region-eyebrow\{[^}]*min-block-size:2\.8em[\s\S]*?#hero-region-subheadline\{[^}]*min-block-size:6em/, 'Hero personalization must reserve both mobile text areas');
 assert.match(page, /@media\(max-width:340px\)\{\.hero-region-eyebrow\{min-block-size:4\.2em\}#hero-region-subheadline\{min-block-size:7\.5em\}\}/, 'Hero personalization must reserve its narrow-mobile text heights');
 assert.match(page, /<script type="module" src="assets\/js\/region-personalization\.mjs"><\/script>/, 'Hero regional personalization client is not loaded');
-assert.match(page, /first 10 beta users within 30 days or you receive a full refund/, 'Hero must state the qualifying-client guarantee');
-assert.match(page, /Less than 28%/, 'Demand narrative must include the healthcare-trust signal');
-assert.match(page, /260 million health and wellness messages/, 'Demand narrative must include the current AI-demand signal');
-assert.match(page, /major opportunity for independent health and wellness experts/, 'Demand narrative must connect the signals to the expert opportunity');
-assert.match(page, /serve thousands without adding another appointment/, 'The page must state the scale outcome without implying medical care');
+assert.match(page, /For qualifying clients, we onboard 10 beta users within 30 days or you receive a full refund/, 'Launch process must state the qualifying-client guarantee');
+assert.match(page, /<strong>350\+<\/strong>\s*<span>Health and wellness experts helped<\/span>/, 'Stat row must lead with the verified expert claim');
+assert.match(page, /<strong>100,000\+<\/strong>\s*<span>Healthcare leads generated online used to train Kodara<\/span>/, 'Stat row must retain the healthcare-data foundation');
+assert.match(page, /<strong>30 days<\/strong>\s*<span>To launch the first AI Version for qualifying clients<\/span>/, 'Launch-timeline stat must state the qualifying-client boundary');
+assert.match(page, /<strong>10<\/strong>\s*<span>Beta users onboarded for qualifying clients<\/span>/, 'Beta-user stat must state the qualifying-client boundary');
 assert.match(page, /Your signed agreement controls eligibility, timing, definitions, and the exact remedy/, 'The offer panel must state the signed-agreement boundary');
 assert.match(page, /more than 100,000 healthcare leads/, 'Client discovery must name the healthcare data foundation');
 assert.match(page, /live search and demand signals/, 'Client discovery must explain the live-demand mechanism');
 assert.match(page, /first 10 beta users will be onboarded, or you receive a full refund/, 'FAQ must state the current qualifying-client guarantee');
 assert.match(page, /Dr\. Vora[\s\S]{0,500}client-discovery model[\s\S]{0,500}30 patients[\s\S]{0,500}first five weeks/, 'Client proof must include Dr. Vora and the VSL mechanism');
 assert.match(page, /Ashley[\s\S]{0,500}client-discovery model[\s\S]{0,500}fully transitioned[\s\S]{0,500}in-person classes[\s\S]{0,500}two months/, 'Client proof must include Ashley and the VSL mechanism');
-assert.match(page, /AI engineers and operators with decades of healthcare experience/, 'Team credibility must match the VSL');
-assert.match(page, /More than 100,000 healthcare leads generated online were used to train Kodara/, 'The healthcare-data claim must match the VSL exactly');
 assert.doesNotMatch(page, /purchased through AI systems built by our team/, 'The authority wall must not imply proof absent from the VSL');
 assert.doesNotMatch(page, /first 10 real users|or you do not pay/i, 'Old guarantee language must not return');
 assert.doesNotMatch(page, /Apply for a Free Live Demo|free live demo/i, 'The page must not promise an unverified free live demo');
@@ -249,19 +236,16 @@ assert.doesNotMatch(page, /professional, clinical, and compliance boundaries|dat
 assert.doesNotMatch(page, /AI sales department|paid assessment|self-funding|highest-level service|smaller digital offers/i, 'Legacy sales-department copy must not return');
 
 const ctaLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*cta-btn[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(ctaLinks.length, 4, 'Header, two mid-page decision points, and final section must each contain one primary button');
+assert.equal(ctaLinks.length, 1, 'The simplified homepage must contain one final qualification button outside the live widget');
 const qualificationLinks = [...page.matchAll(/<a\b[^>]*class="[^"]*qualification-link[^"]*"[^>]*>/g)].map((match) => match[0]);
-assert.equal(qualificationLinks.length, 4, 'Qualification links must appear in the header, two mid-page decision points, and final CTA');
+assert.equal(qualificationLinks.length, 1, 'Only the final CTA must repeat the live qualification action');
 assert.ok(qualificationLinks.every((tag) => /href="#kodara-triager"/.test(tag)), 'Every qualification link must return visitors to the triager widget');
 assert.ok(qualificationLinks.every((tag) => !/target=|rel=|opens in a new tab/.test(tag)), 'In-page qualification links must remain in the current page');
 assert.doesNotMatch(page, /app\.iclosed\.io\/e\/kodara\/strategy-call/, 'The retired external scheduler destination must not remain');
 assert.match(page, /#kodara-triager\{[^}]*scroll-margin-top:clamp\(24px,6vh,64px\)/, 'The triager anchor must land with comfortable viewport spacing');
 assert.doesNotMatch(page, /fdCtaIntent:'strategy-call'/, 'Embed mode must not override the triager scroll path');
-assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 4, 'Every qualification link must use one concise action label');
-assert.equal((page.match(/class="section-cta"/g) ?? []).length, 2, 'Expected exactly two restrained mid-page qualification actions');
-assert.match(page, /id="review-approval"[\s\S]*?<\/section>\s*<div class="section-cta">/, 'The first mid-page CTA must follow team credibility');
-assert.match(page, /class="proof-note">Individual experiences[\s\S]*?<\/section>\s*<div class="section-cta">/, 'The second mid-page CTA must follow the complete client-results section');
-assert.match(page, /\.section-cta\{display:flex;width:100%;justify-content:center;margin-top:var\(--space-7\)\}/, 'Mid-page CTAs must remain centered open-layout actions');
+assert.equal((page.match(/>See If You Qualify/g) ?? []).length, 1, 'The final qualification link must use one concise action label');
+assert.doesNotMatch(page, /class="section-cta"/, 'Intermediate qualification actions must not return');
 
 // Demo retirement and replacement contract.
 assert.doesNotMatch(page, /<ios-notification-demo\b/, 'The previous notification demo must not remain mounted');
@@ -269,7 +253,6 @@ assert.doesNotMatch(page, /assets\/ios-notification-demo\/(?:model|component)\.j
 assert.doesNotMatch(page, /<iframe\b[^>]*mechanism-player|data-player-src|setupMechanismDemos|DEMO_RENDERER_BUILD/, 'Previous mechanism demos and playback controller must be removed');
 assert.doesNotMatch(page, /data-demo-placeholder|data-placeholder|placeholder/i, 'Visible placeholder content must not ship');
 assert.equal((page.match(/class="mechanism-proof(?: |")/g) ?? []).length, 3, 'The mechanism must use three finished proof visuals');
-assert.match(page, /class="offer-demo"/, 'Primary offer visual must replace the empty demo slot');
 assert.match(page, /class="founder-media"/, 'Founder section must include an authentic founder portrait');
 assert.match(page, /src="assets\/lucas-tyson\.jpg"/, 'Founder portrait must use the approved local image');
 assert.match(page, /\.founder-media img\{[^}]*width:100%;height:auto;aspect-ratio:1\/1;[^}]*object-fit:cover/, 'Founder portrait must keep a square, responsive edge-to-edge crop');
@@ -277,11 +260,10 @@ assert.equal((page.match(/class="founder-credential"/g) ?? []).length, 2, 'Found
 assert.match(page, /@media\(max-width:899px\)\{[\s\S]*?\.founder-highlight\{grid-template-columns:1fr/, 'Founder presentation must stack before tablet copy becomes cramped');
 
 // Homepage information architecture.
-assert.equal((page.match(/class="audience-path"/g) ?? []).length, 4, 'Expected four clear audience pathways');
 assert.doesNotMatch(page, /delivery-comparison|delivery-model/, 'Removed delivery comparison must not return');
 assert.equal((page.match(/class="mechanism-step"/g) ?? []).length, 3, 'Expected the launch process to be merged into three product chapters');
 assert.doesNotMatch(page, /class="(?:midpage-action|alternatives-section|process-section)"/, 'Redundant mid-page action, alternatives, and process sections must stay removed');
-assert.equal((page.match(/class="credibility-item"/g) ?? []).length, 3, 'Expected three institutional credibility signals');
+assert.equal((page.match(/class="homepage-stat(?: |")/g) ?? []).length, 4, 'Expected four verified proof and delivery stat cards');
 assert.equal((page.match(/class="case-kicker"/g) ?? []).length, 2, 'Video testimonials must use a consistent client-story label');
 assert.equal((page.match(/class="case-fact"/g) ?? []).length, 2, 'Video testimonials must explain what Kodara helped build');
 assert.equal((page.match(/class="case-role"/g) ?? []).length, 2, 'Written outcomes must include consistent role context');
@@ -306,10 +288,9 @@ assert.match(page, /<h3>AI Disclaimer<\/h3>/, 'Footer must include the AI discla
 assert.match(page, /beta-user guarantee concerns onboarding beta users and is not a guarantee of sales, revenue, or profit/, 'Earnings disclaimer must limit the beta-user guarantee');
 assert.match(page, /does not practice medicine or provide medical advice, diagnosis, or treatment/, 'Medical disclaimer must state the medical-information boundary');
 assert.match(page, /AI-generated information may be incomplete, inaccurate, or outdated/, 'AI disclaimer must state the model-output boundary');
-assert.equal((page.match(/<section class="[^"]*card[^"]*"/g) ?? []).length, 2, 'Major cards must remain limited to the product feature and closing CTA');
+assert.equal((page.match(/<section class="[^"]*card[^"]*"/g) ?? []).length, 1, 'The closing CTA must remain the only section-level card');
 assert.match(page, /<h2 id="founder-highlight-title">Why Kodara exists\.<\/h2>/, 'Founder section must use the concise company-story framing');
 assert.match(page, /class="founder-principle"/, 'Founder section must end with the guiding principle');
-assert.match(page, /id="review-approval"/, 'The review-and-approval section needs an intent-revealing anchor');
 
 // Proof, FAQ, and accessibility.
 assert.equal((page.match(/class="proof-snapshot-logo proof-snapshot-logo--/g) ?? []).length, 6, 'Authority wall must contain six healthcare logos');

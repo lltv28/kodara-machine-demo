@@ -1,76 +1,106 @@
-# Kodara health and wellness homepage
+# Kodara health and wellness website
 
-This context describes the company-style homepage that explains Kodara's done-for-you AI Version of You.
+This context describes the public homepage and post-booking confirmation page for Kodara's done-for-you AI Version of You.
 
-## Visual surfaces
+## Visual system
 
-White is the only neutral page, section, card, and media surface. Text-led sections, stats, process explanations, pathways, credibility copy, founder copy, and text CTAs remain open on the white canvas and use spacing rather than outlines or divider bands. Card outlines are reserved for product features, testimonials and results, FAQ disclosures, and authentic media such as the founder portrait. The closing CTA may use a solid green contained surface. Hairlines are reserved for structural boundaries inside media, controls, and the footer. Do not use pale green, tinted green, or green-gradient backgrounds.
+White is the neutral page, section, card, and media surface. Green is reserved for actions, proof figures, active accents, and the closing CTA. Do not use pale green, tinted green, or green-gradient backgrounds.
 
-## Typography
+Instrument Sans is the site typeface. Desktop body copy uses 20px and 22px tiers; mobile uses 18px and 20px. Desktop display headings use a 48px to 52px hero tier, a 44px to 52px section tier, and a 30px to 36px card tier. Mobile uses a 42px to 48px hero tier, a 34px to 40px section tier, and a 24px to 28px card tier.
 
-Instrument Sans remains the page typeface. Process labels use the same family in sentence case so they read as navigation rather than code. Desktop body copy uses 20px and 22px tiers; mobile uses 18px and 20px. Desktop display headings use a 56px-72px hero tier, a 44px-52px section tier, and a 30px-36px card tier. Mobile uses a 42px-48px hero tier, a 34px-40px section tier, and a 24px-28px card tier. Primary CTA labels use 22px type and a 60px minimum desktop target, then 20px type and a 58px minimum mobile target. This produces a clear institutional hierarchy for an audience over 40 without crowding cards or allowing buttons to dominate the page.
+Use the 1240px wide rail for page structure, the 1000px media rail for videos and embedded experiences, and the 760px reading rail for FAQ and centered supporting copy. Use the shared display, body, and card measures instead of section-specific text widths.
+
+Cards are reserved for the four proof and delivery stats, the three process chapters, testimonials and results, FAQ disclosures, authentic founder media, and the final CTA. Founder copy remains open on the white canvas.
+
+## Homepage narrative
+
+The visible homepage sequence is fixed:
+
+1. Centered logo-only header
+2. Hero, VSL, authority logos, and live qualification widget
+3. Four proof and delivery stat cards
+4. Three-step build and launch process
+5. Client stories and result proof
+6. Why Kodara exists
+7. FAQ
+8. Final qualification CTA
+9. Institutional footer
+
+Do not restore the removed standalone demand education, audience-fit, institutional credibility, primary demo, intermediate CTA, alternatives, or second process sections. Their strongest verified facts now appear once in the approved sequence.
 
 ## Language
 
-**Site hero**:
-The trust-first opening beneath the company header uses a centered cinema stack: a region-aware audience line, headline, one supporting sentence, stable 16:9 Vidalytics VSL, one application action, and compact guarantee reassurance below it. The audience line and supporting sentence may name an approved US state or Canadian province when Cloudflare and IPWhois resolve one within 350ms; every other visitor sees the generic versions without a layout shift. The browser may cache only the approved region name for the current session, and analytics may receive only the personalization mode and approved region name. The page gives qualifying clients the 10-beta-user refund guarantee.
-_Avoid_: Authority-logo opener, demo-first hero, generic AI agency hero
+### Site hero
 
-**Authority proof**:
-The healthcare-first proof immediately beneath the hero. It leads with the verified 350+ expert claim. The organization wall provides neutral market context and explicitly does not imply endorsement, affiliation, client status, or purchase history. Category education follows before the product explanation.
-_Avoid_: Client logo wall, trusted-by logos, unqualified healthcare endorsements
+The hero uses a centered cinema stack: a region-aware availability line, the approved online AI offer headline, guarantee subheadline, stable 16:9 Vidalytics VSL, authority logos, and the live qualification widget. The audience line and supporting sentence may name an approved US state or Canadian province when Cloudflare and IPWhois resolve one within 350ms. Every other visitor sees generic copy without a layout shift.
 
-**Category education**:
-The VSL-aligned demand argument explaining why health and wellness expertise is moving online, using the supplied trust and AI-message signals before presenting the calendar bottleneck. Appointment-based delivery is contrasted with approved digital programs capable of serving thousands online. It does not present AI programs as medical care.
-_Avoid_: Generic AI trend copy, unsupported patient outcomes, medical advice claims
+The browser may cache only the approved region name for the current session. Analytics may receive only the personalization mode and approved region name.
 
-**Primary demo**:
-The main visual explanation after category education. A finished three-part offer visual connects the expert's knowledge, the AI Version, and the first 10 beta users. On smaller screens, the copy appears first and the visual follows.
-_Avoid_: Restoring a previous demo, sales notification demo, self-funding demo, demo grid
+### Authority logos
 
-**AI Version of You**:
-The approved AI experience built from a health or wellness expert's knowledge, methods, client questions, voice, and existing materials. It helps people understand what they need and connects them with a suitable virtual program.
-_Avoid_: AI Brain, AI Triager, AI Salesperson, generic chatbot
+The six-logo strip appears between the VSL and qualification widget. It uses the title "Trusted by companies like:" and contains Massage Envy, Gameday Men's Health, Visiting Angels, Ellie Mental Health, Mayo Clinic, and Johns Hopkins University.
 
-**Expertise extraction**:
-The focused interviews and material review used to organize the expert's knowledge and teach the AI how the expert thinks, explains problems, and guides clients.
-_Avoid_: Brain training, data ingestion
+### Proof and delivery stats
 
-**Digital program**:
-A $500-$2,000 experience sold and delivered entirely online around the expert's approved methods. It is designed to help people without requiring another one-to-one appointment or weekly group call from the expert.
-_Avoid_: Low-ticket assessment, smaller offer, online course
+The four-card row directly below the qualification widget uses these approved facts:
 
-**Kodara client discovery**:
-The agentic model built from more than 100,000 healthcare leads. It analyzes live search and demand signals to identify people likely to want the expert's help and route them to the best-fit digital program.
-_Avoid_: Ad flywheel, self-funding acquisition
+- 350+ health and wellness experts helped
+- 100,000+ healthcare leads generated online used to train Kodara
+- 30 days to launch the first AI Version for qualifying clients
+- 10 beta users onboarded for qualifying clients
 
-**Product overview and launch process**:
-The three sequential chapters combine what Kodara builds with how the client participates: share expertise, review the AI Version and programs, then launch and onboard users. Each chapter uses a concrete VSL proof point: one hour per week, $500-$2,000 programs, or the 100,000+ healthcare-lead training foundation. The third chapter retains the qualifying-client guarantee and signed-agreement boundary.
-_Avoid_: Three equal feature cards, generic feature grid, long sales letter
+The last two cards are qualifying-client offer terms, not typical client outcomes. Do not remove that boundary or turn the figures into universal guarantees.
 
-The page intentionally avoids a separate alternatives section, a second process section, and a mid-page application block. The category argument, primary demo, and three product chapters should carry the narrative without repeating the same calendar-bottleneck or launch language.
+### AI Version of You
 
-**Who Kodara is for**:
-The audience-orientation section for doctors and practitioners, clinic owners, coaches and wellness experts, and healthcare educators. It helps visitors identify whether their expertise and calendar bottleneck fit the offer without creating unsupported vertical-specific promises.
-_Avoid_: Persona cards with invented outcomes, broad "everyone" positioning
+The approved AI experience is built from a health or wellness expert's knowledge, methods, client questions, voice, and existing materials. It helps people understand what they need and connects them with a suitable virtual program.
 
-**Why Kodara exists**:
-The concise founder section pairs a real Lucas Tyson speaking photograph with the personal health experience that motivated the company, the principle that expertise should work beyond the appointment, and two compact verified credentials.
-_Avoid_: Metrics-only founder treatment, long founder sales letter, stock portrait, generic biography
+Avoid AI Brain, AI Triager, AI Salesperson, generic chatbot, medical advice, diagnosis, or treatment claims.
 
-**Experience and approval**:
-The institutional credibility section names the AI engineers and operators with decades of healthcare experience, the verified 350+ expert claim, the 100,000+ healthcare leads generated online and used to train Kodara, and the expert's pre-launch approval. It does not claim HIPAA compliance, clinical validation, formal privacy controls, or another certification unless separately documented.
-_Avoid_: Compliance badge wall, generic security claims, hidden safety copy
+### Expertise extraction
 
-**Proof section**:
-The Sandra and Leanne video stories use consistent client-story labels, verified role and organization context where available, and a concise statement of what Kodara helped build. The supplied Dr. Vora and Ashley results include a role line before the result narrative. Together they show entirely online delivery, greater consistency, patient enrollment, and reduced dependence on in-person work. The adjacent disclaimer states that individual outcomes vary.
-_Avoid_: Generic client-results grid, unrelated agency proof
+Focused interviews and material review organize the expert's knowledge and teach the AI how the expert thinks, explains problems, and guides clients. Use "share what you know" in customer-facing process copy.
 
-**Offer boundary**:
-For qualifying clients, the current offer states that the first AI Version will be completed and launched and the first 10 beta users onboarded within the first 30 days on the launch timeline, or the client receives a full refund. The signed agreement controls all eligibility, definitions, timing, and remedy.
+### Digital program
 
-**Application action**:
-The header navigation is limited to How It Works, Results, and FAQ. The header, hero, and final CTA say "See If You Qualify" and open the live scheduler. The footer does not repeat the application action. The page does not add a repeated mid-page action or promise a free live demo or AI conversation that the destination has not been verified to provide.
+A $500 to $2,000 experience is sold and delivered entirely online around the expert's approved methods. It is designed to help people without requiring another one-to-one appointment or weekly group call from the expert.
 
-**Company navigation**:
-The header keeps the primary path concise: How It Works, Results, and FAQ, followed by one qualification action. Mobile keeps only the brand and qualification action. The institutional footer contains Kodara company information and copyright on the left, with the complete legal disclosure as permanently visible, unbolded fine print on the right. The footer contains no navigation or application action. Unverified privacy, terms, contact, and location links are omitted instead of shown as unfinished content.
+### Kodara client discovery
+
+The agentic model was built from more than 100,000 healthcare leads generated online. It analyzes live search and demand signals to identify people likely to want the expert's help and routes them to the best-fit digital program.
+
+### Product overview and launch process
+
+The three visible chapters are sequential:
+
+1. Share what you know. The client gives Kodara about one hour per week through focused interviews, existing materials, feedback, and decisions.
+2. Review what we build. Kodara creates the $500 to $2,000 digital programs, website, branding, and AI experience. The client tests and approves what represents them.
+3. Launch and onboard users. Kodara helps suitable people find the expertise and onboards the first users. The qualifying-client timeline and refund terms remain controlled by the signed agreement.
+
+### Proof section
+
+The Sandra and Leanne video stories use consistent client-story labels, verified role and organization context where available, and a concise explanation of what Kodara helped build. The Dr. Vora and Ashley results include role context. The adjacent disclaimer states that individual outcomes vary.
+
+Do not add unsupported outcomes, implied medical results, or new testimonial claims.
+
+### Why Kodara exists
+
+The founder section pairs the approved Lucas Tyson speaking photograph with the personal health experience that motivated the company, the principle that expertise should work beyond the appointment, and two verified credentials.
+
+### Offer boundary
+
+For qualifying clients, the current offer states that the first AI Version will be completed and launched and the first 10 beta users onboarded within the first 30 days on the launch timeline, or the client receives a full refund. The signed agreement controls eligibility, definitions, timing, and remedy.
+
+### Application action
+
+The live qualification widget is the primary action in the hero. The only repeated qualification link appears in the final CTA and returns visitors to the widget. Do not add header or intermediate CTA buttons.
+
+## Shared header and footer
+
+Both public pages use a centered, linked Kodara wordmark with no navigation, status text, or header CTA.
+
+The footer contains Kodara company information, copyright, terms and privacy links, and permanently visible earnings, medical-information, and AI fine print. It contains no navigation or application action.
+
+## Confirmation page
+
+The confirmation page keeps its existing call-confirmation video, iClosed call details, authority logos, case study, full-presentation replay, two testimonial videos, four press features, ten FAQ videos, final reminder, and footer. Its content is outside the homepage restructure. Only its header changes to the shared centered logo-only treatment.
