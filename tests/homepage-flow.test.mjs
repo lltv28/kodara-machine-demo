@@ -113,13 +113,19 @@ test('approved process and client proof remain visible', () => {
   const resultCards = [...stories.matchAll(/<article class="client-result-card">([\s\S]*?)<\/article>/gu)].map((match) => match[1]);
   assert.equal(resultCards.length, 4, 'Client proof must begin with four consistent result summaries');
   assert.equal((stories.match(/class="client-result-points"/gu) ?? []).length, 4, 'Each result summary needs its own supporting facts');
+  assert.equal((stories.match(/class="client-result-person"/gu) ?? []).length, 4, 'Each result summary needs a client identity row');
+  assert.equal((stories.match(/class="client-result-avatar(?:\s[^"]*)?"/gu) ?? []).length, 4, 'Each result summary needs a circular client avatar');
   for (const card of resultCards) {
     assert.equal((card.match(/<li>/gu) ?? []).length, 2, 'Each result summary must contain exactly two supporting facts');
   }
   assert.match(stories, /class="testimonial-stars" aria-hidden="true">(?:<span>★<\/span>){5}<\/div>/u, 'The testimonial bridge must contain five decorative gold star icons');
   assert.match(stories, /I’m now on track to make double what I made last year\. My business feels consistent now, and I’m able to enjoy it more\./u, 'The testimonial bridge must use Sandra’s approved combined quote');
   assert.ok(position(stories, 'class="client-results-grid"') < position(stories, 'class="testimonial-spotlight"'), 'Result summaries must precede the featured quote');
-  assert.ok(position(stories, 'class="testimonial-spotlight"') < position(stories, 'class="case-featured'), 'The featured quote must introduce the deeper video stories');
+  assert.ok(position(stories, 'class="testimonial-spotlight"') < position(stories, 'class="case-support-grid"'), 'The featured quote must introduce the deeper video stories');
+  const videoStories = stories.match(/<div class="case-support-grid">([\s\S]*?)<\/div>\s*<p class="proof-note">/u)?.[1] ?? '';
+  assert.equal((videoStories.match(/<article class="case-support"/gu) ?? []).length, 2, 'Sandra and Leanne need equal video-story cards');
+  assert.match(videoStories, /media-id="6oj2gj3wqt"/u, 'Sandra’s video must remain in the paired story grid');
+  assert.match(videoStories, /media-id="fay3lgo8op"/u, 'Leanne’s video must remain in the paired story grid');
   assert.match(stories, /Enrolled 30\+ patients in his first five weeks\./u);
   assert.match(stories, /Replaced her in-person classes within two months\./u);
 
