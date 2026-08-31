@@ -184,7 +184,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 /* ---------- video client stories ---------- */
 .case-studies-head{width:100%;max-width:var(--rail-reading);margin:0 auto var(--space-6);text-align:center}
 .case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
-.client-results-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5)}
 .client-result-card{display:flex;min-width:0;flex-direction:column;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
 .client-result-person{display:grid;grid-template-columns:52px minmax(0,1fr);gap:var(--space-3);align-items:center}
 .client-result-avatar{display:block;width:52px;height:52px;border:1px solid var(--line);border-radius:var(--radius-pill);object-fit:cover;background:var(--surface)}
@@ -200,10 +199,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .testimonial-stars span{display:block}
 .testimonial-spotlight blockquote{margin-top:var(--space-4);font-size:clamp(2rem,3.4vw,2.75rem);font-weight:650;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .testimonial-spotlight cite{display:block;margin-top:var(--space-4);color:var(--ink-3);font-size:var(--type-label);font-style:normal;font-weight:650;line-height:1.4}
-@media(max-width:899px){.client-results-grid{grid-template-columns:1fr}}
 @media(min-width:900px){.founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}}
 .case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);align-items:stretch;margin-top:var(--space-5)}
-.case-support-grid+.client-results-grid{margin-top:clamp(var(--space-7),7vw,var(--space-8))}
 .case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
 .case-support--wide{display:grid;grid-column:1/-1;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);align-items:center}
 .case-support-copy{display:flex;flex:1;flex-direction:column;padding:var(--space-6)}
@@ -244,7 +241,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .homepage-stat--compact strong{font-size:clamp(2.6rem,12vw,3.25rem)}
   .mechanism-feature{min-height:0;padding:var(--space-5)}
   .mechanism-copy{padding:0}
-  .client-results-grid{gap:var(--space-4)}
   .client-result-card{padding:var(--space-5)}
   .testimonial-spotlight{margin:var(--space-7) auto;padding-inline:var(--space-2)}
   .testimonial-stars{font-size:1.5rem}
@@ -257,7 +253,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .case-support--wide{display:flex;grid-column:auto}
   .case-support-copy{padding:var(--space-5)}
   .case-support-grid{gap:var(--space-4);margin-top:var(--space-4)}
-  .case-support-grid+.client-results-grid{margin-top:var(--space-7)}
   .case-support--portrait .case-media--portrait-fit{aspect-ratio:3/4}
   .case-portrait-player{width:100%;height:100%}
   .case-support--wide .case-media{aspect-ratio:16/9}
@@ -501,7 +496,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       <figcaption><cite>Sandra Parker, Just The Tonic</cite></figcaption>
     </figure>
 
-    <div class="case-support-grid">
+    <div class="case-support-grid" aria-label="Client stories and results">
       <article class="case-support case-support--portrait" aria-labelledby="sandra-case-title">
         <div class="case-media case-media--portrait-fit">
           <div class="case-portrait-player">
@@ -551,9 +546,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           </div>
         </div>
       </article>
-    </div>
-
-    <div class="client-results-grid" aria-label="Client results at a glance">
       <article class="client-result-card">
         <div class="client-result-person">
           <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/amit-vora.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Amit N. Vora">
@@ -574,28 +566,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
         <ul class="client-result-points">
           <li>Built an AI business around her expertise.</li>
           <li>Reduced dependence on one-to-one delivery.</li>
-        </ul>
-      </article>
-      <article class="client-result-card">
-        <div class="client-result-person">
-          <img class="client-result-avatar" src="assets/testimonials/sandra.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Sandra Parker">
-          <span class="client-result-role">Sandra Parker, Sobriety coach</span>
-        </div>
-        <h3>Built an entirely online program without adding more calls.</h3>
-        <ul class="client-result-points">
-          <li>Her business became more consistent and enjoyable.</li>
-          <li>Better-fit clients could get help without more one-to-one calls.</li>
-        </ul>
-      </article>
-      <article class="client-result-card">
-        <div class="client-result-person">
-          <img class="client-result-avatar" src="assets/testimonials/leanne.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Leanne Ellington">
-          <span class="client-result-role">Leanne Ellington, Emotional health coach</span>
-        </div>
-        <h3>Made room to launch a passion project.</h3>
-        <ul class="client-result-points">
-          <li>Moved delivery into a largely automated virtual business.</li>
-          <li>Reduced dependence on one-to-one work.</li>
         </ul>
       </article>
     </div>
