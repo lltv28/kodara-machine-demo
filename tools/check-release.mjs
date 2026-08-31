@@ -294,8 +294,8 @@ assert.doesNotMatch(page, /delivery-comparison|delivery-model/, 'Removed deliver
 assert.equal((page.match(/class="mechanism-step"/g) ?? []).length, 3, 'Expected the launch process to be merged into three product chapters');
 assert.doesNotMatch(page, /class="(?:midpage-action|alternatives-section|process-section)"/, 'Redundant mid-page action, alternatives, and process sections must stay removed');
 assert.equal((page.match(/class="homepage-stat(?: |")/g) ?? []).length, 4, 'Expected four verified proof and delivery stat cards');
-assert.equal((page.match(/class="case-kicker"/g) ?? []).length, 2, 'Video testimonials must use a consistent client-story label');
-assert.equal((page.match(/class="case-fact"/g) ?? []).length, 2, 'Video testimonials must explain what Kodara helped build');
+assert.equal((page.match(/class="case-kicker"/g) ?? []).length, 3, 'Video testimonials must use a consistent client-story label');
+assert.equal((page.match(/class="case-fact"/g) ?? []).length, 3, 'Video testimonials must explain what Kodara helped build');
 assert.equal((page.match(/class="client-result-role"/g) ?? []).length, 4, 'Every result summary must include consistent role context');
 assert.equal((page.match(/class="footer-group"/g) ?? []).length, 0, 'Footer navigation groups must stay removed');
 assert.doesNotMatch(page, /<footer[\s\S]*?<nav\b/, 'Footer must contain company information and disclaimers only');

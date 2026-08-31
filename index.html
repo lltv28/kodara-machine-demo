@@ -136,7 +136,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .cta-btn:hover{background:var(--accent-hover);box-shadow:0 14px 34px rgba(16,104,68,.26);transform:translateY(-2px)}
 .cta-btn:active{transform:scale(.98)}
 .cta-btn:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px}
-.case-media wistia-player:focus-within{outline:3px solid var(--accent-dark);outline-offset:4px}
+.case-media wistia-player:focus-within,.case-media video:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px}
 /* ---- closing CTA bookend ---- */
 .cta{padding:clamp(var(--space-7),7vw,88px);border-color:var(--accent-dark);background:var(--accent-dark);color:#fff;text-align:center;box-shadow:none}
 .cta .cta-line{width:100%;max-width:var(--measure-display);margin:0 auto var(--space-4);font-family:var(--fb);font-size:var(--type-section-long);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
@@ -202,15 +202,18 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .testimonial-spotlight cite{display:block;margin-top:var(--space-4);color:var(--ink-3);font-size:var(--type-label);font-style:normal;font-weight:650;line-height:1.4}
 @media(max-width:899px){.client-results-grid{grid-template-columns:1fr}}
 @media(min-width:900px){.founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}}
-.case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);align-items:start;margin-top:var(--space-5)}
+.case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);align-items:stretch;margin-top:var(--space-5)}
 .case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
+.case-support--wide{display:grid;grid-column:1/-1;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);align-items:center}
 .case-support-copy{display:flex;flex:1;flex-direction:column;padding:var(--space-6)}
 .case-media{position:relative;aspect-ratio:16/9;background:var(--surface);overflow:hidden}
 .case-media wistia-player{display:block;width:100%;height:100%}
 .case-media--portrait-fit{display:grid;place-items:center;background:var(--panel)}
 .case-support--portrait .case-media--portrait-fit{aspect-ratio:4/3}
 .case-portrait-player{height:100%;aspect-ratio:3/4;background:var(--surface);overflow:hidden}
-.case-portrait-player wistia-player{width:100%;height:100%}
+.case-portrait-player wistia-player,.case-native-video{display:block;width:100%;height:100%}
+.case-native-video{object-fit:contain;background:var(--surface)}
+.case-support--wide .case-media{width:100%;align-self:center;aspect-ratio:16/9}
 .case-media wistia-player:not(:defined){background-position:center;background-size:cover;background-repeat:no-repeat}
 .case-media wistia-player[media-id='6oj2gj3wqt']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/6oj2gj3wqt/swatch')}
 .case-media wistia-player[media-id='fay3lgo8op']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/fay3lgo8op/swatch')}
@@ -229,6 +232,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .case-person strong,.case-person span{display:block}
 .case-person strong{font-size:var(--type-label);line-height:1.3}
 .case-person span{margin-top:var(--space-1);color:var(--ink-3);font-size:var(--type-meta);line-height:1.45}
+.case-person-image--dr-mike{object-position:center 30%}
 @media(max-width:720px){
   .card{--card-pad:var(--space-5)}
   .case-studies-head{margin-bottom:var(--space-5)}
@@ -249,10 +253,12 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .founder-highlight-copy{padding:0}
   .founder-credentials{grid-template-columns:1fr;gap:var(--space-4)}
   .case-support-grid{grid-template-columns:1fr}
+  .case-support--wide{display:flex;grid-column:auto}
   .case-support-copy{padding:var(--space-5)}
   .case-support-grid{gap:var(--space-4);margin-top:var(--space-4)}
   .case-support--portrait .case-media--portrait-fit{aspect-ratio:3/4}
   .case-portrait-player{width:100%;height:100%}
+  .case-support--wide .case-media{aspect-ratio:16/9}
 }
 
 /* ============================================================
@@ -558,7 +564,24 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           </div>
         </div>
       </article>
-      <article class="case-support" aria-labelledby="leanne-case-title">
+      <article class="case-support case-support--portrait" aria-labelledby="dr-mike-case-title">
+        <div class="case-media case-media--portrait-fit">
+          <div class="case-portrait-player">
+            <video class="case-native-video" src="assets/testimonials/dr-mike.mp4" poster="assets/testimonials/dr-mike-poster.jpg" controls playsinline preload="none" aria-label="Dr. Mike client testimonial video"></video>
+          </div>
+        </div>
+        <div class="case-support-copy">
+          <span class="case-kicker">Client story</span>
+          <h3 class="case-title" id="dr-mike-case-title">Dr. Mike had his AI product testing in about 30 days.</h3>
+          <p class="case-copy">After trying three or four companies, Dr. Mike called Kodara “the best one by far” and praised the team’s speed and responsiveness.</p>
+          <p class="case-fact"><span>What Kodara helped build</span><strong>Dr. Mike AI, with its first product already in testing.</strong></p>
+          <div class="case-person">
+            <img class="case-person-image--dr-mike" src="assets/testimonials/dr-mike-poster.jpg" width="104" height="104" loading="lazy" decoding="async" alt="Dr. Mike">
+            <div><strong>Dr. Mike</strong><span>Kodara client</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="case-support case-support--wide" aria-labelledby="leanne-case-title">
         <div class="case-media">
           <wistia-player media-id="fay3lgo8op" aspect="1.791044776119403" aria-label="Leanne Ellington client testimonial video"></wistia-player>
         </div>

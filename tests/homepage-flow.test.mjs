@@ -125,11 +125,14 @@ test('approved process and client proof remain visible', () => {
   assert.ok(position(stories, 'class="client-results-grid"') < position(stories, 'class="testimonial-spotlight"'), 'Result summaries must precede the featured quote');
   assert.ok(position(stories, 'class="testimonial-spotlight"') < position(stories, 'class="case-support-grid"'), 'The featured quote must introduce the deeper video stories');
   const videoStories = stories.match(/<div class="case-support-grid">([\s\S]*?)<\/div>\s*<p class="proof-note">/u)?.[1] ?? '';
-  assert.equal((videoStories.match(/<article class="case-support(?:\s[^"]*)?"/gu) ?? []).length, 2, 'Sandra and Leanne need paired video-story cards');
+  assert.equal((videoStories.match(/<article class="case-support(?:\s[^"]*)?"/gu) ?? []).length, 3, 'Sandra, Dr. Mike, and Leanne need distinct video-story cards');
   assert.match(videoStories, /<article class="case-support case-support--portrait"[^>]*>[\s\S]*?media-id="6oj2gj3wqt"/u, 'Sandra’s story must use the taller portrait-card treatment');
   assert.match(videoStories, /media-id="6oj2gj3wqt"/u, 'Sandra’s video must remain in the paired story grid');
   assert.match(videoStories, /class="case-media case-media--portrait-fit">\s*<div class="case-portrait-player">\s*<wistia-player media-id="6oj2gj3wqt"/u, 'Sandra’s portrait video must retain a dedicated 3:4 frame instead of being cropped into widescreen');
-  assert.match(videoStories, /media-id="fay3lgo8op"/u, 'Leanne’s video must remain in the paired story grid');
+  assert.match(videoStories, /<video class="case-native-video"[^>]*src="assets\/testimonials\/dr-mike\.mp4"[^>]*poster="assets\/testimonials\/dr-mike-poster\.jpg"[^>]*preload="none"/u, 'Dr. Mike’s approved testimonial must use the web-optimized local video without preloading it');
+  assert.match(videoStories, /Dr\. Mike had his AI product testing in about 30 days\./u, 'Dr. Mike’s story must lead with the supported implementation milestone');
+  assert.doesNotMatch(videoStories, /\$100,?000/u, 'Dr. Mike’s future revenue goal must not be presented as a testimonial result');
+  assert.match(videoStories, /<article class="case-support case-support--wide"[^>]*>[\s\S]*?media-id="fay3lgo8op"/u, 'Leanne’s widescreen story must span the full desktop proof row');
   assert.match(stories, /Enrolled 30\+ patients in his first five weeks\./u);
   assert.match(stories, /Replaced her in-person classes within two months\./u);
 
