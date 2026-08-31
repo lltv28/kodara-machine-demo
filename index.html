@@ -109,8 +109,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .card-title{width:100%;max-width:var(--measure-display);margin-inline:auto;font-family:var(--fb);font-size:var(--type-section);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
 
 /* ---------- early proof ---------- */
-.proof-snapshot-inner{width:100%}
-.proof-snapshot-lead{max-width:760px;margin:0 auto var(--space-7);text-align:center}
+.proof-snapshot-lead{max-width:760px;margin:0 auto;text-align:center}
 .proof-snapshot-lead strong{display:block;color:var(--accent-ink);font-size:clamp(3.2rem,7vw,5.4rem);font-weight:700;line-height:.95;letter-spacing:var(--tracking-stat)}
 .proof-snapshot-lead p{max-width:38ch;margin:var(--space-4) auto 0;color:var(--ink);font-size:var(--type-body-large);font-weight:600;line-height:1.45;text-wrap:balance}
 .proof-snapshot-logos{padding-top:var(--space-5)}
@@ -126,6 +125,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .proof-snapshot-logo--johns-hopkins{--logo-width:164px;--logo-height:44px}
 @media(max-width:899px) and (min-width:721px){.proof-snapshot-logo-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .proof-snapshot-note{margin-top:var(--space-3);color:var(--ink-3);font-size:var(--type-legal);line-height:1.45;text-align:center}
+.hero-proof-logos{width:100%;margin-top:var(--space-7);padding-top:0}
 
 /* ---- CTA button ---- */
 .cta-btn{display:flex;width:max-content;max-width:100%;align-items:center;justify-content:center;min-height:60px;font-family:var(--fb);font-weight:700;font-size:var(--type-button);line-height:1.2;letter-spacing:var(--tracking-body);color:#fff;background:var(--accent);border:1px solid var(--accent-dark);border-radius:var(--radius-sm);padding:15px 32px;text-align:center;text-decoration:none;text-transform:capitalize;box-shadow:0 10px 28px rgba(16,104,68,.22);transition:transform .18s ease,background-color .18s ease,box-shadow .18s ease}
@@ -338,6 +338,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .site-hero h1{max-width:14ch}
   #hero-region-subheadline{max-width:32ch;min-block-size:6em;font-size:var(--type-hero-subheadline)}
   .hero-vsl-stage{margin-top:var(--space-6);border-radius:var(--radius-lg)}
+  .hero-proof-logos{margin-top:var(--space-6);padding:0}
   .hero-triager-title{margin-top:var(--space-6)}
   #kodara-triager{min-height:58px;margin-top:var(--space-3)}
   .cta{padding:var(--space-7) var(--space-4)}
@@ -345,7 +346,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .cta .cta-btn{width:100%}
   .site-hero+.proof-snapshot{margin-top:var(--space-6)}
   .proof-snapshot+.primary-demo{margin-top:var(--space-6)}
-  .proof-snapshot-lead{margin-bottom:var(--space-6)}
   .proof-snapshot-lead strong{font-size:3.5rem}
   .proof-snapshot-lead p{font-size:var(--type-body-large)}
   .proof-snapshot-logos{padding:var(--space-2) 0}
@@ -434,6 +434,18 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
       })(window,document,'Vidalytics','vidalytics_embed_CA0308FsT4_Z8w5E','https://fast.vidalytics.com/embeds/U18KMfDU/CA0308FsT4_Z8w5E/');
       </script>
     </div>
+    <div class="proof-snapshot-logos hero-proof-logos">
+      <p class="proof-snapshot-logo-label">Healthcare and wellness organizations across the markets Kodara serves:</p>
+      <div class="proof-snapshot-logo-row" role="list">
+        <span class="proof-snapshot-logo proof-snapshot-logo--massage-envy" role="listitem"><img src="assets/logos/massage-envy.png" loading="lazy" decoding="async" alt="Massage Envy"></span>
+        <span class="proof-snapshot-logo proof-snapshot-logo--gameday" role="listitem"><img src="assets/logos/gameday-mens-health.svg" loading="lazy" decoding="async" alt="Gameday Men’s Health"></span>
+        <span class="proof-snapshot-logo proof-snapshot-logo--visiting-angels" role="listitem"><img src="assets/logos/visiting-angels.svg" loading="lazy" decoding="async" alt="Visiting Angels"></span>
+        <span class="proof-snapshot-logo proof-snapshot-logo--ellie" role="listitem"><img src="assets/logos/ellie-mental-health.png" loading="lazy" decoding="async" alt="Ellie Mental Health"></span>
+        <span class="proof-snapshot-logo proof-snapshot-logo--mayo" role="listitem"><img src="assets/logos/mayo-clinic.svg" loading="lazy" decoding="async" alt="Mayo Clinic"></span>
+        <span class="proof-snapshot-logo proof-snapshot-logo--johns-hopkins" role="listitem"><img src="assets/logos/johns-hopkins.png" loading="lazy" decoding="async" alt="Johns Hopkins University"></span>
+      </div>
+      <p class="proof-snapshot-note">Organization names are shown for market context and do not imply endorsement, affiliation, client status, or purchase history.</p>
+    </div>
     <h2 class="hero-triager-title">See if you qualify.</h2>
     <div id="kodara-triager"></div>
     <script
@@ -448,20 +460,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     <div class="proof-snapshot-lead">
       <strong>350+</strong>
       <p>We’ve helped more than 350 doctors, practitioners, clinic owners, and wellness experts build AI versions of their knowledge and expertise.</p>
-    </div>
-    <div class="proof-snapshot-inner">
-      <div class="proof-snapshot-logos">
-        <p class="proof-snapshot-logo-label">Healthcare and wellness organizations across the markets Kodara serves:</p>
-        <div class="proof-snapshot-logo-row" role="list">
-          <span class="proof-snapshot-logo proof-snapshot-logo--massage-envy" role="listitem"><img src="assets/logos/massage-envy.png" loading="lazy" decoding="async" alt="Massage Envy"></span>
-          <span class="proof-snapshot-logo proof-snapshot-logo--gameday" role="listitem"><img src="assets/logos/gameday-mens-health.svg" loading="lazy" decoding="async" alt="Gameday Men’s Health"></span>
-          <span class="proof-snapshot-logo proof-snapshot-logo--visiting-angels" role="listitem"><img src="assets/logos/visiting-angels.svg" loading="lazy" decoding="async" alt="Visiting Angels"></span>
-          <span class="proof-snapshot-logo proof-snapshot-logo--ellie" role="listitem"><img src="assets/logos/ellie-mental-health.png" loading="lazy" decoding="async" alt="Ellie Mental Health"></span>
-          <span class="proof-snapshot-logo proof-snapshot-logo--mayo" role="listitem"><img src="assets/logos/mayo-clinic.svg" loading="lazy" decoding="async" alt="Mayo Clinic"></span>
-          <span class="proof-snapshot-logo proof-snapshot-logo--johns-hopkins" role="listitem"><img src="assets/logos/johns-hopkins.png" loading="lazy" decoding="async" alt="Johns Hopkins University"></span>
-        </div>
-        <p class="proof-snapshot-note">Organization names are shown for market context and do not imply endorsement, affiliation, client status, or purchase history.</p>
-      </div>
     </div>
   </section>
 

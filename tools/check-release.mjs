@@ -166,6 +166,9 @@ assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain 
 assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Hero must load the approved Vidalytics VSL source');
 assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
 assert.match(page, /<h2 class="hero-triager-title">See if you qualify\.<\/h2>\s*<div id="kodara-triager"><\/div>/, 'Hero must introduce the triager with the approved qualification heading');
+assert.match(page, /class="hero-vsl-stage"[\s\S]*?<div class="proof-snapshot-logos hero-proof-logos">[\s\S]*?<h2 class="hero-triager-title">See if you qualify\.<\/h2>/, 'Authority logos must appear between the VSL and qualification widget');
+assert.match(page, /\.hero-proof-logos\{width:100%;margin-top:var\(--space-7\);padding-top:0\}/, 'Hero authority logos need deliberate desktop spacing without a duplicate top inset');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-proof-logos\{margin-top:var\(--space-6\);padding:0\}/, 'Hero authority logos need compact mobile spacing');
 assert.match(page, /\.hero-triager-title\{[^}]*font-size:var\(--type-card\);[^}]*text-wrap:balance/, 'Triager heading must use the shared card-heading tier');
 assert.match(page, /<div id="kodara-triager"><\/div>\s*<script\s+src="https:\/\/embed\.kodara\.com\/v1\/widget\.js"\s+data-target="kodara-triager"\s+data-widget-id="lucas-codex-testing">\s*<\/script>/, 'Hero must load the approved Kodara triager widget');
 assert.doesNotMatch(page, /class="hero-guarantee"/, 'Duplicate post-widget guarantee must not return');
