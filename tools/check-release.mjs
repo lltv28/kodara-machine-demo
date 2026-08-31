@@ -210,9 +210,9 @@ assert.ok(sectionIndex('faq') < sectionIndex('cta'), 'FAQ must precede the final
 assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder letter must not return');
 
 // Current VSL offer language.
-assert.match(page, /<h1[^>]*>We Will Turn Your Health Expertise Into An AI You Can Sell To Clients Entirely Online<\/h1>/, 'Hero must lead with the approved online AI offer');
+assert.match(page, /<h1[^>]*>Give Us 30 Days To Turn Your Health Expertise Into An AI That Can Sell Itself To Clients &amp; Patients Online<\/h1>/, 'Hero must lead with the approved online AI offer');
 assert.match(page, /<p class="hero-region-eyebrow" id="hero-region-eyebrow">Limited Availability for Health &amp; Wellness Experts<\/p>\s*<h1/, 'Hero must place the generic regional availability line above the headline');
-assert.match(page, /<p id="hero-region-subheadline">We guarantee to launch and get your first 10 beta users in just 30 days, or else you get a full refund\.<\/p>/, 'Hero must server-render the approved guarantee');
+assert.match(page, /<p id="hero-region-subheadline">If we don't get your first 10 beta users in the first month, you get a full refund!<\/p>/, 'Hero must server-render the approved guarantee');
 assert.match(page, /\.hero-region-eyebrow\{[^}]*min-block-size:1\.4em[^}]*text-wrap:balance/, 'Hero audience personalization must reserve its desktop height and balance wrapping');
 assert.match(page, /#hero-region-subheadline\{[^}]*min-block-size:4\.5em[^}]*text-wrap:balance/, 'Hero subheadline personalization must reserve its desktop height and balance wrapping');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-region-eyebrow\{[^}]*min-block-size:2\.8em[\s\S]*?#hero-region-subheadline\{[^}]*min-block-size:6em/, 'Hero personalization must reserve both mobile text areas');

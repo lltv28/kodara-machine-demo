@@ -91,6 +91,8 @@ The founder section pairs the approved Lucas Tyson speaking photograph with the 
 
 For qualifying clients, the current offer states that the first AI Version will be completed and launched and the first 10 beta users onboarded within the first 30 days on the launch timeline, or the client receives a full refund. The signed agreement controls eligibility, definitions, timing, and remedy.
 
+The approved homepage hero leads with “Give Us 30 Days To Turn Your Health Expertise Into An AI That Can Sell Itself To Clients & Patients Online” and follows with “If we don't get your first 10 beta users in the first month, you get a full refund!” Regional personalization may change only the availability line above this copy.
+
 ### Application action
 
 The live qualification widget is the primary action in the hero. The only repeated qualification link appears in the final CTA and returns visitors to the widget. Do not add header or intermediate CTA buttons.

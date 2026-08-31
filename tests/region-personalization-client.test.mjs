@@ -14,7 +14,7 @@ import {
 test('approved regions personalize the eyebrow without changing the guarantee', () => {
   assert.equal(
     copyForRegion('California'),
-    'We guarantee to launch and get your first 10 beta users in just 30 days, or else you get a full refund.',
+    "If we don't get your first 10 beta users in the first month, you get a full refund!",
   );
   assert.equal(isApprovedRegion('Newfoundland and Labrador'), true);
   assert.equal(eyebrowForRegion('California'), 'Limited Availability for California Health & Wellness Experts');
@@ -24,7 +24,7 @@ test('unknown region produces exact generic copy', () => {
   assert.equal(copyForRegion('England'), GENERIC_COPY);
   assert.equal(
     GENERIC_COPY,
-    'We guarantee to launch and get your first 10 beta users in just 30 days, or else you get a full refund.',
+    "If we don't get your first 10 beta users in the first month, you get a full refund!",
   );
   assert.equal(eyebrowForRegion('England'), GENERIC_EYEBROW);
   assert.equal(GENERIC_EYEBROW, 'Limited Availability for Health & Wellness Experts');

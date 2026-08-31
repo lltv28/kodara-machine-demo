@@ -13,7 +13,7 @@ const APPROVED_REGIONS = new Set([
 
 const STORAGE_KEY = 'kodara:visitor-region';
 
-export const GENERIC_COPY = 'We guarantee to launch and get your first 10 beta users in just 30 days, or else you get a full refund.';
+export const GENERIC_COPY = "If we don't get your first 10 beta users in the first month, you get a full refund!";
 export const GENERIC_EYEBROW = 'Limited Availability for Health & Wellness Experts';
 
 export function isApprovedRegion(region) {
