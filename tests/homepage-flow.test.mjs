@@ -36,6 +36,7 @@ test('homepage follows the approved qualification narrative', () => {
   const orderedMarkers = [
     'class="site-hero"',
     'class="homepage-stats"',
+    'class="search-demand-section"',
     'class="mechanism-features"',
     'class="case-studies"',
     'class="founder-highlight"',
@@ -51,6 +52,23 @@ test('homepage follows the approved qualification narrative', () => {
     assert.doesNotMatch(content, new RegExp(`<section class="${removedSection}"`), `${removedSection} must not remain in the visible homepage flow`);
   }
   assert.doesNotMatch(content, /class="section-cta"/u, 'Intermediate qualification actions must be removed');
+});
+
+test('homepage presents the supplied animated online-demand chart before the build process', () => {
+  const content = body(homepage);
+  const section = content.match(/<section class="search-demand-section"[\s\S]*?<\/section>/u)?.[0] ?? '';
+
+  assert.match(section, /The demand for health and wellness expertise is exploding online\./u);
+  assert.match(section, /People are already searching online for answers, options, and experts they can trust\./u);
+  assert.match(section, /data-search-demand-chart/u);
+  assert.match(section, /data-estimates-url="assets\/data\/search-estimates\.json"/u);
+  assert.match(section, /data-cues-url="assets\/data\/motion-cues\.json"/u);
+  assert.match(section, /<svg[^>]*data-search-demand-plot[^>]*role="img"[^>]*aria-labelledby="search-demand-keyword search-demand-description"/u);
+  assert.match(section, /Illustrative estimates\. Search interest indexed to 2016 = 100\./u);
+  assert.doesNotMatch(section, /<iframe|<canvas/u, 'The chart must remain native SVG');
+  assert.match(homepage, /<script type="module" src="assets\/js\/search-demand-chart\.mjs"><\/script>/u);
+  assert.ok(position(content, 'class="homepage-stats"') < position(content, 'class="search-demand-section"'));
+  assert.ok(position(content, 'class="search-demand-section"') < position(content, 'class="mechanism-features"'));
 });
 
 test('homepage stat row uses the four approved verified figures', () => {

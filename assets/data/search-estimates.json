@@ -1,0 +1,25 @@
+{
+  "status": "illustrative_estimates",
+  "metric": "relative_search_interest_index",
+  "base_year": 2016,
+  "base_value": 100,
+  "years": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+  "display_scale": {
+    "minimum": 70,
+    "maximum": 1050,
+    "note": "A common indexed scale keeps every series comparable while leaving room for quarterly pullbacks below the annual trend."
+  },
+  "series": [
+    { "keyword": "Anxiety", "annual_anchor_values": [100, 110, 125, 145, 170, 205, 250, 310, 375, 445, 520] },
+    { "keyword": "ADHD", "annual_anchor_values": [100, 112, 135, 170, 220, 290, 370, 455, 550, 625, 710] },
+    { "keyword": "Depression", "annual_anchor_values": [100, 106, 118, 136, 160, 195, 235, 285, 345, 420, 510] },
+    { "keyword": "Vitamin deficiencies", "annual_anchor_values": [100, 110, 125, 148, 180, 220, 270, 330, 405, 495, 610] },
+    { "keyword": "GLP-1s", "annual_anchor_values": [100, 105, 118, 145, 190, 265, 390, 560, 740, 860, 1000] },
+    { "keyword": "Peptides", "annual_anchor_values": [100, 110, 128, 155, 190, 235, 305, 400, 530, 680, 860] },
+    { "keyword": "Diabetes and metabolic health", "annual_anchor_values": [100, 108, 122, 145, 175, 215, 265, 325, 400, 500, 650] },
+    { "keyword": "Hormonal health", "annual_anchor_values": [100, 112, 135, 168, 210, 265, 330, 410, 515, 630, 760] },
+    { "keyword": "Autoimmune diseases", "annual_anchor_values": [100, 108, 122, 142, 170, 205, 250, 305, 370, 450, 550] }
+  ],
+  "modeling_note": "Annual anchors are expanded to quarterly points with deterministic pullbacks and plateaus. Every illustrative series reaches at least 5x its 2016 index while retaining a shared scale.",
+  "disclaimer": "Illustrative estimates for visual design only. Replace with sourced Google Trends or search-volume data before presenting as measured fact."
+}

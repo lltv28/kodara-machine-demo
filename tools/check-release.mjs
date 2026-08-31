@@ -11,6 +11,8 @@ const confirmationPath = resolve(root, 'confirmation/index.html');
 const confirmationStylesPath = resolve(root, 'confirmation/styles.css');
 const confirmation = readFileSync(confirmationPath, 'utf8');
 const confirmationStyles = readFileSync(confirmationStylesPath, 'utf8');
+const searchChartModulePath = resolve(root, 'assets/js/search-demand-chart.mjs');
+const searchChartModule = readFileSync(searchChartModulePath, 'utf8');
 
 function cssToken(source, name) {
   return source.match(new RegExp(`${name}:([^;}]+)`))?.[1];
@@ -148,7 +150,7 @@ assert.match(page, /--radius-sm:8px/, 'Compact surfaces need the 8px radius tier
 assert.match(page, /--radius:16px;--radius-lg:16px/, 'Support surfaces need the 16px radius tier');
 assert.match(page, /--radius-xl:24px/, 'Featured surfaces need the 24px radius tier');
 assert.match(page, /--page:#fff;--panel:#fff;--bg:#fff;--surface:#fff/, 'Neutral page surfaces must stay white');
-assert.doesNotMatch(page, /#FCFDFC|#F1F6F5|#E6EFED/i, 'Light green page backgrounds must not return');
+assert.doesNotMatch(page, /--(?:page|panel|bg|surface):#(?:FCFDFC|F1F6F5|E6EFED)/i, 'Light green page backgrounds must not return outside the supplied chart visual');
 assert.match(page, /--ink:#20362D;--ink-2:#304E42;--ink-3:#567066/, 'Text must use the healthcare green-black palette');
 assert.match(page, /--accent:#106844;--accent-hover:#0C5537;--accent-ink:#106844;--accent-dark:#0C4F34/, 'Actions must use the Kodara green palette');
 assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate feature backgrounds and framing must not return');
@@ -198,12 +200,13 @@ assert.match(page, /\.site-header\{[^}]*align-items:center;justify-content:cente
 assert.match(confirmationStyles, /\.site-header\{[\s\S]*?align-items:center;\s*justify-content:center;/, 'Confirmation logo-only header must stay centered');
 
 // Core page structure.
-for (const className of ['site-header', 'site-hero', 'homepage-stats', 'mechanism-features', 'case-studies', 'founder-highlight', 'faq', 'cta', 'site-footer']) {
+for (const className of ['site-header', 'site-hero', 'homepage-stats', 'search-demand-section', 'mechanism-features', 'case-studies', 'founder-highlight', 'faq', 'cta', 'site-footer']) {
   assert.match(page, new RegExp(`class="[^"]*${className}`), `Missing ${className} section`);
 }
 const sectionIndex = (className) => page.search(new RegExp(`<(?:section|header|footer) class="[^"]*\\b${className}\\b`));
 assert.ok(sectionIndex('site-hero') < sectionIndex('homepage-stats'), 'Four verified stats must immediately follow the qualification hero');
-assert.ok(sectionIndex('homepage-stats') < sectionIndex('mechanism-features'), 'The launch process must follow the stat row');
+assert.ok(sectionIndex('homepage-stats') < sectionIndex('search-demand-section'), 'The illustrative demand chart must follow the stat row');
+assert.ok(sectionIndex('search-demand-section') < sectionIndex('mechanism-features'), 'The launch process must follow the demand opportunity');
 assert.ok(sectionIndex('mechanism-features') < sectionIndex('case-studies'), 'Client proof must follow the product and launch chapters');
 assert.ok(sectionIndex('case-studies') < sectionIndex('founder-highlight'), 'The concise founder story must follow client proof');
 assert.ok(sectionIndex('faq') < sectionIndex('cta'), 'FAQ must precede the final CTA');
@@ -220,6 +223,17 @@ assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-region-eyebrow\{[^}]
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-vsl-stage\{margin-top:var\(--space-4\)/, 'Mobile VSL must use a compact gap below the guarantee');
 assert.match(page, /@media\(max-width:340px\)\{\.hero-region-eyebrow\{min-block-size:4\.2em\}#hero-region-subheadline\{min-block-size:7\.5em\}\}/, 'Hero personalization must reserve its narrow-mobile text heights');
 assert.match(page, /<script type="module" src="assets\/js\/region-personalization\.mjs"><\/script>/, 'Hero regional personalization client is not loaded');
+assert.match(page, /<script type="module" src="assets\/js\/search-demand-chart\.mjs"><\/script>/, 'Homepage must load the native search-demand chart module');
+assert.match(page, /<section class="search-demand-section"[^>]*>[\s\S]*?The demand for health and wellness expertise is exploding online\.[\s\S]*?data-search-demand-chart[\s\S]*?<svg data-search-demand-plot role="img"/, 'Homepage must include the approved native SVG demand section');
+assert.match(page, /Illustrative estimates\. Search interest indexed to 2016 = 100\./, 'Search chart must visibly qualify its data as illustrative estimates');
+assert.doesNotMatch(page.match(/<section class="search-demand-section"[\s\S]*?<\/section>/)?.[0] ?? '', /<iframe|<canvas/, 'Search chart must not use an iframe, canvas, or video replacement');
+assert.ok(existsSync(resolve(root, 'assets/data/search-estimates.json')), 'Missing supplied search-estimate data');
+assert.ok(existsSync(resolve(root, 'assets/data/motion-cues.json')), 'Missing supplied search-chart motion cues');
+assert.match(searchChartModule, /new IntersectionObserver/, 'Search chart must trigger from viewport entry');
+assert.match(searchChartModule, /observer\.disconnect\(\)/, 'Search chart viewport trigger must run once');
+assert.match(searchChartModule, /prefers-reduced-motion: reduce/, 'Search chart must provide a reduced-motion final state');
+assert.match(searchChartModule, /setSearchStep\(series\.length, false\)/, 'Reduced motion must reveal the complete nine-line chart');
+assert.doesNotMatch(searchChartModule, /addEventListener\(['"]scroll/, 'Search chart must not attach a scroll-frame listener');
 assert.match(page, /Qualifying clients are protected by the 30-day refund terms in their signed agreement/, 'Launch process must state the qualifying-client guarantee boundary');
 assert.match(page, /<strong>350\+<\/strong>\s*<span>Health and wellness experts running their businesses online with Kodara<\/span>/, 'Stat row must lead with the verified expert claim');
 assert.match(page, /<strong>\$50M\+<\/strong>\s*<span>Revenue generated by our team for online knowledge-based products<\/span>/, 'Stat row must include the verified revenue claim');

@@ -4,7 +4,7 @@ This context describes the public homepage and post-booking confirmation page fo
 
 ## Visual system
 
-White is the neutral page, section, card, and media surface. Green is reserved for actions, proof figures, active accents, and the closing CTA. Do not use pale green, tinted green, or green-gradient backgrounds.
+White is the neutral page, section, card, and media surface. Green is reserved for actions, proof figures, active accents, and the closing CTA. Do not use pale green, tinted green, or green-gradient backgrounds. The native search-demand chart is the only scoped exception: its internal mint gradient preserves the supplied chart design and must not spread to other page surfaces.
 
 Instrument Sans is the site typeface. Desktop body copy uses 20px and 22px tiers; mobile uses 18px and 20px. Desktop display headings use a 48px to 52px hero tier, a 44px to 52px section tier, and a 30px to 36px card tier. Mobile uses a 42px to 48px hero tier, a 34px to 40px section tier, and a 24px to 28px card tier.
 
@@ -19,14 +19,15 @@ The visible homepage sequence is fixed:
 1. Centered logo-only header
 2. Hero, VSL, authority logos, and live qualification widget
 3. Four proof and delivery stat cards
-4. Three-step build and launch process
-5. Client stories and result proof
-6. Why Kodara exists
-7. FAQ
-8. Final qualification CTA
-9. Institutional footer
+4. Illustrative online search-demand chart
+5. Three-step build and launch process
+6. Client stories and result proof
+7. Why Kodara exists
+8. FAQ
+9. Final qualification CTA
+10. Institutional footer
 
-Do not restore the removed standalone demand education, audience-fit, institutional credibility, primary demo, intermediate CTA, alternatives, or second process sections. Their strongest verified facts now appear once in the approved sequence.
+Do not restore the removed audience-fit, institutional credibility, primary demo, intermediate CTA, alternatives, or second process sections. Their strongest verified facts now appear once in the approved sequence.
 
 ## Language
 
@@ -50,6 +51,12 @@ The four-card row directly below the qualification widget uses these approved fa
 - 30+ health, wellness, and medical modalities where Kodara has helped clients create their AI
 
 These are supplied company experience claims. Do not increase, extrapolate, or turn them into guarantees of a visitor's result.
+
+### Illustrative online demand
+
+The stat cards lead into a native SVG chart showing the supplied nine health and wellness search themes from 2016 through 2026. It uses the exact source anchor data, deterministic quarterly variation, shared 70-1050 scale, transcript-relative reveal cues, and Instrument Sans chart styling. The chart runs once when it enters the viewport. Reduced-motion visitors see the completed nine-line state immediately.
+
+The chart is explicitly labeled as illustrative estimates. It must not be described as verified Google Trends, historical search volume, measured market growth, or a prediction of client results.
 
 ### AI Version of You
 

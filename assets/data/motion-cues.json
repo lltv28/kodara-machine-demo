@@ -1,0 +1,38 @@
+{
+  "source_timeline": "untouched_source",
+  "search_sequence": {
+    "start": 190.49,
+    "end": 203.02,
+    "duration": 12.53,
+    "timing_mode": "transcript_relative",
+    "entry_seconds": 0.32,
+    "exit_seconds": 0.24,
+    "estimated_keyword_cues": [
+      { "keyword": "Anxiety", "start": 192.2, "relative_start": 1.71 },
+      { "keyword": "ADHD", "start": 193.2, "relative_start": 2.71 },
+      { "keyword": "Depression", "start": 194.2, "relative_start": 3.71 },
+      { "keyword": "Vitamin deficiencies", "start": 195.2, "relative_start": 4.71 },
+      { "keyword": "GLP-1s", "start": 196.6, "relative_start": 6.11 },
+      { "keyword": "Peptides", "start": 197.6, "relative_start": 7.11 },
+      { "keyword": "Diabetes and metabolic health", "start": 198.5, "relative_start": 8.01 },
+      { "keyword": "Hormonal health", "start": 200.2, "relative_start": 9.71 },
+      { "keyword": "Autoimmune diseases", "start": 201.4, "relative_start": 10.91 }
+    ]
+  },
+  "streaming_shift": {
+    "start": 221.34,
+    "end": 225.81,
+    "layout": "blockbuster_to_netflix_youtube"
+  },
+  "retail_shift": {
+    "start": 229.01,
+    "end": 237.8,
+    "layout": "jcpenney_sears_to_amazon"
+  },
+  "motion_language": {
+    "background": "enter_up_exit_down",
+    "logos": "rise_and_settle",
+    "chart": "add_series_on_spoken_keyword",
+    "easing": "cubic-bezier(0.16, 1, 0.3, 1)"
+  }
+}
