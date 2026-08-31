@@ -85,7 +85,9 @@ assert.match(confirmationStyles, /\.site-footer-inner\{[^}]*grid-template-column
 assert.match(confirmationStyles, /\.brand:focus-visible,\.site-footer-brand:focus-visible\{outline:3px solid var\(--accent-dark\)/, 'Confirmation brand links need the shared focus treatment');
 assert.match(confirmationStyles, /\.press-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation press features must use a two-column desktop grid');
 assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.press-grid\{grid-template-columns:1fr\}/, 'Confirmation press features must stack on smaller screens');
-assert.match(confirmationStyles, /\.press-card-media\{aspect-ratio:16\/9;/, 'Press captures must use the shared 16:9 media frame');
+assert.match(confirmationStyles, /\.press-card-media\{overflow:hidden;/, 'Press captures need a stable clipped media frame');
+assert.match(confirmationStyles, /\.press-card-media>img\{display:block;width:100%;height:auto\}/, 'Press captures must preserve their intrinsic aspect ratio');
+assert.doesNotMatch(confirmationStyles, /\.press-card-media>img\{[^}]*height:100%/, 'Press captures must not be stretched to a forced height');
 assert.match(confirmationStyles, /\.press-card h3\{[^}]*font-size:clamp\(1\.35rem,1\.9vw,1\.75rem\)/, 'Press headlines must remain legible across desktop and mobile');
 assert.match(confirmationStyles, /\.faq-video-grid\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'Confirmation FAQ videos must use a two-column desktop grid');
 assert.match(confirmationStyles, /@media\(max-width:899px\)[\s\S]*\.faq-video-grid\{grid-template-columns:1fr\}/, 'Confirmation FAQ videos must stack on smaller screens');
