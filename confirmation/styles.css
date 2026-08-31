@@ -121,6 +121,15 @@ button,summary{font:inherit}
 .testimonial-person span{margin-top:2px;color:var(--ink-3);font-size:.95rem}
 .proof-note{max-width:78ch;margin:var(--space-5) auto 0;color:var(--ink-3);font-size:.875rem;line-height:1.5;text-align:center}
 
+.press-library{max-width:1100px;margin-inline:auto}
+.press-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6)}
+.press-card{min-width:0;overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm)}
+.press-card-media{display:grid;aspect-ratio:16/9;place-items:center;border-bottom:1px solid var(--line);color:var(--ink-3);text-align:center}
+.press-card-media strong{font-size:var(--type-card);font-weight:650;letter-spacing:-1px}
+.press-card-copy{display:grid;gap:var(--space-2);padding:var(--space-5)}
+.press-card-copy strong{font-size:var(--type-question);font-weight:650;line-height:1.2}
+.press-card-copy span{color:var(--ink-3);font-size:1.05rem;line-height:1.4}
+
 .faq-video-library{max-width:1100px;margin-inline:auto}
 .faq-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6)}
 .faq-video-card{min-width:0;overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow-sm)}
@@ -148,6 +157,7 @@ button,summary{font:inherit}
   .split-copy p{margin-left:auto;margin-right:auto}
   .testimonial-grid{grid-template-columns:1fr}
   .testimonial-media{min-height:320px}
+  .press-grid{grid-template-columns:1fr}
   .faq-video-grid{grid-template-columns:1fr}
   .site-footer-inner{grid-template-columns:1fr}
 }
@@ -177,6 +187,8 @@ button,summary{font:inherit}
   .testimonial-media{min-height:280px}
   .testimonial-media--portrait wistia-player{width:min(58%,280px)}
   .testimonial-copy{padding:var(--space-5)}
+  .press-grid{gap:var(--space-5)}
+  .press-card-copy{padding:var(--space-4)}
   .faq-video-grid{gap:var(--space-5)}
   .faq-video-card h3{min-block-size:0;padding:var(--space-4)}
   .final-reminder{padding:var(--space-7) var(--space-5);border-radius:var(--radius)}
