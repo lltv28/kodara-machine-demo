@@ -45,6 +45,7 @@ head.appendChild(script);
   --type-quote:clamp(1.5rem,2vw,1.75rem);--type-stat:clamp(4rem,7vw,6rem);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spacing:var(--tracking-body);background:var(--page);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   display:flex;flex-direction:column;align-items:center;padding:var(--space-5) var(--page-gutter) var(--page-gutter);overflow-x:hidden}
@@ -403,7 +404,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     <img src="assets/brand/kodara-wordmark.svg" width="98" height="24" alt="Kodara">
   </a>
   <nav class="site-nav" aria-label="Primary navigation">
-    <a href="#how-it-works">How It Works</a>
+    <a href="#how-it-works" hidden>How It Works</a>
     <a href="#stories">Results</a>
     <a href="#faq">FAQ</a>
   </nav>
@@ -463,7 +464,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   <!-- ============ CATEGORY EDUCATION ============ -->
   <section class="education-section" id="why-it-matters" aria-labelledby="education-title">
     <header class="education-head">
-      <h2 id="education-title">The demand for health and wellness expertise is moving online.</h2>
+      <h2 id="education-title">The demand for health and wellness expertise is exploding online.</h2>
       <p>People are already searching online for answers, options, and experts they can trust. But most real expertise is still delivered one person at a time, in one place, at one scheduled time.</p>
     </header>
     <div class="demand-signals" aria-label="Signals behind the demand for online health and wellness expertise">
@@ -474,8 +475,56 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     <p class="education-opportunity">That creates a major opportunity for independent health and wellness experts to make trusted expertise accessible online through AI and the Internet.</p>
   </section>
 
+  <!-- ============ WHO IT IS FOR ============ -->
+  <section class="audience-section" id="who-its-for" aria-labelledby="audience-title">
+    <div class="audience-copy">
+      <h2 id="audience-title">Built for experts whose knowledge is limited by the calendar.</h2>
+      <p>Kodara works with health and wellness businesses that already have valuable expertise and want to help more people without adding more one-to-one work.</p>
+    </div>
+    <div class="audience-list">
+      <article class="audience-path">
+        <span class="audience-number" aria-hidden="true">01</span>
+        <div><h3>Doctors and practitioners</h3><p>Turn the questions and methods you repeat every week into digital programs people can use online.</p></div>
+      </article>
+      <article class="audience-path">
+        <span class="audience-number" aria-hidden="true">02</span>
+        <div><h3>Clinic owners</h3><p>Create another way to help people without adding appointments or requiring every answer to come from the owner.</p></div>
+      </article>
+      <article class="audience-path">
+        <span class="audience-number" aria-hidden="true">03</span>
+        <div><h3>Coaches and wellness experts</h3><p>Package your method into programs that can support more people without another weekly call.</p></div>
+      </article>
+      <article class="audience-path">
+        <span class="audience-number" aria-hidden="true">04</span>
+        <div><h3>Healthcare educators</h3><p>Make specialized knowledge easier to access while retaining review and approval before launch.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE AND APPROVAL ============ -->
+  <section class="credibility-section" id="review-approval" aria-labelledby="credibility-title">
+    <header class="credibility-head">
+      <h2 id="credibility-title">Built by engineers and healthcare operators.</h2>
+      <p>Lucas built the team required to do this properly, including AI engineers and operators with decades of healthcare experience. You remain in control of what carries your name.</p>
+    </header>
+    <div class="credibility-grid">
+      <article class="credibility-item">
+        <strong>350+</strong>
+        <p>More than 350 doctors, practitioners, clinic owners, and wellness experts have built AI versions of their expertise with our team.</p>
+      </article>
+      <article class="credibility-item">
+        <strong>100,000+</strong>
+        <p>More than 100,000 healthcare leads generated online were used to train Kodara’s client-discovery model.</p>
+      </article>
+      <article class="credibility-item">
+        <strong>You approve</strong>
+        <p>You test the programs and AI experience before anything launches under your name.</p>
+      </article>
+    </div>
+  </section>
+
   <!-- ============ PRIMARY DEMO ============ -->
-  <section class="card primary-demo" aria-labelledby="primary-demo-title">
+  <section class="card primary-demo" aria-labelledby="primary-demo-title" hidden>
     <div class="primary-demo-visual">
       <div class="offer-demo" aria-label="How Kodara turns expertise into a launched AI business">
         <div><strong>Your expertise</strong><span>Focused interviews and existing materials</span></div>
@@ -491,7 +540,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   </section>
 
   <!-- ============ MECHANISM FEATURES ============ -->
-  <section class="mechanism-features" id="how-it-works" aria-labelledby="mechanism-title">
+  <section class="mechanism-features" id="how-it-works" aria-labelledby="mechanism-title" hidden>
     <header class="mechanism-head">
       <h2 class="card-title" id="mechanism-title">Your expertise, built and launched in three steps.</h2>
       <p class="mechanism-intro">You give us about one hour per week. Kodara handles the extraction, build, review, launch, and beta-user onboarding.</p>
@@ -579,32 +628,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
     <p class="proof-note">Individual experiences are not typical and do not guarantee a specific result. Results vary by program, audience, implementation, and participation.</p>
   </section>
 
-  <!-- ============ WHO IT IS FOR ============ -->
-  <section class="audience-section" id="who-its-for" aria-labelledby="audience-title">
-    <div class="audience-copy">
-      <h2 id="audience-title">Built for experts whose knowledge is limited by the calendar.</h2>
-      <p>Kodara works with health and wellness businesses that already have valuable expertise and want to help more people without adding more one-to-one work.</p>
-    </div>
-    <div class="audience-list">
-      <article class="audience-path">
-        <span class="audience-number" aria-hidden="true">01</span>
-        <div><h3>Doctors and practitioners</h3><p>Turn the questions and methods you repeat every week into digital programs people can use online.</p></div>
-      </article>
-      <article class="audience-path">
-        <span class="audience-number" aria-hidden="true">02</span>
-        <div><h3>Clinic owners</h3><p>Create another way to help people without adding appointments or requiring every answer to come from the owner.</p></div>
-      </article>
-      <article class="audience-path">
-        <span class="audience-number" aria-hidden="true">03</span>
-        <div><h3>Coaches and wellness experts</h3><p>Package your method into programs that can support more people without another weekly call.</p></div>
-      </article>
-      <article class="audience-path">
-        <span class="audience-number" aria-hidden="true">04</span>
-        <div><h3>Healthcare educators</h3><p>Make specialized knowledge easier to access while retaining review and approval before launch.</p></div>
-      </article>
-    </div>
-  </section>
-
   <!-- ============ WHY KODARA EXISTS ============ -->
   <section class="founder-highlight" id="about" aria-labelledby="founder-highlight-title">
     <figure class="founder-media">
@@ -620,28 +643,6 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
         <div class="founder-credential"><strong>$50M+</strong><span>Online marketing agency built by age 25</span></div>
         <div class="founder-credential"><strong>100,000+</strong><span>Leads and appointments generated for healthcare companies, doctors, and wellness experts</span></div>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ EXPERIENCE AND APPROVAL ============ -->
-  <section class="credibility-section" id="review-approval" aria-labelledby="credibility-title">
-    <header class="credibility-head">
-      <h2 id="credibility-title">Built by AI engineers and healthcare operators.</h2>
-      <p>Lucas built the team required to do this properly, including AI engineers and operators with decades of healthcare experience. You remain in control of what carries your name.</p>
-    </header>
-    <div class="credibility-grid">
-      <article class="credibility-item">
-        <strong>350+</strong>
-        <p>More than 350 doctors, practitioners, clinic owners, and wellness experts have built AI versions of their expertise with our team.</p>
-      </article>
-      <article class="credibility-item">
-        <strong>100,000+</strong>
-        <p>More than 100,000 healthcare leads generated online were used to train Kodara’s client-discovery model.</p>
-      </article>
-      <article class="credibility-item">
-        <strong>You approve</strong>
-        <p>You test the programs and AI experience before anything launches under your name.</p>
-      </article>
     </div>
   </section>
 

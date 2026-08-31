@@ -144,6 +144,10 @@ assert.match(page, /\.education-head\{max-width:var\(--rail-reading\);margin:0 a
 assert.match(page, /\.education-head h2\{font-size:var\(--type-section\);font-weight:650;line-height:1\.1;letter-spacing:var\(--tracking-display\);text-wrap:balance\}/, 'Demand heading must match the institutional section-heading tier');
 assert.match(page, /\.education-head p\{max-width:var\(--measure-body\);margin:var\(--space-4\) auto 0;color:var\(--ink-2\);font-size:var\(--type-body\);line-height:1\.5;text-wrap:pretty\}/, 'Demand subheadline must match the centered institutional supporting-copy tier');
 assert.match(page, /<header class="education-head">\s*<h2 id="education-title">[\s\S]*?<\/h2>\s*<p>[\s\S]*?<\/p>\s*<\/header>\s*<div class="demand-signals"/, 'Demand section must place its centered headline and subheadline before the three-column signals');
+assert.match(page, /<h2 id="education-title">The demand for health and wellness expertise is exploding online\.<\/h2>/, 'Demand headline must use the approved exploding-online language');
+assert.match(page, /\[hidden\]\{display:none!important\}/, 'Temporarily hidden homepage chapters must remain visually suppressed');
+assert.match(page, /<section class="card primary-demo"[^>]*\shidden>/, 'The primary product demo must remain hidden for the simplified homepage flow');
+assert.match(page, /<section class="mechanism-features"[^>]*\shidden>/, 'The three-step mechanism must remain hidden for the simplified homepage flow');
 assert.match(page, /\.faq-item summary::after\{[^}]*right:var\(--space-5\);display:grid;width:32px;height:32px;place-items:center/, 'FAQ icons must use a fixed, centered desktop alignment box');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.faq-item summary\{padding:var\(--space-4\) calc\(var\(--space-7\) \+ var\(--space-2\)\) var\(--space-4\) var\(--space-4\)\}[\s\S]*?\.faq-item summary::after\{right:var\(--space-4\)\}/, 'FAQ questions and icons must keep aligned mobile insets');
 assert.doesNotMatch(page, /@media\(max-width:390px\)\{[^}]*\.faq-item summary\{padding-right:/, 'Narrow screens must not override the shared FAQ icon column');
@@ -169,6 +173,7 @@ assert.doesNotMatch(page, /hero-vsl-cta/, 'Replaced hero qualification button mu
 const primaryNav = page.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0] ?? '';
 assert.equal((primaryNav.match(/<a\b/g) ?? []).length, 3, 'Primary navigation must stay limited to three orientation links');
 assert.match(primaryNav, />How It Works<[^]*>Results<[^]*>FAQ</, 'Primary navigation must use the agreed labels and order');
+assert.match(primaryNav, /<a href="#how-it-works" hidden>How It Works<\/a>/, 'The navigation link to the hidden three-step chapter must also remain hidden');
 
 // Core page structure.
 for (const className of ['site-header', 'site-hero', 'proof-snapshot', 'education-section', 'primary-demo', 'mechanism-features', 'case-studies', 'audience-section', 'founder-highlight', 'credibility-section', 'faq', 'cta', 'site-footer']) {
@@ -177,12 +182,12 @@ for (const className of ['site-header', 'site-hero', 'proof-snapshot', 'educatio
 const sectionIndex = (className) => page.search(new RegExp(`<(?:section|header|footer) class="[^"]*\\b${className}\\b`));
 assert.ok(sectionIndex('site-hero') < sectionIndex('proof-snapshot'), 'Authority proof must follow the hero');
 assert.ok(sectionIndex('proof-snapshot') < sectionIndex('education-section'), 'Category education must follow authority proof');
-assert.ok(sectionIndex('education-section') < sectionIndex('primary-demo'), 'The replacement demo slot must follow category education');
+assert.ok(sectionIndex('education-section') < sectionIndex('audience-section'), 'Audience pathways must immediately follow category education');
+assert.ok(sectionIndex('audience-section') < sectionIndex('credibility-section'), 'Institutional credibility must immediately follow audience pathways');
+assert.ok(sectionIndex('credibility-section') < sectionIndex('primary-demo'), 'Hidden product chapters must remain after the visible opening narrative');
 assert.ok(sectionIndex('primary-demo') < sectionIndex('mechanism-features'), 'Product overview must follow the primary demo');
 assert.ok(sectionIndex('mechanism-features') < sectionIndex('case-studies'), 'Client proof must follow the product and launch chapters');
-assert.ok(sectionIndex('case-studies') < sectionIndex('audience-section'), 'Audience pathways must follow client proof');
 assert.ok(sectionIndex('case-studies') < sectionIndex('founder-highlight'), 'The concise founder story must follow client proof');
-assert.ok(sectionIndex('founder-highlight') < sectionIndex('credibility-section'), 'Institutional credibility must follow the founder story');
 assert.ok(sectionIndex('faq') < sectionIndex('cta'), 'FAQ must precede the final CTA');
 assert.doesNotMatch(page, /class="[^"]*founder-letter/, 'The long-form founder letter must not return');
 
