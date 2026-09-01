@@ -229,6 +229,8 @@ test('confirmation page shares current visual tokens and small assets', () => {
   }
   assert.match(styles, /\.homepage-stat\{[^}]*border:1px solid var\(--line-2\)/u);
   assert.match(styles, /\.case-support\{[^}]*border:1px solid var\(--line-2\)/u);
+  assert.match(styles, /\.press-logo\{[^}]*height:clamp\(46px,5vw,64px\)/u, 'Press logo slot must visibly exceed the previous 40px cap');
+  assert.match(styles, /\.press-wordmark\{[^}]*height:auto;[^}]*max-width:78%;[^}]*max-height:100%/u, 'Press wordmarks must override intrinsic HTML heights while preserving aspect ratio');
   assert.match(styles, /@media\(max-width:390px\)[\s\S]*?\.brand img\{width:104px\}/u);
   for (const size of ['48', '192', '512']) assert.match(confirmation, new RegExp(`favicon-${size}\\.png`));
   assert.doesNotMatch(body(confirmation), /[—–]/u, 'Confirmation visible copy must not contain em or en dashes');
