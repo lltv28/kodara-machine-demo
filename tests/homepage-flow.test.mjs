@@ -119,13 +119,13 @@ test('approved process and client proof remain visible', () => {
   assert.match(faq, /Everything you need to know before you apply\./u);
   assert.match(faq, /What we build, how it works, what we need from you, and what happens next\./u);
 
-  const resultCards = [...stories.matchAll(/<article class="client-result-card">([\s\S]*?)<\/article>/gu)].map((match) => match[1]);
+  const resultCards = [...stories.matchAll(/<article class="client-result-card(?:\s[^"]*)?">([\s\S]*?)<\/article>/gu)].map((match) => match[1]);
   assert.equal(resultCards.length, 2, 'Only Dr. Vora and Ashley should retain concise result summaries');
   assert.equal((stories.match(/class="client-result-points"/gu) ?? []).length, 2, 'Each result summary needs its own supporting facts');
   assert.equal((stories.match(/class="client-result-person"/gu) ?? []).length, 2, 'Each result summary needs a client identity row');
   assert.equal((stories.match(/class="client-result-avatar(?:\s[^"]*)?"/gu) ?? []).length, 2, 'Each result summary needs a circular client avatar');
   assert.match(stories, /class="client-result-avatar client-result-avatar--mirrored" src="assets\/testimonials\/amit-vora\.jpg"[^>]*alt="Amit N\. Vora"/u, 'Dr. Vora must use the approved mirrored portrait');
-  assert.match(stories, /class="client-result-avatar client-result-avatar--mirrored" src="assets\/testimonials\/ashley-holly\.jpg"[^>]*alt="Ashley Holly"/u, 'Ashley must use the approved mirrored portrait');
+  assert.match(stories, /class="client-result-avatar client-result-avatar--mirrored" src="assets\/testimonials\/ashley-holly\.jpg"[^>]*alt="Ashley"/u, 'Ashley must use the approved mirrored portrait without publishing her last name');
   for (const card of resultCards) {
     assert.equal((card.match(/<li>/gu) ?? []).length, 2, 'Each result summary must contain exactly two supporting facts');
   }
@@ -135,22 +135,25 @@ test('approved process and client proof remain visible', () => {
   assert.doesNotMatch(stories, /class="client-results-grid"/u, 'Result summaries should share the video-story grid instead of forming a separate section');
   const videoStories = stories.match(/<div class="case-support-grid" aria-label="Client stories and results">([\s\S]*?)<\/div>\s*<p class="case-studies-close"/u)?.[1] ?? '';
   assert.equal((videoStories.match(/<article class="case-support(?:\s[^"]*)?"/gu) ?? []).length, 3, 'Sandra, Dr. Mike, and Leanne need distinct video-story cards');
-  assert.equal((videoStories.match(/<article class="client-result-card">/gu) ?? []).length, 2, 'Dr. Vora and Ashley must sit in the same proof grid as the videos');
+  assert.equal((videoStories.match(/<article class="client-result-card(?:\s[^"]*)?">/gu) ?? []).length, 2, 'Dr. Vora and Ashley must sit in the same proof grid as the videos');
   assert.match(videoStories, /<article class="case-support case-support--portrait"[^>]*>[\s\S]*?media-id="6oj2gj3wqt"/u, 'Sandra’s story must use the taller portrait-card treatment');
   assert.match(videoStories, /media-id="6oj2gj3wqt"/u, 'Sandra’s video must remain in the paired story grid');
   assert.match(videoStories, /class="case-media case-media--portrait-fit">\s*<div class="case-portrait-player">\s*<wistia-player media-id="6oj2gj3wqt"/u, 'Sandra’s portrait video must retain a dedicated 3:4 frame instead of being cropped into widescreen');
   assert.match(videoStories, /class="case-portrait-player case-portrait-player--nine-sixteen">\s*<wistia-player media-id="b3djcgwuvz" aspect="0\.5625" aria-label="Dr\. Mike client testimonial video">/u, 'Dr. Mike’s approved Wistia testimonial must retain its portrait frame and accessible name');
   assert.match(videoStories, /On track to double last year without adding a hundred more calls\./u, 'Sandra’s story must lead with her supported growth and fewer-calls outcome');
   assert.match(videoStories, /After trying this three or four times, his AI product was in testing within about 30 days\./u, 'Dr. Mike’s story must lead with the supported implementation milestone');
+  assert.match(videoStories, /<strong>Dr\. Mike<\/strong><span>Power-Up Sports Psychology<\/span>/u, 'Dr. Mike’s story must identify his business');
   assert.doesNotMatch(videoStories, /\$100,?000/u, 'Dr. Mike’s future revenue goal must not be presented as a testimonial result');
   assert.match(videoStories, /<article class="case-support case-support--wide"[^>]*>[\s\S]*?media-id="fay3lgo8op"/u, 'Leanne’s widescreen story must span the full desktop proof row');
   assert.match(videoStories, /A virtual business that gave her time to pursue the work she really wanted\./u);
+  assert.match(videoStories, /<strong>Leanne Ellington<\/strong><span>Neuroscience educator<\/span>/u, 'Leanne’s story must use the approved role');
   assert.equal((videoStories.match(/<span>What changed<\/span>/gu) ?? []).length, 3, 'Every video story must frame the build around the client’s desired change');
   assert.match(stories, /30\+ patients enrolled in five weeks, beyond the limits of his appointment calendar\./u);
   assert.match(stories, /Replaced in-person classes with an AI business in two months\./u);
   assert.match(stories, /You already have the expertise\. The next step is turning it into something that can work beyond your calendar\./u);
 
-  for (const proof of ['Sandra Parker', 'Leanne Ellington', 'Dr. Vora', 'Ashley Holly']) {
+  assert.match(homepage, /@media\(max-width:720px\)\{[\s\S]*?\.client-result-card--ashley\{order:1\}[\s\S]*?\.client-result-card--vora\{order:2\}/u, 'Mobile proof summaries must show Ashley before Dr. Vora');
+  for (const proof of ['Sandra Parker', 'Leanne Ellington', 'Dr. Vora', 'Ashley']) {
     assert.match(content, new RegExp(proof.replace('.', '\\.')), `Client proof must retain ${proof}`);
   }
 });

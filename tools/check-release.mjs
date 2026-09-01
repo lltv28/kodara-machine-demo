@@ -267,12 +267,15 @@ assert.match(page, /Results From Other Health &amp; Wellness Experts We've Worke
 assert.match(page, /Ashley[\s\S]{0,500}Replaced in-person classes with an AI business in two months/, 'Client proof must include Ashley and the VSL mechanism');
 assert.equal((page.match(/<span>What changed<\/span>/g) ?? []).length, 3, 'Every video testimonial must frame its proof around the client change');
 assert.match(page, /class="case-studies-close"[^>]*>You already have the expertise\. The next step is turning it into something that can work beyond your calendar\./, 'Client proof must bridge desire into the next decision');
-assert.equal((page.match(/class="client-result-card"/g) ?? []).length, 2, 'Client proof must use result-summary cards only for Dr. Vora and Ashley');
+assert.equal((page.match(/class="client-result-card(?:\s[^"]*)?"/g) ?? []).length, 2, 'Client proof must use result-summary cards only for Dr. Vora and Ashley');
 assert.equal((page.match(/class="client-result-points"/g) ?? []).length, 2, 'Each result-summary card must contain concise supporting facts');
-const clientResultCards = [...page.matchAll(/<article class="client-result-card">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
+const clientResultCards = [...page.matchAll(/<article class="client-result-card(?:\s[^"]*)?">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
 assert.ok(clientResultCards.every((card) => (card.match(/<li>/g) ?? []).length === 2), 'Each result-summary card must contain exactly two supporting facts');
 assert.match(page, /class="testimonial-stars" aria-hidden="true">(?:<span>★<\/span>){5}<\/div>/, 'Client proof must include five decorative gold star icons');
-assert.match(page, /<div class="case-support-grid" aria-label="Client stories and results">[\s\S]*?<article class="client-result-card">[\s\S]*?<article class="client-result-card">[\s\S]*?<\/div>\s*<p class="case-studies-close"/, 'Dr. Vora and Ashley must share the same grid as the video stories');
+assert.match(page, /<div class="case-support-grid" aria-label="Client stories and results">[\s\S]*?<article class="client-result-card client-result-card--vora">[\s\S]*?<article class="client-result-card client-result-card--ashley">[\s\S]*?<\/div>\s*<p class="case-studies-close"/, 'Dr. Vora and Ashley must share the same grid as the video stories');
+assert.match(page, /<strong>Dr\. Mike<\/strong><span>Power-Up Sports Psychology<\/span>/, 'Dr. Mike proof must identify Power-Up Sports Psychology');
+assert.match(page, /<strong>Leanne Ellington<\/strong><span>Neuroscience educator<\/span>/, 'Leanne proof must use the approved role');
+assert.match(page, /@media\(max-width:720px\)\{[\s\S]*?\.client-result-card--ashley\{order:1\}[\s\S]*?\.client-result-card--vora\{order:2\}/, 'Mobile proof summaries must show Ashley before Dr. Vora');
 assert.doesNotMatch(page, /class="client-results-grid"/, 'Client results must not form a separate proof section');
 assert.doesNotMatch(page, /\.client-result-card\{[^}]*border-top:/, 'Client result cards must not use a green top accent');
 assert.match(page, /\.client-result-points\{[^}]*padding:0/, 'Client result facts must align with their card headings');
