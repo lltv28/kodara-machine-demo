@@ -6,7 +6,7 @@ Live site: https://kodarahealth.com/
 
 Post-booking page: `/confirmation/`
 
-The confirmation page uses the approved Vidalytics call-confirmation video, iClosed call-details widget, production Vidalytics presentation, one Wistia case study, three Wistia client stories, and ten Wistia FAQ videos from the Kodara project. It also shares the homepage's four proof stats, illustrative search-demand chart, three-step process, five-client proof system, founder story, and core visual tokens.
+The confirmation page uses the approved Vidalytics call-confirmation video, iClosed call-details widget, one Wistia case study, three Wistia client stories, four press features, ten Wistia FAQ videos, and the production Vidalytics presentation. Its focused post-booking sequence moves from the confirmed appointment into client proof, press, objection handling, and an optional full-presentation replay.
 
 The confirmation page press grid links to four verified features from Business Insider, Yahoo Finance, AP News, and MSN using local article captures and publisher wordmarks.
 

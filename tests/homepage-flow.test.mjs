@@ -175,19 +175,15 @@ test('approved process and client proof remain visible', () => {
   }
 });
 
-test('confirmation page carries the current offer foundation without losing its post-booking flow', () => {
+test('confirmation page follows the approved proof-first post-booking flow', () => {
   const content = body(confirmation);
   const orderedMarkers = [
     'class="confirmation-hero"',
-    'class="confirmation-stats"',
-    'class="search-demand-section"',
-    'class="mechanism-features"',
     'id="case-study"',
-    'id="full-presentation"',
     'id="client-stories"',
-    'class="founder-highlight"',
     'class="press-library"',
     'class="faq-video-library"',
+    'id="full-presentation"',
     'class="final-reminder"',
   ];
   const positions = orderedMarkers.map((marker) => position(content, marker));
@@ -203,30 +199,13 @@ test('confirmation page carries the current offer foundation without losing its 
   ]) assert.match(content, new RegExp(marker), `Confirmation flow must preserve ${marker}`);
 
   assert.equal((content.match(/class="faq-video-card"/gu) ?? []).length, 10, 'Confirmation must retain all ten FAQ videos');
+  assert.match(content, /Real Results: Real Behind-the-Scenes Numbers From One of Our Clients\./u);
+  assert.match(content, /See what we built, how it was launched, and the real client numbers behind the result\./u);
+  assert.doesNotMatch(content, /class="confirmation-stats"|class="search-demand-section"|class="mechanism-features"|class="founder-highlight"/u, 'The focused confirmation sequence must not restore homepage education sections');
   assert.doesNotMatch(content, /id="kodara-triager"|region-personalization/iu, 'Post-booking confirmation must not add the homepage qualification or personalization runtime');
 });
 
-test('confirmation page uses the approved stats, chart, and three-step offer language', () => {
-  const content = body(confirmation);
-  const stats = content.match(/<section class="confirmation-stats"[\s\S]*?<\/section>/u)?.[0] ?? '';
-  assert.equal((stats.match(/class="homepage-stat(?:\s[^"]*)?"/gu) ?? []).length, 4);
-  for (const figure of ['350+', '$50M+', '105,000+', '30+']) assert.ok(stats.includes(`>${figure}</strong>`), `Missing confirmation stat ${figure}`);
-
-  const chart = content.match(/<section class="search-demand-section"[\s\S]*?<\/section>/u)?.[0] ?? '';
-  assert.match(chart, /data-estimates-url="\.\.\/assets\/data\/search-estimates\.json"/u);
-  assert.match(chart, /data-cues-url="\.\.\/assets\/data\/motion-cues\.json"/u);
-  assert.match(chart, /Illustrative estimates\. Search interest indexed to 2016 = 100\./u);
-  assert.match(confirmation, /<script type="module" src="\.\.\/assets\/js\/search-demand-chart\.mjs"><\/script>/u);
-
-  const process = content.match(/<section class="mechanism-features"[\s\S]*?<\/section>/u)?.[0] ?? '';
-  assert.equal((process.match(/class="mechanism-step"/gu) ?? []).length, 3);
-  assert.match(process, /Share what you know\./u);
-  assert.match(process, /Review what we build\./u);
-  assert.match(process, /Launch and onboard users\./u);
-  assert.match(process, /30-day refund terms in their signed agreement/u);
-});
-
-test('confirmation page uses the current five-client proof and founder story', () => {
+test('confirmation page uses the current five-client proof', () => {
   const content = body(confirmation);
   const stories = content.match(/<section class="case-studies"[\s\S]*?<\/section>/u)?.[0] ?? '';
   assert.match(stories, /Results From Other Health &amp; Wellness Experts We've Worked With/u);
@@ -241,12 +220,6 @@ test('confirmation page uses the current five-client proof and founder story', (
   assert.match(stories, /Dr\. Vora/u);
   assert.match(stories, /Ashley/u);
 
-  const founder = content.match(/<section class="founder-highlight"[\s\S]*?<\/section>/u)?.[0] ?? '';
-  assert.match(founder, /src="\.\.\/assets\/lucas-tyson\.jpg"/u);
-  assert.match(founder, /Why Kodara exists\./u);
-  assert.match(founder, /Graves disease/u);
-  assert.match(founder, />\$50M\+<\/strong>/u);
-  assert.match(founder, />100,000\+<\/strong>/u);
 });
 
 test('confirmation page shares current visual tokens and small assets', () => {

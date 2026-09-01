@@ -114,6 +114,6 @@ The footer contains Kodara company information, copyright, terms and privacy lin
 
 ## Confirmation page
 
-The confirmation page preserves the post-booking sequence: call-confirmation video, iClosed call details, authority logos, case study, full-presentation replay, four press features, ten FAQ videos, final reminder, and footer.
+The confirmation page preserves a focused post-booking sequence: call-confirmation video, iClosed call details, case study, authority logos, three testimonial videos and two client-result cards, four press features, ten FAQ videos, optional full-presentation replay, final reminder, and footer.
 
-It now carries the homepage's current offer foundation and visual system through four proof stats, the illustrative search-demand chart, the text-only three-step process, three testimonial videos, two client-result cards, and the concise founder story. These shared sections use the same wide rail, typography tiers, border tokens, radius system, shadows, mobile wordmark sizing, and white-surface treatment as the homepage. The FAQ remains video-led because the visitor has already booked a call.
+The case-study section opens with the approved behind-the-scenes client-results framing. The page retains the homepage's wide rail, typography tiers, border tokens, radius system, shadows, mobile wordmark sizing, and white-surface treatment without repeating the homepage's stats, demand chart, process, or founder education.

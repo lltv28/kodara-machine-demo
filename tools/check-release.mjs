@@ -32,9 +32,18 @@ assert.match(confirmation, /id="vidalytics_embed_VNXQCkfkzn95oP5v"/, 'Confirmati
 assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/VNXQCkfkzn95oP5v\//, 'Call-confirmation video must use the approved Vidalytics source');
 assert.match(confirmation, /class="call-details-widget" data-url="https:\/\/app\.iclosed\.io\/embed" style="width:100%;height:340px"/, 'iClosed call details must appear below the confirmation video');
 assert.match(confirmation, /<script src="https:\/\/app\.iclosed\.io\/assets\/widget\.js" async><\/script>/, 'Confirmation page must load the iClosed widget');
-assert.match(confirmation, /class="call-details-widget"[\s\S]*?<script src="https:\/\/app\.iclosed\.io\/assets\/widget\.js" async><\/script>\s*<div class="proof-snapshot-logos confirmation-proof-logos"/, 'Confirmation authority logos must appear immediately below the iClosed widget');
+assert.match(confirmation, /class="call-details-widget"[\s\S]*?<script src="https:\/\/app\.iclosed\.io\/assets\/widget\.js" async><\/script>\s*<\/section>\s*<section id="case-study"/, 'The client case study must begin immediately after the iClosed widget');
 assert.match(confirmation, /<p class="proof-snapshot-logo-label">Trusted by companies like:<\/p>/, 'Confirmation authority strip must use the approved title');
 assert.equal((confirmation.match(/class="proof-snapshot-logo proof-snapshot-logo--/g) ?? []).length, 6, 'Confirmation authority strip must contain six healthcare logos');
+assert.match(confirmation, /Real Results: Real Behind-the-Scenes Numbers From One of Our Clients\./, 'Confirmation case study must use the approved results-first headline');
+assert.match(confirmation, /See what we built, how it was launched, and the real client numbers behind the result\./, 'Confirmation case study must explain what the viewer will see');
+for (const marker of ['class="confirmation-stats"', 'class="search-demand-section"', 'class="mechanism-features"', 'class="founder-highlight"']) {
+  assert.doesNotMatch(confirmation, new RegExp(marker), `Focused confirmation flow must omit ${marker}`);
+}
+const confirmationSequence = ['id="case-study"', 'id="client-stories"', 'class="press-library"', 'class="faq-video-library"', 'id="full-presentation"'];
+for (let index = 1; index < confirmationSequence.length; index += 1) {
+  assert.ok(confirmation.indexOf(confirmationSequence[index - 1]) < confirmation.indexOf(confirmationSequence[index]), 'Confirmation proof, press, FAQ, and replay sections must follow the approved order');
+}
 assert.doesNotMatch(confirmation, /Organization names are shown for market context/, 'Confirmation authority strip must not show the removed organization disclaimer');
 assert.doesNotMatch(confirmation, /Reserved space for the call confirmation video|This media slot is ready for the final video embed/, 'Call-confirmation placeholder content must not remain');
 assert.match(confirmation, /data-video-slot="case-study"/, 'Confirmation page needs the case-study video slot');
