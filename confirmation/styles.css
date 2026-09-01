@@ -87,10 +87,10 @@ button,summary{font:inherit}
 .brand img{width:118px;height:auto}
 .brand:focus-visible,.site-footer-brand:focus-visible{outline:3px solid var(--accent-dark);outline-offset:4px;border-radius:var(--radius-sm)}
 
-.wrap{width:calc(100% - (var(--gutter) * 2));max-width:var(--rail-wide);margin:0 auto;padding:var(--space-6) 0 var(--space-9)}
+.wrap{width:calc(100% - (var(--gutter) * 2));max-width:var(--rail-wide);margin:0 auto;padding:var(--space-4) 0 var(--space-9)}
 .wrap>section+section{margin-top:clamp(var(--space-8),8vw,var(--space-9))}
 
-.confirmation-hero{display:flex;flex-direction:column;align-items:center;padding:clamp(32px,5vw,64px) 0;text-align:center}
+.confirmation-hero{display:flex;flex-direction:column;align-items:center;padding:var(--space-6) 0 clamp(32px,5vw,64px);text-align:center}
 .confirmation-hero h1{width:100%;max-width:none;margin:0;font-size:var(--type-hero);font-weight:650;line-height:1.06;letter-spacing:var(--tracking-display);text-wrap:balance}
 .confirmation-hero>p{max-width:var(--measure-body);margin:var(--space-5) auto 0;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .confirmation-hero .email-note{margin-top:var(--space-4);color:var(--ink-3);font-size:var(--type-label)}
@@ -290,7 +290,7 @@ button,summary{font:inherit}
   }
   .site-header{min-height:56px}
   .brand img{width:108px}
-  .wrap{padding-top:var(--space-5)}
+  .wrap{padding-top:var(--space-4)}
   .wrap>section+section{margin-top:88px}
   .confirmation-hero{padding:var(--space-5) 0 var(--space-7)}
   .confirmation-hero>p{margin-top:var(--space-4)}

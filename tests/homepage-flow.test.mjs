@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const homepage = readFileSync(resolve(root, 'index.html'), 'utf8');
 const confirmation = readFileSync(resolve(root, 'confirmation/index.html'), 'utf8');
+const confirmationStyles = readFileSync(resolve(root, 'confirmation/styles.css'), 'utf8');
 
 function body(source) {
   return source.match(/<body[^>]*>([\s\S]*?)<\/body>/)?.[1] ?? '';
@@ -29,6 +30,22 @@ test('both public pages use a centered logo-only header', () => {
     assert.equal((content.match(/<a\b/gu) ?? []).length, 1, `${name} header must contain only the brand link`);
     assert.doesNotMatch(content, /<nav\b|cta-btn|header-state/u, `${name} header must not contain navigation, an action, or status text`);
   }
+});
+
+test('both public pages use the compact shared header-to-hero rhythm', () => {
+  assert.match(homepage, /\.site-header\{[^}]*margin-bottom:var\(--space-4\)/u);
+  assert.match(homepage, /\.site-hero\{[^}]*padding:var\(--space-6\) 0 clamp\(32px,5vw,64px\)/u);
+  assert.match(
+    homepage,
+    /@media\(max-width:720px\)[\s\S]*?\.site-header\{min-height:56px;margin-bottom:var\(--space-4\)\}[\s\S]*?\.site-hero\{padding:var\(--space-5\) 0 var\(--space-7\)\}/u,
+  );
+
+  assert.match(confirmationStyles, /\.wrap\{[^}]*padding:var\(--space-4\) 0 var\(--space-9\)/u);
+  assert.match(confirmationStyles, /\.confirmation-hero\{[^}]*padding:var\(--space-6\) 0 clamp\(32px,5vw,64px\)/u);
+  assert.match(
+    confirmationStyles,
+    /@media\(max-width:720px\)[\s\S]*?\.wrap\{padding-top:var\(--space-4\)\}[\s\S]*?\.confirmation-hero\{padding:var\(--space-5\) 0 var\(--space-7\)\}/u,
+  );
 });
 
 test('homepage follows the approved qualification narrative', () => {

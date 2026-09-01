@@ -108,6 +108,8 @@ The live qualification widget is the primary action in the hero. The only repeat
 
 Both public pages use a centered, linked Kodara wordmark with no navigation, status text, or header CTA.
 
+The shared header-to-hero rhythm is 48px on desktop and 40px on mobile, composed from the existing 16px, 24px, and 32px spacing tokens.
+
 The footer contains Kodara company information, copyright, terms and privacy links, and permanently visible earnings, medical-information, and AI fine print. It contains no navigation or application action.
 
 ## Confirmation page
