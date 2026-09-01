@@ -347,8 +347,9 @@ for (const brand of ['Massage Envy', 'Gameday Men’s Health', 'Visiting Angels'
   assert.ok(page.includes(`alt="${brand}"`), `Authority wall must include ${brand}`);
 }
 const wistiaPlayers = [...page.matchAll(/<wistia-player\b[^>]*>/g)].map((match) => match[0]);
-assert.equal(wistiaPlayers.length, 2, 'Expected the two healthcare testimonial videos');
+assert.equal(wistiaPlayers.length, 3, 'Expected the three healthcare testimonial videos');
 assert.ok(wistiaPlayers.every((tag) => /aria-label="[^"]+"/.test(tag)), 'Every testimonial video needs an accessible name');
+assert.match(page, /<wistia-player media-id="b3djcgwuvz" aspect="0\.5625" aria-label="Dr\. Mike client testimonial video">/, 'Dr. Mike testimonial needs the approved portrait Wistia embed');
 assert.equal((page.match(/class="faq-item"/g) ?? []).length, 9, 'Expected nine offer FAQs');
 assert.match(page, /function setupFaqAccordion\(\)/, 'FAQ motion controller is missing');
 assert.match(page, /matchMedia\('\(prefers-reduced-motion:reduce\)'\)/, 'FAQ motion must respect reduced motion');
