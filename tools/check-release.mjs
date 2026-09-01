@@ -184,7 +184,7 @@ assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.homepage-stats,\.mechanis
 assert.match(page, /\.founder-highlight h2\{max-width:none/, 'Founder heading must use the full copy column');
 assert.match(page, /\.case-title\{max-width:none/, 'Case-study headings must use the full card width');
 assert.match(page, /#case-studies-title\{font-size:min\(var\(--type-section\),3\.2rem\)\}/, 'The longest proof heading must receive the minimal optical fit needed to remain on one desktop line');
-assert.match(page, /\.faq-answer\{width:100%;max-width:var\(--measure-body\)/, 'FAQ answers must use the shared body measure');
+assert.match(page, /\.faq-answer\{width:100%;max-width:none;/, 'FAQ answers must use the available card width instead of being constrained to the left side');
 assert.match(page, /\.site-footer\{width:auto;margin:var\(--space-9\) calc\(var\(--page-gutter\) \* -1\) 0/, 'Full-width footer must align to the page gutter without scrollbar overflow');
 assert.doesNotMatch(page, /\.site-footer\{width:100vw/, 'Footer must not use viewport width that includes the scrollbar');
 assert.match(page, /<section class="mechanism-features" id="how-it-works" aria-labelledby="mechanism-title">/, 'The approved three-step process must be visible');
