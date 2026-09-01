@@ -60,7 +60,7 @@ assert.equal((confirmation.match(/id="vidalytics_embed_[^"]+"/g) ?? []).length, 
 assert.equal((confirmation.match(/media-id="1mynmgx2fa"/g) ?? []).length, 1, 'Confirmation page needs the approved case study video exactly once');
 assert.match(confirmation, /https:\/\/fast\.wistia\.com\/embed\/1mynmgx2fa\.js/, 'Case study video must load from the approved Wistia source');
 assert.match(confirmation, /<wistia-player media-id="1mynmgx2fa" aspect="1\.7777777777777777" aria-label="[^"]+">/, 'Case study video needs a stable 16:9 frame and accessible name');
-assert.equal(confirmationPlayers.length, 13, 'Confirmation page needs one case study, two testimonial, and ten FAQ videos');
+assert.equal(confirmationPlayers.length, 14, 'Confirmation page needs one case study, three testimonials, and ten FAQ videos');
 assert.equal((confirmation.match(/data-press-slot="press-[0-9]{2}"/g) ?? []).length, 4, 'Confirmation page needs four replaceable press slots');
 assert.equal((confirmation.match(/class="press-card"/g) ?? []).length, 4, 'Confirmation page needs four visible press cards');
 const pressFeatures = [
