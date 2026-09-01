@@ -69,7 +69,7 @@ assert.equal((confirmation.match(/id="vidalytics_embed_[^"]+"/g) ?? []).length, 
 assert.equal((confirmation.match(/media-id="1mynmgx2fa"/g) ?? []).length, 1, 'Confirmation page needs the approved case study video exactly once');
 assert.match(confirmation, /https:\/\/fast\.wistia\.com\/embed\/1mynmgx2fa\.js/, 'Case study video must load from the approved Wistia source');
 assert.match(confirmation, /<wistia-player media-id="1mynmgx2fa" aspect="1\.7777777777777777" aria-label="[^"]+">/, 'Case study video needs a stable 16:9 frame and accessible name');
-assert.equal(confirmationPlayers.length, 14, 'Confirmation page needs one case study, three testimonials, and ten FAQ videos');
+assert.equal(confirmationPlayers.length, 15, 'Confirmation page needs one case study, four testimonials, and ten FAQ videos');
 assert.equal((confirmation.match(/data-press-slot="press-[0-9]{2}"/g) ?? []).length, 4, 'Confirmation page needs four replaceable press slots');
 assert.equal((confirmation.match(/class="press-card"/g) ?? []).length, 4, 'Confirmation page needs four visible press cards');
 const pressFeatures = [
@@ -274,7 +274,7 @@ assert.match(page, /first 10 beta users will be onboarded, or you receive a full
 assert.match(page, /Dr\. Vora[\s\S]{0,500}30\+ patients enrolled in five weeks, beyond the limits of his appointment calendar[\s\S]{0,500}reach more patients/, 'Client proof must include Dr. Vora and the supported reach outcome');
 assert.match(page, /Results From Other Health &amp; Wellness Experts We've Worked With/, 'Client proof must use the approved health and wellness results headline');
 assert.match(page, /Ashley[\s\S]{0,500}Replaced in-person classes with an AI business in two months/, 'Client proof must include Ashley and the VSL mechanism');
-assert.equal((page.match(/<span>What changed<\/span>/g) ?? []).length, 3, 'Every video testimonial must frame its proof around the client change');
+assert.equal((page.match(/<span>What changed<\/span>/g) ?? []).length, 4, 'Every video testimonial must frame its proof around the client change');
 assert.match(page, /class="case-studies-close"[^>]*>You already have the expertise\. The next step is turning it into something that can work beyond your calendar\./, 'Client proof must bridge desire into the next decision');
 assert.equal((page.match(/class="client-result-card(?:\s[^"]*)?"/g) ?? []).length, 2, 'Client proof must use result-summary cards only for Dr. Vora and Ashley');
 assert.equal((page.match(/class="client-result-points"/g) ?? []).length, 2, 'Each result-summary card must contain concise supporting facts');
@@ -284,6 +284,9 @@ assert.match(page, /class="testimonial-stars" aria-hidden="true">(?:<span>★<\/
 assert.match(page, /<div class="case-support-grid" aria-label="Client stories and results">[\s\S]*?<article class="client-result-card client-result-card--vora">[\s\S]*?<article class="client-result-card client-result-card--ashley">[\s\S]*?<\/div>\s*<p class="case-studies-close"/, 'Dr. Vora and Ashley must share the same grid as the video stories');
 assert.match(page, /<strong>Dr\. Mike<\/strong><span>Power-Up Sports Psychology<\/span>/, 'Dr. Mike proof must identify Power-Up Sports Psychology');
 assert.match(page, /<strong>Leanne Ellington<\/strong><span>Neuroscience educator<\/span>/, 'Leanne proof must use the approved role');
+assert.match(page, /<article class="case-support case-support--paired"[^>]*aria-labelledby="martyn-case-title">[\s\S]*?media-id="fhngly43sb"/, 'Martyn proof must sit beside Leanne in the paired desktop proof row');
+assert.match(page, /Turned five years of ideas into a launched first prototype\./, 'Martyn proof must use the transcript-supported outcome');
+assert.match(page, /<strong>Martyn Buffler<\/strong><span>CEO, The Cancer Battle Plan<\/span>/, 'Martyn proof must use the approved business role');
 assert.match(page, /@media\(max-width:720px\)\{[\s\S]*?\.client-result-card--ashley\{order:1\}[\s\S]*?\.client-result-card--vora\{order:2\}/, 'Mobile proof summaries must show Ashley before Dr. Vora');
 assert.doesNotMatch(page, /class="client-results-grid"/, 'Client results must not form a separate proof section');
 assert.doesNotMatch(page, /\.client-result-card\{[^}]*border-top:/, 'Client result cards must not use a green top accent');
@@ -324,8 +327,8 @@ assert.doesNotMatch(page, /delivery-comparison|delivery-model/, 'Removed deliver
 assert.equal((page.match(/class="mechanism-step"/g) ?? []).length, 3, 'Expected the launch process to be merged into three product chapters');
 assert.doesNotMatch(page, /class="(?:midpage-action|alternatives-section|process-section)"/, 'Redundant mid-page action, alternatives, and process sections must stay removed');
 assert.equal((page.match(/class="homepage-stat(?: |")/g) ?? []).length, 4, 'Expected four verified proof and delivery stat cards');
-assert.equal((page.match(/class="case-kicker"/g) ?? []).length, 3, 'Video testimonials must use a consistent client-story label');
-assert.equal((page.match(/class="case-fact"/g) ?? []).length, 3, 'Video testimonials must explain what Kodara helped build');
+assert.equal((page.match(/class="case-kicker"/g) ?? []).length, 4, 'Video testimonials must use a consistent client-story label');
+assert.equal((page.match(/class="case-fact"/g) ?? []).length, 4, 'Video testimonials must explain what Kodara helped build');
 assert.equal((page.match(/class="client-result-role"/g) ?? []).length, 2, 'Every result summary must include consistent role context');
 assert.equal((page.match(/class="footer-group"/g) ?? []).length, 0, 'Footer navigation groups must stay removed');
 assert.doesNotMatch(page, /<footer[\s\S]*?<nav\b/, 'Footer must contain company information and disclaimers only');
@@ -359,7 +362,7 @@ for (const brand of ['Massage Envy', 'Gameday Men’s Health', 'Visiting Angels'
   assert.ok(page.includes(`alt="${brand}"`), `Authority wall must include ${brand}`);
 }
 const wistiaPlayers = [...page.matchAll(/<wistia-player\b[^>]*>/g)].map((match) => match[0]);
-assert.equal(wistiaPlayers.length, 3, 'Expected the three healthcare testimonial videos');
+assert.equal(wistiaPlayers.length, 4, 'Expected the four healthcare testimonial videos');
 assert.ok(wistiaPlayers.every((tag) => /aria-label="[^"]+"/.test(tag)), 'Every testimonial video needs an accessible name');
 assert.match(page, /<wistia-player media-id="b3djcgwuvz" aspect="0\.5625" aria-label="Dr\. Mike client testimonial video">/, 'Dr. Mike testimonial needs the approved portrait Wistia embed');
 assert.equal((page.match(/class="faq-item"/g) ?? []).length, 9, 'Expected nine offer FAQs');

@@ -11,7 +11,7 @@
   <link rel="icon" href="../assets/brand/favicon-192.png" type="image/png" sizes="192x192">
   <link rel="icon" href="../assets/brand/favicon-512.png" type="image/png" sizes="512x512">
   <link rel="preload" href="../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20260831-press-logos">
+  <link rel="stylesheet" href="styles.css?v=20260901-martyn-proof">
   <title>Your Call Is Confirmed | Kodara</title>
   <script>
   var head=document.head;
@@ -110,9 +110,11 @@
           </div>
         </article>
 
-        <article class="case-support case-support--wide" aria-labelledby="leanne-title">
-          <div class="case-media">
-            <wistia-player media-id="fay3lgo8op" aspect="1.791044776119403" aria-label="Leanne Ellington client testimonial video"></wistia-player>
+        <article class="case-support case-support--paired" aria-labelledby="leanne-title">
+          <div class="case-media case-media--paired">
+            <div class="case-landscape-player">
+              <wistia-player media-id="fay3lgo8op" aspect="1.791044776119403" aria-label="Leanne Ellington client testimonial video"></wistia-player>
+            </div>
           </div>
           <div class="case-support-copy">
             <span class="case-kicker">Client story</span>
@@ -122,6 +124,24 @@
             <div class="case-person">
               <img src="../assets/testimonials/leanne.jpg" width="104" height="104" loading="lazy" decoding="async" alt="Leanne Ellington">
               <div><strong>Leanne Ellington</strong><span>Neuroscience educator</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-support case-support--paired" aria-labelledby="martyn-title">
+          <div class="case-media case-media--paired">
+            <div class="case-portrait-player case-portrait-player--nine-sixteen">
+              <wistia-player media-id="fhngly43sb" aspect="0.5625" aria-label="Martyn Buffler client testimonial video"></wistia-player>
+            </div>
+          </div>
+          <div class="case-support-copy">
+            <span class="case-kicker">Client story</span>
+            <h3 id="martyn-title">Turned five years of ideas into a launched first prototype.</h3>
+            <p>Martyn says the team listened to his vision and helped turn an idea, a concept, and a book he had been working on for five years into something real.</p>
+            <p class="case-fact"><span>What changed</span><strong>A tested first prototype, launched after working with customers and incorporating their feedback.</strong></p>
+            <div class="case-person">
+              <img src="../assets/testimonials/martyn-buffler.jpg" width="104" height="104" loading="lazy" decoding="async" alt="Martyn Buffler">
+              <div><strong>Martyn Buffler</strong><span>CEO, The Cancer Battle Plan</span></div>
             </div>
           </div>
         </article>
@@ -352,7 +372,7 @@
 
     loadWhenNear('#client-stories',function(){
       loadScriptOnce('https://fast.wistia.com/player.js',false);
-      ['6oj2gj3wqt','b3djcgwuvz','fay3lgo8op'].forEach(function(mediaId){
+      ['6oj2gj3wqt','b3djcgwuvz','fay3lgo8op','fhngly43sb'].forEach(function(mediaId){
         loadScriptOnce('https://fast.wistia.com/embed/'+mediaId+'.js',true);
       });
     });

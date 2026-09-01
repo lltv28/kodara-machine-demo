@@ -151,7 +151,7 @@ test('approved process and client proof remain visible', () => {
   assert.ok(position(stories, 'class="testimonial-spotlight"') < position(stories, 'class="case-support-grid"'), 'The featured quote must introduce the deeper video stories');
   assert.doesNotMatch(stories, /class="client-results-grid"/u, 'Result summaries should share the video-story grid instead of forming a separate section');
   const videoStories = stories.match(/<div class="case-support-grid" aria-label="Client stories and results">([\s\S]*?)<\/div>\s*<p class="case-studies-close"/u)?.[1] ?? '';
-  assert.equal((videoStories.match(/<article class="case-support(?:\s[^"]*)?"/gu) ?? []).length, 3, 'Sandra, Dr. Mike, and Leanne need distinct video-story cards');
+  assert.equal((videoStories.match(/<article class="case-support(?:\s[^"]*)?"/gu) ?? []).length, 4, 'Sandra, Dr. Mike, Leanne, and Martyn need distinct video-story cards');
   assert.equal((videoStories.match(/<article class="client-result-card(?:\s[^"]*)?">/gu) ?? []).length, 2, 'Dr. Vora and Ashley must sit in the same proof grid as the videos');
   assert.match(videoStories, /<article class="case-support case-support--portrait"[^>]*>[\s\S]*?media-id="6oj2gj3wqt"/u, 'Sandra’s story must use the taller portrait-card treatment');
   assert.match(videoStories, /media-id="6oj2gj3wqt"/u, 'Sandra’s video must remain in the paired story grid');
@@ -161,16 +161,19 @@ test('approved process and client proof remain visible', () => {
   assert.match(videoStories, /After failing with 4 competitors, he launched in 30 days with us\./u, 'Dr. Mike’s story must lead with the approved implementation milestone');
   assert.match(videoStories, /<strong>Dr\. Mike<\/strong><span>Power-Up Sports Psychology<\/span>/u, 'Dr. Mike’s story must identify his business');
   assert.doesNotMatch(videoStories, /\$100,?000/u, 'Dr. Mike’s future revenue goal must not be presented as a testimonial result');
-  assert.match(videoStories, /<article class="case-support case-support--wide"[^>]*>[\s\S]*?media-id="fay3lgo8op"/u, 'Leanne’s widescreen story must span the full desktop proof row');
+  assert.match(videoStories, /<article class="case-support case-support--paired"[^>]*>[\s\S]*?media-id="fay3lgo8op"/u, 'Leanne’s story must begin the paired desktop proof row');
   assert.match(videoStories, /A virtual business that gave her time to pursue the work she really wanted\./u);
   assert.match(videoStories, /<strong>Leanne Ellington<\/strong><span>Neuroscience educator<\/span>/u, 'Leanne’s story must use the approved role');
-  assert.equal((videoStories.match(/<span>What changed<\/span>/gu) ?? []).length, 3, 'Every video story must frame the build around the client’s desired change');
+  assert.match(videoStories, /<article class="case-support case-support--paired"[^>]*aria-labelledby="martyn-case-title">[\s\S]*?media-id="fhngly43sb"/u, 'Martyn’s portrait story must sit beside Leanne in the paired desktop proof row');
+  assert.match(videoStories, /Turned five years of ideas into a launched first prototype\./u, 'Martyn’s story must use the transcript-supported outcome');
+  assert.match(videoStories, /<strong>Martyn Buffler<\/strong><span>CEO, The Cancer Battle Plan<\/span>/u, 'Martyn’s story must use the approved business role');
+  assert.equal((videoStories.match(/<span>What changed<\/span>/gu) ?? []).length, 4, 'Every video story must frame the build around the client’s desired change');
   assert.match(stories, /30\+ patients enrolled in five weeks, beyond the limits of his appointment calendar\./u);
   assert.match(stories, /Replaced in-person classes with an AI business in two months\./u);
   assert.match(stories, /You already have the expertise\. The next step is turning it into something that can work beyond your calendar\./u);
 
   assert.match(homepage, /@media\(max-width:720px\)\{[\s\S]*?\.client-result-card--ashley\{order:1\}[\s\S]*?\.client-result-card--vora\{order:2\}/u, 'Mobile proof summaries must show Ashley before Dr. Vora');
-  for (const proof of ['Sandra Parker', 'Leanne Ellington', 'Dr. Vora', 'Ashley']) {
+  for (const proof of ['Sandra Parker', 'Leanne Ellington', 'Martyn Buffler', 'Dr. Vora', 'Ashley']) {
     assert.match(content, new RegExp(proof.replace('.', '\\.')), `Client proof must retain ${proof}`);
   }
 });
@@ -205,18 +208,21 @@ test('confirmation page follows the approved proof-first post-booking flow', () 
   assert.doesNotMatch(content, /id="kodara-triager"|region-personalization/iu, 'Post-booking confirmation must not add the homepage qualification or personalization runtime');
 });
 
-test('confirmation page uses the current five-client proof', () => {
+test('confirmation page uses the current six-client proof', () => {
   const content = body(confirmation);
   const stories = content.match(/<section class="case-studies"[\s\S]*?<\/section>/u)?.[0] ?? '';
   assert.match(stories, /Results From Other Health &amp; Wellness Experts We've Worked With/u);
   assert.match(stories, /class="testimonial-stars" aria-hidden="true">(?:<span>★<\/span>){5}<\/div>/u);
   assert.match(stories, /I’m now on track to make double what I made last year/u);
-  assert.equal((stories.match(/<article class="case-support(?:\s[^"]*)?"/gu) ?? []).length, 3);
+  assert.equal((stories.match(/<article class="case-support(?:\s[^"]*)?"/gu) ?? []).length, 4);
   assert.equal((stories.match(/<article class="client-result-card(?:\s[^"]*)?">/gu) ?? []).length, 2);
-  for (const mediaId of ['6oj2gj3wqt', 'b3djcgwuvz', 'fay3lgo8op']) assert.match(stories, new RegExp(`media-id="${mediaId}"`));
+  for (const mediaId of ['6oj2gj3wqt', 'b3djcgwuvz', 'fay3lgo8op', 'fhngly43sb']) assert.match(stories, new RegExp(`media-id="${mediaId}"`));
   assert.match(stories, /After failing with 4 competitors, he launched in 30 days with us\./u);
   assert.match(stories, /Power-Up Sports Psychology/u);
   assert.match(stories, /Neuroscience educator/u);
+  assert.match(stories, /Turned five years of ideas into a launched first prototype\./u);
+  assert.match(stories, /Martyn Buffler/u);
+  assert.match(stories, /CEO, The Cancer Battle Plan/u);
   assert.match(stories, /Dr\. Vora/u);
   assert.match(stories, /Ashley/u);
 
@@ -224,7 +230,7 @@ test('confirmation page uses the current five-client proof', () => {
 
 test('confirmation page shares current visual tokens and small assets', () => {
   const styles = readFileSync(resolve(root, 'confirmation/styles.css'), 'utf8');
-  assert.match(confirmation, /href="styles\.css\?v=20260831-press-logos"/u, 'Confirmation stylesheet changes must bypass stale browser caches');
+  assert.match(confirmation, /href="styles\.css\?v=20260901-martyn-proof"/u, 'Confirmation stylesheet changes must bypass stale browser caches');
   for (const token of ['--border-subtle:#DCE8E5', '--border-default:#CBDCDA', '--border-strong:#A9C5C1', '--line-2:var(--border-default)']) {
     assert.match(styles, new RegExp(token.replace(/[()]/gu, '\\$&')));
   }

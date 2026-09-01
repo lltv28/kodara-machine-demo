@@ -203,20 +203,22 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 @media(min-width:900px){.founder-highlight{grid-template-columns:minmax(320px,2fr) minmax(0,3fr)}}
 .case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);align-items:stretch;margin-top:var(--space-5)}
 .case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
-.case-support--wide{display:grid;grid-column:1/-1;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);align-items:center}
 .case-support-copy{display:flex;flex:1;flex-direction:column;padding:var(--space-6)}
 .case-media{position:relative;aspect-ratio:16/9;background:var(--surface);overflow:hidden}
 .case-media wistia-player{display:block;width:100%;height:100%}
 .case-media--portrait-fit{display:grid;place-items:center;background:var(--panel)}
 .case-support--portrait .case-media--portrait-fit{aspect-ratio:4/3}
+.case-media--paired{display:grid;place-items:center;aspect-ratio:4/3;background:var(--panel)}
+.case-landscape-player{width:100%;aspect-ratio:16/9;background:var(--surface);overflow:hidden}
+.case-landscape-player wistia-player{display:block;width:100%;height:100%}
 .case-portrait-player{height:100%;aspect-ratio:3/4;background:var(--surface);overflow:hidden}
 .case-portrait-player--nine-sixteen{aspect-ratio:9/16}
 .case-portrait-player wistia-player{display:block;width:100%;height:100%}
-.case-support--wide .case-media{width:100%;align-self:center;aspect-ratio:16/9}
 .case-media wistia-player:not(:defined){background-position:center;background-size:cover;background-repeat:no-repeat}
 .case-media wistia-player[media-id='6oj2gj3wqt']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/6oj2gj3wqt/swatch')}
 .case-media wistia-player[media-id='b3djcgwuvz']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/b3djcgwuvz/swatch')}
 .case-media wistia-player[media-id='fay3lgo8op']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/fay3lgo8op/swatch')}
+.case-media wistia-player[media-id='fhngly43sb']:not(:defined){background-image:url('https://fast.wistia.com/embed/medias/fhngly43sb/swatch')}
 .case-title{max-width:none;font-family:var(--fb);font-size:var(--type-card);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .case-support .case-title{font-size:var(--type-card-small)}
 .case-copy{max-width:none;margin-top:var(--space-4);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
@@ -255,12 +257,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .founder-highlight-copy{padding:0}
   .founder-credentials{grid-template-columns:1fr;gap:var(--space-4)}
   .case-support-grid{grid-template-columns:1fr}
-  .case-support--wide{display:flex;grid-column:auto}
   .case-support-copy{padding:var(--space-5)}
   .case-support-grid{gap:var(--space-4);margin-top:var(--space-4)}
   .case-support--portrait .case-media--portrait-fit{aspect-ratio:3/4}
   .case-portrait-player{width:100%;height:100%}
-  .case-support--wide .case-media{aspect-ratio:16/9}
   .case-studies-close{margin-top:var(--space-6);font-size:var(--type-body)}
 }
 
@@ -538,9 +538,11 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           </div>
         </div>
       </article>
-      <article class="case-support case-support--wide" aria-labelledby="leanne-case-title">
-        <div class="case-media">
-          <wistia-player media-id="fay3lgo8op" aspect="1.791044776119403" aria-label="Leanne Ellington client testimonial video"></wistia-player>
+      <article class="case-support case-support--paired" aria-labelledby="leanne-case-title">
+        <div class="case-media case-media--paired">
+          <div class="case-landscape-player">
+            <wistia-player media-id="fay3lgo8op" aspect="1.791044776119403" aria-label="Leanne Ellington client testimonial video"></wistia-player>
+          </div>
         </div>
         <div class="case-support-copy">
           <span class="case-kicker">Client story</span>
@@ -550,6 +552,23 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           <div class="case-person">
             <img src="assets/testimonials/leanne.jpg" width="104" height="104" loading="lazy" decoding="async" alt="Leanne Ellington">
             <div><strong>Leanne Ellington</strong><span>Neuroscience educator</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="case-support case-support--paired" aria-labelledby="martyn-case-title">
+        <div class="case-media case-media--paired">
+          <div class="case-portrait-player case-portrait-player--nine-sixteen">
+            <wistia-player media-id="fhngly43sb" aspect="0.5625" aria-label="Martyn Buffler client testimonial video"></wistia-player>
+          </div>
+        </div>
+        <div class="case-support-copy">
+          <span class="case-kicker">Client story</span>
+          <h3 class="case-title" id="martyn-case-title">Turned five years of ideas into a launched first prototype.</h3>
+          <p class="case-copy">Martyn says the team listened to his vision and helped turn an idea, a concept, and a book he had been working on for five years into something real.</p>
+          <p class="case-fact"><span>What changed</span><strong>A tested first prototype, launched after working with customers and incorporating their feedback.</strong></p>
+          <div class="case-person">
+            <img src="assets/testimonials/martyn-buffler.jpg" width="104" height="104" loading="lazy" decoding="async" alt="Martyn Buffler">
+            <div><strong>Martyn Buffler</strong><span>CEO, The Cancer Battle Plan</span></div>
           </div>
         </div>
       </article>
@@ -685,7 +704,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   function loadWistia(){
     if(loaded) return;
     loaded=true;
-    ['https://fast.wistia.com/player.js','https://fast.wistia.com/embed/6oj2gj3wqt.js','https://fast.wistia.com/embed/b3djcgwuvz.js','https://fast.wistia.com/embed/fay3lgo8op.js'].forEach(function(src,index){
+    ['https://fast.wistia.com/player.js','https://fast.wistia.com/embed/6oj2gj3wqt.js','https://fast.wistia.com/embed/b3djcgwuvz.js','https://fast.wistia.com/embed/fay3lgo8op.js','https://fast.wistia.com/embed/fhngly43sb.js'].forEach(function(src,index){
       var script=document.createElement('script');
       script.src=src;
       script.async=true;

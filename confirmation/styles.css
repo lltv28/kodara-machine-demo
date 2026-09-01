@@ -165,20 +165,22 @@ button,summary{font:inherit}
 .testimonial-spotlight cite{display:block;margin-top:var(--space-4);color:var(--ink-3);font-size:var(--type-label);font-style:normal;font-weight:650;line-height:1.4}
 .case-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-5);align-items:stretch;margin-top:var(--space-5)}
 .case-support{display:flex;min-width:0;flex-direction:column;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm);overflow:hidden}
-.case-support--wide{display:grid;grid-column:1/-1;grid-template-columns:minmax(0,3fr) minmax(320px,2fr);align-items:center}
 .case-support-copy{display:flex;flex:1;flex-direction:column;padding:var(--space-6)}
 .case-media{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface)}
 .case-media wistia-player{display:block;width:100%;height:100%}
 .case-media--portrait-fit{display:grid;place-items:center;background:var(--panel)}
 .case-support--portrait .case-media--portrait-fit{aspect-ratio:4/3}
+.case-media--paired{display:grid;place-items:center;aspect-ratio:4/3;background:var(--panel)}
+.case-landscape-player{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--surface)}
+.case-landscape-player wistia-player{display:block;width:100%;height:100%}
 .case-portrait-player{height:100%;aspect-ratio:3/4;overflow:hidden;background:var(--surface)}
 .case-portrait-player--nine-sixteen{aspect-ratio:9/16}
 .case-portrait-player wistia-player{display:block;width:100%;height:100%}
-.case-support--wide .case-media{width:100%;align-self:center;aspect-ratio:16/9}
 .case-media wistia-player:not(:defined){background-position:center;background-size:cover;background-repeat:no-repeat}
 .case-media wistia-player[media-id="6oj2gj3wqt"]:not(:defined){background-image:url("https://fast.wistia.com/embed/medias/6oj2gj3wqt/swatch")}
 .case-media wistia-player[media-id="b3djcgwuvz"]:not(:defined){background-image:url("https://fast.wistia.com/embed/medias/b3djcgwuvz/swatch")}
 .case-media wistia-player[media-id="fay3lgo8op"]:not(:defined){background-image:url("https://fast.wistia.com/embed/medias/fay3lgo8op/swatch")}
+.case-media wistia-player[media-id="fhngly43sb"]:not(:defined){background-image:url("https://fast.wistia.com/embed/medias/fhngly43sb/swatch")}
 .case-kicker{display:block;margin-bottom:var(--space-3);color:var(--accent-ink);font-size:var(--type-label);font-weight:700;line-height:1.3}
 .case-support-copy h3{max-width:none;margin:0;font-size:var(--type-card-small);font-weight:600;line-height:1.1;letter-spacing:var(--tracking-heading);text-wrap:balance}
 .case-support-copy>p:not(.case-fact){max-width:none;margin:var(--space-4) 0 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
@@ -324,11 +326,9 @@ button,summary{font:inherit}
   .testimonial-stars{font-size:1.5rem}
   .testimonial-spotlight blockquote{font-size:var(--type-card-small)}
   .case-support-grid{grid-template-columns:1fr;gap:var(--space-4);margin-top:var(--space-4)}
-  .case-support--wide{display:flex;grid-column:auto}
   .case-support-copy,.client-result-card{padding:var(--space-5)}
   .case-support--portrait .case-media--portrait-fit{aspect-ratio:3/4}
   .case-portrait-player{width:100%;height:100%}
-  .case-support--wide .case-media{aspect-ratio:16/9}
   .client-result-card--ashley{order:1}
   .client-result-card--vora{order:2}
   .case-studies-close{margin-top:var(--space-6);font-size:var(--type-body)}
