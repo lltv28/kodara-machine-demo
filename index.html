@@ -39,7 +39,7 @@ head.appendChild(script);
   --type-hero:clamp(3rem,3.8vw,3.25rem);--type-section:clamp(2.75rem,4vw,3.25rem);--type-section-long:clamp(2.75rem,3.8vw,3.25rem);
   --type-card:clamp(1.875rem,2.5vw,2.25rem);--type-card-small:clamp(1.875rem,2.2vw,2.125rem);
   --type-body:1.25rem;--type-body-large:1.375rem;
-  --type-question:clamp(1.375rem,1.8vw,1.625rem);
+  --type-question:clamp(1.75rem,2.2vw,2rem);
   --type-control:1.125rem;--type-button:1.375rem;--type-label:1rem;--type-meta:.9375rem;--type-legal:.9375rem;
   --type-hero-eyebrow:1.3rem;--type-hero-subheadline:1.7875rem;
   --type-quote:clamp(1.5rem,2vw,1.75rem);--type-stat:clamp(4rem,7vw,6rem);
@@ -70,7 +70,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 #kodara-triager{width:100%;max-width:var(--rail-media);min-height:60px;margin-top:var(--space-4);scroll-margin-top:clamp(24px,6vh,64px)}
 
 @media(max-width:720px){
-  :root{--type-hero:clamp(2.625rem,11vw,3rem);--type-section:clamp(2.125rem,9.5vw,2.5rem);--type-section-long:2.125rem;--type-card:1.75rem;--type-card-small:1.5rem;--type-body:1.125rem;--type-body-large:1.25rem;--type-hero-subheadline:1.625rem;--type-question:1.375rem;--type-quote:1.5rem;--measure-body:34ch}
+  :root{--type-hero:clamp(2.625rem,11vw,3rem);--type-section:clamp(2.125rem,9.5vw,2.5rem);--type-section-long:2.125rem;--type-card:1.75rem;--type-card-small:1.5rem;--type-body:1.125rem;--type-body-large:1.25rem;--type-hero-subheadline:1.625rem;--type-question:1.5rem;--type-quote:1.5rem;--measure-body:34ch}
   body{padding-inline:var(--page-gutter-mobile)}
 }
 /* ---------- shared card ---------- */
@@ -103,7 +103,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 /* ---------- illustrative online demand ---------- */
 .search-demand-section{width:100%}
 .search-demand-intro{width:100%;max-width:var(--rail-wide);margin:0 auto var(--space-7);text-align:center}
-.search-demand-intro p{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.search-demand-intro p{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .search-demand-stage{--chart-page:#fcfdfc;--chart-mint:#f1f6f5;--chart-ink:#20362d;--chart-muted:#567066;--chart-line:#cbdcda;--chart-accent:#106844;--chart-accent-dark:#0c4f34;--chart-ease:cubic-bezier(.16,1,.3,1);position:relative;width:100%;padding:clamp(24px,3vw,40px);overflow:hidden;border:1px solid var(--line-2);border-radius:var(--radius-lg);background:radial-gradient(circle at 18% 8%,rgba(16,104,68,.07),transparent 34%),linear-gradient(180deg,var(--chart-page),var(--chart-mint));color:var(--chart-ink);box-shadow:var(--shadow-sm)}
 .search-demand-heading{display:flex;min-height:88px;align-items:baseline;justify-content:space-between;gap:var(--space-6)}
 .search-demand-heading h3{max-width:18ch;font-size:clamp(1.75rem,3vw,2.75rem);font-weight:580;line-height:1.14;letter-spacing:.006em;text-wrap:balance}
@@ -140,14 +140,14 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 /* ---- closing CTA bookend ---- */
 .cta{padding:clamp(var(--space-7),7vw,88px);border-color:var(--accent-dark);background:var(--accent-dark);color:#fff;text-align:center;box-shadow:none}
 .cta .cta-line{width:100%;max-width:none;margin:0 auto var(--space-4);font-family:var(--fb);font-size:var(--type-section-long);font-weight:650;line-height:1.1;letter-spacing:var(--tracking-display);text-wrap:balance}
-.cta-sub{width:100%;max-width:var(--measure-body);margin:0 auto var(--space-5);color:rgba(255,255,255,.84);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.cta-sub{width:100%;max-width:var(--measure-body);margin:0 auto var(--space-5);color:rgba(255,255,255,.84);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .cta .cta-btn{margin-inline:auto;color:var(--accent-dark);background:var(--panel);border-color:rgba(255,255,255,.72);box-shadow:none}
 .cta .cta-btn:hover{background:var(--bg)}
 .cta .cta-btn:focus-visible{outline-color:#fff}
 
 /* ---------- mechanism features ---------- */
 .mechanism-head{width:100%;max-width:var(--rail-wide);margin:0 auto var(--space-7);text-align:center}
-.mechanism-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.mechanism-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .mechanism-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5)}
 .mechanism-feature{display:flex;min-width:0;min-height:290px;flex-direction:column;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
 .mechanism-copy{display:flex;flex:1;flex-direction:column;padding:0}
@@ -183,7 +183,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 
 /* ---------- video client stories ---------- */
 .case-studies-head{width:100%;max-width:var(--rail-wide);margin:0 auto var(--space-6);text-align:center}
-.case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+#case-studies-title{font-size:min(var(--type-section),3.2rem)}
+.case-studies-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .client-result-card{display:flex;min-width:0;flex-direction:column;padding:var(--space-6);border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-sm)}
 .client-result-person{display:grid;grid-template-columns:52px minmax(0,1fr);gap:var(--space-3);align-items:center}
 .client-result-avatar{display:block;width:52px;height:52px;border:1px solid var(--line);border-radius:var(--radius-pill);object-fit:cover;background:var(--surface)}
@@ -194,7 +195,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .client-result-points{display:grid;gap:var(--space-2);margin-top:var(--space-4);padding:0;list-style:none}
 .client-result-points li{display:grid;grid-template-columns:8px minmax(0,1fr);gap:var(--space-3);align-items:start;color:var(--ink-2);font-size:var(--type-body);line-height:1.45}
 .client-result-points li::before{width:7px;height:7px;margin-top:.55em;border-radius:50%;background:var(--accent);content:""}
-.testimonial-spotlight{width:100%;max-width:var(--measure-body);margin:clamp(var(--space-7),7vw,var(--space-8)) auto;padding-inline:var(--space-5);text-align:center}
+.testimonial-spotlight{width:100%;max-width:var(--rail-media);margin:clamp(var(--space-7),7vw,var(--space-8)) auto;padding-inline:var(--space-5);text-align:center}
 .testimonial-stars{display:flex;justify-content:center;gap:.3em;color:#C79218;font-family:Arial,sans-serif;font-size:1.75rem;line-height:1}
 .testimonial-stars span{display:block}
 .testimonial-spotlight blockquote{margin-top:var(--space-4);font-size:clamp(2rem,3.4vw,2.75rem);font-weight:650;line-height:1.15;letter-spacing:var(--tracking-heading);text-wrap:balance}
@@ -284,10 +285,10 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 
 .faq{width:100%;max-width:var(--rail-wide)}
 .faq-head{width:100%;max-width:var(--rail-wide);margin:0 auto var(--space-5);text-align:center}
-.faq-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
+.faq-intro{max-width:var(--measure-body);margin:var(--space-4) auto 0;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
 .faq-list{display:grid;width:100%;gap:var(--space-3)}
 .faq-item{border:1px solid var(--line-2);border-radius:var(--radius-lg);background:var(--panel);box-shadow:var(--shadow-subtle);overflow:hidden}
-.faq-item summary{position:relative;padding:var(--space-5) calc(var(--space-7) + var(--space-4)) var(--space-5) var(--space-5);color:var(--ink);font-size:var(--type-question);font-weight:600;line-height:1.3;cursor:pointer;list-style:none;text-wrap:balance}
+.faq-item summary{position:relative;padding:var(--space-5) calc(var(--space-7) + var(--space-4)) var(--space-5) var(--space-5);color:var(--ink);font-size:var(--type-question);font-weight:600;line-height:1.25;cursor:pointer;list-style:none;text-wrap:balance}
 .faq-item summary::-webkit-details-marker{display:none}
 .faq-item summary::after{content:'+';position:absolute;top:50%;right:var(--space-5);display:grid;width:32px;height:32px;place-items:center;color:var(--accent-ink);font-family:var(--fb);font-size:1.8rem;font-weight:400;line-height:1;transform:translateY(-50%);transition:transform .22s cubic-bezier(.22,1,.36,1)}
 .faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg);transition-duration:.3s}
@@ -296,6 +297,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
 .faq-answer{width:100%;max-width:var(--measure-body);padding:0 var(--space-7) var(--space-5) var(--space-5);color:var(--ink-2);font-size:var(--type-body);line-height:1.5;text-wrap:pretty}
 @media(max-width:720px){
   .faq-head{margin-bottom:var(--space-4)}
+  .search-demand-intro p,.mechanism-intro,.case-studies-intro,.faq-intro,.cta-sub{font-size:var(--type-body)}
   .faq-item summary{padding:var(--space-4) calc(var(--space-7) + var(--space-2)) var(--space-4) var(--space-4)}
   .faq-item summary::after{right:var(--space-4)}
   .faq-answer{padding:0 46px var(--space-4) var(--space-4)}
@@ -327,7 +329,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   .proof-snapshot-logo--johns-hopkins{--logo-width:142px;--logo-height:40px}
 }
 @media(max-width:390px){
-  :root{--type-hero:2.625rem;--type-section:2.25rem;--type-section-long:2.125rem;--type-card:1.75rem;--type-card-small:1.5rem;--type-question:1.375rem}
+  :root{--type-hero:2.625rem;--type-section:2.25rem;--type-section-long:2.125rem;--type-card:1.75rem;--type-card-small:1.5rem;--type-question:1.5rem}
   body{padding-inline:var(--page-gutter-mobile)}
   .brand img{width:104px}
   .case-featured--portrait,.case-featured-copy,.case-support-copy,.proof-card{padding:var(--space-5)}
@@ -434,7 +436,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   <!-- ============ ILLUSTRATIVE ONLINE DEMAND ============ -->
   <section class="search-demand-section" id="online-demand" aria-labelledby="search-demand-title">
     <header class="search-demand-intro">
-      <h2 class="card-title" id="search-demand-title">The demand for health and wellness expertise is exploding online.</h2>
+      <h2 class="card-title" id="search-demand-title">Health and wellness demand is exploding online.</h2>
       <p>People are already searching online for answers, options, and experts they can trust. These nine categories show how broad that demand has become.</p>
     </header>
     <div class="search-demand-stage" data-search-demand-chart data-estimates-url="assets/data/search-estimates.json" data-cues-url="assets/data/motion-cues.json" data-chart-state="loading">
@@ -456,7 +458,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   <section class="mechanism-features" id="how-it-works" aria-labelledby="mechanism-title">
     <header class="mechanism-head">
       <h2 class="card-title" id="mechanism-title">Your expertise, built and launched in three steps.</h2>
-      <p class="mechanism-intro">You give us about one hour per week. Kodara handles the extraction, build, review, launch, and beta-user onboarding.</p>
+      <p class="mechanism-intro">Give us one hour a week. We handle the build, launch, and beta-user onboarding.</p>
     </header>
     <div class="mechanism-grid">
       <article class="mechanism-feature">
@@ -486,8 +488,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   <!-- ============ VIDEO CLIENT STORIES ============ -->
   <section class="case-studies" id="stories" aria-labelledby="case-studies-title">
     <div class="case-studies-head">
-      <h2 class="card-title" id="case-studies-title">What happens when your expertise can work without you.</h2>
-      <p class="case-studies-intro">Different experts built different online businesses. Each one reduced how much growth depended on being personally present.</p>
+      <h2 class="card-title" id="case-studies-title">What happens when your expertise works without you.</h2>
+      <p class="case-studies-intro">Each expert built an online business that depended less on their personal time.</p>
     </div>
 
     <figure class="testimonial-spotlight">
@@ -505,7 +507,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
         </div>
         <div class="case-support-copy">
           <span class="case-kicker">Client story</span>
-          <h3 class="case-title" id="sandra-case-title">Sandra is working less while helping more people.</h3>
+          <h3 class="case-title" id="sandra-case-title">Helping more people while working less.</h3>
           <p class="case-copy">Sandra says her entirely online programs made the business more consistent and enjoyable without adding a hundred more calls.</p>
           <p class="case-fact"><span>What Kodara helped build</span><strong>An entirely online program that supports better-fit clients without adding more calls.</strong></p>
           <div class="case-person">
@@ -522,7 +524,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
         </div>
         <div class="case-support-copy">
           <span class="case-kicker">Client story</span>
-          <h3 class="case-title" id="dr-mike-case-title">Dr. Mike had his AI product testing in about 30 days.</h3>
+          <h3 class="case-title" id="dr-mike-case-title">His AI product was in testing within about 30 days.</h3>
           <p class="case-copy">After trying three or four companies, Dr. Mike called Kodara “the best one by far” and praised the team’s speed and responsiveness.</p>
           <p class="case-fact"><span>What Kodara helped build</span><strong>Dr. Mike AI, with its first product already in testing.</strong></p>
           <div class="case-person">
@@ -537,7 +539,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
         </div>
         <div class="case-support-copy">
           <span class="case-kicker">Client story</span>
-          <h3 class="case-title" id="leanne-case-title">Leanne’s virtual business gave her room to launch a passion project.</h3>
+          <h3 class="case-title" id="leanne-case-title">Her virtual business made room for a passion project.</h3>
           <p class="case-copy">Her largely automated virtual business created enough time and space to launch a passion project she could not pursue while doing everything one-to-one.</p>
           <p class="case-fact"><span>What Kodara helped build</span><strong>A largely automated virtual business that reduced dependence on one-to-one delivery.</strong></p>
           <div class="case-person">
@@ -551,7 +553,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/amit-vora.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Amit N. Vora">
           <span class="client-result-role">Dr. Vora, Cardiologist</span>
         </div>
-        <h3>Enrolled 30+ patients in his first five weeks.</h3>
+        <h3>30+ patients enrolled in five weeks.</h3>
         <ul class="client-result-points">
           <li>Used Kodara’s client-discovery model.</li>
           <li>Reached people beyond his appointment calendar.</li>
@@ -562,7 +564,7 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
           <img class="client-result-avatar client-result-avatar--mirrored" src="assets/testimonials/ashley-holly.jpg" width="52" height="52" loading="lazy" decoding="async" alt="Ashley Holly">
           <span class="client-result-role">Ashley Holly, Yoga instructor</span>
         </div>
-        <h3>Replaced her in-person classes within two months.</h3>
+        <h3>Replaced in-person classes in two months.</h3>
         <ul class="client-result-points">
           <li>Built an AI business around her expertise.</li>
           <li>Reduced dependence on one-to-one delivery.</li>
@@ -593,8 +595,8 @@ body{font-family:var(--fb);font-size:var(--type-body);line-height:1.6;letter-spa
   <!-- ============ FAQ ============ -->
   <section class="faq" id="faq" aria-labelledby="faq-title">
     <div class="faq-head">
-      <h2 class="card-title" id="faq-title">Questions before you apply.</h2>
-      <p class="faq-intro">What we build, how your expertise is protected, what the process requires, and what happens next.</p>
+      <h2 class="card-title" id="faq-title">Everything you need to know before you apply.</h2>
+      <p class="faq-intro">What we build, how it works, what we need from you, and what happens next.</p>
     </div>
     <div class="faq-list">
       <details class="faq-item" name="kodara-faq" open>

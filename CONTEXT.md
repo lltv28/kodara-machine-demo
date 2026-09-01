@@ -8,7 +8,7 @@ White is the neutral page, section, card, and media surface. Green is reserved f
 
 Instrument Sans is the site typeface. Desktop body copy uses 20px and 22px tiers; mobile uses 18px and 20px. Desktop display headings use a 48px to 52px hero tier, a 44px to 52px section tier, and a 30px to 36px card tier. Mobile uses a 42px to 48px hero tier, a 34px to 40px section tier, and a 24px to 28px card tier.
 
-Use the 1240px wide rail for page structure and section headlines, the 1000px media rail for videos and embedded experiences, and the shared 62ch measure for readable supporting copy and featured quotes. Section headings and card copy use their full parent width. The animated chart's changing keyword label may retain a scoped intrinsic measure so it cannot collide with the adjacent metric.
+Use the 1240px wide rail for page structure and section headlines, the 1000px media rail for videos, embedded experiences, and featured quotes, and the shared 62ch measure for readable supporting copy. Section headings and card copy use their full parent width. Centered section subheadlines use the 22px desktop tier, the 18px mobile tier, and balanced wrapping. FAQ questions use 28px to 32px on desktop and 24px on mobile. The animated chart's changing keyword label may retain a scoped intrinsic measure so it cannot collide with the adjacent metric.
 
 Cards are reserved for the four proof and delivery stats, the three process chapters, testimonials and results, FAQ disclosures, authentic founder media, and the final CTA. Founder copy remains open on the white canvas.
 

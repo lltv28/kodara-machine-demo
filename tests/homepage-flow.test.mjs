@@ -58,7 +58,7 @@ test('homepage presents the supplied animated online-demand chart before the bui
   const content = body(homepage);
   const section = content.match(/<section class="search-demand-section"[\s\S]*?<\/section>/u)?.[0] ?? '';
 
-  assert.match(section, /The demand for health and wellness expertise is exploding online\./u);
+  assert.match(section, /Health and wellness demand is exploding online\./u);
   assert.match(section, /People are already searching online for answers, options, and experts they can trust\./u);
   assert.match(section, /data-search-demand-chart/u);
   assert.match(section, /data-estimates-url="assets\/data\/search-estimates\.json"/u);
@@ -101,14 +101,23 @@ test('homepage keeps the approved integrations and one final qualification actio
 
 test('approved process and client proof remain visible', () => {
   const content = body(homepage);
+  const demand = content.match(/<section class="search-demand-section"[\s\S]*?<\/section>/u)?.[0] ?? '';
   const process = content.match(/<section class="mechanism-features"[\s\S]*?<\/section>/u)?.[0] ?? '';
   const stories = content.match(/<section class="case-studies"[\s\S]*?<\/section>/u)?.[0] ?? '';
+  const faq = content.match(/<section class="faq"[\s\S]*?<\/section>/u)?.[0] ?? '';
+  assert.match(demand, /Health and wellness demand is exploding online\./u);
   assert.doesNotMatch(process, /\shidden(?:\s|>)/u, 'The three-step process must be visible');
   assert.doesNotMatch(process, /class="mechanism-demo"/u, 'The three-step process must not use decorative image boxes');
+  assert.match(process, /Give us one hour a week\. We handle the build, launch, and beta-user onboarding\./u);
   assert.match(process, /Share what you know\./u);
   assert.match(process, /Review what we build\./u);
   assert.match(process, /Launch and onboard users\./u);
   assert.equal((process.match(/class="mechanism-step"/gu) ?? []).length, 3, 'Each process card needs a clear step label');
+
+  assert.match(stories, /What happens when your expertise works without you\./u);
+  assert.match(stories, /Each expert built an online business that depended less on their personal time\./u);
+  assert.match(faq, /Everything you need to know before you apply\./u);
+  assert.match(faq, /What we build, how it works, what we need from you, and what happens next\./u);
 
   const resultCards = [...stories.matchAll(/<article class="client-result-card">([\s\S]*?)<\/article>/gu)].map((match) => match[1]);
   assert.equal(resultCards.length, 2, 'Only Dr. Vora and Ashley should retain concise result summaries');
@@ -131,11 +140,11 @@ test('approved process and client proof remain visible', () => {
   assert.match(videoStories, /media-id="6oj2gj3wqt"/u, 'Sandra’s video must remain in the paired story grid');
   assert.match(videoStories, /class="case-media case-media--portrait-fit">\s*<div class="case-portrait-player">\s*<wistia-player media-id="6oj2gj3wqt"/u, 'Sandra’s portrait video must retain a dedicated 3:4 frame instead of being cropped into widescreen');
   assert.match(videoStories, /<video class="case-native-video"[^>]*src="assets\/testimonials\/dr-mike\.mp4"[^>]*poster="assets\/testimonials\/dr-mike-poster\.jpg"[^>]*preload="none"/u, 'Dr. Mike’s approved testimonial must use the web-optimized local video without preloading it');
-  assert.match(videoStories, /Dr\. Mike had his AI product testing in about 30 days\./u, 'Dr. Mike’s story must lead with the supported implementation milestone');
+  assert.match(videoStories, /His AI product was in testing within about 30 days\./u, 'Dr. Mike’s story must lead with the supported implementation milestone');
   assert.doesNotMatch(videoStories, /\$100,?000/u, 'Dr. Mike’s future revenue goal must not be presented as a testimonial result');
   assert.match(videoStories, /<article class="case-support case-support--wide"[^>]*>[\s\S]*?media-id="fay3lgo8op"/u, 'Leanne’s widescreen story must span the full desktop proof row');
-  assert.match(stories, /Enrolled 30\+ patients in his first five weeks\./u);
-  assert.match(stories, /Replaced her in-person classes within two months\./u);
+  assert.match(stories, /30\+ patients enrolled in five weeks\./u);
+  assert.match(stories, /Replaced in-person classes in two months\./u);
 
   for (const proof of ['Sandra Parker', 'Leanne Ellington', 'Dr. Vora', 'Ashley Holly']) {
     assert.match(content, new RegExp(proof.replace('.', '\\.')), `Client proof must retain ${proof}`);

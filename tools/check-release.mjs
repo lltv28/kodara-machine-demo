@@ -90,6 +90,9 @@ assert.match(confirmationStyles, /\.featured-video\{[^}]*max-width:var\(--rail-m
 assert.match(confirmationStyles, /\.section-head\{width:100%;max-width:var\(--rail-wide\)/, 'Confirmation section headings must use the full page rail');
 assert.match(confirmationStyles, /\.section-head h2\{width:100%;max-width:none/, 'Confirmation section titles must use their full heading container');
 assert.match(confirmationStyles, /\.section-head p\{max-width:var\(--measure-body\)/, 'Confirmation section copy must use the body measure');
+assert.match(confirmationStyles, /\.section-head p\{[^}]*font-size:var\(--type-body-large\);[^}]*text-wrap:balance/, 'Confirmation section subheadlines must use the shared balanced desktop tier');
+assert.match(confirmationStyles, /\.final-reminder p\{[^}]*font-size:var\(--type-body-large\);[^}]*text-wrap:balance/, 'Confirmation final reminder copy must use the shared balanced desktop tier');
+assert.match(confirmationStyles, /@media\(max-width:720px\)[\s\S]*\.section-head p,\.final-reminder p\{font-size:var\(--type-body\)\}/, 'Confirmation centered supporting copy must return to the 18px body tier on mobile');
 assert.match(confirmationStyles, /\.press-library\{max-width:var\(--rail-wide\)/, 'Confirmation press grid must use the wide rail');
 assert.match(confirmationStyles, /\.faq-video-library\{max-width:var\(--rail-wide\)/, 'Confirmation FAQ grid must use the wide rail');
 assert.match(confirmationStyles, /--accent:#106844/, 'Confirmation page must use the shared Kodara green');
@@ -141,6 +144,8 @@ assert.match(page, /--type-section-long:clamp\(2\.75rem,3\.8vw,3\.25rem\)/, 'Lon
 assert.match(page, /--type-card-small:clamp\(1\.875rem,2\.2vw,2\.125rem\)/, 'Supporting card headings must stay within the 30px to 34px tier');
 assert.match(page, /--type-body:1\.25rem;--type-body-large:1\.375rem/, 'Desktop body text must retain the readable 20px and 22px tiers');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-body:1\.125rem;--type-body-large:1\.25rem/, 'Mobile body text must retain the readable 18px and 20px tiers');
+assert.match(page, /--type-question:clamp\(1\.75rem,2\.2vw,2rem\)/, 'Desktop FAQ questions must use the approved 28px to 32px tier');
+assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-question:1\.5rem/, 'Mobile FAQ questions must use the approved 24px tier');
 assert.match(page, /--type-hero-eyebrow:1\.3rem;--type-hero-subheadline:1\.7875rem/, 'Hero eyebrow and guarantee must retain their approved 30% desktop increase');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*--type-hero-subheadline:1\.625rem/, 'Hero guarantee must retain its approved 30% mobile increase');
 assert.match(page, /\.hero-region-eyebrow\{[^}]*font-size:var\(--type-hero-eyebrow\)/, 'Hero audience line must use its dedicated type token');
@@ -159,17 +164,24 @@ assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate
 assert.doesNotMatch(page, /\.section-band::before/, 'Full-width divider bands must not return');
 assert.match(page, /\.faq-list\{display:grid;[^}]*gap:var\(--space-3\)/, 'FAQ items must use spaced cards instead of divider rows');
 assert.match(page, /\.faq\{width:100%;max-width:var\(--rail-wide\)\}/, 'FAQ must align with the full page rail while answers retain the body measure');
-assert.match(page, /\.testimonial-spotlight\{width:100%;max-width:var\(--measure-body\)/, 'Featured testimonial copy must use the shared body measure without another rail');
+assert.match(page, /\.testimonial-spotlight\{width:100%;max-width:var\(--rail-media\)/, 'Featured testimonial copy must use the media rail for a balanced three-line desktop quote');
+for (const className of ['search-demand-intro p', 'mechanism-intro', 'case-studies-intro', 'faq-intro', 'cta-sub']) {
+  const selector = className.replace(' ', '\\s+').replace('.', '\\.');
+  assert.match(page, new RegExp(`${selector}\\{[^}]*font-size:var\\(--type-body-large\\);[^}]*text-wrap:balance`), `${className} must use the shared balanced desktop subheadline tier`);
+}
+assert.match(page, /@media\(max-width:720px\)\{[\s\S]*?\.search-demand-intro p,\.mechanism-intro,\.case-studies-intro,\.faq-intro,\.cta-sub\{font-size:var\(--type-body\)\}/, 'Centered section subheadlines must return to the readable 18px body tier on mobile');
 assert.match(page, /\.homepage-stats\{display:grid;width:100%;grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/, 'Homepage stats must use one balanced four-card desktop row');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.homepage-stats,\.mechanism-grid\{grid-template-columns:1fr;gap:var\(--space-4\)\}/, 'Homepage stats and process must stack before mobile cards become cramped');
 assert.match(page, /\.founder-highlight h2\{max-width:none/, 'Founder heading must use the full copy column');
 assert.match(page, /\.case-title\{max-width:none/, 'Case-study headings must use the full card width');
+assert.match(page, /#case-studies-title\{font-size:min\(var\(--type-section\),3\.2rem\)\}/, 'The longest proof heading must receive the minimal optical fit needed to remain on one desktop line');
 assert.match(page, /\.faq-answer\{width:100%;max-width:var\(--measure-body\)/, 'FAQ answers must use the shared body measure');
 assert.match(page, /\.site-footer\{width:auto;margin:var\(--space-9\) calc\(var\(--page-gutter\) \* -1\) 0/, 'Full-width footer must align to the page gutter without scrollbar overflow');
 assert.doesNotMatch(page, /\.site-footer\{width:100vw/, 'Footer must not use viewport width that includes the scrollbar');
 assert.match(page, /<section class="mechanism-features" id="how-it-works" aria-labelledby="mechanism-title">/, 'The approved three-step process must be visible');
 assert.doesNotMatch(page, /<section class="(?:education-section|audience-section|credibility-section|proof-snapshot)|<section class="card primary-demo"/, 'Removed narrative chapters must not return to the homepage');
 assert.match(page, /\.faq-item summary::after\{[^}]*right:var\(--space-5\);display:grid;width:32px;height:32px;place-items:center/, 'FAQ icons must use a fixed, centered desktop alignment box');
+assert.match(page, /\.faq-item summary\{[^}]*font-size:var\(--type-question\);[^}]*line-height:1\.25/, 'FAQ questions must use the shared larger tier with compact line spacing');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.faq-item summary\{padding:var\(--space-4\) calc\(var\(--space-7\) \+ var\(--space-2\)\) var\(--space-4\) var\(--space-4\)\}[\s\S]*?\.faq-item summary::after\{right:var\(--space-4\)\}/, 'FAQ questions and icons must keep aligned mobile insets');
 assert.doesNotMatch(page, /@media\(max-width:390px\)\{[^}]*\.faq-item summary\{padding-right:/, 'Narrow screens must not override the shared FAQ icon column');
 assert.match(page, /\.cta-btn\{[^}]*display:flex;[^}]*width:max-content;[^}]*font-weight:700;[^}]*font-size:var\(--type-button\)/, 'CTA buttons must stay on their own line with bold, readable type');
@@ -227,7 +239,7 @@ assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.hero-vsl-stage\{margin-to
 assert.match(page, /@media\(max-width:340px\)\{\.hero-region-eyebrow\{min-block-size:4\.2em\}\}/, 'Narrow mobile must reserve only the personalized availability line');
 assert.match(page, /<script type="module" src="assets\/js\/region-personalization\.mjs"><\/script>/, 'Hero regional personalization client is not loaded');
 assert.match(page, /<script type="module" src="assets\/js\/search-demand-chart\.mjs"><\/script>/, 'Homepage must load the native search-demand chart module');
-assert.match(page, /<section class="search-demand-section"[^>]*>[\s\S]*?The demand for health and wellness expertise is exploding online\.[\s\S]*?data-search-demand-chart[\s\S]*?<svg data-search-demand-plot role="img"/, 'Homepage must include the approved native SVG demand section');
+assert.match(page, /<section class="search-demand-section"[^>]*>[\s\S]*?Health and wellness demand is exploding online\.[\s\S]*?data-search-demand-chart[\s\S]*?<svg data-search-demand-plot role="img"/, 'Homepage must include the approved native SVG demand section');
 assert.match(page, /Illustrative estimates\. Search interest indexed to 2016 = 100\./, 'Search chart must visibly qualify its data as illustrative estimates');
 assert.doesNotMatch(page.match(/<section class="search-demand-section"[\s\S]*?<\/section>/)?.[0] ?? '', /<iframe|<canvas/, 'Search chart must not use an iframe, canvas, or video replacement');
 assert.ok(existsSync(resolve(root, 'assets/data/search-estimates.json')), 'Missing supplied search-estimate data');
@@ -250,8 +262,8 @@ assert.match(page, /Your signed agreement controls eligibility, timing, definiti
 assert.match(page, /more than 100,000 healthcare leads/, 'Client discovery must name the healthcare data foundation');
 assert.match(page, /live search and demand signals/, 'Client discovery must explain the live-demand mechanism');
 assert.match(page, /first 10 beta users will be onboarded, or you receive a full refund/, 'FAQ must state the current qualifying-client guarantee');
-assert.match(page, /Dr\. Vora[\s\S]{0,500}Enrolled 30\+ patients in his first five weeks[\s\S]{0,500}client-discovery model/, 'Client proof must include Dr. Vora and the VSL mechanism');
-assert.match(page, /Ashley[\s\S]{0,500}Replaced her in-person classes within two months[\s\S]{0,500}AI business/, 'Client proof must include Ashley and the VSL mechanism');
+assert.match(page, /Dr\. Vora[\s\S]{0,500}30\+ patients enrolled in five weeks[\s\S]{0,500}client-discovery model/, 'Client proof must include Dr. Vora and the VSL mechanism');
+assert.match(page, /Ashley[\s\S]{0,500}Replaced in-person classes in two months[\s\S]{0,500}AI business/, 'Client proof must include Ashley and the VSL mechanism');
 assert.equal((page.match(/class="client-result-card"/g) ?? []).length, 2, 'Client proof must use result-summary cards only for Dr. Vora and Ashley');
 assert.equal((page.match(/class="client-result-points"/g) ?? []).length, 2, 'Each result-summary card must contain concise supporting facts');
 const clientResultCards = [...page.matchAll(/<article class="client-result-card">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
