@@ -141,7 +141,7 @@ test('approved process and client proof remain visible', () => {
   assert.match(videoStories, /class="case-media case-media--portrait-fit">\s*<div class="case-portrait-player">\s*<wistia-player media-id="6oj2gj3wqt"/u, 'Sandra’s portrait video must retain a dedicated 3:4 frame instead of being cropped into widescreen');
   assert.match(videoStories, /class="case-portrait-player case-portrait-player--nine-sixteen">\s*<wistia-player media-id="b3djcgwuvz" aspect="0\.5625" aria-label="Dr\. Mike client testimonial video">/u, 'Dr. Mike’s approved Wistia testimonial must retain its portrait frame and accessible name');
   assert.match(videoStories, /On track to double last year without adding a hundred more calls\./u, 'Sandra’s story must lead with her supported growth and fewer-calls outcome');
-  assert.match(videoStories, /After trying this three or four times, his AI product was in testing within about 30 days\./u, 'Dr. Mike’s story must lead with the supported implementation milestone');
+  assert.match(videoStories, /After failing with 3-4 competitors, he launched in 30 days with us\./u, 'Dr. Mike’s story must lead with the supported implementation milestone');
   assert.match(videoStories, /<strong>Dr\. Mike<\/strong><span>Power-Up Sports Psychology<\/span>/u, 'Dr. Mike’s story must identify his business');
   assert.doesNotMatch(videoStories, /\$100,?000/u, 'Dr. Mike’s future revenue goal must not be presented as a testimonial result');
   assert.match(videoStories, /<article class="case-support case-support--wide"[^>]*>[\s\S]*?media-id="fay3lgo8op"/u, 'Leanne’s widescreen story must span the full desktop proof row');
