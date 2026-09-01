@@ -107,7 +107,7 @@ test('homepage stat row uses the four approved verified figures', () => {
 test('homepage keeps the approved integrations and one final qualification action', () => {
   const content = body(homepage);
   assert.match(homepage, /https:\/\/t\.kodarahealth\.com\/v1\//u, 'Click tracking must remain in the page');
-  assert.match(content, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/u, 'The approved VSL must remain');
+  assert.match(content, /id="vidalytics_embed_0r6h3jNKkbcixe_K"/u, 'The approved VSL must remain');
   assert.match(content, /id="kodara-triager"/u, 'The live qualification widget target must remain');
   assert.match(content, /https:\/\/embed\.kodara\.com\/v1\/widget\.js/u, 'The live qualification widget script must remain');
 

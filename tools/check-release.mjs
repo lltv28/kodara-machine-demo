@@ -202,8 +202,9 @@ assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*te
 assert.match(page, /\.site-hero h1\{width:100%;max-width:var\(--rail-wide\)/, 'Hero headline must use the full page rail');
 assert.match(page, /#hero-region-subheadline\{width:100%;max-width:min\(var\(--rail-media\),var\(--measure-body\)\)/, 'Hero subheadline must align to the media rail without exceeding the body measure');
 assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:var\(--rail-media\);[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas at the media rail');
-assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain the production Vidalytics VSL');
-assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Hero must load the approved Vidalytics VSL source');
+assert.match(page, /id="vidalytics_embed_0r6h3jNKkbcixe_K"/, 'Hero must contain the production Vidalytics VSL');
+assert.match(page, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/0r6h3jNKkbcixe_K\//, 'Hero must load the approved Vidalytics VSL source');
+assert.doesNotMatch(page, /vidalytics_embed_CA0308FsT4_Z8w5E/, 'Hero must not restore the retired Vidalytics VSL');
 assert.doesNotMatch(page, /class="hero-vsl-poster"/, 'Branded VSL placeholder must be removed');
 assert.match(page, /<h2 class="hero-triager-title">See if you qualify:<\/h2>\s*<div id="kodara-triager"><\/div>/, 'Hero must introduce the triager with the approved qualification heading');
 assert.match(page, /class="hero-vsl-stage"[\s\S]*?<div class="proof-snapshot-logos hero-proof-logos">[\s\S]*?<h2 class="hero-triager-title">See if you qualify:<\/h2>/, 'Authority logos must appear between the VSL and qualification widget');
