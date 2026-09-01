@@ -82,13 +82,13 @@ assert.equal((confirmation.match(/<a class="press-card"[^>]*target="_blank" rel=
 assert.doesNotMatch(confirmation, /Press Feature|Publication name|Interview or article title|will be added here/, 'Press placeholders must not remain');
 assert.match(confirmationStyles, /--rail-wide:1240px/, 'Confirmation page must use the shared 1240px content rail');
 assert.match(confirmationStyles, /--rail-media:1000px/, 'Confirmation page must use the shared 1000px media rail');
-assert.match(confirmationStyles, /--rail-reading:760px/, 'Confirmation page must use the shared 760px reading rail');
-assert.match(confirmationStyles, /--measure-display:22ch/, 'Confirmation page must use the shared display measure');
 assert.match(confirmationStyles, /--measure-body:62ch/, 'Confirmation page must use the shared body measure');
-assert.match(confirmationStyles, /--measure-card-body:42ch/, 'Confirmation page must use the shared card-body measure');
+assert.doesNotMatch(confirmationStyles, /--rail-reading/, 'Confirmation page must not define an unused intermediate reading rail');
+assert.doesNotMatch(confirmationStyles, /--measure-display|--measure-card-body/, 'Confirmation page must not reintroduce narrow display or card measures');
 assert.doesNotMatch(confirmationStyles, /max-width:(?:1000px|1100px|13ch|16ch|22ch|30ch|54ch|58ch|78ch)/, 'Confirmation page must not restore legacy one-off content widths');
 assert.match(confirmationStyles, /\.featured-video\{[^}]*max-width:var\(--rail-media\)/, 'Confirmation featured video must use the media rail');
-assert.match(confirmationStyles, /\.section-head h2\{max-width:var\(--measure-display\)/, 'Confirmation section headings must use the display measure');
+assert.match(confirmationStyles, /\.section-head\{width:100%;max-width:var\(--rail-wide\)/, 'Confirmation section headings must use the full page rail');
+assert.match(confirmationStyles, /\.section-head h2\{width:100%;max-width:none/, 'Confirmation section titles must use their full heading container');
 assert.match(confirmationStyles, /\.section-head p\{max-width:var\(--measure-body\)/, 'Confirmation section copy must use the body measure');
 assert.match(confirmationStyles, /\.press-library\{max-width:var\(--rail-wide\)/, 'Confirmation press grid must use the wide rail');
 assert.match(confirmationStyles, /\.faq-video-library\{max-width:var\(--rail-wide\)/, 'Confirmation FAQ grid must use the wide rail');
@@ -130,8 +130,10 @@ assert.equal((page.match(/assets\/brand\/kodara-wordmark\.svg/g) ?? []).length, 
 assert.doesNotMatch(page, /assets\/favicon\.svg/, 'The previous generated favicon must not remain in use');
 
 // Design-system invariants.
-assert.match(page, /--rail-wide:1240px;--rail-media:1000px;--rail-reading:760px/, 'The page must use the approved wide, media, and reading rails');
-assert.match(page, /--measure-display:22ch;--measure-body:62ch;--measure-card-body:42ch/, 'The page must use one display, body, and card text measure');
+assert.match(page, /--rail-wide:1240px;--rail-media:1000px/, 'The page must use the approved wide and media rails');
+assert.match(page, /--measure-body:62ch/, 'The page must retain one readable body measure');
+assert.doesNotMatch(page, /--rail-reading/, 'The page must not reintroduce an intermediate reading rail');
+assert.doesNotMatch(page, /--measure-display|--measure-card-body/, 'Narrow display and card measures must not constrain headings or card copy');
 assert.doesNotMatch(page, /--hero-primary-width|--measure-display-long|--measure-card-title|--measure-faq/, 'Legacy one-off width tokens must not return');
 assert.match(page, /--type-hero:clamp\(3rem,3\.8vw,3\.25rem\)/, 'Hero must use the approved 48px to 52px long-headline scale');
 assert.match(page, /--type-section:clamp\(2\.75rem,4vw,3\.25rem\)/, 'Section headings must retain the approved 44px to 52px scale');
@@ -156,11 +158,12 @@ assert.match(page, /--accent:#106844;--accent-hover:#0C5537;--accent-ink:#106844
 assert.doesNotMatch(page, /section-band--green|section-band--framed/, 'Alternate feature backgrounds and framing must not return');
 assert.doesNotMatch(page, /\.section-band::before/, 'Full-width divider bands must not return');
 assert.match(page, /\.faq-list\{display:grid;[^}]*gap:var\(--space-3\)/, 'FAQ items must use spaced cards instead of divider rows');
-assert.match(page, /\.faq\{width:100%;max-width:var\(--rail-reading\)\}/, 'FAQ must keep one stable reading width in open and closed states');
+assert.match(page, /\.faq\{width:100%;max-width:var\(--rail-wide\)\}/, 'FAQ must align with the full page rail while answers retain the body measure');
+assert.match(page, /\.testimonial-spotlight\{width:100%;max-width:var\(--measure-body\)/, 'Featured testimonial copy must use the shared body measure without another rail');
 assert.match(page, /\.homepage-stats\{display:grid;width:100%;grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/, 'Homepage stats must use one balanced four-card desktop row');
 assert.match(page, /@media\(max-width:720px\)[\s\S]*?\.homepage-stats,\.mechanism-grid\{grid-template-columns:1fr;gap:var\(--space-4\)\}/, 'Homepage stats and process must stack before mobile cards become cramped');
-assert.match(page, /\.founder-highlight h2\{max-width:var\(--measure-display\)/, 'Founder heading must use the shared display measure');
-assert.match(page, /\.case-title\{max-width:var\(--measure-display\)/, 'Case-study headings must use the shared display measure');
+assert.match(page, /\.founder-highlight h2\{max-width:none/, 'Founder heading must use the full copy column');
+assert.match(page, /\.case-title\{max-width:none/, 'Case-study headings must use the full card width');
 assert.match(page, /\.faq-answer\{width:100%;max-width:var\(--measure-body\)/, 'FAQ answers must use the shared body measure');
 assert.match(page, /\.site-footer\{width:auto;margin:var\(--space-9\) calc\(var\(--page-gutter\) \* -1\) 0/, 'Full-width footer must align to the page gutter without scrollbar overflow');
 assert.doesNotMatch(page, /\.site-footer\{width:100vw/, 'Footer must not use viewport width that includes the scrollbar');
@@ -175,7 +178,7 @@ assert.match(page, /\.cta-btn\{[^}]*min-height:60px;[^}]*padding:15px 32px/, 'Pr
 assert.match(page, /prefers-reduced-motion:reduce/, 'The page must honor reduced-motion preferences');
 assert.doesNotMatch(page, /[—–]/, 'Visible copy must not contain em or en dashes');
 assert.match(page, /\.site-hero\{display:flex;[^}]*flex-direction:column;[^}]*text-align:center/, 'Hero must use the centered cinema stack');
-assert.match(page, /\.site-hero h1\{width:100%;max-width:var\(--rail-media\)/, 'Hero headline must share the media rail');
+assert.match(page, /\.site-hero h1\{width:100%;max-width:var\(--rail-wide\)/, 'Hero headline must use the full page rail');
 assert.match(page, /#hero-region-subheadline\{width:100%;max-width:min\(var\(--rail-media\),var\(--measure-body\)\)/, 'Hero subheadline must align to the media rail without exceeding the body measure');
 assert.match(page, /\.hero-vsl-stage\{[^}]*max-width:var\(--rail-media\);[^}]*aspect-ratio:16\/9/, 'Hero VSL stage must reserve a stable 16:9 canvas at the media rail');
 assert.match(page, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Hero must contain the production Vidalytics VSL');
