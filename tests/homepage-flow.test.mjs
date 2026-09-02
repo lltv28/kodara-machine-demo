@@ -230,7 +230,7 @@ test('confirmation page uses the current six-client proof', () => {
 
 test('confirmation page shares current visual tokens and small assets', () => {
   const styles = readFileSync(resolve(root, 'confirmation/styles.css'), 'utf8');
-  assert.match(confirmation, /href="styles\.css\?v=20260901-confirmation-copy-vsl"/u, 'Confirmation stylesheet changes must bypass stale browser caches');
+  assert.match(confirmation, /href="styles\.css\?v=20260901-confirmation-instruction"/u, 'Confirmation stylesheet changes must bypass stale browser caches');
   for (const token of ['--border-subtle:#DCE8E5', '--border-default:#CBDCDA', '--border-strong:#A9C5C1', '--line-2:var(--border-default)']) {
     assert.match(styles, new RegExp(token.replace(/[()]/gu, '\\$&')));
   }

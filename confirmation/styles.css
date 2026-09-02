@@ -93,8 +93,7 @@ button,summary{font:inherit}
 .confirmation-hero{display:flex;flex-direction:column;align-items:center;padding:var(--space-6) 0 clamp(32px,5vw,64px);text-align:center}
 .confirmation-hero h1{width:100%;max-width:none;margin:0;font-size:var(--type-hero);font-weight:650;line-height:1.06;letter-spacing:var(--tracking-display);text-wrap:balance}
 .confirmation-hero>p{max-width:var(--measure-body);margin:var(--space-5) auto 0;color:var(--ink-2);font-size:var(--type-body-large);line-height:1.5;text-wrap:balance}
-.confirmation-hero .confirmation-instruction{font-weight:650}
-.confirmation-hero .email-note{margin-top:var(--space-4);color:var(--ink-3);font-size:var(--type-label)}
+.confirmation-hero .confirmation-instruction{font-size:var(--type-card-small);font-weight:650;line-height:1.2}
 
 .featured-video{width:100%;max-width:var(--rail-media);margin-top:var(--space-7);overflow:hidden;border:1px solid var(--line-strong);border-radius:var(--radius-xl);background:#fff;box-shadow:var(--shadow-md)}
 .case-study-video{margin:0 auto}

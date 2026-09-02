@@ -29,6 +29,8 @@ assert.match(confirmation, /<meta name="robots" content="noindex,nofollow">/, 'C
 assert.match(confirmation, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f7c1f59890e8b25c13e26ffca667c2709a446cbd68a53bc0bd06ca3d4b782a9\?tag=!clicked&ref_url=[\s\S]*?<\/head>/, 'Confirmation tracking must load from the document head');
 assert.match(confirmation, /<h1 id="confirmation-title">Your Demo Meeting Is Scheduled!<\/h1>/, 'Confirmation page must use the approved scheduled-meeting headline');
 assert.match(confirmation, /<p class="confirmation-instruction">Watch This Brief 2-Minute Video To Ensure Your Call Is Not Cancelled<\/p>/, 'Confirmation page must use the approved preparation instruction');
+assert.doesNotMatch(confirmation, /Your date, time, and meeting link are in your confirmation email/, 'Confirmation page must not repeat the removed email reminder');
+assert.match(confirmationStyles, /\.confirmation-hero \.confirmation-instruction\{[^}]*font-size:var\(--type-card-small\);[^}]*line-height:1\.2/, 'Confirmation instruction must use the larger card-small type level');
 assert.match(confirmation, /id="call-confirmation" class="vsl-stage confirmation-video" data-video-slot="call-confirmation"/, 'Confirmation page needs the call-confirmation video frame');
 assert.match(confirmation, /id="vidalytics_embed_VNXQCkfkzn95oP5v"/, 'Confirmation page needs the approved call-confirmation video');
 assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/VNXQCkfkzn95oP5v\//, 'Call-confirmation video must use the approved Vidalytics source');
