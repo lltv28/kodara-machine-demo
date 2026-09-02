@@ -27,6 +27,8 @@ assert.ok(statSync(confirmationStylesPath).size <= 32 * 1024, 'Confirmation styl
 assert.ok(existsSync(resolve(root, 'assets/fonts/instrument-sans-latin.woff2')), 'Missing reusable Instrument Sans font asset');
 assert.match(confirmation, /<meta name="robots" content="noindex,nofollow">/, 'Confirmation page must stay out of search results');
 assert.match(confirmation, /<head>[\s\S]*?https:\/\/t\.kodarahealth\.com\/v1\/7f7c1f59890e8b25c13e26ffca667c2709a446cbd68a53bc0bd06ca3d4b782a9\?tag=!clicked&ref_url=[\s\S]*?<\/head>/, 'Confirmation tracking must load from the document head');
+assert.match(confirmation, /<h1 id="confirmation-title">Your Demo Meeting Is Scheduled!<\/h1>/, 'Confirmation page must use the approved scheduled-meeting headline');
+assert.match(confirmation, /<p class="confirmation-instruction">Watch This Brief 2-Minute Video To Ensure Your Call Is Not Cancelled<\/p>/, 'Confirmation page must use the approved preparation instruction');
 assert.match(confirmation, /id="call-confirmation" class="vsl-stage confirmation-video" data-video-slot="call-confirmation"/, 'Confirmation page needs the call-confirmation video frame');
 assert.match(confirmation, /id="vidalytics_embed_VNXQCkfkzn95oP5v"/, 'Confirmation page needs the approved call-confirmation video');
 assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/VNXQCkfkzn95oP5v\//, 'Call-confirmation video must use the approved Vidalytics source');
@@ -35,7 +37,7 @@ assert.match(confirmation, /<script src="https:\/\/app\.iclosed\.io\/assets\/wid
 assert.match(confirmation, /class="call-details-widget"[\s\S]*?<script src="https:\/\/app\.iclosed\.io\/assets\/widget\.js" async><\/script>\s*<\/section>\s*<section id="case-study"/, 'The client case study must begin immediately after the iClosed widget');
 assert.match(confirmation, /<p class="proof-snapshot-logo-label">Trusted by companies like:<\/p>/, 'Confirmation authority strip must use the approved title');
 assert.equal((confirmation.match(/class="proof-snapshot-logo proof-snapshot-logo--/g) ?? []).length, 6, 'Confirmation authority strip must contain six healthcare logos');
-assert.match(confirmation, /Real Results: Real Behind-the-Scenes Numbers From One of Our Clients\./, 'Confirmation case study must use the approved results-first headline');
+assert.match(confirmation, /Real Results: Behind-the-Scenes Numbers From 2 Of Our Clients/, 'Confirmation case study must use the approved results-first headline');
 assert.match(confirmation, /See what we built, how it was launched, and the real client numbers behind the result\./, 'Confirmation case study must explain what the viewer will see');
 for (const marker of ['class="confirmation-stats"', 'class="search-demand-section"', 'class="mechanism-features"', 'class="founder-highlight"']) {
   assert.doesNotMatch(confirmation, new RegExp(marker), `Focused confirmation flow must omit ${marker}`);
@@ -63,13 +65,15 @@ for (const mediaId of faqMediaIds) {
   assert.match(confirmation, new RegExp(`https:\\/\\/fast\\.wistia\\.com\\/embed\\/'?\\+mediaId\\+'?\\.js|['"]${mediaId}['"]`), `FAQ media ${mediaId} must be lazy loaded`);
 }
 assert.doesNotMatch(confirmation, /FAQ Video|Video answer will appear here\./, 'FAQ placeholder content must not remain');
-assert.match(confirmation, /id="vidalytics_embed_CA0308FsT4_Z8w5E"/, 'Confirmation page must replay the approved Vidalytics presentation');
-assert.match(confirmation, /https:\/\/fast\.vidalytics\.com\/embeds\/U18KMfDU\/CA0308FsT4_Z8w5E\//, 'Confirmation page must use the approved Vidalytics source');
-assert.equal((confirmation.match(/id="vidalytics_embed_[^"]+"/g) ?? []).length, 2, 'Confirmation page needs the call-confirmation video and full-presentation replay');
+assert.match(confirmation, /<wistia-player media-id="wn2g27b0vb" aspect="1\.7777777777777777" aria-label="Kodara full presentation replay">/, 'Confirmation page must replay the approved Wistia presentation');
+assert.match(confirmation, /https:\/\/fast\.wistia\.com\/embed\/wn2g27b0vb\.js/, 'Confirmation page must load the approved Wistia presentation source');
+assert.equal((confirmation.match(/id="vidalytics_embed_[^"]+"/g) ?? []).length, 1, 'Confirmation page needs only the call-confirmation Vidalytics video');
+assert.match(confirmation, /<h2 id="reminder-title">We're looking forward to speak with you!<\/h2>/, 'Confirmation page must use the approved closing headline');
+assert.match(confirmation, /We started Kodara to help doctors, clinic owners, and wellness experts reach as many people as possible with their expertise\. We appreciate your trust\./, 'Confirmation page must use the approved closing message');
 assert.equal((confirmation.match(/media-id="1mynmgx2fa"/g) ?? []).length, 1, 'Confirmation page needs the approved case study video exactly once');
 assert.match(confirmation, /https:\/\/fast\.wistia\.com\/embed\/1mynmgx2fa\.js/, 'Case study video must load from the approved Wistia source');
 assert.match(confirmation, /<wistia-player media-id="1mynmgx2fa" aspect="1\.7777777777777777" aria-label="[^"]+">/, 'Case study video needs a stable 16:9 frame and accessible name');
-assert.equal(confirmationPlayers.length, 15, 'Confirmation page needs one case study, four testimonials, and ten FAQ videos');
+assert.equal(confirmationPlayers.length, 16, 'Confirmation page needs one case study, four testimonials, ten FAQ videos, and one presentation replay');
 assert.equal((confirmation.match(/data-press-slot="press-[0-9]{2}"/g) ?? []).length, 4, 'Confirmation page needs four replaceable press slots');
 assert.equal((confirmation.match(/class="press-card"/g) ?? []).length, 4, 'Confirmation page needs four visible press cards');
 const pressFeatures = [

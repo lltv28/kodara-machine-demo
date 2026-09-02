@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="description" content="Your Kodara strategy call is confirmed. Review the preparation videos, client stories, and common questions before your session.">
+  <meta name="description" content="Your Kodara demo meeting is scheduled. Watch the brief preparation video, review client stories, and explore common questions before your meeting.">
   <link rel="icon" href="../assets/brand/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="../assets/brand/favicon-48.png" type="image/png" sizes="48x48">
   <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon-180.png" sizes="180x180">
   <link rel="icon" href="../assets/brand/favicon-192.png" type="image/png" sizes="192x192">
   <link rel="icon" href="../assets/brand/favicon-512.png" type="image/png" sizes="512x512">
   <link rel="preload" href="../assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=20260901-martyn-proof">
-  <title>Your Call Is Confirmed | Kodara</title>
+  <link rel="stylesheet" href="styles.css?v=20260901-confirmation-copy-vsl">
+  <title>Your Demo Meeting Is Scheduled | Kodara</title>
   <script>
   var head=document.head;
   var script=document.createElement('script');
@@ -30,19 +30,19 @@
 
   <main class="wrap">
     <section class="confirmation-hero" aria-labelledby="confirmation-title">
-      <h1 id="confirmation-title">Your Call Is Confirmed.</h1>
-      <p>Watch the short videos below before we speak so you can arrive with clear questions and make the most of our time together.</p>
+      <h1 id="confirmation-title">Your Demo Meeting Is Scheduled!</h1>
+      <p class="confirmation-instruction">Watch This Brief 2-Minute Video To Ensure Your Call Is Not Cancelled</p>
       <p class="email-note">Your date, time, and meeting link are in your confirmation email.</p>
-      <div id="call-confirmation" class="vsl-stage confirmation-video" data-video-slot="call-confirmation" aria-label="Kodara call confirmation video">
+      <div id="call-confirmation" class="vsl-stage confirmation-video" data-video-slot="call-confirmation" aria-label="Kodara demo meeting confirmation video">
         <div id="vidalytics_embed_VNXQCkfkzn95oP5v"></div>
       </div>
-      <div class="call-details-widget" data-url="https://app.iclosed.io/embed" style="width:100%;height:340px" aria-label="Your confirmed call details"></div>
+      <div class="call-details-widget" data-url="https://app.iclosed.io/embed" style="width:100%;height:340px" aria-label="Your scheduled demo meeting details"></div>
       <script src="https://app.iclosed.io/assets/widget.js" async></script>
     </section>
 
     <section id="case-study" aria-labelledby="case-study-title">
       <header class="section-head">
-        <h2 id="case-study-title">Real Results: Real Behind-the-Scenes Numbers From One of Our Clients.</h2>
+        <h2 id="case-study-title">Real Results: Behind-the-Scenes Numbers From 2 Of Our Clients</h2>
         <p>See what we built, how it was launched, and the real client numbers behind the result.</p>
       </header>
       <div class="featured-video case-study-video" data-video-slot="case-study">
@@ -294,14 +294,14 @@
         <p>Revisit how we build and launch your AI Version in 30 days, create $500-$2,000 digital programs, and onboard the first beta users.</p>
       </header>
       <div class="vsl-stage" aria-label="Kodara presentation replay">
-        <div id="vidalytics_embed_CA0308FsT4_Z8w5E"></div>
+        <wistia-player media-id="wn2g27b0vb" aspect="1.7777777777777777" aria-label="Kodara full presentation replay"></wistia-player>
       </div>
       <noscript><p class="proof-note">JavaScript is required to play this video.</p></noscript>
     </section>
 
     <section class="final-reminder" aria-labelledby="reminder-title">
-      <h2 id="reminder-title">Your call is booked.</h2>
-      <p>Your confirmation email contains the date, time, and meeting link. Watch the videos that matter to you, bring your questions, and we will take it from there.</p>
+      <h2 id="reminder-title">We're looking forward to speak with you!</h2>
+      <p>We started Kodara to help doctors, clinic owners, and wellness experts reach as many people as possible with their expertise. We appreciate your trust.</p>
     </section>
   </main>
 
@@ -362,7 +362,8 @@
     });
 
     loadWhenNear('#full-presentation',function(){
-      loadVidalytics('vidalytics_embed_CA0308FsT4_Z8w5E','https://fast.vidalytics.com/embeds/U18KMfDU/CA0308FsT4_Z8w5E/');
+      loadScriptOnce('https://fast.wistia.com/player.js',false);
+      loadScriptOnce('https://fast.wistia.com/embed/wn2g27b0vb.js',true);
     });
 
     loadWhenNear('#case-study',function(){

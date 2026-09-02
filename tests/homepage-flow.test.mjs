@@ -196,13 +196,13 @@ test('confirmation page follows the approved proof-first post-booking flow', () 
     'id="call-confirmation"',
     'class="call-details-widget"',
     'media-id="1mynmgx2fa"',
-    'id="vidalytics_embed_CA0308FsT4_Z8w5E"',
+    'media-id="wn2g27b0vb"',
     'class="press-library"',
     'class="site-footer"',
   ]) assert.match(content, new RegExp(marker), `Confirmation flow must preserve ${marker}`);
 
   assert.equal((content.match(/class="faq-video-card"/gu) ?? []).length, 10, 'Confirmation must retain all ten FAQ videos');
-  assert.match(content, /Real Results: Real Behind-the-Scenes Numbers From One of Our Clients\./u);
+  assert.match(content, /Real Results: Behind-the-Scenes Numbers From 2 Of Our Clients/u);
   assert.match(content, /See what we built, how it was launched, and the real client numbers behind the result\./u);
   assert.doesNotMatch(content, /class="confirmation-stats"|class="search-demand-section"|class="mechanism-features"|class="founder-highlight"/u, 'The focused confirmation sequence must not restore homepage education sections');
   assert.doesNotMatch(content, /id="kodara-triager"|region-personalization/iu, 'Post-booking confirmation must not add the homepage qualification or personalization runtime');
@@ -230,7 +230,7 @@ test('confirmation page uses the current six-client proof', () => {
 
 test('confirmation page shares current visual tokens and small assets', () => {
   const styles = readFileSync(resolve(root, 'confirmation/styles.css'), 'utf8');
-  assert.match(confirmation, /href="styles\.css\?v=20260901-martyn-proof"/u, 'Confirmation stylesheet changes must bypass stale browser caches');
+  assert.match(confirmation, /href="styles\.css\?v=20260901-confirmation-copy-vsl"/u, 'Confirmation stylesheet changes must bypass stale browser caches');
   for (const token of ['--border-subtle:#DCE8E5', '--border-default:#CBDCDA', '--border-strong:#A9C5C1', '--line-2:var(--border-default)']) {
     assert.match(styles, new RegExp(token.replace(/[()]/gu, '\\$&')));
   }
